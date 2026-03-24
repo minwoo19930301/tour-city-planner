@@ -1533,20 +1533,11 @@ function showUtilityChrome() {
 }
 
 function hideUtilityChrome() {
-    if (!appState.hasStarted) return;
-    document.body.classList.add('ui-busy');
+    document.body.classList.remove('ui-busy');
 }
 
 function scheduleUtilityChrome() {
-    hideUtilityChrome();
-
-    if (utilityChromeTimer) {
-        window.clearTimeout(utilityChromeTimer);
-    }
-
-    utilityChromeTimer = window.setTimeout(() => {
-        showUtilityChrome();
-    }, 120);
+    showUtilityChrome();
 }
 
 function setShareStatus(message = '') {
@@ -1806,7 +1797,7 @@ function renderDestinationSelector() {
     selectableDestinations.forEach((destination) => {
         const button = document.createElement('button');
         button.type = 'button';
-        button.className = `dropdown-option w-full rounded-[18px] border border-white/10 bg-white/5 px-4 py-3 text-left transition-colors hover:bg-white/10 ${destination.id === setupSelection.destinationId ? 'active' : ''}`;
+        button.className = `dropdown-option w-full rounded-[18px] border border-white/10 bg-slate-900 px-4 py-3 text-left transition-colors hover:bg-slate-800 ${destination.id === setupSelection.destinationId ? 'active' : ''}`;
         button.dataset.destination = destination.id;
         button.innerHTML = `
             <div class="flex items-center justify-between gap-3">
@@ -2056,21 +2047,18 @@ function renderItinerary() {
         const activitiesHtml = day.activities.map((activity, activityIndex) => {
             const nextActivity = day.activities[activityIndex + 1];
             const betweenStopsHtml = nextActivity ? `
-                <div class="relative h-0 z-20">
-                    <div class="absolute right-[28px] -top-[22px] flex flex-col items-center">
-                        <div class="w-px h-4 bg-white/20"></div>
-                        <div class="w-2.5 h-2.5 rounded-full border-2 border-white/90" style="background: var(--accent);"></div>
+                <div class="relative h-5 -mt-1 -mb-1 z-20">
+                    <div class="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-white/18"></div>
+                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
                         <a
                             href="${getDirectionsUrl(activity.location, nextActivity.location)}"
                             target="_blank"
                             rel="noreferrer"
                             data-skip-edit="true"
-                            class="w-9 h-9 rounded-full flex items-center justify-center text-white shadow-lg mt-1"
+                            class="w-8 h-8 rounded-full flex items-center justify-center text-white shadow-lg"
                             style="border: 1px solid rgba(var(--accent-rgb), 0.56); background: rgba(var(--accent-rgb), 0.18);">
                             <i data-lucide="route" class="w-4 h-4"></i>
                         </a>
-                        <div class="w-2.5 h-2.5 rounded-full border-2 border-white/90 mt-1" style="background: var(--accent);"></div>
-                        <div class="w-px h-4 bg-white/20"></div>
                     </div>
                 </div>
             ` : '';
@@ -2089,8 +2077,7 @@ function renderItinerary() {
                         </div>
                         <div class="min-w-0">
                             <div class="text-sm font-bold text-white">${escapeHtml(activity.time)}</div>
-                            <div class="text-sm text-white/88 mt-1">${escapeHtml(activity.title)}</div>
-                            <div class="text-xs text-white/52 truncate mt-1">${escapeHtml(activity.location)}</div>
+                            <div class="text-sm text-white/88 mt-1">${escapeHtml(activity.location)}</div>
                             ${activity.memo ? `<div class="text-xs text-white/62 mt-1 leading-5">${escapeHtml(activity.memo)}</div>` : ''}
                         </div>
                     </div>
@@ -2135,7 +2122,7 @@ function renderItinerary() {
                                 data-skip-edit="true"
                                 class="rounded-full border border-white/10 bg-white/6 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-white/10 transition-colors inline-flex items-center gap-1.5">
                                 <i data-lucide="route" class="w-3.5 h-3.5"></i>
-                                <span>길찾기</span>
+                                <span>하루 이동코스</span>
                             </a>
                         ` : ''}
                         <button
@@ -2165,9 +2152,7 @@ function renderItinerary() {
 function buildShareUrl() {
     const url = new URL(window.location.href);
     url.search = '';
-    url.searchParams.set('destination', appState.destinationId);
-    url.searchParams.set('start', appState.startDate);
-    url.searchParams.set('end', appState.endDate);
+    url.pathname = url.pathname.replace(/\/index\.html$/, '/');
     url.hash = `plan=${encodePlan(buildSharePayload())}`;
     return url.toString();
 }
