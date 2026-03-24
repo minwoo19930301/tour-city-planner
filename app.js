@@ -1221,7 +1221,6 @@ const ui = {
     dateSeoul: document.getElementById('date-seoul'),
     timeDestination: document.getElementById('time-destination'),
     dateDestination: document.getElementById('date-destination'),
-    currencySymbolBadge: document.getElementById('currency-symbol-badge'),
     rateBaseInput: document.getElementById('rate-base-input'),
     rateKrwInput: document.getElementById('rate-krw-input'),
     baseCurrencyLabel: document.getElementById('base-currency-label'),
@@ -1282,6 +1281,43 @@ function escapeHtml(value = '') {
 
 function getDestination(id) {
     return DESTINATIONS[id] || DESTINATIONS[DEFAULT_DESTINATION_ID] || DESTINATIONS.paris;
+}
+
+function getSelectableDestinations() {
+    const grouped = new Map();
+
+    Object.values(DESTINATIONS).forEach((destination) => {
+        const key = `${destination.country}::${destination.timeZone}`;
+        if (!grouped.has(key)) grouped.set(key, []);
+        grouped.get(key).push(destination);
+    });
+
+    const countryZoneCounts = new Map();
+    grouped.forEach((destinations) => {
+        const country = destinations[0].country;
+        countryZoneCounts.set(country, (countryZoneCounts.get(country) || 0) + 1);
+    });
+
+    return Array.from(grouped.values()).map((destinations) => {
+        const representative = destinations[0];
+        const hasMultipleZones = (countryZoneCounts.get(representative.country) || 0) > 1;
+
+        return {
+            id: representative.id,
+            country: representative.country,
+            primaryLabel: representative.country,
+            secondaryLabel: hasMultipleZones ? representative.city : '',
+            timeZone: representative.timeZone
+        };
+    });
+}
+
+function getSelectableDestinationId(id) {
+    const destination = getDestination(id);
+    const match = getSelectableDestinations().find((entry) =>
+        entry.country === destination.country && entry.timeZone === destination.timeZone
+    );
+    return match?.id || destination.id;
 }
 
 function getLocalNow(timeZone) {
@@ -1394,7 +1430,9 @@ function buildItineraryFromSharedPayload(destinationId, startDate, endDate, seri
             ? sourceDay.a.map((activity) => ({
                 id: createId('activity'),
                 time: typeof activity.h === 'string' && activity.h ? activity.h : '09:00',
-                title: typeof activity.n === 'string' && activity.n ? activity.n : '일정',
+                title: typeof activity.n === 'string' && activity.n
+                    ? activity.n
+                    : (typeof activity.l === 'string' && activity.l.trim() ? activity.l.trim() : '일정'),
                 location: typeof activity.l === 'string' ? activity.l : '',
                 type: typeof activity.k === 'string' && (ACTIVITY_ICON_VALUES.has(activity.k) || activity.k === '') ? activity.k : '',
                 memo: typeof activity.m === 'string' ? activity.m : ''
@@ -1411,15 +1449,13 @@ function buildItineraryFromSharedPayload(destinationId, startDate, endDate, seri
 
 function buildSharePayload() {
     return {
-        v: 1,
-        d: appState.destinationId,
+        v: 2,
+        d: getSelectableDestinationId(appState.destinationId),
         s: appState.startDate,
         e: appState.endDate,
         i: appState.itinerary.map((day) => ({
-            t: day.title,
             a: day.activities.map((activity) => ({
                 h: activity.time,
-                n: activity.title,
                 l: activity.location,
                 k: activity.type,
                 m: activity.memo || ''
@@ -1505,8 +1541,7 @@ function applyTheme(destination) {
 
     ui.heroImage.src = destination.heroImage;
     ui.heroImage.alt = `${destination.city}, ${destination.country}`;
-    ui.currencySymbolBadge.style.background = `rgba(${destination.inkRgb}, 0.88)`;
-    document.title = `${destination.city} Trip Plan`;
+    document.title = `${destination.country} Trip Plan`;
 }
 
 function getActivityIconOption(value) {
@@ -1724,25 +1759,26 @@ function renderPhrase() {
 
 function renderUtilityInfo() {
     const destination = getDestination(appState.destinationId);
-    ui.destinationClockLabel.textContent = 'Destination';
+    ui.destinationClockLabel.textContent = destination.country;
     ui.baseCurrencyLabel.textContent = destination.currency.code;
-    ui.currencySymbolBadge.textContent = destination.currency.symbol;
     updateExchangeOutputs();
     renderPhrase();
 }
 
 function renderDestinationSelector() {
     ui.destinationSelector.innerHTML = '';
-    ui.destinationCount.textContent = `${Object.keys(DESTINATIONS).length} cities`;
+    const selectableDestinations = getSelectableDestinations();
+    ui.destinationCount.textContent = `${selectableDestinations.length} countries`;
 
-    Object.values(DESTINATIONS).forEach((destination) => {
+    selectableDestinations.forEach((destination) => {
         const button = document.createElement('button');
         button.type = 'button';
         button.className = `city-card ${destination.id === setupSelection.destinationId ? 'active' : ''}`;
         button.dataset.destination = destination.id;
         button.innerHTML = `
-            <div class="text-[11px] uppercase tracking-[0.28em] text-white/50 mb-4">${escapeHtml(destination.country)}</div>
-            <div class="text-2xl font-semibold text-white">${escapeHtml(destination.city)}</div>
+            <div class="text-[11px] uppercase tracking-[0.28em] text-white/50 mb-3">Country</div>
+            <div class="text-2xl font-semibold text-white">${escapeHtml(destination.primaryLabel)}</div>
+            ${destination.secondaryLabel ? `<div class="text-sm text-white/62 mt-2">${escapeHtml(destination.secondaryLabel)}</div>` : ''}
         `;
         ui.destinationSelector.appendChild(button);
     });
@@ -2075,7 +2111,7 @@ function buildShareUrl() {
     url.searchParams.set('destination', appState.destinationId);
     url.searchParams.set('start', appState.startDate);
     url.searchParams.set('end', appState.endDate);
-    url.searchParams.set('plan', encodePlan(buildSharePayload()));
+    url.hash = `plan=${encodePlan(buildSharePayload())}`;
     return url.toString();
 }
 
@@ -2207,7 +2243,7 @@ function resetToSetup() {
     appState.customized = false;
     setRandomPhrase(destination.id);
 
-    const cleanUrl = `${window.location.pathname}${window.location.hash}`;
+    const cleanUrl = window.location.pathname;
     window.history.replaceState({}, '', cleanUrl);
     setShareStatus('');
     refreshPlan();
@@ -2356,12 +2392,13 @@ function handleItineraryClick(event) {
 
 function bootstrapFromUrl() {
     const url = new URL(window.location.href);
-    const planParam = url.searchParams.get('plan');
+    const hashPlanParam = new URLSearchParams(url.hash.replace(/^#/, '')).get('plan');
+    const planParam = hashPlanParam || url.searchParams.get('plan');
 
     if (planParam) {
         try {
             const payload = decodePlan(planParam);
-            const destination = getDestination(payload.d);
+            const destination = getDestination(getSelectableDestinationId(payload.d));
             const { startDate, endDate } = normalizeDateRange(payload.s, payload.e, destination);
 
             appState.destinationId = destination.id;
@@ -2381,7 +2418,7 @@ function bootstrapFromUrl() {
         }
     }
 
-    const destination = getDestination(url.searchParams.get('destination') || DEFAULT_DESTINATION_ID);
+    const destination = getDestination(getSelectableDestinationId(url.searchParams.get('destination') || DEFAULT_DESTINATION_ID));
     const { startDate, endDate } = normalizeDateRange(url.searchParams.get('start'), url.searchParams.get('end'), destination);
 
     appState.destinationId = destination.id;
