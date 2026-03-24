@@ -914,7 +914,7 @@ const DESTINATIONS = {
         country: 'China',
         summary: '고궁, 후통, 공원, 야경을 묶은 베이징 템플릿입니다.',
         footer: 'Beijing works when imperial landmarks and hutong streets stay in one loop.',
-        heroImage: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?q=80&w=2070&auto=format&fit=crop',
+        heroImage: 'https://unsplash.com/photos/274UL9FkpHs/download?force=true&w=1920',
         accent: '#F87171',
         accentRgb: '248, 113, 113',
         ink: '#450A0A',
@@ -958,7 +958,7 @@ const DESTINATIONS = {
         country: 'China',
         summary: '번드, 타워, 쇼핑 거리, 강변 야경을 묶은 상하이 템플릿입니다.',
         footer: 'Shanghai feels strongest when the Bund and the skyline stay in the same frame.',
-        heroImage: 'https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?q=80&w=2070&auto=format&fit=crop',
+        heroImage: 'https://unsplash.com/photos/CJbHTL3YFPo/download?force=true&w=1920',
         accent: '#38BDF8',
         accentRgb: '56, 189, 248',
         ink: '#082F49',
@@ -1002,7 +1002,7 @@ const DESTINATIONS = {
         country: 'Taiwan',
         summary: '도심 전망, 야시장, 온천, 로컬 먹거리를 묶은 타이베이 템플릿입니다.',
         footer: 'Taipei works when viewpoints, night markets, and food keep the pace light.',
-        heroImage: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=2070&auto=format&fit=crop',
+        heroImage: 'https://unsplash.com/photos/S84J99BHI9g/download?force=true&w=1920',
         accent: '#22D3EE',
         accentRgb: '34, 211, 238',
         ink: '#083344',
@@ -1046,7 +1046,7 @@ const DESTINATIONS = {
         country: 'Vietnam',
         summary: '호수, 올드쿼터, 카페, 야시장을 묶은 하노이 템플릿입니다.',
         footer: 'Hanoi feels best when lakes, old streets, and food stops move at an easy pace.',
-        heroImage: 'https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=2070&auto=format&fit=crop',
+        heroImage: 'https://unsplash.com/photos/enZPXLrYOJA/download?force=true&w=1920',
         accent: '#4ADE80',
         accentRgb: '74, 222, 128',
         ink: '#052E16',
@@ -1090,7 +1090,7 @@ const DESTINATIONS = {
         country: 'Vietnam',
         summary: '도심 랜드마크, 카페, 마켓, 강변 야경을 묶은 호치민 템플릿입니다.',
         footer: 'Ho Chi Minh City works when cafes, markets, and skyline views stay close together.',
-        heroImage: 'https://images.unsplash.com/photo-1583417319070-4a69db38a482?q=80&w=2070&auto=format&fit=crop',
+        heroImage: 'https://unsplash.com/photos/aVbSvuJTUxA/download?force=true&w=1920',
         accent: '#FACC15',
         accentRgb: '250, 204, 21',
         ink: '#422006',
@@ -1140,6 +1140,7 @@ const appState = {
     itinerary: [],
     currentWeather: null,
     weatherMode: 'loading',
+    hasStarted: false,
     customized: false
 };
 
@@ -1171,12 +1172,22 @@ const observer = new IntersectionObserver((entries) => {
 
 const ui = {
     heroImage: document.getElementById('hero-image'),
-    setupPanel: document.getElementById('setup-panel'),
+    tripShell: document.getElementById('trip-shell'),
+    setupOverlay: document.getElementById('setup-overlay'),
     destinationSelector: document.getElementById('destination-selector'),
     destinationCount: document.getElementById('destination-count'),
     setupStartDate: document.getElementById('setup-start-date'),
     setupEndDate: document.getElementById('setup-end-date'),
     applyPlanBtn: document.getElementById('apply-plan-btn'),
+    destinationClockLabel: document.getElementById('destination-clock-label'),
+    timeSeoul: document.getElementById('time-seoul'),
+    dateSeoul: document.getElementById('date-seoul'),
+    timeDestination: document.getElementById('time-destination'),
+    dateDestination: document.getElementById('date-destination'),
+    currencySymbolBadge: document.getElementById('currency-symbol-badge'),
+    baseCurrencyLabel: document.getElementById('base-currency-label'),
+    rateToKrw: document.getElementById('rate-to-krw'),
+    rateFromKrw: document.getElementById('rate-from-krw'),
     tripCountryChip: document.getElementById('trip-country-chip'),
     tripTitle: document.getElementById('trip-title'),
     tripSummary: document.getElementById('trip-summary'),
@@ -1185,8 +1196,6 @@ const ui = {
     tripWeatherLabel: document.getElementById('trip-weather-label'),
     sharePlanBtn: document.getElementById('share-plan-btn'),
     shareStatus: document.getElementById('share-status'),
-    focusSetupBtn: document.getElementById('focus-setup-btn'),
-    resetPlanBtn: document.getElementById('reset-plan-btn'),
     itineraryContainer: document.getElementById('itinerary-container'),
     footerNote: document.getElementById('footer-note'),
     activityModal: document.getElementById('activity-modal'),
@@ -1417,6 +1426,7 @@ function applyTheme(destination) {
 
     ui.heroImage.src = destination.heroImage;
     ui.heroImage.alt = `${destination.city}, ${destination.country}`;
+    ui.currencySymbolBadge.style.background = `rgba(${destination.inkRgb}, 0.88)`;
     document.title = `${destination.city} Trip Plan`;
 }
 
@@ -1424,6 +1434,13 @@ function renderIconOptions() {
     ui.activityIcon.innerHTML = ACTIVITY_ICON_OPTIONS.map((option) => (
         `<option value="${option.value}">${option.label}</option>`
     )).join('');
+}
+
+function renderUtilityInfo() {
+    const destination = getDestination(appState.destinationId);
+    ui.destinationClockLabel.textContent = destination.city;
+    ui.baseCurrencyLabel.textContent = `1 ${destination.currency.code}`;
+    ui.currencySymbolBadge.textContent = destination.currency.symbol;
 }
 
 function renderDestinationSelector() {
@@ -1446,6 +1463,18 @@ function renderDestinationSelector() {
 function renderSetupInputs() {
     ui.setupStartDate.value = setupSelection.startDate;
     ui.setupEndDate.value = setupSelection.endDate;
+}
+
+function showSetupOverlay() {
+    ui.setupOverlay.classList.remove('hidden');
+    ui.tripShell.classList.add('hidden');
+    setScrollLock(true);
+}
+
+function hideSetupOverlay() {
+    ui.setupOverlay.classList.add('hidden');
+    ui.tripShell.classList.remove('hidden');
+    setScrollLock(false);
 }
 
 function renderStaticSummary() {
@@ -1480,6 +1509,37 @@ function renderWeatherStatus() {
     ui.tripWeatherLabel.textContent = 'Forecast';
 }
 
+function updateClocks() {
+    const destination = getDestination(appState.hasStarted ? appState.destinationId : setupSelection.destinationId);
+    const now = new Date();
+
+    ui.timeSeoul.textContent = now.toLocaleTimeString('en-US', {
+        timeZone: 'Asia/Seoul',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+    });
+    ui.dateSeoul.textContent = now.toLocaleDateString('en-US', {
+        timeZone: 'Asia/Seoul',
+        month: 'short',
+        day: 'numeric',
+        weekday: 'short'
+    });
+
+    ui.timeDestination.textContent = now.toLocaleTimeString('en-US', {
+        timeZone: destination.timeZone,
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+    });
+    ui.dateDestination.textContent = now.toLocaleDateString('en-US', {
+        timeZone: destination.timeZone,
+        month: 'short',
+        day: 'numeric',
+        weekday: 'short'
+    });
+}
+
 function getWeatherInfo(code) {
     if (code === 0) return { icon: 'sun', color: 'var(--accent)' };
     if (code >= 1 && code <= 3) return { icon: 'sparkles', color: '#d1d5db' };
@@ -1489,6 +1549,32 @@ function getWeatherInfo(code) {
     if (code >= 80 && code <= 82) return { icon: 'cloud-rain', color: '#60a5fa' };
     if (code >= 95 && code <= 99) return { icon: 'cloud-lightning', color: '#c084fc' };
     return { icon: 'cloud', color: '#cbd5e1' };
+}
+
+async function fetchExchangeRate() {
+    const destination = getDestination(appState.destinationId);
+
+    try {
+        const response = await fetch(`https://open.er-api.com/v6/latest/${destination.currency.code}`);
+        if (!response.ok) throw new Error('Exchange fetch failed');
+
+        const data = await response.json();
+        const rate = data?.rates?.KRW;
+        if (!rate) throw new Error('Missing KRW rate');
+
+        ui.rateToKrw.textContent = `${Math.round(rate).toLocaleString('ko-KR')} ₩`;
+
+        const reverseValue = 1000 / rate;
+        const decimals = destination.currency.code === 'JPY' ? 0 : 2;
+        ui.rateFromKrw.textContent = `${new Intl.NumberFormat(destination.currency.locale, {
+            minimumFractionDigits: decimals,
+            maximumFractionDigits: decimals
+        }).format(reverseValue)} ${destination.currency.symbol}`;
+    } catch (error) {
+        console.error('Exchange rate fetch failed:', error);
+        ui.rateToKrw.textContent = 'Unavailable';
+        ui.rateFromKrw.textContent = 'Unavailable';
+    }
 }
 
 function canFetchWeather(destinationId, startDate, endDate) {
@@ -1680,17 +1766,30 @@ function buildShareUrl() {
 }
 
 function syncUrl() {
+    if (!appState.hasStarted) return;
     window.history.replaceState({}, '', buildShareUrl());
 }
 
 function refreshPlan() {
+    if (!appState.hasStarted) {
+        applyTheme(getDestination(setupSelection.destinationId));
+        renderDestinationSelector();
+        renderSetupInputs();
+        updateClocks();
+        showSetupOverlay();
+        return;
+    }
+
+    hideSetupOverlay();
     applyTheme(getDestination(appState.destinationId));
+    renderUtilityInfo();
+    updateClocks();
     renderDestinationSelector();
-    renderSetupInputs();
     renderStaticSummary();
     renderWeatherStatus();
     renderItinerary();
     syncUrl();
+    fetchExchangeRate();
     fetchWeather();
 }
 
@@ -1721,17 +1820,11 @@ function applySetupSelection() {
     appState.startDate = startDate;
     appState.endDate = endDate;
     appState.itinerary = buildItineraryFromRange(appState.destinationId, appState.startDate, appState.endDate);
+    appState.hasStarted = true;
     appState.customized = false;
 
     setShareStatus('');
     refreshPlan();
-}
-
-function scrollToSetupPanel() {
-    ui.setupPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    window.setTimeout(() => {
-        ui.setupStartDate.focus();
-    }, 220);
 }
 
 async function sharePlan() {
@@ -1754,10 +1847,10 @@ async function sharePlan() {
 
     try {
         await navigator.clipboard.writeText(shareUrl);
-        setShareStatus('공유 링크를 클립보드에 복사했습니다.');
+        setShareStatus('저장/공유 링크를 클립보드에 복사했습니다.');
     } catch (error) {
         window.prompt('이 링크를 복사해서 공유하세요.', shareUrl);
-        setShareStatus('공유 링크를 만들었습니다.');
+        setShareStatus('저장/공유 링크를 만들었습니다.');
     }
 }
 
@@ -1869,18 +1962,6 @@ function handleItineraryClick(event) {
     }
 }
 
-function resetPlanToTemplate() {
-    const shouldReset = window.confirm('현재 커스터마이징을 버리고 현재 날짜 범위 템플릿으로 되돌릴까요?');
-    if (!shouldReset) return;
-
-    appState.itinerary = buildItineraryFromRange(appState.destinationId, appState.startDate, appState.endDate);
-    appState.customized = false;
-    setShareStatus('현재 날짜 범위 템플릿으로 되돌렸습니다.');
-    renderItinerary();
-    syncUrl();
-    fetchWeather();
-}
-
 function bootstrapFromUrl() {
     const url = new URL(window.location.href);
     const planParam = url.searchParams.get('plan');
@@ -1895,6 +1976,7 @@ function bootstrapFromUrl() {
             appState.startDate = startDate;
             appState.endDate = endDate;
             appState.itinerary = buildItineraryFromSharedPayload(destination.id, startDate, endDate, Array.isArray(payload.i) ? payload.i : []);
+            appState.hasStarted = true;
             appState.customized = true;
 
             setupSelection.destinationId = destination.id;
@@ -1913,6 +1995,7 @@ function bootstrapFromUrl() {
     appState.startDate = startDate;
     appState.endDate = endDate;
     appState.itinerary = buildItineraryFromRange(destination.id, startDate, endDate);
+    appState.hasStarted = false;
     appState.customized = false;
 
     setupSelection.destinationId = destination.id;
@@ -1925,6 +2008,12 @@ ui.destinationSelector.addEventListener('click', (event) => {
     if (!button) return;
 
     setupSelection.destinationId = button.dataset.destination;
+    const destination = getDestination(setupSelection.destinationId);
+    const { startDate, endDate } = getSuggestedDateRange(destination);
+    setupSelection.startDate = startDate;
+    setupSelection.endDate = endDate;
+    applyTheme(destination);
+    renderSetupInputs();
     renderDestinationSelector();
 });
 
@@ -1937,9 +2026,7 @@ ui.setupEndDate.addEventListener('input', () => {
 });
 
 ui.applyPlanBtn.addEventListener('click', applySetupSelection);
-ui.focusSetupBtn.addEventListener('click', scrollToSetupPanel);
 ui.sharePlanBtn.addEventListener('click', sharePlan);
-ui.resetPlanBtn.addEventListener('click', resetPlanToTemplate);
 
 ui.activityCloseBtn.addEventListener('click', closeActivityEditor);
 ui.activityCancelBtn.addEventListener('click', closeActivityEditor);
@@ -1953,6 +2040,7 @@ window.addEventListener('keydown', (event) => {
     }
 });
 
+window.setInterval(updateClocks, 1000);
 renderIconOptions();
 bootstrapFromUrl();
 refreshPlan();

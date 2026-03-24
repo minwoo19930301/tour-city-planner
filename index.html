@@ -35,10 +35,7 @@
             --ink-rgb: 31, 24, 51;
             --overlay-top: rgba(31, 24, 51, 0.46);
             --overlay-bottom: rgba(10, 14, 30, 0.9);
-            --panel: rgba(109, 126, 152, 0.18);
-            --panel-strong: rgba(115, 139, 168, 0.28);
             --panel-border: rgba(255, 255, 255, 0.16);
-            --text-muted: rgba(255, 255, 255, 0.68);
         }
 
         ::selection {
@@ -113,21 +110,15 @@
 
         .action-btn {
             border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            background: rgba(255, 255, 255, 0.06);
-            color: #fff;
+            border: 1px solid rgba(var(--accent-rgb), 0.42);
+            background: rgba(var(--accent-rgb), 0.12);
+            color: var(--accent);
             transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
         }
 
         .action-btn:hover {
             transform: translateY(-1px);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .action-btn.accent {
-            color: var(--accent);
-            border-color: rgba(var(--accent-rgb), 0.42);
-            background: rgba(var(--accent-rgb), 0.12);
+            background: rgba(var(--accent-rgb), 0.18);
         }
 
         .action-btn.primary {
@@ -233,38 +224,40 @@
         <div class="absolute inset-0 hero-tint"></div>
     </div>
 
-    <div class="relative z-10 min-h-screen">
-        <header id="setup-panel" class="px-4 pt-8 pb-6 sm:px-6 lg:px-8">
-            <div class="max-w-6xl mx-auto glass-panel rounded-[36px] px-5 py-6 sm:px-8 sm:py-8">
-                <div class="flex items-start justify-between gap-4 mb-6">
-                    <div>
-                        <div class="text-[11px] uppercase tracking-[0.38em] text-white/52 mb-2">Major Cities</div>
-                        <h1 class="text-3xl sm:text-4xl font-serif font-bold text-white">먼저 도시와 날짜를 고르고 시작</h1>
-                        <p class="text-sm sm:text-base text-white/72 mt-3 max-w-2xl leading-7">도시를 고른 뒤 시작일과 종료일을 잡고, 아래 일정 카드에서 시간·장소·메모를 직접 수정하세요.</p>
+    <div id="trip-shell" class="relative z-10 min-h-screen hidden">
+        <main class="px-4 pt-8 pb-24 sm:px-6 lg:px-8">
+            <div class="max-w-5xl mx-auto">
+                <section class="grid grid-cols-1 gap-4 mb-6 lg:grid-cols-[1fr_1fr_1.3fr]">
+                    <div class="glass-panel rounded-[28px] p-5 text-center">
+                        <div class="text-[11px] uppercase tracking-[0.28em] text-white/50 mb-2">Seoul</div>
+                        <div id="time-seoul" class="text-3xl font-serif font-bold text-white">--:--</div>
+                        <div id="date-seoul" class="text-xs text-white/68 mt-1">---</div>
                     </div>
-                    <div id="destination-count" class="shrink-0 text-lg sm:text-2xl font-semibold accent-text"></div>
-                </div>
-
-                <div id="destination-selector" class="grid grid-cols-2 gap-4 lg:grid-cols-4"></div>
-
-                <div class="grid grid-cols-1 gap-4 mt-6 lg:grid-cols-[1fr_1fr_auto] lg:items-end">
-                    <div>
-                        <label for="setup-start-date" class="text-[11px] uppercase tracking-[0.28em] text-white/48 block mb-3">Start Date</label>
-                        <input id="setup-start-date" type="date" class="input-shell">
+                    <div class="glass-panel rounded-[28px] p-5 text-center">
+                        <div id="destination-clock-label" class="text-[11px] uppercase tracking-[0.28em] text-white/50 mb-2">Destination</div>
+                        <div id="time-destination" class="text-3xl font-serif font-bold text-white">--:--</div>
+                        <div id="date-destination" class="text-xs text-white/68 mt-1">---</div>
                     </div>
-                    <div>
-                        <label for="setup-end-date" class="text-[11px] uppercase tracking-[0.28em] text-white/48 block mb-3">End Date</label>
-                        <input id="setup-end-date" type="date" class="input-shell">
+                    <div class="glass-panel rounded-[28px] p-5">
+                        <div class="flex items-center justify-between gap-4">
+                            <div class="flex items-center gap-3 min-w-0">
+                                <div id="currency-symbol-badge"
+                                    class="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg"
+                                    style="background: rgba(var(--ink-rgb), 0.88);">€</div>
+                                <div class="min-w-0">
+                                    <div id="base-currency-label" class="text-[11px] uppercase tracking-[0.24em] text-white/52 mb-1">1 EUR</div>
+                                    <div id="rate-to-krw" class="text-lg font-semibold text-white">...</div>
+                                </div>
+                            </div>
+                            <div class="w-px h-10 bg-white/10"></div>
+                            <div class="text-right min-w-0">
+                                <div class="text-[11px] uppercase tracking-[0.24em] text-white/52 mb-1">1,000 KRW</div>
+                                <div id="rate-from-krw" class="text-lg font-semibold text-white">...</div>
+                            </div>
+                        </div>
                     </div>
-                    <button id="apply-plan-btn" type="button" class="action-btn primary px-6 py-4 text-sm font-semibold lg:min-w-[190px]">일정 적용</button>
-                </div>
+                </section>
 
-                <div class="text-xs text-white/55 mt-4">같은 국가라도 시간대가 다른 도시는 따로 도시 카드로 분리했습니다. 날씨는 대략 앞으로 16일 정도까지만 실시간으로 반영됩니다.</div>
-            </div>
-        </header>
-
-        <main class="px-4 pb-24 sm:px-6 lg:px-8">
-            <div class="max-w-4xl mx-auto">
                 <section class="glass-panel rounded-[36px] p-6 sm:p-8 reveal active">
                     <div id="trip-country-chip" class="chip inline-flex items-center gap-2 px-5 py-2 text-[11px] uppercase tracking-[0.32em] font-semibold mb-5"></div>
                     <h2 id="trip-title" class="text-5xl sm:text-6xl font-serif font-bold text-white mb-4"></h2>
@@ -285,10 +278,8 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 gap-3 mt-7 sm:grid-cols-3">
-                        <button id="focus-setup-btn" type="button" class="action-btn px-5 py-4 text-base font-semibold">도시 / 날짜 바꾸기</button>
-                        <button id="share-plan-btn" type="button" class="action-btn accent px-5 py-4 text-base font-semibold">링크로 공유하기</button>
-                        <button id="reset-plan-btn" type="button" class="action-btn accent px-5 py-4 text-base font-semibold">템플릿으로 초기화</button>
+                    <div class="mt-7">
+                        <button id="share-plan-btn" type="button" class="action-btn px-5 py-4 text-base font-semibold w-full sm:w-auto">링크로 저장하기 및 공유하기</button>
                     </div>
 
                     <div id="share-status" class="text-sm text-white/72 mt-4 min-h-[1.5rem]"></div>
@@ -306,6 +297,38 @@
                 </footer>
             </div>
         </main>
+    </div>
+
+    <div id="setup-overlay" class="fixed inset-0 z-[80] hidden overflow-y-auto">
+        <div class="absolute inset-0 bg-slate-950/72 backdrop-blur-md"></div>
+        <div class="relative z-10 min-h-screen flex items-start sm:items-center px-4 py-4 sm:py-8 sm:px-6">
+            <div class="max-w-6xl mx-auto glass-panel rounded-[36px] px-5 py-6 sm:px-8 sm:py-8 w-full my-4 max-h-[calc(100svh-2rem)] overflow-y-auto">
+                <div class="flex items-start justify-between gap-4 mb-6">
+                    <div>
+                        <div class="text-[11px] uppercase tracking-[0.38em] text-white/52 mb-2">Major Cities</div>
+                        <h1 class="text-3xl sm:text-4xl font-serif font-bold text-white">도시와 날짜를 먼저 고르세요</h1>
+                        <p class="text-sm sm:text-base text-white/72 mt-3 max-w-2xl leading-7">도시를 고른 뒤 시작일과 종료일을 정하면 일정이 열립니다. 이후 수정할 때마다 링크도 같이 업데이트됩니다.</p>
+                    </div>
+                    <div id="destination-count" class="shrink-0 text-lg sm:text-2xl font-semibold accent-text"></div>
+                </div>
+
+                <div id="destination-selector" class="grid grid-cols-2 gap-4 lg:grid-cols-4"></div>
+
+                <div class="grid grid-cols-1 gap-4 mt-6 lg:grid-cols-[1fr_1fr_auto] lg:items-end">
+                    <div>
+                        <label for="setup-start-date" class="text-[11px] uppercase tracking-[0.28em] text-white/48 block mb-3">Start Date</label>
+                        <input id="setup-start-date" type="date" class="input-shell">
+                    </div>
+                    <div>
+                        <label for="setup-end-date" class="text-[11px] uppercase tracking-[0.28em] text-white/48 block mb-3">End Date</label>
+                        <input id="setup-end-date" type="date" class="input-shell">
+                    </div>
+                    <button id="apply-plan-btn" type="button" class="action-btn primary px-6 py-4 text-sm font-semibold lg:min-w-[220px]">이 일정으로 시작</button>
+                </div>
+
+                <div class="text-xs text-white/55 mt-4">같은 국가라도 시간대가 다른 도시는 따로 도시 카드로 분리했습니다. 날씨는 대략 앞으로 16일 정도까지만 실시간으로 반영됩니다.</div>
+            </div>
+        </div>
     </div>
 
     <div id="activity-modal" class="fixed inset-0 z-[90] hidden overflow-y-auto">
