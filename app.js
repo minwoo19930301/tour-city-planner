@@ -1465,6 +1465,10 @@ function getMapsSearchUrl(location) {
     return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
 }
 
+function getDirectionsUrl(origin, destination) {
+    return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}`;
+}
+
 function getMapPreviewEmbedUrl(latitude, longitude) {
     const latDelta = 0.01;
     const lonDelta = 0.015;
@@ -1864,8 +1868,24 @@ function renderItinerary() {
         const dayElement = document.createElement('div');
         dayElement.className = 'relative pl-8 reveal';
 
-        const activitiesHtml = day.activities.map((activity) => `
-            <div class="relative glass-panel p-4 rounded-3xl flex items-center justify-between gap-3 mb-3">
+        const activitiesHtml = day.activities.map((activity, activityIndex) => {
+            const nextActivity = day.activities[activityIndex + 1];
+            const betweenStopsHtml = nextActivity ? `
+                <div class="flex justify-center my-2">
+                    <a
+                        href="${getDirectionsUrl(activity.location, nextActivity.location)}"
+                        target="_blank"
+                        rel="noreferrer"
+                        class="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/6 px-3 py-2 text-[11px] font-semibold text-white/82 hover:bg-white/10 transition-colors">
+                        <i data-lucide="route" class="w-3.5 h-3.5"></i>
+                        <span>${escapeHtml(activity.title)} -> ${escapeHtml(nextActivity.title)} 길찾기</span>
+                    </a>
+                </div>
+            ` : '';
+
+            return `
+            <div>
+                <div class="relative glass-panel p-4 rounded-3xl flex items-center justify-between gap-3 mb-3">
                 ${buildHourlyWeatherHtml(day, activity)}
                 <div class="flex items-center gap-3 flex-1 min-w-0">
                     <div class="p-2 rounded-xl accent-icon shrink-0">
@@ -1896,7 +1916,10 @@ function renderItinerary() {
                     </button>
                 </div>
             </div>
-        `).join('');
+                ${betweenStopsHtml}
+            </div>
+        `;
+        }).join('');
 
         dayElement.innerHTML = `
             <div class="flex items-start gap-3 mb-4">
