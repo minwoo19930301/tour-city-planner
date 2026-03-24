@@ -129,11 +129,11 @@
 
         .input-shell {
             width: 100%;
-            border-radius: 22px;
+            border-radius: 18px;
             border: 1px solid rgba(255, 255, 255, 0.14);
             background: rgba(255, 255, 255, 0.08);
             color: #fff;
-            padding: 0.95rem 1rem;
+            padding: 0.7rem 0.9rem;
             outline: none;
             color-scheme: dark;
         }
@@ -201,7 +201,7 @@
             width: min(calc(100vw - 1.25rem), 72rem);
             z-index: 30;
             pointer-events: none;
-            opacity: 0;
+            opacity: 1;
             transition: opacity 0.26s ease, transform 0.26s ease;
         }
 
@@ -211,24 +211,24 @@
 
         .utility-top {
             top: max(0.5rem, env(safe-area-inset-top));
-            transform: translateX(-50%) translateY(-18px);
+            transform: translateX(-50%) translateY(0);
         }
 
         .utility-bottom {
             bottom: max(0.5rem, env(safe-area-inset-bottom));
-            transform: translateX(-50%) translateY(18px);
-        }
-
-        body.ui-idle .utility-shell {
-            opacity: 1;
-        }
-
-        body.ui-idle .utility-top {
             transform: translateX(-50%) translateY(0);
         }
 
-        body.ui-idle .utility-bottom {
-            transform: translateX(-50%) translateY(0);
+        body.ui-busy .utility-shell {
+            opacity: 0;
+        }
+
+        body.ui-busy .utility-top {
+            transform: translateX(-50%) translateY(-16px);
+        }
+
+        body.ui-busy .utility-bottom {
+            transform: translateX(-50%) translateY(16px);
         }
 
         .next-item {
@@ -265,37 +265,37 @@
             <div class="max-w-5xl mx-auto">
                 <div class="utility-shell utility-top">
                     <div class="space-y-2">
-                        <section class="glass-panel rounded-[24px] p-2.5">
+                        <section class="glass-panel rounded-[22px] p-2">
                             <div class="grid grid-cols-2 gap-3">
-                                <div class="rounded-[20px] border border-white/10 bg-white/5 p-3">
-                                    <div class="flex items-baseline justify-between gap-2 mb-2">
-                                        <div class="text-[10px] uppercase tracking-[0.24em] text-white/52">Currency</div>
-                                        <div id="base-currency-label" class="text-lg font-semibold text-white">EUR</div>
+                                <div class="rounded-[18px] border border-white/10 bg-white/5 p-2.5">
+                                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                                        <div class="text-[10px] uppercase tracking-[0.24em] text-white/52">FX</div>
+                                        <div id="base-currency-label" class="text-base font-semibold text-white">EUR</div>
                                     </div>
-                                    <input id="rate-base-input" type="number" min="0" step="any" value="1" class="input-shell text-base font-semibold py-2">
-                                    <div id="rate-to-krw" class="text-sm font-semibold text-white/84 mt-2">...</div>
+                                    <input id="rate-base-input" type="number" min="0" step="any" value="1" class="input-shell text-base font-semibold py-1.5 px-4">
+                                    <div id="rate-to-krw" class="text-sm font-semibold text-white/84 mt-1.5">...</div>
                                 </div>
-                                <div class="rounded-[20px] border border-white/10 bg-white/5 p-3">
-                                    <div class="flex items-baseline justify-between gap-2 mb-2">
+                                <div class="rounded-[18px] border border-white/10 bg-white/5 p-2.5">
+                                    <div class="flex items-center justify-between gap-2 mb-1.5">
                                         <div class="text-[10px] uppercase tracking-[0.24em] text-white/52">₩ KRW</div>
-                                        <div class="text-lg font-semibold text-white">₩</div>
+                                        <div class="text-base font-semibold text-white">KRW</div>
                                     </div>
-                                    <input id="rate-krw-input" type="number" min="0" step="any" value="1" class="input-shell text-base font-semibold py-2">
-                                    <div id="rate-from-krw" class="text-sm font-semibold text-white/84 mt-2">...</div>
+                                    <input id="rate-krw-input" type="number" min="0" step="any" value="1" class="input-shell text-base font-semibold py-1.5 px-4">
+                                    <div id="rate-from-krw" class="text-sm font-semibold text-white/84 mt-1.5">...</div>
                                 </div>
                             </div>
                         </section>
 
                         <section class="grid grid-cols-2 gap-3">
-                            <div class="glass-panel rounded-[24px] p-3 text-center min-h-[84px] flex flex-col justify-center">
-                                <div id="destination-clock-label" class="text-[11px] uppercase tracking-[0.28em] text-white/50 mb-2">Destination</div>
+                            <div class="glass-panel rounded-[22px] p-2.5 text-center min-h-[72px] flex flex-col justify-center">
+                                <div id="destination-clock-label" class="text-sm text-white/64 mb-1">🌍</div>
                                 <div id="time-destination" class="text-xl font-serif font-bold text-white">--:--</div>
-                                <div id="date-destination" class="text-xs text-white/68 mt-1">---</div>
+                                <div id="date-destination" class="text-[11px] text-white/68 mt-0.5">---</div>
                             </div>
-                            <div class="glass-panel rounded-[24px] p-3 text-center min-h-[84px] flex flex-col justify-center">
-                                <div class="text-[11px] uppercase tracking-[0.28em] text-white/50 mb-2">Seoul</div>
+                            <div class="glass-panel rounded-[22px] p-2.5 text-center min-h-[72px] flex flex-col justify-center">
+                                <div class="text-sm text-white/64 mb-1">🇰🇷</div>
                                 <div id="time-seoul" class="text-xl font-serif font-bold text-white">--:--</div>
-                                <div id="date-seoul" class="text-xs text-white/68 mt-1">---</div>
+                                <div id="date-seoul" class="text-[11px] text-white/68 mt-0.5">---</div>
                             </div>
                         </section>
                     </div>
@@ -343,17 +343,21 @@
 
                 <div class="utility-shell utility-bottom">
                     <div>
-                        <section class="glass-panel rounded-[28px] p-4 sm:p-5 text-center">
-                            <div class="rounded-[18px] border border-white/10 bg-white/5 p-3 mb-3">
-                                <div id="phrase-label" class="text-[10px] uppercase tracking-[0.24em] text-white/48 mb-1.5">Useful phrase</div>
-                                <div id="phrase-text" class="text-xl font-semibold text-white">...</div>
-                                <div id="phrase-meta" class="text-sm text-white/68 mt-1">...</div>
+                        <section class="glass-panel rounded-[24px] p-3 sm:p-4 text-center">
+                            <div class="rounded-[18px] border border-white/10 bg-white/5 p-3 mb-2.5">
+                                <div class="flex items-center justify-center gap-2 mb-1">
+                                    <div id="phrase-label" class="text-base text-white/72">🌍</div>
+                                    <div id="phrase-text" class="text-lg font-semibold text-white">...</div>
+                                </div>
+                                <div id="phrase-meta" class="text-sm text-white/68">...</div>
                             </div>
-                            <button id="share-plan-btn" type="button" class="action-btn px-5 py-3.5 text-base font-semibold w-full">링크로 저장하기 및 공유하기</button>
-                            <div id="share-status" class="text-sm text-white/72 mt-3 min-h-[1.25rem]"></div>
-                            <button id="reset-plan-btn" type="button" class="w-full rounded-2xl border border-white/12 bg-white/6 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-colors">
-                                처음 화면으로 초기화
-                            </button>
+                            <div class="flex items-center gap-2">
+                                <button id="share-plan-btn" type="button" class="action-btn px-4 py-2.5 text-sm font-semibold flex-1">링크 저장/공유</button>
+                                <button id="reset-plan-btn" type="button" class="rounded-2xl border border-white/12 bg-white/6 px-4 py-2.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors flex-1">
+                                    처음 화면
+                                </button>
+                            </div>
+                            <div id="share-status" class="text-xs text-white/72 mt-2 min-h-[1rem]"></div>
                         </section>
                     </div>
                 </div>

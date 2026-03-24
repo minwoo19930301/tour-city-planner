@@ -1195,6 +1195,24 @@ let mapPreviewTimer = null;
 let mapPreviewRequestId = 0;
 let utilityChromeTimer = null;
 
+const COUNTRY_FLAGS = {
+    France: '🇫🇷',
+    'United Kingdom': '🇬🇧',
+    'United States': '🇺🇸',
+    Japan: '🇯🇵',
+    Italy: '🇮🇹',
+    Spain: '🇪🇸',
+    Singapore: '🇸🇬',
+    Thailand: '🇹🇭',
+    'United Arab Emirates': '🇦🇪',
+    Netherlands: '🇳🇱',
+    'Hong Kong': '🇭🇰',
+    Australia: '🇦🇺',
+    China: '🇨🇳',
+    Taiwan: '🇹🇼',
+    Vietnam: '🇻🇳'
+};
+
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -1499,21 +1517,33 @@ function updateBodyScrollLock() {
     setScrollLock(shouldLock);
 }
 
-function scheduleUtilityChrome() {
+function getCountryFlag(country) {
+    return COUNTRY_FLAGS[country] || '🌍';
+}
+
+function showUtilityChrome() {
     if (utilityChromeTimer) {
         window.clearTimeout(utilityChromeTimer);
         utilityChromeTimer = null;
     }
+    document.body.classList.remove('ui-busy');
+}
 
-    document.body.classList.remove('ui-idle');
-
+function hideUtilityChrome() {
     if (!appState.hasStarted) return;
+    document.body.classList.add('ui-busy');
+}
+
+function scheduleUtilityChrome() {
+    hideUtilityChrome();
+
+    if (utilityChromeTimer) {
+        window.clearTimeout(utilityChromeTimer);
+    }
 
     utilityChromeTimer = window.setTimeout(() => {
-        if (appState.hasStarted) {
-            document.body.classList.add('ui-idle');
-        }
-    }, 1800);
+        showUtilityChrome();
+    }, 120);
 }
 
 function setShareStatus(message = '') {
@@ -1752,14 +1782,14 @@ function renderPhrase() {
     const phrases = Array.isArray(destination.phrases) ? destination.phrases : [];
     const phrase = phrases[appState.phraseIndex] || phrases[0];
 
-    ui.phraseLabel.textContent = destination.phraseLabel || 'Travel phrase';
+    ui.phraseLabel.textContent = getCountryFlag(destination.country);
     ui.phraseText.textContent = phrase?.text || 'Hello';
     ui.phraseMeta.textContent = phrase ? `${phrase.pron} · ${phrase.meaning}` : `${destination.city} trip`;
 }
 
 function renderUtilityInfo() {
     const destination = getDestination(appState.destinationId);
-    ui.destinationClockLabel.textContent = destination.country;
+    ui.destinationClockLabel.textContent = getCountryFlag(destination.country);
     ui.baseCurrencyLabel.textContent = destination.currency.code;
     updateExchangeOutputs();
     renderPhrase();
@@ -1792,7 +1822,7 @@ function renderSetupInputs() {
 function showSetupOverlay() {
     ui.setupOverlay.classList.remove('hidden');
     ui.tripShell.classList.add('hidden');
-    document.body.classList.remove('ui-idle');
+    document.body.classList.remove('ui-busy');
     updateBodyScrollLock();
 }
 
@@ -2127,7 +2157,7 @@ function refreshPlan() {
         renderSetupInputs();
         updateClocks();
         showSetupOverlay();
-        scheduleUtilityChrome();
+        showUtilityChrome();
         return;
     }
 
@@ -2142,7 +2172,7 @@ function refreshPlan() {
     syncUrl();
     fetchExchangeRate();
     fetchWeather();
-    scheduleUtilityChrome();
+    showUtilityChrome();
 }
 
 function applySetupSelection() {
@@ -2494,12 +2524,16 @@ window.addEventListener('keydown', (event) => {
     }
 });
 
-['mousemove', 'mousedown', 'keydown'].forEach((eventName) => {
+['mousemove', 'mousedown', 'keydown', 'touchmove', 'wheel'].forEach((eventName) => {
     window.addEventListener(eventName, scheduleUtilityChrome);
 });
 
 ['touchstart', 'scroll'].forEach((eventName) => {
     window.addEventListener(eventName, scheduleUtilityChrome, { passive: true });
+});
+
+['mouseup', 'touchend', 'pointerup'].forEach((eventName) => {
+    window.addEventListener(eventName, showUtilityChrome, { passive: true });
 });
 
 window.setInterval(updateClocks, 1000);
