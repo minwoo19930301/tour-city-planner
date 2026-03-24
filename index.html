@@ -239,20 +239,24 @@
                         <div id="date-destination" class="text-xs text-white/68 mt-1">---</div>
                     </div>
                     <div class="glass-panel rounded-[28px] p-5">
-                        <div class="flex items-center justify-between gap-4">
-                            <div class="flex items-center gap-3 min-w-0">
-                                <div id="currency-symbol-badge"
-                                    class="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg"
-                                    style="background: rgba(var(--ink-rgb), 0.88);">€</div>
-                                <div class="min-w-0">
-                                    <div id="base-currency-label" class="text-[11px] uppercase tracking-[0.24em] text-white/52 mb-1">1 EUR</div>
-                                    <div id="rate-to-krw" class="text-lg font-semibold text-white">...</div>
+                        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                            <div class="rounded-[24px] border border-white/10 bg-white/5 p-4">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <div id="currency-symbol-badge"
+                                        class="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg"
+                                        style="background: rgba(var(--ink-rgb), 0.88);">€</div>
+                                    <div class="min-w-0">
+                                        <div class="text-[11px] uppercase tracking-[0.24em] text-white/52 mb-1">Destination Currency</div>
+                                        <div id="base-currency-label" class="text-lg font-semibold text-white">EUR</div>
+                                    </div>
                                 </div>
+                                <input id="rate-base-input" type="number" min="0" step="any" value="1" class="input-shell text-lg font-semibold">
+                                <div id="rate-to-krw" class="text-sm font-semibold text-white/84 mt-3">...</div>
                             </div>
-                            <div class="w-px h-10 bg-white/10"></div>
-                            <div class="text-right min-w-0">
-                                <div class="text-[11px] uppercase tracking-[0.24em] text-white/52 mb-1">1,000 KRW</div>
-                                <div id="rate-from-krw" class="text-lg font-semibold text-white">...</div>
+                            <div class="rounded-[24px] border border-white/10 bg-white/5 p-4">
+                                <div class="text-[11px] uppercase tracking-[0.24em] text-white/52 mb-3">Korean Won</div>
+                                <input id="rate-krw-input" type="number" min="0" step="any" value="1" class="input-shell text-lg font-semibold">
+                                <div id="rate-from-krw" class="text-sm font-semibold text-white/84 mt-3">...</div>
                             </div>
                         </div>
                     </div>
@@ -263,7 +267,7 @@
                     <h2 id="trip-title" class="text-5xl sm:text-6xl font-serif font-bold text-white mb-4"></h2>
                     <p id="trip-summary" class="text-lg text-white/84 leading-8 max-w-3xl"></p>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+                    <div class="hidden grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
                         <div class="meta-box p-5 flex flex-col justify-between">
                             <div class="text-[11px] uppercase tracking-[0.28em] text-white/48">Trip Length</div>
                             <div id="trip-length" class="text-2xl sm:text-3xl font-bold text-white"></div>
@@ -283,7 +287,6 @@
                     </div>
 
                     <div id="share-status" class="text-sm text-white/72 mt-4 min-h-[1.5rem]"></div>
-                    <p class="text-sm text-white/62 mt-2">각 일정 카드의 편집 버튼으로 시간, 장소, 메모를 바로 수정할 수 있습니다.</p>
                 </section>
 
                 <section class="mt-8">
@@ -361,8 +364,38 @@
                         <input id="activity-location" type="text" placeholder="예: Temple Street" class="input-shell">
                     </div>
                     <div>
-                        <label for="activity-icon" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">Icon</label>
-                        <select id="activity-icon" class="input-shell"></select>
+                        <div class="flex items-center justify-between gap-3 mb-2">
+                            <label class="text-[11px] uppercase tracking-[0.24em] text-white/45 block">Icon <span class="text-white/28">(Optional)</span></label>
+                            <div class="text-[11px] text-white/35">필수 아님</div>
+                        </div>
+                        <button id="activity-icon-trigger" type="button" class="input-shell flex items-center justify-between gap-3 text-left">
+                            <span class="flex items-center gap-3 min-w-0">
+                                <span id="activity-icon-preview" class="p-2 rounded-xl accent-icon shrink-0">
+                                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                                </span>
+                                <span id="activity-icon-label" class="text-white/82 truncate">아이콘 선택 안 함</span>
+                            </span>
+                            <span class="text-[11px] uppercase tracking-[0.24em] text-white/38 shrink-0">Choose</span>
+                        </button>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between gap-3 mb-2">
+                            <label class="text-[11px] uppercase tracking-[0.24em] text-white/45 block">Map Preview</label>
+                            <a id="activity-map-link" href="https://www.google.com/maps" target="_blank" rel="noreferrer"
+                                class="text-[11px] uppercase tracking-[0.24em] text-white/52 hover:text-white transition-colors">
+                                Open Google Maps
+                            </a>
+                        </div>
+                        <div class="rounded-[24px] overflow-hidden border border-white/10 bg-black/20">
+                            <iframe
+                                id="activity-map-frame"
+                                title="구글 지도 미리보기"
+                                class="w-full h-[220px] border-0"
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                src="about:blank"></iframe>
+                        </div>
+                        <div id="activity-map-status" class="text-xs text-white/55 mt-2">장소를 입력하면 여기서 바로 구글 지도를 미리 볼 수 있습니다.</div>
                     </div>
                     <div>
                         <label for="activity-memo" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">Memo</label>
@@ -383,6 +416,35 @@
                         class="flex-1 rounded-2xl px-4 py-3 text-sm font-semibold text-slate-950 transition-colors"
                         style="background: var(--accent);">
                         저장
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="icon-picker-modal" class="fixed inset-0 z-[95] hidden overflow-y-auto">
+        <div class="absolute inset-0 bg-slate-950/76 backdrop-blur-md"></div>
+        <div class="relative z-10 max-w-3xl mx-auto min-h-screen flex items-start sm:items-center px-4 py-4 sm:py-8 sm:px-6">
+            <div class="glass-panel rounded-[32px] p-6 w-full my-4 max-h-[calc(100svh-2rem)] overflow-y-auto">
+                <div class="flex items-start justify-between gap-4 mb-5">
+                    <div>
+                        <div class="text-[11px] uppercase tracking-[0.24em] text-white/45 mb-2">Pick An Icon</div>
+                        <h2 class="text-2xl font-serif font-bold text-white">일정 아이콘 선택</h2>
+                        <p class="text-sm text-white/62 mt-2">아이콘은 선택 사항입니다. 필요 없으면 아이콘 없이 저장하면 됩니다.</p>
+                    </div>
+                    <button id="icon-picker-close-btn"
+                        class="shrink-0 rounded-full bg-white/5 border border-white/10 p-2 text-white/45 hover:text-white transition-colors"
+                        aria-label="아이콘 선택 닫기">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <div id="icon-picker-grid" class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4"></div>
+
+                <div class="flex justify-end mt-6">
+                    <button id="icon-picker-cancel-btn"
+                        class="rounded-2xl border border-white/12 bg-white/6 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-colors">
+                        닫기
                     </button>
                 </div>
             </div>

@@ -1146,7 +1146,8 @@ const appState = {
 
 let activityEditorState = {
     dayIndex: null,
-    activityId: null
+    activityId: null,
+    icon: ''
 };
 
 let setupSelection = {
@@ -1157,6 +1158,10 @@ let setupSelection = {
 
 let idCounter = 0;
 let shareStatusTimer = null;
+let currentExchangeRate = null;
+let isExchangeLoading = false;
+let mapPreviewTimer = null;
+let mapPreviewRequestId = 0;
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -1185,6 +1190,8 @@ const ui = {
     timeDestination: document.getElementById('time-destination'),
     dateDestination: document.getElementById('date-destination'),
     currencySymbolBadge: document.getElementById('currency-symbol-badge'),
+    rateBaseInput: document.getElementById('rate-base-input'),
+    rateKrwInput: document.getElementById('rate-krw-input'),
     baseCurrencyLabel: document.getElementById('base-currency-label'),
     rateToKrw: document.getElementById('rate-to-krw'),
     rateFromKrw: document.getElementById('rate-from-krw'),
@@ -1207,8 +1214,17 @@ const ui = {
     activityTime: document.getElementById('activity-time'),
     activityTitle: document.getElementById('activity-title'),
     activityLocation: document.getElementById('activity-location'),
-    activityIcon: document.getElementById('activity-icon'),
-    activityMemo: document.getElementById('activity-memo')
+    activityIconTrigger: document.getElementById('activity-icon-trigger'),
+    activityIconPreview: document.getElementById('activity-icon-preview'),
+    activityIconLabel: document.getElementById('activity-icon-label'),
+    activityMapFrame: document.getElementById('activity-map-frame'),
+    activityMapLink: document.getElementById('activity-map-link'),
+    activityMapStatus: document.getElementById('activity-map-status'),
+    activityMemo: document.getElementById('activity-memo'),
+    iconPickerModal: document.getElementById('icon-picker-modal'),
+    iconPickerGrid: document.getElementById('icon-picker-grid'),
+    iconPickerCloseBtn: document.getElementById('icon-picker-close-btn'),
+    iconPickerCancelBtn: document.getElementById('icon-picker-cancel-btn')
 };
 
 function createId(prefix) {
@@ -1341,7 +1357,7 @@ function buildItineraryFromSharedPayload(destinationId, startDate, endDate, seri
                 time: typeof activity.h === 'string' && activity.h ? activity.h : '09:00',
                 title: typeof activity.n === 'string' && activity.n ? activity.n : '일정',
                 location: typeof activity.l === 'string' ? activity.l : '',
-                type: typeof activity.k === 'string' && ACTIVITY_ICON_VALUES.has(activity.k) ? activity.k : ACTIVITY_ICON_OPTIONS[0].value,
+                type: typeof activity.k === 'string' && (ACTIVITY_ICON_VALUES.has(activity.k) || activity.k === '') ? activity.k : '',
                 memo: typeof activity.m === 'string' ? activity.m : ''
             }))
             : day.activities;
@@ -1401,6 +1417,13 @@ function setScrollLock(locked) {
     document.body.style.overflow = locked ? 'hidden' : '';
 }
 
+function updateBodyScrollLock() {
+    const shouldLock = !ui.setupOverlay.classList.contains('hidden')
+        || !ui.activityModal.classList.contains('hidden')
+        || !ui.iconPickerModal.classList.contains('hidden');
+    setScrollLock(shouldLock);
+}
+
 function setShareStatus(message = '') {
     if (shareStatusTimer) {
         window.clearTimeout(shareStatusTimer);
@@ -1430,17 +1453,188 @@ function applyTheme(destination) {
     document.title = `${destination.city} Trip Plan`;
 }
 
-function renderIconOptions() {
-    ui.activityIcon.innerHTML = ACTIVITY_ICON_OPTIONS.map((option) => (
-        `<option value="${option.value}">${option.label}</option>`
-    )).join('');
+function getActivityIconOption(value) {
+    return ACTIVITY_ICON_OPTIONS.find((option) => option.value === value) || null;
+}
+
+function getRenderableActivityIcon(value) {
+    return ACTIVITY_ICON_VALUES.has(value) ? value : 'map-pin';
+}
+
+function getMapsSearchUrl(location) {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
+}
+
+function getMapPreviewEmbedUrl(latitude, longitude) {
+    const latDelta = 0.01;
+    const lonDelta = 0.015;
+    const west = longitude - lonDelta;
+    const south = latitude - latDelta;
+    const east = longitude + lonDelta;
+    const north = latitude + latDelta;
+    return `https://www.openstreetmap.org/export/embed.html?bbox=${west},${south},${east},${north}&layer=mapnik&marker=${latitude},${longitude}`;
+}
+
+function parseAmountInput(value) {
+    const normalized = String(value || '').replaceAll(',', '').trim();
+    if (!normalized) return null;
+
+    const amount = Number(normalized);
+    if (!Number.isFinite(amount) || amount < 0) return null;
+    return amount;
+}
+
+function formatExchangeValue(value, locale, maximumFractionDigits = 2) {
+    return new Intl.NumberFormat(locale, {
+        minimumFractionDigits: value !== 0 && Math.abs(value) < 1 ? Math.min(maximumFractionDigits, 4) : 0,
+        maximumFractionDigits: value !== 0 && Math.abs(value) < 1 ? Math.max(maximumFractionDigits, 4) : maximumFractionDigits
+    }).format(value);
+}
+
+function updateExchangeOutputs() {
+    const destination = getDestination(appState.destinationId);
+
+    if (!currentExchangeRate) {
+        const loadingMessage = isExchangeLoading ? '실시간 환율을 불러오는 중입니다.' : '환율을 불러오지 못했습니다.';
+        ui.rateToKrw.textContent = loadingMessage;
+        ui.rateFromKrw.textContent = loadingMessage;
+        return;
+    }
+
+    const baseAmount = parseAmountInput(ui.rateBaseInput.value);
+    const krwAmount = parseAmountInput(ui.rateKrwInput.value);
+
+    if (baseAmount === null) {
+        ui.rateToKrw.textContent = `숫자를 입력하면 KRW로 계산됩니다.`;
+    } else {
+        const convertedKrw = baseAmount * currentExchangeRate;
+        ui.rateToKrw.textContent = `= ${formatExchangeValue(convertedKrw, 'ko-KR', 2)} KRW`;
+    }
+
+    if (krwAmount === null) {
+        ui.rateFromKrw.textContent = `숫자를 입력하면 ${destination.currency.code}로 계산됩니다.`;
+    } else {
+        const convertedCurrency = krwAmount / currentExchangeRate;
+        ui.rateFromKrw.textContent = `= ${formatExchangeValue(convertedCurrency, destination.currency.locale, 2)} ${destination.currency.code}`;
+    }
+}
+
+function renderIconPicker() {
+    const currentValue = activityEditorState.icon || '';
+    const iconButtons = ACTIVITY_ICON_OPTIONS.map((option) => {
+        const isActive = option.value === currentValue;
+        const activeStyle = isActive
+            ? `style="border-color: rgba(var(--accent-rgb), 0.7); background: rgba(var(--accent-rgb), 0.14);"`
+            : '';
+
+        return `
+            <button
+                type="button"
+                class="rounded-[22px] border border-white/10 bg-white/5 p-4 text-left text-white transition-colors hover:bg-white/10"
+                data-icon-choice="${option.value}"
+                ${activeStyle}>
+                <div class="flex items-center gap-3">
+                    <span class="p-2 rounded-xl accent-icon shrink-0">
+                        <i data-lucide="${option.value}" class="w-4 h-4"></i>
+                    </span>
+                    <span class="text-sm font-semibold">${escapeHtml(option.label)}</span>
+                </div>
+            </button>
+        `;
+    }).join('');
+
+    ui.iconPickerGrid.innerHTML = `
+        <button
+            type="button"
+            class="rounded-[22px] border border-white/10 bg-white/5 p-4 text-left text-white transition-colors hover:bg-white/10"
+            data-icon-choice=""
+            ${currentValue === '' ? `style="border-color: rgba(var(--accent-rgb), 0.7); background: rgba(var(--accent-rgb), 0.14);"` : ''}>
+            <div class="flex items-center gap-3">
+                <span class="p-2 rounded-xl border border-dashed border-white/18 bg-white/5 shrink-0">
+                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                </span>
+                <span class="text-sm font-semibold">아이콘 없이 저장</span>
+            </div>
+        </button>
+        ${iconButtons}
+    `;
+
+    lucide.createIcons();
+}
+
+function renderActivityIconSelection() {
+    const option = getActivityIconOption(activityEditorState.icon);
+    ui.activityIconLabel.textContent = option ? option.label : '아이콘 선택 안 함';
+    ui.activityIconPreview.innerHTML = `<i data-lucide="${getRenderableActivityIcon(activityEditorState.icon)}" class="w-4 h-4"></i>`;
+    lucide.createIcons();
+}
+
+function updateActivityMapPreview() {
+    const location = ui.activityLocation.value.trim();
+    const requestId = ++mapPreviewRequestId;
+    ui.activityMapLink.href = location ? getMapsSearchUrl(location) : 'https://www.google.com/maps';
+
+    if (mapPreviewTimer) {
+        window.clearTimeout(mapPreviewTimer);
+        mapPreviewTimer = null;
+    }
+
+    if (!location) {
+        ui.activityMapFrame.src = 'about:blank';
+        ui.activityMapStatus.textContent = '장소를 입력하면 여기서 바로 구글 지도를 미리 볼 수 있습니다.';
+        return;
+    }
+
+    ui.activityMapFrame.src = 'about:blank';
+    ui.activityMapStatus.textContent = `지도를 찾는 중입니다. Google Maps 버튼으로도 바로 검색할 수 있습니다.`;
+
+    mapPreviewTimer = window.setTimeout(async () => {
+        try {
+            const response = await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(location)}&limit=1`);
+            if (!response.ok) throw new Error('Map search failed');
+
+            const data = await response.json();
+            if (requestId !== mapPreviewRequestId) return;
+
+            const feature = Array.isArray(data?.features) ? data.features[0] : null;
+            const coordinates = Array.isArray(feature?.geometry?.coordinates) ? feature.geometry.coordinates : null;
+            if (!coordinates || coordinates.length < 2) throw new Error('Missing map coordinates');
+
+            const [longitude, latitude] = coordinates;
+            ui.activityMapFrame.src = getMapPreviewEmbedUrl(latitude, longitude);
+            ui.activityMapStatus.textContent = `미리보기 지도는 OpenStreetMap 기준으로 "${location}" 주변을 보여줍니다.`;
+        } catch (error) {
+            if (requestId !== mapPreviewRequestId) return;
+            console.warn('Map preview lookup failed:', error);
+            ui.activityMapFrame.src = 'about:blank';
+            ui.activityMapStatus.textContent = '이 위치는 미리보기를 찾지 못했습니다. Google Maps 버튼으로 바로 검색할 수 있습니다.';
+        }
+    }, 320);
+}
+
+function openIconPicker() {
+    renderIconPicker();
+    ui.iconPickerModal.classList.remove('hidden');
+    updateBodyScrollLock();
+}
+
+function closeIconPicker() {
+    ui.iconPickerModal.classList.add('hidden');
+    updateBodyScrollLock();
+}
+
+function applyActivityIconSelection(value) {
+    activityEditorState.icon = ACTIVITY_ICON_VALUES.has(value) ? value : '';
+    renderActivityIconSelection();
+    renderIconPicker();
 }
 
 function renderUtilityInfo() {
     const destination = getDestination(appState.destinationId);
     ui.destinationClockLabel.textContent = destination.city;
-    ui.baseCurrencyLabel.textContent = `1 ${destination.currency.code}`;
+    ui.baseCurrencyLabel.textContent = destination.currency.code;
     ui.currencySymbolBadge.textContent = destination.currency.symbol;
+    updateExchangeOutputs();
 }
 
 function renderDestinationSelector() {
@@ -1468,13 +1662,13 @@ function renderSetupInputs() {
 function showSetupOverlay() {
     ui.setupOverlay.classList.remove('hidden');
     ui.tripShell.classList.add('hidden');
-    setScrollLock(true);
+    updateBodyScrollLock();
 }
 
 function hideSetupOverlay() {
     ui.setupOverlay.classList.add('hidden');
     ui.tripShell.classList.remove('hidden');
-    setScrollLock(false);
+    updateBodyScrollLock();
 }
 
 function renderStaticSummary() {
@@ -1542,7 +1736,7 @@ function updateClocks() {
 
 function getWeatherInfo(code) {
     if (code === 0) return { icon: 'sun', color: 'var(--accent)' };
-    if (code >= 1 && code <= 3) return { icon: 'sparkles', color: '#d1d5db' };
+    if (code >= 1 && code <= 3) return { icon: 'sun', color: '#f8fafc' };
     if (code >= 45 && code <= 48) return { icon: 'cloud-fog', color: '#cbd5e1' };
     if (code >= 51 && code <= 67) return { icon: 'cloud-drizzle', color: '#93c5fd' };
     if (code >= 71 && code <= 77) return { icon: 'cloud-snow', color: '#f8fafc' };
@@ -1553,6 +1747,9 @@ function getWeatherInfo(code) {
 
 async function fetchExchangeRate() {
     const destination = getDestination(appState.destinationId);
+    isExchangeLoading = true;
+    currentExchangeRate = null;
+    updateExchangeOutputs();
 
     try {
         const response = await fetch(`https://open.er-api.com/v6/latest/${destination.currency.code}`);
@@ -1561,19 +1758,14 @@ async function fetchExchangeRate() {
         const data = await response.json();
         const rate = data?.rates?.KRW;
         if (!rate) throw new Error('Missing KRW rate');
-
-        ui.rateToKrw.textContent = `${Math.round(rate).toLocaleString('ko-KR')} ₩`;
-
-        const reverseValue = 1000 / rate;
-        const decimals = destination.currency.code === 'JPY' ? 0 : 2;
-        ui.rateFromKrw.textContent = `${new Intl.NumberFormat(destination.currency.locale, {
-            minimumFractionDigits: decimals,
-            maximumFractionDigits: decimals
-        }).format(reverseValue)} ${destination.currency.symbol}`;
+        isExchangeLoading = false;
+        currentExchangeRate = rate;
+        updateExchangeOutputs();
     } catch (error) {
         console.error('Exchange rate fetch failed:', error);
-        ui.rateToKrw.textContent = 'Unavailable';
-        ui.rateFromKrw.textContent = 'Unavailable';
+        isExchangeLoading = false;
+        currentExchangeRate = null;
+        updateExchangeOutputs();
     }
 }
 
@@ -1677,7 +1869,7 @@ function renderItinerary() {
                 ${buildHourlyWeatherHtml(day, activity)}
                 <div class="flex items-center gap-3 flex-1 min-w-0">
                     <div class="p-2 rounded-xl accent-icon shrink-0">
-                        <i data-lucide="${activity.type}" class="w-4 h-4"></i>
+                        <i data-lucide="${getRenderableActivityIcon(activity.type)}" class="w-4 h-4"></i>
                     </div>
                     <div class="min-w-0">
                         <div class="text-sm font-bold text-white">${escapeHtml(activity.time)}</div>
@@ -1860,24 +2052,29 @@ function openActivityEditor(dayIndex, activityId = null) {
 
     activityEditorState.dayIndex = dayIndex;
     activityEditorState.activityId = activityId;
+    activityEditorState.icon = existing?.type || '';
     ui.activityModalTitle.textContent = existing ? '일정 편집' : '새 일정 추가';
     ui.activityTime.value = existing?.time || '09:00';
     ui.activityTitle.value = existing?.title || '';
     ui.activityLocation.value = existing?.location || '';
-    ui.activityIcon.value = existing?.type || ACTIVITY_ICON_OPTIONS[0].value;
     ui.activityMemo.value = existing?.memo || '';
     ui.activityDeleteBtn.classList.toggle('hidden', !existing);
+    renderActivityIconSelection();
+    updateActivityMapPreview();
+    closeIconPicker();
 
     ui.activityModal.classList.remove('hidden');
-    setScrollLock(true);
+    updateBodyScrollLock();
     lucide.createIcons();
 }
 
 function closeActivityEditor() {
+    closeIconPicker();
     ui.activityModal.classList.add('hidden');
-    setScrollLock(false);
+    updateBodyScrollLock();
     activityEditorState.dayIndex = null;
     activityEditorState.activityId = null;
+    activityEditorState.icon = '';
 }
 
 function persistItineraryChanges() {
@@ -1904,7 +2101,7 @@ function saveActivityEditor() {
         time,
         title,
         location,
-        type: ui.activityIcon.value,
+        type: activityEditorState.icon || '',
         memo: ui.activityMemo.value.trim()
     };
 
@@ -2032,15 +2229,33 @@ ui.activityCloseBtn.addEventListener('click', closeActivityEditor);
 ui.activityCancelBtn.addEventListener('click', closeActivityEditor);
 ui.activitySaveBtn.addEventListener('click', saveActivityEditor);
 ui.activityDeleteBtn.addEventListener('click', deleteCurrentActivity);
+ui.activityLocation.addEventListener('input', updateActivityMapPreview);
+ui.activityIconTrigger.addEventListener('click', openIconPicker);
+ui.iconPickerCloseBtn.addEventListener('click', closeIconPicker);
+ui.iconPickerCancelBtn.addEventListener('click', closeIconPicker);
+ui.iconPickerGrid.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-icon-choice]');
+    if (!button) return;
+
+    applyActivityIconSelection(button.dataset.iconChoice || '');
+    closeIconPicker();
+});
+ui.rateBaseInput.addEventListener('input', updateExchangeOutputs);
+ui.rateKrwInput.addEventListener('input', updateExchangeOutputs);
 ui.itineraryContainer.addEventListener('click', handleItineraryClick);
 
 window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !ui.iconPickerModal.classList.contains('hidden')) {
+        closeIconPicker();
+        return;
+    }
+
     if (event.key === 'Escape' && !ui.activityModal.classList.contains('hidden')) {
         closeActivityEditor();
     }
 });
 
 window.setInterval(updateClocks, 1000);
-renderIconOptions();
+renderIconPicker();
 bootstrapFromUrl();
 refreshPlan();
