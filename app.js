@@ -1631,7 +1631,7 @@ function applyActivityIconSelection(value) {
 
 function renderUtilityInfo() {
     const destination = getDestination(appState.destinationId);
-    ui.destinationClockLabel.textContent = destination.city;
+    ui.destinationClockLabel.textContent = 'Local';
     ui.baseCurrencyLabel.textContent = destination.currency.code;
     ui.currencySymbolBadge.textContent = destination.currency.symbol;
     updateExchangeOutputs();

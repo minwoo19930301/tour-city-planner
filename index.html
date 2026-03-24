@@ -225,44 +225,22 @@
     </div>
 
     <div id="trip-shell" class="relative z-10 min-h-screen hidden">
-        <main class="px-4 pt-8 pb-24 sm:px-6 lg:px-8">
+        <main class="px-4 pt-4 pb-24 sm:px-6 lg:px-8">
             <div class="max-w-5xl mx-auto">
-                <section class="grid grid-cols-1 gap-4 mb-6 lg:grid-cols-[1fr_1fr_1.3fr]">
-                    <div class="glass-panel rounded-[28px] p-5 text-center">
+                <section class="grid grid-cols-2 gap-3 mb-4 sm:mb-5">
+                    <div class="glass-panel rounded-[26px] p-4 text-center min-h-[132px] flex flex-col justify-center">
                         <div class="text-[11px] uppercase tracking-[0.28em] text-white/50 mb-2">Seoul</div>
-                        <div id="time-seoul" class="text-3xl font-serif font-bold text-white">--:--</div>
+                        <div id="time-seoul" class="text-2xl sm:text-3xl font-serif font-bold text-white">--:--</div>
                         <div id="date-seoul" class="text-xs text-white/68 mt-1">---</div>
                     </div>
-                    <div class="glass-panel rounded-[28px] p-5 text-center">
-                        <div id="destination-clock-label" class="text-[11px] uppercase tracking-[0.28em] text-white/50 mb-2">Destination</div>
-                        <div id="time-destination" class="text-3xl font-serif font-bold text-white">--:--</div>
+                    <div class="glass-panel rounded-[26px] p-4 text-center min-h-[132px] flex flex-col justify-center">
+                        <div id="destination-clock-label" class="text-[11px] uppercase tracking-[0.28em] text-white/50 mb-2">Local</div>
+                        <div id="time-destination" class="text-2xl sm:text-3xl font-serif font-bold text-white">--:--</div>
                         <div id="date-destination" class="text-xs text-white/68 mt-1">---</div>
-                    </div>
-                    <div class="glass-panel rounded-[28px] p-5">
-                        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                            <div class="rounded-[24px] border border-white/10 bg-white/5 p-4">
-                                <div class="flex items-center gap-3 mb-3">
-                                    <div id="currency-symbol-badge"
-                                        class="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg"
-                                        style="background: rgba(var(--ink-rgb), 0.88);">€</div>
-                                    <div class="min-w-0">
-                                        <div class="text-[11px] uppercase tracking-[0.24em] text-white/52 mb-1">Destination Currency</div>
-                                        <div id="base-currency-label" class="text-lg font-semibold text-white">EUR</div>
-                                    </div>
-                                </div>
-                                <input id="rate-base-input" type="number" min="0" step="any" value="1" class="input-shell text-lg font-semibold">
-                                <div id="rate-to-krw" class="text-sm font-semibold text-white/84 mt-3">...</div>
-                            </div>
-                            <div class="rounded-[24px] border border-white/10 bg-white/5 p-4">
-                                <div class="text-[11px] uppercase tracking-[0.24em] text-white/52 mb-3">Korean Won</div>
-                                <input id="rate-krw-input" type="number" min="0" step="any" value="1" class="input-shell text-lg font-semibold">
-                                <div id="rate-from-krw" class="text-sm font-semibold text-white/84 mt-3">...</div>
-                            </div>
-                        </div>
                     </div>
                 </section>
 
-                <section class="glass-panel rounded-[36px] p-6 sm:p-8 reveal active">
+                <section class="hidden glass-panel rounded-[36px] p-6 sm:p-8 reveal active">
                     <div id="trip-country-chip" class="chip inline-flex items-center gap-2 px-5 py-2 text-[11px] uppercase tracking-[0.32em] font-semibold mb-5"></div>
                     <h2 id="trip-title" class="text-5xl sm:text-6xl font-serif font-bold text-white mb-4"></h2>
                     <p id="trip-summary" class="text-lg text-white/84 leading-8 max-w-3xl"></p>
@@ -281,21 +259,42 @@
                             <div id="trip-weather-label" class="text-2xl sm:text-3xl font-bold text-white leading-tight">Forecast</div>
                         </div>
                     </div>
-
-                    <div class="mt-7">
-                        <button id="share-plan-btn" type="button" class="action-btn px-5 py-4 text-base font-semibold w-full sm:w-auto">링크로 저장하기 및 공유하기</button>
-                    </div>
-
-                    <div id="share-status" class="text-sm text-white/72 mt-4 min-h-[1.5rem]"></div>
                 </section>
 
-                <section class="mt-8">
+                <section class="mt-3">
                     <div class="relative space-y-8" id="itinerary-container">
                         <div class="absolute left-[11px] top-2 bottom-0 w-[2px] bg-white/20"></div>
                     </div>
                 </section>
 
-                <footer class="py-8 text-center text-white/42 text-sm">
+                <section class="glass-panel rounded-[32px] p-5 sm:p-6 mt-8">
+                    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        <div class="rounded-[24px] border border-white/10 bg-white/5 p-4">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div id="currency-symbol-badge"
+                                    class="w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-lg"
+                                    style="background: rgba(var(--ink-rgb), 0.88);">€</div>
+                                <div class="min-w-0">
+                                    <div class="text-[11px] uppercase tracking-[0.24em] text-white/52 mb-1">Destination Currency</div>
+                                    <div id="base-currency-label" class="text-lg font-semibold text-white">EUR</div>
+                                </div>
+                            </div>
+                            <input id="rate-base-input" type="number" min="0" step="any" value="1" class="input-shell text-lg font-semibold">
+                            <div id="rate-to-krw" class="text-sm font-semibold text-white/84 mt-3">...</div>
+                        </div>
+                        <div class="rounded-[24px] border border-white/10 bg-white/5 p-4">
+                            <div class="text-[11px] uppercase tracking-[0.24em] text-white/52 mb-3">Korean Won</div>
+                            <input id="rate-krw-input" type="number" min="0" step="any" value="1" class="input-shell text-lg font-semibold">
+                            <div id="rate-from-krw" class="text-sm font-semibold text-white/84 mt-3">...</div>
+                        </div>
+                    </div>
+                    <div class="mt-5">
+                        <button id="share-plan-btn" type="button" class="action-btn px-5 py-4 text-base font-semibold w-full">링크로 저장하기 및 공유하기</button>
+                    </div>
+                    <div id="share-status" class="text-sm text-white/72 mt-4 min-h-[1.5rem]"></div>
+                </section>
+
+                <footer class="hidden py-8 text-center text-white/42 text-sm">
                     <p id="footer-note" class="font-serif italic">Start with a city, then make it yours.</p>
                 </footer>
             </div>
