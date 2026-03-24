@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting to Paris Trip</title>
+    <title>Redirecting to Sydney Trip</title>
     <script>
         const params = new URLSearchParams(window.location.search);
-        params.set('destination', 'paris');
+        params.set('destination', 'sydney');
         window.location.replace(`./index.html?${params.toString()}${window.location.hash}`);
     </script>
 </head>
 
 <body>
-    <p>Redirecting to <a href="./index.html?destination=paris">Paris trip</a>...</p>
+    <p>Redirecting to <a href="./index.html?destination=sydney">Sydney trip</a>...</p>
 </body>
 
 </html>

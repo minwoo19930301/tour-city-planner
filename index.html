@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Trip Plans</title>
+    <title>Custom Trip Plans</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +37,6 @@
             --overlay-bottom: rgba(9, 14, 48, 0.94);
             --panel: rgba(255, 255, 255, 0.1);
             --panel-border: rgba(255, 255, 255, 0.2);
-            --panel-strong: rgba(255, 255, 255, 0.18);
         }
 
         ::selection {
@@ -56,20 +55,9 @@
 
         .glass {
             background: var(--panel);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--panel-border);
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.72);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.52);
-        }
-
-        .hero-tint {
-            background: linear-gradient(to bottom, var(--overlay-top), transparent 42%, var(--overlay-bottom));
         }
 
         .hero-multiply {
@@ -77,27 +65,16 @@
             mix-blend-mode: multiply;
         }
 
+        .hero-tint {
+            background: linear-gradient(to bottom, var(--overlay-top), transparent 42%, var(--overlay-bottom));
+        }
+
         .accent-text {
             color: var(--accent);
         }
 
-        .accent-soft {
-            color: rgba(var(--accent-rgb), 0.82);
-        }
-
-        .accent-surface {
-            background: rgba(var(--accent-rgb), 0.14);
-            border-color: rgba(var(--accent-rgb), 0.24);
-        }
-
         .accent-dot {
             background: var(--accent);
-        }
-
-        .accent-chip {
-            background: rgba(var(--accent-rgb), 0.18);
-            color: rgba(255, 255, 255, 0.92);
-            border: 1px solid rgba(var(--accent-rgb), 0.3);
         }
 
         .accent-icon {
@@ -111,7 +88,7 @@
 
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(24px);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
@@ -120,15 +97,8 @@
             transform: translateY(0);
         }
 
-        .next-item {
-            background: rgba(var(--accent-rgb), 0.12);
-            border: 1px solid rgba(var(--accent-rgb), 0.8);
-            box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0.45);
-            animation: pulse-glow 2.2s infinite;
-        }
-
         .destination-card {
-            min-width: 122px;
+            min-width: 124px;
             text-align: left;
             border-radius: 18px;
             padding: 0.9rem 0.95rem;
@@ -139,14 +109,35 @@
 
         .destination-card:hover {
             transform: translateY(-1px);
-            border-color: rgba(var(--accent-rgb), 0.4);
-            background: rgba(255, 255, 255, 0.13);
+            border-color: rgba(var(--accent-rgb), 0.44);
+            background: rgba(255, 255, 255, 0.14);
         }
 
-        .destination-card.active {
-            background: rgba(var(--accent-rgb), 0.15);
-            border-color: rgba(var(--accent-rgb), 0.72);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+        .destination-card.active,
+        .setup-city-card.active {
+            background: rgba(var(--accent-rgb), 0.14);
+            border-color: rgba(var(--accent-rgb), 0.78);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+        }
+
+        .setup-city-card {
+            border-radius: 20px;
+            padding: 1rem;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+        }
+
+        .setup-city-card:hover {
+            transform: translateY(-1px);
+            border-color: rgba(var(--accent-rgb), 0.44);
+        }
+
+        .next-item {
+            background: rgba(var(--accent-rgb), 0.12);
+            border: 1px solid rgba(var(--accent-rgb), 0.8);
+            animation: pulse-glow 2.2s infinite;
         }
 
         @keyframes pulse-glow {
@@ -155,7 +146,7 @@
             }
 
             50% {
-                box-shadow: 0 0 22px 0 rgba(var(--accent-rgb), 0.52);
+                box-shadow: 0 0 24px 0 rgba(var(--accent-rgb), 0.52);
             }
 
             100% {
@@ -174,7 +165,7 @@
 
     <div class="max-w-md mx-auto min-h-screen relative z-10 flex flex-col">
         <div id="header-container"
-            class="sticky top-0 z-50 bg-slate-950/20 backdrop-blur-xl border-b border-white/5 shadow-2xl pb-3">
+            class="sticky top-0 z-40 bg-slate-950/20 backdrop-blur-xl border-b border-white/5 shadow-2xl pb-3">
             <div class="px-6 pt-6 pb-2">
                 <div class="glass rounded-3xl p-5 relative overflow-hidden">
                     <div class="absolute top-0 left-0 w-1 h-full accent-dot"></div>
@@ -243,8 +234,8 @@
             <div class="px-6 pt-2">
                 <div class="flex items-center justify-between mb-3">
                     <div>
-                        <div class="text-[11px] uppercase tracking-[0.28em] text-white/45">Destinations</div>
-                        <div class="text-sm text-white/80">대표 도시 기준으로 빠르게 비교</div>
+                        <div class="text-[11px] uppercase tracking-[0.28em] text-white/45">Major cities</div>
+                        <div class="text-sm text-white/80">먼저 도시와 날짜를 고르고 시작</div>
                     </div>
                     <div id="destination-count" class="text-xs accent-text font-semibold"></div>
                 </div>
@@ -255,7 +246,8 @@
         <section class="px-6 pt-6 pb-24 flex-1">
             <div class="glass rounded-[28px] p-5 mb-6 reveal active">
                 <div id="trip-country-chip"
-                    class="inline-flex items-center gap-2 rounded-full accent-chip px-3 py-1 text-[11px] uppercase tracking-[0.22em] font-semibold mb-4">
+                    class="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] uppercase tracking-[0.22em] font-semibold mb-4"
+                    style="background: rgba(var(--accent-rgb), 0.18); border: 1px solid rgba(var(--accent-rgb), 0.3); color: rgba(255,255,255,0.92);">
                 </div>
                 <div class="flex items-start justify-between gap-4">
                     <div>
@@ -277,6 +269,18 @@
                         <div id="trip-weather-label" class="text-sm font-semibold text-white">Forecast</div>
                     </div>
                 </div>
+                <div class="flex flex-wrap gap-2 mt-5">
+                    <button id="open-setup-btn"
+                        class="rounded-full px-4 py-2 text-sm font-semibold text-white border border-white/15 bg-white/8 hover:bg-white/14 transition-colors">
+                        도시 / 날짜 바꾸기
+                    </button>
+                    <button id="reset-plan-btn"
+                        class="rounded-full px-4 py-2 text-sm font-semibold border transition-colors"
+                        style="color: var(--accent); border-color: rgba(var(--accent-rgb), 0.35); background: rgba(var(--accent-rgb), 0.12);">
+                        템플릿으로 초기화
+                    </button>
+                </div>
+                <p class="text-[11px] text-white/52 mt-3">각 일정 카드의 편집 버튼으로 시간, 장소, 메모를 바로 수정할 수 있습니다.</p>
             </div>
 
             <div class="relative space-y-8" id="itinerary-container">
@@ -285,8 +289,127 @@
         </section>
 
         <footer class="py-8 text-center text-white/40 text-xs">
-            <p id="footer-note" class="font-serif italic">Next city, next story.</p>
+            <p id="footer-note" class="font-serif italic">Start with a city, then make it yours.</p>
         </footer>
+    </div>
+
+    <div id="setup-overlay" class="fixed inset-0 z-[80] hidden">
+        <div class="absolute inset-0 bg-slate-950/72 backdrop-blur-md"></div>
+        <div class="relative z-10 max-w-md mx-auto min-h-screen flex items-center px-6 py-8">
+            <div class="glass rounded-[32px] p-6 w-full">
+                <div class="flex items-start justify-between gap-4 mb-5">
+                    <div>
+                        <div class="text-[11px] uppercase tracking-[0.28em] text-white/45 mb-2">Trip setup</div>
+                        <h2 class="text-3xl font-serif font-bold text-white">도시와 날짜를 먼저 고르세요</h2>
+                        <p class="text-sm text-white/65 mt-2 leading-6">그 다음에는 일정 제목, 장소, 시간, 메모를 직접 커스터마이징할 수 있습니다.</p>
+                    </div>
+                    <button id="setup-close-btn"
+                        class="shrink-0 rounded-full bg-white/5 border border-white/10 p-2 text-white/45 hover:text-white transition-colors"
+                        aria-label="설정 닫기">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <div class="mb-5">
+                    <div class="text-[11px] uppercase tracking-[0.24em] text-white/45 mb-3">Choose city</div>
+                    <div id="setup-city-grid" class="grid grid-cols-2 gap-3"></div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="setup-start-date" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">Start date</label>
+                    <input id="setup-start-date" type="date"
+                        class="w-full rounded-2xl border border-white/12 bg-white/8 px-4 py-3 text-white outline-none focus:border-white/24">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 mb-5">
+                    <div class="rounded-2xl bg-white/6 border border-white/8 p-3">
+                        <div class="text-[10px] uppercase tracking-[0.2em] text-white/45 mb-1">Template</div>
+                        <div id="setup-template-meta" class="text-sm font-semibold text-white"></div>
+                    </div>
+                    <div class="rounded-2xl bg-white/6 border border-white/8 p-3">
+                        <div class="text-[10px] uppercase tracking-[0.2em] text-white/45 mb-1">Forecast</div>
+                        <div id="setup-forecast-meta" class="text-sm font-semibold text-white"></div>
+                    </div>
+                </div>
+
+                <p class="text-[11px] text-white/50 leading-5 mb-5">날씨는 대략 앞으로 16일 정도까지만 실시간으로 붙일 수 있습니다. 더 먼 날짜도 일정 편집은 그대로 가능합니다.</p>
+
+                <div class="flex gap-3">
+                    <button id="setup-cancel-btn"
+                        class="flex-1 rounded-2xl border border-white/12 bg-white/6 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-colors">
+                        취소
+                    </button>
+                    <button id="setup-apply-btn"
+                        class="flex-1 rounded-2xl px-4 py-3 text-sm font-semibold text-slate-950 transition-colors"
+                        style="background: var(--accent);">
+                        이 일정으로 시작
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="activity-modal" class="fixed inset-0 z-[90] hidden">
+        <div class="absolute inset-0 bg-slate-950/68 backdrop-blur-md"></div>
+        <div class="relative z-10 max-w-md mx-auto min-h-screen flex items-center px-6 py-8">
+            <div class="glass rounded-[32px] p-6 w-full">
+                <div class="flex items-start justify-between gap-4 mb-5">
+                    <div>
+                        <div class="text-[11px] uppercase tracking-[0.24em] text-white/45 mb-2">Customize stop</div>
+                        <h2 id="activity-modal-title" class="text-2xl font-serif font-bold text-white">일정 편집</h2>
+                    </div>
+                    <button id="activity-close-btn"
+                        class="shrink-0 rounded-full bg-white/5 border border-white/10 p-2 text-white/45 hover:text-white transition-colors"
+                        aria-label="편집 닫기">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label for="activity-time" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">Time</label>
+                        <input id="activity-time" type="time"
+                            class="w-full rounded-2xl border border-white/12 bg-white/8 px-4 py-3 text-white outline-none focus:border-white/24">
+                    </div>
+                    <div>
+                        <label for="activity-title" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">Title</label>
+                        <input id="activity-title" type="text" placeholder="예: 야시장 투어"
+                            class="w-full rounded-2xl border border-white/12 bg-white/8 px-4 py-3 text-white outline-none focus:border-white/24">
+                    </div>
+                    <div>
+                        <label for="activity-location" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">Location</label>
+                        <input id="activity-location" type="text" placeholder="예: Borough Market"
+                            class="w-full rounded-2xl border border-white/12 bg-white/8 px-4 py-3 text-white outline-none focus:border-white/24">
+                    </div>
+                    <div>
+                        <label for="activity-icon" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">Icon</label>
+                        <select id="activity-icon"
+                            class="w-full rounded-2xl border border-white/12 bg-white/8 px-4 py-3 text-white outline-none focus:border-white/24"></select>
+                    </div>
+                    <div>
+                        <label for="activity-memo" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">Memo</label>
+                        <textarea id="activity-memo" rows="4" placeholder="준비물, 예약 메모, 이동 팁"
+                            class="w-full rounded-2xl border border-white/12 bg-white/8 px-4 py-3 text-white outline-none focus:border-white/24"></textarea>
+                    </div>
+                </div>
+
+                <div class="flex gap-3 mt-6">
+                    <button id="activity-delete-btn"
+                        class="rounded-2xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-sm font-semibold text-red-200 hover:bg-red-500/16 transition-colors">
+                        삭제
+                    </button>
+                    <button id="activity-cancel-btn"
+                        class="flex-1 rounded-2xl border border-white/12 bg-white/6 px-4 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-colors">
+                        취소
+                    </button>
+                    <button id="activity-save-btn"
+                        class="flex-1 rounded-2xl px-4 py-3 text-sm font-semibold text-slate-950 transition-colors"
+                        style="background: var(--accent);">
+                        저장
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="./app.js" defer></script>

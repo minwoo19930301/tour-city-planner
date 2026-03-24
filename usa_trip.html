@@ -3,16 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=./?destination=new-york">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting to USA Trip</title>
     <script>
-        window.location.replace('./?destination=new-york');
+        const params = new URLSearchParams(window.location.search);
+        params.set('destination', 'new-york');
+        window.location.replace(`./index.html?${params.toString()}${window.location.hash}`);
     </script>
 </head>
 
 <body>
-    <p>Redirecting to <a href="./?destination=new-york">USA trip</a>...</p>
+    <p>Redirecting to <a href="./index.html?destination=new-york">USA trip</a>...</p>
 </body>
 
 </html>
