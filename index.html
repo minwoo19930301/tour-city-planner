@@ -94,6 +94,11 @@
             box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
         }
 
+        .dropdown-option.active {
+            background: rgba(var(--accent-rgb), 0.14);
+            border-color: rgba(var(--accent-rgb), 0.56);
+        }
+
         .meta-box {
             border-radius: 26px;
             border: 1px solid rgba(255, 255, 255, 0.16);
@@ -382,9 +387,23 @@
                     <div id="destination-count" class="shrink-0 text-lg sm:text-2xl font-semibold accent-text"></div>
                 </div>
 
-                <div id="destination-selector" class="grid grid-cols-2 gap-4 lg:grid-cols-4"></div>
+                <div class="mb-6">
+                    <label class="text-[11px] uppercase tracking-[0.28em] text-white/48 block mb-3">Country / Time Zone</label>
+                    <div class="relative">
+                        <button id="destination-dropdown-trigger" type="button" class="input-shell flex items-center justify-between gap-3 text-left">
+                            <span class="min-w-0">
+                                <span id="destination-dropdown-value" class="block text-white text-base font-semibold truncate">선택하세요</span>
+                                <span id="destination-dropdown-meta" class="block text-sm text-white/52 truncate">국가와 시간대를 고릅니다.</span>
+                            </span>
+                            <span class="text-white/52 shrink-0">
+                                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                            </span>
+                        </button>
+                        <div id="destination-selector" class="hidden absolute left-0 right-0 top-[calc(100%+0.5rem)] z-20 rounded-[24px] border border-white/12 bg-slate-950/88 backdrop-blur-xl p-2 max-h-[280px] overflow-y-auto shadow-2xl"></div>
+                    </div>
+                </div>
 
-                <div class="grid grid-cols-1 gap-4 mt-6 lg:grid-cols-[1fr_1fr_auto] lg:items-end">
+                <div class="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_1fr_auto] lg:items-end">
                     <div>
                         <label for="setup-start-date" class="text-[11px] uppercase tracking-[0.28em] text-white/48 block mb-3">Start Date</label>
                         <input id="setup-start-date" type="date" class="input-shell">

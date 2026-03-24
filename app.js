@@ -1230,6 +1230,9 @@ const ui = {
     tripShell: document.getElementById('trip-shell'),
     setupOverlay: document.getElementById('setup-overlay'),
     destinationSelector: document.getElementById('destination-selector'),
+    destinationDropdownTrigger: document.getElementById('destination-dropdown-trigger'),
+    destinationDropdownValue: document.getElementById('destination-dropdown-value'),
+    destinationDropdownMeta: document.getElementById('destination-dropdown-meta'),
     destinationCount: document.getElementById('destination-count'),
     setupStartDate: document.getElementById('setup-start-date'),
     setupEndDate: document.getElementById('setup-end-date'),
@@ -1803,15 +1806,26 @@ function renderDestinationSelector() {
     selectableDestinations.forEach((destination) => {
         const button = document.createElement('button');
         button.type = 'button';
-        button.className = `city-card ${destination.id === setupSelection.destinationId ? 'active' : ''}`;
+        button.className = `dropdown-option w-full rounded-[18px] border border-white/10 bg-white/5 px-4 py-3 text-left transition-colors hover:bg-white/10 ${destination.id === setupSelection.destinationId ? 'active' : ''}`;
         button.dataset.destination = destination.id;
         button.innerHTML = `
-            <div class="text-[11px] uppercase tracking-[0.28em] text-white/50 mb-3">Country</div>
-            <div class="text-2xl font-semibold text-white">${escapeHtml(destination.primaryLabel)}</div>
-            ${destination.secondaryLabel ? `<div class="text-sm text-white/62 mt-2">${escapeHtml(destination.secondaryLabel)}</div>` : ''}
+            <div class="flex items-center justify-between gap-3">
+                <div class="min-w-0">
+                    <div class="text-base font-semibold text-white truncate">${escapeHtml(destination.primaryLabel)}</div>
+                    <div class="text-sm text-white/62 truncate">${escapeHtml(destination.secondaryLabel || '대표 시간대')}</div>
+                </div>
+                <div class="text-lg shrink-0">${getCountryFlag(destination.country)}</div>
+            </div>
         `;
         ui.destinationSelector.appendChild(button);
     });
+
+    const selectedDestination = selectableDestinations.find((destination) => destination.id === setupSelection.destinationId)
+        || selectableDestinations[0];
+    if (selectedDestination) {
+        ui.destinationDropdownValue.textContent = selectedDestination.primaryLabel;
+        ui.destinationDropdownMeta.textContent = selectedDestination.secondaryLabel || '대표 시간대';
+    }
 }
 
 function renderSetupInputs() {
@@ -1819,10 +1833,23 @@ function renderSetupInputs() {
     ui.setupEndDate.value = setupSelection.endDate;
 }
 
+function openDestinationDropdown() {
+    ui.destinationSelector.classList.remove('hidden');
+}
+
+function closeDestinationDropdown() {
+    ui.destinationSelector.classList.add('hidden');
+}
+
+function toggleDestinationDropdown() {
+    ui.destinationSelector.classList.toggle('hidden');
+}
+
 function showSetupOverlay() {
     ui.setupOverlay.classList.remove('hidden');
     ui.tripShell.classList.add('hidden');
     document.body.classList.remove('ui-busy');
+    closeDestinationDropdown();
     updateBodyScrollLock();
 }
 
@@ -2464,6 +2491,10 @@ function bootstrapFromUrl() {
     setupSelection.endDate = endDate;
 }
 
+ui.destinationDropdownTrigger.addEventListener('click', () => {
+    toggleDestinationDropdown();
+});
+
 ui.destinationSelector.addEventListener('click', (event) => {
     const button = event.target.closest('[data-destination]');
     if (!button) return;
@@ -2476,6 +2507,7 @@ ui.destinationSelector.addEventListener('click', (event) => {
     applyTheme(destination);
     renderSetupInputs();
     renderDestinationSelector();
+    closeDestinationDropdown();
 });
 
 ui.setupStartDate.addEventListener('input', () => {
@@ -2534,6 +2566,13 @@ window.addEventListener('keydown', (event) => {
 
 ['mouseup', 'touchend', 'pointerup'].forEach((eventName) => {
     window.addEventListener(eventName, showUtilityChrome, { passive: true });
+});
+
+document.addEventListener('click', (event) => {
+    if (ui.setupOverlay.classList.contains('hidden')) return;
+    if (event.target.closest('#destination-dropdown-trigger')) return;
+    if (event.target.closest('#destination-selector')) return;
+    closeDestinationDropdown();
 });
 
 window.setInterval(updateClocks, 1000);
