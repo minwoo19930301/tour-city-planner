@@ -925,6 +925,12 @@ const DESTINATIONS = {
         weather: { latitude: 39.9042, longitude: 116.4074 },
         currency: { code: 'CNY', symbol: '¥', locale: 'zh-CN' },
         startOffsetDays: 7,
+        phraseLabel: 'Chinese phrase',
+        phrases: [
+            { text: 'Ni hao', pron: '[니 하오]', meaning: '안녕하세요' },
+            { text: 'Xie xie', pron: '[셰셰]', meaning: '감사합니다' },
+            { text: 'Qing wen', pron: '[칭 원]', meaning: '실례합니다 / 물어볼게요' }
+        ],
         itineraryTemplate: [
             {
                 title: '황성 워밍업',
@@ -958,7 +964,7 @@ const DESTINATIONS = {
         country: 'China',
         summary: '번드, 타워, 쇼핑 거리, 강변 야경을 묶은 상하이 템플릿입니다.',
         footer: 'Shanghai feels strongest when the Bund and the skyline stay in the same frame.',
-        heroImage: 'https://unsplash.com/photos/CJbHTL3YFPo/download?force=true&w=1920',
+        heroImage: 'https://unsplash.com/photos/mbH-HwbYL-k/download?force=true&w=1920',
         accent: '#38BDF8',
         accentRgb: '56, 189, 248',
         ink: '#082F49',
@@ -969,6 +975,12 @@ const DESTINATIONS = {
         weather: { latitude: 31.2304, longitude: 121.4737 },
         currency: { code: 'CNY', symbol: '¥', locale: 'zh-CN' },
         startOffsetDays: 7,
+        phraseLabel: 'Chinese phrase',
+        phrases: [
+            { text: 'Ni hao', pron: '[니 하오]', meaning: '안녕하세요' },
+            { text: 'Xie xie', pron: '[셰셰]', meaning: '감사합니다' },
+            { text: 'Zai na li?', pron: '[짜이 날리]', meaning: '어디에 있나요?' }
+        ],
         itineraryTemplate: [
             {
                 title: '번드 첫인상',
@@ -1013,6 +1025,12 @@ const DESTINATIONS = {
         weather: { latitude: 25.0330, longitude: 121.5654 },
         currency: { code: 'TWD', symbol: 'NT$', locale: 'zh-TW' },
         startOffsetDays: 6,
+        phraseLabel: 'Taiwan phrase',
+        phrases: [
+            { text: 'Ni hao', pron: '[니 하오]', meaning: '안녕하세요' },
+            { text: 'Xie xie', pron: '[셰셰]', meaning: '감사합니다' },
+            { text: 'Qing wen', pron: '[칭 원]', meaning: '실례합니다 / 물어볼게요' }
+        ],
         itineraryTemplate: [
             {
                 title: '도심 전망',
@@ -1046,7 +1064,7 @@ const DESTINATIONS = {
         country: 'Vietnam',
         summary: '호수, 올드쿼터, 카페, 야시장을 묶은 하노이 템플릿입니다.',
         footer: 'Hanoi feels best when lakes, old streets, and food stops move at an easy pace.',
-        heroImage: 'https://unsplash.com/photos/enZPXLrYOJA/download?force=true&w=1920',
+        heroImage: 'https://unsplash.com/photos/pllzIJ92XHM/download?force=true&w=1920',
         accent: '#4ADE80',
         accentRgb: '74, 222, 128',
         ink: '#052E16',
@@ -1057,6 +1075,12 @@ const DESTINATIONS = {
         weather: { latitude: 21.0278, longitude: 105.8342 },
         currency: { code: 'VND', symbol: '₫', locale: 'vi-VN' },
         startOffsetDays: 7,
+        phraseLabel: 'Vietnamese phrase',
+        phrases: [
+            { text: 'Xin chao', pron: '[씬 짜오]', meaning: '안녕하세요' },
+            { text: 'Cam on', pron: '[깜 언]', meaning: '감사합니다' },
+            { text: 'Cho toi cai nay', pron: '[쪼 또이 까이 나이]', meaning: '이거 주세요' }
+        ],
         itineraryTemplate: [
             {
                 title: '호수와 구시가지',
@@ -1101,6 +1125,12 @@ const DESTINATIONS = {
         weather: { latitude: 10.8231, longitude: 106.6297 },
         currency: { code: 'VND', symbol: '₫', locale: 'vi-VN' },
         startOffsetDays: 7,
+        phraseLabel: 'Vietnamese phrase',
+        phrases: [
+            { text: 'Xin chao', pron: '[씬 짜오]', meaning: '안녕하세요' },
+            { text: 'Cam on', pron: '[깜 언]', meaning: '감사합니다' },
+            { text: 'Tinh tien', pron: '[띵 띠엔]', meaning: '계산해 주세요' }
+        ],
         itineraryTemplate: [
             {
                 title: '도심 중심부',
@@ -1163,6 +1193,7 @@ let currentExchangeRate = null;
 let isExchangeLoading = false;
 let mapPreviewTimer = null;
 let mapPreviewRequestId = 0;
+let utilityChromeTimer = null;
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -1208,6 +1239,10 @@ const ui = {
     sharePlanBtn: document.getElementById('share-plan-btn'),
     resetPlanBtn: document.getElementById('reset-plan-btn'),
     shareStatus: document.getElementById('share-status'),
+    prependDayBtn: document.getElementById('prepend-day-btn'),
+    removeFirstDayBtn: document.getElementById('remove-first-day-btn'),
+    removeLastDayBtn: document.getElementById('remove-last-day-btn'),
+    appendDayBtn: document.getElementById('append-day-btn'),
     itineraryContainer: document.getElementById('itinerary-container'),
     footerNote: document.getElementById('footer-note'),
     activityModal: document.getElementById('activity-modal'),
@@ -1217,7 +1252,6 @@ const ui = {
     activityDeleteBtn: document.getElementById('activity-delete-btn'),
     activityModalTitle: document.getElementById('activity-modal-title'),
     activityTime: document.getElementById('activity-time'),
-    activityTitle: document.getElementById('activity-title'),
     activityLocation: document.getElementById('activity-location'),
     activityIconTrigger: document.getElementById('activity-icon-trigger'),
     activityIconPreview: document.getElementById('activity-icon-preview'),
@@ -1427,6 +1461,23 @@ function updateBodyScrollLock() {
         || !ui.activityModal.classList.contains('hidden')
         || !ui.iconPickerModal.classList.contains('hidden');
     setScrollLock(shouldLock);
+}
+
+function scheduleUtilityChrome() {
+    if (utilityChromeTimer) {
+        window.clearTimeout(utilityChromeTimer);
+        utilityChromeTimer = null;
+    }
+
+    document.body.classList.remove('ui-idle');
+
+    if (!appState.hasStarted) return;
+
+    utilityChromeTimer = window.setTimeout(() => {
+        if (appState.hasStarted) {
+            document.body.classList.add('ui-idle');
+        }
+    }, 1800);
 }
 
 function setShareStatus(message = '') {
@@ -1666,9 +1717,9 @@ function renderPhrase() {
     const phrases = Array.isArray(destination.phrases) ? destination.phrases : [];
     const phrase = phrases[appState.phraseIndex] || phrases[0];
 
-    ui.phraseLabel.textContent = destination.phraseLabel || 'Useful phrase';
-    ui.phraseText.textContent = phrase?.text || destination.city;
-    ui.phraseMeta.textContent = phrase ? `${phrase.pron} · ${phrase.meaning}` : '';
+    ui.phraseLabel.textContent = destination.phraseLabel || 'Travel phrase';
+    ui.phraseText.textContent = phrase?.text || 'Hello';
+    ui.phraseMeta.textContent = phrase ? `${phrase.pron} · ${phrase.meaning}` : `${destination.city} trip`;
 }
 
 function renderUtilityInfo() {
@@ -1705,6 +1756,7 @@ function renderSetupInputs() {
 function showSetupOverlay() {
     ui.setupOverlay.classList.remove('hidden');
     ui.tripShell.classList.add('hidden');
+    document.body.classList.remove('ui-idle');
     updateBodyScrollLock();
 }
 
@@ -1891,9 +1943,9 @@ function buildHourlyWeatherHtml(day, activity) {
     const temp = Math.round(appState.currentWeather.hourly.temperature_2m[index]);
 
     return `
-        <div class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-white/10 border border-white/10">
-            <i data-lucide="${weatherInfo.icon}" class="w-3.5 h-3.5" style="color:${weatherInfo.color}"></i>
-            <span class="text-[11px] font-bold text-white/90">${temp}°</span>
+        <div class="absolute -left-[40px] top-1/2 -translate-y-1/2 flex flex-col items-center justify-center w-[32px] z-10">
+            <i data-lucide="${weatherInfo.icon}" class="w-4 h-4 mb-0.5" style="color:${weatherInfo.color}"></i>
+            <span class="text-[10px] font-bold text-white/90">${temp}°</span>
         </div>
     `;
 }
@@ -1911,17 +1963,22 @@ function renderItinerary() {
         const activitiesHtml = day.activities.map((activity, activityIndex) => {
             const nextActivity = day.activities[activityIndex + 1];
             const betweenStopsHtml = nextActivity ? `
-                <div class="flex justify-center mb-3 -mt-1">
-                    <a
-                        href="${getDirectionsUrl(activity.location, nextActivity.location)}"
-                        target="_blank"
-                        rel="noreferrer"
-                        data-skip-edit="true"
-                        class="inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-[11px] font-semibold text-white hover:bg-white/10 transition-colors"
-                        style="border: 1px solid rgba(var(--accent-rgb), 0.42); background: rgba(var(--accent-rgb), 0.14);">
-                        <i data-lucide="route" class="w-3.5 h-3.5"></i>
-                        <span>다음 장소 길찾기</span>
-                    </a>
+                <div class="relative h-0 z-20">
+                    <div class="absolute right-[28px] -top-[22px] flex flex-col items-center">
+                        <div class="w-px h-4 bg-white/20"></div>
+                        <div class="w-2.5 h-2.5 rounded-full border-2 border-white/90" style="background: var(--accent);"></div>
+                        <a
+                            href="${getDirectionsUrl(activity.location, nextActivity.location)}"
+                            target="_blank"
+                            rel="noreferrer"
+                            data-skip-edit="true"
+                            class="w-9 h-9 rounded-full flex items-center justify-center text-white shadow-lg mt-1"
+                            style="border: 1px solid rgba(var(--accent-rgb), 0.56); background: rgba(var(--accent-rgb), 0.18);">
+                            <i data-lucide="route" class="w-4 h-4"></i>
+                        </a>
+                        <div class="w-2.5 h-2.5 rounded-full border-2 border-white/90 mt-1" style="background: var(--accent);"></div>
+                        <div class="w-px h-4 bg-white/20"></div>
+                    </div>
                 </div>
             ` : '';
 
@@ -1932,15 +1989,13 @@ function renderItinerary() {
                     data-action="edit-activity"
                     data-day-index="${dayIndex}"
                     data-activity-id="${activity.id}">
+                    ${buildHourlyWeatherHtml(day, activity)}
                     <div class="flex items-center gap-3 flex-1 min-w-0">
                         <div class="p-2 rounded-xl accent-icon shrink-0">
                             <i data-lucide="${getRenderableActivityIcon(activity.type)}" class="w-4 h-4"></i>
                         </div>
                         <div class="min-w-0">
-                            <div class="flex items-center gap-2 flex-wrap">
-                                <div class="text-sm font-bold text-white">${escapeHtml(activity.time)}</div>
-                                ${buildHourlyWeatherHtml(day, activity)}
-                            </div>
+                            <div class="text-sm font-bold text-white">${escapeHtml(activity.time)}</div>
                             <div class="text-sm text-white/88 mt-1">${escapeHtml(activity.title)}</div>
                             <div class="text-xs text-white/52 truncate mt-1">${escapeHtml(activity.location)}</div>
                             ${activity.memo ? `<div class="text-xs text-white/62 mt-1 leading-5">${escapeHtml(activity.memo)}</div>` : ''}
@@ -2036,6 +2091,7 @@ function refreshPlan() {
         renderSetupInputs();
         updateClocks();
         showSetupOverlay();
+        scheduleUtilityChrome();
         return;
     }
 
@@ -2050,6 +2106,7 @@ function refreshPlan() {
     syncUrl();
     fetchExchangeRate();
     fetchWeather();
+    scheduleUtilityChrome();
 }
 
 function applySetupSelection() {
@@ -2085,6 +2142,48 @@ function applySetupSelection() {
 
     setShareStatus('');
     refreshPlan();
+}
+
+function rebuildItineraryWithExisting(newStartDate, newEndDate) {
+    const existingDaysByDate = new Map(appState.itinerary.map((day) => [day.date, day]));
+    const nextTemplate = buildItineraryFromRange(appState.destinationId, newStartDate, newEndDate);
+
+    appState.startDate = newStartDate;
+    appState.endDate = newEndDate;
+    appState.itinerary = nextTemplate.map((day) => existingDaysByDate.get(day.date) || day);
+    appState.customized = true;
+
+    refreshPlan();
+}
+
+function prependDay() {
+    const nextStartDate = formatYmd(addDays(parseYmd(appState.startDate), -1));
+    rebuildItineraryWithExisting(nextStartDate, appState.endDate);
+}
+
+function appendDay() {
+    const nextEndDate = formatYmd(addDays(parseYmd(appState.endDate), 1));
+    rebuildItineraryWithExisting(appState.startDate, nextEndDate);
+}
+
+function removeFirstDay() {
+    if (appState.itinerary.length <= 1) {
+        window.alert('하루 일정은 남겨둬야 합니다.');
+        return;
+    }
+
+    const nextStartDate = formatYmd(addDays(parseYmd(appState.startDate), 1));
+    rebuildItineraryWithExisting(nextStartDate, appState.endDate);
+}
+
+function removeLastDay() {
+    if (appState.itinerary.length <= 1) {
+        window.alert('하루 일정은 남겨둬야 합니다.');
+        return;
+    }
+
+    const nextEndDate = formatYmd(addDays(parseYmd(appState.endDate), -1));
+    rebuildItineraryWithExisting(appState.startDate, nextEndDate);
 }
 
 function resetToSetup() {
@@ -2150,7 +2249,6 @@ function openActivityEditor(dayIndex, activityId = null) {
     activityEditorState.icon = existing?.type || '';
     ui.activityModalTitle.textContent = existing ? '일정 편집' : '새 일정 추가';
     ui.activityTime.value = existing?.time || '09:00';
-    ui.activityTitle.value = existing?.title || '';
     ui.activityLocation.value = existing?.location || '';
     ui.activityMemo.value = existing?.memo || '';
     ui.activityDeleteBtn.classList.toggle('hidden', !existing);
@@ -2182,9 +2280,11 @@ function saveActivityEditor() {
     const day = appState.itinerary[activityEditorState.dayIndex];
     if (!day) return;
 
-    const title = ui.activityTitle.value.trim();
     const location = ui.activityLocation.value.trim();
     const time = ui.activityTime.value;
+    const existingActivity = activityEditorState.activityId
+        ? day.activities.find((activity) => activity.id === activityEditorState.activityId)
+        : null;
 
     if (!location || !time) {
         window.alert('시간과 장소는 비워둘 수 없습니다.');
@@ -2194,7 +2294,7 @@ function saveActivityEditor() {
     const nextActivity = {
         id: activityEditorState.activityId || createId('activity'),
         time,
-        title: title || location || '일정',
+        title: existingActivity?.title || location || '일정',
         location,
         type: activityEditorState.icon || '',
         memo: ui.activityMemo.value.trim()
@@ -2322,6 +2422,10 @@ ui.setupEndDate.addEventListener('input', () => {
 ui.applyPlanBtn.addEventListener('click', applySetupSelection);
 ui.sharePlanBtn.addEventListener('click', sharePlan);
 ui.resetPlanBtn.addEventListener('click', resetToSetup);
+ui.prependDayBtn.addEventListener('click', prependDay);
+ui.appendDayBtn.addEventListener('click', appendDay);
+ui.removeFirstDayBtn.addEventListener('click', removeFirstDay);
+ui.removeLastDayBtn.addEventListener('click', removeLastDay);
 
 ui.activityCloseBtn.addEventListener('click', closeActivityEditor);
 ui.activityCancelBtn.addEventListener('click', closeActivityEditor);
@@ -2351,6 +2455,14 @@ window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && !ui.activityModal.classList.contains('hidden')) {
         closeActivityEditor();
     }
+});
+
+['mousemove', 'mousedown', 'keydown'].forEach((eventName) => {
+    window.addEventListener(eventName, scheduleUtilityChrome);
+});
+
+['touchstart', 'scroll'].forEach((eventName) => {
+    window.addEventListener(eventName, scheduleUtilityChrome, { passive: true });
 });
 
 window.setInterval(updateClocks, 1000);
