@@ -201,30 +201,21 @@
         }
 
         .utility-shell {
-            position: fixed;
-            left: 0;
+            position: relative;
             width: 100%;
-            z-index: 30;
-            pointer-events: none;
             opacity: 1;
-            transition: opacity 0.26s ease, transform 0.26s ease;
         }
 
         .utility-shell > div {
-            pointer-events: auto;
-            max-width: 72rem;
-            margin: 0 auto;
-            padding: 0 0.75rem;
+            padding: 0;
         }
 
         .utility-top {
-            top: env(safe-area-inset-top);
-            transform: none;
+            margin-bottom: 0.75rem;
         }
 
         .utility-bottom {
-            bottom: env(safe-area-inset-bottom);
-            transform: none;
+            margin-top: 1rem;
         }
 
         .next-item {
@@ -257,11 +248,11 @@
     </div>
 
     <div id="trip-shell" class="relative z-10 min-h-screen hidden">
-        <main class="px-4 pt-[10.75rem] pb-[9rem] sm:px-6 sm:pt-[9.5rem] sm:pb-[8rem] lg:px-8">
+        <main class="px-4 pt-4 pb-24 sm:px-6 lg:px-8">
             <div class="max-w-5xl mx-auto">
                 <div class="utility-shell utility-top">
                     <div class="space-y-2">
-                        <section class="glass-panel rounded-b-[24px] p-2 sm:rounded-[22px]">
+                        <section class="glass-panel rounded-[22px] p-2">
                             <div class="grid grid-cols-2 gap-3">
                                 <div class="rounded-[18px] border border-white/10 bg-white/5 p-2.5">
                                     <div class="flex items-center gap-2">
@@ -337,7 +328,7 @@
 
                 <div class="utility-shell utility-bottom">
                     <div>
-                        <section class="glass-panel rounded-t-[24px] p-3 sm:rounded-[24px] sm:p-4 text-center">
+                        <section class="glass-panel rounded-[24px] p-3 sm:p-4 text-center">
                             <div class="rounded-[18px] border border-white/10 bg-white/5 p-3 mb-2.5">
                                 <div class="flex items-center justify-center gap-2 mb-1">
                                     <div id="phrase-label" class="text-base text-white/72">🌍</div>
