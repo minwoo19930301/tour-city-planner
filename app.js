@@ -1245,6 +1245,43 @@ const CURRENCY_DISPLAY = {
     VND: '₫'
 };
 
+const LOCATION_LABELS = {
+    France: '프랑스',
+    'United Kingdom': '영국',
+    'United States': '미국',
+    Japan: '일본',
+    Italy: '이탈리아',
+    Spain: '스페인',
+    Singapore: '싱가포르',
+    Thailand: '태국',
+    'United Arab Emirates': '아랍에미리트',
+    Netherlands: '네덜란드',
+    'Hong Kong': '홍콩',
+    Australia: '호주',
+    China: '중국',
+    Taiwan: '대만',
+    Vietnam: '베트남',
+    Paris: '파리',
+    London: '런던',
+    'New York': '뉴욕',
+    'Los Angeles': '로스앤젤레스',
+    Tokyo: '도쿄',
+    Rome: '로마',
+    Barcelona: '바르셀로나',
+    Singapore_city: '싱가포르',
+    Bangkok: '방콕',
+    Dubai: '두바이',
+    Amsterdam: '암스테르담',
+    Madrid: '마드리드',
+    Sydney: '시드니',
+    Beijing: '베이징',
+    Shanghai: '상하이',
+    Taipei: '타이베이',
+    Hanoi: '하노이',
+    'Ho Chi Minh City': '호치민',
+    'Hong Kong_city': '홍콩'
+};
+
 const DEFAULT_BASE_AMOUNTS = {
     EUR: 10,
     GBP: 10,
@@ -1352,6 +1389,10 @@ function getDestination(id) {
     return DESTINATIONS[id] || DESTINATIONS[DEFAULT_DESTINATION_ID] || DESTINATIONS.paris;
 }
 
+function getLocalizedLabel(value, fallback = '') {
+    return LOCATION_LABELS[value] || fallback || value;
+}
+
 function getSelectableDestinations() {
     const grouped = new Map();
 
@@ -1374,8 +1415,8 @@ function getSelectableDestinations() {
         return {
             id: representative.id,
             country: representative.country,
-            primaryLabel: representative.country,
-            secondaryLabel: hasMultipleZones ? representative.city : '',
+            primaryLabel: getLocalizedLabel(representative.country),
+            secondaryLabel: hasMultipleZones ? getLocalizedLabel(representative.city, representative.city) : '',
             timeZone: representative.timeZone
         };
     });
@@ -1885,7 +1926,7 @@ function renderUtilityInfo() {
 function renderDestinationSelector() {
     ui.destinationSelector.innerHTML = '';
     const selectableDestinations = getSelectableDestinations();
-    ui.destinationCount.textContent = `${selectableDestinations.length} countries`;
+    ui.destinationCount.textContent = `${selectableDestinations.length}곳`;
 
     selectableDestinations.forEach((destination) => {
         const button = document.createElement('button');
