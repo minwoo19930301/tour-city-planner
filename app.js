@@ -3838,11 +3838,11 @@ ui.setupCalendarGrid.addEventListener('click', (event) => {
     const clickedDate = parseYmd(value);
     if (!clickedDate) return;
 
-    if (!setupSelection.startDate || !setupSelection.endDate || !setupRangeSelectingEnd) {
+    if (!setupSelection.startDate) {
         setupSelection.startDate = value;
         setupSelection.endDate = '';
         setupRangeSelectingEnd = true;
-    } else {
+    } else if (setupRangeSelectingEnd) {
         const startDate = parseYmd(setupSelection.startDate);
         if (!startDate || clickedDate < startDate) {
             setupSelection.startDate = value;
@@ -3852,6 +3852,10 @@ ui.setupCalendarGrid.addEventListener('click', (event) => {
             setupSelection.endDate = value;
             setupRangeSelectingEnd = false;
         }
+    } else {
+        setupSelection.startDate = value;
+        setupSelection.endDate = '';
+        setupRangeSelectingEnd = true;
     }
 
     syncSetupCalendarMonth(value);
