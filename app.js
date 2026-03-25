@@ -29,6 +29,75 @@ const ACTIVITY_ICON_OPTIONS = [
     { value: 'luggage', label: 'Hotel' }
 ];
 
+const REGION_ORDER = ['asia', 'north-america', 'europe', 'resort', 'south-america'];
+const REGION_LABELS = {
+    asia: '아시아',
+    'north-america': '북미',
+    europe: '유럽',
+    resort: '휴양지',
+    'south-america': '남미'
+};
+const COUNTRY_SORT_ORDER = [
+    'Japan',
+    'Hong Kong',
+    'Macau',
+    'China',
+    'Taiwan',
+    'Thailand',
+    'Vietnam',
+    'Philippines',
+    'Malaysia',
+    'Singapore',
+    'India',
+    'Indonesia',
+    'United States',
+    'Canada',
+    'Mexico',
+    'France',
+    'United Kingdom',
+    'Germany',
+    'Netherlands',
+    'Spain',
+    'Italy',
+    'Russia',
+    'Australia',
+    'United Arab Emirates',
+    'Egypt',
+    'Guam',
+    'Brazil',
+    'Argentina'
+];
+const COUNTRY_REGIONS = {
+    Japan: 'asia',
+    'Hong Kong': 'asia',
+    Macau: 'asia',
+    China: 'asia',
+    Taiwan: 'asia',
+    Thailand: 'asia',
+    Vietnam: 'asia',
+    Philippines: 'asia',
+    Malaysia: 'asia',
+    Singapore: 'asia',
+    India: 'asia',
+    Indonesia: 'asia',
+    'United States': 'north-america',
+    Canada: 'north-america',
+    Mexico: 'north-america',
+    France: 'europe',
+    'United Kingdom': 'europe',
+    Germany: 'europe',
+    Netherlands: 'europe',
+    Spain: 'europe',
+    Italy: 'europe',
+    Russia: 'europe',
+    Australia: 'resort',
+    'United Arab Emirates': 'resort',
+    Egypt: 'resort',
+    Guam: 'resort',
+    Brazil: 'south-america',
+    Argentina: 'south-america'
+};
+
 function hexToRgbString(hex) {
     const normalized = hex.replace('#', '');
     const full = normalized.length === 3
@@ -632,6 +701,96 @@ const DESTINATIONS = {
                     { time: '10:30', title: 'KL 타워', type: 'binoculars', location: 'Kuala Lumpur Tower' },
                     { time: '13:30', title: '메르데카 광장', type: 'map', location: 'Merdeka Square' },
                     { time: '17:30', title: '공항 이동', type: 'plane', location: 'Kuala Lumpur International Airport' }
+                ]
+            }
+        ]
+    },
+    jakarta: {
+        id: 'jakarta',
+        city: 'Jakarta',
+        country: 'Indonesia',
+        summary: '모나스, 구시가지, 스카이라인, 몰 산책을 묶은 자카르타 템플릿입니다.',
+        footer: 'Jakarta feels better when old town, skyline, and mall breaks stay balanced.',
+        heroImage: 'https://commons.wikimedia.org/wiki/Special:FilePath/The%20Skyline%20of%20Jakarta.jpg',
+        timeZone: 'Asia/Jakarta',
+        weather: { latitude: -6.2088, longitude: 106.8456 },
+        currency: { code: 'IDR', symbol: 'Rp', locale: 'id-ID' },
+        startOffsetDays: 7,
+        phraseLabel: 'Bahasa Indonesia',
+        phrases: [
+            { text: 'Halo', pron: '[할로]', meaning: '안녕하세요' },
+            { text: 'Terima kasih', pron: '[뜨리마 까시]', meaning: '감사합니다' },
+            { text: 'Permisi', pron: '[쁘르미시]', meaning: '실례합니다' },
+            { text: 'Berapa harganya?', pron: '[브라파 하르가냐?]', meaning: '이거 얼마예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '도심 워밍업',
+                activities: [
+                    { time: '10:00', title: '모나스', type: 'landmark', location: 'National Monument Jakarta' },
+                    { time: '13:30', title: '이슈티클랄 모스크', type: 'building', location: 'Istiqlal Mosque' },
+                    { time: '18:30', title: '스카이라인 뷰', type: 'binoculars', location: 'Skye Bar Jakarta' }
+                ]
+            },
+            {
+                title: '올드타운 & 쇼핑',
+                activities: [
+                    { time: '10:00', title: '코타 투아', type: 'map', location: 'Kota Tua Jakarta' },
+                    { time: '13:30', title: '파타힐라 광장', type: 'camera', location: 'Fatahillah Square' },
+                    { time: '18:30', title: '그랜드 인도네시아', type: 'shopping-cart', location: 'Grand Indonesia' }
+                ]
+            },
+            {
+                title: '카페 & 출발',
+                activities: [
+                    { time: '10:30', title: '멘텡 브런치', type: 'coffee', location: 'Menteng Jakarta' },
+                    { time: '13:30', title: '기념품 마지막 체크', type: 'gift', location: 'Sarinah' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Soekarno-Hatta International Airport' }
+                ]
+            }
+        ]
+    },
+    bali: {
+        id: 'bali',
+        city: 'Bali',
+        country: 'Indonesia',
+        summary: '발리 사원, 우붓, 라이스 테라스, 선셋 스폿을 묶은 발리 템플릿입니다.',
+        footer: 'Bali feels strongest when temple, rice terrace, and sunset stay in one flow.',
+        heroImage: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bali%20pura%20tanah%20lot.jpg',
+        timeZone: 'Asia/Makassar',
+        weather: { latitude: -8.6500, longitude: 115.2167 },
+        currency: { code: 'IDR', symbol: 'Rp', locale: 'id-ID' },
+        startOffsetDays: 8,
+        phraseLabel: 'Bahasa Indonesia',
+        phrases: [
+            { text: 'Halo', pron: '[할로]', meaning: '안녕하세요' },
+            { text: 'Terima kasih', pron: '[뜨리마 까시]', meaning: '감사합니다' },
+            { text: 'Tolong', pron: '[똘롱]', meaning: '도와주세요 / 부탁합니다' },
+            { text: 'Di mana pantainya?', pron: '[디 마나 빤따이냐?]', meaning: '해변이 어디예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '사원 & 선셋',
+                activities: [
+                    { time: '10:00', title: '따나롯 사원', type: 'landmark', location: 'Tanah Lot Temple' },
+                    { time: '13:30', title: '스미냑 브런치', type: 'coffee', location: 'Seminyak' },
+                    { time: '18:00', title: '선셋 포인트', type: 'sun', location: 'Canggu Beach' }
+                ]
+            },
+            {
+                title: '우붓 데이',
+                activities: [
+                    { time: '09:30', title: '우붓 왕궁', type: 'landmark', location: 'Ubud Palace' },
+                    { time: '13:00', title: '뜨갈랄랑 라이스 테라스', type: 'trees', location: 'Tegallalang Rice Terrace' },
+                    { time: '17:30', title: '몽키 포레스트 주변', type: 'map', location: 'Ubud Monkey Forest' }
+                ]
+            },
+            {
+                title: '클리프 & 출발',
+                activities: [
+                    { time: '10:00', title: '울루와뚜 절벽', type: 'binoculars', location: 'Uluwatu Temple' },
+                    { time: '13:30', title: '짐바란 씨푸드', type: 'utensils-crossed', location: 'Jimbaran Beach' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Ngurah Rai International Airport' }
                 ]
             }
         ]
@@ -1960,6 +2119,8 @@ let setupSelection = {
     startDate: '',
     endDate: ''
 };
+let setupCalendarMonth = '';
+let setupRangeSelectingEnd = false;
 
 let idCounter = 0;
 let shareStatusTimer = null;
@@ -1980,6 +2141,7 @@ const COUNTRY_FLAGS = {
     Spain: '🇪🇸',
     Singapore: '🇸🇬',
     Malaysia: '🇲🇾',
+    Indonesia: '🇮🇩',
     Thailand: '🇹🇭',
     'United Arab Emirates': '🇦🇪',
     Netherlands: '🇳🇱',
@@ -2018,6 +2180,7 @@ const CURRENCY_DENOMINATIONS = {
     ARS: [100, 200, 500, 1000, 2000, 10000],
     SGD: [2, 5, 10, 50, 100],
     THB: [20, 50, 100, 500, 1000],
+    IDR: [1000, 2000, 5000, 10000, 20000, 50000, 100000],
     AED: [5, 10, 20, 50, 100, 200],
     AUD: [5, 10, 20, 50, 100],
     CNY: [1, 5, 10, 20, 50, 100],
@@ -2043,6 +2206,7 @@ const CURRENCY_DISPLAY = {
     ARS: 'AR$',
     SGD: 'S$',
     THB: '฿',
+    IDR: 'Rp',
     AED: 'د.إ',
     AUD: 'A$',
     CNY: '元',
@@ -2060,6 +2224,7 @@ const LOCATION_LABELS = {
     Spain: '스페인',
     Singapore: '싱가포르',
     Malaysia: '말레이시아',
+    Indonesia: '인도네시아',
     Thailand: '태국',
     'United Arab Emirates': '아랍에미리트',
     Netherlands: '네덜란드',
@@ -2088,6 +2253,8 @@ const LOCATION_LABELS = {
     Barcelona: '바르셀로나',
     Singapore_city: '싱가포르',
     'Kuala Lumpur': '쿠알라룸푸르',
+    Jakarta: '자카르타',
+    Bali: '발리',
     Bangkok: '방콕',
     Dubai: '두바이',
     Amsterdam: '암스테르담',
@@ -2134,6 +2301,7 @@ const DEFAULT_BASE_AMOUNTS = {
     ARS: 1000,
     SGD: 10,
     THB: 100,
+    IDR: 100000,
     AED: 10,
     AUD: 10,
     CNY: 10,
@@ -2151,6 +2319,7 @@ const COUNTRY_THEMES = {
     Spain: buildTheme('#EC4899', '#3B0764', 0.46, 0.90),
     Singapore: buildTheme('#14B8A6', '#0F172A', 0.50, 0.92),
     Malaysia: buildTheme('#E11D48', '#3F0A1F', 0.42, 0.88),
+    Indonesia: buildTheme('#FF7A59', '#123B3A', 0.34, 0.78),
     Thailand: buildTheme('#F59E0B', '#451A03', 0.48, 0.92),
     'United Arab Emirates': buildTheme('#22D3EE', '#082F49', 0.52, 0.92),
     Netherlands: buildTheme('#FB923C', '#431407', 0.45, 0.92),
@@ -2173,7 +2342,8 @@ const COUNTRY_THEMES = {
 };
 
 const PREFERRED_GROUP_DESTINATIONS = {
-    China: 'shanghai'
+    China: 'shanghai',
+    Indonesia: 'bali'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -2198,6 +2368,13 @@ const ui = {
     destinationDropdownMeta: document.getElementById('destination-dropdown-meta'),
     setupStartDate: document.getElementById('setup-start-date'),
     setupEndDate: document.getElementById('setup-end-date'),
+    setupStartDisplay: document.getElementById('setup-start-display'),
+    setupEndDisplay: document.getElementById('setup-end-display'),
+    setupCalendarHint: document.getElementById('setup-calendar-hint'),
+    setupCalendarMonthLabel: document.getElementById('setup-calendar-month-label'),
+    setupCalendarGrid: document.getElementById('setup-calendar-grid'),
+    setupCalendarPrevBtn: document.getElementById('setup-calendar-prev-btn'),
+    setupCalendarNextBtn: document.getElementById('setup-calendar-next-btn'),
     applyPlanBtn: document.getElementById('apply-plan-btn'),
     destinationClockLabel: document.getElementById('destination-clock-label'),
     timeSeoul: document.getElementById('time-seoul'),
@@ -2275,6 +2452,48 @@ function getLocalizedLabel(value, fallback = '') {
     return LOCATION_LABELS[value] || fallback || value;
 }
 
+function getRegionKey(country) {
+    return COUNTRY_REGIONS[country] || 'asia';
+}
+
+function getCountrySortIndex(country) {
+    const index = COUNTRY_SORT_ORDER.indexOf(country);
+    return index === -1 ? Number.MAX_SAFE_INTEGER : index;
+}
+
+function startOfMonth(date) {
+    const next = new Date(date);
+    next.setDate(1);
+    next.setHours(0, 0, 0, 0);
+    return next;
+}
+
+function shiftMonth(date, amount) {
+    const next = startOfMonth(date);
+    next.setMonth(next.getMonth() + amount);
+    return next;
+}
+
+function formatSetupDate(value) {
+    const date = parseYmd(value);
+    if (!date) return '선택 안 됨';
+
+    return date.toLocaleDateString('ko-KR', {
+        month: 'long',
+        day: 'numeric',
+        weekday: 'short'
+    });
+}
+
+function formatSetupMonthLabel(date) {
+    return `${date.getFullYear()}년 ${date.getMonth() + 1}월`;
+}
+
+function syncSetupCalendarMonth(anchorValue = setupSelection.startDate || setupSelection.endDate) {
+    const anchorDate = parseYmd(anchorValue) || new Date();
+    setupCalendarMonth = formatYmd(startOfMonth(anchorDate));
+}
+
 function getSelectableDestinations() {
     const grouped = new Map();
 
@@ -2298,10 +2517,19 @@ function getSelectableDestinations() {
         return {
             id: representative.id,
             country: representative.country,
+            region: getRegionKey(representative.country),
             primaryLabel: getLocalizedLabel(representative.country),
             secondaryLabel: hasMultipleZones ? getLocalizedLabel(representative.city, representative.city) : '',
             timeZone: representative.timeZone
         };
+    }).sort((left, right) => {
+        const regionCompare = REGION_ORDER.indexOf(left.region) - REGION_ORDER.indexOf(right.region);
+        if (regionCompare !== 0) return regionCompare;
+
+        const countryCompare = getCountrySortIndex(left.country) - getCountrySortIndex(right.country);
+        if (countryCompare !== 0) return countryCompare;
+
+        return (left.secondaryLabel || '').localeCompare(right.secondaryLabel || '', 'ko');
     });
 }
 
@@ -2807,25 +3035,33 @@ function renderUtilityInfo() {
 }
 
 function renderDestinationSelector() {
-    ui.destinationSelector.innerHTML = '';
     const selectableDestinations = getSelectableDestinations();
+    ui.destinationSelector.innerHTML = REGION_ORDER.map((regionKey) => {
+        const entries = selectableDestinations.filter((destination) => destination.region === regionKey);
+        if (!entries.length) return '';
 
-    selectableDestinations.forEach((destination) => {
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = `dropdown-option w-full rounded-[18px] border border-white/10 bg-slate-900 px-4 py-3 text-left transition-colors hover:bg-slate-800 ${destination.id === setupSelection.destinationId ? 'active' : ''}`;
-        button.dataset.destination = destination.id;
-        button.innerHTML = `
-            <div class="flex items-center justify-between gap-3">
-                <div class="min-w-0">
-                    <div class="text-base font-semibold text-white truncate">${escapeHtml(destination.primaryLabel)}</div>
-                    <div class="text-sm text-white/62 truncate">${escapeHtml(destination.secondaryLabel || '대표 시간대')}</div>
+        const buttons = entries.map((destination) => `
+            <button
+                type="button"
+                class="dropdown-option w-full rounded-[18px] border border-white/10 bg-slate-900 px-4 py-3 text-left transition-colors hover:bg-slate-800 ${destination.id === setupSelection.destinationId ? 'active' : ''}"
+                data-destination="${destination.id}">
+                <div class="flex items-center justify-between gap-3">
+                    <div class="min-w-0">
+                        <div class="text-base font-semibold text-white truncate">${escapeHtml(destination.primaryLabel)}</div>
+                        <div class="text-sm text-white/62 truncate">${escapeHtml(destination.secondaryLabel || '대표 시간대')}</div>
+                    </div>
+                    <div class="text-lg shrink-0">${getCountryFlag(destination.country)}</div>
                 </div>
-                <div class="text-lg shrink-0">${getCountryFlag(destination.country)}</div>
-            </div>
+            </button>
+        `).join('');
+
+        return `
+            <section class="pb-1 ${regionKey === REGION_ORDER[0] ? '' : 'pt-2'}">
+                <div class="px-3 pb-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-white/34">${REGION_LABELS[regionKey]}</div>
+                <div class="space-y-2">${buttons}</div>
+            </section>
         `;
-        ui.destinationSelector.appendChild(button);
-    });
+    }).join('');
 
     const selectedDestination = selectableDestinations.find((destination) => destination.id === setupSelection.destinationId)
         || selectableDestinations[0];
@@ -2835,13 +3071,80 @@ function renderDestinationSelector() {
     }
 }
 
+function renderSetupCalendar() {
+    const monthDate = parseYmd(setupCalendarMonth) || startOfMonth(parseYmd(setupSelection.startDate) || new Date());
+    const monthStart = startOfMonth(monthDate);
+    const gridStart = addDays(monthStart, -monthStart.getDay());
+    const startDate = parseYmd(setupSelection.startDate);
+    const endDate = !setupRangeSelectingEnd ? parseYmd(setupSelection.endDate) : null;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    ui.setupCalendarMonthLabel.textContent = formatSetupMonthLabel(monthStart);
+    ui.setupCalendarGrid.innerHTML = Array.from({ length: 42 }, (_, index) => {
+        const cellDate = addDays(gridStart, index);
+        const cellValue = formatYmd(cellDate);
+        const isOutside = cellDate.getMonth() !== monthStart.getMonth();
+        const isStart = setupSelection.startDate === cellValue;
+        const isEnd = !!setupSelection.endDate && !setupRangeSelectingEnd && setupSelection.endDate === cellValue;
+        const isInRange = startDate && endDate && cellDate >= startDate && cellDate <= endDate;
+        const isToday = cellDate.getTime() === today.getTime();
+
+        const classes = [
+            'calendar-day',
+            isOutside ? 'is-outside' : '',
+            isInRange ? 'is-in-range' : '',
+            (isStart || isEnd) ? 'is-boundary' : '',
+            isToday ? 'is-today' : ''
+        ].filter(Boolean).join(' ');
+
+        return `
+            <button type="button" class="${classes}" data-calendar-date="${cellValue}">
+                <span>${cellDate.getDate()}</span>
+            </button>
+        `;
+    }).join('');
+
+    lucide.createIcons();
+}
+
 function renderSetupInputs() {
-    ui.setupStartDate.value = setupSelection.startDate;
-    ui.setupEndDate.value = setupSelection.endDate;
+    ui.setupStartDate.value = setupSelection.startDate || '';
+    ui.setupEndDate.value = setupSelection.endDate || '';
+    ui.setupStartDisplay.textContent = formatSetupDate(setupSelection.startDate);
+    ui.setupEndDisplay.textContent = setupRangeSelectingEnd
+        ? '종료일 선택 중'
+        : formatSetupDate(setupSelection.endDate);
+    ui.setupCalendarHint.textContent = setupRangeSelectingEnd
+        ? '종료일을 한 번 더 눌러 범위를 마무리하세요.'
+        : '달력에서 시작일과 종료일을 차례로 눌러 범위를 정하세요.';
+
+    const canApply = parseYmd(setupSelection.startDate) && parseYmd(setupSelection.endDate) && !setupRangeSelectingEnd;
+    ui.applyPlanBtn.disabled = !canApply;
+    ui.applyPlanBtn.classList.toggle('opacity-50', !canApply);
+    ui.applyPlanBtn.classList.toggle('pointer-events-none', !canApply);
+
+    renderSetupCalendar();
+}
+
+function syncDestinationDropdownPosition() {
+    if (ui.destinationSelector.classList.contains('hidden')) return;
+
+    const rect = ui.destinationDropdownTrigger.getBoundingClientRect();
+    const viewportPadding = 16;
+    const width = Math.min(rect.width, window.innerWidth - (viewportPadding * 2));
+    const left = Math.min(Math.max(viewportPadding, rect.left), window.innerWidth - width - viewportPadding);
+
+    ui.destinationSelector.style.left = `${left}px`;
+    ui.destinationSelector.style.top = `${rect.bottom + 8}px`;
+    ui.destinationSelector.style.bottom = `${viewportPadding}px`;
+    ui.destinationSelector.style.width = `${width}px`;
+    ui.destinationSelector.style.maxHeight = 'none';
 }
 
 function openDestinationDropdown() {
     ui.destinationSelector.classList.remove('hidden');
+    syncDestinationDropdownPosition();
 }
 
 function closeDestinationDropdown() {
@@ -2849,7 +3152,11 @@ function closeDestinationDropdown() {
 }
 
 function toggleDestinationDropdown() {
-    ui.destinationSelector.classList.toggle('hidden');
+    if (ui.destinationSelector.classList.contains('hidden')) {
+        openDestinationDropdown();
+        return;
+    }
+    closeDestinationDropdown();
 }
 
 function showSetupOverlay() {
@@ -3206,12 +3513,16 @@ function refreshPlan() {
 
 function applySetupSelection() {
     const destination = getDestination(setupSelection.destinationId);
-    const rawStartDate = ui.setupStartDate.value;
-    const rawEndDate = ui.setupEndDate.value;
+    const rawStartDate = setupSelection.startDate;
+    const rawEndDate = setupSelection.endDate;
+
+    if (!parseYmd(rawStartDate) || !parseYmd(rawEndDate) || setupRangeSelectingEnd) {
+        window.alert('달력에서 시작일과 종료일을 차례로 선택해 주세요.');
+        return;
+    }
 
     if (parseYmd(rawStartDate) && parseYmd(rawEndDate) && parseYmd(rawEndDate) < parseYmd(rawStartDate)) {
         window.alert('종료일은 시작일보다 빠를 수 없습니다.');
-        ui.setupEndDate.focus();
         return;
     }
 
@@ -3227,6 +3538,8 @@ function applySetupSelection() {
 
     setupSelection.startDate = startDate;
     setupSelection.endDate = endDate;
+    setupRangeSelectingEnd = false;
+    syncSetupCalendarMonth(startDate);
     appState.destinationId = setupSelection.destinationId;
     appState.startDate = startDate;
     appState.endDate = endDate;
@@ -3291,6 +3604,8 @@ function resetToSetup() {
     setupSelection.destinationId = destination.id;
     setupSelection.startDate = startDate;
     setupSelection.endDate = endDate;
+    setupRangeSelectingEnd = false;
+    syncSetupCalendarMonth(startDate);
 
     appState.destinationId = destination.id;
     appState.startDate = startDate;
@@ -3471,6 +3786,8 @@ function bootstrapFromUrl() {
             setupSelection.destinationId = destination.id;
             setupSelection.startDate = startDate;
             setupSelection.endDate = endDate;
+            setupRangeSelectingEnd = false;
+            syncSetupCalendarMonth(startDate);
             return;
         } catch (error) {
             console.warn('Failed to decode shared plan:', error);
@@ -3491,6 +3808,8 @@ function bootstrapFromUrl() {
     setupSelection.destinationId = destination.id;
     setupSelection.startDate = startDate;
     setupSelection.endDate = endDate;
+    setupRangeSelectingEnd = false;
+    syncSetupCalendarMonth(startDate);
 }
 
 ui.destinationDropdownTrigger.addEventListener('click', () => {
@@ -3506,18 +3825,49 @@ ui.destinationSelector.addEventListener('click', (event) => {
     const { startDate, endDate } = getSuggestedDateRange(destination);
     setupSelection.startDate = startDate;
     setupSelection.endDate = endDate;
+    setupRangeSelectingEnd = false;
+    syncSetupCalendarMonth(startDate);
     applyTheme(destination);
     renderSetupInputs();
     renderDestinationSelector();
     closeDestinationDropdown();
 });
+ui.setupCalendarGrid.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-calendar-date]');
+    if (!button) return;
 
-ui.setupStartDate.addEventListener('input', () => {
-    setupSelection.startDate = ui.setupStartDate.value;
+    const value = button.dataset.calendarDate;
+    const clickedDate = parseYmd(value);
+    if (!clickedDate) return;
+
+    if (!setupSelection.startDate || !setupSelection.endDate || !setupRangeSelectingEnd) {
+        setupSelection.startDate = value;
+        setupSelection.endDate = '';
+        setupRangeSelectingEnd = true;
+    } else {
+        const startDate = parseYmd(setupSelection.startDate);
+        if (!startDate || clickedDate < startDate) {
+            setupSelection.startDate = value;
+            setupSelection.endDate = '';
+            setupRangeSelectingEnd = true;
+        } else {
+            setupSelection.endDate = value;
+            setupRangeSelectingEnd = false;
+        }
+    }
+
+    syncSetupCalendarMonth(value);
+    renderSetupInputs();
 });
-
-ui.setupEndDate.addEventListener('input', () => {
-    setupSelection.endDate = ui.setupEndDate.value;
+ui.setupCalendarPrevBtn.addEventListener('click', () => {
+    const currentMonth = parseYmd(setupCalendarMonth) || startOfMonth(parseYmd(setupSelection.startDate) || new Date());
+    setupCalendarMonth = formatYmd(shiftMonth(currentMonth, -1));
+    renderSetupCalendar();
+});
+ui.setupCalendarNextBtn.addEventListener('click', () => {
+    const currentMonth = parseYmd(setupCalendarMonth) || startOfMonth(parseYmd(setupSelection.startDate) || new Date());
+    setupCalendarMonth = formatYmd(shiftMonth(currentMonth, 1));
+    renderSetupCalendar();
 });
 
 ui.applyPlanBtn.addEventListener('click', applySetupSelection);
@@ -3583,6 +3933,10 @@ document.addEventListener('click', (event) => {
     if (event.target.closest('#destination-selector')) return;
     closeDestinationDropdown();
 });
+
+window.addEventListener('resize', syncDestinationDropdownPosition);
+window.addEventListener('scroll', syncDestinationDropdownPosition, { passive: true });
+ui.setupOverlay.addEventListener('scroll', syncDestinationDropdownPosition, { passive: true });
 
 window.setInterval(updateClocks, 1000);
 renderIconPicker();
