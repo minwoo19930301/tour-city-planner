@@ -249,7 +249,7 @@
 
     <div id="trip-shell" class="relative z-10 min-h-screen hidden">
         <main class="px-4 pt-4 pb-8 sm:px-6 lg:px-8">
-            <div class="max-w-5xl mx-auto">
+            <div class="max-w-[760px] mx-auto">
                 <div class="utility-shell utility-top">
                     <div class="space-y-2">
                         <section class="glass-panel rounded-[22px] p-2">
@@ -363,17 +363,8 @@
 
     <div id="setup-overlay" class="fixed inset-0 z-[80] hidden overflow-y-auto">
         <div class="absolute inset-0 bg-slate-950/72 backdrop-blur-md"></div>
-        <div class="relative z-10 min-h-screen flex items-start sm:items-center px-4 py-4 sm:py-8 sm:px-6">
-            <div class="max-w-6xl mx-auto glass-panel rounded-[36px] px-5 py-6 sm:px-8 sm:py-8 w-full my-4 max-h-[calc(100svh-2rem)] overflow-y-auto">
-                <div class="flex items-start justify-between gap-4 mb-6">
-                    <div>
-                        <div class="text-[11px] uppercase tracking-[0.38em] text-white/52 mb-2">주요 국가</div>
-                        <h1 class="text-3xl sm:text-4xl font-serif font-bold text-white">도시와 날짜를 먼저 고르세요</h1>
-                        <p class="text-sm sm:text-base text-white/72 mt-3 max-w-2xl leading-7">도시를 고른 뒤 시작일과 종료일을 정하면 일정이 열립니다. 이후 수정할 때마다 링크도 같이 업데이트됩니다.</p>
-                    </div>
-                    <div id="destination-count" class="shrink-0 text-lg sm:text-2xl font-semibold accent-text"></div>
-                </div>
-
+        <div class="relative z-10 min-h-screen flex items-start px-4 py-6 sm:px-6">
+            <div class="max-w-[760px] mx-auto glass-panel rounded-[32px] px-5 py-6 sm:px-6 sm:py-6 w-full my-4">
                 <div class="mb-6">
                     <label class="text-[11px] uppercase tracking-[0.28em] text-white/48 block mb-3">국가 / 시간대</label>
                     <div class="relative">
@@ -390,7 +381,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_1fr_auto] lg:items-end">
+                <div class="grid grid-cols-1 gap-4">
                     <div>
                         <label for="setup-start-date" class="text-[11px] uppercase tracking-[0.28em] text-white/48 block mb-3">시작일</label>
                         <input id="setup-start-date" type="date" class="input-shell">
@@ -399,10 +390,8 @@
                         <label for="setup-end-date" class="text-[11px] uppercase tracking-[0.28em] text-white/48 block mb-3">종료일</label>
                         <input id="setup-end-date" type="date" class="input-shell">
                     </div>
-                    <button id="apply-plan-btn" type="button" class="action-btn primary px-6 py-4 text-sm font-semibold lg:min-w-[220px]">이 일정으로 시작</button>
+                    <button id="apply-plan-btn" type="button" class="action-btn primary px-6 py-4 text-sm font-semibold">이 일정으로 시작</button>
                 </div>
-
-                <div class="text-xs text-white/55 mt-4">같은 국가라도 시간대가 다른 도시는 따로 도시 카드로 분리했습니다. 날씨는 대략 앞으로 16일 정도까지만 실시간으로 반영됩니다.</div>
             </div>
         </div>
     </div>

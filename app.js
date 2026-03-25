@@ -29,6 +29,32 @@ const ACTIVITY_ICON_OPTIONS = [
     { value: 'luggage', label: 'Hotel' }
 ];
 
+function hexToRgbString(hex) {
+    const normalized = hex.replace('#', '');
+    const full = normalized.length === 3
+        ? normalized.split('').map((char) => `${char}${char}`).join('')
+        : normalized;
+    const value = Number.parseInt(full, 16);
+    const red = (value >> 16) & 255;
+    const green = (value >> 8) & 255;
+    const blue = value & 255;
+    return `${red}, ${green}, ${blue}`;
+}
+
+function buildTheme(accent, ink, topAlpha = 0.48, bottomAlpha = 0.92) {
+    const accentRgb = hexToRgbString(accent);
+    const inkRgb = hexToRgbString(ink);
+
+    return {
+        accent,
+        accentRgb,
+        ink,
+        inkRgb,
+        overlayTop: `rgba(${inkRgb}, ${topAlpha})`,
+        overlayBottom: `rgba(${inkRgb}, ${bottomAlpha})`
+    };
+}
+
 const DESTINATIONS = {
     paris: {
         id: 'paris',
@@ -47,7 +73,7 @@ const DESTINATIONS = {
         weather: { latitude: 48.8566, longitude: 2.3522 },
         currency: { code: 'EUR', symbol: '€', locale: 'fr-FR' },
         startOffsetDays: 5,
-        phraseLabel: 'French phrase',
+        phraseLabel: 'Français',
         phrases: [
             { text: 'Bonjour', pron: '[봉쥬르]', meaning: '안녕하세요' },
             { text: 'Merci beaucoup', pron: '[메흑씨 보꾸]', meaning: '정말 감사합니다' },
@@ -116,7 +142,7 @@ const DESTINATIONS = {
         weather: { latitude: 51.5072, longitude: -0.1276 },
         currency: { code: 'GBP', symbol: '£', locale: 'en-GB' },
         startOffsetDays: 6,
-        phraseLabel: 'British phrase',
+        phraseLabel: 'English',
         phrases: [
             { text: 'Cheers', pron: '[치얼즈]', meaning: '고마워요 / 좋아요' },
             { text: 'Mind the gap', pron: '[마인드 더 갭]', meaning: '발밑 조심하세요' },
@@ -185,7 +211,7 @@ const DESTINATIONS = {
         weather: { latitude: 40.7128, longitude: -74.0060 },
         currency: { code: 'USD', symbol: '$', locale: 'en-US' },
         startOffsetDays: 7,
-        phraseLabel: 'NYC phrase',
+        phraseLabel: 'English',
         phrases: [
             { text: 'How’s it going?', pron: '[하우즈 잇 고잉]', meaning: '어때요?' },
             { text: 'Can I get this to go?', pron: '[캔 아이 겟 디스 투 고]', meaning: '포장 부탁해요' },
@@ -254,7 +280,7 @@ const DESTINATIONS = {
         weather: { latitude: 34.0522, longitude: -118.2437 },
         currency: { code: 'USD', symbol: '$', locale: 'en-US' },
         startOffsetDays: 9,
-        phraseLabel: 'LA phrase',
+        phraseLabel: 'English',
         phrases: [
             { text: 'No worries', pron: '[노 워리즈]', meaning: '괜찮아요' },
             { text: 'Let’s grab tacos', pron: '[렛츠 그랩 타코스]', meaning: '타코 먹으러 가자' },
@@ -312,7 +338,7 @@ const DESTINATIONS = {
         country: 'Japan',
         summary: '도쿄 핵심 동선 위에 탑, 사원, 후지산 무드를 얹은 클래식 재팬 톤 템플릿입니다.',
         footer: 'Japan feels strongest in vermilion, paper light, and a clean skyline.',
-        heroImage: 'https://unsplash.com/photos/N4DbvTUDikw/download?force=true&w=1920',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/f/f8/View_of_Mount_Fuji_from_%C5%8Cwakudani_20211202.jpg',
         accent: '#C2410C',
         accentRgb: '194, 65, 12',
         ink: '#1F2A44',
@@ -392,7 +418,7 @@ const DESTINATIONS = {
         weather: { latitude: 41.9028, longitude: 12.4964 },
         currency: { code: 'EUR', symbol: '€', locale: 'it-IT' },
         startOffsetDays: 10,
-        phraseLabel: 'Italian phrase',
+        phraseLabel: 'Italiano',
         phrases: [
             { text: 'Ciao', pron: '[차오]', meaning: '안녕하세요 / 안녕' },
             { text: 'Grazie', pron: '[그라치에]', meaning: '감사합니다' },
@@ -461,7 +487,7 @@ const DESTINATIONS = {
         weather: { latitude: 41.3874, longitude: 2.1686 },
         currency: { code: 'EUR', symbol: '€', locale: 'es-ES' },
         startOffsetDays: 7,
-        phraseLabel: 'Spanish phrase',
+        phraseLabel: 'Español',
         phrases: [
             { text: 'Hola', pron: '[올라]', meaning: '안녕하세요' },
             { text: 'Gracias', pron: '[그라시아스]', meaning: '감사합니다' },
@@ -522,7 +548,7 @@ const DESTINATIONS = {
         weather: { latitude: 1.3521, longitude: 103.8198 },
         currency: { code: 'SGD', symbol: 'S$', locale: 'en-SG' },
         startOffsetDays: 6,
-        phraseLabel: 'Singapore phrase',
+        phraseLabel: 'Singlish',
         phrases: [
             { text: 'Can, lah', pron: '[캔 라]', meaning: '가능해요 / 좋아요' },
             { text: 'Chope this seat', pron: '[초프 디스 시트]', meaning: '자리 맡아둘게요' },
@@ -572,7 +598,7 @@ const DESTINATIONS = {
         country: 'Thailand',
         summary: '사원, 강변, 야시장, 루프탑을 묶은 방콕 템플릿입니다.',
         footer: 'Bangkok feels strongest when temple, market, and rooftop share one day.',
-        heroImage: 'https://unsplash.com/photos/ho3omNtPEM0/download?force=true&w=1920',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/f/fc/Wat_Chaiwatthanaram_by_drone.jpg',
         accent: '#F59E0B',
         accentRgb: '245, 158, 11',
         ink: '#451A03',
@@ -705,7 +731,7 @@ const DESTINATIONS = {
         weather: { latitude: 52.3676, longitude: 4.9041 },
         currency: { code: 'EUR', symbol: '€', locale: 'nl-NL' },
         startOffsetDays: 7,
-        phraseLabel: 'Dutch phrase',
+        phraseLabel: 'Nederlands',
         phrases: [
             { text: 'Hallo', pron: '[할로]', meaning: '안녕하세요' },
             { text: 'Dank je wel', pron: '[당크 여 벨]', meaning: '감사합니다' },
@@ -766,7 +792,7 @@ const DESTINATIONS = {
         weather: { latitude: 40.4168, longitude: -3.7038 },
         currency: { code: 'EUR', symbol: '€', locale: 'es-ES' },
         startOffsetDays: 8,
-        phraseLabel: 'Spanish phrase',
+        phraseLabel: 'Español',
         phrases: [
             { text: 'Hola', pron: '[올라]', meaning: '안녕하세요' },
             { text: 'Gracias', pron: '[그라시아스]', meaning: '감사합니다' },
@@ -861,7 +887,7 @@ const DESTINATIONS = {
         country: 'Australia',
         summary: '오페라하우스, 항구, 비치, 로컬 브런치를 묶은 시드니 템플릿입니다.',
         footer: 'Sydney works when harbour icons and beach time stay in balance.',
-        heroImage: 'https://images.unsplash.com/photo-1506973035872-a4f23efedd7d?q=80&w=2070&auto=format&fit=crop',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Sydney_Australia._%2821339175489%29.jpg',
         accent: '#22C55E',
         accentRgb: '34, 197, 94',
         ink: '#052E16',
@@ -872,7 +898,7 @@ const DESTINATIONS = {
         weather: { latitude: -33.8688, longitude: 151.2093 },
         currency: { code: 'AUD', symbol: 'A$', locale: 'en-AU' },
         startOffsetDays: 9,
-        phraseLabel: 'Sydney phrase',
+        phraseLabel: 'English',
         phrases: [
             { text: 'No worries', pron: '[노 워리즈]', meaning: '괜찮아요' },
             { text: 'Cheers', pron: '[치어즈]', meaning: '고마워요' },
@@ -914,7 +940,7 @@ const DESTINATIONS = {
         country: 'China',
         summary: '고궁, 후통, 공원, 야경을 묶은 베이징 템플릿입니다.',
         footer: 'Beijing works when imperial landmarks and hutong streets stay in one loop.',
-        heroImage: 'https://unsplash.com/photos/274UL9FkpHs/download?force=true&w=1920',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/6/64/Shanghai_skyline_from_the_bund.jpg',
         accent: '#F87171',
         accentRgb: '248, 113, 113',
         ink: '#450A0A',
@@ -964,7 +990,7 @@ const DESTINATIONS = {
         country: 'China',
         summary: '번드, 타워, 쇼핑 거리, 강변 야경을 묶은 상하이 템플릿입니다.',
         footer: 'Shanghai feels strongest when the Bund and the skyline stay in the same frame.',
-        heroImage: 'https://unsplash.com/photos/-IOKXJDpgYw/download?force=true&w=1920',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/6/64/Shanghai_skyline_from_the_bund.jpg',
         accent: '#38BDF8',
         accentRgb: '56, 189, 248',
         ink: '#082F49',
@@ -1014,7 +1040,7 @@ const DESTINATIONS = {
         country: 'Taiwan',
         summary: '도심 전망, 야시장, 온천, 로컬 먹거리를 묶은 타이베이 템플릿입니다.',
         footer: 'Taipei works when viewpoints, night markets, and food keep the pace light.',
-        heroImage: 'https://unsplash.com/photos/sa8Zn4f2HsU/download?force=true&w=1920',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/d/d2/Chiang_Kai-shek_memorial_amk.jpg',
         accent: '#22D3EE',
         accentRgb: '34, 211, 238',
         ink: '#083344',
@@ -1075,11 +1101,11 @@ const DESTINATIONS = {
         weather: { latitude: 21.0278, longitude: 105.8342 },
         currency: { code: 'VND', symbol: '₫', locale: 'vi-VN' },
         startOffsetDays: 7,
-        phraseLabel: 'Vietnamese phrase',
+        phraseLabel: 'Tiếng Việt',
         phrases: [
-            { text: 'Xin chao', pron: '[씬 짜오]', meaning: '안녕하세요' },
-            { text: 'Cam on', pron: '[깜 언]', meaning: '감사합니다' },
-            { text: 'Cho toi cai nay', pron: '[쪼 또이 까이 나이]', meaning: '이거 주세요' }
+            { text: 'Xin chào', pron: '[씬 짜오]', meaning: '안녕하세요' },
+            { text: 'Cảm ơn', pron: '[깜 언]', meaning: '감사합니다' },
+            { text: 'Cho tôi cái này', pron: '[쪼 또이 까이 나이]', meaning: '이거 주세요' }
         ],
         itineraryTemplate: [
             {
@@ -1125,11 +1151,11 @@ const DESTINATIONS = {
         weather: { latitude: 10.8231, longitude: 106.6297 },
         currency: { code: 'VND', symbol: '₫', locale: 'vi-VN' },
         startOffsetDays: 7,
-        phraseLabel: 'Vietnamese phrase',
+        phraseLabel: 'Tiếng Việt',
         phrases: [
-            { text: 'Xin chao', pron: '[씬 짜오]', meaning: '안녕하세요' },
-            { text: 'Cam on', pron: '[깜 언]', meaning: '감사합니다' },
-            { text: 'Tinh tien', pron: '[띵 띠엔]', meaning: '계산해 주세요' }
+            { text: 'Xin chào', pron: '[씬 짜오]', meaning: '안녕하세요' },
+            { text: 'Cảm ơn', pron: '[깜 언]', meaning: '감사합니다' },
+            { text: 'Tính tiền', pron: '[띵 띠엔]', meaning: '계산해 주세요' }
         ],
         itineraryTemplate: [
             {
@@ -1154,6 +1180,490 @@ const DESTINATIONS = {
                     { time: '10:30', title: '투득 강변 산책', type: 'map', location: 'Saigon River' },
                     { time: '13:30', title: '반미 런치', type: 'utensils-crossed', location: 'District 1 Ho Chi Minh City' },
                     { time: '17:30', title: '공항 이동', type: 'plane', location: 'Tan Son Nhat International Airport' }
+                ]
+            }
+        ]
+    },
+    india: {
+        id: 'india',
+        city: 'Delhi',
+        country: 'India',
+        summary: '타지마할 무드와 델리 핵심 랜드마크, 시장, 야경을 묶은 인도 템플릿입니다.',
+        footer: 'India feels richest when stone, spice, and late light share one route.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/1/1d/Taj_Mahal_%28Edited%29.jpeg',
+        timeZone: 'Asia/Kolkata',
+        weather: { latitude: 28.6139, longitude: 77.2090 },
+        currency: { code: 'INR', symbol: '₹', locale: 'hi-IN' },
+        startOffsetDays: 9,
+        phraseLabel: 'हिन्दी',
+        phrases: [
+            { text: 'नमस्ते', pron: '[나마스떼]', meaning: '안녕하세요' },
+            { text: 'धन्यवाद', pron: '[단냐바드]', meaning: '감사합니다' },
+            { text: 'यह कितना है?', pron: '[예 키트나 헤?]', meaning: '이거 얼마예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '델리 워밍업',
+                activities: [
+                    { time: '10:00', title: '인디아 게이트', type: 'landmark', location: 'India Gate' },
+                    { time: '13:30', title: '후마윤 묘', type: 'building-2', location: "Humayun's Tomb" },
+                    { time: '18:30', title: '코노트 플레이스', type: 'lightbulb', location: 'Connaught Place' }
+                ]
+            },
+            {
+                title: '아그라 데이',
+                activities: [
+                    { time: '08:30', title: '타지마할', type: 'camera', location: 'Taj Mahal' },
+                    { time: '13:30', title: '아그라 포트', type: 'landmark', location: 'Agra Fort' },
+                    { time: '19:30', title: '야무나 강변 야경', type: 'moon-star', location: 'Mehtab Bagh' }
+                ]
+            },
+            {
+                title: '올드델리 & 출발',
+                activities: [
+                    { time: '10:00', title: '자마 마스지드', type: 'landmark', location: 'Jama Masjid' },
+                    { time: '13:00', title: '찬드니 초크', type: 'store', location: 'Chandni Chowk' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Indira Gandhi International Airport' }
+                ]
+            }
+        ]
+    },
+    philippines: {
+        id: 'philippines',
+        city: 'Manila',
+        country: 'Philippines',
+        summary: '인트라무로스, 도심 스카이라인, 강변, 야시장을 묶은 필리핀 템플릿입니다.',
+        footer: 'The Philippines feels best when old walls and tropical evening light stay together.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/7/77/Baluartillo_de_San_Jos%C3%A9%2C_Manila%2C_Filipinas%2C_2023-08-26%2C_DD_41.jpg',
+        timeZone: 'Asia/Manila',
+        weather: { latitude: 14.5995, longitude: 120.9842 },
+        currency: { code: 'PHP', symbol: '₱', locale: 'en-PH' },
+        startOffsetDays: 8,
+        phraseLabel: 'Filipino',
+        phrases: [
+            { text: 'Kumusta', pron: '[쿠무스타]', meaning: '안녕하세요' },
+            { text: 'Salamat', pron: '[살라맛]', meaning: '감사합니다' },
+            { text: 'Magkano ito?', pron: '[막까노 이토?]', meaning: '이거 얼마예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '마닐라 첫인상',
+                activities: [
+                    { time: '10:00', title: '인트라무로스', type: 'landmark', location: 'Intramuros' },
+                    { time: '13:00', title: '산아구스틴 성당', type: 'landmark', location: 'San Agustin Church' },
+                    { time: '18:30', title: '리잘 파크 선셋', type: 'sun', location: 'Rizal Park' }
+                ]
+            },
+            {
+                title: '도심 & 강변',
+                activities: [
+                    { time: '10:30', title: '마닐라 대성당', type: 'building', location: 'Manila Cathedral' },
+                    { time: '13:30', title: '보니파시오 글로벌 시티', type: 'shopping-cart', location: 'Bonifacio Global City' },
+                    { time: '18:30', title: '파시그 강변 야경', type: 'moon-star', location: 'Pasig River Esplanade' }
+                ]
+            },
+            {
+                title: '로컬 마켓 & 출발',
+                activities: [
+                    { time: '10:00', title: '디비소리아', type: 'shopping-bag', location: 'Divisoria Market' },
+                    { time: '13:30', title: '현지 점심', type: 'utensils-crossed', location: 'Binondo' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Ninoy Aquino International Airport' }
+                ]
+            }
+        ]
+    },
+    russia: {
+        id: 'russia',
+        city: 'Moscow',
+        country: 'Russia',
+        summary: '붉은광장, 크렘린, 강변, 대로 풍경을 묶은 러시아 템플릿입니다.',
+        footer: 'Russia feels strongest when red walls and evening avenues stay in one arc.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/4/46/Moscow_Kremlin_%288281675670%29.jpg',
+        timeZone: 'Europe/Moscow',
+        weather: { latitude: 55.7558, longitude: 37.6173 },
+        currency: { code: 'RUB', symbol: '₽', locale: 'ru-RU' },
+        startOffsetDays: 9,
+        phraseLabel: 'Русский',
+        phrases: [
+            { text: 'Здравствуйте', pron: '[즈드라스트부이쩨]', meaning: '안녕하세요' },
+            { text: 'Спасибо', pron: '[스빠시바]', meaning: '감사합니다' },
+            { text: 'Сколько это стоит?', pron: '[스꼴까 에따 스또잇?]', meaning: '이거 얼마예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '붉은광장 데이',
+                activities: [
+                    { time: '10:00', title: '붉은광장', type: 'landmark', location: 'Red Square' },
+                    { time: '13:00', title: '성 바실리 대성당', type: 'landmark', location: "Saint Basil's Cathedral" },
+                    { time: '18:30', title: '굼 백화점 야경', type: 'lightbulb', location: 'GUM' }
+                ]
+            },
+            {
+                title: '크렘린 & 거리',
+                activities: [
+                    { time: '10:30', title: '크렘린', type: 'building', location: 'Moscow Kremlin' },
+                    { time: '13:30', title: '알바트 거리', type: 'map', location: 'Arbat Street' },
+                    { time: '18:30', title: '모스크바 강변', type: 'moon-star', location: 'Moskva River' }
+                ]
+            },
+            {
+                title: '전망 & 출발',
+                activities: [
+                    { time: '10:00', title: 'VDNKh 산책', type: 'sparkles', location: 'VDNKh' },
+                    { time: '13:30', title: '자랴디예 파크', type: 'trees', location: 'Zaryadye Park' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Sheremetyevo International Airport' }
+                ]
+            }
+        ]
+    },
+    canada: {
+        id: 'canada',
+        city: 'Toronto',
+        country: 'Canada',
+        summary: '스카이라인, 수변 산책, 마켓, 타워 전망을 묶은 캐나다 템플릿입니다.',
+        footer: 'Canada feels calmest when skyline, water, and markets stay in one sweep.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Toronto_Skyline_viewed_from_Algonquin_Island_%2816-9_crop%29.jpg',
+        timeZone: 'America/Toronto',
+        weather: { latitude: 43.6532, longitude: -79.3832 },
+        currency: { code: 'CAD', symbol: 'C$', locale: 'en-CA' },
+        startOffsetDays: 8,
+        phraseLabel: 'English',
+        phrases: [
+            { text: 'Hello', pron: '[헬로]', meaning: '안녕하세요' },
+            { text: 'Thank you', pron: '[땡큐]', meaning: '감사합니다' },
+            { text: 'Where is the station?', pron: '[웨어 이즈 더 스테이션?]', meaning: '역이 어디예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '다운타운 워밍업',
+                activities: [
+                    { time: '10:00', title: 'CN 타워', type: 'tower-control', location: 'CN Tower' },
+                    { time: '13:00', title: '리플리 수족관', type: 'camera', location: "Ripley's Aquarium of Canada" },
+                    { time: '18:30', title: '하버프런트 야경', type: 'moon-star', location: 'Harbourfront Centre' }
+                ]
+            },
+            {
+                title: '로컬 마켓',
+                activities: [
+                    { time: '10:30', title: '세인트로렌스 마켓', type: 'store', location: 'St. Lawrence Market' },
+                    { time: '13:30', title: '디스틸러리 디스트릭트', type: 'map', location: 'Distillery District' },
+                    { time: '18:30', title: '영-던다스 스퀘어', type: 'lightbulb', location: 'Yonge-Dundas Square' }
+                ]
+            },
+            {
+                title: '파크 & 출발',
+                activities: [
+                    { time: '10:00', title: '토론토 아일랜드', type: 'ship', location: 'Toronto Islands' },
+                    { time: '13:30', title: '기념품 쇼핑', type: 'gift', location: 'Eaton Centre' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Toronto Pearson International Airport' }
+                ]
+            }
+        ]
+    },
+    mexico: {
+        id: 'mexico',
+        city: 'Mexico City',
+        country: 'Mexico',
+        summary: '대광장, 벨라스 아르테스, 공원, 시장을 묶은 멕시코 템플릿입니다.',
+        footer: 'Mexico feels richest when plaza, colour, and food stay in one route.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/9/97/Bellas_Artes_01.jpg',
+        timeZone: 'America/Mexico_City',
+        weather: { latitude: 19.4326, longitude: -99.1332 },
+        currency: { code: 'MXN', symbol: 'MX$', locale: 'es-MX' },
+        startOffsetDays: 9,
+        phraseLabel: 'Español',
+        phrases: [
+            { text: 'Hola', pron: '[올라]', meaning: '안녕하세요' },
+            { text: 'Gracias', pron: '[그라시아스]', meaning: '감사합니다' },
+            { text: '¿Cuánto cuesta?', pron: '[꾸안또 꾸에스타?]', meaning: '이거 얼마예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '센트로 히스토리코',
+                activities: [
+                    { time: '10:00', title: '소칼로', type: 'landmark', location: 'Zócalo' },
+                    { time: '13:00', title: '벨라스 아르테스 궁전', type: 'building-2', location: 'Palacio de Bellas Artes' },
+                    { time: '18:30', title: '알라메다 센트럴', type: 'trees', location: 'Alameda Central' }
+                ]
+            },
+            {
+                title: '공원 & 박물관',
+                activities: [
+                    { time: '10:30', title: '차풀테펙 공원', type: 'map', location: 'Chapultepec Park' },
+                    { time: '13:30', title: '국립인류학박물관', type: 'building', location: 'National Museum of Anthropology' },
+                    { time: '18:30', title: '로마 노르테', type: 'coffee', location: 'Roma Norte' }
+                ]
+            },
+            {
+                title: '마켓 & 출발',
+                activities: [
+                    { time: '10:00', title: '코요아칸', type: 'sparkles', location: 'Coyoacán' },
+                    { time: '13:30', title: '산후안 마켓', type: 'store', location: 'Mercado de San Juan' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Mexico City International Airport' }
+                ]
+            }
+        ]
+    },
+    brazil: {
+        id: 'brazil',
+        city: 'Rio de Janeiro',
+        country: 'Brazil',
+        summary: '구세주상, 해변, 케이블카, 밤거리를 묶은 브라질 템플릿입니다.',
+        footer: 'Brazil feels brightest when sea, mountain, and night stay in the same rhythm.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/4/4f/Christ_the_Redeemer_-_Cristo_Redentor.jpg',
+        timeZone: 'America/Sao_Paulo',
+        weather: { latitude: -22.9068, longitude: -43.1729 },
+        currency: { code: 'BRL', symbol: 'R$', locale: 'pt-BR' },
+        startOffsetDays: 10,
+        phraseLabel: 'Português',
+        phrases: [
+            { text: 'Olá', pron: '[올라]', meaning: '안녕하세요' },
+            { text: 'Obrigado', pron: '[오브리가두]', meaning: '감사합니다' },
+            { text: 'Quanto custa?', pron: '[꾸안뚜 꾸스타?]', meaning: '이거 얼마예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '리우 첫인상',
+                activities: [
+                    { time: '10:00', title: '구세주상', type: 'landmark', location: 'Christ the Redeemer' },
+                    { time: '13:30', title: '셀라론 계단', type: 'camera', location: 'Escadaria Selarón' },
+                    { time: '18:30', title: '라파 야경', type: 'moon-star', location: 'Lapa' }
+                ]
+            },
+            {
+                title: '바다와 전망',
+                activities: [
+                    { time: '10:30', title: '슈가로프 마운틴', type: 'binoculars', location: 'Sugarloaf Mountain' },
+                    { time: '14:00', title: '코파카바나 비치', type: 'sun', location: 'Copacabana Beach' },
+                    { time: '18:30', title: '이파네마 선셋', type: 'sparkles', location: 'Ipanema Beach' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:00', title: '산타 테레사 산책', type: 'map', location: 'Santa Teresa' },
+                    { time: '13:30', title: '로컬 점심', type: 'utensils-crossed', location: 'Leblon' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Rio de Janeiro/Galeão International Airport' }
+                ]
+            }
+        ]
+    },
+    argentina: {
+        id: 'argentina',
+        city: 'Buenos Aires',
+        country: 'Argentina',
+        summary: '오벨리스크, 광장, 카페, 탱고 무드를 묶은 아르헨티나 템플릿입니다.',
+        footer: 'Argentina feels best when wide avenues, cafes, and late music share one day.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/f/fc/Buenos_Aires_%2820234294752%29.jpg',
+        timeZone: 'America/Argentina/Buenos_Aires',
+        weather: { latitude: -34.6037, longitude: -58.3816 },
+        currency: { code: 'ARS', symbol: 'AR$', locale: 'es-AR' },
+        startOffsetDays: 10,
+        phraseLabel: 'Español',
+        phrases: [
+            { text: 'Hola', pron: '[올라]', meaning: '안녕하세요' },
+            { text: 'Gracias', pron: '[그라시아스]', meaning: '감사합니다' },
+            { text: 'La cuenta, por favor', pron: '[라 꾸엔따 뽀르 파보르]', meaning: '계산서 주세요' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '센트로 데이',
+                activities: [
+                    { time: '10:00', title: '오벨리스크', type: 'landmark', location: 'Obelisco de Buenos Aires' },
+                    { time: '13:00', title: '카사 로사다', type: 'building', location: 'Casa Rosada' },
+                    { time: '18:30', title: '플로리다 거리', type: 'shopping-bag', location: 'Calle Florida' }
+                ]
+            },
+            {
+                title: '로컬 산책',
+                activities: [
+                    { time: '10:30', title: '산 텔모', type: 'map', location: 'San Telmo' },
+                    { time: '13:30', title: '레콜레타 공동묘지', type: 'landmark', location: 'Recoleta Cemetery' },
+                    { time: '19:00', title: '탱고 나이트', type: 'music', location: 'La Boca' }
+                ]
+            },
+            {
+                title: '공원 & 출발',
+                activities: [
+                    { time: '10:30', title: '팔레르모 공원', type: 'trees', location: 'Parque Tres de Febrero' },
+                    { time: '13:30', title: '카페 타임', type: 'coffee', location: 'Palermo Soho' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Ministro Pistarini International Airport' }
+                ]
+            }
+        ]
+    },
+    germany: {
+        id: 'germany',
+        city: 'Berlin',
+        country: 'Germany',
+        summary: '브란덴부르크문, 박물관섬, 장벽 흔적, 강변을 묶은 독일 템플릿입니다.',
+        footer: 'Germany feels sharp when gates, museums, and broad avenues stay in one frame.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/a/a6/Brandenburger_Tor_abends.jpg',
+        timeZone: 'Europe/Berlin',
+        weather: { latitude: 52.5200, longitude: 13.4050 },
+        currency: { code: 'EUR', symbol: '€', locale: 'de-DE' },
+        startOffsetDays: 8,
+        phraseLabel: 'Deutsch',
+        phrases: [
+            { text: 'Hallo', pron: '[할로]', meaning: '안녕하세요' },
+            { text: 'Danke', pron: '[당케]', meaning: '감사합니다' },
+            { text: 'Wo ist der Bahnhof?', pron: '[보 이스트 데어 반호프?]', meaning: '역이 어디예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '베를린 첫인상',
+                activities: [
+                    { time: '10:00', title: '브란덴부르크문', type: 'landmark', location: 'Brandenburg Gate' },
+                    { time: '13:00', title: '독일 국회의사당', type: 'building', location: 'Reichstag Building' },
+                    { time: '18:30', title: '운터 덴 린덴', type: 'map', location: 'Unter den Linden' }
+                ]
+            },
+            {
+                title: '역사 & 아트',
+                activities: [
+                    { time: '10:30', title: '박물관섬', type: 'building-2', location: 'Museum Island' },
+                    { time: '13:30', title: '이스트 사이드 갤러리', type: 'palette', location: 'East Side Gallery' },
+                    { time: '18:30', title: '알렉산더플라츠', type: 'lightbulb', location: 'Alexanderplatz' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:00', title: '티어가르텐 산책', type: 'trees', location: 'Tiergarten' },
+                    { time: '13:00', title: '카페 타임', type: 'coffee', location: 'Mitte Berlin' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Berlin Brandenburg Airport' }
+                ]
+            }
+        ]
+    },
+    egypt: {
+        id: 'egypt',
+        city: 'Cairo',
+        country: 'Egypt',
+        summary: '피라미드, 강변, 시장, 모스크를 묶은 이집트 템플릿입니다.',
+        footer: 'Egypt feels timeless when stone, river, and market sound stay in one loop.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/9/96/Pyramids_of_the_Giza_Necropolis.jpg',
+        timeZone: 'Africa/Cairo',
+        weather: { latitude: 30.0444, longitude: 31.2357 },
+        currency: { code: 'EGP', symbol: 'E£', locale: 'ar-EG' },
+        startOffsetDays: 9,
+        phraseLabel: 'العربية',
+        phrases: [
+            { text: 'مرحبا', pron: '[마르하바]', meaning: '안녕하세요' },
+            { text: 'شكرا', pron: '[슈크란]', meaning: '감사합니다' },
+            { text: 'بكم هذا؟', pron: '[비캄 하다?]', meaning: '이거 얼마예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '기자 데이',
+                activities: [
+                    { time: '09:30', title: '기자 피라미드', type: 'landmark', location: 'Giza Pyramid Complex' },
+                    { time: '13:30', title: '스핑크스', type: 'camera', location: 'Great Sphinx of Giza' },
+                    { time: '18:30', title: '나일강 디너 크루즈', type: 'ship', location: 'Nile River Dinner Cruise Cairo' }
+                ]
+            },
+            {
+                title: '카이로 중심부',
+                activities: [
+                    { time: '10:30', title: '이집트 박물관', type: 'building-2', location: 'Egyptian Museum' },
+                    { time: '13:30', title: '칸 엘 칼릴리', type: 'store', location: 'Khan el-Khalili' },
+                    { time: '18:30', title: '알모에즈 거리', type: 'lightbulb', location: 'Al-Muizz Street' }
+                ]
+            },
+            {
+                title: '모스크 & 출발',
+                activities: [
+                    { time: '10:00', title: '무함마드 알리 모스크', type: 'landmark', location: 'Mosque of Muhammad Ali' },
+                    { time: '13:30', title: '자말렉 브런치', type: 'coffee', location: 'Zamalek' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Cairo International Airport' }
+                ]
+            }
+        ]
+    },
+    guam: {
+        id: 'guam',
+        city: 'Guam',
+        country: 'Guam',
+        summary: '투몬 베이, 전망대, 쇼핑, 선셋 비치를 묶은 괌 템플릿입니다.',
+        footer: 'Guam feels best when reef colour and sunset pace stay slow.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/6/60/Tumon_Bay_-_panoramio_-_Scott_Cameron.jpg',
+        timeZone: 'Pacific/Guam',
+        weather: { latitude: 13.4443, longitude: 144.7937 },
+        currency: { code: 'USD', symbol: '$', locale: 'en-US' },
+        startOffsetDays: 7,
+        phraseLabel: 'Chamoru',
+        phrases: [
+            { text: 'Håfa adai', pron: '[하파 아다이]', meaning: '안녕하세요' },
+            { text: 'Si Yu’os ma’åse’', pron: '[시 유오스 마아세]', meaning: '감사합니다' },
+            { text: 'Adios', pron: '[아디오스]', meaning: '안녕히 가세요' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '투몬 워밍업',
+                activities: [
+                    { time: '10:00', title: '투몬 베이', type: 'sun', location: 'Tumon Bay' },
+                    { time: '13:00', title: '언더워터 월드', type: 'camera', location: 'UnderWater World Guam' },
+                    { time: '18:30', title: '비치 선셋', type: 'moon-star', location: 'Gun Beach' }
+                ]
+            },
+            {
+                title: '전망 & 쇼핑',
+                activities: [
+                    { time: '10:30', title: '사랑의 절벽', type: 'binoculars', location: 'Two Lovers Point' },
+                    { time: '13:30', title: '마이크로네시아몰', type: 'shopping-cart', location: 'Micronesia Mall' },
+                    { time: '18:30', title: '로컬 디너', type: 'utensils-crossed', location: 'Tumon Guam' }
+                ]
+            },
+            {
+                title: '마지막 비치 & 출발',
+                activities: [
+                    { time: '10:00', title: '이파오 비치', type: 'sun', location: 'Ypao Beach' },
+                    { time: '13:30', title: '기념품 쇼핑', type: 'gift', location: 'The Plaza Shopping Center' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Antonio B. Won Pat International Airport' }
+                ]
+            }
+        ]
+    },
+    hawaii: {
+        id: 'hawaii',
+        city: 'Hawaii',
+        country: 'United States',
+        summary: '와이키키, 다이아몬드 헤드, 수변 산책, 선셋을 묶은 하와이 템플릿입니다.',
+        footer: 'Hawaii feels best when waves, ridge lines, and sunset stay in one day.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Diamond_Head_Hawaii_From_Round_Top_Rd.JPG',
+        timeZone: 'Pacific/Honolulu',
+        weather: { latitude: 21.3099, longitude: -157.8581 },
+        currency: { code: 'USD', symbol: '$', locale: 'en-US' },
+        startOffsetDays: 8,
+        phraseLabel: 'ʻŌlelo Hawaiʻi',
+        phrases: [
+            { text: 'Aloha', pron: '[알로하]', meaning: '안녕하세요 / 사랑 / 환영' },
+            { text: 'Mahalo', pron: '[마할로]', meaning: '감사합니다' },
+            { text: 'E kala mai', pron: '[에 칼라 마이]', meaning: '실례합니다 / 미안해요' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '와이키키 데이',
+                activities: [
+                    { time: '10:00', title: '와이키키 비치', type: 'sun', location: 'Waikiki Beach' },
+                    { time: '13:30', title: '로열 하와이안 센터', type: 'shopping-bag', location: 'Royal Hawaiian Center' },
+                    { time: '18:30', title: '쿠히오 비치 선셋', type: 'moon-star', location: 'Kuhio Beach' }
+                ]
+            },
+            {
+                title: '전망 & 산책',
+                activities: [
+                    { time: '09:30', title: '다이아몬드 헤드', type: 'binoculars', location: 'Diamond Head State Monument' },
+                    { time: '13:30', title: '카카아코 벽화 거리', type: 'palette', location: 'Kakaʻako' },
+                    { time: '18:00', title: '알라모아나 비치', type: 'sun', location: 'Ala Moana Beach Park' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:00', title: '하버 산책', type: 'ship', location: 'Aloha Tower' },
+                    { time: '13:00', title: '로컬 브런치', type: 'coffee', location: 'Honolulu' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Daniel K. Inouye International Airport' }
                 ]
             }
         ]
@@ -1212,37 +1722,63 @@ const COUNTRY_FLAGS = {
     Australia: '🇦🇺',
     China: '🇨🇳',
     Taiwan: '🇹🇼',
-    Vietnam: '🇻🇳'
+    Vietnam: '🇻🇳',
+    India: '🇮🇳',
+    Philippines: '🇵🇭',
+    Russia: '🇷🇺',
+    Canada: '🇨🇦',
+    Mexico: '🇲🇽',
+    Brazil: '🇧🇷',
+    Argentina: '🇦🇷',
+    Germany: '🇩🇪',
+    Egypt: '🇪🇬',
+    Guam: '🇬🇺'
 };
 
 const CURRENCY_DENOMINATIONS = {
     EUR: [5, 10, 20, 50, 100, 200],
     GBP: [5, 10, 20, 50],
     USD: [1, 5, 10, 20, 50, 100],
+    INR: [10, 20, 50, 100, 200, 500, 2000],
     JPY: [100, 500, 1000, 5000, 10000],
     HKD: [10, 20, 50, 100, 500, 1000],
+    PHP: [20, 50, 100, 200, 500, 1000],
+    RUB: [50, 100, 200, 500, 1000, 5000],
+    CAD: [5, 10, 20, 50, 100],
+    MXN: [20, 50, 100, 200, 500, 1000],
+    BRL: [2, 5, 10, 20, 50, 100],
+    ARS: [100, 200, 500, 1000, 2000, 10000],
     SGD: [2, 5, 10, 50, 100],
     THB: [20, 50, 100, 500, 1000],
     AED: [5, 10, 20, 50, 100, 200],
     AUD: [5, 10, 20, 50, 100],
     CNY: [1, 5, 10, 20, 50, 100],
     TWD: [10, 50, 100, 500, 1000],
-    VND: [1000, 2000, 5000, 10000, 20000, 50000, 100000]
+    VND: [1000, 2000, 5000, 10000, 20000, 50000, 100000],
+    EGP: [10, 20, 50, 100, 200]
 };
 
 const CURRENCY_DISPLAY = {
     EUR: '€',
     GBP: '£',
     USD: '$',
+    INR: '₹',
     JPY: '円',
     HKD: 'HK$',
+    PHP: '₱',
+    RUB: '₽',
+    CAD: 'C$',
+    MXN: 'MX$',
+    BRL: 'R$',
+    ARS: 'AR$',
     SGD: 'S$',
     THB: '฿',
     AED: 'د.إ',
     AUD: 'A$',
     CNY: '元',
     TWD: 'NT$',
-    VND: '₫'
+    VND: '₫',
+    EGP: 'E£'
 };
 
 const LOCATION_LABELS = {
@@ -1261,6 +1797,16 @@ const LOCATION_LABELS = {
     China: '중국',
     Taiwan: '대만',
     Vietnam: '베트남',
+    India: '인도',
+    Philippines: '필리핀',
+    Russia: '러시아',
+    Canada: '캐나다',
+    Mexico: '멕시코',
+    Brazil: '브라질',
+    Argentina: '아르헨티나',
+    Germany: '독일',
+    Egypt: '이집트',
+    Guam: '괌',
     Paris: '파리',
     London: '런던',
     'New York': '뉴욕',
@@ -1279,22 +1825,69 @@ const LOCATION_LABELS = {
     Taipei: '타이베이',
     Hanoi: '하노이',
     'Ho Chi Minh City': '호치민',
-    'Hong Kong_city': '홍콩'
+    'Hong Kong_city': '홍콩',
+    Delhi: '델리',
+    Manila: '마닐라',
+    Moscow: '모스크바',
+    Toronto: '토론토',
+    'Mexico City': '멕시코시티',
+    'Rio de Janeiro': '리우데자네이루',
+    'Buenos Aires': '부에노스아이레스',
+    Berlin: '베를린',
+    Cairo: '카이로',
+    Guam_city: '괌',
+    Hawaii: '하와이'
 };
 
 const DEFAULT_BASE_AMOUNTS = {
     EUR: 10,
     GBP: 10,
     USD: 10,
+    INR: 100,
     JPY: 1000,
     HKD: 20,
+    PHP: 100,
+    RUB: 100,
+    CAD: 10,
+    MXN: 50,
+    BRL: 20,
+    ARS: 1000,
     SGD: 10,
     THB: 100,
     AED: 10,
     AUD: 10,
     CNY: 10,
     TWD: 100,
-    VND: 10000
+    VND: 10000,
+    EGP: 100
+};
+
+const COUNTRY_THEMES = {
+    France: buildTheme('#F6C445', '#182B63', 0.58, 0.94),
+    'United Kingdom': buildTheme('#5B8DEF', '#0F172A', 0.52, 0.94),
+    'United States': buildTheme('#FF6B6B', '#111827', 0.48, 0.92),
+    Japan: buildTheme('#E85D04', '#1F2A44', 0.30, 0.74),
+    Italy: buildTheme('#22C55E', '#052E16', 0.48, 0.92),
+    Spain: buildTheme('#EC4899', '#3B0764', 0.46, 0.90),
+    Singapore: buildTheme('#14B8A6', '#0F172A', 0.50, 0.92),
+    Thailand: buildTheme('#F59E0B', '#451A03', 0.48, 0.92),
+    'United Arab Emirates': buildTheme('#22D3EE', '#082F49', 0.52, 0.92),
+    Netherlands: buildTheme('#FB923C', '#431407', 0.45, 0.92),
+    'Hong Kong': buildTheme('#A78BFA', '#2E1065', 0.48, 0.92),
+    Australia: buildTheme('#10B981', '#062E2A', 0.34, 0.72),
+    China: buildTheme('#EF4444', '#450A0A', 0.42, 0.88),
+    Taiwan: buildTheme('#38BDF8', '#083344', 0.42, 0.88),
+    Vietnam: buildTheme('#84CC16', '#1A2E05', 0.40, 0.88),
+    India: buildTheme('#FB8C00', '#4B1D06', 0.44, 0.90),
+    Philippines: buildTheme('#2563EB', '#0B132B', 0.46, 0.90),
+    Russia: buildTheme('#93C5FD', '#1E3A8A', 0.38, 0.88),
+    Canada: buildTheme('#DC2626', '#4C0519', 0.40, 0.90),
+    Mexico: buildTheme('#16A34A', '#052E16', 0.42, 0.88),
+    Brazil: buildTheme('#FACC15', '#14532D', 0.42, 0.88),
+    Argentina: buildTheme('#7DD3FC', '#083344', 0.38, 0.84),
+    Germany: buildTheme('#EAB308', '#111827', 0.40, 0.90),
+    Egypt: buildTheme('#D97706', '#3F1D0A', 0.42, 0.90),
+    Guam: buildTheme('#06B6D4', '#083344', 0.40, 0.88)
 };
 
 const PREFERRED_GROUP_DESTINATIONS = {
@@ -1321,7 +1914,6 @@ const ui = {
     destinationDropdownTrigger: document.getElementById('destination-dropdown-trigger'),
     destinationDropdownValue: document.getElementById('destination-dropdown-value'),
     destinationDropdownMeta: document.getElementById('destination-dropdown-meta'),
-    destinationCount: document.getElementById('destination-count'),
     setupStartDate: document.getElementById('setup-start-date'),
     setupEndDate: document.getElementById('setup-end-date'),
     applyPlanBtn: document.getElementById('apply-plan-btn'),
@@ -1390,7 +1982,11 @@ function escapeHtml(value = '') {
 }
 
 function getDestination(id) {
-    return DESTINATIONS[id] || DESTINATIONS[DEFAULT_DESTINATION_ID] || DESTINATIONS.paris;
+    const destination = DESTINATIONS[id] || DESTINATIONS[DEFAULT_DESTINATION_ID] || DESTINATIONS.paris;
+    return {
+        ...destination,
+        ...(COUNTRY_THEMES[destination.country] || {})
+    };
 }
 
 function getLocalizedLabel(value, fallback = '') {
@@ -1931,7 +2527,6 @@ function renderUtilityInfo() {
 function renderDestinationSelector() {
     ui.destinationSelector.innerHTML = '';
     const selectableDestinations = getSelectableDestinations();
-    ui.destinationCount.textContent = `${selectableDestinations.length}곳`;
 
     selectableDestinations.forEach((destination) => {
         const button = document.createElement('button');
