@@ -878,7 +878,7 @@ const DESTINATIONS = {
         country: 'Hong Kong',
         summary: '스카이라인, 트램, 마켓, 빅토리아 피크를 압축한 홍콩 템플릿입니다.',
         footer: 'Hong Kong feels sharp when skyline, tram lines, and night markets overlap.',
-        heroImage: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?q=80&w=2070&auto=format&fit=crop',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Vista_del_Puerto_de_Victoria_desde_Sky100%2C_Hong_Kong%2C_2013-08-09%2C_DD_10.JPG',
         accent: '#A78BFA',
         accentRgb: '167, 139, 250',
         ink: '#2E1065',
