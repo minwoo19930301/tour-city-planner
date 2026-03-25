@@ -102,8 +102,30 @@
         }
 
         .dropdown-option.active {
-            background: rgba(var(--accent-rgb), 0.14);
-            border-color: rgba(var(--accent-rgb), 0.56);
+            background: rgba(15, 23, 42, 0.96);
+            border-color: rgba(var(--accent-rgb), 0.54);
+            box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), 0.2), 0 12px 28px rgba(2, 6, 23, 0.24);
+        }
+
+        #destination-selector {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(var(--accent-rgb), 0.78) rgba(255, 255, 255, 0.08);
+            overscroll-behavior: contain;
+        }
+
+        #destination-selector::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        #destination-selector::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+        }
+
+        #destination-selector::-webkit-scrollbar-thumb {
+            background: rgba(var(--accent-rgb), 0.78);
+            border-radius: 999px;
+            border: 2px solid rgba(2, 6, 23, 0.94);
         }
 
         .calendar-day {
@@ -417,7 +439,7 @@
     <div id="setup-overlay" class="fixed inset-0 z-[80] hidden overflow-y-auto">
         <div class="absolute inset-0 bg-slate-950/34"></div>
         <div class="relative z-10 min-h-screen flex items-center justify-center px-4 py-8 sm:px-6">
-            <div class="setup-panel max-w-[760px] mx-auto glass-panel rounded-[32px] px-5 py-6 sm:px-6 sm:py-6 w-full relative overflow-visible">
+            <div class="setup-panel max-w-[760px] mx-auto glass-panel rounded-[32px] px-5 py-6 sm:px-6 sm:py-6 w-full min-h-[75svh] relative overflow-visible flex flex-col">
                 <div class="mb-6">
                     <label class="text-[11px] uppercase tracking-[0.28em] text-white/48 block mb-3">국가 / 시간대</label>
                     <div class="relative">
@@ -434,7 +456,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 gap-5">
+                <div class="flex flex-col gap-5 flex-1">
                     <div class="rounded-[28px] border border-white/10 bg-white/[0.04] p-4 sm:p-5">
                         <div class="flex items-center justify-center gap-2 mb-4">
                             <div class="rounded-full border border-white/10 bg-white/[0.04] px-2 py-1 flex items-center gap-2">
@@ -472,7 +494,7 @@
                             </div>
                         </div>
                     </div>
-                    <button id="apply-plan-btn" type="button" class="action-btn primary px-6 py-4 text-sm font-semibold">이 일정으로 시작</button>
+                    <button id="apply-plan-btn" type="button" class="action-btn primary px-6 py-4 text-sm font-semibold mt-auto">이 일정으로 시작</button>
                 </div>
             </div>
         </div>

@@ -29,11 +29,12 @@ const ACTIVITY_ICON_OPTIONS = [
     { value: 'luggage', label: 'Hotel' }
 ];
 
-const REGION_ORDER = ['asia', 'north-america', 'europe', 'resort', 'south-america'];
+const REGION_ORDER = ['asia', 'north-america', 'europe', 'africa', 'resort', 'south-america'];
 const REGION_LABELS = {
     asia: '아시아',
     'north-america': '북미',
     europe: '유럽',
+    africa: '아프리카',
     resort: '휴양지',
     'south-america': '남미'
 };
@@ -56,13 +57,24 @@ const COUNTRY_SORT_ORDER = [
     'France',
     'United Kingdom',
     'Germany',
+    'Czech Republic',
+    'Poland',
+    'Austria',
     'Netherlands',
+    'Denmark',
+    'Sweden',
+    'Norway',
+    'Finland',
+    'Ireland',
+    'Iceland',
     'Spain',
     'Italy',
     'Russia',
+    'Egypt',
+    'South Africa',
+    'Ghana',
     'Australia',
     'United Arab Emirates',
-    'Egypt',
     'Guam',
     'Brazil',
     'Argentina'
@@ -86,13 +98,24 @@ const COUNTRY_REGIONS = {
     France: 'europe',
     'United Kingdom': 'europe',
     Germany: 'europe',
+    'Czech Republic': 'europe',
+    Poland: 'europe',
+    Austria: 'europe',
     Netherlands: 'europe',
+    Denmark: 'europe',
+    Sweden: 'europe',
+    Norway: 'europe',
+    Finland: 'europe',
+    Ireland: 'europe',
+    Iceland: 'europe',
     Spain: 'europe',
     Italy: 'europe',
     Russia: 'europe',
     Australia: 'resort',
     'United Arab Emirates': 'resort',
-    Egypt: 'resort',
+    Egypt: 'africa',
+    'South Africa': 'africa',
+    Ghana: 'africa',
     Guam: 'resort',
     Brazil: 'south-america',
     Argentina: 'south-america'
@@ -2091,6 +2114,578 @@ const DESTINATIONS = {
                 ]
             }
         ]
+    },
+    alaska: {
+        id: 'alaska',
+        city: 'Alaska',
+        country: 'United States',
+        summary: '빙하 전망, 야생 풍경, 수변 산책을 묶은 알래스카 템플릿입니다.',
+        footer: 'Alaska feels best when mountain scale and cold light stay wide open.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Parque_nacional_y_reserva_Denali%2C_Alaska%2C_Estados_Unidos%2C_2017-08-30%2C_DD_13-19_PAN.jpg/1920px-Parque_nacional_y_reserva_Denali%2C_Alaska%2C_Estados_Unidos%2C_2017-08-30%2C_DD_13-19_PAN.jpg',
+        timeZone: 'America/Anchorage',
+        weather: { latitude: 61.2181, longitude: -149.9003 },
+        currency: { code: 'USD', symbol: '$', locale: 'en-US' },
+        startOffsetDays: 9,
+        phraseLabel: 'English',
+        phrases: [
+            { text: 'Thanks', pron: '[땡스]', meaning: '고마워요' },
+            { text: 'Is the trail open?', pron: '[이즈 더 트레일 오픈?]', meaning: '트레일 열려 있나요?' },
+            { text: 'The view is unreal', pron: '[더 뷰 이즈 언리얼]', meaning: '풍경이 정말 대단하네요' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '앵커리지 워밍업',
+                activities: [
+                    { time: '10:00', title: '토니 놀스 코스탈 트레일', type: 'map', location: 'Tony Knowles Coastal Trail' },
+                    { time: '13:30', title: '뮤지엄 산책', type: 'building-2', location: 'Anchorage Museum' },
+                    { time: '18:00', title: '쿡 인렛 야경', type: 'moon-star', location: 'Point Woronzof' }
+                ]
+            },
+            {
+                title: '빙하 데이',
+                activities: [
+                    { time: '09:00', title: '포티지 빙하', type: 'camera', location: 'Portage Glacier' },
+                    { time: '13:00', title: '야생 풍경 드라이브', type: 'binoculars', location: 'Turnagain Arm' },
+                    { time: '18:00', title: '수변 디너', type: 'utensils-crossed', location: 'Seward Highway Lookout' }
+                ]
+            },
+            {
+                title: '마지막 전망 & 출발',
+                activities: [
+                    { time: '10:00', title: '플랫탑 전망', type: 'trees', location: 'Flattop Mountain Trail' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'Downtown Anchorage' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Ted Stevens Anchorage International Airport' }
+                ]
+            }
+        ]
+    },
+    texas: {
+        id: 'texas',
+        city: 'Texas',
+        country: 'United States',
+        summary: '스카이라인, 브런치, 라이브 음악, 강변 산책을 묶은 텍사스 템플릿입니다.',
+        footer: 'Texas works when skyline, food, and music stay warm and loose.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/6/65/Austin_Texas_skyline_at_sunset.jpg',
+        timeZone: 'America/Chicago',
+        weather: { latitude: 30.2672, longitude: -97.7431 },
+        currency: { code: 'USD', symbol: '$', locale: 'en-US' },
+        startOffsetDays: 8,
+        phraseLabel: 'English',
+        phrases: [
+            { text: 'Howdy', pron: '[하우디]', meaning: '안녕하세요' },
+            { text: 'I’ll take barbecue', pron: '[아일 테이크 바비큐]', meaning: '바비큐로 할게요' },
+            { text: 'Where’s the live music?', pron: '[웨어즈 더 라이브 뮤직?]', meaning: '라이브 공연 어디예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '오스틴 첫인상',
+                activities: [
+                    { time: '10:00', title: '사우스 콩그레스', type: 'map', location: 'South Congress Avenue' },
+                    { time: '13:30', title: '텍사스 주의사당', type: 'landmark', location: 'Texas State Capitol' },
+                    { time: '18:30', title: '레이디 버드 호수', type: 'moon-star', location: 'Lady Bird Lake' }
+                ]
+            },
+            {
+                title: '브런치 & 음악',
+                activities: [
+                    { time: '10:00', title: '브런치 카페', type: 'coffee', location: 'South Lamar Austin' },
+                    { time: '13:30', title: '질커 공원', type: 'trees', location: 'Zilker Metropolitan Park' },
+                    { time: '19:00', title: '라이브 음악 거리', type: 'music', location: '6th Street Austin' }
+                ]
+            },
+            {
+                title: '바비큐 & 출발',
+                activities: [
+                    { time: '10:30', title: '텍사스 바비큐', type: 'utensils-crossed', location: 'Franklin Barbecue' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'The Domain Austin' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Austin-Bergstrom International Airport' }
+                ]
+            }
+        ]
+    },
+    czech: {
+        id: 'czech',
+        city: 'Prague',
+        country: 'Czech Republic',
+        summary: '프라하성, 카를교, 광장, 야경을 묶은 체코 템플릿입니다.',
+        footer: 'Prague works when bridges, stone lanes, and night light stay close together.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Czech-2013-Prague-View_from_Charles_Bridge_of_Prague_Castle.jpg/1920px-Czech-2013-Prague-View_from_Charles_Bridge_of_Prague_Castle.jpg',
+        timeZone: 'Europe/Prague',
+        weather: { latitude: 50.0755, longitude: 14.4378 },
+        currency: { code: 'CZK', symbol: 'Kč', locale: 'cs-CZ' },
+        startOffsetDays: 7,
+        phraseLabel: 'Čeština',
+        phrases: [
+            { text: 'Dobrý den', pron: '[도브리 덴]', meaning: '안녕하세요' },
+            { text: 'Děkuji', pron: '[제쿠이]', meaning: '감사합니다' },
+            { text: 'Kolik to stojí?', pron: '[콜릭 또 스토이?]', meaning: '이거 얼마예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '올드타운 워밍업',
+                activities: [
+                    { time: '10:00', title: '구시가 광장', type: 'landmark', location: 'Old Town Square Prague' },
+                    { time: '13:30', title: '천문시계', type: 'camera', location: 'Prague Astronomical Clock' },
+                    { time: '18:30', title: '카를교 야경', type: 'bridge', location: 'Charles Bridge' }
+                ]
+            },
+            {
+                title: '성 & 전망',
+                activities: [
+                    { time: '10:00', title: '프라하성', type: 'landmark', location: 'Prague Castle' },
+                    { time: '13:30', title: '성비투스 대성당', type: 'building', location: 'St. Vitus Cathedral' },
+                    { time: '18:00', title: '레트나 전망', type: 'binoculars', location: 'Letna Park' }
+                ]
+            },
+            {
+                title: '카페 & 출발',
+                activities: [
+                    { time: '10:30', title: '블타바 강변 산책', type: 'map', location: 'Vltava Riverside' },
+                    { time: '13:30', title: '카페 브런치', type: 'coffee', location: 'Malá Strana' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Václav Havel Airport Prague' }
+                ]
+            }
+        ]
+    },
+    poland: {
+        id: 'poland',
+        city: 'Warsaw',
+        country: 'Poland',
+        summary: '구시가지, 궁전, 공원, 강변 야경을 묶은 폴란드 템플릿입니다.',
+        footer: 'Poland works when old squares and modern skyline stay in one rhythm.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Warsaw_07-13_img07_Old_town.jpg/1920px-Warsaw_07-13_img07_Old_town.jpg',
+        timeZone: 'Europe/Warsaw',
+        weather: { latitude: 52.2297, longitude: 21.0122 },
+        currency: { code: 'PLN', symbol: 'zł', locale: 'pl-PL' },
+        startOffsetDays: 7,
+        phraseLabel: 'Polski',
+        phrases: [
+            { text: 'Dzień dobry', pron: '[젠 도브리]', meaning: '안녕하세요' },
+            { text: 'Dziękuję', pron: '[젠쿠예]', meaning: '감사합니다' },
+            { text: 'Gdzie jest metro?', pron: '[그제 예스트 메트로?]', meaning: '지하철 어디예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '광장 & 산책',
+                activities: [
+                    { time: '10:00', title: '구시가지 광장', type: 'landmark', location: 'Old Town Market Place Warsaw' },
+                    { time: '13:30', title: '왕궁', type: 'building', location: 'Royal Castle Warsaw' },
+                    { time: '18:30', title: '비스와 강변', type: 'moon-star', location: 'Vistula Boulevards' }
+                ]
+            },
+            {
+                title: '공원 & 전망',
+                activities: [
+                    { time: '10:00', title: '와지엔키 공원', type: 'trees', location: 'Łazienki Park' },
+                    { time: '13:30', title: '문화과학궁전', type: 'building', location: 'Palace of Culture and Science' },
+                    { time: '18:00', title: '도심 야경', type: 'binoculars', location: 'Warsaw Viewpoint' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '카페 브런치', type: 'coffee', location: 'Śródmieście Warsaw' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'Nowy Świat' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Warsaw Chopin Airport' }
+                ]
+            }
+        ]
+    },
+    denmark: {
+        id: 'denmark',
+        city: 'Copenhagen',
+        country: 'Denmark',
+        summary: '니하운, 궁전, 운하, 북유럽 산책을 묶은 덴마크 템플릿입니다.',
+        footer: 'Denmark works when canals, colour, and a clean walkable pace stay light.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Kopenhagen_%28DK%29%2C_Nyhavn_--_2017_--_1711.jpg/1920px-Kopenhagen_%28DK%29%2C_Nyhavn_--_2017_--_1711.jpg',
+        timeZone: 'Europe/Copenhagen',
+        weather: { latitude: 55.6761, longitude: 12.5683 },
+        currency: { code: 'DKK', symbol: 'kr', locale: 'da-DK' },
+        startOffsetDays: 7,
+        phraseLabel: 'Dansk',
+        phrases: [
+            { text: 'Hej', pron: '[하이]', meaning: '안녕하세요' },
+            { text: 'Tak', pron: '[탁]', meaning: '감사합니다' },
+            { text: 'Hvor er stationen?', pron: '[보어 에어 스테이쇼넨?]', meaning: '역이 어디예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '니하운 워밍업',
+                activities: [
+                    { time: '10:00', title: '니하운', type: 'camera', location: 'Nyhavn' },
+                    { time: '13:30', title: '아말리엔보르 궁전', type: 'landmark', location: 'Amalienborg Palace' },
+                    { time: '18:30', title: '운하 야경', type: 'ship', location: 'Copenhagen Canal' }
+                ]
+            },
+            {
+                title: '도심 산책',
+                activities: [
+                    { time: '10:00', title: '스트뢰에 거리', type: 'shopping-bag', location: 'Strøget' },
+                    { time: '13:30', title: '로젠보르성', type: 'building', location: 'Rosenborg Castle' },
+                    { time: '18:00', title: '티볼리 가든', type: 'sparkles', location: 'Tivoli Gardens' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '카페 브런치', type: 'coffee', location: 'Christianshavn' },
+                    { time: '13:30', title: '인어공주 동상', type: 'map', location: 'The Little Mermaid' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Copenhagen Airport' }
+                ]
+            }
+        ]
+    },
+    sweden: {
+        id: 'sweden',
+        city: 'Stockholm',
+        country: 'Sweden',
+        summary: '감라스탄, 수변, 전망, 박물관을 묶은 스웨덴 템플릿입니다.',
+        footer: 'Sweden feels best when water, stone alleys, and clean design stay together.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Skyline_of_Gamla_Stan_-_panoramio.jpg/1920px-Skyline_of_Gamla_Stan_-_panoramio.jpg',
+        timeZone: 'Europe/Stockholm',
+        weather: { latitude: 59.3293, longitude: 18.0686 },
+        currency: { code: 'SEK', symbol: 'kr', locale: 'sv-SE' },
+        startOffsetDays: 7,
+        phraseLabel: 'Svenska',
+        phrases: [
+            { text: 'Hej', pron: '[헤이]', meaning: '안녕하세요' },
+            { text: 'Tack', pron: '[탁]', meaning: '감사합니다' },
+            { text: 'Var ligger stationen?', pron: '[바 리게르 스타쇼넨?]', meaning: '역이 어디예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '감라스탄 데이',
+                activities: [
+                    { time: '10:00', title: '감라스탄', type: 'map', location: 'Gamla Stan' },
+                    { time: '13:30', title: '왕궁', type: 'landmark', location: 'Stockholm Palace' },
+                    { time: '18:30', title: '수변 야경', type: 'moon-star', location: 'Skeppsbron' }
+                ]
+            },
+            {
+                title: '전망 & 박물관',
+                activities: [
+                    { time: '10:00', title: '피엘가탄 전망', type: 'binoculars', location: 'Fjällgatan' },
+                    { time: '13:30', title: '바사 박물관', type: 'building-2', location: 'Vasa Museum' },
+                    { time: '18:00', title: '쇠데르말름 산책', type: 'shopping-bag', location: 'Södermalm' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '카페 브런치', type: 'coffee', location: 'Östermalm' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'NK Stockholm' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Stockholm Arlanda Airport' }
+                ]
+            }
+        ]
+    },
+    norway: {
+        id: 'norway',
+        city: 'Oslo',
+        country: 'Norway',
+        summary: '오슬로 오페라하우스, 항구, 공원, 전망을 묶은 노르웨이 템플릿입니다.',
+        footer: 'Norway works when harbour light and clean northern air stay crisp.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/5/5a/Bj%C3%B8rvika_at_August_sunset_%28213306%29.jpg',
+        timeZone: 'Europe/Oslo',
+        weather: { latitude: 59.9139, longitude: 10.7522 },
+        currency: { code: 'NOK', symbol: 'kr', locale: 'nb-NO' },
+        startOffsetDays: 7,
+        phraseLabel: 'Norsk',
+        phrases: [
+            { text: 'Hei', pron: '[헤이]', meaning: '안녕하세요' },
+            { text: 'Takk', pron: '[탁]', meaning: '감사합니다' },
+            { text: 'Hvor er sentrum?', pron: '[보어 에어 센트룸?]', meaning: '중심가는 어디예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '항구 워밍업',
+                activities: [
+                    { time: '10:00', title: '오페라하우스', type: 'building', location: 'Oslo Opera House' },
+                    { time: '13:30', title: '비그되이 산책', type: 'map', location: 'Bygdøy' },
+                    { time: '18:30', title: '비외르비카 야경', type: 'moon-star', location: 'Bjørvika' }
+                ]
+            },
+            {
+                title: '도심 & 공원',
+                activities: [
+                    { time: '10:00', title: '아케르브리게', type: 'shopping-bag', location: 'Aker Brygge' },
+                    { time: '13:30', title: '비겔란 공원', type: 'trees', location: 'Vigeland Park' },
+                    { time: '18:00', title: '홀멘콜렌 전망', type: 'binoculars', location: 'Holmenkollen' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '카페 브런치', type: 'coffee', location: 'Grünerløkka' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'Karl Johans gate' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Oslo Airport' }
+                ]
+            }
+        ]
+    },
+    finland: {
+        id: 'finland',
+        city: 'Helsinki',
+        country: 'Finland',
+        summary: '헬싱키 대성당, 항구, 디자인 지구를 묶은 핀란드 템플릿입니다.',
+        footer: 'Finland works when harbour calm and clean city lines stay minimal.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Skyline_of_Helsinki_as_seen_from_the_Erottaja_fire_station.jpg/1920px-Skyline_of_Helsinki_as_seen_from_the_Erottaja_fire_station.jpg',
+        timeZone: 'Europe/Helsinki',
+        weather: { latitude: 60.1699, longitude: 24.9384 },
+        currency: { code: 'EUR', symbol: '€', locale: 'fi-FI' },
+        startOffsetDays: 7,
+        phraseLabel: 'Suomi',
+        phrases: [
+            { text: 'Hei', pron: '[헤이]', meaning: '안녕하세요' },
+            { text: 'Kiitos', pron: '[키이토스]', meaning: '감사합니다' },
+            { text: 'Missä asema on?', pron: '[미싸 아세마 온?]', meaning: '역이 어디예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '광장 & 항구',
+                activities: [
+                    { time: '10:00', title: '헬싱키 대성당', type: 'landmark', location: 'Helsinki Cathedral' },
+                    { time: '13:30', title: '마켓 스퀘어', type: 'shopping-bag', location: 'Market Square Helsinki' },
+                    { time: '18:30', title: '사우스 하버', type: 'ship', location: 'South Harbour Helsinki' }
+                ]
+            },
+            {
+                title: '디자인 산책',
+                activities: [
+                    { time: '10:00', title: '템펠리아우키오 교회', type: 'building', location: 'Temppeliaukio Church' },
+                    { time: '13:30', title: '디자인 지구', type: 'map', location: 'Design District Helsinki' },
+                    { time: '18:00', title: '에스플러네이드', type: 'trees', location: 'Esplanadi' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '카페 브런치', type: 'coffee', location: 'Kallio Helsinki' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'Kamppi Helsinki' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Helsinki Airport' }
+                ]
+            }
+        ]
+    },
+    austria: {
+        id: 'austria',
+        city: 'Vienna',
+        country: 'Austria',
+        summary: '쇤브룬, 구시가지, 카페, 클래식 무드를 묶은 오스트리아 템플릿입니다.',
+        footer: 'Austria works when palace scale and cafe rhythm stay elegant.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Schonbrunn_Palace_-_Vienna.jpg/1920px-Schonbrunn_Palace_-_Vienna.jpg',
+        timeZone: 'Europe/Vienna',
+        weather: { latitude: 48.2082, longitude: 16.3738 },
+        currency: { code: 'EUR', symbol: '€', locale: 'de-AT' },
+        startOffsetDays: 7,
+        phraseLabel: 'Deutsch',
+        phrases: [
+            { text: 'Guten Tag', pron: '[구튼 탁]', meaning: '안녕하세요' },
+            { text: 'Danke', pron: '[당케]', meaning: '감사합니다' },
+            { text: 'Wo ist die U-Bahn?', pron: '[보 이스트 디 우반?]', meaning: '지하철 어디예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '궁전 워밍업',
+                activities: [
+                    { time: '10:00', title: '쇤브룬 궁전', type: 'landmark', location: 'Schönbrunn Palace' },
+                    { time: '13:30', title: '궁전 정원', type: 'trees', location: 'Schönbrunn Palace Gardens' },
+                    { time: '18:30', title: '글로리에테 전망', type: 'binoculars', location: 'Gloriette Vienna' }
+                ]
+            },
+            {
+                title: '구시가지 데이',
+                activities: [
+                    { time: '10:00', title: '슈테판 대성당', type: 'building', location: "St. Stephen's Cathedral, Vienna" },
+                    { time: '13:30', title: '그라벤 산책', type: 'shopping-bag', location: 'Graben Vienna' },
+                    { time: '18:00', title: '오페라하우스 야경', type: 'music', location: 'Vienna State Opera' }
+                ]
+            },
+            {
+                title: '카페 & 출발',
+                activities: [
+                    { time: '10:30', title: '비엔나 카페', type: 'coffee', location: 'Café Central Vienna' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'Naschmarkt' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Vienna International Airport' }
+                ]
+            }
+        ]
+    },
+    ireland: {
+        id: 'ireland',
+        city: 'Dublin',
+        country: 'Ireland',
+        summary: '템플바, 강변, 공원, 로컬 펍 무드를 묶은 아일랜드 템플릿입니다.',
+        footer: 'Ireland works when river walks and pub light stay easygoing.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/9/9b/Temple_Bar_Dublin_at_dusk.jpg',
+        timeZone: 'Europe/Dublin',
+        weather: { latitude: 53.3498, longitude: -6.2603 },
+        currency: { code: 'EUR', symbol: '€', locale: 'en-IE' },
+        startOffsetDays: 7,
+        phraseLabel: 'English',
+        phrases: [
+            { text: 'Cheers', pron: '[치얼즈]', meaning: '고마워요 / 건배' },
+            { text: 'Where’s the pub?', pron: '[웨어즈 더 펍?]', meaning: '펍이 어디예요?' },
+            { text: 'Thanks a million', pron: '[땡스 어 밀리언]', meaning: '정말 고마워요' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '템플바 워밍업',
+                activities: [
+                    { time: '10:00', title: '템플바 산책', type: 'map', location: 'Temple Bar Dublin' },
+                    { time: '13:30', title: '트리니티 칼리지', type: 'building-2', location: 'Trinity College Dublin' },
+                    { time: '18:30', title: '리피강 야경', type: 'moon-star', location: 'River Liffey' }
+                ]
+            },
+            {
+                title: '공원 & 펍',
+                activities: [
+                    { time: '10:00', title: '세인트스티븐스 그린', type: 'trees', location: "St Stephen's Green" },
+                    { time: '13:30', title: '기네스 스토어하우스', type: 'building', location: 'Guinness Storehouse' },
+                    { time: '19:00', title: '펍 무드', type: 'music', location: 'Dublin Pub District' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '브런치 카페', type: 'coffee', location: 'Grafton Street' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'George’s Street Arcade' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Dublin Airport' }
+                ]
+            }
+        ]
+    },
+    iceland: {
+        id: 'iceland',
+        city: 'Reykjavik',
+        country: 'Iceland',
+        summary: '레이캬비크 교회, 해안 산책, 블루라군 무드를 묶은 아이슬란드 템플릿입니다.',
+        footer: 'Iceland works when cold air, church lines, and open sky stay uncluttered.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Hallgr%C3%ADmskirkja%2C_Reykjav%C3%ADk%2C_Iceland%2C_20230506_1701_5380.jpg/1920px-Hallgr%C3%ADmskirkja%2C_Reykjav%C3%ADk%2C_Iceland%2C_20230506_1701_5380.jpg',
+        timeZone: 'Atlantic/Reykjavik',
+        weather: { latitude: 64.1466, longitude: -21.9426 },
+        currency: { code: 'ISK', symbol: 'kr', locale: 'is-IS' },
+        startOffsetDays: 8,
+        phraseLabel: 'Íslenska',
+        phrases: [
+            { text: 'Halló', pron: '[할로]', meaning: '안녕하세요' },
+            { text: 'Takk', pron: '[탁]', meaning: '감사합니다' },
+            { text: 'Hvar er miðbærinn?', pron: '[크바르 에어 미드바이린?]', meaning: '중심가는 어디예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '레이캬비크 첫인상',
+                activities: [
+                    { time: '10:00', title: '할그림스키르캬', type: 'landmark', location: 'Hallgrímskirkja' },
+                    { time: '13:30', title: '하르파', type: 'building', location: 'Harpa Concert Hall' },
+                    { time: '18:30', title: '선보이저 산책', type: 'moon-star', location: 'Sun Voyager' }
+                ]
+            },
+            {
+                title: '블루라군 무드',
+                activities: [
+                    { time: '10:00', title: '블루라군', type: 'sun', location: 'Blue Lagoon Iceland' },
+                    { time: '14:00', title: '해안 드라이브', type: 'map', location: 'Reykjanes Peninsula' },
+                    { time: '18:00', title: '수변 카페', type: 'coffee', location: 'Old Harbour Reykjavik' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '로컬 브런치', type: 'utensils-crossed', location: 'Laugavegur' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'Skólavörðustígur' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Keflavík International Airport' }
+                ]
+            }
+        ]
+    },
+    'south-africa': {
+        id: 'south-africa',
+        city: 'Cape Town',
+        country: 'South Africa',
+        summary: '테이블마운틴, 해안, 와이너리 무드를 묶은 남아공 템플릿입니다.',
+        footer: 'South Africa works when mountain silhouette and ocean light stay bold.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/A_view_of_Cape_Town_from_Table_Mountain.jpg/1920px-A_view_of_Cape_Town_from_Table_Mountain.jpg',
+        timeZone: 'Africa/Johannesburg',
+        weather: { latitude: -33.9249, longitude: 18.4241 },
+        currency: { code: 'ZAR', symbol: 'R', locale: 'en-ZA' },
+        startOffsetDays: 8,
+        phraseLabel: 'English',
+        phrases: [
+            { text: 'Hello', pron: '[헬로]', meaning: '안녕하세요' },
+            { text: 'Thank you', pron: '[땡큐]', meaning: '감사합니다' },
+            { text: 'How do I get there?', pron: '[하우 두 아이 겟 데어?]', meaning: '거기 어떻게 가요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '케이프타운 워밍업',
+                activities: [
+                    { time: '10:00', title: '테이블마운틴', type: 'binoculars', location: 'Table Mountain' },
+                    { time: '13:30', title: 'V&A 워터프런트', type: 'shopping-bag', location: 'V&A Waterfront' },
+                    { time: '18:30', title: '해안 선셋', type: 'sun', location: 'Camp\'s Bay' }
+                ]
+            },
+            {
+                title: '해변 & 거리',
+                activities: [
+                    { time: '10:00', title: '보캅', type: 'camera', location: 'Bo-Kaap' },
+                    { time: '13:30', title: '시포인트 산책', type: 'map', location: 'Sea Point Promenade' },
+                    { time: '18:00', title: '와이너리 디너', type: 'utensils-crossed', location: 'Constantia' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '카페 브런치', type: 'coffee', location: 'Kloof Street' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'Greenmarket Square' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Cape Town International Airport' }
+                ]
+            }
+        ]
+    },
+    ghana: {
+        id: 'ghana',
+        city: 'Accra',
+        country: 'Ghana',
+        summary: '독립광장, 해변, 로컬 마켓을 묶은 가나 템플릿입니다.',
+        footer: 'Ghana works when warm colour, coast, and city pace stay direct.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/4/46/Independence_Arch_Accra_Ghana.jpg',
+        timeZone: 'Africa/Accra',
+        weather: { latitude: 5.6037, longitude: -0.1870 },
+        currency: { code: 'GHS', symbol: '₵', locale: 'en-GH' },
+        startOffsetDays: 8,
+        phraseLabel: 'English',
+        phrases: [
+            { text: 'Hello', pron: '[헬로]', meaning: '안녕하세요' },
+            { text: 'Thank you', pron: '[땡큐]', meaning: '감사합니다' },
+            { text: 'How much is this?', pron: '[하우 머치 이즈 디스?]', meaning: '이거 얼마예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '도심 워밍업',
+                activities: [
+                    { time: '10:00', title: '독립광장', type: 'landmark', location: 'Independence Square Accra' },
+                    { time: '13:30', title: '독립문', type: 'camera', location: 'Independence Arch' },
+                    { time: '18:30', title: '라바디 해변', type: 'sun', location: 'Labadi Beach' }
+                ]
+            },
+            {
+                title: '마켓 & 거리',
+                activities: [
+                    { time: '10:00', title: '마콜라 마켓', type: 'store', location: 'Makola Market' },
+                    { time: '13:30', title: '오스 거리 산책', type: 'map', location: 'Osu Oxford Street' },
+                    { time: '18:00', title: '저녁 무드', type: 'music', location: 'Accra Nightlife' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '브런치 카페', type: 'coffee', location: 'Airport Residential Area Accra' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'Accra Mall' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Kotoka International Airport' }
+                ]
+            }
+        ]
     }
 };
 
@@ -2161,7 +2756,18 @@ const COUNTRY_FLAGS = {
     Brazil: '🇧🇷',
     Argentina: '🇦🇷',
     Germany: '🇩🇪',
+    'Czech Republic': '🇨🇿',
+    Poland: '🇵🇱',
+    Denmark: '🇩🇰',
+    Sweden: '🇸🇪',
+    Norway: '🇳🇴',
+    Finland: '🇫🇮',
+    Austria: '🇦🇹',
+    Ireland: '🇮🇪',
+    Iceland: '🇮🇸',
     Egypt: '🇪🇬',
+    'South Africa': '🇿🇦',
+    Ghana: '🇬🇭',
     Guam: '🇬🇺'
 };
 
@@ -2188,7 +2794,15 @@ const CURRENCY_DENOMINATIONS = {
     CNY: [1, 5, 10, 20, 50, 100],
     TWD: [10, 50, 100, 500, 1000],
     VND: [1000, 2000, 5000, 10000, 20000, 50000, 100000],
-    EGP: [10, 20, 50, 100, 200]
+    EGP: [10, 20, 50, 100, 200],
+    CZK: [100, 200, 500, 1000, 2000],
+    PLN: [10, 20, 50, 100, 200],
+    DKK: [50, 100, 200, 500, 1000],
+    SEK: [20, 50, 100, 200, 500, 1000],
+    NOK: [50, 100, 200, 500, 1000],
+    ISK: [500, 1000, 2000, 5000, 10000],
+    ZAR: [10, 20, 50, 100, 200],
+    GHS: [10, 20, 50, 100, 200]
 };
 
 const CURRENCY_DISPLAY = {
@@ -2214,7 +2828,15 @@ const CURRENCY_DISPLAY = {
     CNY: '元',
     TWD: 'NT$',
     VND: '₫',
-    EGP: 'E£'
+    EGP: 'E£',
+    CZK: 'Kč',
+    PLN: 'zł',
+    DKK: 'kr',
+    SEK: 'kr',
+    NOK: 'kr',
+    ISK: 'kr',
+    ZAR: 'R',
+    GHS: '₵'
 };
 
 const LOCATION_LABELS = {
@@ -2244,7 +2866,18 @@ const LOCATION_LABELS = {
     Brazil: '브라질',
     Argentina: '아르헨티나',
     Germany: '독일',
+    'Czech Republic': '체코',
+    Poland: '폴란드',
+    Denmark: '덴마크',
+    Sweden: '스웨덴',
+    Norway: '노르웨이',
+    Finland: '핀란드',
+    Austria: '오스트리아',
+    Ireland: '아일랜드',
+    Iceland: '아이슬란드',
     Egypt: '이집트',
+    'South Africa': '남아공',
+    Ghana: '가나',
     Guam: '괌',
     Paris: '파리',
     London: '런던',
@@ -2281,9 +2914,22 @@ const LOCATION_LABELS = {
     'Rio de Janeiro': '리우데자네이루',
     'Buenos Aires': '부에노스아이레스',
     Berlin: '베를린',
+    Prague: '프라하',
+    Warsaw: '바르샤바',
+    Copenhagen: '코펜하겐',
+    Stockholm: '스톡홀름',
+    Oslo: '오슬로',
+    Helsinki: '헬싱키',
+    Vienna: '빈',
+    Dublin: '더블린',
+    Reykjavik: '레이캬비크',
     Cairo: '카이로',
+    'Cape Town': '케이프타운',
+    Accra: '아크라',
     Guam_city: '괌',
-    Hawaii: '하와이'
+    Hawaii: '하와이',
+    Alaska: '알래스카',
+    Texas: '텍사스'
 };
 
 const DEFAULT_BASE_AMOUNTS = {
@@ -2309,7 +2955,15 @@ const DEFAULT_BASE_AMOUNTS = {
     CNY: 10,
     TWD: 100,
     VND: 10000,
-    EGP: 100
+    EGP: 100,
+    CZK: 100,
+    PLN: 20,
+    DKK: 100,
+    SEK: 100,
+    NOK: 100,
+    ISK: 1000,
+    ZAR: 100,
+    GHS: 100
 };
 
 const COUNTRY_THEMES = {
@@ -2339,7 +2993,18 @@ const COUNTRY_THEMES = {
     Brazil: buildTheme('#FACC15', '#14532D', 0.42, 0.88),
     Argentina: buildTheme('#7DD3FC', '#083344', 0.38, 0.84),
     Germany: buildTheme('#EAB308', '#111827', 0.40, 0.90),
+    'Czech Republic': buildTheme('#2563EB', '#1E1B4B', 0.40, 0.88),
+    Poland: buildTheme('#FB7185', '#241B2F', 0.36, 0.82),
+    Denmark: buildTheme('#DC2626', '#1F2937', 0.38, 0.86),
+    Sweden: buildTheme('#F59E0B', '#1E3A8A', 0.40, 0.88),
+    Norway: buildTheme('#38BDF8', '#172554', 0.34, 0.82),
+    Finland: buildTheme('#93C5FD', '#0F172A', 0.34, 0.80),
+    Austria: buildTheme('#F87171', '#3F1D1D', 0.38, 0.84),
+    Ireland: buildTheme('#22C55E', '#123524', 0.36, 0.82),
+    Iceland: buildTheme('#60A5FA', '#1E3A8A', 0.32, 0.78),
     Egypt: buildTheme('#D97706', '#3F1D0A', 0.42, 0.90),
+    'South Africa': buildTheme('#10B981', '#153D2E', 0.38, 0.84),
+    Ghana: buildTheme('#FACC15', '#3A2E00', 0.36, 0.82),
     Guam: buildTheme('#06B6D4', '#083344', 0.40, 0.88)
 };
 
