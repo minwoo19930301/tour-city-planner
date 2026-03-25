@@ -312,7 +312,7 @@ const DESTINATIONS = {
         country: 'Japan',
         summary: '도쿄 핵심 동선 위에 탑, 사원, 후지산 무드를 얹은 클래식 재팬 톤 템플릿입니다.',
         footer: 'Japan feels strongest in vermilion, paper light, and a clean skyline.',
-        heroImage: 'https://images.unsplash.com/photo-1526481280695-3c4692d2f038?q=80&w=2070&auto=format&fit=crop',
+        heroImage: 'https://unsplash.com/photos/N4DbvTUDikw/download?force=true&w=1920',
         accent: '#C2410C',
         accentRgb: '194, 65, 12',
         ink: '#1F2A44',
@@ -572,7 +572,7 @@ const DESTINATIONS = {
         country: 'Thailand',
         summary: '사원, 강변, 야시장, 루프탑을 묶은 방콕 템플릿입니다.',
         footer: 'Bangkok feels strongest when temple, market, and rooftop share one day.',
-        heroImage: 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?q=80&w=2070&auto=format&fit=crop',
+        heroImage: 'https://unsplash.com/photos/ho3omNtPEM0/download?force=true&w=1920',
         accent: '#F59E0B',
         accentRgb: '245, 158, 11',
         ink: '#451A03',
@@ -583,14 +583,14 @@ const DESTINATIONS = {
         weather: { latitude: 13.7563, longitude: 100.5018 },
         currency: { code: 'THB', symbol: '฿', locale: 'th-TH' },
         startOffsetDays: 8,
-        phraseLabel: 'Thai phrase',
+        phraseLabel: 'ไทย',
         phrases: [
-            { text: 'Sawasdee krub/ka', pron: '[사왓디 크랍/카]', meaning: '안녕하세요' },
-            { text: 'Khob khun krub/ka', pron: '[컵쿤 크랍/카]', meaning: '감사합니다' },
-            { text: 'Tao rai?', pron: '[타오라이]', meaning: '얼마예요?' },
-            { text: 'Mai phet', pron: '[마이 펫]', meaning: '안 맵게 해주세요' },
-            { text: 'Hong nam yoo tee nai?', pron: '[홍남 유 티 나이]', meaning: '화장실 어디예요?' },
-            { text: 'Check bin', pron: '[첵 빈]', meaning: '계산 부탁해요' }
+            { text: 'สวัสดีครับ/ค่ะ', pron: '[사왓디 크랍/카]', meaning: '안녕하세요' },
+            { text: 'ขอบคุณครับ/ค่ะ', pron: '[컵쿤 크랍/카]', meaning: '감사합니다' },
+            { text: 'เท่าไร', pron: '[타오라이]', meaning: '얼마예요?' },
+            { text: 'ไม่เผ็ด', pron: '[마이 펫]', meaning: '안 맵게 해주세요' },
+            { text: 'ห้องน้ำอยู่ที่ไหน', pron: '[홍남 유 티 나이]', meaning: '화장실 어디예요?' },
+            { text: 'เช็คบิล', pron: '[첵 빈]', meaning: '계산 부탁해요' }
         ],
         itineraryTemplate: [
             {
@@ -644,14 +644,14 @@ const DESTINATIONS = {
         weather: { latitude: 25.2048, longitude: 55.2708 },
         currency: { code: 'AED', symbol: 'AED', locale: 'en-AE' },
         startOffsetDays: 9,
-        phraseLabel: 'Arabic phrase',
+        phraseLabel: 'العربية',
         phrases: [
-            { text: 'Marhaba', pron: '[마르하바]', meaning: '안녕하세요' },
-            { text: 'Shukran', pron: '[슈크란]', meaning: '감사합니다' },
-            { text: 'Kam hatha?', pron: '[캄 하다]', meaning: '이거 얼마예요?' },
-            { text: 'Wayn al-metro?', pron: '[웨인 알 메트로]', meaning: '메트로 어디예요?' },
-            { text: 'Al-hisab, min fadlak', pron: '[알 히삽 민 파들락]', meaning: '계산서 부탁합니다' },
-            { text: 'Mumtaz', pron: '[뭄타즈]', meaning: '아주 좋아요' }
+            { text: 'مرحبا', pron: '[마르하바]', meaning: '안녕하세요' },
+            { text: 'شكرا', pron: '[슈크란]', meaning: '감사합니다' },
+            { text: 'كم هذا؟', pron: '[캄 하다]', meaning: '이거 얼마예요?' },
+            { text: 'وين المترو؟', pron: '[웨인 알 메트로]', meaning: '메트로 어디예요?' },
+            { text: 'الحساب من فضلك', pron: '[알 히삽 민 파들락]', meaning: '계산서 부탁합니다' },
+            { text: 'ممتاز', pron: '[뭄타즈]', meaning: '아주 좋아요' }
         ],
         itineraryTemplate: [
             {
@@ -819,14 +819,14 @@ const DESTINATIONS = {
         weather: { latitude: 22.3193, longitude: 114.1694 },
         currency: { code: 'HKD', symbol: 'HK$', locale: 'en-HK' },
         startOffsetDays: 7,
-        phraseLabel: 'Hong Kong phrase',
+        phraseLabel: '廣東話',
         phrases: [
-            { text: 'M goi', pron: '[음 고이]', meaning: '고맙습니다 / 부탁합니다' },
-            { text: 'Jo san', pron: '[조 산]', meaning: '좋은 아침이에요' },
-            { text: 'Yat go, m goi', pron: '[얏 고 음 고이]', meaning: '하나 주세요' },
-            { text: 'MTR station?', pron: '[엠티알 스테이션]', meaning: 'MTR 역이 어디예요?' },
-            { text: 'Mai dan, m goi', pron: '[마이 단 음 고이]', meaning: '계산 부탁해요' },
-            { text: 'Hou leng', pron: '[호 렝]', meaning: '정말 예뻐요' }
+            { text: '唔該', pron: '[음고이]', meaning: '고맙습니다 / 부탁합니다' },
+            { text: '早晨', pron: '[조산]', meaning: '좋은 아침이에요' },
+            { text: '一個，唔該', pron: '[얏고, 음고이]', meaning: '하나 주세요' },
+            { text: '港鐵站喺邊？', pron: '[공팃잠 하이빈]', meaning: 'MTR 역이 어디예요?' },
+            { text: '埋單，唔該', pron: '[마이단, 음고이]', meaning: '계산 부탁해요' },
+            { text: '好靚', pron: '[호렝]', meaning: '정말 예뻐요' }
         ],
         itineraryTemplate: [
             {
@@ -925,11 +925,11 @@ const DESTINATIONS = {
         weather: { latitude: 39.9042, longitude: 116.4074 },
         currency: { code: 'CNY', symbol: '¥', locale: 'zh-CN' },
         startOffsetDays: 7,
-        phraseLabel: 'Chinese phrase',
+        phraseLabel: '中文',
         phrases: [
-            { text: 'Ni hao', pron: '[니 하오]', meaning: '안녕하세요' },
-            { text: 'Xie xie', pron: '[셰셰]', meaning: '감사합니다' },
-            { text: 'Qing wen', pron: '[칭 원]', meaning: '실례합니다 / 물어볼게요' }
+            { text: '你好', pron: '[니하오]', meaning: '안녕하세요' },
+            { text: '谢谢', pron: '[셰셰]', meaning: '감사합니다' },
+            { text: '请问', pron: '[칭원]', meaning: '실례합니다 / 물어볼게요' }
         ],
         itineraryTemplate: [
             {
@@ -964,7 +964,7 @@ const DESTINATIONS = {
         country: 'China',
         summary: '번드, 타워, 쇼핑 거리, 강변 야경을 묶은 상하이 템플릿입니다.',
         footer: 'Shanghai feels strongest when the Bund and the skyline stay in the same frame.',
-        heroImage: 'https://unsplash.com/photos/mbH-HwbYL-k/download?force=true&w=1920',
+        heroImage: 'https://unsplash.com/photos/-IOKXJDpgYw/download?force=true&w=1920',
         accent: '#38BDF8',
         accentRgb: '56, 189, 248',
         ink: '#082F49',
@@ -975,11 +975,11 @@ const DESTINATIONS = {
         weather: { latitude: 31.2304, longitude: 121.4737 },
         currency: { code: 'CNY', symbol: '¥', locale: 'zh-CN' },
         startOffsetDays: 7,
-        phraseLabel: 'Chinese phrase',
+        phraseLabel: '中文',
         phrases: [
-            { text: 'Ni hao', pron: '[니 하오]', meaning: '안녕하세요' },
-            { text: 'Xie xie', pron: '[셰셰]', meaning: '감사합니다' },
-            { text: 'Zai na li?', pron: '[짜이 날리]', meaning: '어디에 있나요?' }
+            { text: '你好', pron: '[니하오]', meaning: '안녕하세요' },
+            { text: '谢谢', pron: '[셰셰]', meaning: '감사합니다' },
+            { text: '在哪里？', pron: '[짜이날리]', meaning: '어디에 있나요?' }
         ],
         itineraryTemplate: [
             {
@@ -1014,7 +1014,7 @@ const DESTINATIONS = {
         country: 'Taiwan',
         summary: '도심 전망, 야시장, 온천, 로컬 먹거리를 묶은 타이베이 템플릿입니다.',
         footer: 'Taipei works when viewpoints, night markets, and food keep the pace light.',
-        heroImage: 'https://unsplash.com/photos/S84J99BHI9g/download?force=true&w=1920',
+        heroImage: 'https://unsplash.com/photos/sa8Zn4f2HsU/download?force=true&w=1920',
         accent: '#22D3EE',
         accentRgb: '34, 211, 238',
         ink: '#083344',
@@ -1025,11 +1025,11 @@ const DESTINATIONS = {
         weather: { latitude: 25.0330, longitude: 121.5654 },
         currency: { code: 'TWD', symbol: 'NT$', locale: 'zh-TW' },
         startOffsetDays: 6,
-        phraseLabel: 'Taiwan phrase',
+        phraseLabel: '繁體中文',
         phrases: [
-            { text: 'Ni hao', pron: '[니 하오]', meaning: '안녕하세요' },
-            { text: 'Xie xie', pron: '[셰셰]', meaning: '감사합니다' },
-            { text: 'Qing wen', pron: '[칭 원]', meaning: '실례합니다 / 물어볼게요' }
+            { text: '你好', pron: '[니하오]', meaning: '안녕하세요' },
+            { text: '謝謝', pron: '[셰셰]', meaning: '감사합니다' },
+            { text: '請問', pron: '[칭원]', meaning: '실례합니다 / 물어볼게요' }
         ],
         itineraryTemplate: [
             {
@@ -1297,6 +1297,10 @@ const DEFAULT_BASE_AMOUNTS = {
     VND: 10000
 };
 
+const PREFERRED_GROUP_DESTINATIONS = {
+    China: 'shanghai'
+};
+
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -1409,7 +1413,8 @@ function getSelectableDestinations() {
     });
 
     return Array.from(grouped.values()).map((destinations) => {
-        const representative = destinations[0];
+        const preferredId = PREFERRED_GROUP_DESTINATIONS[destinations[0].country];
+        const representative = destinations.find((destination) => destination.id === preferredId) || destinations[0];
         const hasMultipleZones = (countryZoneCounts.get(representative.country) || 0) > 1;
 
         return {
