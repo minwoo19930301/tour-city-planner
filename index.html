@@ -248,7 +248,7 @@
     </div>
 
     <div id="trip-shell" class="relative z-10 min-h-screen hidden">
-        <main class="px-4 pt-4 pb-24 sm:px-6 lg:px-8">
+        <main class="px-4 pt-4 pb-8 sm:px-6 lg:px-8">
             <div class="max-w-5xl mx-auto">
                 <div class="utility-shell utility-top">
                     <div class="space-y-2">
@@ -330,9 +330,16 @@
                     <div>
                         <section class="glass-panel rounded-[24px] p-3 sm:p-4 text-center">
                             <div class="rounded-[18px] border border-white/10 bg-white/5 p-3 mb-2.5">
-                                <div class="flex items-center justify-center gap-2 mb-1">
-                                    <div id="phrase-label" class="text-base text-white/72">🌍</div>
-                                    <div id="phrase-text" class="text-lg font-semibold text-white">...</div>
+                                <div class="flex items-start justify-between gap-3 mb-1">
+                                    <div class="min-w-0 flex-1">
+                                        <div class="flex items-center justify-center gap-2">
+                                            <div id="phrase-label" class="text-base text-white/72">Phrase</div>
+                                            <div id="phrase-text" class="text-lg font-semibold text-white">...</div>
+                                        </div>
+                                    </div>
+                                    <button id="phrase-refresh-btn" type="button" class="shrink-0 rounded-full border border-white/10 bg-white/6 p-2 text-white/70 hover:bg-white/10 hover:text-white transition-colors" aria-label="다른 표현 보기">
+                                        <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                                    </button>
                                 </div>
                                 <div id="phrase-meta" class="text-sm text-white/68">...</div>
                             </div>

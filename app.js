@@ -325,12 +325,12 @@ const DESTINATIONS = {
         startOffsetDays: 8,
         phraseLabel: '日本語',
         phrases: [
-            { text: 'すみません', pron: 'スミマセン', meaning: '실례합니다 / 죄송합니다' },
-            { text: 'ありがとうございます', pron: 'アリガトウゴザイマス', meaning: '감사합니다' },
-            { text: 'これをお願いします', pron: 'コレヲオネガイシマス', meaning: '이걸로 부탁합니다' },
-            { text: '駅はどこですか？', pron: 'エキハドコデスカ', meaning: '역이 어디인가요?' },
-            { text: 'お会計お願いします', pron: 'オカイケイオネガイシマス', meaning: '계산 부탁합니다' },
-            { text: '大丈夫です', pron: 'ダイジョウブデス', meaning: '괜찮습니다' }
+            { text: 'すみません', pron: '스미마센', meaning: '실례합니다 / 죄송합니다' },
+            { text: 'ありがとうございます', pron: '아리가토 고자이마스', meaning: '감사합니다' },
+            { text: 'これをお願いします', pron: '코레오 오네가이시마스', meaning: '이걸로 부탁합니다' },
+            { text: '駅はどこですか？', pron: '에키와 도코데스카', meaning: '역이 어디인가요?' },
+            { text: 'お会計お願いします', pron: '오카이케이 오네가이시마스', meaning: '계산 부탁합니다' },
+            { text: '大丈夫です', pron: '다이조부데스', meaning: '괜찮습니다' }
         ],
         itineraryTemplate: [
             {
@@ -1303,6 +1303,7 @@ const ui = {
     phraseLabel: document.getElementById('phrase-label'),
     phraseText: document.getElementById('phrase-text'),
     phraseMeta: document.getElementById('phrase-meta'),
+    phraseRefreshBtn: document.getElementById('phrase-refresh-btn'),
     sharePlanBtn: document.getElementById('share-plan-btn'),
     resetPlanBtn: document.getElementById('reset-plan-btn'),
     shareStatus: document.getElementById('share-status'),
@@ -1851,6 +1852,15 @@ function setRandomPhrase(destinationId) {
     const destination = getDestination(destinationId);
     const phraseCount = Array.isArray(destination.phrases) ? destination.phrases.length : 0;
     appState.phraseIndex = phraseCount ? Math.floor(Math.random() * phraseCount) : 0;
+}
+
+function cyclePhrase() {
+    const destination = getDestination(appState.destinationId);
+    const phraseCount = Array.isArray(destination.phrases) ? destination.phrases.length : 0;
+    if (!phraseCount) return;
+
+    appState.phraseIndex = (appState.phraseIndex + 1) % phraseCount;
+    renderPhrase();
 }
 
 function renderPhrase() {
@@ -2610,6 +2620,7 @@ ui.iconPickerGrid.addEventListener('click', (event) => {
     applyActivityIconSelection(button.dataset.iconChoice || '');
     closeIconPicker();
 });
+ui.phraseRefreshBtn.addEventListener('click', cyclePhrase);
 ui.rateBaseInput.addEventListener('input', () => {
     exchangeInputsTouched = true;
     updateExchangeOutputs();
