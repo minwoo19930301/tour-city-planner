@@ -592,6 +592,50 @@ const DESTINATIONS = {
             }
         ]
     },
+    malaysia: {
+        id: 'malaysia',
+        city: 'Kuala Lumpur',
+        country: 'Malaysia',
+        summary: '페트로나스, 전망대, 동굴 사원, 야시장을 묶은 말레이시아 템플릿입니다.',
+        footer: 'Malaysia feels best when skyline, market, and temple sit in one route.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/0/09/2016_Kuala_Lumpur%2C_Petronas_Towers_%2818%29.jpg',
+        timeZone: 'Asia/Kuala_Lumpur',
+        weather: { latitude: 3.1390, longitude: 101.6869 },
+        currency: { code: 'MYR', symbol: 'RM', locale: 'ms-MY' },
+        startOffsetDays: 7,
+        phraseLabel: 'Bahasa Melayu',
+        phrases: [
+            { text: 'Apa khabar?', pron: '[아파 카바르?]', meaning: '안녕하세요 / 잘 지내세요?' },
+            { text: 'Terima kasih', pron: '[뜨리마 까시]', meaning: '감사합니다' },
+            { text: 'Berapa harga ini?', pron: '[브라파 하르가 이니?]', meaning: '이거 얼마예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '도심 워밍업',
+                activities: [
+                    { time: '10:00', title: '페트로나스 타워', type: 'tower-control', location: 'Petronas Twin Towers' },
+                    { time: '13:30', title: 'KLCC 공원', type: 'trees', location: 'KLCC Park' },
+                    { time: '18:30', title: '부킷 빈탕', type: 'lightbulb', location: 'Bukit Bintang' }
+                ]
+            },
+            {
+                title: '랜드마크 & 마켓',
+                activities: [
+                    { time: '10:00', title: '바투 동굴', type: 'landmark', location: 'Batu Caves' },
+                    { time: '14:00', title: '센트럴 마켓', type: 'shopping-bag', location: 'Central Market Kuala Lumpur' },
+                    { time: '19:00', title: '잘란 알로 야시장', type: 'utensils-crossed', location: 'Jalan Alor' }
+                ]
+            },
+            {
+                title: '전망 & 출발',
+                activities: [
+                    { time: '10:30', title: 'KL 타워', type: 'binoculars', location: 'Kuala Lumpur Tower' },
+                    { time: '13:30', title: '메르데카 광장', type: 'map', location: 'Merdeka Square' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Kuala Lumpur International Airport' }
+                ]
+            }
+        ]
+    },
     bangkok: {
         id: 'bangkok',
         city: 'Bangkok',
@@ -881,6 +925,50 @@ const DESTINATIONS = {
             }
         ]
     },
+    macau: {
+        id: 'macau',
+        city: 'Macau',
+        country: 'Macau',
+        summary: '성바울 유적, 세나도 광장, 타이파, 코타이를 묶은 마카오 템플릿입니다.',
+        footer: 'Macau works best when old stone and casino light stay in the same frame.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/f/fc/%E5%A4%A7%E4%B8%89%E5%B7%B4%E7%89%8C%E5%9D%8A.jpg',
+        timeZone: 'Asia/Macau',
+        weather: { latitude: 22.1987, longitude: 113.5439 },
+        currency: { code: 'MOP', symbol: 'MOP$', locale: 'zh-MO' },
+        startOffsetDays: 7,
+        phraseLabel: '廣東話',
+        phrases: [
+            { text: '唔該', pron: '[음고이]', meaning: '고맙습니다 / 부탁합니다' },
+            { text: '多謝', pron: '[또제]', meaning: '정말 감사합니다' },
+            { text: '呢個幾多錢？', pron: '[니고 게이도 친?]', meaning: '이거 얼마예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '역사 중심부',
+                activities: [
+                    { time: '10:00', title: '성 바울 성당 유적', type: 'landmark', location: 'Ruins of Saint Paul' },
+                    { time: '13:00', title: '세나도 광장', type: 'map', location: 'Senado Square' },
+                    { time: '18:30', title: '몬테 요새 야경', type: 'camera', location: 'Monte Fort' }
+                ]
+            },
+            {
+                title: '타이파 & 코타이',
+                activities: [
+                    { time: '10:30', title: '타이파 빌리지', type: 'shopping-bag', location: 'Taipa Village' },
+                    { time: '14:00', title: '코타이 스트립', type: 'sparkles', location: 'Cotai Strip' },
+                    { time: '19:00', title: '런더너 야경', type: 'moon-star', location: 'The Londoner Macao' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '마카오 타워', type: 'tower-control', location: 'Macau Tower' },
+                    { time: '13:30', title: '에그타르트 브런치', type: 'coffee', location: 'Rua do Cunha' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Macau International Airport' }
+                ]
+            }
+        ]
+    },
     sydney: {
         id: 'sydney',
         city: 'Sydney',
@@ -930,6 +1018,50 @@ const DESTINATIONS = {
                     { time: '10:00', title: '서리힐스 브런치', type: 'coffee', location: 'Surry Hills' },
                     { time: '13:00', title: '퀸빅토리아빌딩', type: 'shopping-cart', location: 'Queen Victoria Building' },
                     { time: '17:00', title: '공항 이동', type: 'plane', location: 'Sydney Airport' }
+                ]
+            }
+        ]
+    },
+    perth: {
+        id: 'perth',
+        city: 'Perth',
+        country: 'Australia',
+        summary: '킹스파크, 강변, 해변, 도심 전망을 묶은 퍼스 템플릿입니다.',
+        footer: 'Perth works when park light and ocean space stay in balance.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Perth_CBD_skyline_from_State_War_Memorial_Lookout%2C_2023%2C_04_b.jpg',
+        timeZone: 'Australia/Perth',
+        weather: { latitude: -31.9523, longitude: 115.8613 },
+        currency: { code: 'AUD', symbol: 'A$', locale: 'en-AU' },
+        startOffsetDays: 9,
+        phraseLabel: 'English',
+        phrases: [
+            { text: 'No worries', pron: '[노 워리즈]', meaning: '괜찮아요' },
+            { text: 'Cheers', pron: '[치어즈]', meaning: '고마워요' },
+            { text: 'Takeaway, please', pron: '[테이크어웨이 플리즈]', meaning: '포장해주세요' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '도심 & 강변',
+                activities: [
+                    { time: '10:00', title: '킹스파크 전망', type: 'binoculars', location: 'Kings Park and Botanic Garden' },
+                    { time: '13:30', title: '엘리자베스 키', type: 'ship', location: 'Elizabeth Quay' },
+                    { time: '18:30', title: '스완 강변 야경', type: 'moon-star', location: 'Swan River Perth' }
+                ]
+            },
+            {
+                title: '해변 데이',
+                activities: [
+                    { time: '10:30', title: '코츠슬로 비치', type: 'sun', location: 'Cottesloe Beach' },
+                    { time: '13:30', title: '프리맨틀 마켓', type: 'shopping-bag', location: 'Fremantle Markets' },
+                    { time: '18:00', title: '프리맨틀 항구', type: 'camera', location: 'Fremantle Harbour' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:00', title: '노스브리지 브런치', type: 'coffee', location: 'Northbridge Perth' },
+                    { time: '13:00', title: '런던코트 산책', type: 'map', location: 'London Court' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Perth Airport' }
                 ]
             }
         ]
@@ -1316,6 +1448,50 @@ const DESTINATIONS = {
             }
         ]
     },
+    vladivostok: {
+        id: 'vladivostok',
+        city: 'Vladivostok',
+        country: 'Russia',
+        summary: '해안 전망, 브리지, 항구 산책을 묶은 블라디보스토크 템플릿입니다.',
+        footer: 'Vladivostok feels best when bridge lines and harbor light stay in one sweep.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/6/65/Russky_Bridge_%28October_2024%29-0_2.jpg',
+        timeZone: 'Asia/Vladivostok',
+        weather: { latitude: 43.1155, longitude: 131.8855 },
+        currency: { code: 'RUB', symbol: '₽', locale: 'ru-RU' },
+        startOffsetDays: 9,
+        phraseLabel: 'Русский',
+        phrases: [
+            { text: 'Здравствуйте', pron: '[즈드라스트부이쩨]', meaning: '안녕하세요' },
+            { text: 'Спасибо', pron: '[스빠시바]', meaning: '감사합니다' },
+            { text: 'Где вокзал?', pron: '[그제 박잘?]', meaning: '역이 어디예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '항구 첫인상',
+                activities: [
+                    { time: '10:00', title: '금각만 전망', type: 'binoculars', location: 'Golden Horn Bay' },
+                    { time: '13:00', title: '중앙 광장', type: 'map', location: 'Vladivostok Central Square' },
+                    { time: '18:30', title: '해안 산책로 야경', type: 'moon-star', location: 'Sportivnaya Naberezhnaya' }
+                ]
+            },
+            {
+                title: '브리지 & 언덕',
+                activities: [
+                    { time: '10:30', title: '독수리 전망대', type: 'camera', location: 'Eagle’s Nest Hill' },
+                    { time: '13:30', title: '금각교', type: 'bridge', location: 'Zolotoy Bridge' },
+                    { time: '18:00', title: '루스키섬', type: 'ship', location: 'Russky Island' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:00', title: '혁명광장 산책', type: 'sparkles', location: 'Railway Square Vladivostok' },
+                    { time: '13:30', title: '카페 브런치', type: 'coffee', location: 'Arbat Vladivostok' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Vladivostok International Airport' }
+                ]
+            }
+        ]
+    },
     canada: {
         id: 'canada',
         city: 'Toronto',
@@ -1360,6 +1536,50 @@ const DESTINATIONS = {
             }
         ]
     },
+    vancouver: {
+        id: 'vancouver',
+        city: 'Vancouver',
+        country: 'Canada',
+        summary: '수변 스카이라인, 공원, 마켓, 전망을 묶은 밴쿠버 템플릿입니다.',
+        footer: 'Vancouver works when forest edge and skyline stay in the same view.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/5/57/Concord_Pacific_Master_Plan_Area.jpg',
+        timeZone: 'America/Vancouver',
+        weather: { latitude: 49.2827, longitude: -123.1207 },
+        currency: { code: 'CAD', symbol: 'C$', locale: 'en-CA' },
+        startOffsetDays: 8,
+        phraseLabel: 'English',
+        phrases: [
+            { text: 'Hello', pron: '[헬로]', meaning: '안녕하세요' },
+            { text: 'Thank you', pron: '[땡큐]', meaning: '감사합니다' },
+            { text: 'How do I get there?', pron: '[하우 두 아이 겟 데어?]', meaning: '거기 어떻게 가요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '워터프런트 데이',
+                activities: [
+                    { time: '10:00', title: '캐나다 플레이스', type: 'ship', location: 'Canada Place' },
+                    { time: '13:30', title: '가스타운', type: 'map', location: 'Gastown' },
+                    { time: '18:30', title: '하버 야경', type: 'moon-star', location: 'Vancouver Waterfront' }
+                ]
+            },
+            {
+                title: '공원 & 전망',
+                activities: [
+                    { time: '10:00', title: '스탠리 파크', type: 'trees', location: 'Stanley Park' },
+                    { time: '13:30', title: '그랜빌 아일랜드', type: 'shopping-bag', location: 'Granville Island' },
+                    { time: '18:00', title: '잉글리시 베이 선셋', type: 'sun', location: 'English Bay' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '카필라노 전망', type: 'binoculars', location: 'Capilano Suspension Bridge Park' },
+                    { time: '13:30', title: '카페 브런치', type: 'coffee', location: 'Yaletown' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Vancouver International Airport' }
+                ]
+            }
+        ]
+    },
     mexico: {
         id: 'mexico',
         city: 'Mexico City',
@@ -1400,6 +1620,50 @@ const DESTINATIONS = {
                     { time: '10:00', title: '코요아칸', type: 'sparkles', location: 'Coyoacán' },
                     { time: '13:30', title: '산후안 마켓', type: 'store', location: 'Mercado de San Juan' },
                     { time: '17:30', title: '공항 이동', type: 'plane', location: 'Mexico City International Airport' }
+                ]
+            }
+        ]
+    },
+    cancun: {
+        id: 'cancun',
+        city: 'Cancun',
+        country: 'Mexico',
+        summary: '해변, 전망 포인트, 페리, 야경을 묶은 칸쿤 템플릿입니다.',
+        footer: 'Cancun feels best when beach blue and night light stay easy and bright.',
+        heroImage: 'https://upload.wikimedia.org/wikipedia/commons/d/d8/Cancun_Strand_Luftbild_%2822143397586%29.jpg',
+        timeZone: 'America/Cancun',
+        weather: { latitude: 21.1619, longitude: -86.8515 },
+        currency: { code: 'MXN', symbol: 'MX$', locale: 'es-MX' },
+        startOffsetDays: 9,
+        phraseLabel: 'Español',
+        phrases: [
+            { text: 'Hola', pron: '[올라]', meaning: '안녕하세요' },
+            { text: 'Gracias', pron: '[그라시아스]', meaning: '감사합니다' },
+            { text: '¿Dónde está la playa?', pron: '[돈데 에스타 라 쁠라야?]', meaning: '해변이 어디예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '비치 워밍업',
+                activities: [
+                    { time: '10:00', title: '플라야 델피네스', type: 'sun', location: 'Playa Delfines' },
+                    { time: '13:30', title: '호텔존 산책', type: 'map', location: 'Zona Hotelera' },
+                    { time: '18:30', title: '해변 선셋', type: 'moon-star', location: 'Cancun Beach' }
+                ]
+            },
+            {
+                title: '바다 & 시티뷰',
+                activities: [
+                    { time: '10:30', title: '이슬라 무헤레스 페리', type: 'ship', location: 'Ultramar Ferry Puerto Juárez' },
+                    { time: '14:00', title: '라 이슬라 쇼핑빌리지', type: 'shopping-cart', location: 'La Isla Cancún' },
+                    { time: '19:00', title: '코코봉고 주변 야경', type: 'sparkles', location: 'Coco Bongo Cancun' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '로컬 브런치', type: 'coffee', location: 'Downtown Cancun' },
+                    { time: '13:30', title: '기념품 쇼핑', type: 'gift', location: 'Mercado 28' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Cancún International Airport' }
                 ]
             }
         ]
@@ -1715,10 +1979,12 @@ const COUNTRY_FLAGS = {
     Italy: '🇮🇹',
     Spain: '🇪🇸',
     Singapore: '🇸🇬',
+    Malaysia: '🇲🇾',
     Thailand: '🇹🇭',
     'United Arab Emirates': '🇦🇪',
     Netherlands: '🇳🇱',
     'Hong Kong': '🇭🇰',
+    Macau: '🇲🇴',
     Australia: '🇦🇺',
     China: '🇨🇳',
     Taiwan: '🇹🇼',
@@ -1742,6 +2008,8 @@ const CURRENCY_DENOMINATIONS = {
     INR: [10, 20, 50, 100, 200, 500, 2000],
     JPY: [100, 500, 1000, 5000, 10000],
     HKD: [10, 20, 50, 100, 500, 1000],
+    MYR: [1, 5, 10, 20, 50, 100],
+    MOP: [10, 20, 50, 100, 500, 1000],
     PHP: [20, 50, 100, 200, 500, 1000],
     RUB: [50, 100, 200, 500, 1000, 5000],
     CAD: [5, 10, 20, 50, 100],
@@ -1765,6 +2033,8 @@ const CURRENCY_DISPLAY = {
     INR: '₹',
     JPY: '円',
     HKD: 'HK$',
+    MYR: 'RM',
+    MOP: 'MOP$',
     PHP: '₱',
     RUB: '₽',
     CAD: 'C$',
@@ -1789,10 +2059,12 @@ const LOCATION_LABELS = {
     Italy: '이탈리아',
     Spain: '스페인',
     Singapore: '싱가포르',
+    Malaysia: '말레이시아',
     Thailand: '태국',
     'United Arab Emirates': '아랍에미리트',
     Netherlands: '네덜란드',
     'Hong Kong': '홍콩',
+    Macau: '마카오',
     Australia: '호주',
     China: '중국',
     Taiwan: '대만',
@@ -1815,11 +2087,13 @@ const LOCATION_LABELS = {
     Rome: '로마',
     Barcelona: '바르셀로나',
     Singapore_city: '싱가포르',
+    'Kuala Lumpur': '쿠알라룸푸르',
     Bangkok: '방콕',
     Dubai: '두바이',
     Amsterdam: '암스테르담',
     Madrid: '마드리드',
     Sydney: '시드니',
+    Perth: '퍼스',
     Beijing: '베이징',
     Shanghai: '상하이',
     Taipei: '타이베이',
@@ -1828,9 +2102,13 @@ const LOCATION_LABELS = {
     'Hong Kong_city': '홍콩',
     Delhi: '델리',
     Manila: '마닐라',
+    Macau_city: '마카오',
     Moscow: '모스크바',
+    Vladivostok: '블라디보스토크',
     Toronto: '토론토',
+    Vancouver: '밴쿠버',
     'Mexico City': '멕시코시티',
+    Cancun: '칸쿤',
     'Rio de Janeiro': '리우데자네이루',
     'Buenos Aires': '부에노스아이레스',
     Berlin: '베를린',
@@ -1846,6 +2124,8 @@ const DEFAULT_BASE_AMOUNTS = {
     INR: 100,
     JPY: 1000,
     HKD: 20,
+    MYR: 10,
+    MOP: 100,
     PHP: 100,
     RUB: 100,
     CAD: 10,
@@ -1870,10 +2150,12 @@ const COUNTRY_THEMES = {
     Italy: buildTheme('#22C55E', '#052E16', 0.48, 0.92),
     Spain: buildTheme('#EC4899', '#3B0764', 0.46, 0.90),
     Singapore: buildTheme('#14B8A6', '#0F172A', 0.50, 0.92),
+    Malaysia: buildTheme('#E11D48', '#3F0A1F', 0.42, 0.88),
     Thailand: buildTheme('#F59E0B', '#451A03', 0.48, 0.92),
     'United Arab Emirates': buildTheme('#22D3EE', '#082F49', 0.52, 0.92),
     Netherlands: buildTheme('#FB923C', '#431407', 0.45, 0.92),
     'Hong Kong': buildTheme('#A78BFA', '#2E1065', 0.48, 0.92),
+    Macau: buildTheme('#60A5FA', '#172554', 0.42, 0.88),
     Australia: buildTheme('#10B981', '#062E2A', 0.34, 0.72),
     China: buildTheme('#EF4444', '#450A0A', 0.42, 0.88),
     Taiwan: buildTheme('#38BDF8', '#083344', 0.42, 0.88),
