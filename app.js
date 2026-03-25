@@ -2132,6 +2132,7 @@ let mapPreviewRequestId = 0;
 let utilityChromeTimer = null;
 let exchangeInputDestinationId = null;
 let exchangeInputsTouched = false;
+const heroImagePreloadCache = new Map();
 
 const COUNTRY_FLAGS = {
     France: '🇫🇷',
@@ -2769,6 +2770,21 @@ function applyTheme(destination) {
     document.title = `${destination.country} Trip Plan`;
 }
 
+function preloadHeroImage(src) {
+    if (!src) return Promise.resolve(false);
+    if (heroImagePreloadCache.has(src)) return heroImagePreloadCache.get(src);
+
+    const promise = new Promise((resolve) => {
+        const image = new Image();
+        image.onload = () => resolve(true);
+        image.onerror = () => resolve(false);
+        image.src = src;
+    });
+
+    heroImagePreloadCache.set(src, promise);
+    return promise;
+}
+
 function getActivityIconOption(value) {
     return ACTIVITY_ICON_OPTIONS.find((option) => option.value === value) || null;
 }
@@ -3133,12 +3149,13 @@ function syncDestinationDropdownPosition() {
     const viewportPadding = 16;
     const width = Math.min(rect.width, window.innerWidth - (viewportPadding * 2));
     const left = Math.min(Math.max(viewportPadding, rect.left), window.innerWidth - width - viewportPadding);
+    const availableBelow = Math.max(220, window.innerHeight - rect.bottom - viewportPadding);
 
     ui.destinationSelector.style.left = `${left}px`;
     ui.destinationSelector.style.top = `${rect.bottom + 8}px`;
-    ui.destinationSelector.style.bottom = `${viewportPadding}px`;
+    ui.destinationSelector.style.bottom = 'auto';
     ui.destinationSelector.style.width = `${width}px`;
-    ui.destinationSelector.style.maxHeight = 'none';
+    ui.destinationSelector.style.maxHeight = `${availableBelow}px`;
 }
 
 function openDestinationDropdown() {
@@ -3510,7 +3527,7 @@ function refreshPlan() {
     showUtilityChrome();
 }
 
-function applySetupSelection() {
+async function applySetupSelection() {
     const destination = getDestination(setupSelection.destinationId);
     const rawStartDate = setupSelection.startDate;
     const rawEndDate = setupSelection.endDate;
@@ -3547,6 +3564,9 @@ function applySetupSelection() {
     appState.hasStarted = true;
     appState.customized = false;
 
+    ui.applyPlanBtn.disabled = true;
+    await preloadHeroImage(destination.heroImage);
+    applyTheme(destination);
     setShareStatus('');
     refreshPlan();
 }
@@ -3826,6 +3846,7 @@ ui.destinationSelector.addEventListener('click', (event) => {
     setupSelection.endDate = endDate;
     setupRangeSelectingEnd = false;
     syncSetupCalendarMonth(startDate);
+    preloadHeroImage(destination.heroImage);
     applyTheme(destination);
     renderSetupInputs();
     renderDestinationSelector();

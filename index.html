@@ -74,6 +74,12 @@
             box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
         }
 
+        .setup-panel {
+            background: linear-gradient(180deg, rgba(118, 140, 171, 0.68), rgba(57, 70, 92, 0.78));
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
         .city-card {
             text-align: left;
             border-radius: 26px;
@@ -409,9 +415,9 @@
     </div>
 
     <div id="setup-overlay" class="fixed inset-0 z-[80] hidden overflow-y-auto">
-        <div class="absolute inset-0 bg-slate-950/54 backdrop-blur-md"></div>
+        <div class="absolute inset-0 bg-slate-950/34"></div>
         <div class="relative z-10 min-h-screen flex items-center justify-center px-4 py-8 sm:px-6">
-            <div class="max-w-[760px] mx-auto glass-panel rounded-[32px] px-5 py-6 sm:px-6 sm:py-6 w-full relative overflow-visible">
+            <div class="setup-panel max-w-[760px] mx-auto glass-panel rounded-[32px] px-5 py-6 sm:px-6 sm:py-6 w-full relative overflow-visible">
                 <div class="mb-6">
                     <label class="text-[11px] uppercase tracking-[0.28em] text-white/48 block mb-3">국가 / 시간대</label>
                     <div class="relative">
