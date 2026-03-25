@@ -67,16 +67,30 @@ const COUNTRY_SORT_ORDER = [
     'Finland',
     'Ireland',
     'Iceland',
+    'Switzerland',
+    'Portugal',
+    'Greece',
+    'Turkey',
     'Spain',
     'Italy',
     'Russia',
     'Egypt',
+    'Morocco',
+    'Tanzania',
     'South Africa',
     'Kenya',
     'Ghana',
     'Australia',
+    'New Zealand',
+    'Maldives',
     'United Arab Emirates',
     'Guam',
+    'Saipan',
+    'Palau',
+    'Peru',
+    'Chile',
+    'Colombia',
+    'Bolivia',
     'Brazil',
     'Argentina'
 ];
@@ -109,16 +123,30 @@ const COUNTRY_REGIONS = {
     Finland: 'europe',
     Ireland: 'europe',
     Iceland: 'europe',
+    Switzerland: 'europe',
+    Portugal: 'europe',
+    Greece: 'europe',
+    Turkey: 'europe',
     Spain: 'europe',
     Italy: 'europe',
     Russia: 'europe',
     Australia: 'resort',
+    'New Zealand': 'resort',
+    Maldives: 'resort',
     'United Arab Emirates': 'resort',
     Egypt: 'africa',
+    Morocco: 'africa',
+    Tanzania: 'africa',
     'South Africa': 'africa',
     Kenya: 'africa',
     Ghana: 'africa',
     Guam: 'resort',
+    Saipan: 'resort',
+    Palau: 'resort',
+    Peru: 'south-america',
+    Chile: 'south-america',
+    Colombia: 'south-america',
+    Bolivia: 'south-america',
     Brazil: 'south-america',
     Argentina: 'south-america'
 };
@@ -2732,6 +2760,710 @@ const DESTINATIONS = {
                 ]
             }
         ]
+    },
+    greece: {
+        id: 'greece',
+        city: 'Athens',
+        country: 'Greece',
+        summary: '아크로폴리스, 플라카 골목, 언덕 전망을 묶은 그리스 템플릿입니다.',
+        footer: 'Greece works when stone ruins and sunset terraces stay in the same frame.',
+        heroImage: 'assets/heroes/greece.jpg',
+        timeZone: 'Europe/Athens',
+        weather: { latitude: 37.9838, longitude: 23.7275 },
+        currency: { code: 'EUR', symbol: '€', locale: 'el-GR' },
+        startOffsetDays: 8,
+        phraseLabel: 'Ελληνικά',
+        phrases: [
+            { text: 'Καλημέρα', pron: '[칼리메라]', meaning: '안녕하세요' },
+            { text: 'Ευχαριστώ', pron: '[에프하리스토]', meaning: '감사합니다' },
+            { text: 'Πόσο κάνει;', pron: '[포소 카니?]', meaning: '이거 얼마예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '아테네 첫인상',
+                activities: [
+                    { time: '10:00', title: '아크로폴리스', type: 'landmark', location: 'Acropolis of Athens' },
+                    { time: '13:30', title: '플라카 산책', type: 'map', location: 'Plaka Athens' },
+                    { time: '18:30', title: '리카비토스 언덕', type: 'binoculars', location: 'Mount Lycabettus' }
+                ]
+            },
+            {
+                title: '광장 & 박물관',
+                activities: [
+                    { time: '10:30', title: '신타그마 광장', type: 'sparkles', location: 'Syntagma Square' },
+                    { time: '13:30', title: '아크로폴리스 박물관', type: 'building-2', location: 'Acropolis Museum' },
+                    { time: '18:30', title: '모나스티라키', type: 'shopping-bag', location: 'Monastiraki' }
+                ]
+            },
+            {
+                title: '카페 & 출발',
+                activities: [
+                    { time: '10:00', title: '올림피아 제우스 신전', type: 'camera', location: 'Temple of Olympian Zeus' },
+                    { time: '13:30', title: '카페 브런치', type: 'coffee', location: 'Koukaki Athens' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Athens International Airport' }
+                ]
+            }
+        ]
+    },
+    turkey: {
+        id: 'turkey',
+        city: 'Istanbul',
+        country: 'Turkey',
+        summary: '보스포루스, 모스크, 바자르, 언덕 전망을 묶은 튀르키예 템플릿입니다.',
+        footer: 'Turkey feels richest when water, domes, and bazaars stay in one rhythm.',
+        heroImage: 'assets/heroes/turkey.jpg',
+        timeZone: 'Europe/Istanbul',
+        weather: { latitude: 41.0082, longitude: 28.9784 },
+        currency: { code: 'TRY', symbol: '₺', locale: 'tr-TR' },
+        startOffsetDays: 8,
+        phraseLabel: 'Türkçe',
+        phrases: [
+            { text: 'Merhaba', pron: '[메르하바]', meaning: '안녕하세요' },
+            { text: 'Teşekkür ederim', pron: '[테셰퀴르 에데림]', meaning: '감사합니다' },
+            { text: 'Bu ne kadar?', pron: '[부 네 카다르?]', meaning: '이거 얼마예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '술탄아흐메트 데이',
+                activities: [
+                    { time: '10:00', title: '아야 소피아', type: 'landmark', location: 'Hagia Sophia' },
+                    { time: '13:30', title: '블루 모스크', type: 'camera', location: 'Blue Mosque' },
+                    { time: '18:30', title: '갈라타 브리지 선셋', type: 'moon-star', location: 'Galata Bridge' }
+                ]
+            },
+            {
+                title: '바자르 & 전망',
+                activities: [
+                    { time: '10:30', title: '그랜드 바자르', type: 'store', location: 'Grand Bazaar' },
+                    { time: '13:30', title: '갈라타 타워', type: 'tower-control', location: 'Galata Tower' },
+                    { time: '18:30', title: '보스포루스 크루즈', type: 'ship', location: 'Bosphorus Cruise Istanbul' }
+                ]
+            },
+            {
+                title: '카페 & 출발',
+                activities: [
+                    { time: '10:00', title: '이스티클랄 거리', type: 'shopping-bag', location: 'Istiklal Avenue' },
+                    { time: '13:30', title: '카라쿄이 카페', type: 'coffee', location: 'Karaköy' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Istanbul Airport' }
+                ]
+            }
+        ]
+    },
+    switzerland: {
+        id: 'switzerland',
+        city: 'Zermatt',
+        country: 'Switzerland',
+        summary: '마테호른, 호수 반영, 산악열차 무드를 묶은 스위스 템플릿입니다.',
+        footer: 'Switzerland feels sharpest when clean air, snow line, and lake reflection stay clear.',
+        heroImage: 'assets/heroes/switzerland.jpg',
+        timeZone: 'Europe/Zurich',
+        weather: { latitude: 46.0207, longitude: 7.7491 },
+        currency: { code: 'CHF', symbol: 'CHF', locale: 'de-CH' },
+        startOffsetDays: 9,
+        phraseLabel: 'Deutsch',
+        phrases: [
+            { text: 'Grüezi', pron: '[그뤼에치]', meaning: '안녕하세요' },
+            { text: 'Danke', pron: '[당케]', meaning: '감사합니다' },
+            { text: 'Wo ist der Bahnhof?', pron: '[보 이스트 데어 반호프?]', meaning: '역이 어디예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '체르마트 워밍업',
+                activities: [
+                    { time: '10:00', title: '체르마트 마을 산책', type: 'map', location: 'Zermatt' },
+                    { time: '13:30', title: '고르너그라트', type: 'binoculars', location: 'Gornergrat' },
+                    { time: '18:00', title: '마테호른 선셋', type: 'camera', location: 'Matterhorn Viewpoint Zermatt' }
+                ]
+            },
+            {
+                title: '호수 & 전망',
+                activities: [
+                    { time: '09:30', title: '슈텔리제', type: 'camera', location: 'Stellisee' },
+                    { time: '13:30', title: '마터호른 글레이셔 파라다이스', type: 'binoculars', location: 'Matterhorn Glacier Paradise' },
+                    { time: '18:00', title: '알프스 디너', type: 'utensils-crossed', location: 'Zermatt Old Town' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '바호프 거리', type: 'shopping-bag', location: 'Bahnhofstrasse Zermatt' },
+                    { time: '13:00', title: '산장 카페', type: 'coffee', location: 'Sunnegga' },
+                    { time: '17:30', title: '역 이동', type: 'train-front', location: 'Zermatt Railway Station' }
+                ]
+            }
+        ]
+    },
+    portugal: {
+        id: 'portugal',
+        city: 'Lisbon',
+        country: 'Portugal',
+        summary: '노란 트램, 전망대, 알파마 골목, 강변 무드를 묶은 포르투갈 템플릿입니다.',
+        footer: 'Portugal feels best when tram yellow and river light stay warm together.',
+        heroImage: 'assets/heroes/portugal.jpg',
+        timeZone: 'Europe/Lisbon',
+        weather: { latitude: 38.7223, longitude: -9.1393 },
+        currency: { code: 'EUR', symbol: '€', locale: 'pt-PT' },
+        startOffsetDays: 8,
+        phraseLabel: 'Português',
+        phrases: [
+            { text: 'Olá', pron: '[올라]', meaning: '안녕하세요' },
+            { text: 'Obrigado', pron: '[오브리가두]', meaning: '감사합니다' },
+            { text: 'Quanto custa?', pron: '[꾸안투 꾸스타?]', meaning: '이거 얼마예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '리스본 첫인상',
+                activities: [
+                    { time: '10:00', title: '트램 28', type: 'train-front', location: 'Tram 28 Lisbon' },
+                    { time: '13:30', title: '알파마 산책', type: 'map', location: 'Alfama' },
+                    { time: '18:30', title: '상 조르제 성 전망', type: 'binoculars', location: 'São Jorge Castle' }
+                ]
+            },
+            {
+                title: '벨렝 데이',
+                activities: [
+                    { time: '10:00', title: '벨렝 타워', type: 'landmark', location: 'Belém Tower' },
+                    { time: '13:00', title: '제로니무스 수도원', type: 'building', location: 'Jerónimos Monastery' },
+                    { time: '18:00', title: '코메르시우 광장', type: 'sparkles', location: 'Praça do Comércio' }
+                ]
+            },
+            {
+                title: '카페 & 출발',
+                activities: [
+                    { time: '10:30', title: '미라도우루 산책', type: 'camera', location: 'Miradouro de Santa Luzia' },
+                    { time: '13:30', title: '파스텔 드 나타', type: 'coffee', location: 'Pastéis de Belém' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Lisbon Airport' }
+                ]
+            }
+        ]
+    },
+    quebec: {
+        id: 'quebec',
+        city: 'Quebec City',
+        country: 'Canada',
+        summary: '샤토 프롱트낙, 성벽, 구시가지 풍경을 묶은 퀘벡 템플릿입니다.',
+        footer: 'Quebec works when stone streets and winter-blue light stay intimate.',
+        heroImage: 'assets/heroes/quebec.jpg',
+        timeZone: 'America/Toronto',
+        weather: { latitude: 46.8139, longitude: -71.2080 },
+        currency: { code: 'CAD', symbol: 'C$', locale: 'fr-CA' },
+        startOffsetDays: 8,
+        phraseLabel: 'Français',
+        phrases: [
+            { text: 'Bonjour', pron: '[봉쥬르]', meaning: '안녕하세요' },
+            { text: 'Merci', pron: '[메흐시]', meaning: '감사합니다' },
+            { text: 'Où est le vieux Québec ?', pron: '[우 에 르 뷰 케벡?]', meaning: '구시가지는 어디예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '구시가지 워밍업',
+                activities: [
+                    { time: '10:00', title: '샤토 프롱트낙', type: 'landmark', location: 'Fairmont Le Château Frontenac' },
+                    { time: '13:30', title: '뒤프랭 테라스', type: 'binoculars', location: 'Terrasse Dufferin' },
+                    { time: '18:30', title: '쁘띠 샹플랭', type: 'sparkles', location: 'Quartier Petit Champlain' }
+                ]
+            },
+            {
+                title: '성벽 & 강변',
+                activities: [
+                    { time: '10:00', title: '퀘벡 요새', type: 'building', location: 'Citadelle de Québec' },
+                    { time: '13:30', title: '올드 포트 산책', type: 'map', location: 'Old Port Quebec City' },
+                    { time: '18:00', title: '강변 야경', type: 'moon-star', location: 'Saint Lawrence River Quebec City' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '카페 브런치', type: 'coffee', location: 'Rue Saint-Jean' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'Place Royale Quebec City' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Québec City Jean Lesage International Airport' }
+                ]
+            }
+        ]
+    },
+    'las-vegas': {
+        id: 'las-vegas',
+        city: 'Las Vegas',
+        country: 'United States',
+        summary: '스트립, 분수쇼, 스피어, 야경 드라이브를 묶은 라스베이거스 템플릿입니다.',
+        footer: 'Las Vegas works when neon scale and desert night stay unapologetically bright.',
+        heroImage: 'assets/heroes/las-vegas.jpg',
+        timeZone: 'America/Los_Angeles',
+        weather: { latitude: 36.1699, longitude: -115.1398 },
+        currency: { code: 'USD', symbol: '$', locale: 'en-US' },
+        startOffsetDays: 9,
+        phraseLabel: 'English',
+        phrases: [
+            { text: 'Hey there', pron: '[헤이 데어]', meaning: '안녕하세요' },
+            { text: 'Where’s the Strip?', pron: '[웨어즈 더 스트립?]', meaning: '스트립 어디예요?' },
+            { text: 'Check, please', pron: '[첵 플리즈]', meaning: '계산서 주세요' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '스트립 워밍업',
+                activities: [
+                    { time: '10:00', title: '벨라지오 분수', type: 'sparkles', location: 'Bellagio Fountains' },
+                    { time: '13:30', title: '스트립 산책', type: 'map', location: 'Las Vegas Strip' },
+                    { time: '18:30', title: '스피어 야경', type: 'lightbulb', location: 'Sphere Las Vegas' }
+                ]
+            },
+            {
+                title: '뷰 & 다운타운',
+                activities: [
+                    { time: '10:30', title: '하이롤러 전망', type: 'binoculars', location: 'High Roller Las Vegas' },
+                    { time: '14:00', title: '프리몬트 스트리트', type: 'music', location: 'Fremont Street Experience' },
+                    { time: '19:00', title: '스트립 드라이브', type: 'camera', location: 'Welcome to Fabulous Las Vegas Sign' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '카페 브런치', type: 'coffee', location: 'The Cosmopolitan Las Vegas' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'Forum Shops at Caesars' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Harry Reid International Airport' }
+                ]
+            }
+        ]
+    },
+    peru: {
+        id: 'peru',
+        city: 'Cusco',
+        country: 'Peru',
+        summary: '마추픽추 무드, 광장, 계단 골목, 안데스 풍경을 묶은 페루 템플릿입니다.',
+        footer: 'Peru feels most memorable when stone terraces and cloud lines stay dramatic.',
+        heroImage: 'assets/heroes/peru.jpg',
+        timeZone: 'America/Lima',
+        weather: { latitude: -13.5319, longitude: -71.9675 },
+        currency: { code: 'PEN', symbol: 'S/', locale: 'es-PE' },
+        startOffsetDays: 10,
+        phraseLabel: 'Español',
+        phrases: [
+            { text: 'Hola', pron: '[올라]', meaning: '안녕하세요' },
+            { text: 'Gracias', pron: '[그라시아스]', meaning: '감사합니다' },
+            { text: '¿Cuánto cuesta?', pron: '[꾸안또 꾸에스타?]', meaning: '이거 얼마예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '쿠스코 워밍업',
+                activities: [
+                    { time: '10:00', title: '아르마스 광장', type: 'sparkles', location: 'Plaza de Armas Cusco' },
+                    { time: '13:30', title: '산블라스 골목', type: 'map', location: 'San Blas Cusco' },
+                    { time: '18:30', title: '사크사이와만 전망', type: 'binoculars', location: 'Sacsayhuamán' }
+                ]
+            },
+            {
+                title: '마추픽추 데이',
+                activities: [
+                    { time: '06:30', title: '마추픽추', type: 'landmark', location: 'Machu Picchu' },
+                    { time: '13:30', title: '아구아스 칼리엔테스', type: 'coffee', location: 'Aguas Calientes' },
+                    { time: '18:30', title: '기차 복귀', type: 'train-front', location: 'Poroy Station' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '산 페드로 마켓', type: 'store', location: 'San Pedro Market' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'Calle Hatun Rumiyoc' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Alejandro Velasco Astete International Airport' }
+                ]
+            }
+        ]
+    },
+    chile: {
+        id: 'chile',
+        city: 'Santiago',
+        country: 'Chile',
+        summary: '안데스 전망, 언덕, 와이너리 무드를 묶은 칠레 템플릿입니다.',
+        footer: 'Chile works when mountain scale and dry evening light stay wide and crisp.',
+        heroImage: 'assets/heroes/chile.jpg',
+        timeZone: 'America/Santiago',
+        weather: { latitude: -33.4489, longitude: -70.6693 },
+        currency: { code: 'CLP', symbol: '$', locale: 'es-CL' },
+        startOffsetDays: 10,
+        phraseLabel: 'Español',
+        phrases: [
+            { text: 'Hola', pron: '[올라]', meaning: '안녕하세요' },
+            { text: 'Gracias', pron: '[그라시아스]', meaning: '감사합니다' },
+            { text: '¿Dónde está el mirador?', pron: '[돈데 에스타 엘 미라도르?]', meaning: '전망대가 어디예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '산티아고 첫인상',
+                activities: [
+                    { time: '10:00', title: '산 크리스토발 언덕', type: 'binoculars', location: 'Cerro San Cristóbal' },
+                    { time: '13:30', title: '플라사 데 아르마스', type: 'sparkles', location: 'Plaza de Armas Santiago' },
+                    { time: '18:30', title: '스카이 코스타네라', type: 'tower-control', location: 'Sky Costanera' }
+                ]
+            },
+            {
+                title: '시장 & 와인',
+                activities: [
+                    { time: '10:30', title: '센트럴 마켓', type: 'store', location: 'Mercado Central de Santiago' },
+                    { time: '13:30', title: '벨라비스타 산책', type: 'map', location: 'Bellavista Santiago' },
+                    { time: '18:30', title: '와인 디너', type: 'utensils-crossed', location: 'Concha y Toro Pirque' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '카페 브런치', type: 'coffee', location: 'Lastarria' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'Patio Bellavista' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Santiago International Airport' }
+                ]
+            }
+        ]
+    },
+    colombia: {
+        id: 'colombia',
+        city: 'Cartagena',
+        country: 'Colombia',
+        summary: '성벽 도시, 요새, 카리브해 색감을 묶은 콜롬비아 템플릿입니다.',
+        footer: 'Colombia feels best when walls, balconies, and sea breeze stay warm.',
+        heroImage: 'assets/heroes/colombia.jpg',
+        timeZone: 'America/Bogota',
+        weather: { latitude: 10.3910, longitude: -75.4794 },
+        currency: { code: 'COP', symbol: '$', locale: 'es-CO' },
+        startOffsetDays: 10,
+        phraseLabel: 'Español',
+        phrases: [
+            { text: 'Hola', pron: '[올라]', meaning: '안녕하세요' },
+            { text: 'Gracias', pron: '[그라시아스]', meaning: '감사합니다' },
+            { text: '¿Dónde está la muralla?', pron: '[돈데 에스타 라 무라야?]', meaning: '성벽은 어디예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '카르타헤나 워밍업',
+                activities: [
+                    { time: '10:00', title: '시계탑 광장', type: 'sparkles', location: 'Torre del Reloj Cartagena' },
+                    { time: '13:30', title: '성벽 산책', type: 'map', location: 'Walled City of Cartagena' },
+                    { time: '18:30', title: '카페 델 마르 선셋', type: 'moon-star', location: 'Café del Mar Cartagena' }
+                ]
+            },
+            {
+                title: '요새 & 거리',
+                activities: [
+                    { time: '10:30', title: '산 펠리페 요새', type: 'landmark', location: 'Castillo San Felipe de Barajas' },
+                    { time: '13:30', title: '헤체마니', type: 'palette', location: 'Getsemaní' },
+                    { time: '18:30', title: '발코니 거리', type: 'camera', location: 'Centro Histórico Cartagena' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '카리브 브런치', type: 'coffee', location: 'Plaza Santo Domingo' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'Las Bóvedas Cartagena' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Rafael Núñez International Airport' }
+                ]
+            }
+        ]
+    },
+    bolivia: {
+        id: 'bolivia',
+        city: 'Uyuni',
+        country: 'Bolivia',
+        summary: '우유니 소금사막, 반영샷, 기차무덤 무드를 묶은 볼리비아 템플릿입니다.',
+        footer: 'Bolivia feels surreal when horizon, reflection, and salt textures stay endless.',
+        heroImage: 'assets/heroes/bolivia.jpg',
+        timeZone: 'America/La_Paz',
+        weather: { latitude: -20.4607, longitude: -66.8267 },
+        currency: { code: 'BOB', symbol: 'Bs', locale: 'es-BO' },
+        startOffsetDays: 10,
+        phraseLabel: 'Español',
+        phrases: [
+            { text: 'Hola', pron: '[올라]', meaning: '안녕하세요' },
+            { text: 'Gracias', pron: '[그라시아스]', meaning: '감사합니다' },
+            { text: '¿Dónde está el salar?', pron: '[돈데 에스타 엘 살라르?]', meaning: '소금사막은 어디예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '우유니 워밍업',
+                activities: [
+                    { time: '10:00', title: '기차 무덤', type: 'camera', location: 'Uyuni Train Cemetery' },
+                    { time: '13:30', title: '콜차니 마을', type: 'map', location: 'Colchani' },
+                    { time: '18:30', title: '소금사막 선셋', type: 'moon-star', location: 'Salar de Uyuni' }
+                ]
+            },
+            {
+                title: '반영샷 데이',
+                activities: [
+                    { time: '09:30', title: '이슬라 인카와시', type: 'landmark', location: 'Incahuasi Island' },
+                    { time: '13:30', title: '반영 포인트', type: 'camera', location: 'Uyuni Mirror Effect Spot' },
+                    { time: '18:30', title: '별빛 투어', type: 'sparkles', location: 'Salar de Uyuni Night Tour' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '로컬 카페', type: 'coffee', location: 'Uyuni Town' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'Uyuni Market' },
+                    { time: '17:30', title: '버스터미널 이동', type: 'plane', location: 'Uyuni Airport' }
+                ]
+            }
+        ]
+    },
+    morocco: {
+        id: 'morocco',
+        city: 'Chefchaouen',
+        country: 'Morocco',
+        summary: '푸른 골목, 메디나, 옥상 뷰를 묶은 모로코 템플릿입니다.',
+        footer: 'Morocco feels strongest when blue walls and late rooftop light stay soft.',
+        heroImage: 'assets/heroes/morocco.jpg',
+        timeZone: 'Africa/Casablanca',
+        weather: { latitude: 35.1688, longitude: -5.2636 },
+        currency: { code: 'MAD', symbol: 'د.م.', locale: 'ar-MA' },
+        startOffsetDays: 9,
+        phraseLabel: 'العربية',
+        phrases: [
+            { text: 'مرحبا', pron: '[마르하바]', meaning: '안녕하세요' },
+            { text: 'شكرا', pron: '[슈크란]', meaning: '감사합니다' },
+            { text: 'بكم هذا؟', pron: '[비캄 하다?]', meaning: '이거 얼마예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '블루 메디나 데이',
+                activities: [
+                    { time: '10:00', title: '메디나 산책', type: 'map', location: 'Chefchaouen Medina' },
+                    { time: '13:30', title: '우타 엘 함맘 광장', type: 'sparkles', location: 'Plaza Uta el Hammam' },
+                    { time: '18:30', title: '옥상 선셋', type: 'moon-star', location: 'Chefchaouen Rooftop View' }
+                ]
+            },
+            {
+                title: '골목 & 전망',
+                activities: [
+                    { time: '10:30', title: '카스바 박물관', type: 'building-2', location: 'Kasbah Museum Chefchaouen' },
+                    { time: '13:30', title: '라스 엘 마', type: 'camera', location: 'Ras El Maa Waterfall' },
+                    { time: '18:00', title: '스페인 모스크 전망', type: 'binoculars', location: 'Spanish Mosque Chefchaouen' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '민트티 카페', type: 'coffee', location: 'Old Town Chefchaouen' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'Chefchaouen Souk' },
+                    { time: '17:30', title: '이동 준비', type: 'plane', location: 'Tangier' }
+                ]
+            }
+        ]
+    },
+    tanzania: {
+        id: 'tanzania',
+        city: 'Arusha',
+        country: 'Tanzania',
+        summary: '킬리만자로 무드, 사파리 관문, 로컬 마켓을 묶은 탄자니아 템플릿입니다.',
+        footer: 'Tanzania feels unforgettable when mountain silhouettes and savannah air stay open.',
+        heroImage: 'assets/heroes/tanzania.jpg',
+        timeZone: 'Africa/Dar_es_Salaam',
+        weather: { latitude: -3.3869, longitude: 36.6830 },
+        currency: { code: 'TZS', symbol: 'TSh', locale: 'sw-TZ' },
+        startOffsetDays: 9,
+        phraseLabel: 'Kiswahili',
+        phrases: [
+            { text: 'Jambo', pron: '[잠보]', meaning: '안녕하세요' },
+            { text: 'Asante', pron: '[아산테]', meaning: '감사합니다' },
+            { text: 'Bei gani?', pron: '[베이 가니?]', meaning: '이거 얼마예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '아루샤 워밍업',
+                activities: [
+                    { time: '10:00', title: '아루샤 커피 하우스', type: 'coffee', location: 'Arusha Coffee Lodge' },
+                    { time: '13:30', title: '마사이 마켓', type: 'shopping-bag', location: 'Maasai Market Arusha' },
+                    { time: '18:30', title: '킬리만자로 뷰', type: 'binoculars', location: 'Kilimanjaro Viewpoint Tanzania' }
+                ]
+            },
+            {
+                title: '사파리 무드',
+                activities: [
+                    { time: '09:30', title: '아루샤 국립공원', type: 'trees', location: 'Arusha National Park' },
+                    { time: '13:30', title: '기린 센터', type: 'camera', location: 'Meserani Snake Park & Maasai Cultural Museum' },
+                    { time: '18:00', title: '선셋 디너', type: 'utensils-crossed', location: 'Arusha City' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '시계탑 산책', type: 'map', location: 'Arusha Clock Tower' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'Cultural Heritage Centre Arusha' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Kilimanjaro International Airport' }
+                ]
+            }
+        ]
+    },
+    'new-zealand': {
+        id: 'new-zealand',
+        city: 'Queenstown',
+        country: 'New Zealand',
+        summary: '피오르드, 호수, 산악 전망을 묶은 뉴질랜드 템플릿입니다.',
+        footer: 'New Zealand feels vast when lake stillness and cliff scale stay clean.',
+        heroImage: 'assets/heroes/new-zealand.jpg',
+        timeZone: 'Pacific/Auckland',
+        weather: { latitude: -45.0312, longitude: 168.6626 },
+        currency: { code: 'NZD', symbol: 'NZ$', locale: 'en-NZ' },
+        startOffsetDays: 10,
+        phraseLabel: 'Te Reo Māori',
+        phrases: [
+            { text: 'Kia ora', pron: '[키아 오라]', meaning: '안녕하세요' },
+            { text: 'Ngā mihi', pron: '[응아 미히]', meaning: '감사합니다' },
+            { text: 'Kei hea te wharepaku?', pron: '[케이 헤아 테 화레파쿠?]', meaning: '화장실이 어디예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '퀸스타운 워밍업',
+                activities: [
+                    { time: '10:00', title: '와카티푸 호수', type: 'camera', location: 'Lake Wakatipu' },
+                    { time: '13:30', title: '스카이라인 곤돌라', type: 'binoculars', location: 'Skyline Queenstown' },
+                    { time: '18:30', title: '퀸스타운 선셋', type: 'moon-star', location: 'Queenstown Gardens' }
+                ]
+            },
+            {
+                title: '피오르드 데이',
+                activities: [
+                    { time: '08:00', title: '밀포드 사운드', type: 'ship', location: 'Milford Sound' },
+                    { time: '14:30', title: '피오르드 크루즈', type: 'camera', location: 'Milford Sound Cruise' },
+                    { time: '19:00', title: '귀환 디너', type: 'utensils-crossed', location: 'Queenstown Wharf' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '애로우타운 산책', type: 'map', location: 'Arrowtown' },
+                    { time: '13:30', title: '카페 브런치', type: 'coffee', location: 'Shotover Street' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Queenstown Airport' }
+                ]
+            }
+        ]
+    },
+    maldives: {
+        id: 'maldives',
+        city: 'Malé',
+        country: 'Maldives',
+        summary: '라군, 수상 방갈로, 스노클링 무드를 묶은 몰디브 템플릿입니다.',
+        footer: 'Maldives works when water colour and slow air stay almost unreal.',
+        heroImage: 'assets/heroes/maldives.jpg',
+        timeZone: 'Indian/Maldives',
+        weather: { latitude: 4.1755, longitude: 73.5093 },
+        currency: { code: 'MVR', symbol: 'Rf', locale: 'en-MV' },
+        startOffsetDays: 10,
+        phraseLabel: 'ދިވެހި',
+        phrases: [
+            { text: 'އައްސަލާމު ޢަލައިކުމް', pron: '[앗살라무 알라이쿰]', meaning: '안녕하세요' },
+            { text: 'ޝުކުރިއްޔާ', pron: '[슈쿠리야]', meaning: '감사합니다' },
+            { text: 'މި އަގު ކިހިނެއް؟', pron: '[미 아구 키히네?]', meaning: '이거 얼마예요?' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '라군 워밍업',
+                activities: [
+                    { time: '10:00', title: '워터빌라 체크인', type: 'luggage', location: 'Maldives Water Villa Resort' },
+                    { time: '13:30', title: '라군 산책', type: 'sun', location: 'Maldives Lagoon' },
+                    { time: '18:30', title: '선셋 덱', type: 'moon-star', location: 'Sunset Deck Maldives' }
+                ]
+            },
+            {
+                title: '바다 데이',
+                activities: [
+                    { time: '09:30', title: '스노클링', type: 'ship', location: 'Coral Reef Maldives' },
+                    { time: '13:30', title: '샌드뱅크 투어', type: 'camera', location: 'Maldives Sandbank' },
+                    { time: '18:00', title: '오버워터 디너', type: 'utensils-crossed', location: 'Maldives Overwater Restaurant' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '스파 타임', type: 'sparkles', location: 'Maldives Spa' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'Malé Local Market' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Velana International Airport' }
+                ]
+            }
+        ]
+    },
+    saipan: {
+        id: 'saipan',
+        city: 'Saipan',
+        country: 'Saipan',
+        summary: '마나가하 섬, 비치, 절벽 전망을 묶은 사이판 템플릿입니다.',
+        footer: 'Saipan feels easiest when reef blue and island pace stay simple.',
+        heroImage: 'assets/heroes/saipan.jpg',
+        timeZone: 'Pacific/Saipan',
+        weather: { latitude: 15.1778, longitude: 145.7500 },
+        currency: { code: 'USD', symbol: '$', locale: 'en-US' },
+        startOffsetDays: 8,
+        phraseLabel: 'Chamoru',
+        phrases: [
+            { text: 'Håfa adai', pron: '[하파 아다이]', meaning: '안녕하세요' },
+            { text: 'Si Yu’os ma’åse’', pron: '[시 유오스 마아세]', meaning: '감사합니다' },
+            { text: 'Adios', pron: '[아디오스]', meaning: '안녕히 가세요' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '비치 워밍업',
+                activities: [
+                    { time: '10:00', title: '마이크로 비치', type: 'sun', location: 'Micro Beach Saipan' },
+                    { time: '13:30', title: '가라판 산책', type: 'shopping-bag', location: 'Garapan' },
+                    { time: '18:30', title: '선셋 포인트', type: 'moon-star', location: 'Saipan Sunset Cruise' }
+                ]
+            },
+            {
+                title: '섬 & 전망',
+                activities: [
+                    { time: '09:30', title: '마나가하 섬', type: 'ship', location: 'Managaha Island' },
+                    { time: '14:00', title: '반자이 클리프', type: 'binoculars', location: 'Banzai Cliff' },
+                    { time: '18:00', title: '버드 아일랜드 전망', type: 'camera', location: 'Bird Island Lookout' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '로컬 브런치', type: 'coffee', location: 'Garapan Saipan' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'T Galleria Saipan' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Saipan International Airport' }
+                ]
+            }
+        ]
+    },
+    palau: {
+        id: 'palau',
+        city: 'Koror',
+        country: 'Palau',
+        summary: '락 아일랜드, 에메랄드 바다, 섬 호핑을 묶은 팔라우 템플릿입니다.',
+        footer: 'Palau feels surreal when green islands float over clear water.',
+        heroImage: 'assets/heroes/palau.jpg',
+        timeZone: 'Pacific/Palau',
+        weather: { latitude: 7.3426, longitude: 134.4789 },
+        currency: { code: 'USD', symbol: '$', locale: 'en-US' },
+        startOffsetDays: 8,
+        phraseLabel: 'Palauan',
+        phrases: [
+            { text: 'Alii', pron: '[알리이]', meaning: '안녕하세요' },
+            { text: 'Sulang', pron: '[술랑]', meaning: '감사합니다' },
+            { text: 'A kmal mesaul', pron: '[아 크말 메사울]', meaning: '정말 감사합니다' }
+        ],
+        itineraryTemplate: [
+            {
+                title: '코로르 워밍업',
+                activities: [
+                    { time: '10:00', title: '팔라우 국립박물관', type: 'building-2', location: 'Belau National Museum' },
+                    { time: '13:30', title: '시내 산책', type: 'map', location: 'Koror' },
+                    { time: '18:30', title: '워터프런트 선셋', type: 'moon-star', location: 'Koror Waterfront' }
+                ]
+            },
+            {
+                title: '락 아일랜드 데이',
+                activities: [
+                    { time: '09:00', title: '락 아일랜드 투어', type: 'ship', location: 'Rock Islands Palau' },
+                    { time: '13:30', title: '젤리피시 레이크', type: 'camera', location: 'Jellyfish Lake' },
+                    { time: '18:00', title: '섬 디너', type: 'utensils-crossed', location: 'Palau Pacific Resort' }
+                ]
+            },
+            {
+                title: '브런치 & 출발',
+                activities: [
+                    { time: '10:30', title: '카페 브런치', type: 'coffee', location: 'Koror Town' },
+                    { time: '13:30', title: '기념품 체크', type: 'gift', location: 'WCTC Shopping Center' },
+                    { time: '17:30', title: '공항 이동', type: 'plane', location: 'Roman Tmetuchl International Airport' }
+                ]
+            }
+        ]
     }
 };
 
@@ -2811,11 +3543,25 @@ const COUNTRY_FLAGS = {
     Austria: '🇦🇹',
     Ireland: '🇮🇪',
     Iceland: '🇮🇸',
+    Switzerland: '🇨🇭',
+    Portugal: '🇵🇹',
+    Greece: '🇬🇷',
+    Turkey: '🇹🇷',
     Egypt: '🇪🇬',
+    Morocco: '🇲🇦',
+    Tanzania: '🇹🇿',
     'South Africa': '🇿🇦',
     Kenya: '🇰🇪',
     Ghana: '🇬🇭',
-    Guam: '🇬🇺'
+    Guam: '🇬🇺',
+    'New Zealand': '🇳🇿',
+    Maldives: '🇲🇻',
+    Saipan: '🇲🇵',
+    Palau: '🇵🇼',
+    Peru: '🇵🇪',
+    Chile: '🇨🇱',
+    Colombia: '🇨🇴',
+    Bolivia: '🇧🇴'
 };
 
 const CURRENCY_DENOMINATIONS = {
@@ -2848,9 +3594,19 @@ const CURRENCY_DENOMINATIONS = {
     SEK: [20, 50, 100, 200, 500, 1000],
     NOK: [50, 100, 200, 500, 1000],
     ISK: [500, 1000, 2000, 5000, 10000],
+    CHF: [10, 20, 50, 100, 200],
+    TRY: [20, 50, 100, 200, 500],
     ZAR: [10, 20, 50, 100, 200],
     KES: [50, 100, 200, 500, 1000],
-    GHS: [10, 20, 50, 100, 200]
+    GHS: [10, 20, 50, 100, 200],
+    PEN: [10, 20, 50, 100, 200],
+    CLP: [1000, 2000, 5000, 10000, 20000],
+    COP: [2000, 5000, 10000, 20000, 50000, 100000],
+    BOB: [10, 20, 50, 100, 200],
+    MAD: [20, 50, 100, 200],
+    TZS: [1000, 2000, 5000, 10000],
+    NZD: [5, 10, 20, 50, 100],
+    MVR: [10, 20, 50, 100, 500]
 };
 
 const CURRENCY_DISPLAY = {
@@ -2883,9 +3639,19 @@ const CURRENCY_DISPLAY = {
     SEK: 'kr',
     NOK: 'kr',
     ISK: 'kr',
+    CHF: 'Fr',
+    TRY: '₺',
     ZAR: 'R',
     KES: 'KSh',
-    GHS: '₵'
+    GHS: '₵',
+    PEN: 'S/',
+    CLP: 'CLP$',
+    COP: 'COL$',
+    BOB: 'Bs',
+    MAD: 'د.م.',
+    TZS: 'TSh',
+    NZD: 'NZ$',
+    MVR: 'Rf'
 };
 
 const LOCATION_LABELS = {
@@ -2924,11 +3690,25 @@ const LOCATION_LABELS = {
     Austria: '오스트리아',
     Ireland: '아일랜드',
     Iceland: '아이슬란드',
+    Switzerland: '스위스',
+    Portugal: '포르투갈',
+    Greece: '그리스',
+    Turkey: '튀르키예',
     Egypt: '이집트',
+    Morocco: '모로코',
+    Tanzania: '탄자니아',
     'South Africa': '남아공',
     Kenya: '케냐',
     Ghana: '가나',
     Guam: '괌',
+    'New Zealand': '뉴질랜드',
+    Maldives: '몰디브',
+    Saipan: '사이판',
+    Palau: '팔라우',
+    Peru: '페루',
+    Chile: '칠레',
+    Colombia: '콜롬비아',
+    Bolivia: '볼리비아',
     Paris: '파리',
     London: '런던',
     'New York': '뉴욕',
@@ -2973,6 +3753,21 @@ const LOCATION_LABELS = {
     Vienna: '빈',
     Dublin: '더블린',
     Reykjavik: '레이캬비크',
+    Athens: '아테네',
+    Istanbul: '이스탄불',
+    Zermatt: '체르마트',
+    Lisbon: '리스본',
+    'Quebec City': '퀘벡시티',
+    'Las Vegas': '라스베이거스',
+    Cusco: '쿠스코',
+    Santiago: '산티아고',
+    Cartagena: '카르타헤나',
+    Uyuni: '우유니',
+    Chefchaouen: '셰프샤우엔',
+    Arusha: '아루샤',
+    Queenstown: '퀸스타운',
+    'Malé': '말레',
+    Koror: '코로르',
     Cairo: '카이로',
     'Cape Town': '케이프타운',
     Nairobi: '나이로비',
@@ -3013,9 +3808,19 @@ const DEFAULT_BASE_AMOUNTS = {
     SEK: 100,
     NOK: 100,
     ISK: 1000,
+    CHF: 10,
+    TRY: 100,
     ZAR: 100,
     KES: 500,
-    GHS: 100
+    GHS: 100,
+    PEN: 20,
+    CLP: 1000,
+    COP: 10000,
+    BOB: 50,
+    MAD: 100,
+    TZS: 5000,
+    NZD: 10,
+    MVR: 100
 };
 
 const COUNTRY_THEMES = {
@@ -3054,16 +3859,32 @@ const COUNTRY_THEMES = {
     Austria: buildTheme('#F87171', '#3F1D1D', 0.38, 0.84),
     Ireland: buildTheme('#22C55E', '#123524', 0.36, 0.82),
     Iceland: buildTheme('#60A5FA', '#1E3A8A', 0.32, 0.78),
+    Switzerland: buildTheme('#F43F5E', '#2B1B24', 0.36, 0.82),
+    Portugal: buildTheme('#16A34A', '#16301F', 0.36, 0.82),
+    Greece: buildTheme('#2563EB', '#14213D', 0.36, 0.82),
+    Turkey: buildTheme('#E11D48', '#3A101D', 0.38, 0.84),
     Egypt: buildTheme('#D97706', '#3F1D0A', 0.42, 0.90),
+    Morocco: buildTheme('#0EA5E9', '#1E293B', 0.36, 0.82),
+    Tanzania: buildTheme('#84CC16', '#223018', 0.34, 0.80),
     'South Africa': buildTheme('#10B981', '#153D2E', 0.38, 0.84),
     Kenya: buildTheme('#65A30D', '#1F2937', 0.36, 0.82),
     Ghana: buildTheme('#FACC15', '#3A2E00', 0.36, 0.82),
-    Guam: buildTheme('#06B6D4', '#083344', 0.40, 0.88)
+    Guam: buildTheme('#06B6D4', '#083344', 0.40, 0.88),
+    'New Zealand': buildTheme('#38BDF8', '#112240', 0.34, 0.80),
+    Maldives: buildTheme('#22D3EE', '#0B2942', 0.34, 0.78),
+    Saipan: buildTheme('#F59E0B', '#10324A', 0.34, 0.80),
+    Palau: buildTheme('#60A5FA', '#0F172A', 0.32, 0.78),
+    Peru: buildTheme('#DC2626', '#2E1A22', 0.36, 0.82),
+    Chile: buildTheme('#3B82F6', '#0F172A', 0.34, 0.80),
+    Colombia: buildTheme('#FACC15', '#1E3A2A', 0.34, 0.80),
+    Bolivia: buildTheme('#EF4444', '#1E293B', 0.36, 0.82)
 };
 
 const PREFERRED_GROUP_DESTINATIONS = {
     China: 'beijing',
-    Indonesia: 'bali'
+    Indonesia: 'bali',
+    Canada: 'quebec',
+    'United States': 'las-vegas'
 };
 
 const observer = new IntersectionObserver((entries) => {
