@@ -272,17 +272,6 @@
             color: var(--accent);
         }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         .utility-shell {
             position: relative;
             width: 100%;
@@ -428,7 +417,7 @@
                     </div>
                 </section>
 
-                <section class="hidden glass-panel rounded-[36px] p-6 sm:p-8 reveal active">
+                <section class="hidden glass-panel rounded-[36px] p-6 sm:p-8">
                     <div id="trip-country-chip" class="chip inline-flex items-center gap-2 px-5 py-2 text-[11px] uppercase tracking-[0.32em] font-semibold mb-5"></div>
                     <h2 id="trip-title" class="text-5xl sm:text-6xl font-serif font-bold text-white mb-4"></h2>
                     <p id="trip-summary" class="text-lg text-white/84 leading-8 max-w-3xl"></p>
@@ -689,7 +678,7 @@
         </div>
     </div>
 
-    <script src="./app.js?v=758bc93" defer></script>
+    <script src="./app.js?v=f5c1c61" defer></script>
 </body>
 
 </html>

@@ -3950,18 +3950,6 @@ const PREFERRED_GROUP_DESTINATIONS = {
     'United States': 'los-angeles'
 };
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            observer.unobserve(entry.target);
-        }
-    });
-}, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -48px 0px'
-});
-
 const ui = {
     heroImage: document.getElementById('hero-image'),
     tripShell: document.getElementById('trip-shell'),
@@ -5589,10 +5577,10 @@ async function fetchWeather() {
     }
 
     renderWeatherStatus();
-    renderItinerary();
+    refreshRenderedWeather();
 }
 
-function buildDailyWeatherHtml(day) {
+function buildDailyWeatherContent(day) {
     const destinationIds = [...new Set((day.destinationIds?.length ? day.destinationIds : [day.destinationId]).filter(Boolean))];
     const chips = destinationIds.map((destinationId) => {
         const weather = appState.currentWeather?.dailyByKey?.[`${destinationId}|${day.date}`];
@@ -5615,7 +5603,15 @@ function buildDailyWeatherHtml(day) {
     return chips.join('');
 }
 
-function buildHourlyWeatherHtml(day, activity) {
+function buildDailyWeatherHtml(day) {
+    return `
+        <div data-daily-weather="${day.id}" class="flex flex-wrap justify-end gap-2">
+            ${buildDailyWeatherContent(day)}
+        </div>
+    `;
+}
+
+function buildHourlyWeatherContent(day, activity) {
     const hourLabel = `${day.date}T${activity.time.split(':')[0]}:00`;
     const weather = appState.currentWeather?.hourlyByKey?.[`${activity.destinationId || day.destinationId}|${hourLabel}`];
     if (!weather) return '';
@@ -5624,11 +5620,37 @@ function buildHourlyWeatherHtml(day, activity) {
     const temp = Math.round(weather.temp);
 
     return `
-        <div class="absolute -left-[40px] top-1/2 -translate-y-1/2 flex flex-col items-center justify-center w-[32px] z-10">
-            <i data-lucide="${weatherInfo.icon}" class="w-4 h-4 mb-0.5" style="color:${weatherInfo.color}"></i>
-            <span class="text-[10px] font-bold text-white/90">${temp}°</span>
+        <i data-lucide="${weatherInfo.icon}" class="w-4 h-4 mb-0.5" style="color:${weatherInfo.color}"></i>
+        <span class="text-[10px] font-bold text-white/90">${temp}°</span>
+    `;
+}
+
+function buildHourlyWeatherHtml(day, activity) {
+    return `
+        <div data-hourly-weather="${activity.id}" class="absolute -left-[40px] top-1/2 -translate-y-1/2 flex flex-col items-center justify-center w-[32px] z-10">
+            ${buildHourlyWeatherContent(day, activity)}
         </div>
     `;
+}
+
+function refreshRenderedWeather() {
+    if (!appState.hasStarted) return;
+
+    appState.itinerary.forEach((day) => {
+        const dailyContainer = ui.itineraryContainer.querySelector(`[data-daily-weather="${day.id}"]`);
+        if (dailyContainer) {
+            dailyContainer.innerHTML = buildDailyWeatherContent(day);
+        }
+
+        day.activities.forEach((activity) => {
+            const hourlyContainer = ui.itineraryContainer.querySelector(`[data-hourly-weather="${activity.id}"]`);
+            if (hourlyContainer) {
+                hourlyContainer.innerHTML = buildHourlyWeatherContent(day, activity);
+            }
+        });
+    });
+
+    lucide.createIcons();
 }
 
 function renderItinerary() {
@@ -5642,7 +5664,7 @@ function renderItinerary() {
             || previousDay.destinationId !== day.destinationId
             || countDaysInclusive(parseYmd(previousDay.date), parseYmd(day.date)) > 1;
         const dayElement = document.createElement('div');
-        dayElement.className = 'relative pl-8 reveal';
+        dayElement.className = 'relative pl-8';
         const dayDirectionsUrl = getDayDirectionsUrl(day.activities, day.destinationId);
         const segmentChipHtml = isSegmentBoundary ? `
             <div class="mb-2">
@@ -5764,7 +5786,6 @@ function renderItinerary() {
     });
 
     lucide.createIcons();
-    ui.itineraryContainer.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
     updateCurrentFocusButton();
 }
 
