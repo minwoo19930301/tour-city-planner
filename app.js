@@ -4785,14 +4785,14 @@ function getDayDirectionsUrl(activities = [], fallbackDestinationId = '') {
     return url.toString();
 }
 
-function getMapPreviewEmbedUrl(latitude, longitude) {
-    const latDelta = 0.01;
-    const lonDelta = 0.015;
-    const west = longitude - lonDelta;
-    const south = latitude - latDelta;
-    const east = longitude + lonDelta;
-    const north = latitude + latDelta;
-    return `https://www.openstreetmap.org/export/embed.html?bbox=${west},${south},${east},${north}&layer=mapnik&marker=${latitude},${longitude}`;
+function getGoogleMapsEmbedUrl(query) {
+    const url = new URL('https://www.google.com/maps');
+    url.searchParams.set('q', query);
+    url.searchParams.set('z', '15');
+    url.searchParams.set('output', 'embed');
+    url.searchParams.set('hl', 'ko');
+    url.searchParams.set('gl', 'kr');
+    return url.toString();
 }
 
 function parseAmountInput(value) {
@@ -4824,25 +4824,6 @@ function getEditingActivityLookupValue(location) {
     return existing?.location === location
         ? (existing?.mapQuery || location)
         : location;
-}
-
-async function findPreviewFeature(location, destinationId) {
-    for (const query of getLocationSearchQueries(location, destinationId)) {
-        const response = await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(query)}&limit=1&lang=ko`);
-        if (!response.ok) continue;
-
-        const data = await response.json();
-        const feature = Array.isArray(data?.features) ? data.features[0] : null;
-        const coordinates = Array.isArray(feature?.geometry?.coordinates) ? feature.geometry.coordinates : null;
-        if (coordinates && coordinates.length >= 2) {
-            return {
-                query,
-                coordinates
-            };
-        }
-    }
-
-    return null;
 }
 
 function formatExchangeValue(value, locale, maximumFractionDigits = 2) {
@@ -4979,29 +4960,18 @@ function updateActivityMapPreview() {
 
     if (!location) {
         ui.activityMapFrame.src = 'about:blank';
-        ui.activityMapStatus.textContent = '장소를 입력하면 여기서 바로 지도를 미리 볼 수 있습니다.';
+        ui.activityMapStatus.textContent = '장소를 입력하면 여기서 바로 구글 지도를 미리 볼 수 있습니다.';
         return;
     }
 
     ui.activityMapFrame.src = 'about:blank';
-    ui.activityMapStatus.textContent = '지도를 찾는 중입니다. 미리보기와 구글 지도 결과는 다를 수 있습니다.';
+    ui.activityMapStatus.textContent = '구글 지도 미리보기를 불러오는 중입니다.';
 
-    mapPreviewTimer = window.setTimeout(async () => {
-        try {
-            const result = await findPreviewFeature(lookupValue, destinationId);
-            if (requestId !== mapPreviewRequestId) return;
-            if (!result?.coordinates || result.coordinates.length < 2) throw new Error('Missing map coordinates');
-
-            const { coordinates } = result;
-            const [longitude, latitude] = coordinates;
-            ui.activityMapFrame.src = getMapPreviewEmbedUrl(latitude, longitude);
-            ui.activityMapStatus.textContent = `"${location}" 주변을 미리보기로 보여줍니다.`;
-        } catch (error) {
-            if (requestId !== mapPreviewRequestId) return;
-            console.warn('Map preview lookup failed:', error);
-            ui.activityMapFrame.src = 'about:blank';
-            ui.activityMapStatus.textContent = '미리보기 검색기는 못 찾았지만, 구글 지도에서는 열릴 수 있습니다.';
-        }
+    mapPreviewTimer = window.setTimeout(() => {
+        if (requestId !== mapPreviewRequestId) return;
+        const query = String(lookupValue || getLocationSearchQuery(location, destinationId)).trim();
+        ui.activityMapFrame.src = getGoogleMapsEmbedUrl(query);
+        ui.activityMapStatus.textContent = `"${location}" 주변을 구글 지도 기준으로 보여줍니다.`;
     }, 320);
 }
 
