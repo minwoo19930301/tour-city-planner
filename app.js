@@ -4436,6 +4436,67 @@ function buildGeneratedActivitiesForDestination(context, slotIndex = 0, slotCoun
     return activities.sort((left, right) => left.time.localeCompare(right.time));
 }
 
+function buildStayMapQuery(destinationId) {
+    const destination = getDestination(destinationId);
+    return `${destination.city} hotel`;
+}
+
+function createStayActivity({ destinationId, time, title }) {
+    return {
+        id: createId('activity'),
+        destinationId,
+        time,
+        title,
+        location: '숙소',
+        mapQuery: buildStayMapQuery(destinationId),
+        type: 'luggage',
+        memo: ''
+    };
+}
+
+function applyDailyStayAnchors(day) {
+    const activities = Array.isArray(day.activities) ? [...day.activities] : [];
+    const destinationIds = day.destinationIds?.length ? day.destinationIds : [day.destinationId].filter(Boolean);
+    const firstDestinationId = activities.find((activity) => activity.destinationId)?.destinationId || destinationIds[0];
+    const lastDestinationId = [...activities].reverse().find((activity) => activity.destinationId)?.destinationId || destinationIds[destinationIds.length - 1] || firstDestinationId;
+
+    if (!firstDestinationId || !lastDestinationId) {
+        return {
+            ...day,
+            activities
+        };
+    }
+
+    const hasAirportArrival = activities.some((activity) => activity.type === 'plane' && String(activity.title || '').includes('공항 도착'));
+    const hasAirportDeparture = activities.some((activity) => activity.type === 'plane' && String(activity.title || '').includes('공항 출발'));
+    const hasStayDeparture = activities.some((activity) => String(activity.title || '').trim() === '숙소 출발');
+    const hasStayReturn = activities.some((activity) => String(activity.title || '').trim() === '숙소');
+
+    if (!hasAirportArrival && !hasStayDeparture) {
+        activities.push(createStayActivity({
+            destinationId: firstDestinationId,
+            time: '09:00',
+            title: '숙소 출발'
+        }));
+    }
+
+    if (!hasAirportDeparture && !hasStayReturn) {
+        activities.push(createStayActivity({
+            destinationId: lastDestinationId,
+            time: '21:00',
+            title: '숙소'
+        }));
+    }
+
+    const nextDay = {
+        ...day,
+        activities
+    };
+    sortActivities(nextDay);
+    syncDayDestinations(nextDay);
+    return nextDay;
+}
+
 function getSuggestedStartDate(destination) {
     const now = getLocalNow(destination.timeZone);
     now.setHours(0, 0, 0, 0);
@@ -4486,7 +4547,7 @@ function buildItineraryFromRange(destinationId, startDate, endDate) {
             endDate
         }, 0, 1);
 
-        return {
+        return applyDailyStayAnchors({
             id: createId('day'),
             destinationId,
             destinationIds: [destinationId],
@@ -4494,7 +4555,7 @@ function buildItineraryFromRange(destinationId, startDate, endDate) {
             day: DAY_LABELS[currentDate.getDay()],
             title: buildTemplateTitle(destination, dayIndex),
             activities
-        };
+        });
     });
 }
 
@@ -4535,7 +4596,7 @@ function buildItineraryFromSegments(segments = []) {
             );
             const primaryDestination = getDestination(destinationIds[0]);
 
-            return {
+            return applyDailyStayAnchors({
                 id: createId('day'),
                 destinationId: destinationIds[0],
                 destinationIds,
@@ -4545,7 +4606,7 @@ function buildItineraryFromSegments(segments = []) {
                     ? `${destinationIds.length}개 국가 일정`
                     : buildTemplateTitle(primaryDestination, sortedContexts[0].dayIndex),
                 activities
-            };
+            });
         });
 }
 
