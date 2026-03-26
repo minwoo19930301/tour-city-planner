@@ -232,6 +232,14 @@
             opacity: 0.92;
         }
 
+        .input-shell[type="time"] {
+            cursor: pointer;
+        }
+
+        .input-shell[type="time"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+        }
+
         .input-shell::-webkit-datetime-edit,
         .input-shell::-webkit-datetime-edit-text,
         .input-shell::-webkit-datetime-edit-month-field,
@@ -532,19 +540,19 @@
 
                 <div class="space-y-4">
                     <div>
-                        <label for="activity-time" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">Time</label>
+                        <label for="activity-time" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">시간</label>
                         <input id="activity-time" type="time" class="input-shell">
                     </div>
                     <div>
-                        <label for="activity-location" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">Location</label>
+                        <label for="activity-location" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">장소</label>
                         <input id="activity-location" type="text" placeholder="예: 중정기념관" class="input-shell">
                     </div>
                     <div>
                         <div class="flex items-center justify-between gap-3 mb-2">
-                            <label class="text-[11px] uppercase tracking-[0.24em] text-white/45 block">Map Preview</label>
+                            <label class="text-[11px] uppercase tracking-[0.24em] text-white/45 block">지도 미리보기</label>
                             <a id="activity-map-link" href="https://www.google.com/maps" target="_blank" rel="noreferrer"
                                 class="text-[11px] uppercase tracking-[0.24em] text-white/52 hover:text-white transition-colors">
-                                Open Google Maps
+                                구글 지도 열기
                             </a>
                         </div>
                         <div class="rounded-[24px] overflow-hidden border border-white/10 bg-black/20">

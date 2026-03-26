@@ -1,4 +1,5 @@
 const DAY_LABELS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const WEEKDAY_LABELS_KO = ['일', '월', '화', '수', '목', '금', '토'];
 const ACTIVITY_ICON_OPTIONS = [
     { value: 'plane', label: 'Plane' },
     { value: 'train-front', label: 'Train' },
@@ -3943,7 +3944,7 @@ const PREFERRED_GROUP_DESTINATIONS = {
     China: 'beijing',
     Indonesia: 'bali',
     Canada: 'quebec',
-    'United States': 'las-vegas'
+    'United States': 'los-angeles'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -4246,6 +4247,10 @@ function formatMonthDay(date) {
     return `${date.getMonth() + 1}.${String(date.getDate()).padStart(2, '0')}`;
 }
 
+function formatMonthDayWithWeekday(date) {
+    return `${formatMonthDay(date)}(${WEEKDAY_LABELS_KO[date.getDay()]})`;
+}
+
 function addDays(date, amount) {
     const next = new Date(date);
     next.setDate(next.getDate() + amount);
@@ -4294,7 +4299,11 @@ function cloneTemplateActivity(activity) {
     };
 }
 
-function getAirportLocation(destination) {
+function getLocalizedLocationText(value, fallback = '') {
+    return getLocalizedLabel(value, fallback || value);
+}
+
+function getAirportQuery(destination) {
     for (const template of [...destination.itineraryTemplate].reverse()) {
         const airportActivity = [...template.activities].reverse().find((activity) => activity.type === 'plane');
         if (airportActivity?.location) {
@@ -4305,56 +4314,134 @@ function getAirportLocation(destination) {
     return `${destination.city} Airport`;
 }
 
-function getTemplateFocusActivity(destination, dayIndex) {
-    const templateLength = Math.max(destination.itineraryTemplate.length, 1);
-    const template = destination.itineraryTemplate[dayIndex % templateLength];
-    return template.activities.find((activity) => activity.type !== 'plane') || template.activities[0];
+function getAirportDisplayLocation(destination) {
+    const localizedHub = getLocalizedLabel(destination.city, getLocalizedLabel(destination.country, destination.country));
+    return `${localizedHub} 공항`;
 }
 
-function buildGeneratedActivitiesForDestination(destinationId, dayIndex, slotIndex = 0, slotCount = 1) {
+function getTemplateFocusActivities(destination, dayIndex) {
+    const templateLength = Math.max(destination.itineraryTemplate.length, 1);
+    const template = destination.itineraryTemplate[dayIndex % templateLength];
+    const focusActivities = template.activities.filter((activity) => activity.type !== 'plane');
+
+    if (!focusActivities.length) {
+        return [
+            {
+                title: `${getLocalizedLabel(destination.country, destination.country)} 핵심 동선`,
+                location: destination.city,
+                type: 'map'
+            },
+            {
+                title: `${getLocalizedLabel(destination.country, destination.country)} 핵심 동선`,
+                location: destination.city,
+                type: 'map'
+            }
+        ];
+    }
+
+    return focusActivities.length === 1
+        ? [focusActivities[0], focusActivities[0]]
+        : [focusActivities[0], focusActivities[focusActivities.length - 1]];
+}
+
+function getTemplateActivityLocationDisplay(destination, activity) {
+    return getLocalizedLocationText(
+        activity?.location,
+        activity?.locationKo || activity?.title || getLocalizedLabel(destination.city, destination.city)
+    );
+}
+
+function buildGeneratedActivitiesForDestination(context, slotIndex = 0, slotCount = 1) {
+    const normalizedContext = typeof context === 'string'
+        ? {
+            destinationId: context,
+            dayIndex: 0,
+            date: '',
+            startDate: '',
+            endDate: ''
+        }
+        : context;
+    const {
+        destinationId,
+        dayIndex = 0,
+        date = '',
+        startDate = '',
+        endDate = ''
+    } = normalizedContext;
     const destination = getDestination(destinationId);
-    const airportLocation = getAirportLocation(destination);
-    const focusActivity = getTemplateFocusActivity(destination, dayIndex);
+    const airportQuery = getAirportQuery(destination);
+    const airportLocation = getAirportDisplayLocation(destination);
+    const [primaryFocus, secondaryFocus] = getTemplateFocusActivities(destination, dayIndex);
     const localizedCountry = getLocalizedLabel(destination.country, destination.country);
+    const isSegmentStart = Boolean(startDate) && date === startDate;
+    const isSegmentEnd = Boolean(endDate) && date === endDate;
 
     const windowStart = 360;
-    const windowEnd = 1260;
+    const windowEnd = 1320;
     const slotSpan = (windowEnd - windowStart) / Math.max(slotCount, 1);
     const slotStart = windowStart + (slotSpan * slotIndex);
     const slotEnd = windowStart + (slotSpan * (slotIndex + 1));
-    const arrivalTime = minutesToTime(roundMinutes(slotStart + Math.min(20, slotSpan * 0.08)));
-    const focusTime = minutesToTime(roundMinutes(slotStart + (slotSpan * 0.5)));
-    const departureTime = minutesToTime(roundMinutes(slotEnd - Math.min(20, slotSpan * 0.08)));
+    const padding = Math.max(35, Math.min(80, slotSpan * 0.18));
+    const safeTime = (rawMinutes) => minutesToTime(roundMinutes(Math.max(slotStart + 20, Math.min(slotEnd - 20, rawMinutes))));
+    const arrivalTime = safeTime(slotStart + padding);
+    const earlyFocusTime = safeTime(slotStart + (slotSpan * 0.28));
+    const middleFocusTime = safeTime(slotStart + (slotSpan * 0.54));
+    const lateFocusTime = safeTime(slotStart + (slotSpan * 0.74));
+    const departureTime = safeTime(slotEnd - padding);
+    const activities = [];
+    const pushFocusActivity = (activity, time) => {
+        activities.push({
+            id: createId('activity'),
+            destinationId,
+            time,
+            title: activity?.title || `${localizedCountry} 핵심 동선`,
+            location: getTemplateActivityLocationDisplay(destination, activity),
+            mapQuery: activity?.location || activity?.title || destination.city,
+            type: activity?.type || 'map',
+            memo: ''
+        });
+    };
 
-    return [
-        {
+    if (isSegmentStart) {
+        activities.push({
             id: createId('activity'),
             destinationId,
             time: arrivalTime,
             title: `${localizedCountry} 공항 도착`,
             location: airportLocation,
             type: 'plane',
-            memo: ''
-        },
-        {
-            id: createId('activity'),
-            destinationId,
-            time: focusTime,
-            title: focusActivity?.title || `${localizedCountry} 핵심 동선`,
-            location: focusActivity?.location || destination.city,
-            type: focusActivity?.type || 'map',
-            memo: ''
-        },
-        {
+            memo: '',
+            mapQuery: airportQuery
+        });
+    }
+
+    if (isSegmentStart && isSegmentEnd) {
+        pushFocusActivity(primaryFocus, middleFocusTime);
+    } else if (isSegmentStart) {
+        pushFocusActivity(primaryFocus, middleFocusTime);
+    } else if (isSegmentEnd) {
+        pushFocusActivity(secondaryFocus, middleFocusTime);
+    } else if (slotSpan >= 260) {
+        pushFocusActivity(primaryFocus, earlyFocusTime);
+        pushFocusActivity(secondaryFocus, lateFocusTime);
+    } else {
+        pushFocusActivity(primaryFocus, middleFocusTime);
+    }
+
+    if (isSegmentEnd) {
+        activities.push({
             id: createId('activity'),
             destinationId,
             time: departureTime,
             title: `${localizedCountry} 공항 출발`,
             location: airportLocation,
             type: 'plane',
-            memo: ''
-        }
-    ];
+            memo: '',
+            mapQuery: airportQuery
+        });
+    }
+
+    return activities.sort((left, right) => left.time.localeCompare(right.time));
 }
 
 function getSuggestedStartDate(destination) {
@@ -4398,13 +4485,20 @@ function buildItineraryFromRange(destinationId, startDate, endDate) {
 
     return Array.from({ length: dayCount }, (_, dayIndex) => {
         const currentDate = addDays(baseDate, dayIndex);
-        const activities = buildGeneratedActivitiesForDestination(destinationId, dayIndex, 0, 1);
+        const currentDateValue = formatYmd(currentDate);
+        const activities = buildGeneratedActivitiesForDestination({
+            destinationId,
+            dayIndex,
+            date: currentDateValue,
+            startDate,
+            endDate
+        }, 0, 1);
 
         return {
             id: createId('day'),
             destinationId,
             destinationIds: [destinationId],
-            date: formatYmd(currentDate),
+            date: currentDateValue,
             day: DAY_LABELS[currentDate.getDay()],
             title: buildTemplateTitle(destination, dayIndex),
             activities
@@ -4428,6 +4522,7 @@ function buildItineraryFromSegments(segments = []) {
             dayContextMap.get(date).push({
                 destinationId: segment.destinationId,
                 dayIndex,
+                date,
                 startDate: segment.startDate,
                 endDate: segment.endDate
             });
@@ -4444,7 +4539,7 @@ function buildItineraryFromSegments(segments = []) {
             });
             const destinationIds = [...new Set(sortedContexts.map((context) => context.destinationId))];
             const activities = sortedContexts.flatMap((context, slotIndex) =>
-                buildGeneratedActivitiesForDestination(context.destinationId, context.dayIndex, slotIndex, sortedContexts.length)
+                buildGeneratedActivitiesForDestination(context, slotIndex, sortedContexts.length)
             );
             const primaryDestination = getDestination(destinationIds[0]);
 
@@ -4624,16 +4719,54 @@ function getRenderableActivityIcon(value) {
     return ACTIVITY_ICON_VALUES.has(value) ? value : 'map-pin';
 }
 
-function getMapsSearchUrl(location) {
-    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`;
+function getLocationSearchQueries(location, destinationId = '') {
+    const rawLocation = String(location || '').trim();
+    if (!rawLocation) return [];
+
+    if (!destinationId) {
+        return [rawLocation];
+    }
+
+    const destination = getDestination(destinationId);
+    const localizedCity = getLocalizedLabel(destination.city, '');
+    const localizedCountry = getLocalizedLabel(destination.country, destination.country);
+    const queries = [
+        [rawLocation, localizedCity, destination.city, localizedCountry, destination.country].filter(Boolean).join(', '),
+        [rawLocation, destination.city, destination.country].filter(Boolean).join(', '),
+        [rawLocation, localizedCountry, destination.country].filter(Boolean).join(', '),
+        rawLocation
+    ];
+
+    return [...new Set(queries.filter(Boolean))];
+}
+
+function getLocationSearchQuery(location, destinationId = '') {
+    return getLocationSearchQueries(location, destinationId)[0] || String(location || '').trim();
+}
+
+function getMapsSearchUrl(location, destinationId = '') {
+    const url = new URL('https://www.google.com/maps/search/');
+    url.searchParams.set('api', '1');
+    url.searchParams.set('hl', 'ko');
+    url.searchParams.set('gl', 'kr');
+    url.searchParams.set('query', getLocationSearchQuery(location, destinationId));
+    return url.toString();
 }
 
 function getDirectionsUrl(origin, destination) {
-    return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}`;
+    const url = new URL('https://www.google.com/maps/dir/');
+    url.searchParams.set('api', '1');
+    url.searchParams.set('hl', 'ko');
+    url.searchParams.set('gl', 'kr');
+    url.searchParams.set('origin', origin);
+    url.searchParams.set('destination', destination);
+    return url.toString();
 }
 
-function getDayDirectionsUrl(activities = []) {
-    const validLocations = activities.map((activity) => activity.location?.trim()).filter(Boolean);
+function getDayDirectionsUrl(activities = [], fallbackDestinationId = '') {
+    const validLocations = activities
+        .map((activity) => getLocationSearchQuery(activity.mapQuery || activity.location, activity.destinationId || fallbackDestinationId))
+        .filter(Boolean);
     if (validLocations.length < 2) return '';
 
     const origin = validLocations[0];
@@ -4641,6 +4774,8 @@ function getDayDirectionsUrl(activities = []) {
     const waypoints = validLocations.slice(1, -1);
     const url = new URL('https://www.google.com/maps/dir/');
     url.searchParams.set('api', '1');
+    url.searchParams.set('hl', 'ko');
+    url.searchParams.set('gl', 'kr');
     url.searchParams.set('origin', origin);
     url.searchParams.set('destination', destination);
     if (waypoints.length) {
@@ -4666,6 +4801,47 @@ function parseAmountInput(value) {
     const amount = Number(normalized);
     if (!Number.isFinite(amount) || amount < 0) return null;
     return amount;
+}
+
+function getEditingActivityDestinationId() {
+    const day = appState.itinerary[activityEditorState.dayIndex];
+    const existing = activityEditorState.activityId
+        ? day?.activities.find((activity) => activity.id === activityEditorState.activityId)
+        : null;
+    return existing?.destinationId
+        || day?.destinationIds?.[0]
+        || day?.destinationId
+        || appState.destinationId
+        || setupSelection.destinationId;
+}
+
+function getEditingActivityLookupValue(location) {
+    const day = appState.itinerary[activityEditorState.dayIndex];
+    const existing = activityEditorState.activityId
+        ? day?.activities.find((activity) => activity.id === activityEditorState.activityId)
+        : null;
+    return existing?.location === location
+        ? (existing?.mapQuery || location)
+        : location;
+}
+
+async function findPreviewFeature(location, destinationId) {
+    for (const query of getLocationSearchQueries(location, destinationId)) {
+        const response = await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(query)}&limit=1&lang=ko`);
+        if (!response.ok) continue;
+
+        const data = await response.json();
+        const feature = Array.isArray(data?.features) ? data.features[0] : null;
+        const coordinates = Array.isArray(feature?.geometry?.coordinates) ? feature.geometry.coordinates : null;
+        if (coordinates && coordinates.length >= 2) {
+            return {
+                query,
+                coordinates
+            };
+        }
+    }
+
+    return null;
 }
 
 function formatExchangeValue(value, locale, maximumFractionDigits = 2) {
@@ -4790,8 +4966,10 @@ function renderActivityIconSelection() {
 
 function updateActivityMapPreview() {
     const location = ui.activityLocation.value.trim();
+    const destinationId = getEditingActivityDestinationId();
+    const lookupValue = getEditingActivityLookupValue(location);
     const requestId = ++mapPreviewRequestId;
-    ui.activityMapLink.href = location ? getMapsSearchUrl(location) : 'https://www.google.com/maps';
+    ui.activityMapLink.href = location ? getMapsSearchUrl(lookupValue, destinationId) : 'https://www.google.com/maps?hl=ko&gl=kr';
 
     if (mapPreviewTimer) {
         window.clearTimeout(mapPreviewTimer);
@@ -4809,16 +4987,11 @@ function updateActivityMapPreview() {
 
     mapPreviewTimer = window.setTimeout(async () => {
         try {
-            const response = await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(location)}&limit=1`);
-            if (!response.ok) throw new Error('Map search failed');
-
-            const data = await response.json();
+            const result = await findPreviewFeature(lookupValue, destinationId);
             if (requestId !== mapPreviewRequestId) return;
+            if (!result?.coordinates || result.coordinates.length < 2) throw new Error('Missing map coordinates');
 
-            const feature = Array.isArray(data?.features) ? data.features[0] : null;
-            const coordinates = Array.isArray(feature?.geometry?.coordinates) ? feature.geometry.coordinates : null;
-            if (!coordinates || coordinates.length < 2) throw new Error('Missing map coordinates');
-
+            const { coordinates } = result;
             const [longitude, latitude] = coordinates;
             ui.activityMapFrame.src = getMapPreviewEmbedUrl(latitude, longitude);
             ui.activityMapStatus.textContent = `미리보기 지도는 OpenStreetMap 기준으로 "${location}" 주변을 보여줍니다.`;
@@ -4840,6 +5013,16 @@ function openIconPicker() {
 function closeIconPicker() {
     ui.iconPickerModal.classList.add('hidden');
     updateBodyScrollLock();
+}
+
+function openActivityTimePicker() {
+    if (typeof ui.activityTime?.showPicker !== 'function') return;
+
+    try {
+        ui.activityTime.showPicker();
+    } catch (error) {
+        // Some browsers throw when the picker is already open.
+    }
 }
 
 function applyActivityIconSelection(value) {
@@ -5399,13 +5582,14 @@ function renderItinerary() {
 
     appState.itinerary.forEach((day, dayIndex) => {
         const dayDestination = getDayDestination(day);
+        const headerDate = parseYmd(day.date);
         const previousDay = appState.itinerary[dayIndex - 1];
         const isSegmentBoundary = !previousDay
             || previousDay.destinationId !== day.destinationId
             || countDaysInclusive(parseYmd(previousDay.date), parseYmd(day.date)) > 1;
         const dayElement = document.createElement('div');
         dayElement.className = 'relative pl-8 reveal';
-        const dayDirectionsUrl = getDayDirectionsUrl(day.activities);
+        const dayDirectionsUrl = getDayDirectionsUrl(day.activities, day.destinationId);
         const segmentChipHtml = isSegmentBoundary ? `
             <div class="mb-2">
                 <div class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[10px] font-semibold tracking-[0.24em] uppercase text-white/84"
@@ -5425,7 +5609,10 @@ function renderItinerary() {
                     <div class="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-white/18"></div>
                     <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
                         <a
-                            href="${getDirectionsUrl(activity.location, nextActivity.location)}"
+                            href="${getDirectionsUrl(
+                                getLocationSearchQuery(activity.mapQuery || activity.location, activity.destinationId || day.destinationId),
+                                getLocationSearchQuery(nextActivity.mapQuery || nextActivity.location, nextActivity.destinationId || day.destinationId)
+                            )}"
                             target="_blank"
                             rel="noreferrer"
                             data-skip-edit="true"
@@ -5457,7 +5644,7 @@ function renderItinerary() {
                         </div>
                     </div>
                     <div class="flex items-center gap-2 shrink-0">
-                        <a href="${getMapsSearchUrl(activity.location)}"
+                        <a href="${getMapsSearchUrl(activity.mapQuery || activity.location, activity.destinationId || day.destinationId)}"
                             target="_blank"
                             rel="noreferrer"
                             data-skip-edit="true"
@@ -5481,9 +5668,9 @@ function renderItinerary() {
 
                 <div class="flex-1">
                     ${segmentChipHtml}
-                    <div class="flex items-center gap-2">
-                        <h3 class="text-2xl font-serif font-bold text-white">${escapeHtml(day.day)}</h3>
-                        <span class="text-sm text-white/70 font-medium">${formatMonthDay(parseYmd(day.date))}</span>
+                    <div class="flex items-end gap-2.5">
+                        <h3 class="text-3xl font-serif font-bold text-white leading-none">${escapeHtml(formatMonthDay(headerDate))}</h3>
+                        <span class="text-sm text-white/70 font-medium pb-0.5">${escapeHtml(formatMonthDayWithWeekday(headerDate))}</span>
                     </div>
                 </div>
 
@@ -5822,6 +6009,9 @@ function saveActivityEditor() {
         time,
         title: existingActivity?.title || location || '일정',
         location,
+        mapQuery: existingActivity?.location === location
+            ? (existingActivity?.mapQuery || location)
+            : location,
         type: activityEditorState.icon || '',
         memo: ui.activityMemo.value.trim()
     };
@@ -6049,6 +6239,8 @@ ui.activityCloseBtn.addEventListener('click', closeActivityEditor);
 ui.activityCancelBtn.addEventListener('click', closeActivityEditor);
 ui.activitySaveBtn.addEventListener('click', saveActivityEditor);
 ui.activityDeleteBtn.addEventListener('click', deleteCurrentActivity);
+ui.activityTime.addEventListener('click', openActivityTimePicker);
+ui.activityTime.addEventListener('focus', openActivityTimePicker);
 ui.activityLocation.addEventListener('input', updateActivityMapPreview);
 ui.activityIconTrigger.addEventListener('click', openIconPicker);
 ui.iconPickerCloseBtn.addEventListener('click', closeIconPicker);
