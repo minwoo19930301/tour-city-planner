@@ -4248,7 +4248,7 @@ function formatMonthDay(date) {
 }
 
 function formatMonthDayWithWeekday(date) {
-    return `${formatMonthDay(date)}(${WEEKDAY_LABELS_KO[date.getDay()]})`;
+    return `(${WEEKDAY_LABELS_KO[date.getDay()]})`;
 }
 
 function addDays(date, amount) {
@@ -4731,10 +4731,11 @@ function getLocationSearchQueries(location, destinationId = '') {
     const localizedCity = getLocalizedLabel(destination.city, '');
     const localizedCountry = getLocalizedLabel(destination.country, destination.country);
     const queries = [
+        rawLocation,
         [rawLocation, localizedCity, destination.city, localizedCountry, destination.country].filter(Boolean).join(', '),
         [rawLocation, destination.city, destination.country].filter(Boolean).join(', '),
         [rawLocation, localizedCountry, destination.country].filter(Boolean).join(', '),
-        rawLocation
+        [rawLocation, destination.country].filter(Boolean).join(', ')
     ];
 
     return [...new Set(queries.filter(Boolean))];
@@ -4749,7 +4750,7 @@ function getMapsSearchUrl(location, destinationId = '') {
     url.searchParams.set('api', '1');
     url.searchParams.set('hl', 'ko');
     url.searchParams.set('gl', 'kr');
-    url.searchParams.set('query', getLocationSearchQuery(location, destinationId));
+    url.searchParams.set('query', String(location || '').trim() || getLocationSearchQuery(location, destinationId));
     return url.toString();
 }
 
@@ -4765,7 +4766,7 @@ function getDirectionsUrl(origin, destination) {
 
 function getDayDirectionsUrl(activities = [], fallbackDestinationId = '') {
     const validLocations = activities
-        .map((activity) => getLocationSearchQuery(activity.mapQuery || activity.location, activity.destinationId || fallbackDestinationId))
+        .map((activity) => String(activity.mapQuery || activity.location || '').trim())
         .filter(Boolean);
     if (validLocations.length < 2) return '';
 
@@ -4978,12 +4979,12 @@ function updateActivityMapPreview() {
 
     if (!location) {
         ui.activityMapFrame.src = 'about:blank';
-        ui.activityMapStatus.textContent = '장소를 입력하면 여기서 바로 구글 지도를 미리 볼 수 있습니다.';
+        ui.activityMapStatus.textContent = '장소를 입력하면 여기서 바로 지도를 미리 볼 수 있습니다.';
         return;
     }
 
     ui.activityMapFrame.src = 'about:blank';
-    ui.activityMapStatus.textContent = `지도를 찾는 중입니다. Google Maps 버튼으로도 바로 검색할 수 있습니다.`;
+    ui.activityMapStatus.textContent = '지도를 찾는 중입니다. 미리보기와 구글 지도 결과는 다를 수 있습니다.';
 
     mapPreviewTimer = window.setTimeout(async () => {
         try {
@@ -4994,12 +4995,12 @@ function updateActivityMapPreview() {
             const { coordinates } = result;
             const [longitude, latitude] = coordinates;
             ui.activityMapFrame.src = getMapPreviewEmbedUrl(latitude, longitude);
-            ui.activityMapStatus.textContent = `미리보기 지도는 OpenStreetMap 기준으로 "${location}" 주변을 보여줍니다.`;
+            ui.activityMapStatus.textContent = `"${location}" 주변을 미리보기로 보여줍니다.`;
         } catch (error) {
             if (requestId !== mapPreviewRequestId) return;
             console.warn('Map preview lookup failed:', error);
             ui.activityMapFrame.src = 'about:blank';
-            ui.activityMapStatus.textContent = '이 위치는 미리보기를 찾지 못했습니다. Google Maps 버튼으로 바로 검색할 수 있습니다.';
+            ui.activityMapStatus.textContent = '미리보기 검색기는 못 찾았지만, 구글 지도에서는 열릴 수 있습니다.';
         }
     }, 320);
 }
@@ -5610,8 +5611,8 @@ function renderItinerary() {
                     <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
                         <a
                             href="${getDirectionsUrl(
-                                getLocationSearchQuery(activity.mapQuery || activity.location, activity.destinationId || day.destinationId),
-                                getLocationSearchQuery(nextActivity.mapQuery || nextActivity.location, nextActivity.destinationId || day.destinationId)
+                                String(activity.mapQuery || activity.location || '').trim(),
+                                String(nextActivity.mapQuery || nextActivity.location || '').trim()
                             )}"
                             target="_blank"
                             rel="noreferrer"
