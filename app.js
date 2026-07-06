@@ -4697,7 +4697,13 @@ function decodePlan(value) {
     const padded = normalized + '='.repeat((4 - (normalized.length % 4)) % 4);
     const binary = atob(padded);
     const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
-    const json = new TextDecoder().decode(bytes);
+    let json = new TextDecoder().decode(bytes);
+    
+    // 이스케이프되지 않은 제어 문자(줄바꿈, 탭 등)가 문자열 값 내부에 있으면 이스케이프하여 파싱 에러 방지
+    json = json.replace(/"([^"]*)"/g, (match, p1) => {
+        return '"' + p1.replace(/\n/g, '\\n').replace(/\r/g, '\\r').replace(/\t/g, '\\t') + '"';
+    });
+
     return JSON.parse(json);
 }
 
