@@ -5400,17 +5400,18 @@ function generateAIPromptText(destinationId, startDate, endDate) {
     const countryKo = destination.countryKo || destination.country || '';
     const baseDomain = 'https://minwoo19930301.github.io/tour-city-planner/';
 
-    return `[ 여기에 내가 원하는 구체적인 여행 스타일이나 일정 요구사항을 자유롭게 적어주세요. 예: 맛집 위주로 여유롭게, 또는 랜드마크 중심 빡빡한 일정 등 ]
+    return `[ 여기에 원하는 여행 테마나 요구사항을 자유롭게 적어주세요. 예: 디즈니랜드 위주로 대충 짜줘 ]
 
 ---
-안녕하세요 AI 플래너님! 저의 [${cityKo} (${countryKo})] 여행 일정을 계획하고 있어요.
-여행 일정 날짜: ${startDate} ~ ${endDate}
+AI 플래너님, 아래 여행지 및 날짜 조건에 맞는 멋진 여행 일정을 계획해 주세요.
+* 여행지: ${cityKo} (${countryKo})
+* 일정 날짜: ${startDate} ~ ${endDate}
 
-[주의사항 및 규칙]
-1. 만약 맨 첫 줄 대괄호 "[ 여기에 내가 원하는 구체적인 여행 스타일이나... ]" 부분이 비어있거나 수정되지 않은 채 그대로 전송되었다면, 즉시 일정을 짜지 마시고 저에게 "구체적으로 어떤 컨셉(예: 맛집 투어, 힐링 휴양, 문화 탐방 등)이나 원하는 테마를 원하시나요?"라고 먼저 질문해 주세요.
-2. 제가 구체적인 일정을 요청하거나 테마를 확정해 주면, 아래의 엄격한 JSON 규격에 맞춰서 여행 일정을 최종 구성한 뒤, 부가적인 텍스트 설명(인사말, 팁, 서론, 결론 등)은 완전히 배제하고 오로지 아래의 최종 출력 포맷인 단 한 줄의 URL 링크만 텍스트로 답변해 주세요.
+[답변 작성 시 필수 규칙 - 100% 엄수]
+1. 사용자의 요구사항(첫 줄 대괄호 안의 내용)이 비어있거나 수정되지 않았더라도, 되물어보거나 질문을 절대 하지 말고 즉시 일정을 멋지게 짜서 완성해 주세요.
+2. 인사말, 코스 설명, 이동 소요 시간, 팁, 서론, 결론 등 일체의 텍스트 설명을 전부 생략하고, 오로지 최종 JSON 결과물을 인코딩한 URL 링크 단 한 줄만 텍스트로 즉각 대답해 주세요.
 
-[최종 답변 출력 포맷]
+[출력 포맷]
 ${baseDomain}#plan=<BASE64_ENCODED_JSON>
 
 [JSON 설계 스펙 가이드]
@@ -5420,17 +5421,17 @@ ${baseDomain}#plan=<BASE64_ENCODED_JSON>
   "i": [
     {
       "a": [
-        {"d": "${destinationId}", "h": "09:00", "l": "도착 및 일정 시작", "k": "plane", "m": ""},
-        {"d": "${destinationId}", "h": "13:00", "l": "로컬 맛집 탐방", "k": "utensils", "m": ""}
+        {"d": "${destinationId}", "h": "09:00", "l": "가볼만한 장소 또는 활동명 1", "k": "landmark", "m": ""},
+        {"d": "${destinationId}", "h": "13:00", "l": "가볼만한 장소 또는 활동명 2", "k": "utensils", "m": ""}
       ]
     }
   ]
 }
 
 * 참고 스펙:
-- "i" 배열의 원소 개수는 총 여행 일수인 날짜 범위와 완벽히 대응해야 합니다.
-- "k" 값에는 Lucide 아이콘 명칭을 활용해주세요 (예: "plane", "sparkles", "luggage", "landmark", "compass", "utensils", "coffee", "hotel", "camera", "shopping-bag", "train", "car", "map-pin", "moon-star", "sun", "ticket", "beer").
-- 완성된 JSON 문자열을 UTF-8 기준으로 Base64 인코딩하여 #plan= 뒤에 붙여 한 줄의 링크로만 응답해주세요.`;
+- "i" 배열의 원소 개수는 여행 총 일수와 정확히 일치해야 합니다.
+- "k" 값에는 Lucide 아이콘 명칭 사용: "plane", "sparkles", "luggage", "landmark", "compass", "utensils", "coffee", "hotel", "camera", "shopping-bag", "train", "car", "map-pin", "moon-star", "sun", "ticket", "beer".
+- 완성된 JSON 문자열을 UTF-8 기준으로 Base64 인코딩하여 #plan= 뒤에 붙여 한 줄의 링크로만 응답해 주세요.`;
 }
 
 function findActiveContext() {
