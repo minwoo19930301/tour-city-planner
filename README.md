@@ -53,8 +53,15 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory "/Users/minwokim/Docume
 - 환율: `open.er-api.com`
 - 지도 링크/미리보기: `Google Maps`
 
-## 파일 구성
+## 파일 구성 및 서브 상세 설명서
 
 - `index.html`: 메인 UI
 - `app.js`: 목적지 데이터, 일정 생성, 공유 로직, 날씨/환율 연동
 - `*_trip.html`: 특정 목적지로 바로 들어가는 redirect 페이지
+- 📘 **[시스템 아키텍처 및 상세 개발자 매뉴얼](docs/MANUAL.md)**: 데이터 포맷, Base64 URL 프로토콜, AI 프롬프트 연동 및 도시 템플릿 확장 가이드
+
+## 📄 라이선스 (License)
+
+본 프로젝트는 **[CC BY-NC 4.0 (크리에이티브 커먼즈 저작자표시-비영리 4.0)](LICENSE)** 라이선스에 따라 개인 및 비영리 목적으로 자유롭게 사용하실 수 있습니다.
+
+> ⚠️ **상업적 이용 안내**: 기업 사용, 유료 서비스 연동, 외주 개발 등 상업적 목적으로 활용 시 저작권자(`contact@ai-ing.org`)와 **별도의 상업 라이선스 계약**을 체결해야 합니다.
