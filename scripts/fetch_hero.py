@@ -11,7 +11,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def api(params):
     url = "https://commons.wikimedia.org/w/api.php?" + urllib.parse.urlencode(params)
     req = urllib.request.Request(url, headers={"User-Agent": UA})
-    return json.load(urllib.request.urlopen(req, timeout=30))
+    data = json.load(urllib.request.urlopen(req, timeout=30))
+    if isinstance(data, dict) and data.get("error"):
+        raise RuntimeError(f"API error: {data['error'].get('code')} {str(data['error'].get('info',''))[:80]}")
+    return data
 
 def strip(s):
     return html.unescape(re.sub(r'<[^>]+>', ' ', s or '')).strip()[:120]

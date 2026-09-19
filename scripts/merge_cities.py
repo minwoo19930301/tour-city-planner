@@ -7,25 +7,20 @@ import json, os, re, subprocess, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APP = os.path.join(ROOT, "app.js")
 # new city -> insert right after this existing entry
-ANCHOR = {"seoul": "london", "busan": "seoul", "jeju": "busan",
-          "osaka": "tokyo", "kyoto": "osaka", "fukuoka": "kyoto", "sapporo": "fukuoka",
-          "nagoya": "sapporo", "okinawa": "nagoya",
-          "hangzhou": "shanghai", "suzhou": "hangzhou", "xian": "suzhou",
-          "chengdu": "xian", "guangzhou": "chengdu", "qingdao": "guangzhou"}
-ORDER = ["seoul", "busan", "jeju",
-         "osaka", "kyoto", "fukuoka", "sapporo", "nagoya", "okinawa",
-         "hangzhou", "suzhou", "xian", "chengdu", "guangzhou", "qingdao"]
+ANCHOR = {"seoul": "london", "busan": "seoul", "jeju": "busan", "osaka": "tokyo", "kyoto": "osaka", "fukuoka": "kyoto", "sapporo": "fukuoka", "nagoya": "sapporo", "okinawa": "nagoya", "hangzhou": "shanghai", "suzhou": "hangzhou", "xian": "suzhou", "chengdu": "xian", "guangzhou": "chengdu", "qingdao": "guangzhou", "kagoshima": "okinawa", "kumamoto": "kagoshima", "nagasaki": "kumamoto", "oita": "nagasaki", "miyazaki": "oita", "kitakyushu": "miyazaki", "saga": "kitakyushu", "hiroshima": "saga", "kobe": "hiroshima", "okayama": "kobe", "takamatsu": "okayama", "matsuyama": "takamatsu", "tokushima": "matsuyama", "yonago": "tokushima", "kanazawa": "yonago", "sendai": "kanazawa", "niigata": "sendai", "aomori": "niigata", "hakodate": "aomori", "shizuoka": "hakodate", "ishigaki": "shizuoka", "miyakojima": "ishigaki", "zhangjiajie": "qingdao", "nanjing": "zhangjiajie", "changsha": "nanjing", "kunming": "changsha", "xiamen": "kunming", "harbin": "xiamen", "yanji": "harbin", "chongqing": "yanji", "guilin": "chongqing", "dalian": "guilin", "shenyang": "dalian", "yantai": "shenyang", "weihai": "yantai", "wuhan": "weihai", "da-nang": "hanoi", "nha-trang": "da-nang", "phu-quoc": "nha-trang", "chiang-mai": "bangkok", "phuket": "chiang-mai", "vientiane": "bangkok", "phnom-penh": "bangkok", "cebu": "philippines", "bohol": "cebu", "boracay": "bohol", "clark": "boracay", "kota-kinabalu": "malaysia", "kaohsiung": "taipei", "taichung": "kaohsiung", "brunei": "malaysia", "manado": "bali", "ulaanbaatar": "india", "almaty": "india", "astana": "almaty", "tashkent": "india", "bishkek": "india", "kathmandu": "india", "colombo": "india", "doha": "dubai", "abu-dhabi": "dubai", "milan": "rome", "budapest": "czech", "san-francisco": "texas", "seattle": "san-francisco", "chicago": "seattle", "boston": "chicago", "washington-dc": "boston", "salt-lake-city": "washington-dc", "calgary": "quebec", "brisbane": "perth", "melbourne": "brisbane"}
+ORDER = ["seoul", "busan", "jeju", "osaka", "kyoto", "fukuoka", "sapporo", "nagoya", "okinawa", "hangzhou", "suzhou", "xian", "chengdu", "guangzhou", "qingdao", "kagoshima", "kumamoto", "nagasaki", "oita", "miyazaki", "kitakyushu", "saga", "hiroshima", "kobe", "okayama", "takamatsu", "matsuyama", "tokushima", "yonago", "kanazawa", "sendai", "niigata", "aomori", "hakodate", "shizuoka", "ishigaki", "miyakojima", "zhangjiajie", "nanjing", "changsha", "kunming", "xiamen", "harbin", "yanji", "chongqing", "guilin", "dalian", "shenyang", "yantai", "weihai", "wuhan", "da-nang", "nha-trang", "phu-quoc", "chiang-mai", "phuket", "vientiane", "phnom-penh", "cebu", "bohol", "boracay", "clark", "kota-kinabalu", "kaohsiung", "taichung", "brunei", "manado", "ulaanbaatar", "almaty", "astana", "tashkent", "bishkek", "kathmandu", "colombo", "doha", "abu-dhabi", "milan", "budapest", "san-francisco", "seattle", "chicago", "boston", "washington-dc", "salt-lake-city", "calgary", "brisbane", "melbourne"]
 
 def js_block(obj, key):
     """Render one destination entry as JS source with 4-space base indent."""
     body = json.dumps(obj, ensure_ascii=False, indent=4)
     body = "\n".join("    " + line for line in body.splitlines()).lstrip()
     body = re.sub(r'^(\s*)"([A-Za-z_][A-Za-z0-9_]*)":', r"\1\2:", body, flags=re.M)
-    return f"    {key}: {body},\n"
+    jskey = key if re.match(r"^[A-Za-z_$][\w$]*$", key) else f"'{key}'"   # hyphenated ids must be quoted
+    return f"    {jskey}: {body},\n"
 
 def entry_span(src, key):
     """Byte span of an existing `    key: { ... },` block inside DESTINATIONS."""
-    m = re.search(rf"^    {re.escape(key)}: \{{", src, re.M)
+    m = re.search(rf"^    (?:'{re.escape(key)}'|\"{re.escape(key)}\"|{re.escape(key)}): \{{", src, re.M)
     if not m: return None
     i, depth = m.end() - 1, 0
     while i < len(src):

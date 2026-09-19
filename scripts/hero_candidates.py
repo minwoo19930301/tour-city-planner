@@ -5,9 +5,15 @@ import sys, json, os, subprocess, importlib.util
 spec = importlib.util.spec_from_file_location("fh", os.path.join(os.path.dirname(__file__), "fetch_hero.py")); fh = importlib.util.module_from_spec(spec); spec.loader.exec_module(fh)
 slug, cats = sys.argv[1], sys.argv[2:]
 seen, out = set(), []
+import time
 for cat in cats:
-    try: rows = fh.from_category(cat, limit=100)
-    except Exception as e: print("skip", cat, e); continue
+    rows = []
+    for attempt in range(3):
+        try:
+            rows = fh.from_category(cat, limit=100); break
+        except Exception as e:
+            print("retry", cat, attempt + 1, str(e)[:80]); time.sleep(20 * (attempt + 1))
+    time.sleep(2.0)   # be polite to the Commons API
     for r in rows[:6]:
         if r["title"] in seen: continue
         seen.add(r["title"]); r["cat"] = cat; out.append(r)

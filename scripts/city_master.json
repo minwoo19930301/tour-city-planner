@@ -1,0 +1,1558 @@
+[
+ {
+  "id": "kagoshima",
+  "city": "Kagoshima",
+  "cityKo": "가고시마",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Sakurajima volcano Kagoshima",
+  "must": [
+   "Kagoshima",
+   "Sakurajima"
+  ],
+  "categories": [
+   "Category:Sakurajima"
+  ]
+ },
+ {
+  "id": "kumamoto",
+  "city": "Kumamoto",
+  "cityKo": "구마모토",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Kumamoto Castle",
+  "must": [
+   "Kumamoto"
+  ],
+  "categories": [
+   "Category:Kumamoto_Castle"
+  ]
+ },
+ {
+  "id": "nagasaki",
+  "city": "Nagasaki",
+  "cityKo": "나가사키",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Nagasaki night view Inasayama",
+  "must": [
+   "Nagasaki"
+  ],
+  "categories": [
+   "Category:Nagasaki"
+  ]
+ },
+ {
+  "id": "oita",
+  "city": "Oita (Beppu)",
+  "cityKo": "오이타(벳푸)",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Beppu hells onsen steam",
+  "must": [
+   "Beppu",
+   "Oita",
+   "Ōita",
+   "Yufuin"
+  ],
+  "categories": [
+   "Category:Beppu,_Ōita"
+  ]
+ },
+ {
+  "id": "miyazaki",
+  "city": "Miyazaki",
+  "cityKo": "미야자키",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Takachiho Gorge Miyazaki",
+  "must": [
+   "Miyazaki",
+   "Takachiho",
+   "Aoshima"
+  ],
+  "categories": [
+   "Category:Takachiho_Gorge"
+  ]
+ },
+ {
+  "id": "kitakyushu",
+  "city": "Kitakyushu",
+  "cityKo": "기타큐슈",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Mojiko Retro Kitakyushu Kokura Castle",
+  "must": [
+   "Kitakyushu",
+   "Kokura",
+   "Mojiko",
+   "Moji"
+  ],
+  "categories": [
+   "Category:Kokura_Castle"
+  ]
+ },
+ {
+  "id": "saga",
+  "city": "Saga",
+  "cityKo": "사가",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Yutoku Inari Shrine Saga",
+  "must": [
+   "Saga",
+   "Yutoku",
+   "Yūtoku",
+   "Karatsu"
+  ],
+  "categories": [
+   "Category:Yūtoku_Inari_Shrine"
+  ]
+ },
+ {
+  "id": "hiroshima",
+  "city": "Hiroshima",
+  "cityKo": "히로시마",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Itsukushima Shrine torii Miyajima",
+  "must": [
+   "Hiroshima",
+   "Itsukushima",
+   "Miyajima"
+  ],
+  "categories": [
+   "Category:Itsukushima_Shrine"
+  ]
+ },
+ {
+  "id": "kobe",
+  "city": "Kobe",
+  "cityKo": "고베",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Kobe port night view Harborland",
+  "must": [
+   "Kobe",
+   "Kōbe"
+  ],
+  "categories": [
+   "Category:Kobe"
+  ]
+ },
+ {
+  "id": "okayama",
+  "city": "Okayama",
+  "cityKo": "오카야마",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Korakuen garden Okayama Castle",
+  "must": [
+   "Okayama",
+   "Korakuen",
+   "Kōraku-en",
+   "Kurashiki"
+  ],
+  "categories": [
+   "Category:Kōraku-en"
+  ]
+ },
+ {
+  "id": "takamatsu",
+  "city": "Takamatsu",
+  "cityKo": "다카마쓰",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Ritsurin Garden Takamatsu",
+  "must": [
+   "Takamatsu",
+   "Ritsurin"
+  ],
+  "categories": [
+   "Category:Ritsurin_Garden"
+  ]
+ },
+ {
+  "id": "matsuyama",
+  "city": "Matsuyama",
+  "cityKo": "마쓰야마",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Matsuyama Castle Dogo Onsen",
+  "must": [
+   "Matsuyama",
+   "Dogo",
+   "Dōgo"
+  ],
+  "categories": [
+   "Category:Matsuyama_Castle"
+  ]
+ },
+ {
+  "id": "tokushima",
+  "city": "Tokushima",
+  "cityKo": "도쿠시마",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Naruto whirlpools Tokushima",
+  "must": [
+   "Tokushima",
+   "Naruto",
+   "Iya"
+  ],
+  "categories": [
+   "Category:Naruto_whirlpools"
+  ]
+ },
+ {
+  "id": "yonago",
+  "city": "Yonago (Tottori)",
+  "cityKo": "요나고(돗토리)",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Tottori Sand Dunes",
+  "must": [
+   "Tottori",
+   "Yonago",
+   "Daisen"
+  ],
+  "categories": [
+   "Category:Tottori_Sand_Dunes"
+  ]
+ },
+ {
+  "id": "kanazawa",
+  "city": "Kanazawa",
+  "cityKo": "가나자와",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Kenrokuen garden Kanazawa",
+  "must": [
+   "Kanazawa",
+   "Kenrokuen",
+   "Kenroku-en"
+  ],
+  "categories": [
+   "Category:Kenroku-en"
+  ]
+ },
+ {
+  "id": "sendai",
+  "city": "Sendai",
+  "cityKo": "센다이",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Matsushima bay islands Sendai",
+  "must": [
+   "Sendai",
+   "Matsushima"
+  ],
+  "categories": [
+   "Category:Matsushima"
+  ]
+ },
+ {
+  "id": "niigata",
+  "city": "Niigata",
+  "cityKo": "니가타",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Niigata city Bandai bridge Sado",
+  "must": [
+   "Niigata",
+   "Sado"
+  ],
+  "categories": [
+   "Category:Niigata_(city)"
+  ]
+ },
+ {
+  "id": "aomori",
+  "city": "Aomori",
+  "cityKo": "아오모리",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Hirosaki Castle cherry blossoms",
+  "must": [
+   "Aomori",
+   "Hirosaki",
+   "Oirase"
+  ],
+  "categories": [
+   "Category:Hirosaki_Castle"
+  ]
+ },
+ {
+  "id": "hakodate",
+  "city": "Hakodate",
+  "cityKo": "하코다테",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Hakodate night view Mount Hakodate",
+  "must": [
+   "Hakodate"
+  ],
+  "categories": [
+   "Category:Hakodate"
+  ]
+ },
+ {
+  "id": "shizuoka",
+  "city": "Shizuoka",
+  "cityKo": "시즈오카",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Mount Fuji from Shizuoka Miho no Matsubara",
+  "must": [
+   "Shizuoka",
+   "Fuji",
+   "Miho"
+  ],
+  "categories": [
+   "Category:Mount_Fuji_from_Shizuoka_Prefecture"
+  ]
+ },
+ {
+  "id": "ishigaki",
+  "city": "Ishigaki",
+  "cityKo": "이시가키",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Kabira Bay Ishigaki",
+  "must": [
+   "Ishigaki",
+   "Kabira"
+  ],
+  "categories": [
+   "Category:Kabira_Bay"
+  ]
+ },
+ {
+  "id": "miyakojima",
+  "city": "Miyakojima",
+  "cityKo": "미야코지마",
+  "country": "Japan",
+  "timeZone": "Asia/Tokyo",
+  "currency": {
+   "code": "JPY",
+   "symbol": "¥",
+   "locale": "ja-JP"
+  },
+  "phraseLabel": "日本語",
+  "query": "Miyakojima Irabu Bridge sea",
+  "must": [
+   "Miyakojima",
+   "Miyako",
+   "Irabu"
+  ],
+  "categories": [
+   "Category:Miyakojima,_Okinawa"
+  ]
+ },
+ {
+  "id": "zhangjiajie",
+  "city": "Zhangjiajie",
+  "cityKo": "장자제",
+  "country": "China",
+  "timeZone": "Asia/Shanghai",
+  "currency": {
+   "code": "CNY",
+   "symbol": "¥",
+   "locale": "zh-CN"
+  },
+  "phraseLabel": "中文",
+  "query": "Zhangjiajie National Forest Park sandstone pillars",
+  "must": [
+   "Zhangjiajie",
+   "Wulingyuan",
+   "Tianmen"
+  ],
+  "categories": [
+   "Category:Zhangjiajie_National_Forest_Park"
+  ]
+ },
+ {
+  "id": "nanjing",
+  "city": "Nanjing",
+  "cityKo": "난징",
+  "country": "China",
+  "timeZone": "Asia/Shanghai",
+  "currency": {
+   "code": "CNY",
+   "symbol": "¥",
+   "locale": "zh-CN"
+  },
+  "phraseLabel": "中文",
+  "query": "Nanjing Confucius Temple Qinhuai River night",
+  "must": [
+   "Nanjing",
+   "Qinhuai",
+   "Zhongshan"
+  ],
+  "categories": [
+   "Category:Nanjing"
+  ]
+ },
+ {
+  "id": "changsha",
+  "city": "Changsha",
+  "cityKo": "창사",
+  "country": "China",
+  "timeZone": "Asia/Shanghai",
+  "currency": {
+   "code": "CNY",
+   "symbol": "¥",
+   "locale": "zh-CN"
+  },
+  "phraseLabel": "中文",
+  "query": "Changsha Orange Isle skyline night",
+  "must": [
+   "Changsha",
+   "Orange Isle",
+   "Juzizhou"
+  ],
+  "categories": [
+   "Category:Changsha"
+  ]
+ },
+ {
+  "id": "kunming",
+  "city": "Kunming",
+  "cityKo": "쿤밍",
+  "country": "China",
+  "timeZone": "Asia/Shanghai",
+  "currency": {
+   "code": "CNY",
+   "symbol": "¥",
+   "locale": "zh-CN"
+  },
+  "phraseLabel": "中文",
+  "query": "Stone Forest Shilin Kunming",
+  "must": [
+   "Kunming",
+   "Shilin",
+   "Stone Forest",
+   "Dianchi"
+  ],
+  "categories": [
+   "Category:Stone_Forest"
+  ]
+ },
+ {
+  "id": "xiamen",
+  "city": "Xiamen",
+  "cityKo": "샤먼",
+  "country": "China",
+  "timeZone": "Asia/Shanghai",
+  "currency": {
+   "code": "CNY",
+   "symbol": "¥",
+   "locale": "zh-CN"
+  },
+  "phraseLabel": "中文",
+  "query": "Gulangyu island Xiamen",
+  "must": [
+   "Xiamen",
+   "Gulangyu",
+   "Kulangsu"
+  ],
+  "categories": [
+   "Category:Gulangyu"
+  ]
+ },
+ {
+  "id": "harbin",
+  "city": "Harbin",
+  "cityKo": "하얼빈",
+  "country": "China",
+  "timeZone": "Asia/Shanghai",
+  "currency": {
+   "code": "CNY",
+   "symbol": "¥",
+   "locale": "zh-CN"
+  },
+  "phraseLabel": "中文",
+  "query": "Harbin Saint Sophia Cathedral",
+  "must": [
+   "Harbin"
+  ],
+  "categories": [
+   "Category:Harbin"
+  ]
+ },
+ {
+  "id": "yanji",
+  "city": "Yanji",
+  "cityKo": "옌지",
+  "country": "China",
+  "timeZone": "Asia/Shanghai",
+  "currency": {
+   "code": "CNY",
+   "symbol": "¥",
+   "locale": "zh-CN"
+  },
+  "phraseLabel": "中文",
+  "query": "Changbai Mountain Heaven Lake Tianchi",
+  "must": [
+   "Yanji",
+   "Changbai",
+   "Tianchi",
+   "Heaven Lake"
+  ],
+  "categories": [
+   "Category:Heaven_Lake_(Changbai_Mountains)"
+  ]
+ },
+ {
+  "id": "chongqing",
+  "city": "Chongqing",
+  "cityKo": "충칭",
+  "country": "China",
+  "timeZone": "Asia/Shanghai",
+  "currency": {
+   "code": "CNY",
+   "symbol": "¥",
+   "locale": "zh-CN"
+  },
+  "phraseLabel": "中文",
+  "query": "Chongqing Hongya Cave night skyline",
+  "must": [
+   "Chongqing",
+   "Hongya"
+  ],
+  "categories": [
+   "Category:Chongqing"
+  ]
+ },
+ {
+  "id": "guilin",
+  "city": "Guilin",
+  "cityKo": "구이린",
+  "country": "China",
+  "timeZone": "Asia/Shanghai",
+  "currency": {
+   "code": "CNY",
+   "symbol": "¥",
+   "locale": "zh-CN"
+  },
+  "phraseLabel": "中文",
+  "query": "Li River karst Yangshuo Guilin",
+  "must": [
+   "Guilin",
+   "Yangshuo",
+   "Li River"
+  ],
+  "categories": [
+   "Category:Li_River_(Guangxi)"
+  ]
+ },
+ {
+  "id": "dalian",
+  "city": "Dalian",
+  "cityKo": "다롄",
+  "country": "China",
+  "timeZone": "Asia/Shanghai",
+  "currency": {
+   "code": "CNY",
+   "symbol": "¥",
+   "locale": "zh-CN"
+  },
+  "phraseLabel": "中文",
+  "query": "Dalian Xinghai Square coast",
+  "must": [
+   "Dalian"
+  ],
+  "categories": [
+   "Category:Dalian"
+  ]
+ },
+ {
+  "id": "shenyang",
+  "city": "Shenyang",
+  "cityKo": "선양",
+  "country": "China",
+  "timeZone": "Asia/Shanghai",
+  "currency": {
+   "code": "CNY",
+   "symbol": "¥",
+   "locale": "zh-CN"
+  },
+  "phraseLabel": "中文",
+  "query": "Mukden Palace Shenyang",
+  "must": [
+   "Shenyang",
+   "Mukden"
+  ],
+  "categories": [
+   "Category:Mukden_Palace"
+  ]
+ },
+ {
+  "id": "yantai",
+  "city": "Yantai",
+  "cityKo": "옌타이",
+  "country": "China",
+  "timeZone": "Asia/Shanghai",
+  "currency": {
+   "code": "CNY",
+   "symbol": "¥",
+   "locale": "zh-CN"
+  },
+  "phraseLabel": "中文",
+  "query": "Penglai Pavilion Yantai coast",
+  "must": [
+   "Yantai",
+   "Penglai"
+  ],
+  "categories": [
+   "Category:Yantai"
+  ]
+ },
+ {
+  "id": "weihai",
+  "city": "Weihai",
+  "cityKo": "웨이하이",
+  "country": "China",
+  "timeZone": "Asia/Shanghai",
+  "currency": {
+   "code": "CNY",
+   "symbol": "¥",
+   "locale": "zh-CN"
+  },
+  "phraseLabel": "中文",
+  "query": "Weihai coast Liugong Island",
+  "must": [
+   "Weihai",
+   "Liugong"
+  ],
+  "categories": [
+   "Category:Weihai"
+  ]
+ },
+ {
+  "id": "wuhan",
+  "city": "Wuhan",
+  "cityKo": "우한",
+  "country": "China",
+  "timeZone": "Asia/Shanghai",
+  "currency": {
+   "code": "CNY",
+   "symbol": "¥",
+   "locale": "zh-CN"
+  },
+  "phraseLabel": "中文",
+  "query": "Yellow Crane Tower Wuhan",
+  "must": [
+   "Wuhan",
+   "Yellow Crane"
+  ],
+  "categories": [
+   "Category:Yellow_Crane_Tower"
+  ]
+ },
+ {
+  "id": "da-nang",
+  "city": "Da Nang",
+  "cityKo": "다낭",
+  "country": "Vietnam",
+  "timeZone": "Asia/Ho_Chi_Minh",
+  "currency": {
+   "code": "VND",
+   "symbol": "₫",
+   "locale": "vi-VN"
+  },
+  "phraseLabel": "Tiếng Việt",
+  "query": "Da Nang Dragon Bridge My Khe beach",
+  "must": [
+   "Da Nang",
+   "Đà Nẵng",
+   "Danang"
+  ],
+  "categories": [
+   "Category:Da_Nang"
+  ]
+ },
+ {
+  "id": "nha-trang",
+  "city": "Nha Trang",
+  "cityKo": "나트랑",
+  "country": "Vietnam",
+  "timeZone": "Asia/Ho_Chi_Minh",
+  "currency": {
+   "code": "VND",
+   "symbol": "₫",
+   "locale": "vi-VN"
+  },
+  "phraseLabel": "Tiếng Việt",
+  "query": "Nha Trang bay beach",
+  "must": [
+   "Nha Trang"
+  ],
+  "categories": [
+   "Category:Nha_Trang"
+  ]
+ },
+ {
+  "id": "phu-quoc",
+  "city": "Phu Quoc",
+  "cityKo": "푸꾸옥",
+  "country": "Vietnam",
+  "timeZone": "Asia/Ho_Chi_Minh",
+  "currency": {
+   "code": "VND",
+   "symbol": "₫",
+   "locale": "vi-VN"
+  },
+  "phraseLabel": "Tiếng Việt",
+  "query": "Phu Quoc beach island",
+  "must": [
+   "Phu Quoc",
+   "Phú Quốc"
+  ],
+  "categories": [
+   "Category:Phú_Quốc"
+  ]
+ },
+ {
+  "id": "chiang-mai",
+  "city": "Chiang Mai",
+  "cityKo": "치앙마이",
+  "country": "Thailand",
+  "timeZone": "Asia/Bangkok",
+  "currency": {
+   "code": "THB",
+   "symbol": "฿",
+   "locale": "th-TH"
+  },
+  "phraseLabel": "ไทย",
+  "query": "Wat Phra That Doi Suthep Chiang Mai",
+  "must": [
+   "Chiang Mai",
+   "Doi Suthep"
+  ],
+  "categories": [
+   "Category:Wat_Phra_That_Doi_Suthep"
+  ]
+ },
+ {
+  "id": "phuket",
+  "city": "Phuket",
+  "cityKo": "푸켓",
+  "country": "Thailand",
+  "timeZone": "Asia/Bangkok",
+  "currency": {
+   "code": "THB",
+   "symbol": "฿",
+   "locale": "th-TH"
+  },
+  "phraseLabel": "ไทย",
+  "query": "Phuket beach Phang Nga bay",
+  "must": [
+   "Phuket",
+   "Phang Nga",
+   "Patong"
+  ],
+  "categories": [
+   "Category:Phuket_Province"
+  ]
+ },
+ {
+  "id": "vientiane",
+  "city": "Vientiane",
+  "cityKo": "비엔티안",
+  "country": "Laos",
+  "timeZone": "Asia/Vientiane",
+  "currency": {
+   "code": "LAK",
+   "symbol": "₭",
+   "locale": "lo-LA"
+  },
+  "phraseLabel": "ລາວ",
+  "query": "Pha That Luang Vientiane",
+  "must": [
+   "Vientiane",
+   "That Luang",
+   "Patuxai"
+  ],
+  "categories": [
+   "Category:Pha_That_Luang"
+  ]
+ },
+ {
+  "id": "phnom-penh",
+  "city": "Phnom Penh",
+  "cityKo": "프놈펜",
+  "country": "Cambodia",
+  "timeZone": "Asia/Phnom_Penh",
+  "currency": {
+   "code": "USD",
+   "symbol": "$",
+   "locale": "en-US"
+  },
+  "phraseLabel": "ខ្មែរ",
+  "query": "Royal Palace Phnom Penh",
+  "must": [
+   "Phnom Penh"
+  ],
+  "categories": [
+   "Category:Royal_Palace,_Phnom_Penh"
+  ]
+ },
+ {
+  "id": "cebu",
+  "city": "Cebu",
+  "cityKo": "세부",
+  "country": "Philippines",
+  "timeZone": "Asia/Manila",
+  "currency": {
+   "code": "PHP",
+   "symbol": "₱",
+   "locale": "en-PH"
+  },
+  "phraseLabel": "English · Tagalog",
+  "query": "Cebu Mactan beach island",
+  "must": [
+   "Cebu",
+   "Mactan",
+   "Oslob",
+   "Moalboal"
+  ],
+  "categories": [
+   "Category:Cebu_City"
+  ]
+ },
+ {
+  "id": "bohol",
+  "city": "Bohol",
+  "cityKo": "보홀",
+  "country": "Philippines",
+  "timeZone": "Asia/Manila",
+  "currency": {
+   "code": "PHP",
+   "symbol": "₱",
+   "locale": "en-PH"
+  },
+  "phraseLabel": "English · Tagalog",
+  "query": "Chocolate Hills Bohol",
+  "must": [
+   "Bohol",
+   "Chocolate Hills",
+   "Panglao"
+  ],
+  "categories": [
+   "Category:Chocolate_Hills"
+  ]
+ },
+ {
+  "id": "boracay",
+  "city": "Boracay",
+  "cityKo": "보라카이",
+  "country": "Philippines",
+  "timeZone": "Asia/Manila",
+  "currency": {
+   "code": "PHP",
+   "symbol": "₱",
+   "locale": "en-PH"
+  },
+  "phraseLabel": "English · Tagalog",
+  "query": "Boracay White Beach sunset",
+  "must": [
+   "Boracay"
+  ],
+  "categories": [
+   "Category:Boracay"
+  ]
+ },
+ {
+  "id": "clark",
+  "city": "Clark (Angeles)",
+  "cityKo": "클락",
+  "country": "Philippines",
+  "timeZone": "Asia/Manila",
+  "currency": {
+   "code": "PHP",
+   "symbol": "₱",
+   "locale": "en-PH"
+  },
+  "phraseLabel": "English · Tagalog",
+  "query": "Mount Pinatubo crater lake",
+  "must": [
+   "Pinatubo",
+   "Clark",
+   "Angeles",
+   "Subic"
+  ],
+  "categories": [
+   "Category:Mount_Pinatubo"
+  ]
+ },
+ {
+  "id": "kota-kinabalu",
+  "city": "Kota Kinabalu",
+  "cityKo": "코타키나발루",
+  "country": "Malaysia",
+  "timeZone": "Asia/Kuala_Lumpur",
+  "currency": {
+   "code": "MYR",
+   "symbol": "RM",
+   "locale": "ms-MY"
+  },
+  "phraseLabel": "Bahasa Melayu",
+  "query": "Kota Kinabalu sunset Mount Kinabalu",
+  "must": [
+   "Kota Kinabalu",
+   "Kinabalu",
+   "Sabah"
+  ],
+  "categories": [
+   "Category:Kota_Kinabalu"
+  ]
+ },
+ {
+  "id": "kaohsiung",
+  "city": "Kaohsiung",
+  "cityKo": "가오슝",
+  "country": "Taiwan",
+  "timeZone": "Asia/Taipei",
+  "currency": {
+   "code": "TWD",
+   "symbol": "NT$",
+   "locale": "zh-TW"
+  },
+  "phraseLabel": "中文",
+  "query": "Kaohsiung Love River skyline night",
+  "must": [
+   "Kaohsiung",
+   "Cijin",
+   "Lotus Pond"
+  ],
+  "categories": [
+   "Category:Kaohsiung"
+  ]
+ },
+ {
+  "id": "taichung",
+  "city": "Taichung",
+  "cityKo": "타이중",
+  "country": "Taiwan",
+  "timeZone": "Asia/Taipei",
+  "currency": {
+   "code": "TWD",
+   "symbol": "NT$",
+   "locale": "zh-TW"
+  },
+  "phraseLabel": "中文",
+  "query": "Sun Moon Lake Taichung",
+  "must": [
+   "Taichung",
+   "Sun Moon Lake",
+   "Gaomei"
+  ],
+  "categories": [
+   "Category:Sun_Moon_Lake"
+  ]
+ },
+ {
+  "id": "brunei",
+  "city": "Bandar Seri Begawan",
+  "cityKo": "반다르스리브가완",
+  "country": "Brunei",
+  "timeZone": "Asia/Brunei",
+  "currency": {
+   "code": "BND",
+   "symbol": "B$",
+   "locale": "ms-BN"
+  },
+  "phraseLabel": "Bahasa Melayu",
+  "query": "Sultan Omar Ali Saifuddien Mosque Brunei",
+  "must": [
+   "Brunei",
+   "Bandar Seri Begawan",
+   "Saifuddien"
+  ],
+  "categories": [
+   "Category:Sultan_Omar_Ali_Saifuddien_Mosque"
+  ]
+ },
+ {
+  "id": "manado",
+  "city": "Manado",
+  "cityKo": "마나도",
+  "country": "Indonesia",
+  "timeZone": "Asia/Makassar",
+  "currency": {
+   "code": "IDR",
+   "symbol": "Rp",
+   "locale": "id-ID"
+  },
+  "phraseLabel": "Bahasa Indonesia",
+  "query": "Bunaken island Manado sea",
+  "must": [
+   "Manado",
+   "Bunaken"
+  ],
+  "categories": [
+   "Category:Bunaken_National_Park"
+  ]
+ },
+ {
+  "id": "ulaanbaatar",
+  "city": "Ulaanbaatar",
+  "cityKo": "울란바토르",
+  "country": "Mongolia",
+  "timeZone": "Asia/Ulaanbaatar",
+  "currency": {
+   "code": "MNT",
+   "symbol": "₮",
+   "locale": "mn-MN"
+  },
+  "phraseLabel": "Монгол",
+  "query": "Ulaanbaatar Gandan Monastery Sukhbaatar Square",
+  "must": [
+   "Ulaanbaatar",
+   "Ulan Bator",
+   "Gandan",
+   "Terelj"
+  ],
+  "categories": [
+   "Category:Ulaanbaatar"
+  ]
+ },
+ {
+  "id": "almaty",
+  "city": "Almaty",
+  "cityKo": "알마티",
+  "country": "Kazakhstan",
+  "timeZone": "Asia/Almaty",
+  "currency": {
+   "code": "KZT",
+   "symbol": "₸",
+   "locale": "kk-KZ"
+  },
+  "phraseLabel": "Қазақша · Русский",
+  "query": "Almaty mountains Big Almaty Lake",
+  "must": [
+   "Almaty",
+   "Alma-Ata"
+  ],
+  "categories": [
+   "Category:Almaty"
+  ]
+ },
+ {
+  "id": "astana",
+  "city": "Astana",
+  "cityKo": "아스타나",
+  "country": "Kazakhstan",
+  "timeZone": "Asia/Almaty",
+  "currency": {
+   "code": "KZT",
+   "symbol": "₸",
+   "locale": "kk-KZ"
+  },
+  "phraseLabel": "Қазақша · Русский",
+  "query": "Astana Bayterek tower skyline",
+  "must": [
+   "Astana",
+   "Bayterek",
+   "Nur-Sultan"
+  ],
+  "categories": [
+   "Category:Astana"
+  ]
+ },
+ {
+  "id": "tashkent",
+  "city": "Tashkent",
+  "cityKo": "타슈켄트",
+  "country": "Uzbekistan",
+  "timeZone": "Asia/Tashkent",
+  "currency": {
+   "code": "UZS",
+   "symbol": "soʻm",
+   "locale": "uz-UZ"
+  },
+  "phraseLabel": "Oʻzbekcha",
+  "query": "Tashkent Hazrati Imam complex",
+  "must": [
+   "Tashkent",
+   "Toshkent",
+   "Hazrati Imam"
+  ],
+  "categories": [
+   "Category:Tashkent"
+  ]
+ },
+ {
+  "id": "bishkek",
+  "city": "Bishkek",
+  "cityKo": "비슈케크",
+  "country": "Kyrgyzstan",
+  "timeZone": "Asia/Bishkek",
+  "currency": {
+   "code": "KGS",
+   "symbol": "сом",
+   "locale": "ky-KG"
+  },
+  "phraseLabel": "Кыргызча · Русский",
+  "query": "Ala Archa mountains Bishkek",
+  "must": [
+   "Bishkek",
+   "Ala Archa",
+   "Ala-Archa"
+  ],
+  "categories": [
+   "Category:Ala_Archa_National_Park"
+  ]
+ },
+ {
+  "id": "kathmandu",
+  "city": "Kathmandu",
+  "cityKo": "카트만두",
+  "country": "Nepal",
+  "timeZone": "Asia/Kathmandu",
+  "currency": {
+   "code": "NPR",
+   "symbol": "₨",
+   "locale": "ne-NP"
+  },
+  "phraseLabel": "नेपाली",
+  "query": "Boudhanath stupa Kathmandu",
+  "must": [
+   "Kathmandu",
+   "Boudhanath",
+   "Boudha",
+   "Swayambhunath"
+  ],
+  "categories": [
+   "Category:Boudhanath"
+  ]
+ },
+ {
+  "id": "colombo",
+  "city": "Colombo",
+  "cityKo": "콜롬보",
+  "country": "Sri Lanka",
+  "timeZone": "Asia/Colombo",
+  "currency": {
+   "code": "LKR",
+   "symbol": "Rs",
+   "locale": "si-LK"
+  },
+  "phraseLabel": "සිංහල · English",
+  "query": "Colombo Galle Face skyline Lotus Tower",
+  "must": [
+   "Colombo",
+   "Galle Face",
+   "Lotus Tower"
+  ],
+  "categories": [
+   "Category:Colombo"
+  ]
+ },
+ {
+  "id": "doha",
+  "city": "Doha",
+  "cityKo": "도하",
+  "country": "Qatar",
+  "timeZone": "Asia/Qatar",
+  "currency": {
+   "code": "QAR",
+   "symbol": "QR",
+   "locale": "ar-QA"
+  },
+  "phraseLabel": "العربية",
+  "query": "Doha skyline Corniche night",
+  "must": [
+   "Doha",
+   "Corniche",
+   "Katara"
+  ],
+  "categories": [
+   "Category:Doha"
+  ]
+ },
+ {
+  "id": "abu-dhabi",
+  "city": "Abu Dhabi",
+  "cityKo": "아부다비",
+  "country": "United Arab Emirates",
+  "timeZone": "Asia/Dubai",
+  "currency": {
+   "code": "AED",
+   "symbol": "د.إ",
+   "locale": "ar-AE"
+  },
+  "phraseLabel": "العربية",
+  "query": "Sheikh Zayed Grand Mosque Abu Dhabi",
+  "must": [
+   "Abu Dhabi",
+   "Zayed"
+  ],
+  "categories": [
+   "Category:Sheikh_Zayed_Mosque"
+  ]
+ },
+ {
+  "id": "milan",
+  "city": "Milan",
+  "cityKo": "밀라노",
+  "country": "Italy",
+  "timeZone": "Europe/Rome",
+  "currency": {
+   "code": "EUR",
+   "symbol": "€",
+   "locale": "it-IT"
+  },
+  "phraseLabel": "Italiano",
+  "query": "Milan Cathedral Duomo di Milano",
+  "must": [
+   "Milan",
+   "Milano",
+   "Duomo"
+  ],
+  "categories": [
+   "Category:Milan_Cathedral"
+  ]
+ },
+ {
+  "id": "budapest",
+  "city": "Budapest",
+  "cityKo": "부다페스트",
+  "country": "Hungary",
+  "timeZone": "Europe/Budapest",
+  "currency": {
+   "code": "HUF",
+   "symbol": "Ft",
+   "locale": "hu-HU"
+  },
+  "phraseLabel": "Magyar",
+  "query": "Hungarian Parliament Budapest Danube night",
+  "must": [
+   "Budapest",
+   "Parliament",
+   "Danube"
+  ],
+  "categories": [
+   "Category:Hungarian_Parliament_Building"
+  ]
+ },
+ {
+  "id": "san-francisco",
+  "city": "San Francisco",
+  "cityKo": "샌프란시스코",
+  "country": "United States",
+  "timeZone": "America/Los_Angeles",
+  "currency": {
+   "code": "USD",
+   "symbol": "$",
+   "locale": "en-US"
+  },
+  "phraseLabel": "English",
+  "query": "Golden Gate Bridge San Francisco",
+  "must": [
+   "San Francisco",
+   "Golden Gate"
+  ],
+  "categories": [
+   "Category:Golden_Gate_Bridge"
+  ]
+ },
+ {
+  "id": "seattle",
+  "city": "Seattle",
+  "cityKo": "시애틀",
+  "country": "United States",
+  "timeZone": "America/Los_Angeles",
+  "currency": {
+   "code": "USD",
+   "symbol": "$",
+   "locale": "en-US"
+  },
+  "phraseLabel": "English",
+  "query": "Seattle skyline Space Needle Mount Rainier",
+  "must": [
+   "Seattle",
+   "Space Needle"
+  ],
+  "categories": [
+   "Category:Skylines_of_Seattle"
+  ]
+ },
+ {
+  "id": "chicago",
+  "city": "Chicago",
+  "cityKo": "시카고",
+  "country": "United States",
+  "timeZone": "America/Chicago",
+  "currency": {
+   "code": "USD",
+   "symbol": "$",
+   "locale": "en-US"
+  },
+  "phraseLabel": "English",
+  "query": "Chicago skyline river Cloud Gate",
+  "must": [
+   "Chicago",
+   "Cloud Gate"
+  ],
+  "categories": [
+   "Category:Skylines_of_Chicago"
+  ]
+ },
+ {
+  "id": "boston",
+  "city": "Boston",
+  "cityKo": "보스턴",
+  "country": "United States",
+  "timeZone": "America/New_York",
+  "currency": {
+   "code": "USD",
+   "symbol": "$",
+   "locale": "en-US"
+  },
+  "phraseLabel": "English",
+  "query": "Boston skyline Charles River",
+  "must": [
+   "Boston"
+  ],
+  "categories": [
+   "Category:Skylines_of_Boston"
+  ]
+ },
+ {
+  "id": "washington-dc",
+  "city": "Washington, D.C.",
+  "cityKo": "워싱턴 D.C.",
+  "country": "United States",
+  "timeZone": "America/New_York",
+  "currency": {
+   "code": "USD",
+   "symbol": "$",
+   "locale": "en-US"
+  },
+  "phraseLabel": "English",
+  "query": "United States Capitol Washington Lincoln Memorial",
+  "must": [
+   "Washington",
+   "Capitol",
+   "Lincoln Memorial"
+  ],
+  "categories": [
+   "Category:United_States_Capitol"
+  ]
+ },
+ {
+  "id": "salt-lake-city",
+  "city": "Salt Lake City",
+  "cityKo": "솔트레이크시티",
+  "country": "United States",
+  "timeZone": "America/Denver",
+  "currency": {
+   "code": "USD",
+   "symbol": "$",
+   "locale": "en-US"
+  },
+  "phraseLabel": "English",
+  "query": "Salt Lake City skyline Wasatch mountains",
+  "must": [
+   "Salt Lake",
+   "Wasatch"
+  ],
+  "categories": [
+   "Category:Skylines_of_Salt_Lake_City"
+  ]
+ },
+ {
+  "id": "calgary",
+  "city": "Calgary (Banff)",
+  "cityKo": "캘거리(밴프)",
+  "country": "Canada",
+  "timeZone": "America/Edmonton",
+  "currency": {
+   "code": "CAD",
+   "symbol": "C$",
+   "locale": "en-CA"
+  },
+  "phraseLabel": "English",
+  "query": "Moraine Lake Banff Lake Louise",
+  "must": [
+   "Banff",
+   "Moraine",
+   "Louise",
+   "Calgary"
+  ],
+  "categories": [
+   "Category:Moraine_Lake"
+  ]
+ },
+ {
+  "id": "brisbane",
+  "city": "Brisbane",
+  "cityKo": "브리즈번",
+  "country": "Australia",
+  "timeZone": "Australia/Brisbane",
+  "currency": {
+   "code": "AUD",
+   "symbol": "A$",
+   "locale": "en-AU"
+  },
+  "phraseLabel": "English",
+  "query": "Brisbane skyline Story Bridge river",
+  "must": [
+   "Brisbane",
+   "Story Bridge"
+  ],
+  "categories": [
+   "Category:Skylines_of_Brisbane"
+  ]
+ },
+ {
+  "id": "melbourne",
+  "city": "Melbourne",
+  "cityKo": "멜버른",
+  "country": "Australia",
+  "timeZone": "Australia/Melbourne",
+  "currency": {
+   "code": "AUD",
+   "symbol": "A$",
+   "locale": "en-AU"
+  },
+  "phraseLabel": "English",
+  "query": "Melbourne Flinders Street Yarra skyline",
+  "must": [
+   "Melbourne",
+   "Flinders",
+   "Yarra"
+  ],
+  "categories": [
+   "Category:Skylines_of_Melbourne"
+  ]
+ }
+]

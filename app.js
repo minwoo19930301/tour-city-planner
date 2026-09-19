@@ -53,6 +53,15 @@ const COUNTRY_SORT_ORDER = [
     'Singapore',
     'India',
     'Indonesia',
+    'Qatar',
+    'Nepal',
+    'Kyrgyzstan',
+    'Uzbekistan',
+    'Kazakhstan',
+    'Mongolia',
+    'Brunei',
+    'Cambodia',
+    'Laos',
     'Saudi Arabia',
     'United States',
     'Canada',
@@ -61,6 +70,7 @@ const COUNTRY_SORT_ORDER = [
     'United Kingdom',
     'Germany',
     'Czech Republic',
+    'Hungary',
     'Poland',
     'Austria',
     'Netherlands',
@@ -98,6 +108,17 @@ const COUNTRY_SORT_ORDER = [
     'Argentina'
 ];
 const COUNTRY_REGIONS = {
+    Hungary: 'europe',
+    Qatar: 'asia',
+    'Sri Lanka': 'asia',
+    Nepal: 'asia',
+    Kyrgyzstan: 'asia',
+    Uzbekistan: 'asia',
+    Kazakhstan: 'asia',
+    Mongolia: 'asia',
+    Brunei: 'asia',
+    Cambodia: 'asia',
+    Laos: 'asia',
     'South Korea': 'asia',
     Japan: 'asia',
     'Hong Kong': 'asia',
@@ -505,8 +526,8 @@ const DESTINATIONS = {
         footer: "Busan is salt air, bridge lights, and a bowl of milmyeon.",
         heroImage: "assets/heroes/busan.jpg",
         heroPosition: "38% 55%",
-        accent: "#0284C7",
-        accentRgb: "2, 132, 199",
+        accent: "#026AC7",
+        accentRgb: "2, 106, 199",
         ink: "#0C2E4E",
         inkRgb: "12, 46, 78",
         overlayTop: "rgba(12, 46, 78, 0.30)",
@@ -658,8 +679,8 @@ const DESTINATIONS = {
         footer: "Jeju is basalt, tangerines, and wind that never quite stops.",
         heroImage: "assets/heroes/jeju.jpg",
         heroPosition: "50% 55%",
-        accent: "#F97316",
-        accentRgb: "249, 115, 22",
+        accent: "#FB923C",
+        accentRgb: "251, 146, 60",
         ink: "#2F3437",
         inkRgb: "47, 52, 55",
         overlayTop: "rgba(47, 52, 55, 0.30)",
@@ -1020,8 +1041,8 @@ const DESTINATIONS = {
         footer: "Osaka runs on neon, broth, and people who talk to strangers.",
         heroImage: "assets/heroes/osaka.jpg",
         heroPosition: "60% center",
-        accent: "#DC2626",
-        accentRgb: "220, 38, 38",
+        accent: "#DC269E",
+        accentRgb: "220, 38, 158",
         ink: "#3B0A0A",
         inkRgb: "59, 10, 10",
         overlayTop: "rgba(59, 10, 10, 0.40)",
@@ -1372,8 +1393,8 @@ const DESTINATIONS = {
         footer: "Fukuoka is a port city: sea air by day, yatai stools by night.",
         heroImage: "assets/heroes/fukuoka.jpg",
         heroPosition: "50% center",
-        accent: "#0284C7",
-        accentRgb: "2, 132, 199",
+        accent: "#0EA5E9",
+        accentRgb: "14, 165, 233",
         ink: "#0C4A6E",
         inkRgb: "12, 74, 110",
         overlayTop: "rgba(12, 74, 110, 0.40)",
@@ -1701,8 +1722,8 @@ const DESTINATIONS = {
         footer: "Nagoya is golden roofs, miso-dark food, and easy trains.",
         heroImage: "assets/heroes/nagoya.jpg",
         heroPosition: "55% center",
-        accent: "#CA8A04",
-        accentRgb: "202, 138, 4",
+        accent: "#CAA404",
+        accentRgb: "202, 164, 4",
         ink: "#3F2D0B",
         inkRgb: "63, 45, 11",
         overlayTop: "rgba(63, 45, 11, 0.40)",
@@ -2022,6 +2043,3303 @@ const DESTINATIONS = {
             }
         ]
     },
+    kagoshima: {
+        id: "kagoshima",
+        city: "Kagoshima",
+        country: "Japan",
+        summary: "사쿠라지마 화산 연기와 센간엔 정원, 이부스키 모래찜질과 텐몬칸 흑돼지까지 남규슈의 뜨거운 기운을 담은 템플릿입니다.",
+        footer: "Kagoshima lives under a smoking volcano and sleeps in warm sand.",
+        heroImage: "assets/heroes/kagoshima.jpg",
+        heroPosition: "center center",
+        accent: "#B91C1C",
+        accentRgb: "185, 28, 28",
+        ink: "#450A0A",
+        inkRgb: "69, 10, 10",
+        overlayTop: "rgba(69, 10, 10, 0.38)",
+        overlayBottom: "rgba(28, 12, 12, 0.88)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 31.5966,
+            longitude: 130.5571
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 9,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "桜島は今日見えますか？",
+                pron: "사쿠라지마와 쿄 미에마스카",
+                meaning: "오늘 사쿠라지마가 보이나요?"
+            },
+            {
+                text: "砂むし温泉を予約したいです",
+                pron: "스나무시온센오 요야쿠시타이데스",
+                meaning: "모래찜질 온천을 예약하고 싶어요"
+            },
+            {
+                text: "黒豚のとんかつをください",
+                pron: "쿠로부타노 톤카츠오 쿠다사이",
+                meaning: "흑돼지 돈카츠 주세요"
+            },
+            {
+                text: "芋焼酎をロックで",
+                pron: "이모쇼츄오 롯쿠데",
+                meaning: "고구마 소주를 온더록으로요"
+            },
+            {
+                text: "フェリー乗り場はどこですか？",
+                pron: "페리 노리바와 도코데스카",
+                meaning: "페리 선착장이 어디인가요?"
+            },
+            {
+                text: "しろくまをください",
+                pron: "시로쿠마오 쿠다사이",
+                meaning: "시로쿠마(가고시마 빙수) 주세요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "텐몬칸 & 시로야마",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "시로야마 전망대 사쿠라지마 조망",
+                        type: "binoculars",
+                        location: "Shiroyama Observatory"
+                    },
+                    {
+                        time: "13:00",
+                        title: "텐몬칸 흑돼지 돈카츠 점심",
+                        type: "utensils-crossed",
+                        location: "Tenmonkan"
+                    },
+                    {
+                        time: "18:30",
+                        title: "아뮤플라자 관람차 야경",
+                        type: "moon-star",
+                        location: "Amu Plaza Kagoshima"
+                    }
+                ]
+            },
+            {
+                title: "사쿠라지마",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "사쿠라지마 페리 승선",
+                        type: "ship",
+                        location: "Sakurajima Ferry Terminal"
+                    },
+                    {
+                        time: "11:00",
+                        title: "유노히라 전망소 분화구 조망",
+                        type: "camera",
+                        location: "Yunohira Observatory"
+                    },
+                    {
+                        time: "15:00",
+                        title: "용암 나기사 공원 족욕",
+                        type: "trees",
+                        location: "Sakurajima Yogan Nagisa Park"
+                    }
+                ]
+            },
+            {
+                title: "이부스키",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "이부스키노 타마테바코 열차",
+                        type: "train-front",
+                        location: "Ibusuki Station"
+                    },
+                    {
+                        time: "12:00",
+                        title: "사라쿠 모래찜질 온천",
+                        type: "sparkles",
+                        location: "Sunamushi Kaikan Saraku"
+                    },
+                    {
+                        time: "15:30",
+                        title: "이케다 호수 & 가이몬다케 조망",
+                        type: "sun",
+                        location: "Lake Ikeda"
+                    }
+                ]
+            },
+            {
+                title: "센간엔 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "센간엔 정원 산책",
+                        type: "landmark",
+                        location: "Sengan-en"
+                    },
+                    {
+                        time: "12:30",
+                        title: "텐몬칸 무자키 시로쿠마 빙수",
+                        type: "coffee",
+                        location: "Tenmonkan Mujaki"
+                    },
+                    {
+                        time: "15:30",
+                        title: "가고시마 공항 이동",
+                        type: "plane",
+                        location: "Kagoshima Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    kumamoto: {
+        id: "kumamoto",
+        city: "Kumamoto",
+        country: "Japan",
+        summary: "구마모토성 검은 천수각에서 스이젠지 정원, 아소 분화구와 구로카와 노천탕까지 불의 나라를 가로지르는 템플릿입니다.",
+        footer: "Kumamoto is a black castle, a green caldera, and steam in the valley.",
+        heroImage: "assets/heroes/kumamoto.jpg",
+        heroPosition: "center center",
+        accent: "#05968F",
+        accentRgb: "5, 150, 143",
+        ink: "#022C22",
+        inkRgb: "2, 44, 34",
+        overlayTop: "rgba(2, 44, 34, 0.38)",
+        overlayBottom: "rgba(6, 22, 18, 0.88)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 32.8032,
+            longitude: 130.7079
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 10,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "天守閣まで行けますか？",
+                pron: "텐슈카쿠마데 이케마스카",
+                meaning: "천수각까지 올라갈 수 있나요?"
+            },
+            {
+                text: "馬刺しをください",
+                pron: "바사시오 쿠다사이",
+                meaning: "말고기 회 주세요"
+            },
+            {
+                text: "入湯手形はどこで買えますか？",
+                pron: "뉴토테가타와 도코데 카에마스카",
+                meaning: "온천 순회권(입탕수형)은 어디서 살 수 있나요?"
+            },
+            {
+                text: "阿蘇行きのバスは何番ですか？",
+                pron: "아소유키노 바스와 난반데스카",
+                meaning: "아소행 버스는 몇 번인가요?"
+            },
+            {
+                text: "くまモングッズはありますか？",
+                pron: "쿠마몬 굿즈와 아리마스카",
+                meaning: "구마몬 굿즈 있나요?"
+            },
+            {
+                text: "火口は今日見学できますか？",
+                pron: "카코와 쿄 켄가쿠 데키마스카",
+                meaning: "오늘 분화구 견학할 수 있나요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "구마모토성 & 시내",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "구마모토성 천수각",
+                        type: "landmark",
+                        location: "Kumamoto Castle"
+                    },
+                    {
+                        time: "12:30",
+                        title: "사쿠라노바바 조사이엔 점심",
+                        type: "utensils-crossed",
+                        location: "Sakuranobaba Josaien"
+                    },
+                    {
+                        time: "15:30",
+                        title: "구마모토 현립미술관",
+                        type: "building-2",
+                        location: "Kumamoto Prefectural Museum of Art"
+                    }
+                ]
+            },
+            {
+                title: "스이젠지 & 상점가",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "스이젠지 조주엔 정원",
+                        type: "trees",
+                        location: "Suizenji Jojuen Garden"
+                    },
+                    {
+                        time: "13:00",
+                        title: "구마몬 스퀘어",
+                        type: "gift",
+                        location: "Kumamon Square"
+                    },
+                    {
+                        time: "18:00",
+                        title: "시모토리 아케이드 말고기 회 저녁",
+                        type: "shopping-bag",
+                        location: "Shimotori Arcade"
+                    }
+                ]
+            },
+            {
+                title: "아소 & 구로카와 온천",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "아소역으로 이동",
+                        type: "train-front",
+                        location: "Aso Station"
+                    },
+                    {
+                        time: "10:30",
+                        title: "나카다케 분화구",
+                        type: "camera",
+                        location: "Mount Aso Nakadake Crater"
+                    },
+                    {
+                        time: "16:30",
+                        title: "구로카와 온천 노천탕 순회",
+                        type: "sparkles",
+                        location: "Kurokawa Onsen"
+                    }
+                ]
+            },
+            {
+                title: "아소 북부 & 이동",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "다이칸보 전망대 칼데라 조망",
+                        type: "binoculars",
+                        location: "Daikanbo"
+                    },
+                    {
+                        time: "11:30",
+                        title: "구사센리 초원 산책",
+                        type: "sun",
+                        location: "Kusasenri"
+                    },
+                    {
+                        time: "16:00",
+                        title: "구마모토 공항 이동",
+                        type: "plane",
+                        location: "Kumamoto Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    nagasaki: {
+        id: "nagasaki",
+        city: "Nagasaki",
+        country: "Japan",
+        summary: "글로버 가든과 데지마의 이국 정취, 짬뽕 골목과 군함도, 이나사야마 천만 불 야경을 엮은 항구 도시 템플릿입니다.",
+        footer: "Nagasaki layers Dutch, Chinese, and Japanese stories over one harbor.",
+        heroImage: "assets/heroes/nagasaki.jpg",
+        heroPosition: "center center",
+        accent: "#AB3AED",
+        accentRgb: "171, 58, 237",
+        ink: "#2E1065",
+        inkRgb: "46, 16, 101",
+        overlayTop: "rgba(46, 16, 101, 0.38)",
+        overlayBottom: "rgba(20, 12, 40, 0.88)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 32.7503,
+            longitude: 129.8779
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 11,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "ちゃんぽんを一つください",
+                pron: "챰폰오 히토츠 쿠다사이",
+                meaning: "짬뽕 하나 주세요"
+            },
+            {
+                text: "角煮まんじゅうを一つください",
+                pron: "카쿠니만쥬오 히토츠 쿠다사이",
+                meaning: "카쿠니만쥬(돼지고기 찐빵) 하나 주세요"
+            },
+            {
+                text: "ロープウェイは動いていますか？",
+                pron: "로프웨이와 우고이테 이마스카",
+                meaning: "로프웨이 운행하고 있나요?"
+            },
+            {
+                text: "軍艦島ツアーは何時発ですか？",
+                pron: "군칸지마 츠아와 난지 하츠데스카",
+                meaning: "군함도 투어는 몇 시 출발인가요?"
+            },
+            {
+                text: "カステラをお土産にしたいです",
+                pron: "카스테라오 오미야게니 시타이데스",
+                meaning: "카스텔라를 선물용으로 사고 싶어요"
+            },
+            {
+                text: "夜景はどこから見えますか？",
+                pron: "야케이와 도코카라 미에마스카",
+                meaning: "야경은 어디서 볼 수 있나요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "미나미야마테 & 이나사야마",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "글로버 가든",
+                        type: "landmark",
+                        location: "Glover Garden"
+                    },
+                    {
+                        time: "13:00",
+                        title: "데지마 네덜란드 상관",
+                        type: "building-2",
+                        location: "Dejima"
+                    },
+                    {
+                        time: "18:30",
+                        title: "이나사야마 로프웨이 야경",
+                        type: "moon-star",
+                        location: "Mount Inasa"
+                    }
+                ]
+            },
+            {
+                title: "평화공원 & 신치 차이나타운",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "평화공원 & 원폭자료관",
+                        type: "landmark",
+                        location: "Nagasaki Peace Park"
+                    },
+                    {
+                        time: "13:00",
+                        title: "신치 차이나타운 짬뽕",
+                        type: "utensils-crossed",
+                        location: "Nagasaki Shinchi Chinatown"
+                    },
+                    {
+                        time: "16:00",
+                        title: "메가네바시 안경다리",
+                        type: "bridge",
+                        location: "Meganebashi Bridge"
+                    }
+                ]
+            },
+            {
+                title: "군함도 & 시안바시",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "군함도 상륙 크루즈",
+                        type: "ship",
+                        location: "Hashima Island"
+                    },
+                    {
+                        time: "13:30",
+                        title: "군함도 디지털 뮤지엄",
+                        type: "building",
+                        location: "Gunkanjima Digital Museum"
+                    },
+                    {
+                        time: "17:00",
+                        title: "후쿠사야 본점 카스텔라",
+                        type: "gift",
+                        location: "Fukusaya Main Store"
+                    }
+                ]
+            },
+            {
+                title: "하우스텐보스 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "하우스텐보스 입장",
+                        type: "ticket",
+                        location: "Huis Ten Bosch"
+                    },
+                    {
+                        time: "13:00",
+                        title: "돔토른 전망대 & 꽃 정원",
+                        type: "tower-control",
+                        location: "Domtoren"
+                    },
+                    {
+                        time: "17:00",
+                        title: "나가사키 공항 이동",
+                        type: "plane",
+                        location: "Nagasaki Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    oita: {
+        id: "oita",
+        city: "Oita (Beppu)",
+        country: "Japan",
+        summary: "벳푸 지옥순례의 증기와 유후인 긴린코 아침 안개, 다카사키야마 원숭이까지 온천 향으로 채운 4일 템플릿입니다.",
+        footer: "Oita is steam rising from every street corner in Beppu.",
+        heroImage: "assets/heroes/oita.jpg",
+        heroPosition: "center center",
+        accent: "#0E7490",
+        accentRgb: "14, 116, 144",
+        ink: "#083344",
+        inkRgb: "8, 51, 68",
+        overlayTop: "rgba(8, 51, 68, 0.38)",
+        overlayBottom: "rgba(6, 24, 32, 0.88)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 33.2846,
+            longitude: 131.4914
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 12,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "日帰り入浴はできますか？",
+                pron: "히가에리 뉴요쿠와 데키마스카",
+                meaning: "당일 입욕이 가능한가요?"
+            },
+            {
+                text: "地獄めぐりの共通券をください",
+                pron: "지고쿠메구리노 쿄츠켄오 쿠다사이",
+                meaning: "지옥순례 공통권 주세요"
+            },
+            {
+                text: "家族風呂は空いていますか？",
+                pron: "카조쿠부로와 아이테 이마스카",
+                meaning: "가족탕 비어 있나요?"
+            },
+            {
+                text: "とり天をください",
+                pron: "토리텐오 쿠다사이",
+                meaning: "토리텐(오이타식 닭튀김) 주세요"
+            },
+            {
+                text: "由布院行きのバス乗り場はどこですか？",
+                pron: "유후인유키노 바스노리바와 도코데스카",
+                meaning: "유후인행 버스 타는 곳이 어디인가요?"
+            },
+            {
+                text: "足湯は無料ですか？",
+                pron: "아시유와 무료데스카",
+                meaning: "족욕은 무료인가요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "벳푸 간나와 지옥순례",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "우미지고쿠 바다 지옥",
+                        type: "sparkles",
+                        location: "Umi Jigoku"
+                    },
+                    {
+                        time: "12:30",
+                        title: "간나와 지옥찜 공방 점심",
+                        type: "utensils-crossed",
+                        location: "Jigokumushi Kobo Kannawa"
+                    },
+                    {
+                        time: "15:00",
+                        title: "치노이케 지옥 & 다쓰마키 지옥",
+                        type: "camera",
+                        location: "Chinoike Jigoku"
+                    }
+                ]
+            },
+            {
+                title: "유후인",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "긴린코 호수 아침 산책",
+                        type: "trees",
+                        location: "Kinrin Lake"
+                    },
+                    {
+                        time: "12:30",
+                        title: "유노쓰보 거리 먹거리 & 쇼핑",
+                        type: "shopping-bag",
+                        location: "Yunotsubo Street"
+                    },
+                    {
+                        time: "15:00",
+                        title: "유후인 플로럴 빌리지 카페",
+                        type: "coffee",
+                        location: "Yufuin Floral Village"
+                    }
+                ]
+            },
+            {
+                title: "다카사키야마 & 오이타 시내",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "다카사키야마 야생 원숭이",
+                        type: "binoculars",
+                        location: "Takasakiyama Natural Zoological Garden"
+                    },
+                    {
+                        time: "12:30",
+                        title: "우미타마고 수족관",
+                        type: "ship",
+                        location: "Oita Marine Palace Aquarium Umitamago"
+                    },
+                    {
+                        time: "18:00",
+                        title: "오이타역 토리텐 저녁",
+                        type: "utensils-crossed",
+                        location: "Oita Station"
+                    }
+                ]
+            },
+            {
+                title: "벳푸 온천 & 이동",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "다케가와라 온천 모래찜질",
+                        type: "sparkles",
+                        location: "Takegawara Onsen"
+                    },
+                    {
+                        time: "11:30",
+                        title: "벳푸 타워 & 온천 거리 산책",
+                        type: "tower-control",
+                        location: "Beppu Tower"
+                    },
+                    {
+                        time: "15:00",
+                        title: "오이타 공항 이동",
+                        type: "plane",
+                        location: "Oita Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    miyazaki: {
+        id: "miyazaki",
+        city: "Miyazaki",
+        country: "Japan",
+        summary: "아오시마 도깨비 빨래판과 니치난 해안 드라이브, 다카치호 협곡 보트와 치킨난반으로 남국 햇살을 담은 템플릿입니다.",
+        footer: "Miyazaki is palm trees, surf, and myths carved into the coast.",
+        heroImage: "assets/heroes/miyazaki.jpg",
+        heroPosition: "center center",
+        accent: "#EA3B0C",
+        accentRgb: "234, 59, 12",
+        ink: "#431407",
+        inkRgb: "67, 20, 7",
+        overlayTop: "rgba(67, 20, 7, 0.36)",
+        overlayBottom: "rgba(30, 14, 8, 0.86)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 31.9077,
+            longitude: 131.4202
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 8,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "チキン南蛮をください",
+                pron: "치킨난반오 쿠다사이",
+                meaning: "치킨난반 주세요"
+            },
+            {
+                text: "マンゴーはありますか？",
+                pron: "망고와 아리마스카",
+                meaning: "망고 있나요?"
+            },
+            {
+                text: "高千穂までどのくらいかかりますか？",
+                pron: "타카치호마데 도노쿠라이 카카리마스카",
+                meaning: "다카치호까지 얼마나 걸리나요?"
+            },
+            {
+                text: "ボートを借りたいです",
+                pron: "보토오 카리타이데스",
+                meaning: "보트를 빌리고 싶어요"
+            },
+            {
+                text: "運玉を投げてみたいです",
+                pron: "운타마오 나게테 미타이데스",
+                meaning: "운타마(행운 구슬)를 던져보고 싶어요"
+            },
+            {
+                text: "地鶏の炭火焼きをください",
+                pron: "지도리노 스미비야키오 쿠다사이",
+                meaning: "토종닭 숯불구이 주세요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "아오시마 & 니치난 해안",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "아오시마 신사 & 도깨비 빨래판",
+                        type: "sun",
+                        location: "Aoshima Shrine"
+                    },
+                    {
+                        time: "13:00",
+                        title: "선멧세 니치난 모아이",
+                        type: "camera",
+                        location: "Sun Messe Nichinan"
+                    },
+                    {
+                        time: "15:30",
+                        title: "우도신궁 운타마 던지기",
+                        type: "landmark",
+                        location: "Udo Shrine"
+                    }
+                ]
+            },
+            {
+                title: "다카치호",
+                activities: [
+                    {
+                        time: "10:30",
+                        title: "다카치호 협곡 보트",
+                        type: "ship",
+                        location: "Takachiho Gorge"
+                    },
+                    {
+                        time: "13:30",
+                        title: "다카치호 신사",
+                        type: "landmark",
+                        location: "Takachiho Shrine"
+                    },
+                    {
+                        time: "16:00",
+                        title: "아마노이와토 신사 & 아마노야스카와라",
+                        type: "sparkles",
+                        location: "Amano Iwato Shrine"
+                    }
+                ]
+            },
+            {
+                title: "미야자키 시내 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "헤이와다이 공원 하니와 정원",
+                        type: "trees",
+                        location: "Heiwadai Park"
+                    },
+                    {
+                        time: "12:30",
+                        title: "오구라 본점 치킨난반 점심",
+                        type: "utensils-crossed",
+                        location: "Ogura Honten"
+                    },
+                    {
+                        time: "15:30",
+                        title: "미야자키 공항 이동",
+                        type: "plane",
+                        location: "Miyazaki Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    kitakyushu: {
+        id: "kitakyushu",
+        city: "Kitakyushu",
+        country: "Japan",
+        summary: "모지코 레트로 항구와 고쿠라성, 탄가시장 다이가쿠동, 가와치후지엔 등나무 터널을 잇는 공업 도시의 반전 매력 템플릿입니다.",
+        footer: "Kitakyushu pairs a brick-red retro port with a castle and a wisteria tunnel.",
+        heroImage: "assets/heroes/kitakyushu.jpg",
+        heroPosition: "center center",
+        accent: "#A21CAF",
+        accentRgb: "162, 28, 175",
+        ink: "#4A044E",
+        inkRgb: "74, 4, 78",
+        overlayTop: "rgba(74, 4, 78, 0.38)",
+        overlayBottom: "rgba(28, 10, 30, 0.88)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 33.8834,
+            longitude: 130.8752
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 7,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "焼きカレーをください",
+                pron: "야키카레오 쿠다사이",
+                meaning: "야키카레(구운 카레) 주세요"
+            },
+            {
+                text: "関門トンネルを歩いて渡れますか？",
+                pron: "칸몬 톤네루오 아루이테 와타레마스카",
+                meaning: "간몬 터널을 걸어서 건널 수 있나요?"
+            },
+            {
+                text: "大学丼はどこで食べられますか？",
+                pron: "다이가쿠동와 도코데 타베라레마스카",
+                meaning: "다이가쿠동(탄가시장 덮밥)은 어디서 먹을 수 있나요?"
+            },
+            {
+                text: "ふぐ料理はありますか？",
+                pron: "후구료리와 아리마스카",
+                meaning: "복어 요리 있나요?"
+            },
+            {
+                text: "藤は今が見頃ですか？",
+                pron: "후지와 이마가 미고로데스카",
+                meaning: "등나무꽃은 지금이 볼 때인가요?"
+            },
+            {
+                text: "小倉城まで歩けますか？",
+                pron: "코쿠라죠마데 아루케마스카",
+                meaning: "고쿠라성까지 걸어갈 수 있나요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "고쿠라",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "고쿠라성 천수각",
+                        type: "landmark",
+                        location: "Kokura Castle"
+                    },
+                    {
+                        time: "12:30",
+                        title: "탄가시장 다이가쿠동",
+                        type: "store",
+                        location: "Tanga Market"
+                    },
+                    {
+                        time: "17:30",
+                        title: "리버워크 기타큐슈 & 무라사키강 야경",
+                        type: "moon-star",
+                        location: "Riverwalk Kitakyushu"
+                    }
+                ]
+            },
+            {
+                title: "모지코 레트로",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "모지코역 레트로 거리 산책",
+                        type: "train-front",
+                        location: "Mojiko Station"
+                    },
+                    {
+                        time: "12:30",
+                        title: "모지코 야키카레 점심",
+                        type: "utensils-crossed",
+                        location: "Mojiko Retro"
+                    },
+                    {
+                        time: "15:00",
+                        title: "간몬 인도 터널로 시모노세키 왕복",
+                        type: "map",
+                        location: "Kanmon Pedestrian Tunnel"
+                    }
+                ]
+            },
+            {
+                title: "야하타 & 이동",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "가와치 후지엔 등나무 터널",
+                        type: "trees",
+                        location: "Kawachi Wisteria Garden"
+                    },
+                    {
+                        time: "12:30",
+                        title: "사라쿠라산 케이블카 전망",
+                        type: "binoculars",
+                        location: "Mount Sarakura"
+                    },
+                    {
+                        time: "16:00",
+                        title: "기타큐슈 공항 이동",
+                        type: "plane",
+                        location: "Kitakyushu Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    saga: {
+        id: "saga",
+        city: "Saga",
+        country: "Japan",
+        summary: "유토쿠이나리의 주홍 회랑과 가라쓰 바다의 오징어 활어회, 우레시노 온천과 아리타 도자기 마을을 도는 소박한 템플릿입니다.",
+        footer: "Saga is quiet: vermilion shrines, squid boats, and porcelain kilns.",
+        heroImage: "assets/heroes/saga.jpg",
+        heroPosition: "center center",
+        accent: "#1E2DAF",
+        accentRgb: "30, 45, 175",
+        ink: "#172554",
+        inkRgb: "23, 37, 84",
+        overlayTop: "rgba(23, 37, 84, 0.38)",
+        overlayBottom: "rgba(10, 16, 36, 0.88)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 33.2635,
+            longitude: 130.3009
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 13,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "嬉野茶をください",
+                pron: "우레시노차오 쿠다사이",
+                meaning: "우레시노 차 주세요"
+            },
+            {
+                text: "この器は電子レンジで使えますか？",
+                pron: "코노 우츠와와 덴시렌지데 츠카에마스카",
+                meaning: "이 그릇은 전자레인지에 써도 되나요?"
+            },
+            {
+                text: "割れないように包んでください",
+                pron: "와레나이요니 츠츤데 쿠다사이",
+                meaning: "깨지지 않게 포장해 주세요"
+            },
+            {
+                text: "イカの活き造りをください",
+                pron: "이카노 이키즈쿠리오 쿠다사이",
+                meaning: "오징어 활어회 주세요"
+            },
+            {
+                text: "佐賀牛はありますか？",
+                pron: "사가규와 아리마스카",
+                meaning: "사가규(사가 소고기) 있나요?"
+            },
+            {
+                text: "奥の院まで何分ですか？",
+                pron: "오쿠노인마데 난푼데스카",
+                meaning: "오쿠노인(안쪽 신전)까지 몇 분 걸리나요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "사가 시내 & 유토쿠이나리",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "사가성 혼마루 역사관",
+                        type: "building-2",
+                        location: "Saga Castle Honmaru History Museum"
+                    },
+                    {
+                        time: "12:30",
+                        title: "사가역 사가규 점심",
+                        type: "utensils-crossed",
+                        location: "Saga Station"
+                    },
+                    {
+                        time: "15:30",
+                        title: "유토쿠 이나리 신사 주홍 회랑",
+                        type: "landmark",
+                        location: "Yutoku Inari Shrine"
+                    }
+                ]
+            },
+            {
+                title: "가라쓰 & 요부코",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "요부코 아침시장 오징어 활어회",
+                        type: "store",
+                        location: "Yobuko Morning Market"
+                    },
+                    {
+                        time: "12:30",
+                        title: "가라쓰성 천수각",
+                        type: "landmark",
+                        location: "Karatsu Castle"
+                    },
+                    {
+                        time: "15:00",
+                        title: "니지노마쓰바라 소나무 숲 드라이브",
+                        type: "trees",
+                        location: "Niji no Matsubara"
+                    }
+                ]
+            },
+            {
+                title: "우레시노 & 아리타 & 이동",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "우레시노 온천 시볼트노유",
+                        type: "sparkles",
+                        location: "Siebold no Yu"
+                    },
+                    {
+                        time: "12:00",
+                        title: "도잔 신사 도자기 도리이 & 아리타 거리",
+                        type: "shopping-bag",
+                        location: "Tozan Shrine"
+                    },
+                    {
+                        time: "16:00",
+                        title: "사가 공항 이동",
+                        type: "plane",
+                        location: "Saga Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    hiroshima: {
+        id: "hiroshima",
+        city: "Hiroshima",
+        country: "Japan",
+        summary: "평화기념공원의 묵직한 아침부터 미야지마 바다 위 도리이, 오코노미야키 철판과 시마나미 해도 라이딩까지 잇는 세토내해 템플릿입니다.",
+        footer: "Hiroshima holds silence and sea light in the same breath.",
+        heroImage: "assets/heroes/hiroshima.jpg",
+        heroPosition: "center center",
+        accent: "#9F1226",
+        accentRgb: "159, 18, 38",
+        ink: "#3B1524",
+        inkRgb: "59, 21, 36",
+        overlayTop: "rgba(59, 21, 36, 0.34)",
+        overlayBottom: "rgba(24, 12, 18, 0.86)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 34.3853,
+            longitude: 132.4553
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 9,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "そば入りでお願いします",
+                pron: "소바이리데 오네가이시마스",
+                meaning: "(오코노미야키) 소바 넣어 주세요"
+            },
+            {
+                text: "宮島行きのフェリーはどこですか？",
+                pron: "미야지마유키노 페리와 도코데스카",
+                meaning: "미야지마행 페리는 어디서 타나요?"
+            },
+            {
+                text: "焼き牡蠣をください",
+                pron: "야키가키오 쿠다사이",
+                meaning: "구운 굴 주세요"
+            },
+            {
+                text: "もみじ饅頭を一箱ください",
+                pron: "모미지만쥬오 히토하코 쿠다사이",
+                meaning: "모미지만주 한 상자 주세요"
+            },
+            {
+                text: "路面電車はどこで乗れますか？",
+                pron: "로멘덴샤와 도코데 노레마스카",
+                meaning: "노면전차는 어디서 탈 수 있나요?"
+            },
+            {
+                text: "ぶちうまい",
+                pron: "부치 우마이",
+                meaning: "엄청 맛있다 (히로시마 사투리)"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "평화기념공원 & 핫초보리",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "원폭 돔",
+                        type: "landmark",
+                        location: "Atomic Bomb Dome"
+                    },
+                    {
+                        time: "12:30",
+                        title: "평화기념자료관 & 평화의 등불",
+                        type: "building-2",
+                        location: "Hiroshima Peace Memorial Museum"
+                    },
+                    {
+                        time: "18:30",
+                        title: "오코노미무라 철판 저녁",
+                        type: "utensils-crossed",
+                        location: "Okonomimura"
+                    }
+                ]
+            },
+            {
+                title: "미야지마",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "이쓰쿠시마 신사 & 바다 위 도리이",
+                        type: "landmark",
+                        location: "Itsukushima Shrine"
+                    },
+                    {
+                        time: "12:30",
+                        title: "오모테산도 상점가 굴구이 · 모미지만주",
+                        type: "store",
+                        location: "Miyajima Omotesando Shopping Street"
+                    },
+                    {
+                        time: "18:00",
+                        title: "미야지마구치 아나고메시 저녁",
+                        type: "utensils-crossed",
+                        location: "Anagomeshi Ueno"
+                    }
+                ]
+            },
+            {
+                title: "오노미치 & 시마나미 해도",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "센코지 공원 전망 & 고양이 골목",
+                        type: "binoculars",
+                        location: "Senkoji Park"
+                    },
+                    {
+                        time: "12:30",
+                        title: "오노미치 U2 렌터사이클 & 점심",
+                        type: "utensils-crossed",
+                        location: "ONOMICHI U2"
+                    },
+                    {
+                        time: "16:30",
+                        title: "시마나미 해도 라이딩 (무카이시마~인노시마)",
+                        type: "bridge",
+                        location: "Innoshima Bridge"
+                    }
+                ]
+            },
+            {
+                title: "히로시마성 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "히로시마성 천수각",
+                        type: "landmark",
+                        location: "Hiroshima Castle"
+                    },
+                    {
+                        time: "13:00",
+                        title: "슛케이엔 정원 산책",
+                        type: "trees",
+                        location: "Shukkeien Garden"
+                    },
+                    {
+                        time: "16:30",
+                        title: "히로시마 공항 이동",
+                        type: "plane",
+                        location: "Hiroshima Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    kobe: {
+        id: "kobe",
+        city: "Kobe",
+        country: "Japan",
+        summary: "기타노 이진칸 언덕과 하버랜드 야경, 난킨마치 간식과 아리마 온천, 히메지성 당일치기까지 담은 항구 도시 템플릿입니다.",
+        footer: "Kobe is a port that dresses well and eats better.",
+        heroImage: "assets/heroes/kobe.jpg",
+        heroPosition: "center center",
+        accent: "#1F1E8A",
+        accentRgb: "31, 30, 138",
+        ink: "#0F1F3D",
+        inkRgb: "15, 31, 61",
+        overlayTop: "rgba(15, 31, 61, 0.36)",
+        overlayBottom: "rgba(8, 14, 30, 0.88)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 34.6901,
+            longitude: 135.1955
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 8,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "神戸牛のステーキをください",
+                pron: "고베규노 스테키오 쿠다사이",
+                meaning: "고베규 스테이크 주세요"
+            },
+            {
+                text: "焼き加減はミディアムで",
+                pron: "야키카겐와 미디아무데",
+                meaning: "굽기는 미디엄으로 해 주세요"
+            },
+            {
+                text: "有馬温泉行きのバス乗り場はどこですか？",
+                pron: "아리마온센유키노 바스노리바와 도코데스카",
+                meaning: "아리마온천행 버스 정류장은 어디인가요?"
+            },
+            {
+                text: "夜景がきれいですね",
+                pron: "야케이가 키레이데스네",
+                meaning: "야경이 예쁘네요"
+            },
+            {
+                text: "豚まんを二つください",
+                pron: "부타만오 후타츠 쿠다사이",
+                meaning: "고기만두 두 개 주세요 (난킨마치)"
+            },
+            {
+                text: "姫路城まで何分かかりますか？",
+                pron: "히메지죠마데 난푼 카카리마스카",
+                meaning: "히메지성까지 몇 분 걸리나요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "산노미야 & 기타노",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "기타노 이진칸 풍향계의 집",
+                        type: "landmark",
+                        location: "Weathercock House"
+                    },
+                    {
+                        time: "12:30",
+                        title: "고베규 스테이크 점심",
+                        type: "utensils-crossed",
+                        location: "Steakland Kobe"
+                    },
+                    {
+                        time: "18:30",
+                        title: "누노비키 허브원 로프웨이 야경",
+                        type: "binoculars",
+                        location: "Kobe Nunobiki Herb Gardens & Ropeway"
+                    }
+                ]
+            },
+            {
+                title: "하버랜드 & 난킨마치",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "메리켄파크 & 고베 포트타워",
+                        type: "tower-control",
+                        location: "Kobe Port Tower"
+                    },
+                    {
+                        time: "12:30",
+                        title: "난킨마치 차이나타운 부타만 점심",
+                        type: "store",
+                        location: "Nankinmachi"
+                    },
+                    {
+                        time: "18:30",
+                        title: "하버랜드 umie 모자이크 야경",
+                        type: "moon-star",
+                        location: "Kobe Harborland umie"
+                    }
+                ]
+            },
+            {
+                title: "아리마 온천 & 롯코산",
+                activities: [
+                    {
+                        time: "10:30",
+                        title: "킨노유 금탕 입욕",
+                        type: "sparkles",
+                        location: "Kin no Yu"
+                    },
+                    {
+                        time: "13:00",
+                        title: "온천가 산책 & 탄산센베",
+                        type: "store",
+                        location: "Arima Onsen"
+                    },
+                    {
+                        time: "17:30",
+                        title: "롯코 가든테라스 천만불 야경",
+                        type: "moon-star",
+                        location: "Rokko Garden Terrace"
+                    }
+                ]
+            },
+            {
+                title: "히메지 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "히메지성 (백로성)",
+                        type: "landmark",
+                        location: "Himeji Castle"
+                    },
+                    {
+                        time: "12:30",
+                        title: "고코엔 정원 & 점심",
+                        type: "trees",
+                        location: "Koko-en Garden"
+                    },
+                    {
+                        time: "16:30",
+                        title: "고베 공항 이동",
+                        type: "plane",
+                        location: "Kobe Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    okayama: {
+        id: "okayama",
+        city: "Okayama",
+        country: "Japan",
+        summary: "고라쿠엔과 까마귀성, 구라시키 미관지구 운하, 나오시마 예술섬 당일치기를 잇는 세토우치 예술 정원 템플릿입니다.",
+        footer: "Okayama pairs raked gardens with island art and white peaches.",
+        heroImage: "assets/heroes/okayama.jpg",
+        heroPosition: "center center",
+        accent: "#EC4899",
+        accentRgb: "236, 72, 153",
+        ink: "#3B2430",
+        inkRgb: "59, 36, 48",
+        overlayTop: "rgba(59, 36, 48, 0.30)",
+        overlayBottom: "rgba(26, 16, 22, 0.84)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 34.6551,
+            longitude: 133.9195
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 10,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "白桃はありますか？",
+                pron: "하쿠토와 아리마스카",
+                meaning: "백도(하얀 복숭아) 있나요?"
+            },
+            {
+                text: "きびだんごをください",
+                pron: "키비단고오 쿠다사이",
+                meaning: "기비단고(수수경단) 주세요"
+            },
+            {
+                text: "倉敷行きは何番線ですか？",
+                pron: "쿠라시키유키와 난반센데스카",
+                meaning: "구라시키행은 몇 번 승강장인가요?"
+            },
+            {
+                text: "直島まで船でどのくらいですか？",
+                pron: "나오시마마데 후네데 도노쿠라이데스카",
+                meaning: "나오시마까지 배로 얼마나 걸리나요?"
+            },
+            {
+                text: "庭園の入口はどこですか？",
+                pron: "테이엔노 이리구치와 도코데스카",
+                meaning: "정원 입구는 어디인가요?"
+            },
+            {
+                text: "ぼっけぇきれいじゃなぁ",
+                pron: "봇케 키레이쟈나",
+                meaning: "엄청 예쁘네 (오카야마 사투리)"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "고라쿠엔 & 오카야마성",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "고라쿠엔 산책",
+                        type: "trees",
+                        location: "Okayama Korakuen Garden"
+                    },
+                    {
+                        time: "13:00",
+                        title: "오카야마성 (까마귀성) 천수각",
+                        type: "landmark",
+                        location: "Okayama Castle"
+                    },
+                    {
+                        time: "18:00",
+                        title: "오모테초 상점가 저녁",
+                        type: "shopping-bag",
+                        location: "Omotecho Shopping Street"
+                    }
+                ]
+            },
+            {
+                title: "구라시키 미관지구",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "미관지구 운하 & 나룻배",
+                        type: "camera",
+                        location: "Kurashiki Bikan Historical Quarter"
+                    },
+                    {
+                        time: "13:00",
+                        title: "오하라 미술관",
+                        type: "palette",
+                        location: "Ohara Museum of Art"
+                    },
+                    {
+                        time: "18:00",
+                        title: "아이비 스퀘어 붉은 벽돌 저녁",
+                        type: "building",
+                        location: "Kurashiki Ivy Square"
+                    }
+                ]
+            },
+            {
+                title: "나오시마 예술섬",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "우노항에서 나오시마 페리",
+                        type: "ship",
+                        location: "Uno Port"
+                    },
+                    {
+                        time: "12:30",
+                        title: "지추 미술관",
+                        type: "palette",
+                        location: "Chichu Art Museum"
+                    },
+                    {
+                        time: "17:00",
+                        title: "베네세 하우스 & 노란 호박 노을",
+                        type: "camera",
+                        location: "Benesse House Museum"
+                    }
+                ]
+            },
+            {
+                title: "기비쓰 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "기비쓰 신사 회랑",
+                        type: "landmark",
+                        location: "Kibitsu Shrine"
+                    },
+                    {
+                        time: "13:00",
+                        title: "오카야마역 기비단고 · 백도 쇼핑",
+                        type: "gift",
+                        location: "Okayama Station"
+                    },
+                    {
+                        time: "16:30",
+                        title: "오카야마 모모타로 공항 이동",
+                        type: "plane",
+                        location: "Okayama Momotaro Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    takamatsu: {
+        id: "takamatsu",
+        city: "Takamatsu",
+        country: "Japan",
+        summary: "리쓰린공원 아침 산책, 셀프 우동집, 고토히라궁 785계단, 쇼도시마 올리브와 엔젤로드를 엮은 사누키 템플릿입니다.",
+        footer: "Takamatsu runs on udon, pine gardens, and slow ferries.",
+        heroImage: "assets/heroes/takamatsu.jpg",
+        heroPosition: "center center",
+        accent: "#115E59",
+        accentRgb: "17, 94, 89",
+        ink: "#0F2E2B",
+        inkRgb: "15, 46, 43",
+        overlayTop: "rgba(15, 46, 43, 0.34)",
+        overlayBottom: "rgba(8, 22, 21, 0.86)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 34.3428,
+            longitude: 134.0466
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 11,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "ぶっかけの冷たいのをください",
+                pron: "붓카케노 츠메타이노오 쿠다사이",
+                meaning: "차가운 붓카케 우동 주세요"
+            },
+            {
+                text: "天ぷらは自分で取るんですか？",
+                pron: "텐푸라와 지분데 토룬데스카",
+                meaning: "튀김은 직접 가져가는 건가요? (셀프 우동집)"
+            },
+            {
+                text: "次の船は何時に出ますか？",
+                pron: "츠기노 후네와 난지니 데마스카",
+                meaning: "다음 배는 몇 시에 출발하나요?"
+            },
+            {
+                text: "階段は何段ありますか？",
+                pron: "카이단와 난단 아리마스카",
+                meaning: "계단이 몇 개인가요? (고토히라궁 785계단)"
+            },
+            {
+                text: "杖を借りられますか？",
+                pron: "츠에오 카리라레마스카",
+                meaning: "지팡이를 빌릴 수 있나요? (고토히라궁 참배길)"
+            },
+            {
+                text: "オリーブオイルをお土産にしたいです",
+                pron: "오리부오이루오 오미야게니 시타이데스",
+                meaning: "올리브오일을 선물로 사고 싶어요 (쇼도시마)"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "리쓰린공원 & 선포트",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "리쓰린 공원 & 기쿠게쓰테이 말차",
+                        type: "trees",
+                        location: "Ritsurin Garden"
+                    },
+                    {
+                        time: "12:30",
+                        title: "사누키 우동 점심",
+                        type: "utensils-crossed",
+                        location: "Udon Baka Ichidai"
+                    },
+                    {
+                        time: "18:00",
+                        title: "심볼타워 전망 & 항구 저녁",
+                        type: "building",
+                        location: "Takamatsu Symbol Tower"
+                    }
+                ]
+            },
+            {
+                title: "고토히라 (곤피라상)",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "고토히라궁 785계단 참배",
+                        type: "landmark",
+                        location: "Kotohira-gu"
+                    },
+                    {
+                        time: "12:30",
+                        title: "나카노 우동학교 체험 & 점심",
+                        type: "utensils-crossed",
+                        location: "Nakano Udon School"
+                    },
+                    {
+                        time: "16:30",
+                        title: "젠쓰지 (구카이 탄생지) 오층탑",
+                        type: "landmark",
+                        location: "Zentsuji Temple"
+                    }
+                ]
+            },
+            {
+                title: "쇼도시마",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "다카마쓰항 → 쇼도시마 페리",
+                        type: "ship",
+                        location: "Takamatsu Port"
+                    },
+                    {
+                        time: "12:30",
+                        title: "올리브 공원 & 마녀 빗자루 사진",
+                        type: "camera",
+                        location: "Shodoshima Olive Park"
+                    },
+                    {
+                        time: "17:00",
+                        title: "엔젤로드 물길 산책 (간조 시간 확인)",
+                        type: "sun",
+                        location: "Angel Road"
+                    }
+                ]
+            },
+            {
+                title: "야시마 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "야시마 전망대 (야시마루)",
+                        type: "binoculars",
+                        location: "Yashima"
+                    },
+                    {
+                        time: "12:30",
+                        title: "마루가메마치 상점가 점심 & 쇼핑",
+                        type: "shopping-bag",
+                        location: "Marugamemachi Shopping Street"
+                    },
+                    {
+                        time: "16:00",
+                        title: "다카마쓰 공항 이동",
+                        type: "plane",
+                        location: "Takamatsu Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    matsuyama: {
+        id: "matsuyama",
+        city: "Matsuyama",
+        country: "Japan",
+        summary: "마쓰야마성 천수각과 도고온천 본관, 시마나미 해도 자전거 횡단까지 온천과 바다를 오가는 이요 템플릿입니다.",
+        footer: "Matsuyama is warm water, citrus light, and bridges over the sea.",
+        heroImage: "assets/heroes/matsuyama.jpg",
+        heroPosition: "center center",
+        accent: "#FF2700",
+        accentRgb: "255, 39, 0",
+        ink: "#3A1F0F",
+        inkRgb: "58, 31, 15",
+        overlayTop: "rgba(58, 31, 15, 0.32)",
+        overlayBottom: "rgba(24, 14, 8, 0.86)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 33.8392,
+            longitude: 132.7657
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 12,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "入浴券を一枚ください",
+                pron: "뉴요쿠켄오 이치마이 쿠다사이",
+                meaning: "입욕권 한 장 주세요 (도고온천)"
+            },
+            {
+                text: "タオルは付いていますか？",
+                pron: "타오루와 츠이테이마스카",
+                meaning: "수건이 포함되어 있나요?"
+            },
+            {
+                text: "ロープウェイ乗り場はどこですか？",
+                pron: "로푸웨이 노리바와 도코데스카",
+                meaning: "로프웨이 승강장은 어디인가요? (마쓰야마성)"
+            },
+            {
+                text: "レンタサイクルはありますか？",
+                pron: "렌타사이쿠루와 아리마스카",
+                meaning: "대여 자전거 있나요? (시마나미 해도)"
+            },
+            {
+                text: "みかんジュースをください",
+                pron: "미칸쥬스오 쿠다사이",
+                meaning: "귤(미칸) 주스 주세요"
+            },
+            {
+                text: "鯛めしをお願いします",
+                pron: "타이메시오 오네가이시마스",
+                meaning: "타이메시(도미밥) 주세요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "마쓰야마성 & 오카이도",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "마쓰야마성 로프웨이 & 천수각",
+                        type: "landmark",
+                        location: "Matsuyama Castle"
+                    },
+                    {
+                        time: "12:30",
+                        title: "니노마루 사적정원 산책",
+                        type: "trees",
+                        location: "Ninomaru Historical Garden"
+                    },
+                    {
+                        time: "18:00",
+                        title: "오카이도 상점가 타이메시 저녁",
+                        type: "utensils-crossed",
+                        location: "Okaido Shopping Street"
+                    }
+                ]
+            },
+            {
+                title: "도고 온천",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "이시테지 (시코쿠 88영장 51번)",
+                        type: "landmark",
+                        location: "Ishiteji Temple"
+                    },
+                    {
+                        time: "12:30",
+                        title: "하이카라 거리 점심 & 미칸주스",
+                        type: "store",
+                        location: "Dogo Haikara Street"
+                    },
+                    {
+                        time: "18:00",
+                        title: "도고 온천 본관 야간 입욕",
+                        type: "sparkles",
+                        location: "Dogo Onsen Honkan"
+                    }
+                ]
+            },
+            {
+                title: "시마나미 해도 (이마바리)",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "선라이즈 이토야마 렌터사이클",
+                        type: "map",
+                        location: "Sunrise Itoyama"
+                    },
+                    {
+                        time: "12:30",
+                        title: "구루시마 해협대교 횡단",
+                        type: "bridge",
+                        location: "Kurushima-Kaikyo Bridge"
+                    },
+                    {
+                        time: "16:30",
+                        title: "기로산 전망공원 노을",
+                        type: "binoculars",
+                        location: "Kirosan Observatory Park"
+                    }
+                ]
+            },
+            {
+                title: "반스이소 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "반스이소 프랑스풍 저택",
+                        type: "building-2",
+                        location: "Bansuiso"
+                    },
+                    {
+                        time: "12:30",
+                        title: "긴텐가이 상점가 점심 & 쇼핑",
+                        type: "shopping-bag",
+                        location: "Gintengai Shopping Street"
+                    },
+                    {
+                        time: "16:30",
+                        title: "마쓰야마 공항 이동",
+                        type: "plane",
+                        location: "Matsuyama Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    tokushima: {
+        id: "tokushima",
+        city: "Tokushima",
+        country: "Japan",
+        summary: "나루토 소용돌이 관조선, 오보케 협곡과 이야 덩굴다리, 아와오도리 회관의 춤까지 담은 아와 자연·축제 템플릿입니다.",
+        footer: "Tokushima dances between whirlpools, gorges, and indigo.",
+        heroImage: "assets/heroes/tokushima.jpg",
+        heroPosition: "center center",
+        accent: "#4630A3",
+        accentRgb: "70, 48, 163",
+        ink: "#171A3A",
+        inkRgb: "23, 26, 58",
+        overlayTop: "rgba(23, 26, 58, 0.36)",
+        overlayBottom: "rgba(10, 12, 30, 0.88)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 34.0703,
+            longitude: 134.5547
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 10,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "渦潮は何時ごろ見えますか？",
+                pron: "우즈시오와 난지고로 미에마스카",
+                meaning: "소용돌이는 몇 시쯤 볼 수 있나요?"
+            },
+            {
+                text: "観潮船に乗りたいです",
+                pron: "칸쵸센니 노리타이데스",
+                meaning: "소용돌이 관조선을 타고 싶어요"
+            },
+            {
+                text: "かずら橋は揺れますか？",
+                pron: "카즈라바시와 유레마스카",
+                meaning: "덩굴다리는 많이 흔들리나요?"
+            },
+            {
+                text: "踊りを一緒に体験できますか？",
+                pron: "오도리오 잇쇼니 타이켄 데키마스카",
+                meaning: "춤을 함께 체험할 수 있나요? (아와오도리 회관)"
+            },
+            {
+                text: "生卵を一つ追加してください",
+                pron: "나마타마고오 히토츠 츠이카시테 쿠다사이",
+                meaning: "날달걀 하나 추가해 주세요 (도쿠시마 라멘)"
+            },
+            {
+                text: "踊る阿呆に見る阿呆",
+                pron: "오도루 아호니 미루 아호",
+                meaning: "춤추는 바보에 구경하는 바보 (아와오도리 노랫말)"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "도쿠시마 시내 & 아와오도리",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "비잔 로프웨이 전망",
+                        type: "binoculars",
+                        location: "Bizan Ropeway"
+                    },
+                    {
+                        time: "12:30",
+                        title: "도쿠시마 라멘 점심",
+                        type: "utensils-crossed",
+                        location: "Tokushima Ramen Inotani"
+                    },
+                    {
+                        time: "18:00",
+                        title: "아와오도리 회관 공연 & 체험",
+                        type: "music",
+                        location: "Awa Odori Kaikan"
+                    }
+                ]
+            },
+            {
+                title: "나루토",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "오쓰카 국제미술관",
+                        type: "palette",
+                        location: "Otsuka Museum of Art"
+                    },
+                    {
+                        time: "13:00",
+                        title: "관조선 소용돌이 크루즈 (조석표 확인)",
+                        type: "ship",
+                        location: "Uzushio Kisen"
+                    },
+                    {
+                        time: "16:30",
+                        title: "우즈노미치 유리바닥 전망로",
+                        type: "bridge",
+                        location: "Uzu no Michi"
+                    }
+                ]
+            },
+            {
+                title: "오보케 & 이야 계곡",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "오보케 협곡 유람선",
+                        type: "ship",
+                        location: "Oboke Gorge"
+                    },
+                    {
+                        time: "12:30",
+                        title: "이야 덩굴다리 & 이야소바 점심",
+                        type: "bridge",
+                        location: "Iya Kazurabashi Bridge"
+                    },
+                    {
+                        time: "17:00",
+                        title: "이야 온천 케이블카 노천탕",
+                        type: "sparkles",
+                        location: "Hotel Iya Onsen"
+                    }
+                ]
+            },
+            {
+                title: "도쿠시마성 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "도쿠시마성 박물관 & 센슈카쿠 정원",
+                        type: "building-2",
+                        location: "Tokushima Castle Museum"
+                    },
+                    {
+                        time: "13:00",
+                        title: "역앞 스다치 · 와산본 기념품",
+                        type: "gift",
+                        location: "Tokushima Station"
+                    },
+                    {
+                        time: "16:00",
+                        title: "도쿠시마 아와오도리 공항 이동",
+                        type: "plane",
+                        location: "Tokushima Awaodori Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    yonago: {
+        id: "yonago",
+        city: "Yonago (Tottori)",
+        country: "Japan",
+        summary: "사카이미나토 요괴거리와 돗토리 사구 낙타 산책, 다이센 산기슭 목장까지 산인 해안을 달리는 요나고 베이스 템플릿입니다.",
+        footer: "Yonago is the quiet base for dunes, yokai, and a sacred mountain.",
+        heroImage: "assets/heroes/yonago.jpg",
+        heroPosition: "center center",
+        accent: "#854D0E",
+        accentRgb: "133, 77, 14",
+        ink: "#2F2415",
+        inkRgb: "47, 36, 21",
+        overlayTop: "rgba(47, 36, 21, 0.30)",
+        overlayBottom: "rgba(22, 17, 10, 0.84)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 35.4281,
+            longitude: 133.3311
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 13,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "砂丘行きのバスはどこから出ますか？",
+                pron: "사큐유키노 바스와 도코카라 데마스카",
+                meaning: "사구행 버스는 어디서 출발하나요?"
+            },
+            {
+                text: "ラクダに乗れますか？",
+                pron: "라쿠다니 노레마스카",
+                meaning: "낙타를 탈 수 있나요? (돗토리 사구)"
+            },
+            {
+                text: "妖怪スタンプ帳をください",
+                pron: "요카이 스탄푸쵸오 쿠다사이",
+                meaning: "요괴 스탬프 수첩 주세요 (미즈키 시게루 로드)"
+            },
+            {
+                text: "松葉ガニはありますか？",
+                pron: "마츠바가니와 아리마스카",
+                meaning: "마쓰바가니(대게) 있나요? (겨울 별미)"
+            },
+            {
+                text: "二十世紀梨をください",
+                pron: "니줏세이키나시오 쿠다사이",
+                meaning: "20세기 배 주세요 (돗토리 특산)"
+            },
+            {
+                text: "だんだん",
+                pron: "단단",
+                meaning: "고맙습니다 (산인 지방 사투리)"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "사카이미나토 요괴거리",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "미즈키 시게루 로드 요괴 동상 산책",
+                        type: "camera",
+                        location: "Mizuki Shigeru Road"
+                    },
+                    {
+                        time: "13:00",
+                        title: "미즈키 시게루 기념관 & 항구 해산물 점심",
+                        type: "building-2",
+                        location: "Mizuki Shigeru Museum"
+                    },
+                    {
+                        time: "18:00",
+                        title: "카이케 온천 해변 노을",
+                        type: "sun",
+                        location: "Kaike Onsen"
+                    }
+                ]
+            },
+            {
+                title: "돗토리 사구",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "돗토리 사구 & 낙타 체험",
+                        type: "sun",
+                        location: "Tottori Sand Dunes"
+                    },
+                    {
+                        time: "12:30",
+                        title: "모래 미술관",
+                        type: "palette",
+                        location: "Tottori Sand Museum"
+                    },
+                    {
+                        time: "17:30",
+                        title: "가로이치 수산시장 해산물 저녁",
+                        type: "utensils-crossed",
+                        location: "Karoichi"
+                    }
+                ]
+            },
+            {
+                title: "다이센",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "다이센지 & 오가미야마 신사 참배길",
+                        type: "landmark",
+                        location: "Daisenji Temple"
+                    },
+                    {
+                        time: "12:30",
+                        title: "마키바 미루쿠노사토 목장 점심",
+                        type: "coffee",
+                        location: "Daisen Makiba Milk no Sato"
+                    },
+                    {
+                        time: "17:00",
+                        title: "가기카케 고개 다이센 남벽 노을",
+                        type: "binoculars",
+                        location: "Kagikake Pass"
+                    }
+                ]
+            },
+            {
+                title: "요나고 시내 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "요나고성터 전망",
+                        type: "binoculars",
+                        location: "Yonago Castle Ruins"
+                    },
+                    {
+                        time: "12:30",
+                        title: "요나고역 20세기 배 · 기념품",
+                        type: "gift",
+                        location: "Yonago Station"
+                    },
+                    {
+                        time: "15:30",
+                        title: "요나고 기타로 공항 이동",
+                        type: "plane",
+                        location: "Yonago Kitaro Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    kanazawa: {
+        id: "kanazawa",
+        city: "Kanazawa",
+        country: "Japan",
+        summary: "겐로쿠엔 아침 산책과 오미초시장 해산물, 히가시차야 금박 골목, 시라카와고 당일치기까지 담은 가가 백만석 템플릿입니다.",
+        footer: "Kanazawa keeps gold leaf, rain, and old tea houses in perfect order.",
+        heroImage: "assets/heroes/kanazawa.jpg",
+        heroPosition: "center center",
+        accent: "#6B21A8",
+        accentRgb: "107, 33, 168",
+        ink: "#2A1B3D",
+        inkRgb: "42, 27, 61",
+        overlayTop: "rgba(42, 27, 61, 0.34)",
+        overlayBottom: "rgba(16, 11, 26, 0.88)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 36.5613,
+            longitude: 136.6562
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 9,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "金箔ソフトをください",
+                pron: "킨파쿠소후토오 쿠다사이",
+                meaning: "금박 소프트아이스크림 주세요"
+            },
+            {
+                text: "海鮮丼をお願いします",
+                pron: "카이센동오 오네가이시마스",
+                meaning: "해산물 덮밥 주세요 (오미초 시장)"
+            },
+            {
+                text: "白川郷行きのバスを予約したいです",
+                pron: "시라카와고유키노 바스오 요야쿠시타이데스",
+                meaning: "시라카와고행 버스를 예약하고 싶어요"
+            },
+            {
+                text: "お茶屋の中は見学できますか？",
+                pron: "오챠야노 나카와 켄가쿠 데키마스카",
+                meaning: "찻집(오차야) 내부를 둘러볼 수 있나요? (히가시차야)"
+            },
+            {
+                text: "旬の魚はどれですか？",
+                pron: "슌노 사카나와 도레데스카",
+                meaning: "제철 생선은 어느 것인가요?"
+            },
+            {
+                text: "弁当忘れても傘忘れるな",
+                pron: "벤토 와스레테모 카사 와스레루나",
+                meaning: "도시락은 잊어도 우산은 잊지 마라 (비 많은 가나자와 속담)"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "겐로쿠엔 & 21세기 미술관",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "겐로쿠엔 & 가나자와성 산책",
+                        type: "trees",
+                        location: "Kenrokuen Garden"
+                    },
+                    {
+                        time: "13:00",
+                        title: "21세기 미술관 스위밍 풀",
+                        type: "palette",
+                        location: "21st Century Museum of Contemporary Art, Kanazawa"
+                    },
+                    {
+                        time: "18:00",
+                        title: "가타마치 가가 요리 저녁",
+                        type: "utensils-crossed",
+                        location: "Katamachi"
+                    }
+                ]
+            },
+            {
+                title: "히가시차야 & 오미초",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "오미초 시장 해산물 아침",
+                        type: "store",
+                        location: "Omicho Market"
+                    },
+                    {
+                        time: "12:30",
+                        title: "히가시차야 거리 금박 소프트",
+                        type: "camera",
+                        location: "Higashi Chaya District"
+                    },
+                    {
+                        time: "18:00",
+                        title: "가즈에마치 차야 골목 저녁 산책",
+                        type: "moon-star",
+                        location: "Kazuemachi Chaya District"
+                    }
+                ]
+            },
+            {
+                title: "시라카와고 당일치기",
+                activities: [
+                    {
+                        time: "10:30",
+                        title: "시라카와고 갓쇼즈쿠리 마을",
+                        type: "landmark",
+                        location: "Shirakawa-go"
+                    },
+                    {
+                        time: "13:00",
+                        title: "와다 하우스 & 향토 점심",
+                        type: "building-2",
+                        location: "Wada House"
+                    },
+                    {
+                        time: "16:00",
+                        title: "시로야마 전망대 전경",
+                        type: "binoculars",
+                        location: "Shiroyama Viewpoint"
+                    }
+                ]
+            },
+            {
+                title: "나가마치 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "나가마치 무사 저택 거리",
+                        type: "landmark",
+                        location: "Nagamachi Samurai District"
+                    },
+                    {
+                        time: "12:30",
+                        title: "가나자와역 쓰즈미몬 & 기념품",
+                        type: "gift",
+                        location: "Kanazawa Station"
+                    },
+                    {
+                        time: "15:30",
+                        title: "고마쓰 공항 이동",
+                        type: "plane",
+                        location: "Komatsu Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    sendai: {
+        id: "sendai",
+        city: "Sendai",
+        country: "Japan",
+        summary: "마쓰시마 섬 유람과 자오 오카마, 아키우 온천, 규탄 정식까지 도호쿠의 관문을 느긋하게 도는 센다이 템플릿입니다.",
+        footer: "Sendai is a city of trees: pine islands, crater lakes, and grilled beef tongue.",
+        heroImage: "assets/heroes/sendai.jpg",
+        heroPosition: "center center",
+        accent: "#059630",
+        accentRgb: "5, 150, 48",
+        ink: "#064E3B",
+        inkRgb: "6, 78, 59",
+        overlayTop: "rgba(6, 78, 59, 0.38)",
+        overlayBottom: "rgba(6, 30, 24, 0.90)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 38.2682,
+            longitude: 140.8694
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 9,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "牛タン定食をください",
+                pron: "규탄 테이쇼쿠오 쿠다사이",
+                meaning: "규탄 정식 주세요"
+            },
+            {
+                text: "ずんだ餅はありますか？",
+                pron: "즌다모치와 아리마스카",
+                meaning: "즌다모치 있나요?"
+            },
+            {
+                text: "遊覧船は何時に出ますか？",
+                pron: "유란센와 난지니 데마스카",
+                meaning: "유람선은 몇 시에 출발하나요?"
+            },
+            {
+                text: "温泉に入りたいです",
+                pron: "온센니 하이리타이데스",
+                meaning: "온천에 들어가고 싶어요"
+            },
+            {
+                text: "樹氷は見えますか？",
+                pron: "주효와 미에마스카",
+                meaning: "수빙(스노몬스터)이 보이나요?"
+            },
+            {
+                text: "荷物を預けられますか？",
+                pron: "니모츠오 아즈케라레마스카",
+                meaning: "짐을 맡길 수 있나요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "센다이 시내 & 아오바",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "즈이호덴 다테 마사무네 영묘",
+                        type: "landmark",
+                        location: "Zuihoden"
+                    },
+                    {
+                        time: "13:00",
+                        title: "이치반초 규탄 정식 점심",
+                        type: "utensils-crossed",
+                        location: "Ichibancho, Sendai"
+                    },
+                    {
+                        time: "17:00",
+                        title: "아오바성터 마사무네 기마상 전망",
+                        type: "binoculars",
+                        location: "Sendai Castle Ruins"
+                    }
+                ]
+            },
+            {
+                title: "마쓰시마",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "마쓰시마만 섬 순회 유람선",
+                        type: "ship",
+                        location: "Matsushima Bay"
+                    },
+                    {
+                        time: "12:30",
+                        title: "즈이간지 & 고다이도",
+                        type: "landmark",
+                        location: "Zuiganji Temple"
+                    },
+                    {
+                        time: "16:00",
+                        title: "후쿠우라지마 붉은 다리 산책",
+                        type: "bridge",
+                        location: "Fukuura Island"
+                    }
+                ]
+            },
+            {
+                title: "자오 & 아키우 온천",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "자오 오카마 분화구 호수",
+                        type: "camera",
+                        location: "Zao Okama"
+                    },
+                    {
+                        time: "13:30",
+                        title: "아키우 대폭포",
+                        type: "trees",
+                        location: "Akiu Great Falls"
+                    },
+                    {
+                        time: "17:00",
+                        title: "아키우 온천 당일 입욕",
+                        type: "sun",
+                        location: "Akiu Onsen"
+                    }
+                ]
+            },
+            {
+                title: "아침시장 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "센다이 아사이치 아침시장",
+                        type: "store",
+                        location: "Sendai Asaichi Market"
+                    },
+                    {
+                        time: "12:30",
+                        title: "에스팔 센다이 즌다 기념품",
+                        type: "gift",
+                        location: "S-PAL Sendai"
+                    },
+                    {
+                        time: "15:30",
+                        title: "센다이 공항 이동",
+                        type: "plane",
+                        location: "Sendai Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    niigata: {
+        id: "niigata",
+        city: "Niigata",
+        country: "Japan",
+        summary: "반다이바시 강바람과 후루마치 골목, 사도섬 당일치기와 니가타 사케 시음을 엮은 일본해 쌀·술 템플릿입니다.",
+        footer: "Niigata runs on rice, sake, and the slow gray light of the Sea of Japan.",
+        heroImage: "assets/heroes/niigata.jpg",
+        heroPosition: "center center",
+        accent: "#1D4ED8",
+        accentRgb: "29, 78, 216",
+        ink: "#172554",
+        inkRgb: "23, 37, 84",
+        overlayTop: "rgba(23, 37, 84, 0.40)",
+        overlayBottom: "rgba(10, 18, 44, 0.90)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 37.9162,
+            longitude: 139.0364
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 10,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "日本酒の飲み比べをお願いします",
+                pron: "니혼슈노 노미쿠라베오 오네가이시마스",
+                meaning: "사케 시음 세트 부탁합니다"
+            },
+            {
+                text: "辛口はどれですか？",
+                pron: "카라쿠치와 도레데스카",
+                meaning: "드라이한 술은 어느 것인가요?"
+            },
+            {
+                text: "フェリーの切符を買いたいです",
+                pron: "페리노 킷푸오 카이타이데스",
+                meaning: "페리 표를 사고 싶어요"
+            },
+            {
+                text: "海は荒れていますか？",
+                pron: "우미와 아레테이마스카",
+                meaning: "바다가 거친가요?"
+            },
+            {
+                text: "たらい舟に乗れますか？",
+                pron: "타라이부네니 노레마스카",
+                meaning: "대야배를 탈 수 있나요?"
+            },
+            {
+                text: "ご飯のおかわりできますか？",
+                pron: "고항노 오카와리 데키마스카",
+                meaning: "밥 리필 되나요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "반다이 & 니가타역",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "반다이바시 시나노강 산책",
+                        type: "bridge",
+                        location: "Bandai Bridge"
+                    },
+                    {
+                        time: "12:30",
+                        title: "피아 반다이 해산물 점심",
+                        type: "utensils-crossed",
+                        location: "Pia Bandai"
+                    },
+                    {
+                        time: "17:30",
+                        title: "폰슈칸 사케 시음 코인",
+                        type: "store",
+                        location: "Ponshukan Niigata Station"
+                    }
+                ]
+            },
+            {
+                title: "사도섬 당일치기",
+                activities: [
+                    {
+                        time: "08:00",
+                        title: "제트포일 타고 사도 료쓰항",
+                        type: "map",
+                        location: "Ryotsu Port"
+                    },
+                    {
+                        time: "11:00",
+                        title: "사도 금산 광산 갱도",
+                        type: "landmark",
+                        location: "Sado Gold Mine"
+                    },
+                    {
+                        time: "14:00",
+                        title: "오기 타라이부네 대야배 체험",
+                        type: "ship",
+                        location: "Ogi Port"
+                    }
+                ]
+            },
+            {
+                title: "미나토 & 후루마치",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "니가타시 역사박물관 미나토피아",
+                        type: "building-2",
+                        location: "Niigata City History Museum Minatopia"
+                    },
+                    {
+                        time: "13:00",
+                        title: "토키 멧세 전망실",
+                        type: "building",
+                        location: "Toki Messe"
+                    },
+                    {
+                        time: "18:00",
+                        title: "후루마치 골목 이자카야 저녁",
+                        type: "moon-star",
+                        location: "Furumachi, Niigata"
+                    }
+                ]
+            },
+            {
+                title: "양조장 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "이마요 쓰카사 양조장 견학",
+                        type: "store",
+                        location: "Imayo Tsukasa Sake Brewery"
+                    },
+                    {
+                        time: "12:30",
+                        title: "니가타역 코시히카리 기념품",
+                        type: "gift",
+                        location: "Niigata Station"
+                    },
+                    {
+                        time: "15:30",
+                        title: "니가타 공항 이동",
+                        type: "plane",
+                        location: "Niigata Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    aomori: {
+        id: "aomori",
+        city: "Aomori",
+        country: "Japan",
+        summary: "네부타의 집 와랏세와 히로사키성, 오이라세 계류와 핫코다 로프웨이를 잇는 혼슈 최북단 축제·자연 템플릿입니다.",
+        footer: "Aomori is Nebuta light, apple orchards, and a stream that never stops.",
+        heroImage: "assets/heroes/aomori.jpg",
+        heroPosition: "center center",
+        accent: "#E11DC9",
+        accentRgb: "225, 29, 201",
+        ink: "#4C0519",
+        inkRgb: "76, 5, 25",
+        overlayTop: "rgba(76, 5, 25, 0.38)",
+        overlayBottom: "rgba(30, 8, 16, 0.90)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 40.8246,
+            longitude: 140.7406
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 11,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "りんごジュースをください",
+                pron: "링고 쥬스오 쿠다사이",
+                meaning: "사과 주스 주세요"
+            },
+            {
+                text: "ねぶたはいつですか？",
+                pron: "네부타와 이츠데스카",
+                meaning: "네부타 축제는 언제인가요?"
+            },
+            {
+                text: "桜は咲いていますか？",
+                pron: "사쿠라와 사이테이마스카",
+                meaning: "벚꽃이 피었나요?"
+            },
+            {
+                text: "遊歩道はどこから始まりますか？",
+                pron: "유호도와 도코카라 하지마리마스카",
+                meaning: "산책로는 어디서 시작하나요?"
+            },
+            {
+                text: "ロープウェイは動いていますか？",
+                pron: "로프웨이와 우고이테이마스카",
+                meaning: "로프웨이 운행하나요?"
+            },
+            {
+                text: "のっけ丼のチケットをください",
+                pron: "놋케동노 치켓토오 쿠다사이",
+                meaning: "놋케동 티켓 주세요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "아오모리 항구 & 시내",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "네부타의 집 와랏세",
+                        type: "sparkles",
+                        location: "Nebuta Museum WA-RASSE"
+                    },
+                    {
+                        time: "12:30",
+                        title: "후루카와 시장 놋케동 점심",
+                        type: "utensils-crossed",
+                        location: "Aomori Gyosai Center"
+                    },
+                    {
+                        time: "17:30",
+                        title: "아스팜 전망대와 아오모리만 노을",
+                        type: "building",
+                        location: "ASPAM"
+                    }
+                ]
+            },
+            {
+                title: "히로사키",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "히로사키성 & 공원",
+                        type: "landmark",
+                        location: "Hirosaki Castle"
+                    },
+                    {
+                        time: "12:30",
+                        title: "후지타 기념정원 애플파이",
+                        type: "coffee",
+                        location: "Fujita Memorial Japanese Garden"
+                    },
+                    {
+                        time: "15:30",
+                        title: "쓰가루한 네푸타무라 샤미센",
+                        type: "music",
+                        location: "Tsugaru-han Neputa Village"
+                    }
+                ]
+            },
+            {
+                title: "핫코다 & 오이라세",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "핫코다 로프웨이 산정",
+                        type: "binoculars",
+                        location: "Hakkoda Ropeway"
+                    },
+                    {
+                        time: "12:30",
+                        title: "오이라세 계류 트레킹",
+                        type: "trees",
+                        location: "Oirase Gorge"
+                    },
+                    {
+                        time: "15:30",
+                        title: "도와다 호수 유람선",
+                        type: "ship",
+                        location: "Lake Towada"
+                    }
+                ]
+            },
+            {
+                title: "미술관 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "아오모리 현립미술관 아오모리견",
+                        type: "palette",
+                        location: "Aomori Museum of Art"
+                    },
+                    {
+                        time: "13:00",
+                        title: "A-팩토리 사과 시드르 기념품",
+                        type: "gift",
+                        location: "A-FACTORY"
+                    },
+                    {
+                        time: "15:30",
+                        title: "아오모리 공항 이동",
+                        type: "plane",
+                        location: "Aomori Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    hakodate: {
+        id: "hakodate",
+        city: "Hakodate",
+        country: "Japan",
+        summary: "하코다테산 백만 불 야경, 아침시장 카이센동, 별 모양 고료카쿠와 모토마치 언덕, 유노카와 온천까지 담은 항구 도시 템플릿입니다.",
+        footer: "Hakodate is a harbor of slopes, church bells, and a night view worth the ropeway.",
+        heroImage: "assets/heroes/hakodate.jpg",
+        heroPosition: "center center",
+        accent: "#4D3AED",
+        accentRgb: "77, 58, 237",
+        ink: "#2E1065",
+        inkRgb: "46, 16, 101",
+        overlayTop: "rgba(46, 16, 101, 0.40)",
+        overlayBottom: "rgba(18, 10, 40, 0.92)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 41.7687,
+            longitude: 140.7291
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 12,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "夜景は何時からきれいですか？",
+                pron: "야케이와 난지카라 키레이데스카",
+                meaning: "야경은 몇 시부터 예쁜가요?"
+            },
+            {
+                text: "往復券をください",
+                pron: "오후쿠켄오 쿠다사이",
+                meaning: "왕복권 주세요"
+            },
+            {
+                text: "イカ釣りを体験できますか？",
+                pron: "이카츠리오 타이켄 데키마스카",
+                meaning: "오징어 낚시 체험할 수 있나요?"
+            },
+            {
+                text: "市電の一日券はありますか？",
+                pron: "시덴노 이치니치켄와 아리마스카",
+                meaning: "노면전차 1일권 있나요?"
+            },
+            {
+                text: "足湯は無料ですか？",
+                pron: "아시유와 무료데스카",
+                meaning: "족욕탕은 무료인가요?"
+            },
+            {
+                text: "風が強いですね",
+                pron: "카제가 츠요이데스네",
+                meaning: "바람이 세네요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "모토마치 & 하코다테산",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "하치만자카 언덕과 항구 전망",
+                        type: "map",
+                        location: "Hachimanzaka Slope"
+                    },
+                    {
+                        time: "13:00",
+                        title: "구 하코다테구 공회당",
+                        type: "building-2",
+                        location: "Old Public Hall of Hakodate Ward"
+                    },
+                    {
+                        time: "18:00",
+                        title: "하코다테산 로프웨이 야경",
+                        type: "moon-star",
+                        location: "Mount Hakodate"
+                    }
+                ]
+            },
+            {
+                title: "아침시장 & 고료카쿠",
+                activities: [
+                    {
+                        time: "08:00",
+                        title: "하코다테 아침시장 카이센동",
+                        type: "utensils-crossed",
+                        location: "Hakodate Morning Market"
+                    },
+                    {
+                        time: "12:30",
+                        title: "고료카쿠 공원 별 모양 성곽",
+                        type: "landmark",
+                        location: "Goryokaku Park"
+                    },
+                    {
+                        time: "17:00",
+                        title: "고료카쿠 타워 전망",
+                        type: "tower-control",
+                        location: "Goryokaku Tower"
+                    }
+                ]
+            },
+            {
+                title: "유노카와 온천",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "트라피스틴 수도원",
+                        type: "landmark",
+                        location: "Trappistine Convent"
+                    },
+                    {
+                        time: "13:00",
+                        title: "열대식물원 온천 원숭이",
+                        type: "trees",
+                        location: "Hakodate Tropical Botanical Garden"
+                    },
+                    {
+                        time: "17:00",
+                        title: "유노카와 온천 족욕과 료칸",
+                        type: "sun",
+                        location: "Yunokawa Onsen"
+                    }
+                ]
+            },
+            {
+                title: "베이 에어리어 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "가네모리 아카렌가 창고 쇼핑",
+                        type: "shopping-bag",
+                        location: "Kanemori Red Brick Warehouse"
+                    },
+                    {
+                        time: "12:30",
+                        title: "하코다테역 기념품",
+                        type: "gift",
+                        location: "Hakodate Station"
+                    },
+                    {
+                        time: "15:30",
+                        title: "하코다테 공항 이동",
+                        type: "plane",
+                        location: "Hakodate Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    shizuoka: {
+        id: "shizuoka",
+        city: "Shizuoka",
+        country: "Japan",
+        summary: "미호노마쓰바라 너머 후지산, 니혼다이라와 구노잔 동조궁, 아타미 온천 바다까지 차밭 향으로 묶은 시즈오카 템플릿입니다.",
+        footer: "Shizuoka is tea fields, a pine-lined shore, and Fuji on a clear morning.",
+        heroImage: "assets/heroes/shizuoka.jpg",
+        heroPosition: "center center",
+        accent: "#3DA30D",
+        accentRgb: "61, 163, 13",
+        ink: "#1A2E05",
+        inkRgb: "26, 46, 5",
+        overlayTop: "rgba(26, 46, 5, 0.36)",
+        overlayBottom: "rgba(14, 24, 6, 0.90)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 34.9756,
+            longitude: 138.3828
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 7,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "富士山は見えますか？",
+                pron: "후지산와 미에마스카",
+                meaning: "후지산이 보이나요?"
+            },
+            {
+                text: "お茶の試飲はできますか？",
+                pron: "오차노 시인와 데키마스카",
+                meaning: "차 시음할 수 있나요?"
+            },
+            {
+                text: "桜えびの丼はありますか？",
+                pron: "사쿠라에비노 동와 아리마스카",
+                meaning: "사쿠라 새우 덮밥 있나요?"
+            },
+            {
+                text: "今日は晴れますか？",
+                pron: "쿄와 하레마스카",
+                meaning: "오늘 맑을까요?"
+            },
+            {
+                text: "静岡おでんをください",
+                pron: "시즈오카 오뎅오 쿠다사이",
+                meaning: "시즈오카 오뎅 주세요"
+            },
+            {
+                text: "新幹線の切符はここで買えますか？",
+                pron: "신칸센노 킷푸와 코코데 카에마스카",
+                meaning: "신칸센 표를 여기서 살 수 있나요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "시즈오카 시내",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "시즈오카 센겐 신사",
+                        type: "landmark",
+                        location: "Shizuoka Sengen Shrine"
+                    },
+                    {
+                        time: "13:00",
+                        title: "아오바 오뎅 거리 점심",
+                        type: "utensils-crossed",
+                        location: "Aoba Oden Street"
+                    },
+                    {
+                        time: "17:00",
+                        title: "순푸성 공원 산책",
+                        type: "trees",
+                        location: "Sunpu Castle Park"
+                    }
+                ]
+            },
+            {
+                title: "니혼다이라 & 미호",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "니혼다이라 유메 테라스 후지산 전망",
+                        type: "binoculars",
+                        location: "Nihondaira Yume Terrace"
+                    },
+                    {
+                        time: "12:00",
+                        title: "로프웨이로 구노잔 동조궁",
+                        type: "landmark",
+                        location: "Kunozan Toshogu Shrine"
+                    },
+                    {
+                        time: "16:00",
+                        title: "미호노마쓰바라 소나무 해변",
+                        type: "camera",
+                        location: "Miho no Matsubara"
+                    }
+                ]
+            },
+            {
+                title: "아타미 & 이즈",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "MOA 미술관",
+                        type: "palette",
+                        location: "MOA Museum of Art"
+                    },
+                    {
+                        time: "13:00",
+                        title: "아타미 선비치 해변 산책",
+                        type: "sun",
+                        location: "Atami Sun Beach"
+                    },
+                    {
+                        time: "17:00",
+                        title: "아타미성 전망과 온천",
+                        type: "building",
+                        location: "Atami Castle"
+                    }
+                ]
+            },
+            {
+                title: "토로 유적 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "토로 유적 야요이 마을",
+                        type: "map",
+                        location: "Toro Ruins"
+                    },
+                    {
+                        time: "12:30",
+                        title: "시즈오카역 차 & 우나기파이 기념품",
+                        type: "gift",
+                        location: "Shizuoka Station"
+                    },
+                    {
+                        time: "15:30",
+                        title: "후지산 시즈오카 공항 이동",
+                        type: "plane",
+                        location: "Mount Fuji Shizuoka Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    ishigaki: {
+        id: "ishigaki",
+        city: "Ishigaki",
+        country: "Japan",
+        summary: "가비라만 글라스보트, 다케토미 물소 수레, 이리오모테 정글 크루즈와 유글레나몰 저녁까지 담은 야에야마 섬 템플릿입니다.",
+        footer: "Ishigaki is coral blue, water buffalo carts, and a sky full of stars.",
+        heroImage: "assets/heroes/ishigaki.jpg",
+        heroPosition: "center center",
+        accent: "#0D3594",
+        accentRgb: "13, 53, 148",
+        ink: "#134E4A",
+        inkRgb: "19, 78, 74",
+        overlayTop: "rgba(19, 78, 74, 0.36)",
+        overlayBottom: "rgba(8, 36, 36, 0.88)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 24.3448,
+            longitude: 124.1572
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 14,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "グラスボートに乗りたいです",
+                pron: "구라스보토니 노리타이데스",
+                meaning: "글라스보트를 타고 싶어요"
+            },
+            {
+                text: "水牛車は何時ですか？",
+                pron: "스이규샤와 난지데스카",
+                meaning: "물소 수레는 몇 시인가요?"
+            },
+            {
+                text: "石垣牛をください",
+                pron: "이시가키규오 쿠다사이",
+                meaning: "이시가키규 주세요"
+            },
+            {
+                text: "シュノーケルを借りられますか？",
+                pron: "슈노케루오 카리라레마스카",
+                meaning: "스노클을 빌릴 수 있나요?"
+            },
+            {
+                text: "船は欠航ですか？",
+                pron: "후네와 켓코데스카",
+                meaning: "배가 결항인가요?"
+            },
+            {
+                text: "星空ツアーはありますか？",
+                pron: "호시조라 츠아와 아리마스카",
+                meaning: "별 관측 투어 있나요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "이시가키 시내",
+                activities: [
+                    {
+                        time: "10:30",
+                        title: "유글레나몰 아케이드 구경",
+                        type: "shopping-bag",
+                        location: "Euglena Mall"
+                    },
+                    {
+                        time: "13:00",
+                        title: "이시가키 공설시장 점심",
+                        type: "utensils-crossed",
+                        location: "Ishigaki Public Market"
+                    },
+                    {
+                        time: "17:30",
+                        title: "반나 공원 전망대 노을",
+                        type: "camera",
+                        location: "Banna Park"
+                    }
+                ]
+            },
+            {
+                title: "가비라만 & 북부",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "가비라만 글라스보트",
+                        type: "ship",
+                        location: "Kabira Bay"
+                    },
+                    {
+                        time: "12:30",
+                        title: "요네하라 해변 스노클",
+                        type: "sun",
+                        location: "Yonehara Beach"
+                    },
+                    {
+                        time: "16:30",
+                        title: "다마토리자키 전망대",
+                        type: "binoculars",
+                        location: "Tamatorizaki Observatory"
+                    }
+                ]
+            },
+            {
+                title: "이리오모테 & 다케토미",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "이리오모테 우라우치강 정글 크루즈",
+                        type: "trees",
+                        location: "Urauchi River"
+                    },
+                    {
+                        time: "12:30",
+                        title: "유부섬 물소 수레",
+                        type: "map",
+                        location: "Yubu Island"
+                    },
+                    {
+                        time: "16:00",
+                        title: "다케토미 마을 붉은 기와 골목",
+                        type: "landmark",
+                        location: "Taketomi Island"
+                    }
+                ]
+            },
+            {
+                title: "후사키 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "후사키 비치 아침 산책",
+                        type: "sun",
+                        location: "Fusaki Beach"
+                    },
+                    {
+                        time: "12:30",
+                        title: "730 코트 기념품",
+                        type: "gift",
+                        location: "730 COURT"
+                    },
+                    {
+                        time: "15:30",
+                        title: "신이시가키 공항 이동",
+                        type: "plane",
+                        location: "New Ishigaki Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    miyakojima: {
+        id: "miyakojima",
+        city: "Miyakojima",
+        country: "Japan",
+        summary: "요나하마에하마의 미야코 블루, 이라부대교와 시모지시마 17END, 이케마대교 드라이브를 잇는 렌터카 섬 템플릿입니다.",
+        footer: "Miyakojima is one long bridge into blue, best driven with the windows down.",
+        heroImage: "assets/heroes/miyakojima.jpg",
+        heroPosition: "center center",
+        accent: "#0891B2",
+        accentRgb: "8, 145, 178",
+        ink: "#164E63",
+        inkRgb: "22, 78, 99",
+        overlayTop: "rgba(22, 78, 99, 0.34)",
+        overlayBottom: "rgba(8, 34, 48, 0.88)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 24.8055,
+            longitude: 125.2811
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 13,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "宮古そばをください",
+                pron: "미야코 소바오 쿠다사이",
+                meaning: "미야코 소바 주세요"
+            },
+            {
+                text: "ウミガメはいますか？",
+                pron: "우미가메와 이마스카",
+                meaning: "바다거북이 있나요?"
+            },
+            {
+                text: "マンゴーはありますか？",
+                pron: "망고와 아리마스카",
+                meaning: "망고 있나요?"
+            },
+            {
+                text: "ガソリンスタンドはどこですか？",
+                pron: "가소린스탄도와 도코데스카",
+                meaning: "주유소가 어디인가요?"
+            },
+            {
+                text: "夕日は何時ごろですか？",
+                pron: "유히와 난지고로데스카",
+                meaning: "노을은 몇 시쯤인가요?"
+            },
+            {
+                text: "波は高いですか？",
+                pron: "나미와 타카이데스카",
+                meaning: "파도가 높나요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "요나하마에하마 & 남서부",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "요나하마에하마 비치",
+                        type: "sun",
+                        location: "Yonaha Maehama Beach"
+                    },
+                    {
+                        time: "13:00",
+                        title: "미야코지마 공설시장 미야코소바",
+                        type: "utensils-crossed",
+                        location: "Miyakojima Public Market"
+                    },
+                    {
+                        time: "16:30",
+                        title: "구리마 대교 & 류구성 전망대",
+                        type: "binoculars",
+                        location: "Ryugujo Observatory"
+                    }
+                ]
+            },
+            {
+                title: "이라부 & 시모지시마",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "이라부 대교 드라이브",
+                        type: "bridge",
+                        location: "Irabu Bridge"
+                    },
+                    {
+                        time: "12:30",
+                        title: "도리이케 연못 산책",
+                        type: "map",
+                        location: "Toriike Pond"
+                    },
+                    {
+                        time: "17:00",
+                        title: "17END 활주로 끝 노을",
+                        type: "camera",
+                        location: "17END"
+                    }
+                ]
+            },
+            {
+                title: "이케마 & 동부",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "스나야마 비치",
+                        type: "sun",
+                        location: "Sunayama Beach"
+                    },
+                    {
+                        time: "12:00",
+                        title: "이케마 대교 드라이브",
+                        type: "bridge",
+                        location: "Ikema Bridge"
+                    },
+                    {
+                        time: "16:00",
+                        title: "히가시헨나자키 등대",
+                        type: "camera",
+                        location: "Cape Higashi-Hennazaki"
+                    }
+                ]
+            },
+            {
+                title: "히라라 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "하리미즈 우타키 참배",
+                        type: "landmark",
+                        location: "Harimizu Utaki"
+                    },
+                    {
+                        time: "12:30",
+                        title: "시마노에키 미야코 기념품",
+                        type: "gift",
+                        location: "Shima no Eki Miyako"
+                    },
+                    {
+                        time: "15:30",
+                        title: "미야코 공항 이동",
+                        type: "plane",
+                        location: "Miyako Airport"
+                    }
+                ]
+            }
+        ]
+    },
     rome: {
         id: 'rome',
         city: 'Rome',
@@ -2087,6 +5405,182 @@ const DESTINATIONS = {
                     { time: '10:00', title: '스페인 계단', type: 'camera', location: 'Spanish Steps' },
                     { time: '13:00', title: '가죽 소품 쇼핑', type: 'shopping-bag', location: 'Via del Corso' },
                     { time: '16:30', title: '피우미치노 이동', type: 'plane', location: 'Leonardo da Vinci International Airport' }
+                ]
+            }
+        ]
+    },
+    milan: {
+        id: "milan",
+        city: "Milan",
+        country: "Italy",
+        summary: "두오모와 갤러리아, 최후의 만찬, 브레라, 나빌리 아페리티보에 코모 호수 당일치기를 더한 밀라노 템플릿입니다.",
+        footer: "Milan works when marble spires, fashion, and aperitivo hour share one evening.",
+        heroImage: "assets/heroes/milan.jpg",
+        heroPosition: "center center",
+        accent: "#E045B8",
+        accentRgb: "224, 69, 184",
+        ink: "#3B0716",
+        inkRgb: "59, 7, 22",
+        overlayTop: "rgba(59, 7, 22, 0.40)",
+        overlayBottom: "rgba(24, 12, 16, 0.90)",
+        timeZone: "Europe/Rome",
+        weather: {
+            latitude: 45.4642,
+            longitude: 9.19
+        },
+        currency: {
+            code: "EUR",
+            symbol: "€",
+            locale: "it-IT"
+        },
+        startOffsetDays: 12,
+        phraseLabel: "Italiano",
+        phrases: [
+            {
+                text: "Buongiorno",
+                pron: "[부온조르노]",
+                meaning: "좋은 아침입니다 / 안녕하세요"
+            },
+            {
+                text: "Un cappuccino al banco",
+                pron: "[운 카푸치노 알 반코]",
+                meaning: "바에서 카푸치노 한 잔이요 (서서 마시면 더 저렴)"
+            },
+            {
+                text: "Quanto costa?",
+                pron: "[콴토 코스타]",
+                meaning: "얼마예요?"
+            },
+            {
+                text: "Ho una prenotazione",
+                pron: "[오 우나 프레노타치오네]",
+                meaning: "예약했어요"
+            },
+            {
+                text: "Facciamo l’aperitivo?",
+                pron: "[파치아모 라페리티보]",
+                meaning: "아페리티보 할까요?"
+            },
+            {
+                text: "Posso pagare con la carta?",
+                pron: "[포쏘 파가레 콘 라 카르타]",
+                meaning: "카드로 결제할 수 있어요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "두오모 & 갤러리아",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "두오모 대성당 & 옥상 테라스",
+                        type: "landmark",
+                        location: "Duomo di Milano"
+                    },
+                    {
+                        time: "13:00",
+                        title: "갤러리아 비토리오 에마누엘레 2세",
+                        type: "shopping-bag",
+                        location: "Galleria Vittorio Emanuele II"
+                    },
+                    {
+                        time: "18:30",
+                        title: "라 스칼라 극장",
+                        type: "music",
+                        location: "Teatro alla Scala"
+                    }
+                ]
+            },
+            {
+                title: "최후의 만찬 & 스포르체스코",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "최후의 만찬 관람 (예약 필수)",
+                        type: "palette",
+                        location: "Santa Maria delle Grazie"
+                    },
+                    {
+                        time: "12:30",
+                        title: "스포르체스코 성",
+                        type: "landmark",
+                        location: "Castello Sforzesco"
+                    },
+                    {
+                        time: "17:30",
+                        title: "셈피오네 공원 & 평화의 문",
+                        type: "trees",
+                        location: "Parco Sempione"
+                    }
+                ]
+            },
+            {
+                title: "브레라 & 콰드릴라테로",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "브레라 미술관",
+                        type: "building-2",
+                        location: "Pinacoteca di Brera"
+                    },
+                    {
+                        time: "13:00",
+                        title: "브레라 골목 런치",
+                        type: "coffee",
+                        location: "Via Brera"
+                    },
+                    {
+                        time: "17:00",
+                        title: "몬테 나폴레오네 쇼핑 거리",
+                        type: "shopping-bag",
+                        location: "Via Monte Napoleone"
+                    }
+                ]
+            },
+            {
+                title: "코모 호수 당일치기",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "코모 호숫가 산책",
+                        type: "map",
+                        location: "Lake Como"
+                    },
+                    {
+                        time: "12:30",
+                        title: "벨라지오 페리 & 런치",
+                        type: "ship",
+                        location: "Bellagio"
+                    },
+                    {
+                        time: "17:00",
+                        title: "브루나테 푸니콜라레 전망",
+                        type: "binoculars",
+                        location: "Funicolare Como-Brunate"
+                    }
+                ]
+            },
+            {
+                title: "나빌리 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "나빌리 운하 산책",
+                        type: "map",
+                        location: "Navigli"
+                    },
+                    {
+                        time: "12:30",
+                        title: "나빌리오 그란데 런치",
+                        type: "utensils-crossed",
+                        location: "Naviglio Grande"
+                    },
+                    {
+                        time: "16:00",
+                        title: "말펜사 공항 이동",
+                        type: "plane",
+                        location: "Milan Malpensa Airport"
+                    }
                 ]
             }
         ]
@@ -2257,6 +5751,335 @@ const DESTINATIONS = {
             }
         ]
     },
+    brunei: {
+        id: "brunei",
+        city: "Bandar Seri Begawan",
+        country: "Brunei",
+        summary: "술탄 오마르 알리 사이푸딘 모스크와 캄퐁아예르 수상마을, 제임 아스르 모스크, 울루템부롱 정글까지 3박 4일 브루나이 템플릿입니다.",
+        footer: "Brunei is gold domes, quiet water villages, and rainforest an hour away.",
+        heroImage: "assets/heroes/brunei.jpg",
+        heroPosition: "center center",
+        accent: "#C8EA08",
+        accentRgb: "200, 234, 8",
+        ink: "#14322A",
+        inkRgb: "20, 50, 42",
+        overlayTop: "rgba(20, 50, 42, 0.36)",
+        overlayBottom: "rgba(10, 28, 24, 0.86)",
+        timeZone: "Asia/Brunei",
+        weather: {
+            latitude: 4.9031,
+            longitude: 114.9398
+        },
+        currency: {
+            code: "BND",
+            symbol: "B$",
+            locale: "ms-BN"
+        },
+        startOffsetDays: 13,
+        phraseLabel: "Bahasa Melayu",
+        phrases: [
+            {
+                text: "Assalamualaikum",
+                pron: "앗살라무알라이쿰",
+                meaning: "안녕하세요 (평안을 빕니다)"
+            },
+            {
+                text: "Maaf, saya tak faham",
+                pron: "마아프 사야 탁 파함",
+                meaning: "죄송해요, 이해 못 했어요"
+            },
+            {
+                text: "Boleh saya ambil gambar?",
+                pron: "볼레 사야 암빌 감바르",
+                meaning: "사진 찍어도 될까요?"
+            },
+            {
+                text: "Bila masjid dibuka?",
+                pron: "빌라 마스짓 디부카",
+                meaning: "모스크는 언제 열어요?"
+            },
+            {
+                text: "Satu teh tarik",
+                pron: "사투 테 타릭",
+                meaning: "테 타릭(밀크티) 한 잔 주세요"
+            },
+            {
+                text: "Sama-sama",
+                pron: "사마사마",
+                meaning: "천만에요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "시내 모스크 & 박물관",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "술탄 오마르 알리 사이푸딘 모스크",
+                        type: "landmark",
+                        location: "Sultan Omar Ali Saifuddien Mosque"
+                    },
+                    {
+                        time: "13:00",
+                        title: "로열 레갈리아 박물관",
+                        type: "building",
+                        location: "Royal Regalia Museum"
+                    },
+                    {
+                        time: "18:30",
+                        title: "가동 야시장 저녁",
+                        type: "utensils-crossed",
+                        location: "Gadong Night Market"
+                    }
+                ]
+            },
+            {
+                title: "캄퐁아예르 & 브루나이강",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "캄퐁아예르 수상마을 보트",
+                        type: "ship",
+                        location: "Kampong Ayer"
+                    },
+                    {
+                        time: "13:30",
+                        title: "제임 아스르 하사날 볼키아 모스크",
+                        type: "landmark",
+                        location: "Jame' Asr Hassanil Bolkiah Mosque"
+                    },
+                    {
+                        time: "17:00",
+                        title: "브루나이강 코주부원숭이 크루즈",
+                        type: "binoculars",
+                        location: "Brunei River"
+                    }
+                ]
+            },
+            {
+                title: "울루 템부롱",
+                activities: [
+                    {
+                        time: "07:00",
+                        title: "울루 템부롱 캐노피 워크",
+                        type: "trees",
+                        location: "Ulu Temburong National Park"
+                    },
+                    {
+                        time: "13:00",
+                        title: "템부롱 대교 경유 귀환",
+                        type: "bridge",
+                        location: "Temburong Bridge"
+                    },
+                    {
+                        time: "17:30",
+                        title: "무아라 비치 선셋",
+                        type: "sun",
+                        location: "Muara Beach"
+                    }
+                ]
+            },
+            {
+                title: "제루동 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "제루동 파크",
+                        type: "sparkles",
+                        location: "Jerudong Park Playground"
+                    },
+                    {
+                        time: "12:30",
+                        title: "엠파이어 브루나이 애프터눈 티",
+                        type: "coffee",
+                        location: "The Empire Brunei"
+                    },
+                    {
+                        time: "16:30",
+                        title: "브루나이 공항 이동",
+                        type: "plane",
+                        location: "Brunei International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    'kota-kinabalu': {
+        id: "kota-kinabalu",
+        city: "Kota Kinabalu",
+        country: "Malaysia",
+        summary: "탄중아루 선셋과 사피·마누칸 섬 호핑, 마리마리 문화마을, 키나발루 공원과 필리피노 야시장까지 4박 5일 코타키나발루 템플릿입니다.",
+        footer: "Kota Kinabalu ends every day the same way, with the sun sinking into the South China Sea.",
+        heroImage: "assets/heroes/kota-kinabalu.jpg",
+        heroPosition: "center center",
+        accent: "#FF7043",
+        accentRgb: "255, 112, 67",
+        ink: "#2A1C33",
+        inkRgb: "42, 28, 51",
+        overlayTop: "rgba(42, 28, 51, 0.32)",
+        overlayBottom: "rgba(22, 14, 30, 0.84)",
+        timeZone: "Asia/Kuala_Lumpur",
+        weather: {
+            latitude: 5.9804,
+            longitude: 116.0735
+        },
+        currency: {
+            code: "MYR",
+            symbol: "RM",
+            locale: "ms-MY"
+        },
+        startOffsetDays: 11,
+        phraseLabel: "Bahasa Melayu",
+        phrases: [
+            {
+                text: "Selamat petang",
+                pron: "슬라맛 프탕",
+                meaning: "좋은 오후예요 / 좋은 저녁이에요"
+            },
+            {
+                text: "Boleh kurang sikit?",
+                pron: "볼레 쿠랑 시킷",
+                meaning: "조금만 깎아 주실래요?"
+            },
+            {
+                text: "Sedap!",
+                pron: "스답",
+                meaning: "맛있어요!"
+            },
+            {
+                text: "Di mana jeti?",
+                pron: "디 마나 제티",
+                meaning: "선착장이 어디예요?"
+            },
+            {
+                text: "Saya nak ini",
+                pron: "사야 낙 이니",
+                meaning: "이걸로 할게요"
+            },
+            {
+                text: "Jumpa lagi",
+                pron: "줌파 라기",
+                meaning: "또 만나요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "시내 & 탄중아루",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "시그널힐 전망대",
+                        type: "binoculars",
+                        location: "Signal Hill Observatory Tower"
+                    },
+                    {
+                        time: "13:00",
+                        title: "가야 스트리트 점심",
+                        type: "utensils-crossed",
+                        location: "Gaya Street"
+                    },
+                    {
+                        time: "18:00",
+                        title: "탄중아루 선셋",
+                        type: "sun",
+                        location: "Tanjung Aru Beach"
+                    }
+                ]
+            },
+            {
+                title: "툰쿠 압둘 라만 해양공원",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "사피섬 스노클링",
+                        type: "binoculars",
+                        location: "Sapi Island"
+                    },
+                    {
+                        time: "13:30",
+                        title: "마누칸섬 점심 & 해변",
+                        type: "sun",
+                        location: "Manukan Island"
+                    },
+                    {
+                        time: "19:00",
+                        title: "필리피노 야시장 씨푸드",
+                        type: "utensils-crossed",
+                        location: "Filipino Market"
+                    }
+                ]
+            },
+            {
+                title: "마리마리 & 반딧불",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "마리마리 문화마을",
+                        type: "palette",
+                        location: "Mari Mari Cultural Village"
+                    },
+                    {
+                        time: "14:00",
+                        title: "수리아 사바 쇼핑",
+                        type: "shopping-bag",
+                        location: "Suria Sabah Shopping Mall"
+                    },
+                    {
+                        time: "17:30",
+                        title: "클리아스강 코주부원숭이 · 반딧불 크루즈",
+                        type: "ship",
+                        location: "Klias River"
+                    }
+                ]
+            },
+            {
+                title: "키나발루 공원",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "키나발루 공원 트레일",
+                        type: "trees",
+                        location: "Kinabalu Park"
+                    },
+                    {
+                        time: "12:30",
+                        title: "데사 목장 우유 · 아이스크림",
+                        type: "coffee",
+                        location: "Desa Dairy Farm"
+                    },
+                    {
+                        time: "16:00",
+                        title: "포링 온천",
+                        type: "sparkles",
+                        location: "Poring Hot Spring"
+                    }
+                ]
+            },
+            {
+                title: "마지막 쇼핑 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "수상 모스크 (시티 모스크)",
+                        type: "landmark",
+                        location: "Kota Kinabalu City Mosque"
+                    },
+                    {
+                        time: "12:30",
+                        title: "이마고 몰 점심 & 쇼핑",
+                        type: "shopping-cart",
+                        location: "Imago Shopping Mall"
+                    },
+                    {
+                        time: "16:00",
+                        title: "코타키나발루 공항 이동",
+                        type: "plane",
+                        location: "Kota Kinabalu International Airport"
+                    }
+                ]
+            }
+        ]
+    },
     jakarta: {
         id: 'jakarta',
         city: 'Jakarta',
@@ -2347,6 +6170,182 @@ const DESTINATIONS = {
             }
         ]
     },
+    manado: {
+        id: "manado",
+        city: "Manado",
+        country: "Indonesia",
+        summary: "부나켄 스노클링·다이빙과 톰모혼 시장, 린노우 호수, 마하우 화산, 미나하사 고원을 4박 5일로 엮은 마나도 템플릿입니다.",
+        footer: "Manado is reef walls, highland lakes, and food that does not hold back on chili.",
+        heroImage: "assets/heroes/manado.jpg",
+        heroPosition: "center center",
+        accent: "#005596",
+        accentRgb: "0, 85, 150",
+        ink: "#0F2F3A",
+        inkRgb: "15, 47, 58",
+        overlayTop: "rgba(15, 47, 58, 0.34)",
+        overlayBottom: "rgba(8, 26, 34, 0.84)",
+        timeZone: "Asia/Makassar",
+        weather: {
+            latitude: 1.4748,
+            longitude: 124.8421
+        },
+        currency: {
+            code: "IDR",
+            symbol: "Rp",
+            locale: "id-ID"
+        },
+        startOffsetDays: 14,
+        phraseLabel: "Bahasa Indonesia",
+        phrases: [
+            {
+                text: "Selamat siang",
+                pron: "슬라맛 시앙",
+                meaning: "안녕하세요 (낮 인사)"
+            },
+            {
+                text: "Jangan terlalu pedas",
+                pron: "장안 뜨를랄루 쁘다스",
+                meaning: "너무 맵지 않게 해주세요"
+            },
+            {
+                text: "Mau snorkeling ke Bunaken",
+                pron: "마우 스노클링 끄 부나켄",
+                meaning: "부나켄으로 스노클링 가고 싶어요"
+            },
+            {
+                text: "Enak sekali!",
+                pron: "에낙 스깔리",
+                meaning: "정말 맛있어요!"
+            },
+            {
+                text: "Bisa pakai kartu?",
+                pron: "비사 빠까이 까르뚜",
+                meaning: "카드 결제 되나요?"
+            },
+            {
+                text: "Sampai jumpa",
+                pron: "삼빠이 줌빠",
+                meaning: "또 만나요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "마나도 시내",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "예수 축복상",
+                        type: "landmark",
+                        location: "Christ Blessing Monument"
+                    },
+                    {
+                        time: "13:00",
+                        title: "마나도 타운 스퀘어 점심",
+                        type: "shopping-cart",
+                        location: "Manado Town Square"
+                    },
+                    {
+                        time: "18:00",
+                        title: "불러바드 선셋 (마나도 투아 조망)",
+                        type: "sun",
+                        location: "Boulevard Manado"
+                    }
+                ]
+            },
+            {
+                title: "부나켄 해양공원",
+                activities: [
+                    {
+                        time: "08:00",
+                        title: "부나켄 스노클링 · 다이빙",
+                        type: "binoculars",
+                        location: "Bunaken Island"
+                    },
+                    {
+                        time: "12:30",
+                        title: "시라덴 섬 점심 & 해변",
+                        type: "sun",
+                        location: "Siladen Island"
+                    },
+                    {
+                        time: "16:00",
+                        title: "마나도 투아 화산섬 조망",
+                        type: "camera",
+                        location: "Manado Tua Island"
+                    }
+                ]
+            },
+            {
+                title: "톰모혼 고원",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "마하우 화산 분화구 트레킹",
+                        type: "trees",
+                        location: "Mount Mahawu"
+                    },
+                    {
+                        time: "11:30",
+                        title: "톰모혼 전통시장",
+                        type: "store",
+                        location: "Tomohon Traditional Market"
+                    },
+                    {
+                        time: "14:30",
+                        title: "린노우 호수 카페",
+                        type: "coffee",
+                        location: "Lake Linow"
+                    }
+                ]
+            },
+            {
+                title: "미나하사 고원",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "워루가 석관 유적",
+                        type: "landmark",
+                        location: "Waruga Sawangan"
+                    },
+                    {
+                        time: "12:30",
+                        title: "톤다노 호수 점심",
+                        type: "utensils-crossed",
+                        location: "Lake Tondano"
+                    },
+                    {
+                        time: "15:30",
+                        title: "부킷 카시 전망",
+                        type: "camera",
+                        location: "Bukit Kasih"
+                    }
+                ]
+            },
+            {
+                title: "마지막 산책 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "반 힌 키옹 사원",
+                        type: "landmark",
+                        location: "Ban Hin Kiong Temple"
+                    },
+                    {
+                        time: "12:30",
+                        title: "클라퍼타르트 선물",
+                        type: "gift",
+                        location: "Christine Klappertaart"
+                    },
+                    {
+                        time: "15:30",
+                        title: "삼 라툴랑이 공항 이동",
+                        type: "plane",
+                        location: "Sam Ratulangi International Airport"
+                    }
+                ]
+            }
+        ]
+    },
     bangkok: {
         id: 'bangkok',
         city: 'Bangkok',
@@ -2408,6 +6407,664 @@ const DESTINATIONS = {
             }
         ]
     },
+    'phnom-penh': {
+        id: "phnom-penh",
+        city: "Phnom Penh",
+        country: "Cambodia",
+        summary: "왕궁과 실버파고다, 왓프놈, 센트럴마켓, 뚜올슬렝과 킬링필드, 리버사이드를 차분히 잇는 프놈펜 템플릿입니다.",
+        footer: "Phnom Penh asks for a quiet morning, an honest afternoon, and a riverside evening.",
+        heroImage: "assets/heroes/phnom-penh.jpg",
+        heroPosition: "center center",
+        accent: "#BE123C",
+        accentRgb: "190, 18, 60",
+        ink: "#2E0A14",
+        inkRgb: "46, 10, 20",
+        overlayTop: "rgba(46, 10, 20, 0.44)",
+        overlayBottom: "rgba(24, 8, 14, 0.90)",
+        timeZone: "Asia/Phnom_Penh",
+        weather: {
+            latitude: 11.5564,
+            longitude: 104.9282
+        },
+        currency: {
+            code: "USD",
+            symbol: "$",
+            locale: "en-US"
+        },
+        startOffsetDays: 7,
+        phraseLabel: "ខ្មែរ",
+        phrases: [
+            {
+                text: "សួស្តី",
+                pron: "[수어스데이]",
+                meaning: "안녕하세요"
+            },
+            {
+                text: "អរគុណ",
+                pron: "[어꾼]",
+                meaning: "감사합니다"
+            },
+            {
+                text: "ថ្លៃប៉ុន្មាន?",
+                pron: "[틀라이 뽄만]",
+                meaning: "얼마예요?"
+            },
+            {
+                text: "ឆ្ងាញ់ណាស់",
+                pron: "[츠응안 나]",
+                meaning: "아주 맛있어요"
+            },
+            {
+                text: "សុំទោស",
+                pron: "[솜 또]",
+                meaning: "죄송합니다 / 실례합니다"
+            },
+            {
+                text: "បង្គន់នៅឯណា?",
+                pron: "[벙꼰 너우 아에 나]",
+                meaning: "화장실이 어디예요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "왕궁 & 리버사이드",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "왕궁 & 실버파고다",
+                        type: "landmark",
+                        location: "Royal Palace Phnom Penh"
+                    },
+                    {
+                        time: "13:00",
+                        title: "캄보디아 국립박물관",
+                        type: "palette",
+                        location: "National Museum of Cambodia"
+                    },
+                    {
+                        time: "18:30",
+                        title: "시소왓 키 강변 산책 & 저녁",
+                        type: "moon-star",
+                        location: "Sisowath Quay"
+                    }
+                ]
+            },
+            {
+                title: "왓프놈 & 센트럴마켓",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "왓프놈",
+                        type: "landmark",
+                        location: "Wat Phnom"
+                    },
+                    {
+                        time: "12:30",
+                        title: "센트럴마켓 (프사 트마이)",
+                        type: "store",
+                        location: "Central Market Phnom Penh"
+                    },
+                    {
+                        time: "18:30",
+                        title: "바삭 레인 골목 저녁",
+                        type: "utensils-crossed",
+                        location: "Bassac Lane"
+                    }
+                ]
+            },
+            {
+                title: "역사의 하루 — 뚜올슬렝 & 킬링필드",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "뚜올슬렝 학살 박물관",
+                        type: "landmark",
+                        location: "Tuol Sleng Genocide Museum"
+                    },
+                    {
+                        time: "13:30",
+                        title: "쯔응아익 킬링필드",
+                        type: "landmark",
+                        location: "Choeung Ek Genocidal Center"
+                    },
+                    {
+                        time: "18:00",
+                        title: "러시안 마켓 저녁",
+                        type: "shopping-bag",
+                        location: "Russian Market Phnom Penh"
+                    }
+                ]
+            },
+            {
+                title: "마지막 사원 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "왓 우날롬",
+                        type: "landmark",
+                        location: "Wat Ounalom"
+                    },
+                    {
+                        time: "12:30",
+                        title: "이온몰 점심 & 마지막 쇼핑",
+                        type: "shopping-cart",
+                        location: "AEON Mall Phnom Penh"
+                    },
+                    {
+                        time: "16:30",
+                        title: "테초 공항 이동",
+                        type: "plane",
+                        location: "Techo International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    vientiane: {
+        id: "vientiane",
+        city: "Vientiane",
+        country: "Laos",
+        summary: "탓루앙과 빠뚜사이, 왓시사켓, 메콩 야시장에 고속철 방비엥 당일 여행을 더한 비엔티안 템플릿입니다.",
+        footer: "Vientiane keeps a slow riverside pace, with a fast train to the mountains.",
+        heroImage: "assets/heroes/vientiane.jpg",
+        heroPosition: "center center",
+        accent: "#F4DE30",
+        accentRgb: "244, 222, 48",
+        ink: "#3B2A05",
+        inkRgb: "59, 42, 5",
+        overlayTop: "rgba(59, 42, 5, 0.44)",
+        overlayBottom: "rgba(28, 20, 6, 0.90)",
+        timeZone: "Asia/Vientiane",
+        weather: {
+            latitude: 17.9757,
+            longitude: 102.6331
+        },
+        currency: {
+            code: "LAK",
+            symbol: "₭",
+            locale: "lo-LA"
+        },
+        startOffsetDays: 8,
+        phraseLabel: "ລາວ",
+        phrases: [
+            {
+                text: "ສະບາຍດີ",
+                pron: "[사바이디]",
+                meaning: "안녕하세요"
+            },
+            {
+                text: "ຂອບໃຈ",
+                pron: "[컵 짜이]",
+                meaning: "감사합니다"
+            },
+            {
+                text: "ເທົ່າໃດ",
+                pron: "[타오 다이]",
+                meaning: "얼마예요?"
+            },
+            {
+                text: "ແຊບຫຼາຍ",
+                pron: "[쌥 라이]",
+                meaning: "아주 맛있어요"
+            },
+            {
+                text: "ບໍ່ເປັນຫຍັງ",
+                pron: "[버 뻰 냥]",
+                meaning: "괜찮아요"
+            },
+            {
+                text: "ຫ້ອງນ້ຳຢູ່ໃສ",
+                pron: "[홍 남 유 사이]",
+                meaning: "화장실이 어디예요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "탓루앙 & 빠뚜사이",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "탓루앙 황금 탑",
+                        type: "landmark",
+                        location: "Pha That Luang"
+                    },
+                    {
+                        time: "13:00",
+                        title: "빠뚜사이 개선문",
+                        type: "landmark",
+                        location: "Patuxai"
+                    },
+                    {
+                        time: "18:30",
+                        title: "메콩 강변 야시장",
+                        type: "sparkles",
+                        location: "Vientiane Night Market"
+                    }
+                ]
+            },
+            {
+                title: "올드타운 사원 & 남푸",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "왓시사켓",
+                        type: "landmark",
+                        location: "Wat Si Saket"
+                    },
+                    {
+                        time: "13:00",
+                        title: "조마 베이커리 카페 점심",
+                        type: "coffee",
+                        location: "Joma Bakery Cafe"
+                    },
+                    {
+                        time: "18:30",
+                        title: "남푸 분수 광장 저녁",
+                        type: "moon-star",
+                        location: "Nam Phou Fountain"
+                    }
+                ]
+            },
+            {
+                title: "방비엥 당일 (고속철)",
+                activities: [
+                    {
+                        time: "07:30",
+                        title: "라오-중국 고속철 출발",
+                        type: "train-front",
+                        location: "Vientiane Railway Station"
+                    },
+                    {
+                        time: "11:00",
+                        title: "블루라군 물놀이",
+                        type: "trees",
+                        location: "Blue Lagoon Vang Vieng"
+                    },
+                    {
+                        time: "15:00",
+                        title: "남송강 카약 & 카르스트 풍경",
+                        type: "ship",
+                        location: "Nam Song River"
+                    }
+                ]
+            },
+            {
+                title: "붓다파크 & 이동",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "붓다파크 (씨엥쿠안)",
+                        type: "landmark",
+                        location: "Buddha Park"
+                    },
+                    {
+                        time: "12:30",
+                        title: "딸랏싸오 시장 점심 & 기념품",
+                        type: "store",
+                        location: "Talat Sao Morning Market"
+                    },
+                    {
+                        time: "16:30",
+                        title: "왓따이 공항 이동",
+                        type: "plane",
+                        location: "Wattay International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    'chiang-mai': {
+        id: "chiang-mai",
+        city: "Chiang Mai",
+        country: "Thailand",
+        summary: "올드시티 사원, 도이수텝, 님만해민 카페, 코끼리 보호구역과 도이인타논까지 란나의 산과 절을 느리게 걷는 치앙마이 템플릿입니다.",
+        footer: "Chiang Mai slows down for temples, mountains, and one more coffee.",
+        heroImage: "assets/heroes/chiang-mai.jpg",
+        heroPosition: "center center",
+        accent: "#A14E07",
+        accentRgb: "161, 78, 7",
+        ink: "#2A1A0E",
+        inkRgb: "42, 26, 14",
+        overlayTop: "rgba(42, 26, 14, 0.42)",
+        overlayBottom: "rgba(24, 16, 10, 0.90)",
+        timeZone: "Asia/Bangkok",
+        weather: {
+            latitude: 18.7883,
+            longitude: 98.9853
+        },
+        currency: {
+            code: "THB",
+            symbol: "฿",
+            locale: "th-TH"
+        },
+        startOffsetDays: 11,
+        phraseLabel: "ไทย",
+        phrases: [
+            {
+                text: "ไปที่นี่",
+                pron: "[빠이 티 니]",
+                meaning: "여기로 가 주세요"
+            },
+            {
+                text: "อร่อยมาก",
+                pron: "[아로이 막]",
+                meaning: "아주 맛있어요"
+            },
+            {
+                text: "ลดหน่อยได้ไหม",
+                pron: "[롯 너이 다이 마이]",
+                meaning: "조금 깎아 주실 수 있나요?"
+            },
+            {
+                text: "ไม่เป็นไร",
+                pron: "[마이 뻰 라이]",
+                meaning: "괜찮아요"
+            },
+            {
+                text: "ขอน้ำเปล่า",
+                pron: "[커 남 쁠라오]",
+                meaning: "생수 주세요"
+            },
+            {
+                text: "ถ่ายรูปได้ไหม",
+                pron: "[타이 룹 다이 마이]",
+                meaning: "사진 찍어도 되나요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "올드시티 사원",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "왓 체디루앙",
+                        type: "landmark",
+                        location: "Wat Chedi Luang"
+                    },
+                    {
+                        time: "12:30",
+                        title: "카오소이 점심",
+                        type: "utensils-crossed",
+                        location: "Khao Soi Khun Yai"
+                    },
+                    {
+                        time: "18:00",
+                        title: "타페 게이트 & 선데이 워킹 스트리트",
+                        type: "sparkles",
+                        location: "Tha Phae Gate"
+                    }
+                ]
+            },
+            {
+                title: "도이수텝 & 님만해민",
+                activities: [
+                    {
+                        time: "08:00",
+                        title: "왓 프라탓 도이수텝",
+                        type: "landmark",
+                        location: "Wat Phra That Doi Suthep"
+                    },
+                    {
+                        time: "13:00",
+                        title: "님만해민 카페 거리",
+                        type: "coffee",
+                        location: "Nimmanhaemin Road"
+                    },
+                    {
+                        time: "18:30",
+                        title: "원 님만 저녁",
+                        type: "shopping-bag",
+                        location: "One Nimman"
+                    }
+                ]
+            },
+            {
+                title: "매림 & 코끼리 보호구역",
+                activities: [
+                    {
+                        time: "07:30",
+                        title: "코끼리 보호구역 방문",
+                        type: "trees",
+                        location: "Elephant Nature Park"
+                    },
+                    {
+                        time: "14:30",
+                        title: "매사 폭포",
+                        type: "trees",
+                        location: "Mae Sa Waterfall"
+                    },
+                    {
+                        time: "19:00",
+                        title: "나이트 바자",
+                        type: "sparkles",
+                        location: "Chiang Mai Night Bazaar"
+                    }
+                ]
+            },
+            {
+                title: "도이인타논",
+                activities: [
+                    {
+                        time: "08:00",
+                        title: "도이인타논 정상 & 운해",
+                        type: "trees",
+                        location: "Doi Inthanon National Park"
+                    },
+                    {
+                        time: "12:30",
+                        title: "와치라탄 폭포",
+                        type: "camera",
+                        location: "Wachirathan Waterfall"
+                    },
+                    {
+                        time: "18:30",
+                        title: "우아라이 새터데이 워킹 스트리트",
+                        type: "shopping-bag",
+                        location: "Wualai Walking Street"
+                    }
+                ]
+            },
+            {
+                title: "마지막 시장 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "와로롯 시장 아침",
+                        type: "store",
+                        location: "Warorot Market"
+                    },
+                    {
+                        time: "12:30",
+                        title: "왓 시수판 은사원",
+                        type: "landmark",
+                        location: "Wat Sri Suphan"
+                    },
+                    {
+                        time: "16:30",
+                        title: "치앙마이 공항 이동",
+                        type: "plane",
+                        location: "Chiang Mai International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    phuket: {
+        id: "phuket",
+        city: "Phuket",
+        country: "Thailand",
+        summary: "빠통과 올드타운, 빅부다와 프롬텝곶 노을, 팡아만 투어까지 안다만 해의 결을 따라 도는 푸켓 템플릿입니다.",
+        footer: "Phuket is loudest in Patong and quietest at Promthep Cape.",
+        heroImage: "assets/heroes/phuket.jpg",
+        heroPosition: "center center",
+        accent: "#0316A1",
+        accentRgb: "3, 22, 161",
+        ink: "#0B1E3A",
+        inkRgb: "11, 30, 58",
+        overlayTop: "rgba(11, 30, 58, 0.44)",
+        overlayBottom: "rgba(8, 18, 36, 0.90)",
+        timeZone: "Asia/Bangkok",
+        weather: {
+            latitude: 7.8804,
+            longitude: 98.3923
+        },
+        currency: {
+            code: "THB",
+            symbol: "฿",
+            locale: "th-TH"
+        },
+        startOffsetDays: 13,
+        phraseLabel: "ไทย",
+        phrases: [
+            {
+                text: "ทะเลอยู่ทางไหน",
+                pron: "[탈레 유 탕 나이]",
+                meaning: "바다는 어느 쪽인가요?"
+            },
+            {
+                text: "เผ็ดนิดหน่อย",
+                pron: "[펫 닛 너이]",
+                meaning: "조금만 맵게 해주세요"
+            },
+            {
+                text: "ขอเมนู",
+                pron: "[커 메누]",
+                meaning: "메뉴판 주세요"
+            },
+            {
+                text: "แพงไป",
+                pron: "[팽 빠이]",
+                meaning: "너무 비싸요"
+            },
+            {
+                text: "ช่วยด้วย",
+                pron: "[추어이 두어이]",
+                meaning: "도와주세요"
+            },
+            {
+                text: "ไปสนามบิน",
+                pron: "[빠이 사남빈]",
+                meaning: "공항으로 가 주세요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "빠통",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "빠통 비치",
+                        type: "sun",
+                        location: "Patong Beach"
+                    },
+                    {
+                        time: "13:00",
+                        title: "정실론 쇼핑 & 점심",
+                        type: "shopping-bag",
+                        location: "Jungceylon Shopping Center"
+                    },
+                    {
+                        time: "19:00",
+                        title: "방라 로드 밤거리",
+                        type: "lightbulb",
+                        location: "Bangla Road"
+                    }
+                ]
+            },
+            {
+                title: "푸켓 올드타운",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "탈랑 로드 시노-포르투갈 거리",
+                        type: "camera",
+                        location: "Thalang Road"
+                    },
+                    {
+                        time: "12:30",
+                        title: "올드타운 로컬 점심",
+                        type: "utensils-crossed",
+                        location: "One Chun Cafe & Restaurant"
+                    },
+                    {
+                        time: "18:00",
+                        title: "카오랑 힐 전망 노을",
+                        type: "binoculars",
+                        location: "Khao Rang Hill Viewpoint"
+                    }
+                ]
+            },
+            {
+                title: "남부 — 빅부다 & 프롬텝곶",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "빅부다",
+                        type: "landmark",
+                        location: "Big Buddha Phuket"
+                    },
+                    {
+                        time: "13:00",
+                        title: "라와이 해산물 시장 점심",
+                        type: "utensils-crossed",
+                        location: "Rawai Seafood Market"
+                    },
+                    {
+                        time: "17:30",
+                        title: "프롬텝곶 선셋",
+                        type: "camera",
+                        location: "Promthep Cape"
+                    }
+                ]
+            },
+            {
+                title: "팡아만 투어",
+                activities: [
+                    {
+                        time: "08:00",
+                        title: "제임스본드 섬 보트 투어",
+                        type: "ship",
+                        location: "James Bond Island"
+                    },
+                    {
+                        time: "12:30",
+                        title: "꼬 빠니 수상마을 점심",
+                        type: "utensils-crossed",
+                        location: "Koh Panyee"
+                    },
+                    {
+                        time: "18:30",
+                        title: "카론 비치 노을 저녁",
+                        type: "moon-star",
+                        location: "Karon Beach"
+                    }
+                ]
+            },
+            {
+                title: "카타 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "카타 비치 마지막 수영",
+                        type: "sun",
+                        location: "Kata Beach"
+                    },
+                    {
+                        time: "12:30",
+                        title: "센트럴 푸켓 마지막 쇼핑",
+                        type: "shopping-cart",
+                        location: "Central Phuket"
+                    },
+                    {
+                        time: "17:00",
+                        title: "푸켓 공항 이동",
+                        type: "plane",
+                        location: "Phuket International Airport"
+                    }
+                ]
+            }
+        ]
+    },
     dubai: {
         id: 'dubai',
         city: 'Dubai',
@@ -2465,6 +7122,312 @@ const DESTINATIONS = {
                     { time: '10:30', title: '미래박물관', type: 'building', location: 'Museum of the Future' },
                     { time: '13:30', title: '기념품 쇼핑', type: 'gift', location: 'City Walk Dubai' },
                     { time: '17:30', title: 'DXB 이동', type: 'plane', location: 'Dubai International Airport' }
+                ]
+            }
+        ]
+    },
+    'abu-dhabi': {
+        id: "abu-dhabi",
+        city: "Abu Dhabi",
+        country: "United Arab Emirates",
+        summary: "셰이크 자이드 모스크와 카스르 알 와탄, 루브르 아부다비, 야스 섬 페라리 월드와 코르니슈를 묶은 아부다비 템플릿입니다.",
+        footer: "Abu Dhabi is white marble, gold light, and calm turquoise water.",
+        heroImage: "assets/heroes/abu-dhabi.jpg",
+        heroPosition: "center center",
+        accent: "#C9A227",
+        accentRgb: "201, 162, 39",
+        ink: "#422006",
+        inkRgb: "66, 32, 6",
+        overlayTop: "rgba(66, 32, 6, 0.36)",
+        overlayBottom: "rgba(28, 16, 6, 0.88)",
+        timeZone: "Asia/Dubai",
+        weather: {
+            latitude: 24.4539,
+            longitude: 54.3773
+        },
+        currency: {
+            code: "AED",
+            symbol: "د.إ",
+            locale: "ar-AE"
+        },
+        startOffsetDays: 8,
+        phraseLabel: "العربية",
+        phrases: [
+            {
+                text: "هلا",
+                pron: "할라",
+                meaning: "안녕하세요 (걸프식 인사)"
+            },
+            {
+                text: "مع السلامة",
+                pron: "마아 살라마",
+                meaning: "안녕히 가세요"
+            },
+            {
+                text: "كم السعر؟",
+                pron: "캄 앗시으르",
+                meaning: "가격이 얼마예요?"
+            },
+            {
+                text: "من فضلك",
+                pron: "민 파들락",
+                meaning: "부탁합니다"
+            },
+            {
+                text: "وين التاكسي؟",
+                pron: "웨인 앗탁시",
+                meaning: "택시 어디예요?"
+            },
+            {
+                text: "ما شاء الله",
+                pron: "마샤알라",
+                meaning: "멋지네요 (감탄)"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "그랜드 모스크 & 카스르 알 와탄",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "셰이크 자이드 그랜드 모스크",
+                        type: "landmark",
+                        location: "Sheikh Zayed Grand Mosque"
+                    },
+                    {
+                        time: "13:30",
+                        title: "카스르 알 와탄",
+                        type: "building",
+                        location: "Qasr Al Watan"
+                    },
+                    {
+                        time: "18:00",
+                        title: "에미리트 팰리스 골드 카푸치노",
+                        type: "coffee",
+                        location: "Emirates Palace"
+                    }
+                ]
+            },
+            {
+                title: "사디야트 섬",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "루브르 아부다비",
+                        type: "palette",
+                        location: "Louvre Abu Dhabi"
+                    },
+                    {
+                        time: "13:30",
+                        title: "마나라트 알 사디야트 점심",
+                        type: "building-2",
+                        location: "Manarat Al Saadiyat"
+                    },
+                    {
+                        time: "17:30",
+                        title: "사디야트 비치 선셋",
+                        type: "sun",
+                        location: "Saadiyat Beach"
+                    }
+                ]
+            },
+            {
+                title: "야스 섬",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "페라리 월드",
+                        type: "ticket",
+                        location: "Ferrari World Abu Dhabi"
+                    },
+                    {
+                        time: "14:00",
+                        title: "야스 몰 점심 & 쇼핑",
+                        type: "shopping-cart",
+                        location: "Yas Mall"
+                    },
+                    {
+                        time: "18:30",
+                        title: "야스 베이 워터프런트 야경",
+                        type: "moon-star",
+                        location: "Yas Bay Waterfront"
+                    }
+                ]
+            },
+            {
+                title: "코르니슈 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "코르니슈 비치 산책",
+                        type: "map",
+                        location: "Corniche Beach"
+                    },
+                    {
+                        time: "13:00",
+                        title: "카스르 알 호슨 & 기념품",
+                        type: "gift",
+                        location: "Qasr Al Hosn"
+                    },
+                    {
+                        time: "16:30",
+                        title: "자이드 공항 이동",
+                        type: "plane",
+                        location: "Zayed International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    doha: {
+        id: "doha",
+        city: "Doha",
+        country: "Qatar",
+        summary: "수크 와키프와 이슬람 예술 박물관, 코르니슈, 카타라와 펄, 사막 사파리까지 묶은 도하 템플릿입니다.",
+        footer: "Doha feels strongest when old souq lanterns and new skyline glass share one bay.",
+        heroImage: "assets/heroes/doha.jpg",
+        heroPosition: "center center",
+        accent: "#8D1B3D",
+        accentRgb: "141, 27, 61",
+        ink: "#4C0519",
+        inkRgb: "76, 5, 25",
+        overlayTop: "rgba(76, 5, 25, 0.40)",
+        overlayBottom: "rgba(30, 6, 14, 0.90)",
+        timeZone: "Asia/Qatar",
+        weather: {
+            latitude: 25.2854,
+            longitude: 51.531
+        },
+        currency: {
+            code: "QAR",
+            symbol: "QR",
+            locale: "ar-QA"
+        },
+        startOffsetDays: 7,
+        phraseLabel: "العربية",
+        phrases: [
+            {
+                text: "السلام عليكم",
+                pron: "앗살라무 알라이쿰",
+                meaning: "안녕하세요"
+            },
+            {
+                text: "شكراً جزيلاً",
+                pron: "슈크란 자질란",
+                meaning: "정말 감사합니다"
+            },
+            {
+                text: "بكم هذا؟",
+                pron: "비캄 하다",
+                meaning: "이거 얼마예요?"
+            },
+            {
+                text: "لو سمحت",
+                pron: "라우 사마흐트",
+                meaning: "실례합니다 / 저기요"
+            },
+            {
+                text: "وين سوق واقف؟",
+                pron: "웨인 수크 와키프",
+                meaning: "수크 와키프가 어디예요?"
+            },
+            {
+                text: "لذيذ",
+                pron: "라디드",
+                meaning: "맛있어요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "코르니슈 & 수크 와키프",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "이슬람 예술 박물관",
+                        type: "building-2",
+                        location: "Museum of Islamic Art"
+                    },
+                    {
+                        time: "13:30",
+                        title: "코르니슈 산책 & MIA 파크",
+                        type: "map",
+                        location: "Doha Corniche"
+                    },
+                    {
+                        time: "18:30",
+                        title: "수크 와키프 저녁",
+                        type: "store",
+                        location: "Souq Waqif"
+                    }
+                ]
+            },
+            {
+                title: "카타라 & 펄",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "카타라 문화마을",
+                        type: "palette",
+                        location: "Katara Cultural Village"
+                    },
+                    {
+                        time: "13:30",
+                        title: "펄 카타르 포르토 아라비아 점심",
+                        type: "coffee",
+                        location: "The Pearl-Qatar"
+                    },
+                    {
+                        time: "18:30",
+                        title: "루사일 대로 야경",
+                        type: "moon-star",
+                        location: "Lusail Boulevard"
+                    }
+                ]
+            },
+            {
+                title: "국립박물관 & 사막 사파리",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "카타르 국립박물관 (사막 장미)",
+                        type: "building",
+                        location: "National Museum of Qatar"
+                    },
+                    {
+                        time: "14:30",
+                        title: "사막 사파리 & 내해 (코르 알 아다이드)",
+                        type: "sun",
+                        location: "Khor Al Adaid"
+                    },
+                    {
+                        time: "19:30",
+                        title: "사막 캠프 바비큐",
+                        type: "utensils-crossed",
+                        location: "Sealine Beach"
+                    }
+                ]
+            },
+            {
+                title: "교육도시 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "카타르 국립도서관",
+                        type: "library",
+                        location: "Qatar National Library"
+                    },
+                    {
+                        time: "13:00",
+                        title: "므셰이레브 다운타운 점심 & 기념품",
+                        type: "gift",
+                        location: "Msheireb Downtown Doha"
+                    },
+                    {
+                        time: "16:30",
+                        title: "하마드 공항 이동",
+                        type: "plane",
+                        location: "Hamad International Airport"
+                    }
                 ]
             }
         ]
@@ -2817,6 +7780,358 @@ const DESTINATIONS = {
                     { time: '10:00', title: '노스브리지 브런치', type: 'coffee', location: 'Northbridge Perth' },
                     { time: '13:00', title: '런던코트 산책', type: 'map', location: 'London Court' },
                     { time: '17:30', title: '공항 이동', type: 'plane', location: 'Perth Airport' }
+                ]
+            }
+        ]
+    },
+    brisbane: {
+        id: "brisbane",
+        city: "Brisbane",
+        country: "Australia",
+        summary: "사우스뱅크, 스토리 브리지, 론파인 코알라, 마운트 쿠사 전망에 골드코스트 당일치기를 더한 브리즈번 템플릿입니다.",
+        footer: "Brisbane works when river light, koalas, and a Gold Coast beach day stay easy.",
+        heroImage: "assets/heroes/brisbane.jpg",
+        heroPosition: "center center",
+        accent: "#A3E635",
+        accentRgb: "163, 230, 53",
+        ink: "#1A2E12",
+        inkRgb: "26, 46, 18",
+        overlayTop: "rgba(26, 46, 18, 0.38)",
+        overlayBottom: "rgba(14, 26, 14, 0.90)",
+        timeZone: "Australia/Brisbane",
+        weather: {
+            latitude: -27.4698,
+            longitude: 153.0251
+        },
+        currency: {
+            code: "AUD",
+            symbol: "A$",
+            locale: "en-AU"
+        },
+        startOffsetDays: 12,
+        phraseLabel: "English",
+        phrases: [
+            {
+                text: "Where do I tap on?",
+                pron: "[웨어 두 아이 탭 온]",
+                meaning: "교통카드 어디에 찍어요?"
+            },
+            {
+                text: "Does the CityCat stop here?",
+                pron: "[더즈 더 시티캣 스탑 히어]",
+                meaning: "시티캣(페리) 여기 서요?"
+            },
+            {
+                text: "This arvo works for me",
+                pron: "[디스 아보 웍스 포 미]",
+                meaning: "오늘 오후 괜찮아요 (호주식 표현)"
+            },
+            {
+                text: "Can I hold a koala?",
+                pron: "[캔 아이 홀드 어 코알라]",
+                meaning: "코알라 안아볼 수 있어요?"
+            },
+            {
+                text: "Do you sell sunscreen?",
+                pron: "[두 유 셀 선스크린]",
+                meaning: "선크림 팔아요?"
+            },
+            {
+                text: "Ta, mate",
+                pron: "[타 메이트]",
+                meaning: "고마워요 (호주식 표현)"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "사우스뱅크 & 시티",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "사우스뱅크 파크랜드 & 스트리츠 비치",
+                        type: "sun",
+                        location: "South Bank Parklands"
+                    },
+                    {
+                        time: "13:00",
+                        title: "퀸즐랜드 현대미술관(GOMA)",
+                        type: "palette",
+                        location: "Gallery of Modern Art Brisbane"
+                    },
+                    {
+                        time: "18:00",
+                        title: "휠 오브 브리즈번 & 강변 야경",
+                        type: "sparkles",
+                        location: "The Wheel of Brisbane"
+                    }
+                ]
+            },
+            {
+                title: "스토리 브리지 & 뉴팜",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "스토리 브리지 어드벤처 클라임",
+                        type: "bridge",
+                        location: "Story Bridge"
+                    },
+                    {
+                        time: "13:00",
+                        title: "하워드 스미스 워브스 런치",
+                        type: "utensils-crossed",
+                        location: "Howard Smith Wharves"
+                    },
+                    {
+                        time: "17:30",
+                        title: "뉴팜 파크 & 브리즈번 파워하우스",
+                        type: "trees",
+                        location: "New Farm Park"
+                    }
+                ]
+            },
+            {
+                title: "론파인 & 마운트 쿠사",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "론파인 코알라 보호구역",
+                        type: "camera",
+                        location: "Lone Pine Koala Sanctuary"
+                    },
+                    {
+                        time: "13:30",
+                        title: "마운트 쿠사 식물원",
+                        type: "trees",
+                        location: "Brisbane Botanic Gardens Mt Coot-tha"
+                    },
+                    {
+                        time: "17:30",
+                        title: "마운트 쿠사 전망대 선셋",
+                        type: "binoculars",
+                        location: "Mount Coot-tha Lookout"
+                    }
+                ]
+            },
+            {
+                title: "골드코스트 당일치기",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "서퍼스 파라다이스 비치",
+                        type: "sun",
+                        location: "Surfers Paradise Beach"
+                    },
+                    {
+                        time: "13:00",
+                        title: "스카이포인트 전망대",
+                        type: "tower-control",
+                        location: "SkyPoint Observation Deck"
+                    },
+                    {
+                        time: "17:00",
+                        title: "버레이 헤즈 선셋",
+                        type: "camera",
+                        location: "Burleigh Heads"
+                    }
+                ]
+            },
+            {
+                title: "퀸 스트리트 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "시티 보타닉 가든 산책",
+                        type: "trees",
+                        location: "City Botanic Gardens Brisbane"
+                    },
+                    {
+                        time: "12:30",
+                        title: "퀸 스트리트 몰 쇼핑",
+                        type: "shopping-bag",
+                        location: "Queen Street Mall"
+                    },
+                    {
+                        time: "16:00",
+                        title: "브리즈번 공항 이동",
+                        type: "plane",
+                        location: "Brisbane Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    melbourne: {
+        id: "melbourne",
+        city: "Melbourne",
+        country: "Australia",
+        summary: "플린더스 역과 호시어 레인, 퀸빅토리아 마켓, 세인트 킬다에 그레이트 오션 로드와 야라 밸리 당일치기를 더한 멜버른 템플릿입니다.",
+        footer: "Melbourne runs on laneway coffee, street art, and one long coastal drive.",
+        heroImage: "assets/heroes/melbourne.jpg",
+        heroPosition: "center center",
+        accent: "#818CF8",
+        accentRgb: "129, 140, 248",
+        ink: "#1C1B2F",
+        inkRgb: "28, 27, 47",
+        overlayTop: "rgba(28, 27, 47, 0.42)",
+        overlayBottom: "rgba(16, 15, 30, 0.92)",
+        timeZone: "Australia/Melbourne",
+        weather: {
+            latitude: -37.8136,
+            longitude: 144.9631
+        },
+        currency: {
+            code: "AUD",
+            symbol: "A$",
+            locale: "en-AU"
+        },
+        startOffsetDays: 14,
+        phraseLabel: "English",
+        phrases: [
+            {
+                text: "Where can I top up my Myki?",
+                pron: "[웨어 캔 아이 탑 업 마이 마이키]",
+                meaning: "마이키(교통카드) 어디서 충전해요?"
+            },
+            {
+                text: "Is this tram in the free zone?",
+                pron: "[이즈 디스 트램 인 더 프리 존]",
+                meaning: "이 트램 무료 구간이에요?"
+            },
+            {
+                text: "A long black, please",
+                pron: "[어 롱 블랙 플리즈]",
+                meaning: "롱블랙 한 잔 주세요"
+            },
+            {
+                text: "Four seasons in one day",
+                pron: "[포 시즌스 인 원 데이]",
+                meaning: "하루에 사계절 다 있어요 (멜버른 날씨 표현)"
+            },
+            {
+                text: "Who’s playing at the G tonight?",
+                pron: "[후즈 플레잉 앳 더 지 투나잇]",
+                meaning: "오늘 MCG에 어느 팀 경기해요?"
+            },
+            {
+                text: "Which laneway is that café in?",
+                pron: "[위치 레인웨이 이즈 댓 카페 인]",
+                meaning: "그 카페 어느 골목에 있어요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "CBD & 레인웨이",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "플린더스 스트리트 역 & 페더레이션 스퀘어",
+                        type: "landmark",
+                        location: "Flinders Street Station"
+                    },
+                    {
+                        time: "12:00",
+                        title: "호시어 레인 & 디그레이브스 골목",
+                        type: "palette",
+                        location: "Hosier Lane"
+                    },
+                    {
+                        time: "18:00",
+                        title: "멜버른 스카이덱 야경",
+                        type: "building",
+                        location: "Melbourne Skydeck"
+                    }
+                ]
+            },
+            {
+                title: "퀸빅토리아 마켓 & 칼튼",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "퀸 빅토리아 마켓",
+                        type: "store",
+                        location: "Queen Victoria Market"
+                    },
+                    {
+                        time: "13:00",
+                        title: "라이곤 스트리트 이탈리안 런치",
+                        type: "utensils-crossed",
+                        location: "Lygon Street"
+                    },
+                    {
+                        time: "17:00",
+                        title: "칼튼 가든 & 왕립전시관",
+                        type: "landmark",
+                        location: "Royal Exhibition Building"
+                    }
+                ]
+            },
+            {
+                title: "그레이트 오션 로드 당일치기",
+                activities: [
+                    {
+                        time: "08:00",
+                        title: "토키 & 벨스 비치",
+                        type: "sun",
+                        location: "Bells Beach"
+                    },
+                    {
+                        time: "12:30",
+                        title: "아폴로 베이 런치",
+                        type: "utensils-crossed",
+                        location: "Apollo Bay"
+                    },
+                    {
+                        time: "16:30",
+                        title: "12 사도 바위",
+                        type: "camera",
+                        location: "Twelve Apostles"
+                    }
+                ]
+            },
+            {
+                title: "세인트 킬다 & 사우스 야라",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "왕립식물원 & 추모 사원",
+                        type: "trees",
+                        location: "Royal Botanic Gardens Victoria"
+                    },
+                    {
+                        time: "13:00",
+                        title: "채플 스트리트 런치 & 쇼핑",
+                        type: "shopping-bag",
+                        location: "Chapel Street South Yarra"
+                    },
+                    {
+                        time: "17:30",
+                        title: "세인트 킬다 피어 & 펭귄",
+                        type: "sun",
+                        location: "St Kilda Pier"
+                    }
+                ]
+            },
+            {
+                title: "야라 밸리 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "야라 밸리 와이너리 (도멘 샹동)",
+                        type: "sparkles",
+                        location: "Domaine Chandon Yarra Valley"
+                    },
+                    {
+                        time: "12:30",
+                        title: "힐스빌 런치",
+                        type: "utensils-crossed",
+                        location: "Healesville"
+                    },
+                    {
+                        time: "16:30",
+                        title: "멜버른 공항 이동",
+                        type: "plane",
+                        location: "Melbourne Airport"
+                    }
                 ]
             }
         ]
@@ -3281,8 +8596,8 @@ const DESTINATIONS = {
         footer: "Xi'an lands when clay soldiers, old ramparts, and night-market smoke stack up in one trip.",
         heroImage: "assets/heroes/xian.jpg",
         heroPosition: "center 40%",
-        accent: "#B45309",
-        accentRgb: "180, 83, 9",
+        accent: "#B46A09",
+        accentRgb: "180, 106, 9",
         ink: "#431407",
         inkRgb: "67, 20, 7",
         overlayTop: "rgba(67, 20, 7, 0.44)",
@@ -3977,6 +9292,2033 @@ const DESTINATIONS = {
             }
         ]
     },
+    zhangjiajie: {
+        id: "zhangjiajie",
+        city: "Zhangjiajie",
+        country: "China",
+        summary: "아바타 봉우리와 톈먼산 유리잔도, 대협곡 유리다리로 하늘 위를 걷는 장자제 템플릿입니다.",
+        footer: "Zhangjiajie hits hardest when the sandstone pillars float out of the morning mist.",
+        heroImage: "assets/heroes/zhangjiajie.jpg",
+        heroPosition: "center center",
+        accent: "#059669",
+        accentRgb: "5, 150, 105",
+        ink: "#052E16",
+        inkRgb: "5, 46, 22",
+        overlayTop: "rgba(5, 46, 22, 0.42)",
+        overlayBottom: "rgba(15, 23, 42, 0.90)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 29.117,
+            longitude: 110.479
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 10,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "缆车在哪里？",
+                pron: "[란처 짜이 날리]",
+                meaning: "케이블카는 어디 있나요?"
+            },
+            {
+                text: "观光车几点发？",
+                pron: "[관광처 지 뎬 파]",
+                meaning: "셔틀버스는 몇 시에 출발해요?"
+            },
+            {
+                text: "风景太壮观了",
+                pron: "[펑징 타이 좡관 러]",
+                meaning: "경치가 정말 웅장하네요"
+            },
+            {
+                text: "我有点怕高",
+                pron: "[워 여우뎬 파 가오]",
+                meaning: "저는 높은 곳이 좀 무서워요"
+            },
+            {
+                text: "帮我拍一张",
+                pron: "[방 워 파이 이 장]",
+                meaning: "사진 한 장 찍어 주세요"
+            },
+            {
+                text: "有点累了",
+                pron: "[여우뎬 레이 러]",
+                meaning: "조금 피곤해요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "우링위안 · 위안자제 & 톈쯔산",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "바이룽 엘리베이터 탑승",
+                        type: "tower-control",
+                        location: "Bailong Elevator"
+                    },
+                    {
+                        time: "10:00",
+                        title: "위안자제 할렐루야산 전망",
+                        type: "binoculars",
+                        location: "Avatar Hallelujah Mountain"
+                    },
+                    {
+                        time: "14:30",
+                        title: "톈쯔산 어필봉 & 케이블카 하산",
+                        type: "camera",
+                        location: "Tianzi Mountain"
+                    }
+                ]
+            },
+            {
+                title: "황스자이 & 진볜시",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "황스자이 케이블카 & 전망대",
+                        type: "binoculars",
+                        location: "Huangshizhai"
+                    },
+                    {
+                        time: "13:00",
+                        title: "진볜시 계곡 트레킹",
+                        type: "trees",
+                        location: "Golden Whip Stream"
+                    },
+                    {
+                        time: "19:00",
+                        title: "시부제 야시장",
+                        type: "sparkles",
+                        location: "Xibu Street"
+                    }
+                ]
+            },
+            {
+                title: "톈먼산",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "톈먼산 케이블카 탑승",
+                        type: "tower-control",
+                        location: "Tianmen Mountain Cableway"
+                    },
+                    {
+                        time: "11:00",
+                        title: "유리잔도 & 귀곡잔도",
+                        type: "camera",
+                        location: "Tianmen Mountain Glass Skywalk"
+                    },
+                    {
+                        time: "15:00",
+                        title: "톈먼동 999계단",
+                        type: "landmark",
+                        location: "Tianmen Cave"
+                    }
+                ]
+            },
+            {
+                title: "대협곡 유리다리 & 이동",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "장자제 대협곡 유리다리",
+                        type: "bridge",
+                        location: "Zhangjiajie Grand Canyon Glass Bridge"
+                    },
+                    {
+                        time: "11:30",
+                        title: "대협곡 트레킹 & 점심",
+                        type: "trees",
+                        location: "Zhangjiajie Grand Canyon"
+                    },
+                    {
+                        time: "16:30",
+                        title: "허화 공항 이동",
+                        type: "plane",
+                        location: "Zhangjiajie Hehua International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    nanjing: {
+        id: "nanjing",
+        city: "Nanjing",
+        country: "China",
+        summary: "중산릉과 명효릉, 부자묘 친화이허 야경으로 육조 고도의 시간을 되짚는 난징 템플릿입니다.",
+        footer: "Nanjing is best read slowly, from the mausoleum steps to the lantern-lit Qinhuai.",
+        heroImage: "assets/heroes/nanjing.jpg",
+        heroPosition: "center center",
+        accent: "#7C3AED",
+        accentRgb: "124, 58, 237",
+        ink: "#2E1065",
+        inkRgb: "46, 16, 101",
+        overlayTop: "rgba(46, 16, 101, 0.44)",
+        overlayBottom: "rgba(20, 16, 40, 0.90)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 32.0603,
+            longitude: 118.7969
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 8,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "这是明朝的吗？",
+                pron: "[저 스 밍차오 더 마]",
+                meaning: "이건 명나라 것인가요?"
+            },
+            {
+                text: "一碗鸭血粉丝汤",
+                pron: "[이 완 야셰 펀쓰탕]",
+                meaning: "오리 선지 당면탕 한 그릇 주세요"
+            },
+            {
+                text: "来一份盐水鸭",
+                pron: "[라이 이 펀 옌수이야]",
+                meaning: "염수압(소금물 오리) 하나 주세요"
+            },
+            {
+                text: "坐游船要多久？",
+                pron: "[쭤 여우촨 야오 둬주]",
+                meaning: "유람선은 얼마나 걸려요?"
+            },
+            {
+                text: "我想去夫子庙",
+                pron: "[워 샹 취 푸쯔먀오]",
+                meaning: "부자묘에 가고 싶어요"
+            },
+            {
+                text: "请慢点说",
+                pron: "[칭 만뎬 숴]",
+                meaning: "천천히 말해 주세요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "중산릉 & 명효릉",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "중산릉 참배",
+                        type: "landmark",
+                        location: "Sun Yat-sen Mausoleum"
+                    },
+                    {
+                        time: "13:00",
+                        title: "명효릉 신도 산책",
+                        type: "trees",
+                        location: "Ming Xiaoling Mausoleum"
+                    },
+                    {
+                        time: "17:00",
+                        title: "쉬안우호 노을 산책",
+                        type: "sun",
+                        location: "Xuanwu Lake"
+                    }
+                ]
+            },
+            {
+                title: "부자묘 & 친화이허",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "부자묘 & 강남공원",
+                        type: "landmark",
+                        location: "Nanjing Confucius Temple"
+                    },
+                    {
+                        time: "12:30",
+                        title: "라오먼둥 옛 거리 점심",
+                        type: "utensils-crossed",
+                        location: "Laomendong"
+                    },
+                    {
+                        time: "19:00",
+                        title: "친화이허 야경 유람선",
+                        type: "ship",
+                        location: "Qinhuai River"
+                    }
+                ]
+            },
+            {
+                title: "총통부 & 기념관",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "총통부 관람",
+                        type: "building",
+                        location: "Presidential Palace Nanjing"
+                    },
+                    {
+                        time: "12:30",
+                        title: "1912 거리 점심",
+                        type: "utensils-crossed",
+                        location: "Nanjing 1912"
+                    },
+                    {
+                        time: "15:00",
+                        title: "난징대학살기념관",
+                        type: "library",
+                        location: "Nanjing Massacre Memorial Hall"
+                    }
+                ]
+            },
+            {
+                title: "중화문 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "중화문 옹성 성벽",
+                        type: "landmark",
+                        location: "Zhonghua Gate"
+                    },
+                    {
+                        time: "12:30",
+                        title: "신제커우 쇼핑 & 점심",
+                        type: "shopping-bag",
+                        location: "Xinjiekou"
+                    },
+                    {
+                        time: "16:30",
+                        title: "루커우 공항 이동",
+                        type: "plane",
+                        location: "Nanjing Lukou International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    changsha: {
+        id: "changsha",
+        city: "Changsha",
+        country: "China",
+        summary: "웨루산과 오렌지섬, 후난성박물관, 타이핑제와 원허유 야시장으로 매운 밤을 채우는 창사 템플릿입니다.",
+        footer: "Changsha runs on chili, milk tea, and a skyline that never quite goes to sleep.",
+        heroImage: "assets/heroes/changsha.jpg",
+        heroPosition: "center center",
+        accent: "#EA580C",
+        accentRgb: "234, 88, 12",
+        ink: "#450A0A",
+        inkRgb: "69, 10, 10",
+        overlayTop: "rgba(69, 10, 10, 0.42)",
+        overlayBottom: "rgba(28, 12, 12, 0.90)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 28.2282,
+            longitude: 112.9388
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 7,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "臭豆腐来一份",
+                pron: "[처우더우푸 라이 이 펀]",
+                meaning: "취두부 하나 주세요"
+            },
+            {
+                text: "太辣了",
+                pron: "[타이 라 러]",
+                meaning: "너무 매워요"
+            },
+            {
+                text: "奶茶少糖",
+                pron: "[나이차 사오 탕]",
+                meaning: "밀크티는 당 적게 해 주세요"
+            },
+            {
+                text: "排队要多久？",
+                pron: "[파이두이 야오 둬주]",
+                meaning: "줄 서면 얼마나 걸려요?"
+            },
+            {
+                text: "有小龙虾吗？",
+                pron: "[여우 샤오룽샤 마]",
+                meaning: "민물가재 요리 있나요?"
+            },
+            {
+                text: "夜市几点开始？",
+                pron: "[예스 지 뎬 카이스]",
+                meaning: "야시장은 몇 시에 시작해요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "웨루산 & 오렌지섬",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "웨루서원",
+                        type: "landmark",
+                        location: "Yuelu Academy"
+                    },
+                    {
+                        time: "11:30",
+                        title: "웨루산 애만정 산책",
+                        type: "trees",
+                        location: "Yuelu Mountain"
+                    },
+                    {
+                        time: "17:00",
+                        title: "오렌지섬 노을 & 청년 마오쩌둥상",
+                        type: "sun",
+                        location: "Orange Isle"
+                    }
+                ]
+            },
+            {
+                title: "후난성박물관 & 타이핑제",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "후난성박물관 마왕퇴 한묘",
+                        type: "library",
+                        location: "Hunan Museum"
+                    },
+                    {
+                        time: "12:30",
+                        title: "타이핑제 취두부 & 점심",
+                        type: "store",
+                        location: "Taiping Old Street"
+                    },
+                    {
+                        time: "19:00",
+                        title: "원허유 야시장 저녁",
+                        type: "sparkles",
+                        location: "Changsha Wenheyou"
+                    }
+                ]
+            },
+            {
+                title: "우이광장 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "우이광장 & 차옌웨써 밀크티",
+                        type: "coffee",
+                        location: "Wuyi Square"
+                    },
+                    {
+                        time: "12:30",
+                        title: "창사 IFS 전망 & 점심",
+                        type: "building",
+                        location: "Changsha IFS"
+                    },
+                    {
+                        time: "16:30",
+                        title: "황화 공항 이동",
+                        type: "plane",
+                        location: "Changsha Huanghua International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    kunming: {
+        id: "kunming",
+        city: "Kunming",
+        country: "China",
+        summary: "석림과 뎬츠, 진마비지팡에 다리 고성 당일까지 얹은 사계절 봄 도시 쿤밍 템플릿입니다.",
+        footer: "Kunming stays spring all year; the stone forest and the lake do the rest.",
+        heroImage: "assets/heroes/kunming.jpg",
+        heroPosition: "center center",
+        accent: "#65A30D",
+        accentRgb: "101, 163, 13",
+        ink: "#1A2E05",
+        inkRgb: "26, 46, 5",
+        overlayTop: "rgba(26, 46, 5, 0.40)",
+        overlayBottom: "rgba(15, 23, 42, 0.88)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 25.0389,
+            longitude: 102.7183
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 12,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "一碗过桥米线",
+                pron: "[이 완 궈차오 미셴]",
+                meaning: "과교미셴 한 그릇 주세요"
+            },
+            {
+                text: "这花叫什么？",
+                pron: "[저 화 자오 선머]",
+                meaning: "이 꽃 이름이 뭐예요?"
+            },
+            {
+                text: "天气真舒服",
+                pron: "[톈치 전 수푸]",
+                meaning: "날씨가 정말 쾌적하네요"
+            },
+            {
+                text: "去石林的车在哪？",
+                pron: "[취 스린 더 처 짜이 날]",
+                meaning: "석림 가는 차는 어디예요?"
+            },
+            {
+                text: "有菌子火锅吗？",
+                pron: "[여우 쥔쯔 훠궈 마]",
+                meaning: "버섯 훠궈 있나요?"
+            },
+            {
+                text: "我先看看",
+                pron: "[워 셴 칸칸]",
+                meaning: "먼저 좀 둘러볼게요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "뎬츠 & 시산",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "윈난민족촌",
+                        type: "landmark",
+                        location: "Yunnan Nationalities Village"
+                    },
+                    {
+                        time: "13:00",
+                        title: "하이겅 제방 갈매기 산책",
+                        type: "sun",
+                        location: "Haigeng Dam"
+                    },
+                    {
+                        time: "16:00",
+                        title: "시산 용문 전망",
+                        type: "binoculars",
+                        location: "Dragon Gate, Western Hills"
+                    }
+                ]
+            },
+            {
+                title: "스린 석림 당일",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "스린 대석림 탐방",
+                        type: "landmark",
+                        location: "Stone Forest"
+                    },
+                    {
+                        time: "13:00",
+                        title: "이족 마을 점심",
+                        type: "utensils-crossed",
+                        location: "Shilin Yi Autonomous County"
+                    },
+                    {
+                        time: "15:00",
+                        title: "나이구 석림",
+                        type: "binoculars",
+                        location: "Naigu Stone Forest"
+                    }
+                ]
+            },
+            {
+                title: "옛 도심 & 진마비지팡",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "위안퉁사 참배",
+                        type: "landmark",
+                        location: "Yuantong Temple"
+                    },
+                    {
+                        time: "12:30",
+                        title: "취안후 공원 & 과교미셴 점심",
+                        type: "utensils-crossed",
+                        location: "Green Lake Park"
+                    },
+                    {
+                        time: "19:00",
+                        title: "진마비지팡 야경",
+                        type: "moon-star",
+                        location: "Jinma Biji Archways"
+                    }
+                ]
+            },
+            {
+                title: "다리 고성 당일",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "다리 고성 산책",
+                        type: "landmark",
+                        location: "Dali Ancient City"
+                    },
+                    {
+                        time: "13:00",
+                        title: "얼하이 호숫가 점심",
+                        type: "utensils-crossed",
+                        location: "Erhai Lake"
+                    },
+                    {
+                        time: "15:30",
+                        title: "충성사 삼탑",
+                        type: "landmark",
+                        location: "Three Pagodas of Chongsheng Temple"
+                    }
+                ]
+            },
+            {
+                title: "관두 고진 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "윈난성박물관",
+                        type: "library",
+                        location: "Yunnan Provincial Museum"
+                    },
+                    {
+                        time: "12:30",
+                        title: "관두 고진 점심",
+                        type: "store",
+                        location: "Guandu Ancient Town"
+                    },
+                    {
+                        time: "16:30",
+                        title: "창수이 공항 이동",
+                        type: "plane",
+                        location: "Kunming Changshui International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    xiamen: {
+        id: "xiamen",
+        city: "Xiamen",
+        country: "China",
+        summary: "구랑위 섬, 샤먼대학과 난푸퉈사, 쩡춰안 바닷가 골목을 묶은 샤먼 템플릿입니다.",
+        footer: "Xiamen is a ferry ride, a piano echo, and a slow walk along the sea wall.",
+        heroImage: "assets/heroes/xiamen.jpg",
+        heroPosition: "center center",
+        accent: "#E11D48",
+        accentRgb: "225, 29, 72",
+        ink: "#0C4A6E",
+        inkRgb: "12, 74, 110",
+        overlayTop: "rgba(12, 74, 110, 0.42)",
+        overlayBottom: "rgba(15, 23, 42, 0.90)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 24.4798,
+            longitude: 118.0894
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 9,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "船票怎么买？",
+                pron: "[촨퍄오 전머 마이]",
+                meaning: "배표는 어떻게 사나요?"
+            },
+            {
+                text: "一碗沙茶面",
+                pron: "[이 완 사차몐]",
+                meaning: "사차면 한 그릇 주세요"
+            },
+            {
+                text: "海边可以游泳吗？",
+                pron: "[하이볜 커이 여우융 마]",
+                meaning: "바닷가에서 수영해도 되나요?"
+            },
+            {
+                text: "一杯冰美式",
+                pron: "[이 베이 빙 메이스]",
+                meaning: "아이스 아메리카노 한 잔 주세요"
+            },
+            {
+                text: "最后一班船几点？",
+                pron: "[쭈이허우 이 반 촨 지 뎬]",
+                meaning: "마지막 배는 몇 시예요?"
+            },
+            {
+                text: "这个是什么？",
+                pron: "[저거 스 선머]",
+                meaning: "이건 뭐예요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "구랑위",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "르광옌 전망대",
+                        type: "binoculars",
+                        location: "Sunlight Rock"
+                    },
+                    {
+                        time: "12:30",
+                        title: "룽터우루 먹거리 점심",
+                        type: "utensils-crossed",
+                        location: "Longtou Road"
+                    },
+                    {
+                        time: "15:30",
+                        title: "슈좡화원 & 피아노박물관",
+                        type: "music",
+                        location: "Shuzhuang Garden"
+                    }
+                ]
+            },
+            {
+                title: "샤먼대학 & 난푸퉈사",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "난푸퉈사 참배",
+                        type: "landmark",
+                        location: "Nanputuo Temple"
+                    },
+                    {
+                        time: "11:30",
+                        title: "샤먼대학 캠퍼스 산책",
+                        type: "building",
+                        location: "Xiamen University"
+                    },
+                    {
+                        time: "14:30",
+                        title: "사포웨이 카페 골목",
+                        type: "coffee",
+                        location: "Shapowei"
+                    }
+                ]
+            },
+            {
+                title: "환도로 & 쩡춰안",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "후리산 포대",
+                        type: "landmark",
+                        location: "Hulishan Fortress"
+                    },
+                    {
+                        time: "13:00",
+                        title: "환도로 자전거 라이딩",
+                        type: "map",
+                        location: "Huandao Road"
+                    },
+                    {
+                        time: "18:30",
+                        title: "쩡춰안 야시장 저녁",
+                        type: "sparkles",
+                        location: "Zengcuoan"
+                    }
+                ]
+            },
+            {
+                title: "중산루 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "중산루 보행자 거리",
+                        type: "shopping-bag",
+                        location: "Zhongshan Road Pedestrian Street"
+                    },
+                    {
+                        time: "12:30",
+                        title: "바스 시장 사차면 점심",
+                        type: "utensils-crossed",
+                        location: "Bashi Market"
+                    },
+                    {
+                        time: "16:30",
+                        title: "가오치 공항 이동",
+                        type: "plane",
+                        location: "Xiamen Gaoqi International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    harbin: {
+        id: "harbin",
+        city: "Harbin",
+        country: "China",
+        summary: "성소피아 성당과 중앙대가, 빙설대세계와 태양도로 겨울 러시아 무드를 담은 하얼빈 템플릿입니다.",
+        footer: "Harbin glows coldest and brightest when the ice lanterns switch on.",
+        heroImage: "assets/heroes/harbin.jpg",
+        heroPosition: "center center",
+        accent: "#7DD3FC",
+        accentRgb: "125, 211, 252",
+        ink: "#0F172A",
+        inkRgb: "15, 23, 42",
+        overlayTop: "rgba(15, 23, 42, 0.46)",
+        overlayBottom: "rgba(2, 6, 23, 0.92)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 45.8038,
+            longitude: 126.535
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 14,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "太冷了",
+                pron: "[타이 렁 러]",
+                meaning: "너무 추워요"
+            },
+            {
+                text: "有暖气吗？",
+                pron: "[여우 놘치 마]",
+                meaning: "난방 되나요?"
+            },
+            {
+                text: "一份锅包肉",
+                pron: "[이 펀 궈바오러우]",
+                meaning: "궈바로우 하나 주세요"
+            },
+            {
+                text: "冰灯几点亮？",
+                pron: "[빙덩 지 뎬 량]",
+                meaning: "빙등은 몇 시에 켜져요?"
+            },
+            {
+                text: "路很滑，小心",
+                pron: "[루 헌 화, 샤오신]",
+                meaning: "길이 미끄러워요, 조심하세요"
+            },
+            {
+                text: "有热水吗？",
+                pron: "[여우 러수이 마]",
+                meaning: "뜨거운 물 있나요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "중앙대가 & 성소피아",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "성소피아 성당",
+                        type: "landmark",
+                        location: "Saint Sophia Cathedral"
+                    },
+                    {
+                        time: "12:30",
+                        title: "중앙대가 러시아 요리 점심",
+                        type: "utensils-crossed",
+                        location: "Central Street"
+                    },
+                    {
+                        time: "18:30",
+                        title: "방홍기념탑 & 쑹화강 야경",
+                        type: "moon-star",
+                        location: "Harbin Flood Control Memorial Tower"
+                    }
+                ]
+            },
+            {
+                title: "태양도 & 빙설대세계",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "태양도 설조박람회 (겨울)",
+                        type: "camera",
+                        location: "Sun Island Scenic Area"
+                    },
+                    {
+                        time: "13:30",
+                        title: "하얼빈 극지관",
+                        type: "binoculars",
+                        location: "Harbin Polarland"
+                    },
+                    {
+                        time: "17:00",
+                        title: "빙설대세계 야간 점등 (겨울)",
+                        type: "sparkles",
+                        location: "Harbin Ice and Snow World"
+                    }
+                ]
+            },
+            {
+                title: "호랑이림원 & 라오다오와이",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "둥베이 호랑이림원",
+                        type: "binoculars",
+                        location: "Siberian Tiger Park"
+                    },
+                    {
+                        time: "13:00",
+                        title: "라오다오와이 궈바로우 점심",
+                        type: "utensils-crossed",
+                        location: "Laodaowai"
+                    },
+                    {
+                        time: "18:30",
+                        title: "하얼빈 대극장 야경",
+                        type: "building",
+                        location: "Harbin Grand Theatre"
+                    }
+                ]
+            },
+            {
+                title: "기념관 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "731부대 죄증진열관",
+                        type: "library",
+                        location: "Unit 731 Museum"
+                    },
+                    {
+                        time: "12:30",
+                        title: "하얼빈역 안중근 의사 기념관",
+                        type: "landmark",
+                        location: "Harbin Railway Station"
+                    },
+                    {
+                        time: "16:30",
+                        title: "타이핑 공항 이동",
+                        type: "plane",
+                        location: "Harbin Taiping International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    yanji: {
+        id: "yanji",
+        city: "Yanji",
+        country: "China",
+        summary: "한글 간판 거리와 옌볜 냉면, 백두산 천지 당일과 두만강까지 잇는 옌지 템플릿입니다.",
+        footer: "Yanji feels close to home, with Heaven Lake one long morning away.",
+        heroImage: "assets/heroes/yanji.jpg",
+        heroPosition: "center center",
+        accent: "#0F766E",
+        accentRgb: "15, 118, 110",
+        ink: "#134E4A",
+        inkRgb: "19, 78, 74",
+        overlayTop: "rgba(19, 78, 74, 0.42)",
+        overlayBottom: "rgba(15, 23, 42, 0.90)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 42.9048,
+            longitude: 129.5091
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 11,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "会说韩语吗？",
+                pron: "[후이 숴 한위 마]",
+                meaning: "한국어 할 줄 아세요?"
+            },
+            {
+                text: "一碗冷面",
+                pron: "[이 완 렁몐]",
+                meaning: "냉면 한 그릇 주세요"
+            },
+            {
+                text: "天池今天能看到吗？",
+                pron: "[톈츠 진톈 넝 칸다오 마]",
+                meaning: "오늘 천지 볼 수 있나요?"
+            },
+            {
+                text: "打包一份米肠",
+                pron: "[다바오 이 펀 미창]",
+                meaning: "순대 하나 포장해 주세요"
+            },
+            {
+                text: "几点回延吉？",
+                pron: "[지 뎬 후이 옌지]",
+                meaning: "옌지로 몇 시에 돌아가요?"
+            },
+            {
+                text: "这里离边境远吗？",
+                pron: "[저리 리 볜징 위안 마]",
+                meaning: "여기서 국경까지 멀어요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "옌지 한글 간판 거리",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "옌볜대학 한글 간판 벽",
+                        type: "camera",
+                        location: "Yanbian University"
+                    },
+                    {
+                        time: "12:30",
+                        title: "서시장 옌볜 냉면 점심",
+                        type: "utensils-crossed",
+                        location: "Yanji Xishi Market"
+                    },
+                    {
+                        time: "19:00",
+                        title: "옌지 야시장",
+                        type: "sparkles",
+                        location: "Yanji Night Market"
+                    }
+                ]
+            },
+            {
+                title: "백두산 천지 당일 (북파)",
+                activities: [
+                    {
+                        time: "06:30",
+                        title: "창바이산 북파 산문 이동",
+                        type: "map",
+                        location: "Changbai Mountain North Scenic Area"
+                    },
+                    {
+                        time: "10:30",
+                        title: "천지 전망대",
+                        type: "binoculars",
+                        location: "Heaven Lake, Changbai Mountain"
+                    },
+                    {
+                        time: "13:30",
+                        title: "창바이 폭포 & 온천 계란",
+                        type: "trees",
+                        location: "Changbai Waterfall"
+                    }
+                ]
+            },
+            {
+                title: "도문 두만강 & 이동",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "도문 두만강 국경 전망",
+                        type: "map",
+                        location: "Tumen River Scenic Area"
+                    },
+                    {
+                        time: "12:30",
+                        title: "부르하퉁하 강변 산책 & 점심",
+                        type: "sun",
+                        location: "Buerhatong River"
+                    },
+                    {
+                        time: "16:00",
+                        title: "차오양촨 공항 이동",
+                        type: "plane",
+                        location: "Yanji Chaoyangchuan International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    chongqing: {
+        id: "chongqing",
+        city: "Chongqing",
+        country: "China",
+        summary: "훙야둥 야경과 경전철 관통 건물, 고진 골목과 훠궈를 한 줄로 엮은 산성 충칭 템플릿입니다.",
+        footer: "Chongqing stacks itself: trains through towers, lights on the cliff, hotpot at the end.",
+        heroImage: "assets/heroes/chongqing.jpg",
+        heroPosition: "center center",
+        accent: "#D72626",
+        accentRgb: "215, 38, 38",
+        ink: "#4C0519",
+        inkRgb: "76, 5, 25",
+        overlayTop: "rgba(76, 5, 25, 0.44)",
+        overlayBottom: "rgba(24, 12, 18, 0.90)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 29.563,
+            longitude: 106.5516
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 7,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "要鸳鸯锅",
+                pron: "[야오 위안양 궈]",
+                meaning: "반반 훠궈로 할게요"
+            },
+            {
+                text: "微麻微辣",
+                pron: "[웨이 마 웨이 라]",
+                meaning: "조금만 얼얼하고 조금만 맵게요"
+            },
+            {
+                text: "索道在哪坐？",
+                pron: "[쒀다오 짜이 나 쭤]",
+                meaning: "케이블카는 어디서 타나요?"
+            },
+            {
+                text: "轻轨怎么坐？",
+                pron: "[칭구이 전머 쭤]",
+                meaning: "경전철은 어떻게 타나요?"
+            },
+            {
+                text: "一碗小面",
+                pron: "[이 완 샤오몐]",
+                meaning: "충칭 샤오몐 한 그릇 주세요"
+            },
+            {
+                text: "几点亮灯？",
+                pron: "[지 뎬 량 덩]",
+                meaning: "몇 시에 조명이 켜지나요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "해방비 & 훙야둥",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "해방비 보행가 쇼핑",
+                        type: "shopping-bag",
+                        location: "Jiefangbei Pedestrian Street"
+                    },
+                    {
+                        time: "12:30",
+                        title: "바이루 먹자골목 점심",
+                        type: "utensils-crossed",
+                        location: "Bayi Road Food Street"
+                    },
+                    {
+                        time: "19:00",
+                        title: "훙야둥 야경",
+                        type: "sparkles",
+                        location: "Hongya Cave"
+                    }
+                ]
+            },
+            {
+                title: "리쯔바 & 창장 케이블카",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "리쯔바 경전철 관통 건물",
+                        type: "train-front",
+                        location: "Liziba Station"
+                    },
+                    {
+                        time: "12:30",
+                        title: "어링얼창 카페 점심",
+                        type: "coffee",
+                        location: "Eling Erchang Creative Park"
+                    },
+                    {
+                        time: "18:00",
+                        title: "창장 케이블카 야경",
+                        type: "moon-star",
+                        location: "Yangtze River Cableway"
+                    }
+                ]
+            },
+            {
+                title: "츠치커우 고진",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "츠치커우 골목 산책",
+                        type: "store",
+                        location: "Ciqikou Ancient Town"
+                    },
+                    {
+                        time: "12:30",
+                        title: "마오쉐왕 고진 점심",
+                        type: "utensils-crossed",
+                        location: "Ciqikou Ancient Town"
+                    },
+                    {
+                        time: "15:30",
+                        title: "보륜사 & 자링강 전망",
+                        type: "landmark",
+                        location: "Baolun Temple"
+                    }
+                ]
+            },
+            {
+                title: "난산 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "난산 이커수 전망대",
+                        type: "binoculars",
+                        location: "Nanshan Yikeshu Viewing Platform"
+                    },
+                    {
+                        time: "12:30",
+                        title: "난빈루 강변 훠궈 점심",
+                        type: "utensils-crossed",
+                        location: "Nanbin Road"
+                    },
+                    {
+                        time: "16:30",
+                        title: "장베이 공항 이동",
+                        type: "plane",
+                        location: "Chongqing Jiangbei International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    guilin: {
+        id: "guilin",
+        city: "Guilin",
+        country: "China",
+        summary: "상비산과 리장 유람, 룽지 다랑논과 양숴 시골길까지 카르스트 풍경을 나흘로 묶은 구이린 템플릿입니다.",
+        footer: "Guilin is an ink painting you can float through.",
+        heroImage: "assets/heroes/guilin.jpg",
+        heroPosition: "center center",
+        accent: "#2F855A",
+        accentRgb: "47, 133, 90",
+        ink: "#022C22",
+        inkRgb: "2, 44, 34",
+        overlayTop: "rgba(2, 44, 34, 0.42)",
+        overlayBottom: "rgba(12, 24, 20, 0.90)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 25.2742,
+            longitude: 110.29
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 8,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "我要坐竹筏",
+                pron: "[워 야오 쭤 주파]",
+                meaning: "대나무 뗏목 타고 싶어요"
+            },
+            {
+                text: "船几点开？",
+                pron: "[촨 지 뎬 카이]",
+                meaning: "배는 몇 시에 출발하나요?"
+            },
+            {
+                text: "风景真美",
+                pron: "[펑징 전 메이]",
+                meaning: "풍경이 정말 아름답네요"
+            },
+            {
+                text: "一碗米粉",
+                pron: "[이 완 미펀]",
+                meaning: "구이린 쌀국수 한 그릇 주세요"
+            },
+            {
+                text: "去阳朔的车在哪？",
+                pron: "[취 양숴 더 처 짜이 나]",
+                meaning: "양숴 가는 차는 어디 있나요?"
+            },
+            {
+                text: "梯田怎么去？",
+                pron: "[티톈 전머 취]",
+                meaning: "다랑논은 어떻게 가나요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "구이린 시내",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "상비산 코끼리바위",
+                        type: "landmark",
+                        location: "Elephant Trunk Hill"
+                    },
+                    {
+                        time: "12:30",
+                        title: "정양 보행가 구이린 미펀 점심",
+                        type: "utensils-crossed",
+                        location: "Zhengyang Pedestrian Street"
+                    },
+                    {
+                        time: "19:00",
+                        title: "일월쌍탑 야경",
+                        type: "moon-star",
+                        location: "Sun and Moon Twin Pagodas"
+                    }
+                ]
+            },
+            {
+                title: "룽지 다랑논",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "룽지 다랑논 트레킹",
+                        type: "trees",
+                        location: "Longji Rice Terraces"
+                    },
+                    {
+                        time: "12:30",
+                        title: "핑안 마을 대나무통밥 점심",
+                        type: "utensils-crossed",
+                        location: "Ping'an Village"
+                    },
+                    {
+                        time: "15:30",
+                        title: "황뤄 야오족 긴머리 마을",
+                        type: "landmark",
+                        location: "Huangluo Yao Village"
+                    }
+                ]
+            },
+            {
+                title: "리장 유람 & 양숴",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "리장 유람선 (구이린→양숴)",
+                        type: "ship",
+                        location: "Li River"
+                    },
+                    {
+                        time: "13:30",
+                        title: "양숴 서가 비어피시 점심",
+                        type: "utensils-crossed",
+                        location: "Yangshuo West Street"
+                    },
+                    {
+                        time: "19:30",
+                        title: "인상유삼저 야간 공연",
+                        type: "music",
+                        location: "Impression Liu Sanjie"
+                    }
+                ]
+            },
+            {
+                title: "양숴 시골 & 이동",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "위룽강 대나무 뗏목",
+                        type: "ship",
+                        location: "Yulong River"
+                    },
+                    {
+                        time: "12:00",
+                        title: "월량산 농가 점심",
+                        type: "utensils-crossed",
+                        location: "Moon Hill"
+                    },
+                    {
+                        time: "16:30",
+                        title: "량장 공항 이동",
+                        type: "plane",
+                        location: "Guilin Liangjiang International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    dalian: {
+        id: "dalian",
+        city: "Dalian",
+        country: "China",
+        summary: "싱하이광장과 빈하이로 해안, 라오후탄과 러시아풍정가를 잇는 바닷바람 다롄 템플릿입니다.",
+        footer: "Dalian is sea wind, wide squares, and seafood by the pier.",
+        heroImage: "assets/heroes/dalian.jpg",
+        heroPosition: "center center",
+        accent: "#1F6FB2",
+        accentRgb: "31, 111, 178",
+        ink: "#1E3A8A",
+        inkRgb: "30, 58, 138",
+        overlayTop: "rgba(30, 58, 138, 0.42)",
+        overlayBottom: "rgba(15, 23, 42, 0.90)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 38.914,
+            longitude: 121.6147
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 9,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "海鲜新鲜吗？",
+                pron: "[하이셴 신셴 마]",
+                meaning: "해산물 신선한가요?"
+            },
+            {
+                text: "我想坐电车",
+                pron: "[워 샹 쭤 뎬처]",
+                meaning: "트램을 타보고 싶어요"
+            },
+            {
+                text: "广场怎么走？",
+                pron: "[광창 전머 저우]",
+                meaning: "광장은 어떻게 가나요?"
+            },
+            {
+                text: "风好大",
+                pron: "[펑 하오 다]",
+                meaning: "바람이 정말 세네요"
+            },
+            {
+                text: "来一份烤鱿鱼",
+                pron: "[라이 이 펀 카오 여우위]",
+                meaning: "오징어구이 하나 주세요"
+            },
+            {
+                text: "哪里看日落好？",
+                pron: "[날리 칸 르뤄 하오]",
+                meaning: "일몰 보기 좋은 곳이 어디예요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "싱하이광장 & 빈하이로",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "싱하이광장 산책",
+                        type: "map",
+                        location: "Xinghai Square"
+                    },
+                    {
+                        time: "12:30",
+                        title: "다롄 해산물 점심",
+                        type: "utensils-crossed",
+                        location: "Wanbao Seafood Restaurant"
+                    },
+                    {
+                        time: "17:00",
+                        title: "빈하이로 해안 일몰",
+                        type: "camera",
+                        location: "Binhai Road Dalian"
+                    }
+                ]
+            },
+            {
+                title: "라오후탄 & 남쪽 해안",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "라오후탄 해양공원",
+                        type: "sun",
+                        location: "Laohutan Ocean Park"
+                    },
+                    {
+                        time: "13:00",
+                        title: "푸자좡 해변 점심",
+                        type: "utensils-crossed",
+                        location: "Fujiazhuang Beach"
+                    },
+                    {
+                        time: "16:30",
+                        title: "방추이다오 해안 산책",
+                        type: "trees",
+                        location: "Bangchui Island Scenic Area"
+                    }
+                ]
+            },
+            {
+                title: "러시아풍정가 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "러시아 풍정가 산책",
+                        type: "store",
+                        location: "Russian Style Street"
+                    },
+                    {
+                        time: "12:30",
+                        title: "중산광장 근처 점심",
+                        type: "utensils-crossed",
+                        location: "Zhongshan Square Dalian"
+                    },
+                    {
+                        time: "16:30",
+                        title: "저우수이쯔 공항 이동",
+                        type: "plane",
+                        location: "Dalian Zhoushuizi International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    shenyang: {
+        id: "shenyang",
+        city: "Shenyang",
+        country: "China",
+        summary: "선양고궁과 장씨수부, 북릉공원과 중가 야경으로 청나라 첫 수도를 걷는 선양 템플릿입니다.",
+        footer: "Shenyang is the first Qing capital, still warm with dumplings and skewers.",
+        heroImage: "assets/heroes/shenyang.jpg",
+        heroPosition: "center center",
+        accent: "#B8860B",
+        accentRgb: "184, 134, 11",
+        ink: "#422006",
+        inkRgb: "66, 32, 6",
+        overlayTop: "rgba(66, 32, 6, 0.44)",
+        overlayBottom: "rgba(28, 20, 12, 0.90)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 41.8057,
+            longitude: 123.4315
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 10,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "故宫怎么走？",
+                pron: "[구궁 전머 저우]",
+                meaning: "고궁은 어떻게 가나요?"
+            },
+            {
+                text: "来一个鸡架",
+                pron: "[라이 이 거 지자]",
+                meaning: "지자(닭뼈 구이) 하나 주세요"
+            },
+            {
+                text: "天真冷",
+                pron: "[톈 전 렁]",
+                meaning: "날씨가 정말 춥네요"
+            },
+            {
+                text: "有讲解吗？",
+                pron: "[여우 장제 마]",
+                meaning: "해설 가이드 있나요?"
+            },
+            {
+                text: "来十串",
+                pron: "[라이 스 촨]",
+                meaning: "꼬치 열 개 주세요"
+            },
+            {
+                text: "老好了",
+                pron: "[라오 하오 러]",
+                meaning: "엄청 좋아요 (동북 사투리)"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "선양고궁 & 중가",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "선양고궁 (무크덴 궁)",
+                        type: "landmark",
+                        location: "Shenyang Imperial Palace"
+                    },
+                    {
+                        time: "12:30",
+                        title: "라오볜 만두 점심",
+                        type: "utensils-crossed",
+                        location: "Laobian Dumpling Restaurant"
+                    },
+                    {
+                        time: "18:30",
+                        title: "중가 보행가 야경 쇼핑",
+                        type: "shopping-bag",
+                        location: "Zhongjie Pedestrian Street"
+                    }
+                ]
+            },
+            {
+                title: "시타 & 태원가",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "중산광장 옛 만철 건물",
+                        type: "building",
+                        location: "Zhongshan Square Shenyang"
+                    },
+                    {
+                        time: "12:30",
+                        title: "시타 조선족 거리 점심",
+                        type: "utensils-crossed",
+                        location: "Xita Street"
+                    },
+                    {
+                        time: "18:00",
+                        title: "태원가 쇼핑 & 저녁",
+                        type: "shopping-cart",
+                        location: "Taiyuan Street"
+                    }
+                ]
+            },
+            {
+                title: "북릉 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "북릉공원 소릉 산책",
+                        type: "trees",
+                        location: "Beiling Park"
+                    },
+                    {
+                        time: "12:30",
+                        title: "장씨수부 관람 & 점심",
+                        type: "building-2",
+                        location: "Marshal Zhang's Mansion Museum"
+                    },
+                    {
+                        time: "16:30",
+                        title: "타오셴 공항 이동",
+                        type: "plane",
+                        location: "Shenyang Taoxian International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    yantai: {
+        id: "yantai",
+        city: "Yantai",
+        country: "China",
+        summary: "옌타이산 등대와 펑라이각 전설, 창위 와인과 양마도 해안을 담은 옌타이 템플릿입니다.",
+        footer: "Yantai pours wine by the sea and tells legends of the eight immortals.",
+        heroImage: "assets/heroes/yantai.jpg",
+        heroPosition: "center center",
+        accent: "#7B2D8E",
+        accentRgb: "123, 45, 142",
+        ink: "#2E1065",
+        inkRgb: "46, 16, 101",
+        overlayTop: "rgba(46, 16, 101, 0.42)",
+        overlayBottom: "rgba(20, 14, 34, 0.90)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 37.4638,
+            longitude: 121.4479
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 11,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "一杯红酒",
+                pron: "[이 베이 훙주]",
+                meaning: "와인 한 잔 주세요"
+            },
+            {
+                text: "可以试喝吗？",
+                pron: "[커이 스 허 마]",
+                meaning: "시음할 수 있나요?"
+            },
+            {
+                text: "苹果甜吗？",
+                pron: "[핑궈 톈 마]",
+                meaning: "사과 달아요?"
+            },
+            {
+                text: "去蓬莱怎么走？",
+                pron: "[취 펑라이 전머 저우]",
+                meaning: "펑라이는 어떻게 가나요?"
+            },
+            {
+                text: "有海景房吗？",
+                pron: "[여우 하이징팡 마]",
+                meaning: "바다 전망 방 있나요?"
+            },
+            {
+                text: "轮渡几点？",
+                pron: "[룬두 지 뎬]",
+                meaning: "페리는 몇 시예요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "옌타이산 & 조계지",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "옌타이산 등대 공원",
+                        type: "landmark",
+                        location: "Yantaishan Park"
+                    },
+                    {
+                        time: "12:30",
+                        title: "차오양제 옛 거리 점심",
+                        type: "utensils-crossed",
+                        location: "Chaoyang Street Yantai"
+                    },
+                    {
+                        time: "17:30",
+                        title: "제1해수욕장 일몰",
+                        type: "camera",
+                        location: "Yantai First Bathing Beach"
+                    }
+                ]
+            },
+            {
+                title: "양마도 & 와인",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "양마도 해안도로 드라이브",
+                        type: "map",
+                        location: "Yangma Island"
+                    },
+                    {
+                        time: "12:30",
+                        title: "양마도 어가 해산물 점심",
+                        type: "utensils-crossed",
+                        location: "Yangma Island"
+                    },
+                    {
+                        time: "16:00",
+                        title: "창위 와인문화박물관 시음",
+                        type: "library",
+                        location: "Changyu Wine Culture Museum"
+                    }
+                ]
+            },
+            {
+                title: "펑라이 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "창위 카스텔 와인성 투어",
+                        type: "ticket",
+                        location: "Chateau Changyu Castel"
+                    },
+                    {
+                        time: "12:30",
+                        title: "펑라이각 & 해변 점심",
+                        type: "landmark",
+                        location: "Penglai Pavilion"
+                    },
+                    {
+                        time: "16:30",
+                        title: "펑라이 공항 이동",
+                        type: "plane",
+                        location: "Yantai Penglai International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    weihai: {
+        id: "weihai",
+        city: "Weihai",
+        country: "China",
+        summary: "류궁다오 페리와 한국인거리, 성산두 일출과 환추이러우 전망을 묶은 웨이하이 템플릿입니다.",
+        footer: "Weihai is clean air, a quiet bay, and the first sunrise on the coast.",
+        heroImage: "assets/heroes/weihai.jpg",
+        heroPosition: "center center",
+        accent: "#1B4EAA",
+        accentRgb: "27, 78, 170",
+        ink: "#083344",
+        inkRgb: "8, 51, 68",
+        overlayTop: "rgba(8, 51, 68, 0.42)",
+        overlayBottom: "rgba(12, 24, 32, 0.90)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 37.513,
+            longitude: 122.1204
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 12,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "去刘公岛的船票",
+                pron: "[취 류궁다오 더 촨퍄오]",
+                meaning: "류궁다오 가는 배표 주세요"
+            },
+            {
+                text: "韩国街在哪？",
+                pron: "[한궈제 짜이 나]",
+                meaning: "한국인 거리는 어디예요?"
+            },
+            {
+                text: "我是韩国人",
+                pron: "[워 스 한궈런]",
+                meaning: "저는 한국인이에요"
+            },
+            {
+                text: "空气真好",
+                pron: "[쿵치 전 하오]",
+                meaning: "공기가 정말 좋네요"
+            },
+            {
+                text: "几点日出？",
+                pron: "[지 뎬 르추]",
+                meaning: "일출은 몇 시예요?"
+            },
+            {
+                text: "帮我叫车",
+                pron: "[방 워 자오 처]",
+                meaning: "차 좀 불러주세요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "류궁다오 & 환추이러우",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "류궁다오 페리 & 섬 산책",
+                        type: "ship",
+                        location: "Liugong Island"
+                    },
+                    {
+                        time: "12:30",
+                        title: "섬 안 해산물 점심",
+                        type: "utensils-crossed",
+                        location: "Liugong Island"
+                    },
+                    {
+                        time: "17:30",
+                        title: "환추이러우 전망 & 야경",
+                        type: "tower-control",
+                        location: "Huancuilou Park"
+                    }
+                ]
+            },
+            {
+                title: "해변 산책로 & 한국인거리",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "웨이하이 공원 해변 산책",
+                        type: "map",
+                        location: "Weihai Park"
+                    },
+                    {
+                        time: "12:30",
+                        title: "한러팡 한국인거리 점심",
+                        type: "utensils-crossed",
+                        location: "Hanlefang Weihai"
+                    },
+                    {
+                        time: "18:00",
+                        title: "행복문 야경",
+                        type: "moon-star",
+                        location: "Happiness Gate Weihai"
+                    }
+                ]
+            },
+            {
+                title: "성산두 & 이동",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "성산두 천애 해각",
+                        type: "sun",
+                        location: "Chengshantou Scenic Area"
+                    },
+                    {
+                        time: "12:30",
+                        title: "시샤커우 어촌 해산물 점심",
+                        type: "utensils-crossed",
+                        location: "Xixiakou Scenic Area"
+                    },
+                    {
+                        time: "16:30",
+                        title: "다수이보 공항 이동",
+                        type: "plane",
+                        location: "Weihai Dashuibo Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    wuhan: {
+        id: "wuhan",
+        city: "Wuhan",
+        country: "China",
+        summary: "황학루와 창장대교, 둥후 녹도와 후베이성박물관, 호부항 먹거리를 잇는 우한 템플릿입니다.",
+        footer: "Wuhan starts with hot dry noodles and ends with the river lights.",
+        heroImage: "assets/heroes/wuhan.jpg",
+        heroPosition: "center center",
+        accent: "#E08A1E",
+        accentRgb: "224, 138, 30",
+        ink: "#451A03",
+        inkRgb: "69, 26, 3",
+        overlayTop: "rgba(69, 26, 3, 0.44)",
+        overlayBottom: "rgba(26, 18, 12, 0.90)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 30.5928,
+            longitude: 114.3055
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 13,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "一碗热干面",
+                pron: "[이 완 러간몐]",
+                meaning: "러간몐 한 그릇 주세요"
+            },
+            {
+                text: "过早了吗？",
+                pron: "[궈자오 러 마]",
+                meaning: "아침 드셨어요? (우한식 인사)"
+            },
+            {
+                text: "黄鹤楼几点开门？",
+                pron: "[황허러우 지 뎬 카이먼]",
+                meaning: "황학루는 몇 시에 여나요?"
+            },
+            {
+                text: "我想租自行车",
+                pron: "[워 샹 쭈 쯔싱처]",
+                meaning: "자전거 빌리고 싶어요"
+            },
+            {
+                text: "鸭脖辣不辣？",
+                pron: "[야보 라 부 라]",
+                meaning: "오리목 매운가요?"
+            },
+            {
+                text: "樱花开了吗？",
+                pron: "[잉화 카이 러 마]",
+                meaning: "벚꽃 폈나요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "황학루 & 창장대교",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "황학루 전망",
+                        type: "landmark",
+                        location: "Yellow Crane Tower"
+                    },
+                    {
+                        time: "12:30",
+                        title: "호부항 러간몐 점심",
+                        type: "utensils-crossed",
+                        location: "Hubu Alley"
+                    },
+                    {
+                        time: "18:30",
+                        title: "창장대교 강변 야경",
+                        type: "bridge",
+                        location: "Wuhan Yangtze River Bridge"
+                    }
+                ]
+            },
+            {
+                title: "둥후 & 박물관",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "후베이성박물관 증후을 편종",
+                        type: "library",
+                        location: "Hubei Provincial Museum"
+                    },
+                    {
+                        time: "12:30",
+                        title: "추허한제 점심 & 쇼핑",
+                        type: "utensils-crossed",
+                        location: "Chu River Han Street"
+                    },
+                    {
+                        time: "16:00",
+                        title: "둥후 녹도 자전거 & 일몰",
+                        type: "trees",
+                        location: "East Lake Greenway"
+                    }
+                ]
+            },
+            {
+                title: "한커우 조계지",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "장한루 보행가 옛 조계지",
+                        type: "map",
+                        location: "Jianghan Road Pedestrian Street"
+                    },
+                    {
+                        time: "12:30",
+                        title: "리황피루 카페 거리 브런치",
+                        type: "coffee",
+                        location: "Lihuangpi Road"
+                    },
+                    {
+                        time: "19:00",
+                        title: "한커우 장탄 강변 야경",
+                        type: "moon-star",
+                        location: "Hankou Jiangtan Park"
+                    }
+                ]
+            },
+            {
+                title: "한양 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "귀원선사 참배",
+                        type: "landmark",
+                        location: "Guiyuan Temple"
+                    },
+                    {
+                        time: "12:30",
+                        title: "칭촨거 산책 & 점심",
+                        type: "camera",
+                        location: "Qingchuan Pavilion"
+                    },
+                    {
+                        time: "16:30",
+                        title: "톈허 공항 이동",
+                        type: "plane",
+                        location: "Wuhan Tianhe International Airport"
+                    }
+                ]
+            }
+        ]
+    },
     taipei: {
         id: 'taipei',
         city: 'Taipei',
@@ -4027,6 +11369,312 @@ const DESTINATIONS = {
             }
         ]
     },
+    kaohsiung: {
+        id: "kaohsiung",
+        city: "Kaohsiung",
+        country: "Taiwan",
+        summary: "연지담 용호탑, 보얼예술특구와 치진섬, 불광산과 류허 야시장, 아이허 야경을 3박 4일로 묶은 가오슝 템플릿입니다.",
+        footer: "Kaohsiung is a harbor city that turns on its lights slowly and generously.",
+        heroImage: "assets/heroes/kaohsiung.jpg",
+        heroPosition: "center center",
+        accent: "#F43F76",
+        accentRgb: "244, 63, 118",
+        ink: "#1B1F3A",
+        inkRgb: "27, 31, 58",
+        overlayTop: "rgba(27, 31, 58, 0.36)",
+        overlayBottom: "rgba(14, 16, 32, 0.86)",
+        timeZone: "Asia/Taipei",
+        weather: {
+            latitude: 22.6273,
+            longitude: 120.3014
+        },
+        currency: {
+            code: "TWD",
+            symbol: "NT$",
+            locale: "zh-TW"
+        },
+        startOffsetDays: 7,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "不好意思",
+                pron: "부하오이쓰",
+                meaning: "실례합니다 / 미안해요 (대만식)"
+            },
+            {
+                text: "一杯珍珠奶茶",
+                pron: "이 베이 전주 나이차",
+                meaning: "버블티 한 잔 주세요"
+            },
+            {
+                text: "捷運站在哪裡？",
+                pron: "제윈잔 짜이 나리",
+                meaning: "MRT 역이 어디예요?"
+            },
+            {
+                text: "內用還是外帶？",
+                pron: "네이용 하이스 와이다이",
+                meaning: "매장에서 드세요, 포장이에요? (점원이 묻는 말)"
+            },
+            {
+                text: "可以刷卡嗎？",
+                pron: "커이 솨카 마",
+                meaning: "카드 결제 되나요?"
+            },
+            {
+                text: "超好吃！",
+                pron: "차오 하오츠",
+                meaning: "엄청 맛있어요!"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "쭤잉 연지담",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "연지담 용호탑",
+                        type: "landmark",
+                        location: "Dragon and Tiger Pagodas"
+                    },
+                    {
+                        time: "13:30",
+                        title: "한신 아레나 점심 & 쇼핑",
+                        type: "shopping-cart",
+                        location: "Hanshin Arena Shopping Plaza"
+                    },
+                    {
+                        time: "18:30",
+                        title: "루이펑 야시장",
+                        type: "sparkles",
+                        location: "Ruifeng Night Market"
+                    }
+                ]
+            },
+            {
+                title: "옌청 & 치진",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "보얼 예술특구",
+                        type: "palette",
+                        location: "Pier-2 Art Center"
+                    },
+                    {
+                        time: "13:00",
+                        title: "치진섬 해산물 거리 점심",
+                        type: "utensils-crossed",
+                        location: "Cijin Island"
+                    },
+                    {
+                        time: "18:30",
+                        title: "아이허 야경 유람선",
+                        type: "moon-star",
+                        location: "Love River"
+                    }
+                ]
+            },
+            {
+                title: "불광산 & 류허",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "불광산 불타기념관",
+                        type: "landmark",
+                        location: "Fo Guang Shan Buddha Museum"
+                    },
+                    {
+                        time: "15:00",
+                        title: "메이리다오역 빛의 돔",
+                        type: "train-front",
+                        location: "Formosa Boulevard Station"
+                    },
+                    {
+                        time: "18:30",
+                        title: "류허 야시장 저녁",
+                        type: "utensils-crossed",
+                        location: "Liuhe Night Market"
+                    }
+                ]
+            },
+            {
+                title: "항구 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "가오슝 유행음악센터",
+                        type: "music",
+                        location: "Kaohsiung Music Center"
+                    },
+                    {
+                        time: "12:30",
+                        title: "다강교 & 하마싱 점심",
+                        type: "bridge",
+                        location: "Great Harbor Bridge"
+                    },
+                    {
+                        time: "15:30",
+                        title: "가오슝 공항 이동",
+                        type: "plane",
+                        location: "Kaohsiung International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    taichung: {
+        id: "taichung",
+        city: "Taichung",
+        country: "Taiwan",
+        summary: "궁위안옌과와 펑자 야시장, 르웨탄 유람선, 무지개마을과 가오메이 습지 선셋을 3박 4일로 엮은 타이중 템플릿입니다.",
+        footer: "Taichung pairs bubble tea and a mountain lake within one easy day.",
+        heroImage: "assets/heroes/taichung.jpg",
+        heroPosition: "center center",
+        accent: "#8B5CF6",
+        accentRgb: "139, 92, 246",
+        ink: "#1E2A3A",
+        inkRgb: "30, 42, 58",
+        overlayTop: "rgba(30, 42, 58, 0.34)",
+        overlayBottom: "rgba(16, 22, 32, 0.84)",
+        timeZone: "Asia/Taipei",
+        weather: {
+            latitude: 24.1477,
+            longitude: 120.6736
+        },
+        currency: {
+            code: "TWD",
+            symbol: "NT$",
+            locale: "zh-TW"
+        },
+        startOffsetDays: 8,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "我要一份雞排",
+                pron: "워 야오 이 펀 지파이",
+                meaning: "지파이(대만식 닭튀김) 하나 주세요"
+            },
+            {
+                text: "去逢甲夜市",
+                pron: "취 펑자 예스",
+                meaning: "펑자 야시장으로 가주세요"
+            },
+            {
+                text: "半糖少冰",
+                pron: "반탕 사오빙",
+                meaning: "설탕 반, 얼음 적게요 (음료 주문)"
+            },
+            {
+                text: "哪裡可以買悠遊卡？",
+                pron: "나리 커이 마이 여우여우카",
+                meaning: "이지카드는 어디서 사나요?"
+            },
+            {
+                text: "幾點日落？",
+                pron: "지 뎬 르뤄",
+                meaning: "해는 몇 시에 지나요?"
+            },
+            {
+                text: "太好了",
+                pron: "타이 하오 러",
+                meaning: "아주 좋아요 / 잘됐어요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "타이중 시내",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "국립 대만 미술관",
+                        type: "palette",
+                        location: "National Taiwan Museum of Fine Arts"
+                    },
+                    {
+                        time: "13:00",
+                        title: "궁위안옌과 아이스크림",
+                        type: "coffee",
+                        location: "Miyahara"
+                    },
+                    {
+                        time: "18:30",
+                        title: "펑자 야시장",
+                        type: "utensils-crossed",
+                        location: "Fengjia Night Market"
+                    }
+                ]
+            },
+            {
+                title: "르웨탄 (일월담)",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "르웨탄 유람선",
+                        type: "ship",
+                        location: "Sun Moon Lake"
+                    },
+                    {
+                        time: "12:30",
+                        title: "이다샤오 거리 점심",
+                        type: "store",
+                        location: "Ita Thao Pier"
+                    },
+                    {
+                        time: "15:30",
+                        title: "르웨탄 로프웨이",
+                        type: "binoculars",
+                        location: "Sun Moon Lake Ropeway"
+                    }
+                ]
+            },
+            {
+                title: "무지개마을 & 가오메이",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "무지개마을",
+                        type: "camera",
+                        location: "Rainbow Village Taichung"
+                    },
+                    {
+                        time: "13:00",
+                        title: "선지신촌 점심 & 소품 구경",
+                        type: "gift",
+                        location: "Shen Ji New Village"
+                    },
+                    {
+                        time: "17:30",
+                        title: "가오메이 습지 선셋",
+                        type: "sun",
+                        location: "Gaomei Wetlands"
+                    }
+                ]
+            },
+            {
+                title: "가극원 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "타이중 국가가극원",
+                        type: "building",
+                        location: "National Taichung Theater"
+                    },
+                    {
+                        time: "12:00",
+                        title: "타이중 제2시장 점심",
+                        type: "store",
+                        location: "Taichung Second Market"
+                    },
+                    {
+                        time: "15:30",
+                        title: "타이중 공항 이동",
+                        type: "plane",
+                        location: "Taichung International Airport"
+                    }
+                ]
+            }
+        ]
+    },
     hanoi: {
         id: 'hanoi',
         city: 'Hanoi',
@@ -4073,6 +11721,534 @@ const DESTINATIONS = {
                     { time: '10:30', title: '분짜 런치', type: 'utensils-crossed', location: 'Bun Cha Huong Lien' },
                     { time: '13:30', title: '기념품 쇼핑', type: 'gift', location: 'Trang Tien Plaza' },
                     { time: '17:30', title: '공항 이동', type: 'plane', location: 'Noi Bai International Airport' }
+                ]
+            }
+        ]
+    },
+    'da-nang': {
+        id: "da-nang",
+        city: "Da Nang",
+        country: "Vietnam",
+        summary: "미케 비치 아침, 바나힐 골든 브릿지, 호이안 등불, 용다리 불쇼까지 바다와 산과 옛 마을을 한 번에 도는 다낭 템플릿입니다.",
+        footer: "Da Nang is a beach morning, a mountain bridge, and a lantern town after dark.",
+        heroImage: "assets/heroes/da-nang.jpg",
+        heroPosition: "center center",
+        accent: "#0F940D",
+        accentRgb: "15, 148, 13",
+        ink: "#0F2A2E",
+        inkRgb: "15, 42, 46",
+        overlayTop: "rgba(15, 42, 46, 0.44)",
+        overlayBottom: "rgba(10, 24, 28, 0.90)",
+        timeZone: "Asia/Ho_Chi_Minh",
+        weather: {
+            latitude: 16.0544,
+            longitude: 108.2022
+        },
+        currency: {
+            code: "VND",
+            symbol: "₫",
+            locale: "vi-VN"
+        },
+        startOffsetDays: 9,
+        phraseLabel: "Tiếng Việt",
+        phrases: [
+            {
+                text: "Bao nhiêu tiền?",
+                pron: "[바오 니에우 띠엔]",
+                meaning: "얼마예요?"
+            },
+            {
+                text: "Đắt quá!",
+                pron: "[닷 꾸아]",
+                meaning: "너무 비싸요!"
+            },
+            {
+                text: "Bớt chút được không?",
+                pron: "[벗 쭛 드억 콩]",
+                meaning: "조금 깎아 주실 수 있나요?"
+            },
+            {
+                text: "Làm ơn đưa tôi đến bãi biển Mỹ Khê",
+                pron: "[람 언 드어 또이 덴 바이 비엔 미 케]",
+                meaning: "미케 비치까지 데려다 주세요"
+            },
+            {
+                text: "Không cay",
+                pron: "[콩 까이]",
+                meaning: "안 맵게 해주세요"
+            },
+            {
+                text: "Cho tôi một ly cà phê sữa đá",
+                pron: "[쪼 또이 못 리 까페 스어 다]",
+                meaning: "연유 아이스커피 한 잔 주세요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "미케 비치 & 손짜",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "미케 비치 아침 산책",
+                        type: "sun",
+                        location: "My Khe Beach"
+                    },
+                    {
+                        time: "13:00",
+                        title: "영응사 해수관음상",
+                        type: "landmark",
+                        location: "Linh Ung Pagoda"
+                    },
+                    {
+                        time: "18:30",
+                        title: "안트엉 거리 저녁",
+                        type: "utensils-crossed",
+                        location: "An Thuong Tourist Area"
+                    }
+                ]
+            },
+            {
+                title: "바나힐",
+                activities: [
+                    {
+                        time: "08:00",
+                        title: "바나힐 케이블카 탑승",
+                        type: "ticket",
+                        location: "Sun World Ba Na Hills"
+                    },
+                    {
+                        time: "10:00",
+                        title: "골든 브릿지",
+                        type: "bridge",
+                        location: "Golden Bridge"
+                    },
+                    {
+                        time: "13:00",
+                        title: "프렌치 빌리지 점심 & 판타지 파크",
+                        type: "sparkles",
+                        location: "French Village Ba Na Hills"
+                    }
+                ]
+            },
+            {
+                title: "호이안 올드타운",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "내원교 & 옛 거리 산책",
+                        type: "landmark",
+                        location: "Japanese Covered Bridge"
+                    },
+                    {
+                        time: "13:00",
+                        title: "까오러우 점심",
+                        type: "utensils-crossed",
+                        location: "Hoi An Market"
+                    },
+                    {
+                        time: "18:30",
+                        title: "투본강 등불 야경 & 야시장",
+                        type: "moon-star",
+                        location: "Hoi An Night Market"
+                    }
+                ]
+            },
+            {
+                title: "오행산 & 한강",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "오행산 동굴 사원",
+                        type: "landmark",
+                        location: "Marble Mountains"
+                    },
+                    {
+                        time: "13:00",
+                        title: "한시장 로컬 점심",
+                        type: "store",
+                        location: "Han Market"
+                    },
+                    {
+                        time: "20:30",
+                        title: "용다리 야경 & 불쇼",
+                        type: "sparkles",
+                        location: "Dragon Bridge"
+                    }
+                ]
+            },
+            {
+                title: "마지막 카페 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "콩카페 코코넛 커피",
+                        type: "coffee",
+                        location: "Cong Caphe Da Nang"
+                    },
+                    {
+                        time: "12:30",
+                        title: "빈컴 플라자 마지막 쇼핑",
+                        type: "shopping-bag",
+                        location: "Vincom Plaza Da Nang"
+                    },
+                    {
+                        time: "16:30",
+                        title: "다낭 공항 이동",
+                        type: "plane",
+                        location: "Da Nang International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    'nha-trang': {
+        id: "nha-trang",
+        city: "Nha Trang",
+        country: "Vietnam",
+        summary: "포나가르 탑과 롱선사, 머드 온천, 혼문섬 스노클링, 빈원더스를 해변 도시의 느긋한 리듬으로 엮은 나트랑 템플릿입니다.",
+        footer: "Nha Trang works best when the bay does most of the planning.",
+        heroImage: "assets/heroes/nha-trang.jpg",
+        heroPosition: "center center",
+        accent: "#08B263",
+        accentRgb: "8, 178, 99",
+        ink: "#0C2A3A",
+        inkRgb: "12, 42, 58",
+        overlayTop: "rgba(12, 42, 58, 0.44)",
+        overlayBottom: "rgba(8, 22, 34, 0.90)",
+        timeZone: "Asia/Ho_Chi_Minh",
+        weather: {
+            latitude: 12.2388,
+            longitude: 109.1967
+        },
+        currency: {
+            code: "VND",
+            symbol: "₫",
+            locale: "vi-VN"
+        },
+        startOffsetDays: 10,
+        phraseLabel: "Tiếng Việt",
+        phrases: [
+            {
+                text: "Xin lỗi",
+                pron: "[씬 로이]",
+                meaning: "죄송합니다 / 실례합니다"
+            },
+            {
+                text: "Nhà vệ sinh ở đâu?",
+                pron: "[냐 베 신 어 더우]",
+                meaning: "화장실이 어디예요?"
+            },
+            {
+                text: "Tôi không hiểu",
+                pron: "[또이 콩 히에우]",
+                meaning: "잘 이해하지 못했어요"
+            },
+            {
+                text: "Ngon quá!",
+                pron: "[응온 꾸아]",
+                meaning: "정말 맛있어요!"
+            },
+            {
+                text: "Tôi muốn gọi món",
+                pron: "[또이 무온 고이 몬]",
+                meaning: "주문할게요"
+            },
+            {
+                text: "Hẹn gặp lại",
+                pron: "[헨 갑 라이]",
+                meaning: "또 만나요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "나트랑 비치 & 시내",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "나트랑 비치",
+                        type: "sun",
+                        location: "Nha Trang Beach"
+                    },
+                    {
+                        time: "13:00",
+                        title: "담시장 로컬 점심",
+                        type: "store",
+                        location: "Dam Market"
+                    },
+                    {
+                        time: "18:30",
+                        title: "나트랑 야시장",
+                        type: "sparkles",
+                        location: "Nha Trang Night Market"
+                    }
+                ]
+            },
+            {
+                title: "포나가르 & 머드 온천",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "롱선사 백불상",
+                        type: "landmark",
+                        location: "Long Son Pagoda"
+                    },
+                    {
+                        time: "11:00",
+                        title: "포나가르 참탑",
+                        type: "landmark",
+                        location: "Po Nagar Cham Towers"
+                    },
+                    {
+                        time: "15:30",
+                        title: "탑바 머드 온천",
+                        type: "sparkles",
+                        location: "Thap Ba Hot Spring Center"
+                    }
+                ]
+            },
+            {
+                title: "혼문섬 스노클링",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "혼문섬 스노클링 투어",
+                        type: "ship",
+                        location: "Hon Mun Island"
+                    },
+                    {
+                        time: "12:30",
+                        title: "혼땀섬 해변 점심",
+                        type: "sun",
+                        location: "Hon Tam Island"
+                    },
+                    {
+                        time: "18:30",
+                        title: "해변 브루하우스 저녁",
+                        type: "utensils-crossed",
+                        location: "Louisiane Brewhouse"
+                    }
+                ]
+            },
+            {
+                title: "빈원더스 & 혼쫑곶",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "빈원더스 케이블카 입장",
+                        type: "ticket",
+                        location: "VinWonders Nha Trang"
+                    },
+                    {
+                        time: "16:00",
+                        title: "혼쫑곶 노을",
+                        type: "camera",
+                        location: "Hon Chong Promontory"
+                    },
+                    {
+                        time: "19:00",
+                        title: "세일링 클럽 비치 디너",
+                        type: "moon-star",
+                        location: "Sailing Club Nha Trang"
+                    }
+                ]
+            },
+            {
+                title: "마지막 한 끼 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "나트랑 대성당",
+                        type: "landmark",
+                        location: "Nha Trang Cathedral"
+                    },
+                    {
+                        time: "12:30",
+                        title: "넴느엉 점심",
+                        type: "utensils-crossed",
+                        location: "Nem Nuong Dang Van Quyen"
+                    },
+                    {
+                        time: "16:30",
+                        title: "깜란 공항 이동",
+                        type: "plane",
+                        location: "Cam Ranh International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    'phu-quoc': {
+        id: "phu-quoc",
+        city: "Phu Quoc",
+        country: "Vietnam",
+        summary: "롱비치와 사오비치, 혼똠 케이블카와 선셋타운 키스 브릿지, 즈엉동 야시장까지 섬 남북을 오가는 푸꾸옥 템플릿입니다.",
+        footer: "Phu Quoc is white sand by day and a sunset show by night.",
+        heroImage: "assets/heroes/phu-quoc.jpg",
+        heroPosition: "center center",
+        accent: "#EA0C18",
+        accentRgb: "234, 12, 24",
+        ink: "#3A1A0A",
+        inkRgb: "58, 26, 10",
+        overlayTop: "rgba(58, 26, 10, 0.42)",
+        overlayBottom: "rgba(30, 16, 10, 0.90)",
+        timeZone: "Asia/Ho_Chi_Minh",
+        weather: {
+            latitude: 10.2899,
+            longitude: 103.984
+        },
+        currency: {
+            code: "VND",
+            symbol: "₫",
+            locale: "vi-VN"
+        },
+        startOffsetDays: 12,
+        phraseLabel: "Tiếng Việt",
+        phrases: [
+            {
+                text: "Tôi muốn đi đến đây",
+                pron: "[또이 무온 디 덴 더이]",
+                meaning: "여기로 가고 싶어요"
+            },
+            {
+                text: "Có bán kem chống nắng không?",
+                pron: "[꼬 반 껨 쫑 낭 콩]",
+                meaning: "선크림 파나요?"
+            },
+            {
+                text: "Mấy giờ mặt trời lặn?",
+                pron: "[머이 저 맛 쩌이 란]",
+                meaning: "해가 몇 시에 지나요?"
+            },
+            {
+                text: "Cho tôi nước dừa",
+                pron: "[쪼 또이 느억 즈어]",
+                meaning: "코코넛 주스 주세요"
+            },
+            {
+                text: "Hải sản có tươi không?",
+                pron: "[하이 산 꼬 뜨어이 콩]",
+                meaning: "해산물 신선한가요?"
+            },
+            {
+                text: "Giúp tôi với!",
+                pron: "[줍 또이 버이]",
+                meaning: "도와주세요!"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "즈엉동 & 롱비치",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "롱비치 오전",
+                        type: "sun",
+                        location: "Long Beach Phu Quoc"
+                    },
+                    {
+                        time: "13:00",
+                        title: "진꺼우 사당 바위",
+                        type: "landmark",
+                        location: "Dinh Cau Temple"
+                    },
+                    {
+                        time: "18:30",
+                        title: "즈엉동 야시장 해산물",
+                        type: "sparkles",
+                        location: "Phu Quoc Night Market"
+                    }
+                ]
+            },
+            {
+                title: "남부 — 사오비치 & 선셋타운",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "사오비치 백사장",
+                        type: "sun",
+                        location: "Bai Sao Beach"
+                    },
+                    {
+                        time: "13:00",
+                        title: "혼똠 해상 케이블카",
+                        type: "ticket",
+                        location: "Sun World Hon Thom"
+                    },
+                    {
+                        time: "18:00",
+                        title: "선셋타운 키스 브릿지 노을",
+                        type: "bridge",
+                        location: "Kiss Bridge"
+                    }
+                ]
+            },
+            {
+                title: "북부 — 빈원더스 & 그랜드월드",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "빈원더스 푸꾸옥",
+                        type: "ticket",
+                        location: "VinWonders Phu Quoc"
+                    },
+                    {
+                        time: "13:30",
+                        title: "빈펄 사파리",
+                        type: "trees",
+                        location: "Vinpearl Safari Phu Quoc"
+                    },
+                    {
+                        time: "18:30",
+                        title: "그랜드월드 베니스 운하 야경",
+                        type: "lightbulb",
+                        location: "Grand World Phu Quoc"
+                    }
+                ]
+            },
+            {
+                title: "동부 & 중부 로컬",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "함닌 어촌 마을",
+                        type: "ship",
+                        location: "Ham Ninh Fishing Village"
+                    },
+                    {
+                        time: "12:30",
+                        title: "수오이짜인 폭포 산책",
+                        type: "trees",
+                        location: "Suoi Tranh Waterfall"
+                    },
+                    {
+                        time: "16:00",
+                        title: "응옥히엔 진주농장",
+                        type: "gift",
+                        location: "Ngoc Hien Pearl Farm"
+                    }
+                ]
+            },
+            {
+                title: "마지막 쇼핑 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "즈엉동 시장 아침",
+                        type: "store",
+                        location: "Duong Dong Market"
+                    },
+                    {
+                        time: "12:30",
+                        title: "킹콩마트 기념품",
+                        type: "shopping-bag",
+                        location: "King Kong Mart Phu Quoc"
+                    },
+                    {
+                        time: "16:00",
+                        title: "푸꾸옥 공항 이동",
+                        type: "plane",
+                        location: "Phu Quoc International Airport"
+                    }
                 ]
             }
         ]
@@ -4171,6 +12347,1238 @@ const DESTINATIONS = {
             }
         ]
     },
+    colombo: {
+        id: "colombo",
+        city: "Colombo",
+        country: "Sri Lanka",
+        summary: "갈레 페이스 일몰과 강가라마야 사원, 페타 시장, 로터스 타워에 갈레 요새 당일 기차까지 엮은 콜롬보 템플릿입니다.",
+        footer: "Colombo is best at golden hour, with sea spray and a cup of Ceylon tea.",
+        heroImage: "assets/heroes/colombo.jpg",
+        heroPosition: "center center",
+        accent: "#10B981",
+        accentRgb: "16, 185, 129",
+        ink: "#064E3B",
+        inkRgb: "6, 78, 59",
+        overlayTop: "rgba(6, 78, 59, 0.36)",
+        overlayBottom: "rgba(6, 30, 26, 0.88)",
+        timeZone: "Asia/Colombo",
+        weather: {
+            latitude: 6.9271,
+            longitude: 79.8612
+        },
+        currency: {
+            code: "LKR",
+            symbol: "Rs",
+            locale: "si-LK"
+        },
+        startOffsetDays: 9,
+        phraseLabel: "සිංහල · English",
+        phrases: [
+            {
+                text: "ආයුබෝවන්",
+                pron: "아유보완",
+                meaning: "안녕하세요"
+            },
+            {
+                text: "ස්තූතියි",
+                pron: "스투티",
+                meaning: "감사합니다"
+            },
+            {
+                text: "මේක කීයද?",
+                pron: "메카 키야다",
+                meaning: "이거 얼마예요?"
+            },
+            {
+                text: "සමාවෙන්න",
+                pron: "사마웬나",
+                meaning: "실례합니다"
+            },
+            {
+                text: "හරි රසයි",
+                pron: "하리 라사이",
+                meaning: "정말 맛있어요"
+            },
+            {
+                text: "බිල ගේන්න",
+                pron: "빌라 겐나",
+                meaning: "계산서 주세요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "포트 & 페타",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "콜롬보 포트 & 올드 더치 호스피탈",
+                        type: "building",
+                        location: "Dutch Hospital Shopping Precinct"
+                    },
+                    {
+                        time: "13:00",
+                        title: "페타 시장",
+                        type: "store",
+                        location: "Pettah Market"
+                    },
+                    {
+                        time: "18:00",
+                        title: "갈레 페이스 그린 일몰",
+                        type: "sun",
+                        location: "Galle Face Green"
+                    }
+                ]
+            },
+            {
+                title: "베이라 호수 & 로터스 타워",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "강가라마야 사원",
+                        type: "landmark",
+                        location: "Gangaramaya Temple"
+                    },
+                    {
+                        time: "12:30",
+                        title: "시마 말라카 수상 법당",
+                        type: "camera",
+                        location: "Seema Malaka"
+                    },
+                    {
+                        time: "18:30",
+                        title: "로터스 타워 야경",
+                        type: "tower-control",
+                        location: "Lotus Tower"
+                    }
+                ]
+            },
+            {
+                title: "갈레 요새 당일 (해안 기차)",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "갈레 요새 성벽 산책",
+                        type: "landmark",
+                        location: "Galle Fort"
+                    },
+                    {
+                        time: "13:00",
+                        title: "올드 더치 호스피탈 갈레 점심",
+                        type: "utensils-crossed",
+                        location: "Old Dutch Hospital Galle"
+                    },
+                    {
+                        time: "17:00",
+                        title: "갈레 등대 & 성벽 일몰",
+                        type: "sun",
+                        location: "Galle Fort Lighthouse"
+                    }
+                ]
+            },
+            {
+                title: "콜롬보 7 & 인디펜던스",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "콜롬보 국립박물관",
+                        type: "building-2",
+                        location: "Colombo National Museum"
+                    },
+                    {
+                        time: "13:00",
+                        title: "인디펜던스 메모리얼 홀",
+                        type: "landmark",
+                        location: "Independence Memorial Hall"
+                    },
+                    {
+                        time: "18:30",
+                        title: "아케이드 인디펜던스 스퀘어 저녁",
+                        type: "shopping-bag",
+                        location: "Arcade Independence Square"
+                    }
+                ]
+            },
+            {
+                title: "마운트 라비니아 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "마운트 라비니아 비치 브런치",
+                        type: "coffee",
+                        location: "Mount Lavinia Beach"
+                    },
+                    {
+                        time: "13:00",
+                        title: "락살라 실론 티 & 기념품",
+                        type: "gift",
+                        location: "Laksala"
+                    },
+                    {
+                        time: "16:00",
+                        title: "반다라나이케 공항 이동",
+                        type: "plane",
+                        location: "Bandaranaike International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    kathmandu: {
+        id: "kathmandu",
+        city: "Kathmandu",
+        country: "Nepal",
+        summary: "보드나트와 스와얌부나트, 더르바르 광장과 파슈파티나트, 타멜 밤거리에 나가르코트 일출까지 담은 카트만두 템플릿입니다.",
+        footer: "Kathmandu feels richest in prayer flags, butter lamps, and mountain dawns.",
+        heroImage: "assets/heroes/kathmandu.jpg",
+        heroPosition: "center center",
+        accent: "#E4572E",
+        accentRgb: "228, 87, 46",
+        ink: "#431407",
+        inkRgb: "67, 20, 7",
+        overlayTop: "rgba(67, 20, 7, 0.38)",
+        overlayBottom: "rgba(28, 12, 6, 0.88)",
+        timeZone: "Asia/Kathmandu",
+        weather: {
+            latitude: 27.7172,
+            longitude: 85.324
+        },
+        currency: {
+            code: "NPR",
+            symbol: "₨",
+            locale: "ne-NP"
+        },
+        startOffsetDays: 12,
+        phraseLabel: "नेपाली",
+        phrases: [
+            {
+                text: "नमस्ते",
+                pron: "나마스테",
+                meaning: "안녕하세요"
+            },
+            {
+                text: "धन्यवाद",
+                pron: "단녀바드",
+                meaning: "감사합니다"
+            },
+            {
+                text: "यो कति हो?",
+                pron: "요 카티 호",
+                meaning: "이거 얼마예요?"
+            },
+            {
+                text: "माफ गर्नुहोस्",
+                pron: "마프 가르누호스",
+                meaning: "실례합니다 / 죄송합니다"
+            },
+            {
+                text: "मिठो छ",
+                pron: "미토 차",
+                meaning: "맛있어요"
+            },
+            {
+                text: "बिल दिनुहोस्",
+                pron: "빌 디누호스",
+                meaning: "계산서 주세요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "더르바르 광장 & 타멜",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "카트만두 더르바르 광장 & 쿠마리 하우스",
+                        type: "landmark",
+                        location: "Kathmandu Durbar Square"
+                    },
+                    {
+                        time: "13:00",
+                        title: "아산 바자르 골목 & 점심",
+                        type: "store",
+                        location: "Asan Bazaar"
+                    },
+                    {
+                        time: "18:00",
+                        title: "타멜 저녁 산책",
+                        type: "shopping-bag",
+                        location: "Thamel"
+                    }
+                ]
+            },
+            {
+                title: "스와얌부나트 & 파탄",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "스와얌부나트 (몽키 템플)",
+                        type: "landmark",
+                        location: "Swayambhunath Stupa"
+                    },
+                    {
+                        time: "13:00",
+                        title: "파탄 더르바르 광장 & 점심",
+                        type: "building-2",
+                        location: "Patan Durbar Square"
+                    },
+                    {
+                        time: "18:00",
+                        title: "가든 오브 드림스 저녁",
+                        type: "trees",
+                        location: "Garden of Dreams"
+                    }
+                ]
+            },
+            {
+                title: "보드나트 & 파슈파티나트",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "보드나트 스투파 아침 코라",
+                        type: "landmark",
+                        location: "Boudhanath Stupa"
+                    },
+                    {
+                        time: "13:00",
+                        title: "코판 사원 전망 & 점심",
+                        type: "binoculars",
+                        location: "Kopan Monastery"
+                    },
+                    {
+                        time: "17:30",
+                        title: "파슈파티나트 저녁 아르티",
+                        type: "sparkles",
+                        location: "Pashupatinath Temple"
+                    }
+                ]
+            },
+            {
+                title: "나가르코트 일출 & 박타푸르",
+                activities: [
+                    {
+                        time: "05:30",
+                        title: "나가르코트 히말라야 일출",
+                        type: "sun",
+                        location: "Nagarkot"
+                    },
+                    {
+                        time: "10:30",
+                        title: "박타푸르 더르바르 광장",
+                        type: "landmark",
+                        location: "Bhaktapur Durbar Square"
+                    },
+                    {
+                        time: "13:30",
+                        title: "냐타폴라 사원 & 주주 다우 점심",
+                        type: "utensils-crossed",
+                        location: "Taumadhi Square"
+                    }
+                ]
+            },
+            {
+                title: "궁전 박물관 & 이동",
+                activities: [
+                    {
+                        time: "11:00",
+                        title: "나라얀히티 궁전 박물관",
+                        type: "building",
+                        location: "Narayanhiti Palace Museum"
+                    },
+                    {
+                        time: "13:30",
+                        title: "더르바르 마르그 점심 & 기념품",
+                        type: "gift",
+                        location: "Durbar Marg"
+                    },
+                    {
+                        time: "16:30",
+                        title: "트리부반 공항 이동",
+                        type: "plane",
+                        location: "Tribhuvan International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    bishkek: {
+        id: "bishkek",
+        city: "Bishkek",
+        country: "Kyrgyzstan",
+        summary: "알라투 광장과 오쉬 바자르, 알라 아르차 트레킹, 부라나 탑을 지나 이식쿨 호수까지 이어지는 비슈케크 템플릿입니다.",
+        footer: "Bishkek is a gateway: bazaars in the morning, alpine air by noon.",
+        heroImage: "assets/heroes/bishkek.jpg",
+        heroPosition: "center center",
+        accent: "#EF4444",
+        accentRgb: "239, 68, 68",
+        ink: "#292524",
+        inkRgb: "41, 37, 36",
+        overlayTop: "rgba(41, 37, 36, 0.36)",
+        overlayBottom: "rgba(20, 18, 17, 0.88)",
+        timeZone: "Asia/Bishkek",
+        weather: {
+            latitude: 42.8746,
+            longitude: 74.5698
+        },
+        currency: {
+            code: "KGS",
+            symbol: "сом",
+            locale: "ky-KG"
+        },
+        startOffsetDays: 11,
+        phraseLabel: "Кыргызча · Русский",
+        phrases: [
+            {
+                text: "Саламатсызбы",
+                pron: "살라맛스즈브",
+                meaning: "안녕하세요"
+            },
+            {
+                text: "Рахмат",
+                pron: "라흐맛",
+                meaning: "감사합니다"
+            },
+            {
+                text: "Бул канча турат?",
+                pron: "불 칸차 투라트",
+                meaning: "이거 얼마예요?"
+            },
+            {
+                text: "Кечиресиз",
+                pron: "케치레시즈",
+                meaning: "실례합니다"
+            },
+            {
+                text: "Очень вкусно",
+                pron: "오친 프쿠스나",
+                meaning: "정말 맛있어요 (러시아어)"
+            },
+            {
+                text: "Где базар?",
+                pron: "그제 바자르",
+                meaning: "시장이 어디예요? (러시아어)"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "알라투 광장 & 도심",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "알라투 광장 & 근위병 교대",
+                        type: "map",
+                        location: "Ala-Too Square"
+                    },
+                    {
+                        time: "13:00",
+                        title: "오쉬 바자르 점심",
+                        type: "store",
+                        location: "Osh Bazaar"
+                    },
+                    {
+                        time: "18:30",
+                        title: "수파라 에스노 콤플렉스 저녁",
+                        type: "utensils-crossed",
+                        location: "Supara Ethno Complex"
+                    }
+                ]
+            },
+            {
+                title: "알라 아르차 국립공원",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "알라 아르차 트레킹",
+                        type: "trees",
+                        location: "Ala Archa National Park"
+                    },
+                    {
+                        time: "12:30",
+                        title: "악사이 폭포 코스 & 도시락",
+                        type: "camera",
+                        location: "Ak-Sai Waterfall"
+                    },
+                    {
+                        time: "18:30",
+                        title: "에르킨딕 대로 산책 & 저녁",
+                        type: "lightbulb",
+                        location: "Erkindik Boulevard"
+                    }
+                ]
+            },
+            {
+                title: "부라나 탑 & 이식쿨 호수",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "부라나 탑 & 발발 석상",
+                        type: "landmark",
+                        location: "Burana Tower"
+                    },
+                    {
+                        time: "14:00",
+                        title: "촐폰아타 도착 & 호수 수영",
+                        type: "sun",
+                        location: "Cholpon-Ata"
+                    },
+                    {
+                        time: "17:30",
+                        title: "암각화 야외 박물관",
+                        type: "palette",
+                        location: "Cholpon-Ata Petroglyphs"
+                    }
+                ]
+            },
+            {
+                title: "이식쿨 → 비슈케크",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "루흐 오르도 문화센터",
+                        type: "building",
+                        location: "Ruh Ordo Cultural Center"
+                    },
+                    {
+                        time: "12:30",
+                        title: "그리고리예프카 협곡",
+                        type: "trees",
+                        location: "Grigorievka Gorge"
+                    },
+                    {
+                        time: "19:30",
+                        title: "비슈케크 귀환 & 나밧 저녁",
+                        type: "utensils-crossed",
+                        location: "Navat Restaurant"
+                    }
+                ]
+            },
+            {
+                title: "박물관 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "국립역사박물관",
+                        type: "building-2",
+                        location: "State History Museum Bishkek"
+                    },
+                    {
+                        time: "13:00",
+                        title: "춤(TSUM) 펠트 기념품",
+                        type: "gift",
+                        location: "TSUM Aichurek"
+                    },
+                    {
+                        time: "16:00",
+                        title: "마나스 공항 이동",
+                        type: "plane",
+                        location: "Manas International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    tashkent: {
+        id: "tashkent",
+        city: "Tashkent",
+        country: "Uzbekistan",
+        summary: "하즈라티 이맘과 초르수 바자르, 지하철 역 투어에 사마르칸트 레기스탄 당일 고속철까지 묶은 타슈켄트 템플릿입니다.",
+        footer: "Tashkent runs on blue tiles, plov, and marble metro stations.",
+        heroImage: "assets/heroes/tashkent.jpg",
+        heroPosition: "center center",
+        accent: "#26A0B8",
+        accentRgb: "38, 160, 184",
+        ink: "#0C4A6E",
+        inkRgb: "12, 74, 110",
+        overlayTop: "rgba(12, 74, 110, 0.40)",
+        overlayBottom: "rgba(8, 30, 48, 0.88)",
+        timeZone: "Asia/Tashkent",
+        weather: {
+            latitude: 41.2995,
+            longitude: 69.2401
+        },
+        currency: {
+            code: "UZS",
+            symbol: "soʻm",
+            locale: "uz-UZ"
+        },
+        startOffsetDays: 10,
+        phraseLabel: "Oʻzbekcha",
+        phrases: [
+            {
+                text: "Assalomu alaykum",
+                pron: "앗살로무 알라이쿰",
+                meaning: "안녕하세요"
+            },
+            {
+                text: "Rahmat",
+                pron: "라흐맛",
+                meaning: "감사합니다"
+            },
+            {
+                text: "Bu qancha turadi?",
+                pron: "부 칸차 투라디",
+                meaning: "이거 얼마예요?"
+            },
+            {
+                text: "Kechirasiz",
+                pron: "케치라시즈",
+                meaning: "실례합니다"
+            },
+            {
+                text: "Hisobni bering, iltimos",
+                pron: "히솝니 베링 일티모스",
+                meaning: "계산서 주세요"
+            },
+            {
+                text: "Juda mazali",
+                pron: "주다 마잘리",
+                meaning: "정말 맛있어요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "올드 타운 & 초르수",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "하즈라티 이맘 단지 (오스만 쿠란)",
+                        type: "landmark",
+                        location: "Hazrati Imam Complex"
+                    },
+                    {
+                        time: "13:00",
+                        title: "초르수 바자르 플로프 점심",
+                        type: "store",
+                        location: "Chorsu Bazaar"
+                    },
+                    {
+                        time: "17:30",
+                        title: "쿠켈다시 마드라사 & 저녁",
+                        type: "building-2",
+                        location: "Kukeldash Madrasah"
+                    }
+                ]
+            },
+            {
+                title: "아미르 티무르 광장 & 신시가",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "아미르 티무르 광장",
+                        type: "landmark",
+                        location: "Amir Temur Square"
+                    },
+                    {
+                        time: "13:00",
+                        title: "아미르 티무르 박물관",
+                        type: "building",
+                        location: "Amir Timur Museum"
+                    },
+                    {
+                        time: "18:30",
+                        title: "타슈켄트 시티 파크 분수 야경",
+                        type: "sparkles",
+                        location: "Tashkent City Park"
+                    }
+                ]
+            },
+            {
+                title: "사마르칸트 당일 (아프로시욥 고속철)",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "레기스탄 광장",
+                        type: "landmark",
+                        location: "Registan Square"
+                    },
+                    {
+                        time: "13:00",
+                        title: "시욥 바자르 & 비비하눔 모스크",
+                        type: "store",
+                        location: "Siyob Bazaar"
+                    },
+                    {
+                        time: "16:00",
+                        title: "샤히진다 영묘군",
+                        type: "camera",
+                        location: "Shah-i-Zinda"
+                    }
+                ]
+            },
+            {
+                title: "지하철 역 투어 & 독립광장",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "독립광장 산책",
+                        type: "map",
+                        location: "Independence Square"
+                    },
+                    {
+                        time: "13:30",
+                        title: "지하철 명소 역 투어 (코스모나블라르)",
+                        type: "train-front",
+                        location: "Kosmonavtlar Metro Station"
+                    },
+                    {
+                        time: "19:00",
+                        title: "나보이 오페라 발레 극장",
+                        type: "music",
+                        location: "Alisher Navoi Opera and Ballet Theater"
+                    }
+                ]
+            },
+            {
+                title: "TV 타워 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "타슈켄트 TV 타워 전망",
+                        type: "tower-control",
+                        location: "Tashkent TV Tower"
+                    },
+                    {
+                        time: "13:00",
+                        title: "사마르칸트 다르보자 몰 점심 & 기념품",
+                        type: "gift",
+                        location: "Samarkand Darvoza Mall"
+                    },
+                    {
+                        time: "16:00",
+                        title: "타슈켄트 공항 이동",
+                        type: "plane",
+                        location: "Tashkent International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    almaty: {
+        id: "almaty",
+        city: "Almaty",
+        country: "Kazakhstan",
+        summary: "젠코프 성당과 그린 바자르, 콕토베, 메데우·침불락, 빅 알마티 호수와 차른 캐니언까지 산과 도시를 잇는 알마티 템플릿입니다.",
+        footer: "Almaty works best when apple orchards, snow peaks, and bazaars share one day.",
+        heroImage: "assets/heroes/almaty.jpg",
+        heroPosition: "center center",
+        accent: "#16A34A",
+        accentRgb: "22, 163, 74",
+        ink: "#14532D",
+        inkRgb: "20, 83, 45",
+        overlayTop: "rgba(20, 83, 45, 0.36)",
+        overlayBottom: "rgba(12, 26, 18, 0.88)",
+        timeZone: "Asia/Almaty",
+        weather: {
+            latitude: 43.238,
+            longitude: 76.889
+        },
+        currency: {
+            code: "KZT",
+            symbol: "₸",
+            locale: "kk-KZ"
+        },
+        startOffsetDays: 9,
+        phraseLabel: "Қазақша · Русский",
+        phrases: [
+            {
+                text: "Сәлеметсіз бе",
+                pron: "살레메트시즈 베",
+                meaning: "안녕하세요"
+            },
+            {
+                text: "Рахмет",
+                pron: "라흐메트",
+                meaning: "감사합니다"
+            },
+            {
+                text: "Бұл қанша тұрады?",
+                pron: "불 칸샤 투라드",
+                meaning: "이거 얼마예요?"
+            },
+            {
+                text: "Кешіріңіз",
+                pron: "케시리니즈",
+                meaning: "실례합니다"
+            },
+            {
+                text: "Счёт, пожалуйста",
+                pron: "숏 파잘루스타",
+                meaning: "계산서 주세요 (러시아어)"
+            },
+            {
+                text: "Өте әдемі",
+                pron: "외테 애데미",
+                meaning: "정말 예쁘네요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "판필로프 공원 & 콕토베",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "젠코프 성당 (승천 대성당)",
+                        type: "landmark",
+                        location: "Ascension Cathedral"
+                    },
+                    {
+                        time: "13:00",
+                        title: "그린 바자르 점심",
+                        type: "store",
+                        location: "Green Bazaar"
+                    },
+                    {
+                        time: "18:00",
+                        title: "콕토베 케이블카 야경",
+                        type: "moon-star",
+                        location: "Kok Tobe"
+                    }
+                ]
+            },
+            {
+                title: "메데우 & 침불락",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "메데우 빙상장",
+                        type: "camera",
+                        location: "Medeu"
+                    },
+                    {
+                        time: "12:30",
+                        title: "침불락 곤돌라 & 산 위 점심",
+                        type: "binoculars",
+                        location: "Shymbulak Mountain Resort"
+                    },
+                    {
+                        time: "19:00",
+                        title: "아바이 오페라 공연",
+                        type: "music",
+                        location: "Abay Opera House"
+                    }
+                ]
+            },
+            {
+                title: "빅 알마티 호수 & 남부",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "빅 알마티 호수",
+                        type: "camera",
+                        location: "Big Almaty Lake"
+                    },
+                    {
+                        time: "13:30",
+                        title: "첫 대통령 공원 산책",
+                        type: "trees",
+                        location: "First President Park"
+                    },
+                    {
+                        time: "18:30",
+                        title: "공화국 광장 & 독립기념비",
+                        type: "landmark",
+                        location: "Republic Square"
+                    }
+                ]
+            },
+            {
+                title: "차른 캐니언 당일",
+                activities: [
+                    {
+                        time: "07:00",
+                        title: "차른 캐니언 성의 계곡 트레킹",
+                        type: "map",
+                        location: "Charyn Canyon"
+                    },
+                    {
+                        time: "12:30",
+                        title: "캐니언 에코파크 유르트 점심",
+                        type: "utensils-crossed",
+                        location: "Charyn Canyon Eco Park"
+                    },
+                    {
+                        time: "19:30",
+                        title: "판필로프 거리 저녁 산책",
+                        type: "lightbulb",
+                        location: "Panfilov Street"
+                    }
+                ]
+            },
+            {
+                title: "박물관 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "중앙 국립박물관",
+                        type: "building-2",
+                        location: "Central State Museum of Kazakhstan"
+                    },
+                    {
+                        time: "13:00",
+                        title: "도스틱 플라자 점심 & 기념품",
+                        type: "gift",
+                        location: "Dostyk Plaza"
+                    },
+                    {
+                        time: "16:30",
+                        title: "알마티 공항 이동",
+                        type: "plane",
+                        location: "Almaty International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    astana: {
+        id: "astana",
+        city: "Astana",
+        country: "Kazakhstan",
+        summary: "바이테렉과 칸 샤티르, 하즈렛 술탄 모스크, 누르 알렘에 보로보이 당일까지 더한 초원 위 미래도시 아스타나 템플릿입니다.",
+        footer: "Astana feels strongest when glass towers meet the wide steppe sky.",
+        heroImage: "assets/heroes/astana.jpg",
+        heroPosition: "center center",
+        accent: "#EEF205",
+        accentRgb: "238, 242, 5",
+        ink: "#1E3A5F",
+        inkRgb: "30, 58, 95",
+        overlayTop: "rgba(30, 58, 95, 0.36)",
+        overlayBottom: "rgba(12, 22, 40, 0.88)",
+        timeZone: "Asia/Almaty",
+        weather: {
+            latitude: 51.1694,
+            longitude: 71.4491
+        },
+        currency: {
+            code: "KZT",
+            symbol: "₸",
+            locale: "kk-KZ"
+        },
+        startOffsetDays: 9,
+        phraseLabel: "Қазақша · Русский",
+        phrases: [
+            {
+                text: "Сәлем",
+                pron: "살렘",
+                meaning: "안녕 (편한 인사)"
+            },
+            {
+                text: "Көп рахмет",
+                pron: "쾨프 라흐메트",
+                meaning: "정말 감사합니다"
+            },
+            {
+                text: "Дәмді екен",
+                pron: "댐디 에켄",
+                meaning: "맛있네요"
+            },
+            {
+                text: "Где остановка?",
+                pron: "그제 아스타놉카",
+                meaning: "정류장이 어디예요? (러시아어)"
+            },
+            {
+                text: "Можно фото?",
+                pron: "모즈나 포토",
+                meaning: "사진 찍어도 돼요? (러시아어)"
+            },
+            {
+                text: "Сау болыңыз",
+                pron: "사우 볼르느즈",
+                meaning: "안녕히 계세요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "좌안 신도심 & 바이테렉",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "바이테렉 전망대",
+                        type: "tower-control",
+                        location: "Bayterek Tower"
+                    },
+                    {
+                        time: "13:30",
+                        title: "칸 샤티르 점심 & 쇼핑",
+                        type: "shopping-cart",
+                        location: "Khan Shatyr"
+                    },
+                    {
+                        time: "18:30",
+                        title: "누르졸 대로 야경 산책",
+                        type: "moon-star",
+                        location: "Nurzhol Boulevard"
+                    }
+                ]
+            },
+            {
+                title: "하즈렛 술탄 & 독립 광장",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "하즈렛 술탄 모스크",
+                        type: "landmark",
+                        location: "Hazrat Sultan Mosque"
+                    },
+                    {
+                        time: "13:00",
+                        title: "국립박물관",
+                        type: "building-2",
+                        location: "National Museum of the Republic of Kazakhstan"
+                    },
+                    {
+                        time: "18:00",
+                        title: "피라미드 (평화와 화해의 궁전)",
+                        type: "building",
+                        location: "Palace of Peace and Reconciliation"
+                    }
+                ]
+            },
+            {
+                title: "엑스포 & 누르 알렘",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "누르 알렘 미래 에너지 박물관",
+                        type: "sparkles",
+                        location: "Nur Alem"
+                    },
+                    {
+                        time: "13:30",
+                        title: "아스타나 식물원 산책",
+                        type: "trees",
+                        location: "Astana Botanical Garden"
+                    },
+                    {
+                        time: "18:00",
+                        title: "메가 실크웨이 저녁",
+                        type: "shopping-bag",
+                        location: "Mega Silk Way"
+                    }
+                ]
+            },
+            {
+                title: "보로보이 (부라바이) 당일",
+                activities: [
+                    {
+                        time: "07:30",
+                        title: "부라바이 국립공원 이동 & 숲 산책",
+                        type: "map",
+                        location: "Burabay National Park"
+                    },
+                    {
+                        time: "12:30",
+                        title: "옥제트페스 바위 전망",
+                        type: "binoculars",
+                        location: "Okzhetpes"
+                    },
+                    {
+                        time: "15:30",
+                        title: "보로보이 호수 보트",
+                        type: "ship",
+                        location: "Lake Burabay"
+                    }
+                ]
+            },
+            {
+                title: "그랜드 모스크 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "아스타나 그랜드 모스크",
+                        type: "landmark",
+                        location: "Astana Grand Mosque"
+                    },
+                    {
+                        time: "13:00",
+                        title: "케루엔 몰 점심 & 기념품",
+                        type: "gift",
+                        location: "Keruen Mall"
+                    },
+                    {
+                        time: "16:00",
+                        title: "나자르바예프 공항 이동",
+                        type: "plane",
+                        location: "Nursultan Nazarbayev International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    ulaanbaatar: {
+        id: "ulaanbaatar",
+        city: "Ulaanbaatar",
+        country: "Mongolia",
+        summary: "간단사와 수흐바타르 광장, 자이산 전망대에 테를지 초원과 칭기즈칸 기마상까지 묶은 몽골 템플릿입니다.",
+        footer: "Ulaanbaatar is best read against an endless blue sky and open steppe.",
+        heroImage: "assets/heroes/ulaanbaatar.jpg",
+        heroPosition: "center center",
+        accent: "#3B82F6",
+        accentRgb: "59, 130, 246",
+        ink: "#1E293B",
+        inkRgb: "30, 41, 59",
+        overlayTop: "rgba(30, 41, 59, 0.34)",
+        overlayBottom: "rgba(15, 23, 42, 0.86)",
+        timeZone: "Asia/Ulaanbaatar",
+        weather: {
+            latitude: 47.9188,
+            longitude: 106.9176
+        },
+        currency: {
+            code: "MNT",
+            symbol: "₮",
+            locale: "mn-MN"
+        },
+        startOffsetDays: 10,
+        phraseLabel: "Монгол",
+        phrases: [
+            {
+                text: "Сайн байна уу",
+                pron: "샌 배노",
+                meaning: "안녕하세요"
+            },
+            {
+                text: "Баярлалаа",
+                pron: "바야를라",
+                meaning: "감사합니다"
+            },
+            {
+                text: "Энэ хэд вэ?",
+                pron: "엔 헤드 웨",
+                meaning: "이거 얼마예요?"
+            },
+            {
+                text: "Уучлаарай",
+                pron: "오칠라래",
+                meaning: "실례합니다 / 죄송합니다"
+            },
+            {
+                text: "Тооцоогоо хийе",
+                pron: "토초고 히예",
+                meaning: "계산할게요"
+            },
+            {
+                text: "Амттай байна",
+                pron: "암태 밴",
+                meaning: "맛있어요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "수흐바타르 광장 & 도심",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "수흐바타르 광장",
+                        type: "map",
+                        location: "Sukhbaatar Square"
+                    },
+                    {
+                        time: "13:30",
+                        title: "칭기즈칸 국립박물관",
+                        type: "building-2",
+                        location: "Chinggis Khaan National Museum"
+                    },
+                    {
+                        time: "18:00",
+                        title: "투멘 에흐 전통 공연 (흐미·마두금)",
+                        type: "music",
+                        location: "Tumen Ekh Ensemble"
+                    }
+                ]
+            },
+            {
+                title: "간단사 & 자이산",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "간단사 아침 예불",
+                        type: "landmark",
+                        location: "Gandantegchinlen Monastery"
+                    },
+                    {
+                        time: "13:30",
+                        title: "보그드 칸 겨울 궁전",
+                        type: "building",
+                        location: "Winter Palace of the Bogd Khan"
+                    },
+                    {
+                        time: "18:00",
+                        title: "자이산 전망대 일몰",
+                        type: "sun",
+                        location: "Zaisan Memorial"
+                    }
+                ]
+            },
+            {
+                title: "테를지 국립공원 당일",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "칭기즈칸 기마상",
+                        type: "landmark",
+                        location: "Chinggis Khaan Statue Complex"
+                    },
+                    {
+                        time: "12:30",
+                        title: "거북바위 & 게르 점심",
+                        type: "camera",
+                        location: "Turtle Rock"
+                    },
+                    {
+                        time: "15:30",
+                        title: "아리야발 명상 사원 트레킹",
+                        type: "trees",
+                        location: "Aryabal Meditation Temple"
+                    }
+                ]
+            },
+            {
+                title: "초이진 라마 & 나란톨",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "초이진 라마 사원 박물관",
+                        type: "landmark",
+                        location: "Choijin Lama Temple Museum"
+                    },
+                    {
+                        time: "13:30",
+                        title: "나란톨 시장 구경",
+                        type: "store",
+                        location: "Narantuul Market"
+                    },
+                    {
+                        time: "18:30",
+                        title: "블루 스카이 타워 야경",
+                        type: "moon-star",
+                        location: "Blue Sky Tower"
+                    }
+                ]
+            },
+            {
+                title: "캐시미어 쇼핑 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "국영백화점 캐시미어 쇼핑",
+                        type: "shopping-cart",
+                        location: "State Department Store"
+                    },
+                    {
+                        time: "13:00",
+                        title: "몽골 전통 음식 점심",
+                        type: "utensils-crossed",
+                        location: "Modern Nomads"
+                    },
+                    {
+                        time: "16:00",
+                        title: "칭기즈칸 국제공항 이동",
+                        type: "plane",
+                        location: "Chinggis Khaan International Airport"
+                    }
+                ]
+            }
+        ]
+    },
     philippines: {
         id: 'philippines',
         city: 'Manila',
@@ -4211,6 +13619,641 @@ const DESTINATIONS = {
                     { time: '10:00', title: '디비소리아', type: 'shopping-bag', location: 'Divisoria Market' },
                     { time: '13:30', title: '현지 점심', type: 'utensils-crossed', location: 'Binondo' },
                     { time: '17:30', title: '공항 이동', type: 'plane', location: 'Ninoy Aquino International Airport' }
+                ]
+            }
+        ]
+    },
+    cebu: {
+        id: "cebu",
+        city: "Cebu",
+        country: "Philippines",
+        summary: "막탄 호핑과 오슬롭 고래상어, 모알보알 정어리떼와 카와산 폭포에 세부 시티 탑스힐 야경까지 얹은 4박 5일 세부 휴양 템플릿입니다.",
+        footer: "Cebu is turquoise water, mango shakes, and a boat waiting at every pier.",
+        heroImage: "assets/heroes/cebu.jpg",
+        heroPosition: "center center",
+        accent: "#2DD4BF",
+        accentRgb: "45, 212, 191",
+        ink: "#0C2A3A",
+        inkRgb: "12, 42, 58",
+        overlayTop: "rgba(12, 42, 58, 0.34)",
+        overlayBottom: "rgba(8, 24, 36, 0.84)",
+        timeZone: "Asia/Manila",
+        weather: {
+            latitude: 10.3157,
+            longitude: 123.8854
+        },
+        currency: {
+            code: "PHP",
+            symbol: "₱",
+            locale: "en-PH"
+        },
+        startOffsetDays: 10,
+        phraseLabel: "English · Tagalog",
+        phrases: [
+            {
+                text: "Maayong buntag",
+                pron: "마아용 분탁",
+                meaning: "좋은 아침이에요 (세부아노)"
+            },
+            {
+                text: "Salamat kaayo",
+                pron: "살라맛 카아요",
+                meaning: "정말 감사합니다 (세부아노)"
+            },
+            {
+                text: "Tagpila ni?",
+                pron: "탁필라 니",
+                meaning: "이거 얼마예요? (세부아노)"
+            },
+            {
+                text: "Lami kaayo!",
+                pron: "라미 카아요",
+                meaning: "정말 맛있어요! (세부아노)"
+            },
+            {
+                text: "Where is the pier?",
+                pron: "웨어 이즈 더 피어",
+                meaning: "선착장이 어디예요?"
+            },
+            {
+                text: "Ingat!",
+                pron: "잉갓",
+                meaning: "조심히 가세요 / 몸 조심해요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "막탄 섬",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "막탄 호핑투어 · 힐루퉁안 스노클링",
+                        type: "ship",
+                        location: "Hilutungan Island"
+                    },
+                    {
+                        time: "13:30",
+                        title: "란타우 수상 레스토랑 점심",
+                        type: "utensils-crossed",
+                        location: "Lantaw Floating Native Restaurant"
+                    },
+                    {
+                        time: "18:30",
+                        title: "막탄 뉴타운 저녁 산책",
+                        type: "moon-star",
+                        location: "Mactan Newtown"
+                    }
+                ]
+            },
+            {
+                title: "세부 시티",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "마젤란 십자가 · 산토니뇨 성당",
+                        type: "landmark",
+                        location: "Magellan's Cross"
+                    },
+                    {
+                        time: "13:30",
+                        title: "아얄라 센터 점심 & 쇼핑",
+                        type: "shopping-cart",
+                        location: "Ayala Center Cebu"
+                    },
+                    {
+                        time: "18:30",
+                        title: "탑스힐 야경",
+                        type: "binoculars",
+                        location: "Tops Lookout Cebu"
+                    }
+                ]
+            },
+            {
+                title: "오슬롭 & 남부",
+                activities: [
+                    {
+                        time: "06:30",
+                        title: "오슬롭 고래상어 스노클링",
+                        type: "camera",
+                        location: "Oslob Whale Shark Watching"
+                    },
+                    {
+                        time: "11:00",
+                        title: "투말록 폭포",
+                        type: "trees",
+                        location: "Tumalog Falls"
+                    },
+                    {
+                        time: "15:00",
+                        title: "수밀론 섬 샌드바",
+                        type: "sun",
+                        location: "Sumilon Island"
+                    }
+                ]
+            },
+            {
+                title: "모알보알 & 카와산",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "카와산 폭포 캐녀닝",
+                        type: "sparkles",
+                        location: "Kawasan Falls"
+                    },
+                    {
+                        time: "14:00",
+                        title: "파낙사마 비치 정어리떼 스노클링",
+                        type: "binoculars",
+                        location: "Panagsama Beach"
+                    },
+                    {
+                        time: "18:00",
+                        title: "화이트 비치 선셋",
+                        type: "sun",
+                        location: "White Beach Moalboal"
+                    }
+                ]
+            },
+            {
+                title: "마지막 쇼핑 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "SM 시사이드 시티 쇼핑",
+                        type: "shopping-bag",
+                        location: "SM Seaside City Cebu"
+                    },
+                    {
+                        time: "13:00",
+                        title: "타보안 시장 건망고 · 건어물 선물",
+                        type: "gift",
+                        location: "Taboan Public Market"
+                    },
+                    {
+                        time: "16:30",
+                        title: "막탄 공항 이동",
+                        type: "plane",
+                        location: "Mactan-Cebu International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    bohol: {
+        id: "bohol",
+        city: "Bohol",
+        country: "Philippines",
+        summary: "초콜릿힐과 안경원숭이, 로복강 크루즈, 팡라오 알로나비치와 발리카삭 스노클링을 3박 4일로 엮은 보홀 템플릿입니다.",
+        footer: "Bohol moves slowly: hills, rivers, and reefs all on one small island.",
+        heroImage: "assets/heroes/bohol.jpg",
+        heroPosition: "center center",
+        accent: "#84CC16",
+        accentRgb: "132, 204, 22",
+        ink: "#1F2E1A",
+        inkRgb: "31, 46, 26",
+        overlayTop: "rgba(31, 46, 26, 0.32)",
+        overlayBottom: "rgba(16, 24, 14, 0.84)",
+        timeZone: "Asia/Manila",
+        weather: {
+            latitude: 9.6475,
+            longitude: 123.8556
+        },
+        currency: {
+            code: "PHP",
+            symbol: "₱",
+            locale: "en-PH"
+        },
+        startOffsetDays: 12,
+        phraseLabel: "English · Tagalog",
+        phrases: [
+            {
+                text: "Magandang umaga",
+                pron: "마간당 우마가",
+                meaning: "좋은 아침입니다"
+            },
+            {
+                text: "Pwede po bang magtanong?",
+                pron: "뿌웨데 포 방 막타농",
+                meaning: "뭐 좀 여쭤봐도 될까요?"
+            },
+            {
+                text: "Nasaan ang beach?",
+                pron: "나사안 앙 비치",
+                meaning: "해변이 어디예요?"
+            },
+            {
+                text: "Masarap!",
+                pron: "마사랍",
+                meaning: "맛있어요!"
+            },
+            {
+                text: "Can I rent a scooter?",
+                pron: "캔 아이 렌트 어 스쿠터",
+                meaning: "스쿠터 빌릴 수 있나요?"
+            },
+            {
+                text: "Paalam",
+                pron: "파알람",
+                meaning: "안녕히 계세요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "팡라오 섬",
+                activities: [
+                    {
+                        time: "11:00",
+                        title: "히나그다난 동굴",
+                        type: "camera",
+                        location: "Hinagdanan Cave"
+                    },
+                    {
+                        time: "14:00",
+                        title: "두마루안 비치",
+                        type: "sun",
+                        location: "Dumaluan Beach"
+                    },
+                    {
+                        time: "18:30",
+                        title: "알로나 비치 선셋 & 씨푸드 저녁",
+                        type: "utensils-crossed",
+                        location: "Alona Beach"
+                    }
+                ]
+            },
+            {
+                title: "초콜릿힐 & 로복",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "안경원숭이 보호구역",
+                        type: "trees",
+                        location: "Philippine Tarsier Sanctuary"
+                    },
+                    {
+                        time: "11:30",
+                        title: "초콜릿힐 전망대",
+                        type: "binoculars",
+                        location: "Chocolate Hills Complex"
+                    },
+                    {
+                        time: "14:00",
+                        title: "로복강 크루즈 점심",
+                        type: "ship",
+                        location: "Loboc River Cruise"
+                    }
+                ]
+            },
+            {
+                title: "발리카삭 & 바다",
+                activities: [
+                    {
+                        time: "06:30",
+                        title: "발리카삭 스노클링 · 돌고래 워칭",
+                        type: "binoculars",
+                        location: "Balicasag Island"
+                    },
+                    {
+                        time: "11:00",
+                        title: "버진 아일랜드 샌드바",
+                        type: "sun",
+                        location: "Virgin Island Panglao"
+                    },
+                    {
+                        time: "18:30",
+                        title: "아바탄강 반딧불 투어",
+                        type: "moon-star",
+                        location: "Abatan River"
+                    }
+                ]
+            },
+            {
+                title: "바클라욘 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "바클라욘 교회",
+                        type: "landmark",
+                        location: "Baclayon Church"
+                    },
+                    {
+                        time: "12:30",
+                        title: "보홀 비 팜 점심",
+                        type: "utensils-crossed",
+                        location: "Bohol Bee Farm"
+                    },
+                    {
+                        time: "16:00",
+                        title: "팡라오 공항 이동",
+                        type: "plane",
+                        location: "Bohol-Panglao International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    boracay: {
+        id: "boracay",
+        city: "Boracay",
+        country: "Philippines",
+        summary: "화이트비치 스테이션 1~3과 디몰, 푸카셸비치, 선셋 세일링, 아리엘스 포인트까지 섬 하나를 꽉 채우는 3박 4일 보라카이 템플릿입니다.",
+        footer: "Boracay is powder-white sand, paraw sails, and a sunset that never gets old.",
+        heroImage: "assets/heroes/boracay.jpg",
+        heroPosition: "center center",
+        accent: "#F472B6",
+        accentRgb: "244, 114, 182",
+        ink: "#3B1A2E",
+        inkRgb: "59, 26, 46",
+        overlayTop: "rgba(59, 26, 46, 0.30)",
+        overlayBottom: "rgba(30, 14, 26, 0.82)",
+        timeZone: "Asia/Manila",
+        weather: {
+            latitude: 11.9674,
+            longitude: 121.9248
+        },
+        currency: {
+            code: "PHP",
+            symbol: "₱",
+            locale: "en-PH"
+        },
+        startOffsetDays: 9,
+        phraseLabel: "English · Tagalog",
+        phrases: [
+            {
+                text: "Isa pa po",
+                pron: "이사 파 포",
+                meaning: "하나 더 주세요"
+            },
+            {
+                text: "Sobrang ganda!",
+                pron: "소브랑 간다",
+                meaning: "정말 아름다워요!"
+            },
+            {
+                text: "How much for the boat?",
+                pron: "하우 머치 포 더 보트",
+                meaning: "보트 요금이 얼마예요?"
+            },
+            {
+                text: "Bawal ba dito?",
+                pron: "바왈 바 디토",
+                meaning: "여기서는 금지인가요?"
+            },
+            {
+                text: "Sandali lang",
+                pron: "산달리 랑",
+                meaning: "잠시만요"
+            },
+            {
+                text: "Walang anuman",
+                pron: "왈랑 아누만",
+                meaning: "천만에요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "화이트비치 스테이션 1~2",
+                activities: [
+                    {
+                        time: "11:00",
+                        title: "화이트비치 산책",
+                        type: "sun",
+                        location: "White Beach Boracay"
+                    },
+                    {
+                        time: "13:30",
+                        title: "디몰 점심 & 쇼핑",
+                        type: "shopping-bag",
+                        location: "D'Mall de Boracay"
+                    },
+                    {
+                        time: "18:00",
+                        title: "윌리스 록 선셋",
+                        type: "camera",
+                        location: "Willy's Rock"
+                    }
+                ]
+            },
+            {
+                title: "호핑 & 푸카셸",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "아일랜드 호핑 · 크리스탈 코브",
+                        type: "binoculars",
+                        location: "Crystal Cove Island"
+                    },
+                    {
+                        time: "13:00",
+                        title: "푸카셸 비치",
+                        type: "sun",
+                        location: "Puka Shell Beach"
+                    },
+                    {
+                        time: "17:30",
+                        title: "파라우 선셋 세일링",
+                        type: "ship",
+                        location: "Station 1 Boracay"
+                    }
+                ]
+            },
+            {
+                title: "아리엘스 포인트 & 스테이션 3",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "아리엘스 포인트 절벽 다이빙",
+                        type: "ship",
+                        location: "Ariel's Point"
+                    },
+                    {
+                        time: "15:00",
+                        title: "불라복 비치 카이트서핑 구경",
+                        type: "sparkles",
+                        location: "Bulabog Beach"
+                    },
+                    {
+                        time: "19:00",
+                        title: "디탈리파파 씨푸드 저녁",
+                        type: "utensils-crossed",
+                        location: "D'Talipapa Market"
+                    }
+                ]
+            },
+            {
+                title: "마운트 루호 & 이동",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "마운트 루호 전망대",
+                        type: "binoculars",
+                        location: "Mt. Luho View Deck"
+                    },
+                    {
+                        time: "11:30",
+                        title: "조나스 프루트 셰이크",
+                        type: "coffee",
+                        location: "Jonah's Fruit Shake"
+                    },
+                    {
+                        time: "14:00",
+                        title: "칼리보 공항 이동",
+                        type: "plane",
+                        location: "Kalibo International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    clark: {
+        id: "clark",
+        city: "Clark (Angeles)",
+        country: "Philippines",
+        summary: "미모사 골프 라운딩과 피나투보 화산 트레킹, 수빅 오션어드벤처, SM클락 쇼핑을 묶은 3박 4일 클락 템플릿입니다.",
+        footer: "Clark is volcano ash, wide fairways, and the easiest airport in the Philippines.",
+        heroImage: "assets/heroes/clark.jpg",
+        heroPosition: "center center",
+        accent: "#9A3412",
+        accentRgb: "154, 52, 18",
+        ink: "#2B1D14",
+        inkRgb: "43, 29, 20",
+        overlayTop: "rgba(43, 29, 20, 0.36)",
+        overlayBottom: "rgba(24, 16, 12, 0.86)",
+        timeZone: "Asia/Manila",
+        weather: {
+            latitude: 15.145,
+            longitude: 120.5887
+        },
+        currency: {
+            code: "PHP",
+            symbol: "₱",
+            locale: "en-PH"
+        },
+        startOffsetDays: 8,
+        phraseLabel: "English · Tagalog",
+        phrases: [
+            {
+                text: "Magandang hapon",
+                pron: "마간당 하폰",
+                meaning: "좋은 오후예요 (낮 인사)"
+            },
+            {
+                text: "Saan ang terminal?",
+                pron: "사안 앙 터미널",
+                meaning: "터미널이 어디예요?"
+            },
+            {
+                text: "Pakibigyan ako ng tubig",
+                pron: "파키비기얀 아코 낭 투빅",
+                meaning: "물 좀 주세요"
+            },
+            {
+                text: "Opo",
+                pron: "오포",
+                meaning: "네 (공손한 대답)"
+            },
+            {
+                text: "Tee time at nine, please",
+                pron: "티 타임 앳 나인 플리즈",
+                meaning: "9시 티타임으로 부탁해요"
+            },
+            {
+                text: "Ang init!",
+                pron: "앙 이닛",
+                meaning: "너무 더워요!"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "클락 프리포트",
+                activities: [
+                    {
+                        time: "08:00",
+                        title: "미모사 플러스 골프 라운딩",
+                        type: "trees",
+                        location: "Mimosa Plus Golf Course"
+                    },
+                    {
+                        time: "13:30",
+                        title: "SM 시티 클락 점심 & 쇼핑",
+                        type: "shopping-cart",
+                        location: "SM City Clark"
+                    },
+                    {
+                        time: "18:00",
+                        title: "클락 퍼레이드 그라운드 선셋 산책",
+                        type: "sun",
+                        location: "Clark Parade Grounds"
+                    }
+                ]
+            },
+            {
+                title: "피나투보 화산",
+                activities: [
+                    {
+                        time: "06:00",
+                        title: "산타 훌리아나 4x4 지프 출발",
+                        type: "map",
+                        location: "Santa Juliana, Capas, Tarlac"
+                    },
+                    {
+                        time: "09:30",
+                        title: "피나투보 분화구 호수 트레킹",
+                        type: "binoculars",
+                        location: "Mount Pinatubo Crater Lake"
+                    },
+                    {
+                        time: "16:30",
+                        title: "푸닝 온천 화산재 스파",
+                        type: "sparkles",
+                        location: "Puning Hot Spring & Restaurant"
+                    }
+                ]
+            },
+            {
+                title: "수빅 베이",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "오션 어드벤처 돌고래 쇼",
+                        type: "ticket",
+                        location: "Ocean Adventure Subic Bay"
+                    },
+                    {
+                        time: "13:30",
+                        title: "주빅 사파리",
+                        type: "camera",
+                        location: "Zoobic Safari"
+                    },
+                    {
+                        time: "18:30",
+                        title: "수빅 보드워크 씨푸드 저녁",
+                        type: "utensils-crossed",
+                        location: "Subic Bay Boardwalk"
+                    }
+                ]
+            },
+            {
+                title: "앙헬레스 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "홀리 로사리 성당",
+                        type: "landmark",
+                        location: "Holy Rosary Parish Church"
+                    },
+                    {
+                        time: "12:30",
+                        title: "알링 루싱 시식(Sisig) 점심",
+                        type: "store",
+                        location: "Aling Lucing's Sisig"
+                    },
+                    {
+                        time: "15:30",
+                        title: "클락 공항 이동",
+                        type: "plane",
+                        location: "Clark International Airport"
+                    }
                 ]
             }
         ]
@@ -4831,6 +14874,1062 @@ const DESTINATIONS = {
             }
         ]
     },
+    'san-francisco': {
+        id: "san-francisco",
+        city: "San Francisco",
+        country: "United States",
+        summary: "골든게이트, 알카트라즈, 피어 39, 케이블카, 소살리토 페리를 언덕 동선으로 묶은 샌프란시스코 템플릿입니다.",
+        footer: "San Francisco works when fog, hills, and the bay keep showing up in one frame.",
+        heroImage: "assets/heroes/san-francisco.jpg",
+        heroPosition: "center center",
+        accent: "#F00035",
+        accentRgb: "240, 0, 53",
+        ink: "#1E293B",
+        inkRgb: "30, 41, 59",
+        overlayTop: "rgba(30, 41, 59, 0.40)",
+        overlayBottom: "rgba(15, 23, 42, 0.90)",
+        timeZone: "America/Los_Angeles",
+        weather: {
+            latitude: 37.7749,
+            longitude: -122.4194
+        },
+        currency: {
+            code: "USD",
+            symbol: "$",
+            locale: "en-US"
+        },
+        startOffsetDays: 12,
+        phraseLabel: "English",
+        phrases: [
+            {
+                text: "Does this cable car go to the Wharf?",
+                pron: "[더즈 디스 케이블 카 고 투 더 워프]",
+                meaning: "이 케이블카 피셔맨스 워프 가나요?"
+            },
+            {
+                text: "Clam chowder in a bread bowl, please",
+                pron: "[클램 차우더 인 어 브레드 보울 플리즈]",
+                meaning: "빵 그릇 클램차우더 주세요"
+            },
+            {
+                text: "Is the fog rolling in?",
+                pron: "[이즈 더 포그 롤링 인]",
+                meaning: "안개 끼기 시작하나요?"
+            },
+            {
+                text: "Can I tap my card on Muni?",
+                pron: "[캔 아이 탭 마이 카드 온 뮤니]",
+                meaning: "뮤니(시내 교통)에서 카드 태그 되나요?"
+            },
+            {
+                text: "Which pier is the ferry from?",
+                pron: "[위치 피어 이즈 더 페리 프롬]",
+                meaning: "페리는 몇 번 부두에서 타요?"
+            },
+            {
+                text: "It’s chilly by the bay",
+                pron: "[잇츠 칠리 바이 더 베이]",
+                meaning: "만 근처는 쌀쌀하네요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "피셔맨스 워프 & 알카트라즈",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "알카트라즈 페리 (예약 필수)",
+                        type: "ship",
+                        location: "Alcatraz Island"
+                    },
+                    {
+                        time: "13:00",
+                        title: "피어 39 & 바다사자",
+                        type: "camera",
+                        location: "Pier 39"
+                    },
+                    {
+                        time: "18:00",
+                        title: "피셔맨스 워프 클램차우더",
+                        type: "utensils-crossed",
+                        location: "Fisherman's Wharf"
+                    }
+                ]
+            },
+            {
+                title: "골든게이트 & 소살리토",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "골든게이트 브리지 자전거",
+                        type: "bridge",
+                        location: "Golden Gate Bridge"
+                    },
+                    {
+                        time: "13:00",
+                        title: "소살리토 런치",
+                        type: "utensils-crossed",
+                        location: "Sausalito"
+                    },
+                    {
+                        time: "17:30",
+                        title: "페리로 귀환 & 페리 빌딩 마켓",
+                        type: "ship",
+                        location: "San Francisco Ferry Building"
+                    }
+                ]
+            },
+            {
+                title: "케이블카 & 노브힐",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "케이블카 탑승",
+                        type: "train-front",
+                        location: "Powell Street Cable Car Turnaround"
+                    },
+                    {
+                        time: "13:00",
+                        title: "롬바드 스트리트",
+                        type: "camera",
+                        location: "Lombard Street"
+                    },
+                    {
+                        time: "18:00",
+                        title: "차이나타운 저녁",
+                        type: "utensils-crossed",
+                        location: "Chinatown San Francisco"
+                    }
+                ]
+            },
+            {
+                title: "골든게이트 파크 & 미션",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "골든게이트 파크 & 드 영 미술관",
+                        type: "palette",
+                        location: "de Young Museum"
+                    },
+                    {
+                        time: "13:30",
+                        title: "알라모 스퀘어 & 페인티드 레이디스",
+                        type: "camera",
+                        location: "Alamo Square Park"
+                    },
+                    {
+                        time: "18:00",
+                        title: "미션 디스트릭트 부리토",
+                        type: "utensils-crossed",
+                        location: "Mission District San Francisco"
+                    }
+                ]
+            },
+            {
+                title: "트윈 픽스 & 이동",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "트윈 픽스 전망",
+                        type: "binoculars",
+                        location: "Twin Peaks San Francisco"
+                    },
+                    {
+                        time: "12:00",
+                        title: "기라델리 스퀘어 초콜릿 쇼핑",
+                        type: "gift",
+                        location: "Ghirardelli Square"
+                    },
+                    {
+                        time: "16:00",
+                        title: "SFO 공항 이동",
+                        type: "plane",
+                        location: "San Francisco International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    seattle: {
+        id: "seattle",
+        city: "Seattle",
+        country: "United States",
+        summary: "파이크 플레이스 마켓, 스페이스 니들, 치훌리, 케리 파크 스카이라인을 커피 향으로 묶은 시애틀 템플릿입니다.",
+        footer: "Seattle feels right with a coffee in hand, a ferry horn, and rain that never quite falls.",
+        heroImage: "assets/heroes/seattle.jpg",
+        heroPosition: "center center",
+        accent: "#1FA91F",
+        accentRgb: "31, 169, 31",
+        ink: "#0F2A22",
+        inkRgb: "15, 42, 34",
+        overlayTop: "rgba(15, 42, 34, 0.42)",
+        overlayBottom: "rgba(10, 22, 20, 0.92)",
+        timeZone: "America/Los_Angeles",
+        weather: {
+            latitude: 47.6062,
+            longitude: -122.3321
+        },
+        currency: {
+            code: "USD",
+            symbol: "$",
+            locale: "en-US"
+        },
+        startOffsetDays: 13,
+        phraseLabel: "English",
+        phrases: [
+            {
+                text: "A tall drip coffee, please",
+                pron: "[어 톨 드립 커피 플리즈]",
+                meaning: "톨 사이즈 드립커피 주세요"
+            },
+            {
+                text: "Room for cream, please",
+                pron: "[룸 포 크림 플리즈]",
+                meaning: "크림 넣을 공간 남겨 주세요"
+            },
+            {
+                text: "Is it going to rain later?",
+                pron: "[이즈 잇 고잉 투 레인 레이터]",
+                meaning: "이따 비 와요?"
+            },
+            {
+                text: "Where’s the ferry terminal?",
+                pron: "[웨어즈 더 페리 터미널]",
+                meaning: "페리 터미널 어디예요?"
+            },
+            {
+                text: "Do you sell this by the pound?",
+                pron: "[두 유 셀 디스 바이 더 파운드]",
+                meaning: "이거 파운드 단위로 팔아요?"
+            },
+            {
+                text: "Which stop for the Space Needle?",
+                pron: "[위치 스탑 포 더 스페이스 니들]",
+                meaning: "스페이스 니들은 어느 정류장이에요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "파이크 플레이스 & 워터프런트",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "파이크 플레이스 마켓",
+                        type: "store",
+                        location: "Pike Place Market"
+                    },
+                    {
+                        time: "12:30",
+                        title: "스타벅스 1호점",
+                        type: "coffee",
+                        location: "Original Starbucks"
+                    },
+                    {
+                        time: "18:00",
+                        title: "시애틀 그레이트 휠 & 워터프런트",
+                        type: "sparkles",
+                        location: "Seattle Great Wheel"
+                    }
+                ]
+            },
+            {
+                title: "시애틀 센터",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "스페이스 니들",
+                        type: "tower-control",
+                        location: "Space Needle"
+                    },
+                    {
+                        time: "13:00",
+                        title: "치훌리 가든 앤 글라스",
+                        type: "palette",
+                        location: "Chihuly Garden and Glass"
+                    },
+                    {
+                        time: "18:00",
+                        title: "팝 컬처 뮤지엄",
+                        type: "music",
+                        location: "Museum of Pop Culture"
+                    }
+                ]
+            },
+            {
+                title: "다운타운 & 케리 파크",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "시애틀 미술관",
+                        type: "building-2",
+                        location: "Seattle Art Museum"
+                    },
+                    {
+                        time: "13:00",
+                        title: "시애틀 중앙도서관",
+                        type: "library",
+                        location: "Seattle Central Library"
+                    },
+                    {
+                        time: "18:30",
+                        title: "케리 파크 스카이라인 선셋",
+                        type: "binoculars",
+                        location: "Kerry Park"
+                    }
+                ]
+            },
+            {
+                title: "베인브리지 & 파이오니어 스퀘어",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "베인브리지 아일랜드 페리",
+                        type: "ship",
+                        location: "Bainbridge Island"
+                    },
+                    {
+                        time: "13:30",
+                        title: "파이오니어 스퀘어 & 스미스 타워",
+                        type: "building",
+                        location: "Smith Tower"
+                    },
+                    {
+                        time: "18:00",
+                        title: "캐피톨 힐 디너",
+                        type: "utensils-crossed",
+                        location: "Capitol Hill Seattle"
+                    }
+                ]
+            },
+            {
+                title: "가스 웍스 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "가스 웍스 파크",
+                        type: "trees",
+                        location: "Gas Works Park"
+                    },
+                    {
+                        time: "12:30",
+                        title: "프리몬트 트롤 & 브런치",
+                        type: "camera",
+                        location: "Fremont Troll"
+                    },
+                    {
+                        time: "16:00",
+                        title: "시택 공항 이동",
+                        type: "plane",
+                        location: "Seattle-Tacoma International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    chicago: {
+        id: "chicago",
+        city: "Chicago",
+        country: "United States",
+        summary: "클라우드 게이트, 아트 인스티튜트, 건축 리버 크루즈, 윌리스 타워, 딥디쉬를 묶은 시카고 템플릿입니다.",
+        footer: "Chicago works when the river, the skyline, and a slow deep-dish share one day.",
+        heroImage: "assets/heroes/chicago.jpg",
+        heroPosition: "center center",
+        accent: "#3DEBF2",
+        accentRgb: "61, 235, 242",
+        ink: "#0F172A",
+        inkRgb: "15, 23, 42",
+        overlayTop: "rgba(15, 23, 42, 0.44)",
+        overlayBottom: "rgba(10, 14, 28, 0.92)",
+        timeZone: "America/Chicago",
+        weather: {
+            latitude: 41.8781,
+            longitude: -87.6298
+        },
+        currency: {
+            code: "USD",
+            symbol: "$",
+            locale: "en-US"
+        },
+        startOffsetDays: 14,
+        phraseLabel: "English",
+        phrases: [
+            {
+                text: "Which way is the Loop?",
+                pron: "[위치 웨이 이즈 더 루프]",
+                meaning: "루프(도심)는 어느 쪽이에요?"
+            },
+            {
+                text: "How long for a deep-dish?",
+                pron: "[하우 롱 포 어 딥 디시]",
+                meaning: "딥디쉬 피자 얼마나 걸려요?"
+            },
+            {
+                text: "Is this the Red Line?",
+                pron: "[이즈 디스 더 레드 라인]",
+                meaning: "이거 레드라인 맞아요?"
+            },
+            {
+                text: "It’s windy out there",
+                pron: "[잇츠 윈디 아웃 데어]",
+                meaning: "밖에 바람 엄청 불어요"
+            },
+            {
+                text: "Do I need to tip here?",
+                pron: "[두 아이 니드 투 팁 히어]",
+                meaning: "여기 팁 내야 해요?"
+            },
+            {
+                text: "Can we sit by the river?",
+                pron: "[캔 위 싯 바이 더 리버]",
+                meaning: "강가 자리에 앉을 수 있어요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "밀레니엄 파크 & 루프",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "클라우드 게이트(더 빈)",
+                        type: "sparkles",
+                        location: "Cloud Gate"
+                    },
+                    {
+                        time: "13:00",
+                        title: "아트 인스티튜트 오브 시카고",
+                        type: "palette",
+                        location: "The Art Institute of Chicago"
+                    },
+                    {
+                        time: "18:30",
+                        title: "딥디쉬 피자 디너",
+                        type: "utensils-crossed",
+                        location: "Lou Malnati's Pizzeria"
+                    }
+                ]
+            },
+            {
+                title: "리버 크루즈 & 매그니피센트 마일",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "시카고 건축 리버 크루즈",
+                        type: "ship",
+                        location: "Chicago Architecture Center"
+                    },
+                    {
+                        time: "13:30",
+                        title: "매그니피센트 마일 쇼핑",
+                        type: "shopping-bag",
+                        location: "Magnificent Mile"
+                    },
+                    {
+                        time: "18:00",
+                        title: "360 시카고 전망대",
+                        type: "building",
+                        location: "360 Chicago"
+                    }
+                ]
+            },
+            {
+                title: "윌리스 타워 & 리버워크",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "윌리스 타워 스카이덱",
+                        type: "tower-control",
+                        location: "Skydeck Chicago"
+                    },
+                    {
+                        time: "13:00",
+                        title: "리버워크 런치",
+                        type: "coffee",
+                        location: "Chicago Riverwalk"
+                    },
+                    {
+                        time: "18:00",
+                        title: "시카고 극장 & 스테이트 스트리트",
+                        type: "music",
+                        location: "The Chicago Theatre"
+                    }
+                ]
+            },
+            {
+                title: "네이비 피어 & 링컨 파크",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "네이비 피어",
+                        type: "sparkles",
+                        location: "Navy Pier"
+                    },
+                    {
+                        time: "13:30",
+                        title: "링컨 파크 동물원",
+                        type: "trees",
+                        location: "Lincoln Park Zoo"
+                    },
+                    {
+                        time: "18:30",
+                        title: "노스 애비뉴 비치 스카이라인",
+                        type: "sun",
+                        location: "North Avenue Beach"
+                    }
+                ]
+            },
+            {
+                title: "뮤지엄 캠퍼스 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "필드 자연사 박물관",
+                        type: "building-2",
+                        location: "Field Museum"
+                    },
+                    {
+                        time: "12:30",
+                        title: "애들러 천문관 스카이라인 뷰",
+                        type: "binoculars",
+                        location: "Adler Planetarium"
+                    },
+                    {
+                        time: "16:00",
+                        title: "오헤어 공항 이동",
+                        type: "plane",
+                        location: "O'Hare International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    boston: {
+        id: "boston",
+        city: "Boston",
+        country: "United States",
+        summary: "프리덤 트레일, 퀸시 마켓, 하버드·MIT, 펜웨이, 뉴베리 스트리트를 걸어서 묶은 보스턴 템플릿입니다.",
+        footer: "Boston is best on foot, where red brick, campus lawns, and the harbour line up.",
+        heroImage: "assets/heroes/boston.jpg",
+        heroPosition: "center center",
+        accent: "#BD3039",
+        accentRgb: "189, 48, 57",
+        ink: "#2A1410",
+        inkRgb: "42, 20, 16",
+        overlayTop: "rgba(42, 20, 16, 0.42)",
+        overlayBottom: "rgba(22, 14, 12, 0.90)",
+        timeZone: "America/New_York",
+        weather: {
+            latitude: 42.3601,
+            longitude: -71.0589
+        },
+        currency: {
+            code: "USD",
+            symbol: "$",
+            locale: "en-US"
+        },
+        startOffsetDays: 15,
+        phraseLabel: "English",
+        phrases: [
+            {
+                text: "Wicked good",
+                pron: "[위키드 굿]",
+                meaning: "진짜 좋네요 (보스턴식 표현)"
+            },
+            {
+                text: "Where does the Freedom Trail start?",
+                pron: "[웨어 더즈 더 프리덤 트레일 스타트]",
+                meaning: "프리덤 트레일 출발점이 어디예요?"
+            },
+            {
+                text: "One lobster roll, hot with butter",
+                pron: "[원 랍스터 롤 핫 위드 버터]",
+                meaning: "버터 바른 따뜻한 랍스터롤 하나요"
+            },
+            {
+                text: "Is this the Green Line to Fenway?",
+                pron: "[이즈 디스 더 그린 라인 투 펜웨이]",
+                meaning: "펜웨이 가는 그린라인 맞아요?"
+            },
+            {
+                text: "Can I get a CharlieCard?",
+                pron: "[캔 아이 겟 어 찰리카드]",
+                meaning: "찰리카드(교통카드) 하나 살 수 있어요?"
+            },
+            {
+                text: "Are there student discounts?",
+                pron: "[아 데어 스튜던트 디스카운츠]",
+                meaning: "학생 할인 있어요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "프리덤 트레일",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "보스턴 커먼 & 주 의사당",
+                        type: "landmark",
+                        location: "Boston Common"
+                    },
+                    {
+                        time: "13:00",
+                        title: "퀸시 마켓 런치",
+                        type: "store",
+                        location: "Quincy Market"
+                    },
+                    {
+                        time: "17:30",
+                        title: "노스엔드 이탈리안 디너",
+                        type: "utensils-crossed",
+                        location: "North End Boston"
+                    }
+                ]
+            },
+            {
+                title: "하버드 & MIT",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "하버드 야드 캠퍼스 투어",
+                        type: "library",
+                        location: "Harvard University"
+                    },
+                    {
+                        time: "13:00",
+                        title: "하버드 스퀘어 런치",
+                        type: "coffee",
+                        location: "Harvard Square"
+                    },
+                    {
+                        time: "17:00",
+                        title: "MIT & 찰스강 산책",
+                        type: "map",
+                        location: "Massachusetts Institute of Technology"
+                    }
+                ]
+            },
+            {
+                title: "펜웨이 & 백베이",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "보스턴 미술관",
+                        type: "palette",
+                        location: "Museum of Fine Arts Boston"
+                    },
+                    {
+                        time: "13:30",
+                        title: "펜웨이 파크 투어",
+                        type: "ticket",
+                        location: "Fenway Park"
+                    },
+                    {
+                        time: "18:00",
+                        title: "뉴베리 스트리트 저녁",
+                        type: "shopping-bag",
+                        location: "Newbury Street"
+                    }
+                ]
+            },
+            {
+                title: "하버 & 시포트",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "보스턴 티 파티 박물관",
+                        type: "building-2",
+                        location: "Boston Tea Party Ships & Museum"
+                    },
+                    {
+                        time: "13:00",
+                        title: "시포트 런치",
+                        type: "utensils-crossed",
+                        location: "Seaport District Boston"
+                    },
+                    {
+                        time: "17:30",
+                        title: "하버워크 선셋",
+                        type: "map",
+                        location: "Boston Harborwalk"
+                    }
+                ]
+            },
+            {
+                title: "비컨힐 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "비컨힐 & 에이콘 스트리트",
+                        type: "camera",
+                        location: "Acorn Street"
+                    },
+                    {
+                        time: "12:30",
+                        title: "보스턴 퍼블릭 가든",
+                        type: "trees",
+                        location: "Boston Public Garden"
+                    },
+                    {
+                        time: "16:00",
+                        title: "로건 공항 이동",
+                        type: "plane",
+                        location: "Boston Logan International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    'washington-dc': {
+        id: "washington-dc",
+        city: "Washington, D.C.",
+        country: "United States",
+        summary: "내셔널 몰의 링컨 기념관, 스미소니언, 백악관과 의사당, 조지타운, 알링턴을 묶은 워싱턴 D.C. 템플릿입니다.",
+        footer: "Washington works when monuments, free museums, and Georgetown brick stay in one loop.",
+        heroImage: "assets/heroes/washington-dc.jpg",
+        heroPosition: "center center",
+        accent: "#F9A8D4",
+        accentRgb: "249, 168, 212",
+        ink: "#1E2A47",
+        inkRgb: "30, 42, 71",
+        overlayTop: "rgba(30, 42, 71, 0.40)",
+        overlayBottom: "rgba(15, 20, 40, 0.90)",
+        timeZone: "America/New_York",
+        weather: {
+            latitude: 38.9072,
+            longitude: -77.0369
+        },
+        currency: {
+            code: "USD",
+            symbol: "$",
+            locale: "en-US"
+        },
+        startOffsetDays: 16,
+        phraseLabel: "English",
+        phrases: [
+            {
+                text: "Are the museums free?",
+                pron: "[아 더 뮤지엄즈 프리]",
+                meaning: "박물관 무료예요?"
+            },
+            {
+                text: "Do I need a timed pass?",
+                pron: "[두 아이 니드 어 타임드 패스]",
+                meaning: "시간 지정 입장권 필요해요?"
+            },
+            {
+                text: "Stand right, walk left",
+                pron: "[스탠드 라이트 워크 레프트]",
+                meaning: "에스컬레이터는 오른쪽 서고 왼쪽으로 걷기"
+            },
+            {
+                text: "Where’s the nearest Metro?",
+                pron: "[웨어즈 더 니어리스트 메트로]",
+                meaning: "가장 가까운 메트로역 어디예요?"
+            },
+            {
+                text: "Can I bring a bag inside?",
+                pron: "[캔 아이 브링 어 백 인사이드]",
+                meaning: "가방 들고 들어갈 수 있어요?"
+            },
+            {
+                text: "Which exit for the Mall?",
+                pron: "[위치 엑싯 포 더 몰]",
+                meaning: "내셔널 몰은 어느 출구예요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "내셔널 몰 서쪽",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "링컨 기념관",
+                        type: "landmark",
+                        location: "Lincoln Memorial"
+                    },
+                    {
+                        time: "13:00",
+                        title: "워싱턴 기념탑 & 리플렉팅 풀",
+                        type: "camera",
+                        location: "Washington Monument"
+                    },
+                    {
+                        time: "18:00",
+                        title: "타이들 베이슨 제퍼슨 기념관 야경",
+                        type: "moon-star",
+                        location: "Jefferson Memorial"
+                    }
+                ]
+            },
+            {
+                title: "스미소니언",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "국립 항공우주박물관",
+                        type: "building-2",
+                        location: "National Air and Space Museum"
+                    },
+                    {
+                        time: "13:30",
+                        title: "국립 자연사박물관",
+                        type: "building-2",
+                        location: "National Museum of Natural History"
+                    },
+                    {
+                        time: "17:30",
+                        title: "국립 미술관",
+                        type: "palette",
+                        location: "National Gallery of Art"
+                    }
+                ]
+            },
+            {
+                title: "백악관 & 캐피톨",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "백악관",
+                        type: "landmark",
+                        location: "The White House"
+                    },
+                    {
+                        time: "13:00",
+                        title: "국회의사당 투어",
+                        type: "landmark",
+                        location: "United States Capitol"
+                    },
+                    {
+                        time: "17:30",
+                        title: "의회도서관",
+                        type: "library",
+                        location: "Library of Congress"
+                    }
+                ]
+            },
+            {
+                title: "알링턴 & 조지타운",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "알링턴 국립묘지",
+                        type: "landmark",
+                        location: "Arlington National Cemetery"
+                    },
+                    {
+                        time: "13:00",
+                        title: "조지타운 M 스트리트 런치",
+                        type: "utensils-crossed",
+                        location: "Georgetown Washington DC"
+                    },
+                    {
+                        time: "17:30",
+                        title: "조지타운 워터프런트 파크",
+                        type: "sun",
+                        location: "Georgetown Waterfront Park"
+                    }
+                ]
+            },
+            {
+                title: "내셔널 아카이브 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "국립문서보관소 (독립선언서)",
+                        type: "building",
+                        location: "National Archives Museum"
+                    },
+                    {
+                        time: "12:30",
+                        title: "더 워프 브런치",
+                        type: "coffee",
+                        location: "The Wharf Washington DC"
+                    },
+                    {
+                        time: "16:00",
+                        title: "덜레스 공항 이동",
+                        type: "plane",
+                        location: "Washington Dulles International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    'salt-lake-city': {
+        id: "salt-lake-city",
+        city: "Salt Lake City",
+        country: "United States",
+        summary: "템플 스퀘어와 주 의사당, 앤털로프 아일랜드, 파크시티, 와사치 캐니언을 로드트립으로 묶은 솔트레이크시티 템플릿입니다.",
+        footer: "Salt Lake City works when granite temples, salt flats, and mountain roads share the week.",
+        heroImage: "assets/heroes/salt-lake-city.jpg",
+        heroPosition: "center center",
+        accent: "#D084FC",
+        accentRgb: "208, 132, 252",
+        ink: "#2E1065",
+        inkRgb: "46, 16, 101",
+        overlayTop: "rgba(46, 16, 101, 0.38)",
+        overlayBottom: "rgba(24, 12, 48, 0.90)",
+        timeZone: "America/Denver",
+        weather: {
+            latitude: 40.7608,
+            longitude: -111.891
+        },
+        currency: {
+            code: "USD",
+            symbol: "$",
+            locale: "en-US"
+        },
+        startOffsetDays: 18,
+        phraseLabel: "English",
+        phrases: [
+            {
+                text: "Does TRAX go to the airport?",
+                pron: "[더즈 트랙스 고 투 디 에어포트]",
+                meaning: "트랙스(경전철) 공항까지 가요?"
+            },
+            {
+                text: "Is the canyon road open?",
+                pron: "[이즈 더 캐니언 로드 오픈]",
+                meaning: "캐니언 도로 열려 있어요?"
+            },
+            {
+                text: "Are you open on Sundays?",
+                pron: "[아 유 오픈 온 선데이즈]",
+                meaning: "일요일에도 영업해요?"
+            },
+            {
+                text: "I need to fill up the tank",
+                pron: "[아이 니드 투 필 업 더 탱크]",
+                meaning: "기름 넣어야 해요"
+            },
+            {
+                text: "What’s the elevation here?",
+                pron: "[왓츠 디 엘리베이션 히어]",
+                meaning: "여기 고도가 얼마예요?"
+            },
+            {
+                text: "Do you rent gear here?",
+                pron: "[두 유 렌트 기어 히어]",
+                meaning: "여기서 장비 대여돼요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "템플 스퀘어 & 다운타운",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "템플 스퀘어",
+                        type: "landmark",
+                        location: "Temple Square"
+                    },
+                    {
+                        time: "13:00",
+                        title: "시티 크릭 센터 런치",
+                        type: "shopping-cart",
+                        location: "City Creek Center"
+                    },
+                    {
+                        time: "18:00",
+                        title: "유타 주 의사당 야경",
+                        type: "building",
+                        location: "Utah State Capitol"
+                    }
+                ]
+            },
+            {
+                title: "앤털로프 아일랜드",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "앤털로프 아일랜드 주립공원 & 들소",
+                        type: "trees",
+                        location: "Antelope Island State Park"
+                    },
+                    {
+                        time: "12:30",
+                        title: "버팔로 포인트 트레일",
+                        type: "map",
+                        location: "Buffalo Point Trail"
+                    },
+                    {
+                        time: "17:30",
+                        title: "그레이트 솔트레이크 선셋",
+                        type: "sun",
+                        location: "Great Salt Lake"
+                    }
+                ]
+            },
+            {
+                title: "파크시티",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "파크시티 메인 스트리트",
+                        type: "map",
+                        location: "Park City Main Street"
+                    },
+                    {
+                        time: "13:00",
+                        title: "유타 올림픽 파크",
+                        type: "ticket",
+                        location: "Utah Olympic Park"
+                    },
+                    {
+                        time: "17:30",
+                        title: "파크시티 마운틴 디너",
+                        type: "utensils-crossed",
+                        location: "Park City Mountain Resort"
+                    }
+                ]
+            },
+            {
+                title: "와사치 캐니언",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "리틀 코튼우드 캐니언 드라이브",
+                        type: "map",
+                        location: "Little Cottonwood Canyon"
+                    },
+                    {
+                        time: "12:30",
+                        title: "스노버드 에어리얼 트램",
+                        type: "sparkles",
+                        location: "Snowbird"
+                    },
+                    {
+                        time: "17:30",
+                        title: "엔사인 피크 선셋",
+                        type: "binoculars",
+                        location: "Ensign Peak"
+                    }
+                ]
+            },
+            {
+                title: "자연사 박물관 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "유타 자연사 박물관",
+                        type: "building-2",
+                        location: "Natural History Museum of Utah"
+                    },
+                    {
+                        time: "12:30",
+                        title: "리버티 파크 브런치",
+                        type: "coffee",
+                        location: "Liberty Park Salt Lake City"
+                    },
+                    {
+                        time: "16:00",
+                        title: "솔트레이크시티 공항 이동",
+                        type: "plane",
+                        location: "Salt Lake City International Airport"
+                    }
+                ]
+            }
+        ]
+    },
     czech: {
         id: 'czech',
         city: 'Prague',
@@ -4871,6 +15970,182 @@ const DESTINATIONS = {
                     { time: '10:30', title: '블타바 강변 산책', type: 'map', location: 'Vltava Riverside' },
                     { time: '13:30', title: '카페 브런치', type: 'coffee', location: 'Malá Strana' },
                     { time: '17:30', title: '공항 이동', type: 'plane', location: 'Václav Havel Airport Prague' }
+                ]
+            }
+        ]
+    },
+    budapest: {
+        id: "budapest",
+        city: "Budapest",
+        country: "Hungary",
+        summary: "국회의사당과 어부의 요새, 세체니 온천, 중앙시장, 도나우 야경 유람선을 묶은 부다페스트 템플릿입니다.",
+        footer: "Budapest glows brightest when thermal steam and Danube lights end the same day.",
+        heroImage: "assets/heroes/budapest.jpg",
+        heroPosition: "center center",
+        accent: "#DE843B",
+        accentRgb: "222, 132, 59",
+        ink: "#1E1B2E",
+        inkRgb: "30, 27, 46",
+        overlayTop: "rgba(30, 27, 46, 0.42)",
+        overlayBottom: "rgba(16, 14, 28, 0.92)",
+        timeZone: "Europe/Budapest",
+        weather: {
+            latitude: 47.4979,
+            longitude: 19.0402
+        },
+        currency: {
+            code: "HUF",
+            symbol: "Ft",
+            locale: "hu-HU"
+        },
+        startOffsetDays: 14,
+        phraseLabel: "Magyar",
+        phrases: [
+            {
+                text: "Jó napot kívánok",
+                pron: "[요 너포트 키바노크]",
+                meaning: "안녕하세요 (정중한 인사)"
+            },
+            {
+                text: "Köszönöm",
+                pron: "[쾨쇠뇜]",
+                meaning: "감사합니다"
+            },
+            {
+                text: "Mennyibe kerül?",
+                pron: "[멘니베 케륄]",
+                meaning: "얼마예요?"
+            },
+            {
+                text: "Egy sört kérek",
+                pron: "[에지 쇠르트 케레크]",
+                meaning: "맥주 한 잔 주세요"
+            },
+            {
+                text: "A számlát kérem",
+                pron: "[어 사믈라트 케렘]",
+                meaning: "계산서 주세요"
+            },
+            {
+                text: "Egészségedre!",
+                pron: "[에게셰게드레]",
+                meaning: "건배! / 건강을 위하여"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "페스트 – 국회의사당 & 도나우",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "국회의사당 투어",
+                        type: "landmark",
+                        location: "Hungarian Parliament Building"
+                    },
+                    {
+                        time: "13:00",
+                        title: "다뉴브 강변의 신발",
+                        type: "camera",
+                        location: "Shoes on the Danube Bank"
+                    },
+                    {
+                        time: "19:00",
+                        title: "도나우 야경 유람선",
+                        type: "ship",
+                        location: "Vigadó tér"
+                    }
+                ]
+            },
+            {
+                title: "부다 – 성 지구",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "어부의 요새",
+                        type: "landmark",
+                        location: "Fisherman's Bastion"
+                    },
+                    {
+                        time: "12:30",
+                        title: "마차시 성당 & 성 지구 골목",
+                        type: "map",
+                        location: "Matthias Church"
+                    },
+                    {
+                        time: "17:30",
+                        title: "부다 왕궁 & 푸니쿨라",
+                        type: "building",
+                        location: "Buda Castle"
+                    }
+                ]
+            },
+            {
+                title: "온천 & 시민공원",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "세체니 온천",
+                        type: "sparkles",
+                        location: "Széchenyi Thermal Bath"
+                    },
+                    {
+                        time: "13:00",
+                        title: "영웅 광장",
+                        type: "landmark",
+                        location: "Heroes' Square"
+                    },
+                    {
+                        time: "17:30",
+                        title: "바이다후냐드 성 & 시민공원",
+                        type: "trees",
+                        location: "Vajdahunyad Castle"
+                    }
+                ]
+            },
+            {
+                title: "중앙시장 & 유대인 지구",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "중앙 시장",
+                        type: "store",
+                        location: "Great Market Hall"
+                    },
+                    {
+                        time: "13:00",
+                        title: "바치 거리 런치",
+                        type: "coffee",
+                        location: "Váci Street"
+                    },
+                    {
+                        time: "19:00",
+                        title: "폐허 술집 심플라 케르트",
+                        type: "music",
+                        location: "Szimpla Kert"
+                    }
+                ]
+            },
+            {
+                title: "겔레르트 언덕 & 이동",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "겔레르트 언덕 & 자유의 여신상",
+                        type: "binoculars",
+                        location: "Gellért Hill"
+                    },
+                    {
+                        time: "12:00",
+                        title: "뉴욕 카페",
+                        type: "coffee",
+                        location: "New York Café"
+                    },
+                    {
+                        time: "16:00",
+                        title: "리스트 페렌츠 공항 이동",
+                        type: "plane",
+                        location: "Budapest Ferenc Liszt International Airport"
+                    }
                 ]
             }
         ]
@@ -5579,6 +16854,182 @@ const DESTINATIONS = {
             }
         ]
     },
+    calgary: {
+        id: "calgary",
+        city: "Calgary (Banff)",
+        country: "Canada",
+        summary: "캘거리 타워에서 밴프 곤돌라, 모레인 호수, 레이크 루이스, 아이스필드 파크웨이까지 이어지는 로키 로드트립 템플릿입니다.",
+        footer: "The Rockies reward early starts, glacier-blue water, and one more lookout.",
+        heroImage: "assets/heroes/calgary.jpg",
+        heroPosition: "center center",
+        accent: "#5EEAD4",
+        accentRgb: "94, 234, 212",
+        ink: "#0C2B2B",
+        inkRgb: "12, 43, 43",
+        overlayTop: "rgba(12, 43, 43, 0.38)",
+        overlayBottom: "rgba(8, 24, 26, 0.90)",
+        timeZone: "America/Edmonton",
+        weather: {
+            latitude: 51.0447,
+            longitude: -114.0719
+        },
+        currency: {
+            code: "CAD",
+            symbol: "C$",
+            locale: "en-CA"
+        },
+        startOffsetDays: 20,
+        phraseLabel: "English",
+        phrases: [
+            {
+                text: "One Parks Canada pass, please",
+                pron: "[원 팍스 캐나다 패스 플리즈]",
+                meaning: "파크스 캐나다 입장권 하나 주세요"
+            },
+            {
+                text: "Is the Moraine Lake shuttle running?",
+                pron: "[이즈 더 모레인 레이크 셔틀 러닝]",
+                meaning: "모레인 호수 셔틀 운행해요?"
+            },
+            {
+                text: "Any bears on the trail?",
+                pron: "[애니 베어즈 온 더 트레일]",
+                meaning: "트레일에 곰 나왔어요?"
+            },
+            {
+                text: "What time is the last gondola?",
+                pron: "[왓 타임 이즈 더 라스트 곤돌라]",
+                meaning: "마지막 곤돌라 몇 시예요?"
+            },
+            {
+                text: "Do I need winter tires?",
+                pron: "[두 아이 니드 윈터 타이어즈]",
+                meaning: "겨울용 타이어 필요해요?"
+            },
+            {
+                text: "A double-double, please",
+                pron: "[어 더블 더블 플리즈]",
+                meaning: "더블더블(팀홀튼 커피) 하나 주세요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "캘거리 다운타운",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "캘거리 타워",
+                        type: "tower-control",
+                        location: "Calgary Tower"
+                    },
+                    {
+                        time: "13:00",
+                        title: "스티븐 애비뉴 런치",
+                        type: "utensils-crossed",
+                        location: "Stephen Avenue Walk"
+                    },
+                    {
+                        time: "17:30",
+                        title: "피스 브리지 & 프린스 아일랜드 파크",
+                        type: "bridge",
+                        location: "Peace Bridge Calgary"
+                    }
+                ]
+            },
+            {
+                title: "밴프 타운 & 설퍼산",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "밴프 곤돌라 (설퍼산)",
+                        type: "binoculars",
+                        location: "Banff Gondola"
+                    },
+                    {
+                        time: "13:00",
+                        title: "밴프 애비뉴 런치",
+                        type: "utensils-crossed",
+                        location: "Banff Avenue"
+                    },
+                    {
+                        time: "18:00",
+                        title: "밴프 어퍼 핫 스프링스",
+                        type: "sparkles",
+                        location: "Banff Upper Hot Springs"
+                    }
+                ]
+            },
+            {
+                title: "모레인 호수 & 레이크 루이스",
+                activities: [
+                    {
+                        time: "07:30",
+                        title: "모레인 호수 (셔틀 예약)",
+                        type: "camera",
+                        location: "Moraine Lake"
+                    },
+                    {
+                        time: "12:30",
+                        title: "샤토 레이크 루이스 런치",
+                        type: "utensils-crossed",
+                        location: "Fairmont Chateau Lake Louise"
+                    },
+                    {
+                        time: "16:30",
+                        title: "레이크 루이스 카누",
+                        type: "ship",
+                        location: "Lake Louise Boathouse"
+                    }
+                ]
+            },
+            {
+                title: "아이스필드 파크웨이 (재스퍼 방향)",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "보우 호수",
+                        type: "camera",
+                        location: "Bow Lake"
+                    },
+                    {
+                        time: "11:00",
+                        title: "페이토 호수 전망대",
+                        type: "binoculars",
+                        location: "Peyto Lake"
+                    },
+                    {
+                        time: "15:00",
+                        title: "컬럼비아 아이스필드 스카이워크",
+                        type: "sparkles",
+                        location: "Columbia Icefield Skywalk"
+                    }
+                ]
+            },
+            {
+                title: "존스턴 캐니언 & 이동",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "존스턴 캐니언 하이킹",
+                        type: "map",
+                        location: "Johnston Canyon"
+                    },
+                    {
+                        time: "12:30",
+                        title: "캔모어 런치",
+                        type: "coffee",
+                        location: "Canmore"
+                    },
+                    {
+                        time: "16:30",
+                        title: "캘거리 공항 이동",
+                        type: "plane",
+                        location: "Calgary International Airport"
+                    }
+                ]
+            }
+        ]
+    },
     'las-vegas': {
         id: 'las-vegas',
         city: 'Las Vegas',
@@ -6116,6 +17567,17 @@ const COUNTRY_FLAGS = {
     'United Kingdom': '🇬🇧',
     'United States': '🇺🇸',
     'South Korea': '🇰🇷',
+    Laos: '🇱🇦',
+    Cambodia: '🇰🇭',
+    Brunei: '🇧🇳',
+    Mongolia: '🇲🇳',
+    Kazakhstan: '🇰🇿',
+    Uzbekistan: '🇺🇿',
+    Kyrgyzstan: '🇰🇬',
+    Nepal: '🇳🇵',
+    'Sri Lanka': '🇱🇰',
+    Qatar: '🇶🇦',
+    Hungary: '🇭🇺',
     Japan: '🇯🇵',
     Italy: '🇮🇹',
     Spain: '🇪🇸',
@@ -6218,6 +17680,16 @@ const CURRENCY_DENOMINATIONS = {
 const GENERAL_SMALL_AMOUNT_CANDIDATES = [1, 2, 5, 10, 20, 50, 100];
 
 const CURRENCY_DISPLAY = {
+    LAK: '₭',
+    BND: 'B$',
+    MNT: '₮',
+    KZT: '₸',
+    UZS: 'soʻm',
+    KGS: 'сом',
+    NPR: '₨',
+    LKR: 'Rs',
+    QAR: 'QR',
+    HUF: 'Ft',
     EUR: '€',
     GBP: '£',
     USD: '$',
@@ -6324,7 +17796,90 @@ const LOCATION_LABELS = {
     'New York': '뉴욕',
     'Los Angeles': '로스앤젤레스',
     'South Korea': '대한민국',
+    Laos: '라오스',
+    Cambodia: '캄보디아',
+    Brunei: '브루나이',
+    Mongolia: '몽골',
+    Kazakhstan: '카자흐스탄',
+    Uzbekistan: '우즈베키스탄',
+    Kyrgyzstan: '키르기스스탄',
+    Nepal: '네팔',
+    'Sri Lanka': '스리랑카',
+    Qatar: '카타르',
+    Hungary: '헝가리',
     Tokyo: '도쿄',
+    Kagoshima: '가고시마',
+    Kumamoto: '구마모토',
+    Nagasaki: '나가사키',
+    'Oita (Beppu)': '오이타(벳푸)',
+    Miyazaki: '미야자키',
+    Kitakyushu: '기타큐슈',
+    Saga: '사가',
+    Hiroshima: '히로시마',
+    Kobe: '고베',
+    Okayama: '오카야마',
+    Takamatsu: '다카마쓰',
+    Matsuyama: '마쓰야마',
+    Tokushima: '도쿠시마',
+    'Yonago (Tottori)': '요나고(돗토리)',
+    Kanazawa: '가나자와',
+    Sendai: '센다이',
+    Niigata: '니가타',
+    Aomori: '아오모리',
+    Hakodate: '하코다테',
+    Shizuoka: '시즈오카',
+    Ishigaki: '이시가키',
+    Miyakojima: '미야코지마',
+    Zhangjiajie: '장자제',
+    Nanjing: '난징',
+    Changsha: '창사',
+    Kunming: '쿤밍',
+    Xiamen: '샤먼',
+    Harbin: '하얼빈',
+    Yanji: '옌지',
+    Chongqing: '충칭',
+    Guilin: '구이린',
+    Dalian: '다롄',
+    Shenyang: '선양',
+    Yantai: '옌타이',
+    Weihai: '웨이하이',
+    Wuhan: '우한',
+    'Da Nang': '다낭',
+    'Nha Trang': '나트랑',
+    'Phu Quoc': '푸꾸옥',
+    'Chiang Mai': '치앙마이',
+    Phuket: '푸켓',
+    Vientiane: '비엔티안',
+    'Phnom Penh': '프놈펜',
+    Cebu: '세부',
+    Bohol: '보홀',
+    Boracay: '보라카이',
+    'Clark (Angeles)': '클락',
+    'Kota Kinabalu': '코타키나발루',
+    Kaohsiung: '가오슝',
+    Taichung: '타이중',
+    'Bandar Seri Begawan': '반다르스리브가완',
+    Manado: '마나도',
+    Ulaanbaatar: '울란바토르',
+    Almaty: '알마티',
+    Astana: '아스타나',
+    Tashkent: '타슈켄트',
+    Bishkek: '비슈케크',
+    Kathmandu: '카트만두',
+    Colombo: '콜롬보',
+    Doha: '도하',
+    'Abu Dhabi': '아부다비',
+    Milan: '밀라노',
+    Budapest: '부다페스트',
+    'San Francisco': '샌프란시스코',
+    Seattle: '시애틀',
+    Chicago: '시카고',
+    Boston: '보스턴',
+    'Washington, D.C.': '워싱턴 D.C.',
+    'Salt Lake City': '솔트레이크시티',
+    'Calgary (Banff)': '캘거리(밴프)',
+    Brisbane: '브리즈번',
+    Melbourne: '멜버른',
     Seoul: '서울',
     Busan: '부산',
     Jeju: '제주',
