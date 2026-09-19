@@ -87,7 +87,39 @@ def from_category(cat, limit=60):
     return sorted(out, key=lambda x: -x["score"])
 
 
+def run_one(slug, query, must, cats, dry=False):
+    cands = search(query, must)
+    if not cands:
+        for cat in cats:
+            cands = from_category(cat)
+            if cands:
+                print(f"   (분류 {cat} 에서 찾음)"); break
+    if not cands:
+        print(f"FAIL {slug}: no freely licensed landscape image for '{query}'"); return False
+    pick = cands[0]
+    p = save(slug, pick, dry)
+    if not dry: credit(slug, pick)
+    print(f"ok {slug} | {pick['w']}x{pick['h']} ar{pick['ar']} | {pick['lic']} | {pick['author']} | {pick['title'][:60]}")
+    return True
+
+
 if __name__ == "__main__":
+    if sys.argv[1] == "--batch":
+        # JSON list: [{"slug":"...","query":"...","must":["..."],"categories":["Category:..."]}, ...]
+        items = json.load(open(sys.argv[2]))
+        skip_existing = "--skip-existing" in sys.argv
+        ok = fail = skipped = 0
+        for it in items:
+            dest = os.path.join(ROOT, "assets", "heroes", f"{it['slug']}.jpg")
+            if skip_existing and os.path.exists(dest):
+                skipped += 1; continue
+            try:
+                r = run_one(it["slug"], it["query"], it.get("must") or [it["query"].split()[0]], it.get("categories") or [])
+            except Exception as e:
+                print(f"FAIL {it['slug']}: {e}"); r = False
+            ok += bool(r); fail += (not r)
+        print(f"\n일괄 결과: 성공 {ok} · 실패 {fail} · 건너뜀 {skipped}")
+        sys.exit(1 if fail else 0)
     slug, query = sys.argv[1], sys.argv[2]
     dry = "--dry" in sys.argv
     must = [t for t in sys.argv[3:] if not t.startswith("--") and not t.startswith("Category:")] or [query.split()[0]]

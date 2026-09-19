@@ -16,3 +16,6 @@
 | `xian` | [A moat near the Xi'an city wall (35519022302).jpg](https://commons.wikimedia.org/wiki/File:A_moat_near_the_Xi%27an_city_wall_(35519022302).jpg) | shankar s.  from Dubai, united arab emirates | CC BY 2.0 |
 | `guangzhou` | [Canton Tower 20220626 (cropped).jpg](https://commons.wikimedia.org/wiki/File:Canton_Tower_20220626_(cropped).jpg) | Tim Wu | CC BY-SA 4.0 |
 | `qingdao` | [City Of Qingdao - panoramio.jpg](https://commons.wikimedia.org/wiki/File:City_Of_Qingdao_-_panoramio.jpg) | ---=XEON=--- | CC BY 3.0 |
+| `busan` | [Gwangandaegyo Bridge in Busan, South Korea (iau2207b).tiff](https://commons.wikimedia.org/wiki/File:Gwangandaegyo_Bridge_in_Busan,_South_Korea_(iau2207b).tiff) | Busan Tourism Organization | CC BY 4.0 |
+| `seoul` | [2018 Bukchon Hanok village.jpg](https://commons.wikimedia.org/wiki/File:2018_Bukchon_Hanok_village.jpg) | Trainholic | CC BY-SA 3.0 |
+| `jeju` | [Hyeopjae.jpg](https://commons.wikimedia.org/wiki/File:Hyeopjae.jpg) | Lcarrion88 | CC BY-SA 4.0 |

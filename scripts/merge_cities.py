@@ -7,11 +7,13 @@ import json, os, re, subprocess, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 APP = os.path.join(ROOT, "app.js")
 # new city -> insert right after this existing entry
-ANCHOR = {"osaka": "tokyo", "kyoto": "osaka", "fukuoka": "kyoto", "sapporo": "fukuoka",
+ANCHOR = {"seoul": "london", "busan": "seoul", "jeju": "busan",
+          "osaka": "tokyo", "kyoto": "osaka", "fukuoka": "kyoto", "sapporo": "fukuoka",
           "nagoya": "sapporo", "okinawa": "nagoya",
           "hangzhou": "shanghai", "suzhou": "hangzhou", "xian": "suzhou",
           "chengdu": "xian", "guangzhou": "chengdu", "qingdao": "guangzhou"}
-ORDER = ["osaka", "kyoto", "fukuoka", "sapporo", "nagoya", "okinawa",
+ORDER = ["seoul", "busan", "jeju",
+         "osaka", "kyoto", "fukuoka", "sapporo", "nagoya", "okinawa",
          "hangzhou", "suzhou", "xian", "chengdu", "guangzhou", "qingdao"]
 
 def js_block(obj, key):
