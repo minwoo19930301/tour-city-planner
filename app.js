@@ -528,6 +528,1016 @@ const DESTINATIONS = {
             }
         ]
     },
+    osaka: {
+        id: "osaka",
+        city: "Osaka",
+        country: "Japan",
+        summary: "도톤보리 네온과 길거리 음식, 오사카성과 우메다 전망을 한 줄로 엮은 간사이 먹방 템플릿입니다.",
+        footer: "Osaka runs on neon, broth, and people who talk to strangers.",
+        heroImage: "assets/heroes/osaka.jpg",
+        heroPosition: "60% center",
+        accent: "#DC2626",
+        accentRgb: "220, 38, 38",
+        ink: "#3B0A0A",
+        inkRgb: "59, 10, 10",
+        overlayTop: "rgba(59, 10, 10, 0.40)",
+        overlayBottom: "rgba(24, 16, 16, 0.88)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 34.6937,
+            longitude: 135.5023
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 8,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "めっちゃ美味しい",
+                pron: "멧챠 오이시이",
+                meaning: "엄청 맛있어요 (간사이 말투)"
+            },
+            {
+                text: "おすすめは何ですか？",
+                pron: "오스스메와 난데스카",
+                meaning: "추천 메뉴가 뭔가요?"
+            },
+            {
+                text: "持ち帰りでお願いします",
+                pron: "모치카에리데 오네가이시마스",
+                meaning: "포장해 주세요"
+            },
+            {
+                text: "一人です",
+                pron: "히토리데스",
+                meaning: "한 명입니다"
+            },
+            {
+                text: "写真を撮ってもいいですか？",
+                pron: "샤신오 톳테모 이이데스카",
+                meaning: "사진 찍어도 될까요?"
+            },
+            {
+                text: "もう一つください",
+                pron: "모 히토츠 쿠다사이",
+                meaning: "하나 더 주세요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "난바 & 도톤보리",
+                activities: [
+                    {
+                        time: "11:00",
+                        title: "구로몬 시장 먹거리",
+                        type: "store",
+                        location: "Kuromon Ichiba Market"
+                    },
+                    {
+                        time: "14:00",
+                        title: "신사이바시 쇼핑 거리",
+                        type: "shopping-bag",
+                        location: "Shinsaibashi-suji Shopping Street"
+                    },
+                    {
+                        time: "19:00",
+                        title: "도톤보리 글리코 네온",
+                        type: "sparkles",
+                        location: "Dotonbori"
+                    }
+                ]
+            },
+            {
+                title: "오사카성 & 오사카역",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "오사카성 천수각",
+                        type: "landmark",
+                        location: "Osaka Castle"
+                    },
+                    {
+                        time: "12:30",
+                        title: "니시노마루 정원 산책",
+                        type: "trees",
+                        location: "Nishinomaru Garden"
+                    },
+                    {
+                        time: "18:00",
+                        title: "우메다 공중정원 전망대",
+                        type: "building",
+                        location: "Umeda Sky Building"
+                    }
+                ]
+            },
+            {
+                title: "신세카이 & 덴노지",
+                activities: [
+                    {
+                        time: "10:30",
+                        title: "시텐노지 참배",
+                        type: "landmark",
+                        location: "Shitenno-ji"
+                    },
+                    {
+                        time: "13:00",
+                        title: "신세카이 쿠시카츠 점심",
+                        type: "utensils-crossed",
+                        location: "Shinsekai"
+                    },
+                    {
+                        time: "17:30",
+                        title: "아베노 하루카스 300 전망대",
+                        type: "tower-control",
+                        location: "Abeno Harukas 300"
+                    }
+                ]
+            },
+            {
+                title: "유니버설 스튜디오",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "USJ 개장 입장",
+                        type: "ticket",
+                        location: "Universal Studios Japan"
+                    },
+                    {
+                        time: "13:00",
+                        title: "위저딩 월드 구역",
+                        type: "sparkles",
+                        location: "The Wizarding World of Harry Potter Osaka"
+                    },
+                    {
+                        time: "19:30",
+                        title: "유니버설 시티워크 저녁",
+                        type: "utensils-crossed",
+                        location: "Universal CityWalk Osaka"
+                    }
+                ]
+            },
+            {
+                title: "마지막 쇼핑 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "덴진바시스지 상점가",
+                        type: "shopping-cart",
+                        location: "Tenjinbashisuji Shopping Street"
+                    },
+                    {
+                        time: "13:30",
+                        title: "난바 역 짐 정리",
+                        type: "luggage",
+                        location: "Namba Station"
+                    },
+                    {
+                        time: "16:30",
+                        title: "간사이 공항 이동",
+                        type: "plane",
+                        location: "Kansai International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    kyoto: {
+        id: "kyoto",
+        city: "Kyoto",
+        country: "Japan",
+        summary: "청수사 언덕길부터 후시미이나리 천 개의 도리이, 아라시야마 대숲과 기온 밤거리까지 천천히 걷는 고도 템플릿입니다.",
+        footer: "Kyoto rewards early mornings, quiet lanes, and slow tea.",
+        heroImage: "assets/heroes/kyoto.jpg",
+        heroPosition: "50% 60%",
+        accent: "#166534",
+        accentRgb: "22, 101, 52",
+        ink: "#1C1917",
+        inkRgb: "28, 25, 23",
+        overlayTop: "rgba(28, 25, 23, 0.38)",
+        overlayBottom: "rgba(12, 20, 15, 0.90)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 35.0116,
+            longitude: 135.7681
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 9,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "拝観料はいくらですか？",
+                pron: "하이칸료와 이쿠라데스카",
+                meaning: "관람료가 얼마인가요?"
+            },
+            {
+                text: "写真撮影は大丈夫ですか？",
+                pron: "샤신 사츠에이와 다이조부데스카",
+                meaning: "사진 촬영해도 되나요?"
+            },
+            {
+                text: "抹茶をください",
+                pron: "맛차오 쿠다사이",
+                meaning: "말차 주세요"
+            },
+            {
+                text: "何時までですか？",
+                pron: "난지마데데스카",
+                meaning: "몇 시까지 하나요?"
+            },
+            {
+                text: "着物を借りたいです",
+                pron: "키모노오 카리타이데스",
+                meaning: "기모노를 빌리고 싶어요"
+            },
+            {
+                text: "ゆっくり見てもいいですか？",
+                pron: "윳쿠리 미테모 이이데스카",
+                meaning: "천천히 둘러봐도 될까요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "히가시야마 & 기온",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "기요미즈데라 아침 참배",
+                        type: "landmark",
+                        location: "Kiyomizu-dera"
+                    },
+                    {
+                        time: "11:30",
+                        title: "산넨자카 골목 산책",
+                        type: "map",
+                        location: "Sannenzaka"
+                    },
+                    {
+                        time: "18:00",
+                        title: "기온 하나미코지 저녁",
+                        type: "moon-star",
+                        location: "Hanamikoji Street"
+                    }
+                ]
+            },
+            {
+                title: "후시미 & 남부",
+                activities: [
+                    {
+                        time: "08:00",
+                        title: "후시미이나리 천 개 도리이",
+                        type: "landmark",
+                        location: "Fushimi Inari Taisha"
+                    },
+                    {
+                        time: "12:30",
+                        title: "후시미 사케 양조장 거리",
+                        type: "store",
+                        location: "Gekkeikan Okura Sake Museum"
+                    },
+                    {
+                        time: "16:00",
+                        title: "도후쿠지 정원",
+                        type: "trees",
+                        location: "Tofuku-ji"
+                    }
+                ]
+            },
+            {
+                title: "아라시야마",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "아라시야마 대나무 숲길",
+                        type: "trees",
+                        location: "Arashiyama Bamboo Grove"
+                    },
+                    {
+                        time: "11:30",
+                        title: "덴류지와 정원",
+                        type: "landmark",
+                        location: "Tenryu-ji"
+                    },
+                    {
+                        time: "15:00",
+                        title: "도게츠교 강변 산책",
+                        type: "bridge",
+                        location: "Togetsukyo Bridge"
+                    }
+                ]
+            },
+            {
+                title: "북서부 금각사 라인",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "킨카쿠지 금각사",
+                        type: "landmark",
+                        location: "Kinkaku-ji"
+                    },
+                    {
+                        time: "12:30",
+                        title: "료안지 석정",
+                        type: "palette",
+                        location: "Ryoan-ji"
+                    },
+                    {
+                        time: "15:30",
+                        title: "니조성 니노마루",
+                        type: "building-2",
+                        location: "Nijo Castle"
+                    }
+                ]
+            },
+            {
+                title: "니시키 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "니시키 시장 먹거리",
+                        type: "utensils-crossed",
+                        location: "Nishiki Market"
+                    },
+                    {
+                        time: "13:00",
+                        title: "교토역 이세탄 기념품",
+                        type: "gift",
+                        location: "Kyoto Station"
+                    },
+                    {
+                        time: "16:00",
+                        title: "하루카 타고 간사이공항",
+                        type: "train-front",
+                        location: "Kansai International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    fukuoka: {
+        id: "fukuoka",
+        city: "Fukuoka",
+        country: "Japan",
+        summary: "하카타 돈코츠 라멘과 나카스 포장마차, 다자이후 참배와 모모치 바닷바람을 묶은 규슈 관문 템플릿입니다.",
+        footer: "Fukuoka is a port city: sea air by day, yatai stools by night.",
+        heroImage: "assets/heroes/fukuoka.jpg",
+        heroPosition: "50% center",
+        accent: "#0284C7",
+        accentRgb: "2, 132, 199",
+        ink: "#0C4A6E",
+        inkRgb: "12, 74, 110",
+        overlayTop: "rgba(12, 74, 110, 0.40)",
+        overlayBottom: "rgba(8, 25, 45, 0.90)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 33.5902,
+            longitude: 130.4017
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 6,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "替え玉お願いします",
+                pron: "카에다마 오네가이시마스",
+                meaning: "면 추가 부탁합니다"
+            },
+            {
+                text: "麺は硬めで",
+                pron: "멘와 카타메데",
+                meaning: "면은 조금 단단하게요"
+            },
+            {
+                text: "相席でも大丈夫です",
+                pron: "아이세키데모 다이조부데스",
+                meaning: "합석해도 괜찮아요"
+            },
+            {
+                text: "屋台はどこですか？",
+                pron: "야타이와 도코데스카",
+                meaning: "포장마차가 어디에 있나요?"
+            },
+            {
+                text: "おいしかったです",
+                pron: "오이시캇타데스",
+                meaning: "맛있었습니다"
+            },
+            {
+                text: "生ビールください",
+                pron: "나마비루 쿠다사이",
+                meaning: "생맥주 주세요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "하카타 & 나카스",
+                activities: [
+                    {
+                        time: "10:30",
+                        title: "구시다 신사 참배",
+                        type: "landmark",
+                        location: "Kushida Shrine"
+                    },
+                    {
+                        time: "13:00",
+                        title: "캐널시티 하카타",
+                        type: "shopping-bag",
+                        location: "Canal City Hakata"
+                    },
+                    {
+                        time: "19:00",
+                        title: "나카스 야타이 포장마차",
+                        type: "utensils-crossed",
+                        location: "Nakasu Yatai"
+                    }
+                ]
+            },
+            {
+                title: "다자이후 당일 나들이",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "니시테츠 타고 다자이후",
+                        type: "train-front",
+                        location: "Dazaifu Station"
+                    },
+                    {
+                        time: "10:30",
+                        title: "다자이후 텐만구",
+                        type: "landmark",
+                        location: "Dazaifu Tenmangu"
+                    },
+                    {
+                        time: "14:00",
+                        title: "규슈국립박물관",
+                        type: "building-2",
+                        location: "Kyushu National Museum"
+                    }
+                ]
+            },
+            {
+                title: "모모치 & 바다",
+                activities: [
+                    {
+                        time: "10:30",
+                        title: "오호리 공원 산책",
+                        type: "trees",
+                        location: "Ohori Park"
+                    },
+                    {
+                        time: "14:00",
+                        title: "후쿠오카 타워 전망",
+                        type: "tower-control",
+                        location: "Fukuoka Tower"
+                    },
+                    {
+                        time: "17:30",
+                        title: "모모치 해변 노을",
+                        type: "camera",
+                        location: "Momochi Seaside Park"
+                    }
+                ]
+            },
+            {
+                title: "텐진 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "텐진 지하상가 쇼핑",
+                        type: "shopping-cart",
+                        location: "Tenjin Chikagai"
+                    },
+                    {
+                        time: "13:00",
+                        title: "하카타역 명란 기념품",
+                        type: "gift",
+                        location: "Hakata Station"
+                    },
+                    {
+                        time: "16:00",
+                        title: "후쿠오카 공항 이동",
+                        type: "plane",
+                        location: "Fukuoka Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    sapporo: {
+        id: "sapporo",
+        city: "Sapporo",
+        country: "Japan",
+        summary: "오도리 공원의 찬 공기, 미소 라멘과 징기스칸, 오타루 운하 당일치기까지 담은 홋카이도 겨울 템플릿입니다.",
+        footer: "Sapporo is cold air, hot broth, and a grid you can walk.",
+        heroImage: "assets/heroes/sapporo.jpg",
+        heroPosition: "50% 45%",
+        accent: "#64748B",
+        accentRgb: "100, 116, 139",
+        ink: "#1E293B",
+        inkRgb: "30, 41, 59",
+        overlayTop: "rgba(30, 41, 59, 0.38)",
+        overlayBottom: "rgba(15, 23, 42, 0.92)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 43.0618,
+            longitude: 141.3545
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 12,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "寒いですね",
+                pron: "사무이데스네",
+                meaning: "춥네요"
+            },
+            {
+                text: "味噌ラーメンをください",
+                pron: "미소 라멘오 쿠다사이",
+                meaning: "미소 라멘 주세요"
+            },
+            {
+                text: "暖かい席はありますか？",
+                pron: "아타타카이 세키와 아리마스카",
+                meaning: "따뜻한 자리 있나요?"
+            },
+            {
+                text: "雪道は滑りますか？",
+                pron: "유키미치와 스베리마스카",
+                meaning: "눈길이 미끄러운가요?"
+            },
+            {
+                text: "バスは何時ですか？",
+                pron: "바스와 난지데스카",
+                meaning: "버스가 몇 시인가요?"
+            },
+            {
+                text: "お土産を探しています",
+                pron: "오미야게오 사가시테이마스",
+                meaning: "기념품을 찾고 있어요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "도심 오도리 라인",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "오도리 공원 산책",
+                        type: "trees",
+                        location: "Odori Park"
+                    },
+                    {
+                        time: "12:30",
+                        title: "삿포로 TV 타워 전망",
+                        type: "tower-control",
+                        location: "Sapporo TV Tower"
+                    },
+                    {
+                        time: "18:30",
+                        title: "스스키노 징기스칸 저녁",
+                        type: "utensils-crossed",
+                        location: "Susukino"
+                    }
+                ]
+            },
+            {
+                title: "북부 & 맥주박물관",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "홋카이도청 구본청사",
+                        type: "building-2",
+                        location: "Former Hokkaido Government Office"
+                    },
+                    {
+                        time: "13:30",
+                        title: "삿포로 맥주 박물관 시음",
+                        type: "store",
+                        location: "Sapporo Beer Museum"
+                    },
+                    {
+                        time: "17:00",
+                        title: "삿포로 팩토리 쇼핑",
+                        type: "shopping-bag",
+                        location: "Sapporo Factory"
+                    }
+                ]
+            },
+            {
+                title: "오타루 당일치기",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "JR 타고 오타루",
+                        type: "train-front",
+                        location: "Otaru Station"
+                    },
+                    {
+                        time: "11:00",
+                        title: "오타루 운하 산책",
+                        type: "ship",
+                        location: "Otaru Canal"
+                    },
+                    {
+                        time: "15:00",
+                        title: "사카이마치 유리공방 거리",
+                        type: "gift",
+                        location: "Sakaimachi Street"
+                    }
+                ]
+            },
+            {
+                title: "교외 전망 & 시장",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "니조 시장 해산물 아침",
+                        type: "utensils-crossed",
+                        location: "Nijo Market"
+                    },
+                    {
+                        time: "13:00",
+                        title: "모이와산 로프웨이",
+                        type: "sun",
+                        location: "Mount Moiwa Ropeway"
+                    },
+                    {
+                        time: "18:00",
+                        title: "모이와산 야경",
+                        type: "moon-star",
+                        location: "Mount Moiwa Observation Deck"
+                    }
+                ]
+            },
+            {
+                title: "마지막 쇼핑 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "삿포로역 다이마루 쇼핑",
+                        type: "shopping-cart",
+                        location: "Daimaru Sapporo"
+                    },
+                    {
+                        time: "13:00",
+                        title: "짐 정리 후 출발",
+                        type: "luggage",
+                        location: "Sapporo Station"
+                    },
+                    {
+                        time: "16:00",
+                        title: "신치토세 공항 이동",
+                        type: "plane",
+                        location: "New Chitose Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    nagoya: {
+        id: "nagoya",
+        city: "Nagoya",
+        country: "Japan",
+        summary: "금 샤치호코가 올라앉은 나고야성, 아쓰타 신궁의 고요함, 오스 상점가와 나고야항까지 도는 주부권 템플릿입니다.",
+        footer: "Nagoya is golden roofs, miso-dark food, and easy trains.",
+        heroImage: "assets/heroes/nagoya.jpg",
+        heroPosition: "55% center",
+        accent: "#CA8A04",
+        accentRgb: "202, 138, 4",
+        ink: "#3F2D0B",
+        inkRgb: "63, 45, 11",
+        overlayTop: "rgba(63, 45, 11, 0.40)",
+        overlayBottom: "rgba(26, 20, 10, 0.90)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 35.1815,
+            longitude: 136.9066
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 7,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "味噌カツをください",
+                pron: "미소카츠오 쿠다사이",
+                meaning: "미소카츠 주세요"
+            },
+            {
+                text: "モーニングはありますか？",
+                pron: "모닝구와 아리마스카",
+                meaning: "모닝 세트 있나요?"
+            },
+            {
+                text: "何番出口ですか？",
+                pron: "난반 데구치데스카",
+                meaning: "몇 번 출구인가요?"
+            },
+            {
+                text: "待ち時間はどれくらいですか？",
+                pron: "마치지칸와 도레쿠라이데스카",
+                meaning: "대기 시간이 얼마나 되나요?"
+            },
+            {
+                text: "一日乗車券をください",
+                pron: "이치니치 조샤켄오 쿠다사이",
+                meaning: "1일 승차권 주세요"
+            },
+            {
+                text: "少し辛いですか？",
+                pron: "스코시 카라이데스카",
+                meaning: "좀 매운가요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "나고야성 & 사카에",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "나고야성과 혼마루고텐",
+                        type: "landmark",
+                        location: "Nagoya Castle"
+                    },
+                    {
+                        time: "13:00",
+                        title: "사카에 미소카츠 점심",
+                        type: "utensils-crossed",
+                        location: "Sakae, Nagoya"
+                    },
+                    {
+                        time: "18:00",
+                        title: "오아시스21 전망 데크",
+                        type: "building",
+                        location: "Oasis 21"
+                    }
+                ]
+            },
+            {
+                title: "오스 & 후시미",
+                activities: [
+                    {
+                        time: "10:30",
+                        title: "오스칸논 참배",
+                        type: "landmark",
+                        location: "Osu Kannon"
+                    },
+                    {
+                        time: "12:30",
+                        title: "오스 상점가 구경",
+                        type: "shopping-cart",
+                        location: "Osu Shopping Street"
+                    },
+                    {
+                        time: "16:00",
+                        title: "도쿠가와 미술관",
+                        type: "building-2",
+                        location: "Tokugawa Art Museum"
+                    }
+                ]
+            },
+            {
+                title: "아쓰타 & 나고야항",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "아쓰타 신궁 숲길",
+                        type: "trees",
+                        location: "Atsuta Shrine"
+                    },
+                    {
+                        time: "13:00",
+                        title: "나고야항 수족관",
+                        type: "ship",
+                        location: "Port of Nagoya Public Aquarium"
+                    },
+                    {
+                        time: "17:30",
+                        title: "가든 부두 노을",
+                        type: "camera",
+                        location: "Nagoya Port Garden Pier"
+                    }
+                ]
+            },
+            {
+                title: "나고야역 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "나고야역 카페 모닝",
+                        type: "coffee",
+                        location: "Nagoya Station"
+                    },
+                    {
+                        time: "13:00",
+                        title: "JR 게이트타워 쇼핑",
+                        type: "shopping-bag",
+                        location: "JR Gate Tower"
+                    },
+                    {
+                        time: "16:30",
+                        title: "주부 센트레아 공항 이동",
+                        type: "plane",
+                        location: "Chubu Centrair International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    okinawa: {
+        id: "okinawa",
+        city: "Okinawa",
+        country: "Japan",
+        summary: "고쿠사이도리의 느린 오후, 슈리성의 류큐 색, 추라우미 수족관과 에메랄드 해변까지 이어지는 오키나와 본섬 템플릿입니다.",
+        footer: "Okinawa moves at island speed: turquoise water, Ryukyu red, no rush.",
+        heroImage: "assets/heroes/okinawa.jpg",
+        heroPosition: "50% 55%",
+        accent: "#06B6D4",
+        accentRgb: "6, 182, 212",
+        ink: "#0F3B3A",
+        inkRgb: "15, 59, 58",
+        overlayTop: "rgba(15, 59, 58, 0.36)",
+        overlayBottom: "rgba(8, 35, 40, 0.88)",
+        timeZone: "Asia/Tokyo",
+        weather: {
+            latitude: 26.2124,
+            longitude: 127.6809
+        },
+        currency: {
+            code: "JPY",
+            symbol: "¥",
+            locale: "ja-JP"
+        },
+        startOffsetDays: 14,
+        phraseLabel: "日本語",
+        phrases: [
+            {
+                text: "めんそーれ",
+                pron: "멘소레",
+                meaning: "어서 오세요 (오키나와 말)"
+            },
+            {
+                text: "にふぇーでーびる",
+                pron: "니페데비루",
+                meaning: "감사합니다 (오키나와 말)"
+            },
+            {
+                text: "レンタカーを借りたいです",
+                pron: "렌타카오 카리타이데스",
+                meaning: "렌터카를 빌리고 싶어요"
+            },
+            {
+                text: "海はきれいですね",
+                pron: "우미와 키레이데스네",
+                meaning: "바다가 정말 예쁘네요"
+            },
+            {
+                text: "泳いでもいいですか？",
+                pron: "오요이데모 이이데스카",
+                meaning: "수영해도 되나요?"
+            },
+            {
+                text: "日焼け止めはありますか？",
+                pron: "히야케도메와 아리마스카",
+                meaning: "선크림 있나요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "나하 시내",
+                activities: [
+                    {
+                        time: "10:30",
+                        title: "고쿠사이도리 거리 구경",
+                        type: "shopping-bag",
+                        location: "Kokusai Street"
+                    },
+                    {
+                        time: "13:00",
+                        title: "마키시 공설시장 점심",
+                        type: "utensils-crossed",
+                        location: "Makishi Public Market"
+                    },
+                    {
+                        time: "17:00",
+                        title: "쓰보야 도자기 거리",
+                        type: "palette",
+                        location: "Tsuboya Yachimun Street"
+                    }
+                ]
+            },
+            {
+                title: "슈리 & 류큐 유적",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "슈리성 공원",
+                        type: "landmark",
+                        location: "Shuri Castle"
+                    },
+                    {
+                        time: "12:30",
+                        title: "다마우둔 왕릉",
+                        type: "map",
+                        location: "Tamaudun Mausoleum"
+                    },
+                    {
+                        time: "16:00",
+                        title: "후쿠슈엔 정원",
+                        type: "trees",
+                        location: "Fukushuen Garden"
+                    }
+                ]
+            },
+            {
+                title: "북부 추라우미 드라이브",
+                activities: [
+                    {
+                        time: "08:30",
+                        title: "렌터카로 북부 출발",
+                        type: "map",
+                        location: "Naha"
+                    },
+                    {
+                        time: "11:00",
+                        title: "추라우미 수족관",
+                        type: "ship",
+                        location: "Okinawa Churaumi Aquarium"
+                    },
+                    {
+                        time: "15:00",
+                        title: "고우리 대교와 섬",
+                        type: "bridge",
+                        location: "Kouri Bridge"
+                    }
+                ]
+            },
+            {
+                title: "중부 해안 & 아메리칸 빌리지",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "만좌모 절벽 전망",
+                        type: "camera",
+                        location: "Cape Manzamo"
+                    },
+                    {
+                        time: "13:30",
+                        title: "잔파곶 등대",
+                        type: "sun",
+                        location: "Cape Zanpa"
+                    },
+                    {
+                        time: "18:00",
+                        title: "아메리칸 빌리지 관람차 야경",
+                        type: "moon-star",
+                        location: "American Village Chatan"
+                    }
+                ]
+            },
+            {
+                title: "남부 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "세화우타키 성지",
+                        type: "landmark",
+                        location: "Sefa-utaki"
+                    },
+                    {
+                        time: "13:00",
+                        title: "우미카지 테라스 브런치",
+                        type: "coffee",
+                        location: "Umikaji Terrace"
+                    },
+                    {
+                        time: "16:30",
+                        title: "나하 공항 이동",
+                        type: "plane",
+                        location: "Naha Airport"
+                    }
+                ]
+            }
+        ]
+    },
     rome: {
         id: 'rome',
         city: 'Rome',
@@ -1423,6 +2433,1062 @@ const DESTINATIONS = {
                     { time: '10:30', title: '신천지 브런치', type: 'coffee', location: 'Xintiandi' },
                     { time: '13:30', title: '예원', type: 'landmark', location: 'Yu Garden' },
                     { time: '17:30', title: '푸동 공항 이동', type: 'plane', location: 'Shanghai Pudong International Airport' }
+                ]
+            }
+        ]
+    },
+    hangzhou: {
+        id: "hangzhou",
+        city: "Hangzhou",
+        country: "China",
+        summary: "서호 호반과 차밭, 고찰과 옛 거리를 천천히 묶은 항저우 템플릿입니다.",
+        footer: "Hangzhou opens up when the lake, the tea hills, and the temple bells share one slow day.",
+        heroImage: "assets/heroes/hangzhou.jpg",
+        heroPosition: "center 38%",
+        accent: "#14B8A6",
+        accentRgb: "20, 184, 166",
+        ink: "#042F2E",
+        inkRgb: "4, 47, 46",
+        overlayTop: "rgba(4, 47, 46, 0.42)",
+        overlayBottom: "rgba(15, 23, 42, 0.90)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 30.2741,
+            longitude: 120.1551
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 9,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "请问怎么走？",
+                pron: "[칭원 전머 저우]",
+                meaning: "실례지만 어떻게 가나요?"
+            },
+            {
+                text: "太美了",
+                pron: "[타이 메이 러]",
+                meaning: "정말 아름답네요"
+            },
+            {
+                text: "一杯龙井茶",
+                pron: "[이 베이 룽징 차]",
+                meaning: "용정차 한 잔 주세요"
+            },
+            {
+                text: "多少钱？",
+                pron: "[둬사오 첸]",
+                meaning: "얼마예요?"
+            },
+            {
+                text: "可以拍照吗？",
+                pron: "[커이 파이자오 마]",
+                meaning: "사진 찍어도 될까요?"
+            },
+            {
+                text: "我要这个",
+                pron: "[워 야오 저거]",
+                meaning: "이걸로 할게요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "서호 동안 산책",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "단교와 백제 산책",
+                        type: "bridge",
+                        location: "Broken Bridge, West Lake"
+                    },
+                    {
+                        time: "12:30",
+                        title: "호반 점심",
+                        type: "utensils-crossed",
+                        location: "Lou Wai Lou Restaurant"
+                    },
+                    {
+                        time: "17:30",
+                        title: "뇌봉탑 일몰",
+                        type: "tower-control",
+                        location: "Leifeng Pagoda"
+                    }
+                ]
+            },
+            {
+                title: "영은사 & 비래봉",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "영은사 참배",
+                        type: "landmark",
+                        location: "Lingyin Temple"
+                    },
+                    {
+                        time: "12:00",
+                        title: "사찰 앞 소면 점심",
+                        type: "utensils-crossed",
+                        location: "Fayun Alley"
+                    },
+                    {
+                        time: "15:00",
+                        title: "비래봉 석굴 탐방",
+                        type: "binoculars",
+                        location: "Feilai Feng"
+                    }
+                ]
+            },
+            {
+                title: "용정 차밭",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "용정촌 차밭 걷기",
+                        type: "trees",
+                        location: "Longjing Village"
+                    },
+                    {
+                        time: "12:30",
+                        title: "농가 차요리 점심",
+                        type: "utensils-crossed",
+                        location: "Meijiawu Tea Village"
+                    },
+                    {
+                        time: "15:30",
+                        title: "중국차엽박물관",
+                        type: "library",
+                        location: "China National Tea Museum"
+                    }
+                ]
+            },
+            {
+                title: "허팡제 옛 거리",
+                activities: [
+                    {
+                        time: "10:30",
+                        title: "허팡제 골목 구경",
+                        type: "store",
+                        location: "Hefang Street"
+                    },
+                    {
+                        time: "13:00",
+                        title: "항저우 가정식 점심",
+                        type: "utensils-crossed",
+                        location: "Grandma's Home Hefang Street"
+                    },
+                    {
+                        time: "18:30",
+                        title: "우산 야경 전망",
+                        type: "moon-star",
+                        location: "Wushan Tiancheng"
+                    }
+                ]
+            },
+            {
+                title: "시시습지 & 이동",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "시시습지 보트",
+                        type: "ship",
+                        location: "Xixi National Wetland Park"
+                    },
+                    {
+                        time: "12:30",
+                        title: "습지 앞 브런치",
+                        type: "coffee",
+                        location: "Xixi Tiantang"
+                    },
+                    {
+                        time: "16:00",
+                        title: "샤오산 공항 이동",
+                        type: "plane",
+                        location: "Hangzhou Xiaoshan International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    suzhou: {
+        id: "suzhou",
+        city: "Suzhou",
+        country: "China",
+        summary: "고전 정원과 수로 골목, 사찰과 옛 거리를 잇는 쑤저우 템플릿입니다.",
+        footer: "Suzhou reads like ink on paper: gardens, canals, and a temple bell at dusk.",
+        heroImage: "assets/heroes/suzhou.jpg",
+        heroPosition: "center 40%",
+        accent: "#475B72",
+        accentRgb: "71, 91, 114",
+        ink: "#1E293B",
+        inkRgb: "30, 41, 59",
+        overlayTop: "rgba(30, 41, 59, 0.40)",
+        overlayBottom: "rgba(15, 23, 42, 0.88)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 31.2989,
+            longitude: 120.5853
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 14,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "园林几点开？",
+                pron: "[위안린 지 뎬 카이]",
+                meaning: "정원은 몇 시에 여나요?"
+            },
+            {
+                text: "坐船好吗？",
+                pron: "[쭤 촨 하오 마]",
+                meaning: "배를 타는 게 좋을까요?"
+            },
+            {
+                text: "这条路很安静",
+                pron: "[저 톄오 루 헌 안징]",
+                meaning: "이 길은 참 조용하네요"
+            },
+            {
+                text: "请慢走",
+                pron: "[칭 만 저우]",
+                meaning: "조심히 가세요"
+            },
+            {
+                text: "我想休息一下",
+                pron: "[워 샹 슈시 이샤]",
+                meaning: "잠깐 쉬고 싶어요"
+            },
+            {
+                text: "有没有地图？",
+                pron: "[여우 메이여우 디투]",
+                meaning: "지도 있나요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "졸정원 & 박물관",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "졸정원 정원 산책",
+                        type: "trees",
+                        location: "Humble Administrator's Garden"
+                    },
+                    {
+                        time: "12:30",
+                        title: "정원 앞 쑤저우식 점심",
+                        type: "utensils-crossed",
+                        location: "Dongbei Street Suzhou"
+                    },
+                    {
+                        time: "14:30",
+                        title: "쑤저우 박물관",
+                        type: "library",
+                        location: "Suzhou Museum"
+                    }
+                ]
+            },
+            {
+                title: "평강로 수로 골목",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "평강로 옛 거리 산책",
+                        type: "map",
+                        location: "Pingjiang Road"
+                    },
+                    {
+                        time: "13:00",
+                        title: "골목 찻집 점심",
+                        type: "coffee",
+                        location: "Pingjiang Road"
+                    },
+                    {
+                        time: "18:30",
+                        title: "수로 야간 유람선",
+                        type: "ship",
+                        location: "Suzhou Grand Canal"
+                    }
+                ]
+            },
+            {
+                title: "한산사 & 서원",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "한산사 종루",
+                        type: "landmark",
+                        location: "Hanshan Temple"
+                    },
+                    {
+                        time: "12:30",
+                        title: "펑차오 근처 점심",
+                        type: "utensils-crossed",
+                        location: "Fengqiao Scenic Area"
+                    },
+                    {
+                        time: "15:30",
+                        title: "유원 고전 정원",
+                        type: "trees",
+                        location: "Lingering Garden"
+                    }
+                ]
+            },
+            {
+                title: "산탕제 & 호구",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "호구탑 언덕",
+                        type: "tower-control",
+                        location: "Tiger Hill Suzhou"
+                    },
+                    {
+                        time: "13:00",
+                        title: "산탕제 먹거리 점심",
+                        type: "utensils-crossed",
+                        location: "Shantang Street"
+                    },
+                    {
+                        time: "19:00",
+                        title: "산탕제 홍등 야경",
+                        type: "moon-star",
+                        location: "Shantang Street"
+                    }
+                ]
+            },
+            {
+                title: "자수 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "쑤저우 자수연구소",
+                        type: "palette",
+                        location: "Suzhou Embroidery Research Institute"
+                    },
+                    {
+                        time: "12:30",
+                        title: "관첸제 기념품 쇼핑",
+                        type: "gift",
+                        location: "Guanqian Street"
+                    },
+                    {
+                        time: "16:00",
+                        title: "쑤저우역 이동",
+                        type: "train-front",
+                        location: "Suzhou Railway Station"
+                    }
+                ]
+            }
+        ]
+    },
+    xian: {
+        id: "xian",
+        city: "Xi'an",
+        country: "China",
+        summary: "병마용과 성벽, 회민가 먹거리로 고도의 시간을 되짚는 시안 템플릿입니다.",
+        footer: "Xi'an lands when clay soldiers, old ramparts, and night-market smoke stack up in one trip.",
+        heroImage: "assets/heroes/xian.jpg",
+        heroPosition: "center 40%",
+        accent: "#B45309",
+        accentRgb: "180, 83, 9",
+        ink: "#431407",
+        inkRgb: "67, 20, 7",
+        overlayTop: "rgba(67, 20, 7, 0.44)",
+        overlayBottom: "rgba(28, 18, 12, 0.90)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 34.3416,
+            longitude: 108.9398
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 10,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "不要太辣",
+                pron: "[부야오 타이 라]",
+                meaning: "너무 맵지 않게 해주세요"
+            },
+            {
+                text: "来一碗",
+                pron: "[라이 이 완]",
+                meaning: "한 그릇 주세요"
+            },
+            {
+                text: "门票在哪买？",
+                pron: "[먼퍄오 짜이 날 마이]",
+                meaning: "입장권은 어디서 사나요?"
+            },
+            {
+                text: "几点关门？",
+                pron: "[지 뎬 관먼]",
+                meaning: "몇 시에 닫나요?"
+            },
+            {
+                text: "请帮我一下",
+                pron: "[칭 방 워 이샤]",
+                meaning: "좀 도와주세요"
+            },
+            {
+                text: "很好吃",
+                pron: "[헌 하오츠]",
+                meaning: "정말 맛있어요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "병마용 하루",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "병마용 1~3호갱",
+                        type: "landmark",
+                        location: "Terracotta Army Museum"
+                    },
+                    {
+                        time: "13:00",
+                        title: "진시황릉 근처 점심",
+                        type: "utensils-crossed",
+                        location: "Lintong District"
+                    },
+                    {
+                        time: "15:30",
+                        title: "화청지 온천 정원",
+                        type: "sun",
+                        location: "Huaqing Palace"
+                    }
+                ]
+            },
+            {
+                title: "성벽 & 종고루",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "고성벽 자전거 일주",
+                        type: "map",
+                        location: "Xi'an City Wall"
+                    },
+                    {
+                        time: "13:30",
+                        title: "종루 근처 점심",
+                        type: "utensils-crossed",
+                        location: "Bell Tower of Xi'an"
+                    },
+                    {
+                        time: "19:00",
+                        title: "고루 야경 산책",
+                        type: "moon-star",
+                        location: "Drum Tower of Xi'an"
+                    }
+                ]
+            },
+            {
+                title: "회민가 먹거리",
+                activities: [
+                    {
+                        time: "10:30",
+                        title: "화각항 골목 탐방",
+                        type: "store",
+                        location: "Huajue Lane"
+                    },
+                    {
+                        time: "12:30",
+                        title: "대청진사 관람",
+                        type: "landmark",
+                        location: "Great Mosque of Xi'an"
+                    },
+                    {
+                        time: "18:00",
+                        title: "회민가 야시장",
+                        type: "sparkles",
+                        location: "Muslim Quarter Xi'an"
+                    }
+                ]
+            },
+            {
+                title: "대안탑 & 박물관",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "섬서역사박물관",
+                        type: "library",
+                        location: "Shaanxi History Museum"
+                    },
+                    {
+                        time: "13:00",
+                        title: "대당불야성 점심",
+                        type: "utensils-crossed",
+                        location: "Great Tang All Day Mall"
+                    },
+                    {
+                        time: "19:30",
+                        title: "대안탑 분수쇼",
+                        type: "sparkles",
+                        location: "Giant Wild Goose Pagoda"
+                    }
+                ]
+            },
+            {
+                title: "마지막 거리 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "서원문 문방구 거리",
+                        type: "gift",
+                        location: "Shuyuanmen Ancient Culture Street"
+                    },
+                    {
+                        time: "12:30",
+                        title: "비림박물관",
+                        type: "library",
+                        location: "Beilin Museum"
+                    },
+                    {
+                        time: "16:30",
+                        title: "셴양 공항 이동",
+                        type: "plane",
+                        location: "Xi'an Xianyang International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    chengdu: {
+        id: "chengdu",
+        city: "Chengdu",
+        country: "China",
+        summary: "판다와 찻집, 사당과 옛 골목을 느긋하게 이어 붙인 청두 템플릿입니다.",
+        footer: "Chengdu works at teahouse speed: pandas early, hotpot late, everything else in between.",
+        heroImage: "assets/heroes/chengdu.jpg",
+        heroPosition: "center 42%",
+        accent: "#4D7C0F",
+        accentRgb: "77, 124, 15",
+        ink: "#1A2E05",
+        inkRgb: "26, 46, 5",
+        overlayTop: "rgba(26, 46, 5, 0.42)",
+        overlayBottom: "rgba(17, 24, 39, 0.90)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 30.5728,
+            longitude: 104.0668
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 11,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "微辣就好",
+                pron: "[웨이라 지우 하오]",
+                meaning: "약간만 맵게 해주세요"
+            },
+            {
+                text: "熊猫在哪里？",
+                pron: "[슝마오 짜이 날리]",
+                meaning: "판다는 어디 있나요?"
+            },
+            {
+                text: "再来一杯茶",
+                pron: "[짜이 라이 이 베이 차]",
+                meaning: "차 한 잔 더 주세요"
+            },
+            {
+                text: "慢一点",
+                pron: "[만 이뎬]",
+                meaning: "조금 천천히요"
+            },
+            {
+                text: "打包带走",
+                pron: "[다바오 다이 저우]",
+                meaning: "포장해 주세요"
+            },
+            {
+                text: "这个辣吗？",
+                pron: "[저거 라 마]",
+                meaning: "이거 매운가요?"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "판다 기지 아침",
+                activities: [
+                    {
+                        time: "08:00",
+                        title: "자이언트 판다 번식기지",
+                        type: "trees",
+                        location: "Chengdu Research Base of Giant Panda Breeding"
+                    },
+                    {
+                        time: "12:30",
+                        title: "기지 근처 촨차이 점심",
+                        type: "utensils-crossed",
+                        location: "Xiongmao Avenue"
+                    },
+                    {
+                        time: "15:30",
+                        title: "원수원 사찰 찻집",
+                        type: "landmark",
+                        location: "Wenshu Monastery"
+                    }
+                ]
+            },
+            {
+                title: "우허우사당 & 진리",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "우허우사당 관람",
+                        type: "landmark",
+                        location: "Wuhou Shrine"
+                    },
+                    {
+                        time: "12:30",
+                        title: "진리거리 먹거리 점심",
+                        type: "utensils-crossed",
+                        location: "Jinli Ancient Street"
+                    },
+                    {
+                        time: "19:00",
+                        title: "진리 홍등 야경",
+                        type: "moon-star",
+                        location: "Jinli Ancient Street"
+                    }
+                ]
+            },
+            {
+                title: "관자이샹쯔 골목",
+                activities: [
+                    {
+                        time: "10:30",
+                        title: "콴자이 골목 산책",
+                        type: "store",
+                        location: "Kuanzhai Alley"
+                    },
+                    {
+                        time: "13:00",
+                        title: "골목 안 촨촨 점심",
+                        type: "utensils-crossed",
+                        location: "Kuanzhai Alley"
+                    },
+                    {
+                        time: "16:00",
+                        title: "인민공원 찻집",
+                        type: "coffee",
+                        location: "Heming Teahouse, People's Park"
+                    }
+                ]
+            },
+            {
+                title: "두보초당 & 강변",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "두보초당 정원",
+                        type: "library",
+                        location: "Du Fu Thatched Cottage"
+                    },
+                    {
+                        time: "13:00",
+                        title: "칭양궁 근처 점심",
+                        type: "utensils-crossed",
+                        location: "Qingyang Palace"
+                    },
+                    {
+                        time: "18:30",
+                        title: "주청리 야경 쇼핑",
+                        type: "shopping-bag",
+                        location: "Jiuyanqiao"
+                    }
+                ]
+            },
+            {
+                title: "마지막 훠궈 & 이동",
+                activities: [
+                    {
+                        time: "10:30",
+                        title: "춘시루 쇼핑",
+                        type: "shopping-cart",
+                        location: "Chunxi Road"
+                    },
+                    {
+                        time: "13:00",
+                        title: "청두 훠궈 점심",
+                        type: "utensils-crossed",
+                        location: "Shudaxia Hotpot Chunxi Road"
+                    },
+                    {
+                        time: "17:00",
+                        title: "톈푸 공항 이동",
+                        type: "plane",
+                        location: "Chengdu Tianfu International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    guangzhou: {
+        id: "guangzhou",
+        city: "Guangzhou",
+        country: "China",
+        summary: "딤섬과 강변 야경, 사면섬 산책을 묶은 광저우 템플릿입니다.",
+        footer: "Guangzhou is a food city first: dim sum by day, river lights by night.",
+        heroImage: "assets/heroes/guangzhou.jpg",
+        heroPosition: "center 35%",
+        accent: "#DB2777",
+        accentRgb: "219, 39, 119",
+        ink: "#500724",
+        inkRgb: "80, 7, 36",
+        overlayTop: "rgba(80, 7, 36, 0.44)",
+        overlayBottom: "rgba(24, 14, 26, 0.90)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 23.1291,
+            longitude: 113.2644
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 12,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "喝早茶",
+                pron: "[허 자오차]",
+                meaning: "아침 딤섬 먹으러 가요"
+            },
+            {
+                text: "再点一笼",
+                pron: "[짜이 뎬 이 룽]",
+                meaning: "한 판 더 주문할게요"
+            },
+            {
+                text: "有推荐吗？",
+                pron: "[여우 퉈이젠 마]",
+                meaning: "추천 메뉴 있나요?"
+            },
+            {
+                text: "不要香菜",
+                pron: "[부야오 샹차이]",
+                meaning: "고수는 빼주세요"
+            },
+            {
+                text: "地铁站怎么走？",
+                pron: "[디톄잔 전머 저우]",
+                meaning: "지하철역은 어떻게 가나요?"
+            },
+            {
+                text: "买单",
+                pron: "[마이단]",
+                meaning: "계산할게요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "사면섬 & 상하구",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "사면섬 옛 조계지 산책",
+                        type: "map",
+                        location: "Shamian Island"
+                    },
+                    {
+                        time: "12:00",
+                        title: "아침 딤섬 점심",
+                        type: "utensils-crossed",
+                        location: "Guangzhou Restaurant Wenchang Road"
+                    },
+                    {
+                        time: "16:00",
+                        title: "상하구 보행가 쇼핑",
+                        type: "shopping-bag",
+                        location: "Shangxiajiu Pedestrian Street"
+                    }
+                ]
+            },
+            {
+                title: "천허 도심 & 타워",
+                activities: [
+                    {
+                        time: "10:30",
+                        title: "천허 도심 쇼핑",
+                        type: "shopping-cart",
+                        location: "Tianhe District"
+                    },
+                    {
+                        time: "13:00",
+                        title: "태고회 점심",
+                        type: "utensils-crossed",
+                        location: "Taikoo Hui Guangzhou"
+                    },
+                    {
+                        time: "19:00",
+                        title: "광저우 타워 전망",
+                        type: "tower-control",
+                        location: "Canton Tower"
+                    }
+                ]
+            },
+            {
+                title: "주강 & 오래된 성",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "진씨서원 관람",
+                        type: "landmark",
+                        location: "Chen Clan Ancestral Hall"
+                    },
+                    {
+                        time: "13:00",
+                        title: "판시주가 딤섬 점심",
+                        type: "utensils-crossed",
+                        location: "Panxi Restaurant"
+                    },
+                    {
+                        time: "19:30",
+                        title: "주강 야경 크루즈",
+                        type: "ship",
+                        location: "Pearl River Night Cruise"
+                    }
+                ]
+            },
+            {
+                title: "백운산 자연",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "백운산 등반",
+                        type: "trees",
+                        location: "Baiyun Mountain"
+                    },
+                    {
+                        time: "13:00",
+                        title: "산 아래 광둥식 점심",
+                        type: "utensils-crossed",
+                        location: "Baiyun Mountain Scenic Area"
+                    },
+                    {
+                        time: "16:30",
+                        title: "월수공원 오양상",
+                        type: "landmark",
+                        location: "Yuexiu Park"
+                    }
+                ]
+            },
+            {
+                title: "마지막 차 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "천자만당 조차",
+                        type: "coffee",
+                        location: "Tao Tao Ju Restaurant"
+                    },
+                    {
+                        time: "13:00",
+                        title: "영남 기념품 쇼핑",
+                        type: "gift",
+                        location: "Beijing Road Pedestrian Street"
+                    },
+                    {
+                        time: "17:00",
+                        title: "바이윈 공항 이동",
+                        type: "plane",
+                        location: "Guangzhou Baiyun International Airport"
+                    }
+                ]
+            }
+        ]
+    },
+    qingdao: {
+        id: "qingdao",
+        city: "Qingdao",
+        country: "China",
+        summary: "바다와 독일식 거리, 맥주와 해산물을 묶은 칭다오 템플릿입니다.",
+        footer: "Qingdao is red roofs, blue water, and a cold glass of beer at the end of the day.",
+        heroImage: "assets/heroes/qingdao.jpg",
+        heroPosition: "center 45%",
+        accent: "#2563EB",
+        accentRgb: "37, 99, 235",
+        ink: "#172554",
+        inkRgb: "23, 37, 84",
+        overlayTop: "rgba(23, 37, 84, 0.42)",
+        overlayBottom: "rgba(15, 23, 42, 0.90)",
+        timeZone: "Asia/Shanghai",
+        weather: {
+            latitude: 36.0671,
+            longitude: 120.3826
+        },
+        currency: {
+            code: "CNY",
+            symbol: "¥",
+            locale: "zh-CN"
+        },
+        startOffsetDays: 13,
+        phraseLabel: "中文",
+        phrases: [
+            {
+                text: "一扎啤酒",
+                pron: "[이 자 피주]",
+                meaning: "생맥주 한 잔 주세요"
+            },
+            {
+                text: "海鲜怎么卖？",
+                pron: "[하이셴 전머 마이]",
+                meaning: "해산물은 어떻게 파나요?"
+            },
+            {
+                text: "去海边",
+                pron: "[취 하이볜]",
+                meaning: "바닷가로 가주세요"
+            },
+            {
+                text: "今天天气真好",
+                pron: "[진톈 톈치 전 하오]",
+                meaning: "오늘 날씨 정말 좋네요"
+            },
+            {
+                text: "有位子吗？",
+                pron: "[여우 웨이쯔 마]",
+                meaning: "자리 있나요?"
+            },
+            {
+                text: "再见",
+                pron: "[짜이젠]",
+                meaning: "안녕히 가세요"
+            }
+        ],
+        itineraryTemplate: [
+            {
+                title: "잔교 & 옛 시가",
+                activities: [
+                    {
+                        time: "09:30",
+                        title: "잔교 부두 산책",
+                        type: "bridge",
+                        location: "Zhanqiao Pier"
+                    },
+                    {
+                        time: "12:30",
+                        title: "피차이위안 먹자골목",
+                        type: "utensils-crossed",
+                        location: "Pichaiyuan Food Street"
+                    },
+                    {
+                        time: "16:00",
+                        title: "천주교당 거리",
+                        type: "landmark",
+                        location: "St. Michael's Cathedral Qingdao"
+                    }
+                ]
+            },
+            {
+                title: "8대관 & 해변",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "8대관 별장 거리",
+                        type: "map",
+                        location: "Badaguan Scenic Area"
+                    },
+                    {
+                        time: "13:00",
+                        title: "해변 해산물 점심",
+                        type: "utensils-crossed",
+                        location: "Second Bathing Beach"
+                    },
+                    {
+                        time: "17:30",
+                        title: "화석루 일몰",
+                        type: "camera",
+                        location: "Huashi Villa"
+                    }
+                ]
+            },
+            {
+                title: "맥주 박물관 & 시내",
+                activities: [
+                    {
+                        time: "10:30",
+                        title: "칭다오 맥주박물관",
+                        type: "library",
+                        location: "Tsingtao Beer Museum"
+                    },
+                    {
+                        time: "13:00",
+                        title: "덩저우루 맥주거리 점심",
+                        type: "utensils-crossed",
+                        location: "Dengzhou Road Beer Street"
+                    },
+                    {
+                        time: "19:00",
+                        title: "5.4광장 야경",
+                        type: "moon-star",
+                        location: "May Fourth Square"
+                    }
+                ]
+            },
+            {
+                title: "라오산 하루",
+                activities: [
+                    {
+                        time: "09:00",
+                        title: "라오산 남쪽 코스",
+                        type: "trees",
+                        location: "Laoshan Mountain"
+                    },
+                    {
+                        time: "13:00",
+                        title: "타이칭궁 근처 점심",
+                        type: "utensils-crossed",
+                        location: "Taiqing Palace Laoshan"
+                    },
+                    {
+                        time: "16:30",
+                        title: "해안 드라이브 전망",
+                        type: "binoculars",
+                        location: "Laoshan Scenic Area"
+                    }
+                ]
+            },
+            {
+                title: "마지막 해변 & 이동",
+                activities: [
+                    {
+                        time: "10:00",
+                        title: "올림픽 요트 선착장",
+                        type: "ship",
+                        location: "Qingdao Olympic Sailing Center"
+                    },
+                    {
+                        time: "12:30",
+                        title: "해산물 마지막 점심",
+                        type: "utensils-crossed",
+                        location: "Yunxiao Road Food Street"
+                    },
+                    {
+                        time: "16:30",
+                        title: "자오둥 공항 이동",
+                        type: "plane",
+                        location: "Qingdao Jiaodong International Airport"
+                    }
                 ]
             }
         ]
@@ -3773,6 +5839,18 @@ const LOCATION_LABELS = {
     'New York': '뉴욕',
     'Los Angeles': '로스앤젤레스',
     Tokyo: '도쿄',
+    Osaka: '오사카',
+    Kyoto: '교토',
+    Fukuoka: '후쿠오카',
+    Sapporo: '삿포로',
+    Nagoya: '나고야',
+    Okinawa: '오키나와',
+    Hangzhou: '항저우',
+    Suzhou: '쑤저우',
+    "Xi'an": '시안',
+    Chengdu: '청두',
+    Guangzhou: '광저우',
+    Qingdao: '칭다오',
     Rome: '로마',
     Barcelona: '바르셀로나',
     Singapore_city: '싱가포르',
@@ -4185,32 +6263,24 @@ function getPendingSetupSegments(includeDraft = false) {
 }
 
 function getSelectableDestinations() {
-    const grouped = new Map();
-
+    const countryCityCounts = new Map();
     Object.values(DESTINATIONS).forEach((destination) => {
-        const key = `${destination.country}::${destination.timeZone}`;
-        if (!grouped.has(key)) grouped.set(key, []);
-        grouped.get(key).push(destination);
+        countryCityCounts.set(destination.country, (countryCityCounts.get(destination.country) || 0) + 1);
     });
 
-    const countryZoneCounts = new Map();
-    grouped.forEach((destinations) => {
-        const country = destinations[0].country;
-        countryZoneCounts.set(country, (countryZoneCounts.get(country) || 0) + 1);
-    });
-
-    return Array.from(grouped.values()).map((destinations) => {
-        const preferredId = PREFERRED_GROUP_DESTINATIONS[destinations[0].country];
-        const representative = destinations.find((destination) => destination.id === preferredId) || destinations[0];
-        const hasMultipleZones = (countryZoneCounts.get(representative.country) || 0) > 1;
+    return Object.values(DESTINATIONS).map((destination) => {
+        const hasSiblingCities = (countryCityCounts.get(destination.country) || 0) > 1;
+        const countryLabel = getLocalizedLabel(destination.country);
+        const cityLabel = getLocalizedLabel(destination.city, destination.city);
 
         return {
-            id: representative.id,
-            country: representative.country,
-            region: getRegionKey(representative.country),
-            primaryLabel: getLocalizedLabel(representative.country),
-            secondaryLabel: hasMultipleZones ? getLocalizedLabel(representative.city, representative.city) : '',
-            timeZone: representative.timeZone
+            id: destination.id,
+            country: destination.country,
+            city: destination.city,
+            region: getRegionKey(destination.country),
+            primaryLabel: hasSiblingCities ? `${countryLabel} · ${cityLabel}` : countryLabel,
+            secondaryLabel: destination.timeZone,
+            timeZone: destination.timeZone
         };
     }).sort((left, right) => {
         const regionCompare = REGION_ORDER.indexOf(left.region) - REGION_ORDER.indexOf(right.region);
@@ -4219,16 +6289,16 @@ function getSelectableDestinations() {
         const countryCompare = getCountrySortIndex(left.country) - getCountrySortIndex(right.country);
         if (countryCompare !== 0) return countryCompare;
 
-        return (left.secondaryLabel || '').localeCompare(right.secondaryLabel || '', 'ko');
+        const preferredId = PREFERRED_GROUP_DESTINATIONS[left.country];
+        if (preferredId && left.id === preferredId) return -1;
+        if (preferredId && right.id === preferredId) return 1;
+
+        return (left.secondaryLabel || left.primaryLabel).localeCompare(right.secondaryLabel || right.primaryLabel, 'ko');
     });
 }
 
 function getSelectableDestinationId(id) {
-    const destination = getDestination(id);
-    const match = getSelectableDestinations().find((entry) =>
-        entry.country === destination.country && entry.timeZone === destination.timeZone
-    );
-    return match?.id || destination.id;
+    return getDestination(id).id;
 }
 
 function getLocalNow(timeZone) {
@@ -6104,6 +8174,7 @@ function renderItinerary() {
             || countDaysInclusive(parseYmd(previousDay.date), parseYmd(day.date)) > 1;
         const dayElement = document.createElement('div');
         dayElement.className = 'relative pl-8';
+        dayElement.dataset.dayPanel = String(dayIndex);
         const dayDirectionsUrl = getDayDirectionsUrl(day.activities, day.destinationId);
         const segmentChipHtml = isSegmentBoundary ? `
             <div class="mb-2">
@@ -6146,9 +8217,20 @@ function renderItinerary() {
                     data-action="edit-activity"
                     data-day-index="${dayIndex}"
                     data-activity-card-id="${activity.id}"
-                    data-activity-id="${activity.id}">
+                    data-activity-id="${activity.id}"
+                    tabindex="0">
                     ${buildHourlyWeatherHtml(day, activity)}
                     <div class="flex items-center gap-3 flex-1 min-w-0">
+                        <button
+                            type="button"
+                            tabindex="-1"
+                            data-skip-edit="true"
+                            data-drag-handle="true"
+                            class="activity-drag-handle shrink-0"
+                            aria-label="${escapeHtml('일정 순서 바꾸기')}"
+                            title="${escapeHtml('끌어서 순서 바꾸기')}">
+                            <i data-lucide="grip-vertical" class="w-4 h-4"></i>
+                        </button>
                         <div class="p-2 rounded-xl accent-icon shrink-0">
                             <i data-lucide="${getRenderableActivityIcon(activity.type)}" class="w-4 h-4"></i>
                         </div>
@@ -6594,6 +8676,313 @@ function renameDay(dayIndex) {
     persistItineraryChanges();
 }
 
+
+const activityDragState = {
+    active: false,
+    pointerId: null,
+    handle: null,
+    card: null,
+    sourceDayIndex: -1,
+    activityId: '',
+    startX: 0,
+    startY: 0,
+    lastY: 0,
+    targetDayIndex: -1,
+    targetIndex: -1,
+    indicator: null,
+    dayPanel: null,
+    autoScrollFrame: null
+};
+
+const DRAG_START_THRESHOLD = 5;
+const DRAG_EDGE_ZONE = 90;
+const DRAG_EDGE_SPEED = 14;
+
+function reassignDayTimes(day, orderedActivities) {
+    const times = day.activities.map((activity) => activity.time).sort((left, right) => left.localeCompare(right));
+    day.activities = orderedActivities;
+    day.activities.forEach((activity, index) => {
+        if (times[index]) activity.time = times[index];
+    });
+}
+
+function moveActivityWithinDay(dayIndex, activityId, targetIndex) {
+    const day = appState.itinerary[dayIndex];
+    if (!day) return false;
+
+    const currentIndex = day.activities.findIndex((activity) => activity.id === activityId);
+    if (currentIndex === -1) return false;
+
+    let nextIndex = Math.max(0, Math.min(day.activities.length - 1, targetIndex > currentIndex ? targetIndex - 1 : targetIndex));
+    if (nextIndex === currentIndex) return false;
+
+    const ordered = day.activities.slice();
+    const [moved] = ordered.splice(currentIndex, 1);
+    ordered.splice(nextIndex, 0, moved);
+    reassignDayTimes(day, ordered);
+    return true;
+}
+
+function resolveInsertedTime(activities, insertIndex, fallbackTime) {
+    const previous = activities[insertIndex - 1];
+    const next = activities[insertIndex];
+
+    if (previous && next) {
+        const previousMinutes = timeToMinutes(previous.time);
+        const nextMinutes = timeToMinutes(next.time);
+        if (nextMinutes - previousMinutes >= 2) {
+            return minutesToTime(Math.floor((previousMinutes + nextMinutes) / 2));
+        }
+        return minutesToTime(previousMinutes);
+    }
+
+    if (next) return minutesToTime(Math.max(0, timeToMinutes(next.time) - 60));
+    if (previous) return minutesToTime(Math.min(1439, timeToMinutes(previous.time) + 60));
+    return fallbackTime;
+}
+
+function moveActivityAcrossDays(sourceDayIndex, targetDayIndex, activityId, targetIndex) {
+    const sourceDay = appState.itinerary[sourceDayIndex];
+    const targetDay = appState.itinerary[targetDayIndex];
+    if (!sourceDay || !targetDay) return false;
+
+    const currentIndex = sourceDay.activities.findIndex((activity) => activity.id === activityId);
+    if (currentIndex === -1) return false;
+
+    const [moved] = sourceDay.activities.splice(currentIndex, 1);
+    const insertIndex = Math.max(0, Math.min(targetDay.activities.length, targetIndex));
+    moved.time = resolveInsertedTime(targetDay.activities, insertIndex, moved.time);
+    moved.destinationId = targetDay.destinationIds?.[0] || targetDay.destinationId || moved.destinationId;
+    targetDay.activities.splice(insertIndex, 0, moved);
+
+    sortActivities(targetDay);
+    if (typeof syncDayDestinations === 'function') {
+        syncDayDestinations(sourceDay);
+        syncDayDestinations(targetDay);
+    }
+    return true;
+}
+
+function getDayCards(dayIndex) {
+    const panel = ui.itineraryContainer.querySelector(`[data-day-panel="${dayIndex}"]`);
+    if (!panel) return [];
+    return Array.from(panel.querySelectorAll('[data-activity-card-id]'));
+}
+
+function ensureDropIndicator() {
+    if (activityDragState.indicator) return activityDragState.indicator;
+    const indicator = document.createElement('div');
+    indicator.className = 'activity-drop-indicator';
+    document.body.appendChild(indicator);
+    activityDragState.indicator = indicator;
+    return indicator;
+}
+
+function clearDropIndicator() {
+    if (activityDragState.indicator) {
+        activityDragState.indicator.remove();
+        activityDragState.indicator = null;
+    }
+}
+
+function highlightDayPanel(panel) {
+    if (activityDragState.dayPanel === panel) return;
+    if (activityDragState.dayPanel) activityDragState.dayPanel.classList.remove('day-drop-target');
+    activityDragState.dayPanel = panel;
+    if (panel) panel.classList.add('day-drop-target');
+}
+
+function updateDropTarget(clientX, clientY) {
+    const element = document.elementFromPoint(clientX, clientY);
+    const panel = element ? element.closest('[data-day-panel]') : null;
+
+    if (!panel) {
+        activityDragState.targetDayIndex = -1;
+        activityDragState.targetIndex = -1;
+        highlightDayPanel(null);
+        clearDropIndicator();
+        return;
+    }
+
+    const dayIndex = Number(panel.dataset.dayPanel);
+    const cards = getDayCards(dayIndex);
+    let insertIndex = cards.length;
+
+    for (let index = 0; index < cards.length; index += 1) {
+        const rect = cards[index].getBoundingClientRect();
+        if (clientY < rect.top + rect.height / 2) {
+            insertIndex = index;
+            break;
+        }
+    }
+
+    activityDragState.targetDayIndex = dayIndex;
+    activityDragState.targetIndex = insertIndex;
+    highlightDayPanel(panel);
+
+    const indicator = ensureDropIndicator();
+    const referenceCard = cards[insertIndex] || cards[cards.length - 1];
+    if (!referenceCard) {
+        const panelRect = panel.getBoundingClientRect();
+        indicator.style.left = `${panelRect.left + 32}px`;
+        indicator.style.width = `${Math.max(0, panelRect.width - 32)}px`;
+        indicator.style.top = `${panelRect.bottom - 8}px`;
+        return;
+    }
+
+    const rect = referenceCard.getBoundingClientRect();
+    indicator.style.left = `${rect.left}px`;
+    indicator.style.width = `${rect.width}px`;
+    indicator.style.top = `${cards[insertIndex] ? rect.top - 5 : rect.bottom + 3}px`;
+}
+
+function stepDragAutoScroll() {
+    if (!activityDragState.active) return;
+    const y = activityDragState.lastY;
+
+    if (y < DRAG_EDGE_ZONE) {
+        window.scrollBy(0, -DRAG_EDGE_SPEED);
+        updateDropTarget(activityDragState.startX, y);
+    } else if (y > window.innerHeight - DRAG_EDGE_ZONE) {
+        window.scrollBy(0, DRAG_EDGE_SPEED);
+        updateDropTarget(activityDragState.startX, y);
+    }
+
+    activityDragState.autoScrollFrame = window.requestAnimationFrame(stepDragAutoScroll);
+}
+
+function beginActivityDrag() {
+    activityDragState.active = true;
+    document.body.classList.add('is-reordering-activities');
+    if (activityDragState.card) activityDragState.card.classList.add('activity-card-dragging');
+    if (activityDragState.handle) activityDragState.handle.classList.add('is-dragging');
+    activityDragState.autoScrollFrame = window.requestAnimationFrame(stepDragAutoScroll);
+}
+
+function resetActivityDragState() {
+    if (activityDragState.autoScrollFrame) {
+        window.cancelAnimationFrame(activityDragState.autoScrollFrame);
+        activityDragState.autoScrollFrame = null;
+    }
+    if (activityDragState.card) activityDragState.card.classList.remove('activity-card-dragging');
+    if (activityDragState.handle) activityDragState.handle.classList.remove('is-dragging');
+    highlightDayPanel(null);
+    clearDropIndicator();
+    document.body.classList.remove('is-reordering-activities');
+
+    activityDragState.active = false;
+    activityDragState.pointerId = null;
+    activityDragState.handle = null;
+    activityDragState.card = null;
+    activityDragState.sourceDayIndex = -1;
+    activityDragState.activityId = '';
+    activityDragState.targetDayIndex = -1;
+    activityDragState.targetIndex = -1;
+}
+
+function handleActivityPointerDown(event) {
+    if (event.button !== undefined && event.button !== 0) return;
+    const handle = event.target.closest('[data-drag-handle="true"]');
+    if (!handle) return;
+
+    const card = handle.closest('[data-activity-card-id]');
+    if (!card) return;
+
+    activityDragState.pointerId = event.pointerId;
+    activityDragState.handle = handle;
+    activityDragState.card = card;
+    activityDragState.sourceDayIndex = Number(card.dataset.dayIndex);
+    activityDragState.activityId = card.dataset.activityId;
+    activityDragState.startX = event.clientX;
+    activityDragState.startY = event.clientY;
+    activityDragState.lastY = event.clientY;
+
+    try {
+        handle.setPointerCapture(event.pointerId);
+    } catch (error) {
+        /* 일부 환경에서는 포인터 캡처를 지원하지 않습니다. */
+    }
+    event.preventDefault();
+}
+
+function handleActivityPointerMove(event) {
+    if (activityDragState.pointerId === null || event.pointerId !== activityDragState.pointerId) return;
+
+    activityDragState.lastY = event.clientY;
+
+    if (!activityDragState.active) {
+        const distance = Math.hypot(event.clientX - activityDragState.startX, event.clientY - activityDragState.startY);
+        if (distance < DRAG_START_THRESHOLD) return;
+        beginActivityDrag();
+    }
+
+    event.preventDefault();
+    updateDropTarget(event.clientX, event.clientY);
+}
+
+function handleActivityPointerUp(event) {
+    if (activityDragState.pointerId === null || event.pointerId !== activityDragState.pointerId) return;
+
+    const wasActive = activityDragState.active;
+    const sourceDayIndex = activityDragState.sourceDayIndex;
+    const targetDayIndex = activityDragState.targetDayIndex;
+    const targetIndex = activityDragState.targetIndex;
+    const activityId = activityDragState.activityId;
+
+    try {
+        if (activityDragState.handle && activityDragState.handle.hasPointerCapture(event.pointerId)) {
+            activityDragState.handle.releasePointerCapture(event.pointerId);
+        }
+    } catch (error) {
+        /* 이미 해제된 경우는 무시합니다. */
+    }
+
+    resetActivityDragState();
+
+    if (!wasActive || targetDayIndex === -1 || targetIndex === -1) return;
+
+    const moved = targetDayIndex === sourceDayIndex
+        ? moveActivityWithinDay(sourceDayIndex, activityId, targetIndex)
+        : moveActivityAcrossDays(sourceDayIndex, targetDayIndex, activityId, targetIndex);
+
+    if (moved) {
+        persistItineraryChanges();
+        focusActivityCard(activityId);
+    }
+}
+
+function focusActivityCard(activityId) {
+    const card = ui.itineraryContainer.querySelector(`[data-activity-card-id="${activityId}"]`);
+    if (card) card.focus({ preventScroll: true });
+}
+
+function handleActivityReorderKeydown(event) {
+    if (!event.altKey) return;
+    if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
+
+    const card = event.target.closest && event.target.closest('[data-activity-card-id]');
+    if (!card) return;
+
+    const dayIndex = Number(card.dataset.dayIndex);
+    const day = appState.itinerary[dayIndex];
+    if (!day) return;
+
+    const currentIndex = day.activities.findIndex((activity) => activity.id === card.dataset.activityId);
+    if (currentIndex === -1) return;
+
+    const nextIndex = event.key === 'ArrowUp' ? currentIndex - 1 : currentIndex + 1;
+    if (nextIndex < 0 || nextIndex >= day.activities.length) return;
+
+    event.preventDefault();
+
+    const ordered = day.activities.slice();
+    const [moved] = ordered.splice(currentIndex, 1);
+    ordered.splice(nextIndex, 0, moved);
+    reassignDayTimes(day, ordered);
+    persistItineraryChanges();
+    focusActivityCard(moved.id);
+}
+
 function handleItineraryClick(event) {
     if (event.target.closest('[data-skip-edit]')) {
         return;
@@ -6851,6 +9240,11 @@ ui.rateKrwInput.addEventListener('input', () => {
     updateExchangeOutputs();
 });
 ui.itineraryContainer.addEventListener('click', handleItineraryClick);
+ui.itineraryContainer.addEventListener('pointerdown', handleActivityPointerDown);
+ui.itineraryContainer.addEventListener('keydown', handleActivityReorderKeydown);
+window.addEventListener('pointermove', handleActivityPointerMove, { passive: false });
+window.addEventListener('pointerup', handleActivityPointerUp);
+window.addEventListener('pointercancel', handleActivityPointerUp);
 ui.currentFocusBtn.addEventListener('click', scrollToCurrentFocus);
 
 window.addEventListener('keydown', (event) => {

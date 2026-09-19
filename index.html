@@ -356,6 +356,62 @@
                 transform: scale(0.995);
             }
         }
+
+        .activity-drag-handle {
+            touch-action: none;
+            cursor: grab;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.4);
+            transition: color 140ms ease, background 140ms ease;
+        }
+
+        .activity-drag-handle:hover,
+        .activity-drag-handle:focus-visible {
+            color: rgba(255, 255, 255, 0.82);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .activity-drag-handle.is-dragging {
+            cursor: grabbing;
+        }
+
+        .activity-card-dragging {
+            opacity: 0.42;
+            transform: scale(0.99);
+        }
+
+        .activity-drop-indicator {
+            position: fixed;
+            height: 2px;
+            border-radius: 999px;
+            background: rgba(var(--accent-rgb), 0.95);
+            box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.6);
+            pointer-events: none;
+            z-index: 60;
+        }
+
+        .day-drop-target {
+            outline: 1px solid rgba(var(--accent-rgb), 0.42);
+            outline-offset: 10px;
+            border-radius: 24px;
+        }
+
+        .itinerary-drag-hint {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.46);
+        }
+
+        body.is-reordering-activities {
+            user-select: none;
+            -webkit-user-select: none;
+        }
     </style>
 </head>
 
@@ -440,6 +496,12 @@
                 </section>
 
                 <section class="mt-3">
+                    <div class="mb-3 pl-8">
+                        <span class="itinerary-drag-hint">
+                            <i data-lucide="grip-vertical" class="w-3 h-3"></i>
+                            손잡이를 끌어 순서를 바꿀 수 있어요
+                        </span>
+                    </div>
                     <div class="relative space-y-8" id="itinerary-container">
                         <div class="absolute left-[11px] top-2 bottom-0 w-[2px] bg-white/20"></div>
                     </div>
