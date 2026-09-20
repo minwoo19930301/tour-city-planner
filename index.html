@@ -360,6 +360,10 @@
         /* 일정 카드 순서 편집 (드래그 / ▲▼ / 날짜 이동) */
         .glass-panel.activity-card {
             transition: transform 120ms ease, background-color 160ms ease, box-shadow 160ms ease;
+            /* 카드 아무 데나 잡고 끌 수 있게, 글자가 선택되지 않도록 */
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
         }
 
         .activity-card-pressing {
@@ -590,6 +594,165 @@
             border-radius: 24px;
         }
 
+        /* 가는 길 미리보기 (연결선·하루 이동코스 → 구글 지도 길찾기 iframe) */
+        .route-preview-trigger {
+            position: relative;
+        }
+
+        .route-preview-trigger::after {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 999px;
+        }
+
+        .route-preview-trigger.is-previewing {
+            box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.45);
+        }
+
+        #route-preview {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            z-index: 88;
+        }
+
+        #route-preview.route-preview--sheet {
+            position: fixed;
+            inset: 0;
+            width: auto;
+            height: auto;
+        }
+
+        .route-preview-backdrop {
+            display: none;
+            position: absolute;
+            inset: 0;
+            background: rgba(2, 6, 23, 0.58);
+        }
+
+        .route-preview--sheet .route-preview-backdrop {
+            display: block;
+        }
+
+        .route-preview-card {
+            position: absolute;
+            width: 400px;
+            max-width: calc(100vw - 24px);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 28px 70px rgba(0, 0, 0, 0.55);
+        }
+
+        .route-preview--sheet .route-preview-card {
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: auto;
+            width: auto;
+            max-width: none;
+            border-radius: 28px 28px 0 0;
+            padding-bottom: env(safe-area-inset-bottom);
+            animation: route-sheet-up 200ms ease-out;
+        }
+
+        @keyframes route-sheet-up {
+            from { transform: translateY(24px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .route-preview-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 12px 10px 16px;
+        }
+
+        .route-preview-kicker {
+            font-size: 10px;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.48);
+        }
+
+        .route-preview-title {
+            margin-top: 2px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .route-preview-actions {
+            display: flex;
+            gap: 8px;
+            flex: 0 0 auto;
+        }
+
+        .route-preview-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: background 120ms ease, border-color 120ms ease;
+        }
+
+        .route-preview-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .route-preview-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .route-preview-frame-wrap {
+            position: relative;
+            background: #0b1220;
+        }
+
+        #route-preview-frame {
+            display: block;
+            width: 100%;
+            height: 300px;
+            border: 0;
+        }
+
+        .route-preview--sheet #route-preview-frame {
+            height: min(58vh, 520px);
+        }
+
+        .route-preview-status {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.62);
+            background: rgba(11, 18, 32, 0.85);
+            pointer-events: none;
+        }
+
+        .route-preview-status[hidden] {
+            display: none;
+        }
+
+        body.route-preview-sheet-open {
+            overflow: hidden;
+        }
+
         .activity-card-moved {
             box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.9), 0 0 28px rgba(var(--accent-rgb), 0.35);
         }
@@ -757,6 +920,30 @@
             <span>순서 편집 완료</span>
         </span>
     </button>
+
+    <div id="route-preview" hidden>
+        <div class="route-preview-backdrop" data-route-close="true"></div>
+        <div id="route-preview-card" class="route-preview-card glass-panel" role="dialog" aria-modal="false" aria-labelledby="route-preview-title">
+            <div class="route-preview-head">
+                <div class="min-w-0">
+                    <div class="route-preview-kicker">가는 길</div>
+                    <div id="route-preview-title" class="route-preview-title">가는 길</div>
+                </div>
+                <div class="route-preview-actions">
+                    <a id="route-preview-open" href="https://www.google.com/maps" target="_blank" rel="noreferrer" class="route-preview-btn" title="구글 지도에서 자세히 보기" aria-label="구글 지도에서 자세히 보기">
+                        <i data-lucide="external-link"></i>
+                    </a>
+                    <button id="route-preview-close" type="button" class="route-preview-btn" data-route-close="true" title="닫기" aria-label="닫기">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="route-preview-frame-wrap">
+                <iframe id="route-preview-frame" title="가는 길 미리보기" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="about:blank"></iframe>
+                <div id="route-preview-status" class="route-preview-status">경로를 불러오는 중…</div>
+            </div>
+        </div>
+    </div>
 
     <div id="setup-overlay" class="fixed inset-0 z-[80] hidden overflow-y-auto">
         <div class="absolute inset-0 bg-slate-950/34"></div>
@@ -1054,7 +1241,7 @@
         </div>
     </div>
 
-    <script src="./app.js?v=20260920" defer></script>
+    <script src="./app.js?v=20260920b" defer></script>
 </body>
 
 </html>

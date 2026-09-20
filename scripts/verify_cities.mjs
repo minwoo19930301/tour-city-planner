@@ -1,5 +1,5 @@
 // Loads every destination (or the given ids) in a headless browser and checks: hero image 200, template days ≥ 3,
-// Korean label in the dropdown, no page errors. usage: node scripts/verify_cities.mjs [id ...] [--port N]
+// Korean label in the (grouped) dropdown, no page errors. usage: node scripts/verify_cities.mjs [id ...] [--port N]
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const pw = require(process.env.PW_MODULE || '/Users/hyemini/Documents/Codex/2026-09-08/seoul-elevation-local/node_modules/playwright-core');
@@ -14,7 +14,8 @@ const page = await browser.newPage({ viewport: { width: 1200, height: 900 } });
 // dropdown labels once
 await page.goto(`http://localhost:${port}/index.html`, { waitUntil: 'load' }); await page.waitForTimeout(600);
 await page.locator('#destination-dropdown-trigger').click().catch(() => {}); await page.waitForTimeout(300);
-const labels = await page.evaluate(() => Object.fromEntries([...document.querySelectorAll('[data-destination]')].map(x => [x.dataset.destination, x.querySelector('.font-semibold')?.textContent.trim() || ''])));
+// 목록은 나라+시간대별 한 줄(대표 도시). 묶인 도시는 그 줄의 "같은 시간대" 글에 한글 이름이 있어야 목록에 있는 것으로 본다.
+const labels = await page.evaluate(() => { const out = {}; document.querySelectorAll('[data-destination]').forEach(row => { const primary = row.querySelector('.font-semibold')?.textContent.trim() || ''; const siblings = row.querySelector('[data-sibling-cities]')?.textContent.replace(/\s+/g, ' ').trim() || ''; (row.dataset.memberIds || row.dataset.destination).split(' ').forEach(id => { const d = getDestination(id); const cityKo = getLocalizedLabel(d.city, d.city); out[id] = id === row.dataset.destination ? primary : (siblings.includes(cityKo) ? `${primary} › ${cityKo}` : ''); }); }); return out; });
 let bad = 0;
 for (const id of ids) {
   const errs = []; const onErr = e => errs.push(String(e)); page.on('pageerror', onErr);
@@ -34,7 +35,7 @@ for (const id of ids) {
   if (!label) problems.push('목록에 없음'); else if (/[A-Za-z]{3,}/.test(label) && !/D\.C\./.test(label)) problems.push(`라벨 영문 '${label}'`);
   if (errs.length) problems.push('에러 ' + errs[0].slice(0, 60));
   if (problems.length) bad++;
-  console.log(`${problems.length ? '✗' : '✓'} ${id.padEnd(16)} ${label.padEnd(18)} ${info.days}일 ${info.cards}카드 ${problems.join(' · ')}`);
+  console.log(`${problems.length ? '✗' : '✓'} ${id.padEnd(16)} ${label.padEnd(24)} ${info.days}일 ${info.cards}카드 ${problems.join(' · ')}`);
 }
 await browser.close(); srv.kill();
 console.log(`\n${ids.length}개 중 문제 ${bad}개`); process.exit(bad ? 1 : 0);

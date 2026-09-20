@@ -18227,11 +18227,33 @@ const COUNTRY_THEMES = {
     Bolivia: buildTheme('#EF4444', '#1E293B', 0.36, 0.82)
 };
 
+// 같은 나라·같은 시간대의 도시는 목록에서 한 줄로 묶고, 여기 적힌 도시가 그 줄의 대표가 된다.
+// (없으면 데이터 순서상 첫 도시) 키는 "나라::시간대" 또는 나라 이름.
 const PREFERRED_GROUP_DESTINATIONS = {
-    China: 'beijing',
-    Indonesia: 'bali',
-    Canada: 'quebec',
-    'United States': 'los-angeles'
+    'Japan::Asia/Tokyo': 'tokyo',
+    'China::Asia/Shanghai': 'beijing',
+    'South Korea::Asia/Seoul': 'seoul',
+    'United States::America/Los_Angeles': 'los-angeles',
+    'United States::America/New_York': 'new-york',
+    'United States::America/Chicago': 'chicago',
+    'Canada::America/Toronto': 'canada',
+    'Indonesia::Asia/Makassar': 'bali',
+    'Spain::Europe/Madrid': 'madrid',
+    'Italy::Europe/Rome': 'rome',
+    'Thailand::Asia/Bangkok': 'bangkok',
+    'Vietnam::Asia/Ho_Chi_Minh': 'hanoi',
+    'Philippines::Asia/Manila': 'philippines',
+    'Taiwan::Asia/Taipei': 'taipei',
+    'Malaysia::Asia/Kuala_Lumpur': 'malaysia',
+    'United Arab Emirates::Asia/Dubai': 'dubai',
+    'Kazakhstan::Asia/Almaty': 'almaty'
+};
+
+// 시간대가 여러 개인 나라에서 맨 위에 올 대표 시간대의 도시
+const PREFERRED_COUNTRY_DESTINATIONS = {
+    'United States': 'los-angeles',
+    Canada: 'canada',
+    Indonesia: 'bali'
 };
 
 const ui = {
@@ -18283,6 +18305,13 @@ const ui = {
     removeLastDayBtn: document.getElementById('remove-last-day-btn'),
     appendDayBtn: document.getElementById('append-day-btn'),
     itineraryContainer: document.getElementById('itinerary-container'),
+    routePreview: document.getElementById('route-preview'),
+    routePreviewCard: document.getElementById('route-preview-card'),
+    routePreviewTitle: document.getElementById('route-preview-title'),
+    routePreviewOpen: document.getElementById('route-preview-open'),
+    routePreviewClose: document.getElementById('route-preview-close'),
+    routePreviewFrame: document.getElementById('route-preview-frame'),
+    routePreviewStatus: document.getElementById('route-preview-status'),
     currentFocusBtn: document.getElementById('current-focus-btn'),
     reorderModeBtn: document.getElementById('reorder-mode-btn'),
     reorderModeHint: document.getElementById('reorder-mode-hint'),
@@ -18471,23 +18500,60 @@ function getPendingSetupSegments(includeDraft = false) {
     return sortSegments(segments);
 }
 
-function getSelectableDestinations() {
-    const countryCityCounts = new Map();
+function getDestinationGroupKey(destination) {
+    return `${destination.country}::${destination.timeZone}`;
+}
+
+// 나라 + 시간대로 묶은 도시 그룹. 어차피 시간대가 핵심이라 목록에는 그룹마다 대표 도시 한 줄만 보여 주고,
+// 같은 시간대의 다른 도시는 그 줄 아래에 이름만 함께 적는다. 도시 데이터 자체는 그대로라 링크(?destination=osaka)로는 여전히 열린다.
+let destinationGroupCache = null;
+function getDestinationGroups() {
+    if (destinationGroupCache) return destinationGroupCache;
+    const groups = new Map();
     Object.values(DESTINATIONS).forEach((destination) => {
-        countryCityCounts.set(destination.country, (countryCityCounts.get(destination.country) || 0) + 1);
+        const key = getDestinationGroupKey(destination);
+        if (!groups.has(key)) {
+            groups.set(key, { key, country: destination.country, timeZone: destination.timeZone, members: [] });
+        }
+        groups.get(key).members.push(destination);
+    });
+    groups.forEach((group) => {
+        const preferredId = PREFERRED_GROUP_DESTINATIONS[group.key] || PREFERRED_GROUP_DESTINATIONS[group.country];
+        group.representative = group.members.find((member) => member.id === preferredId) || group.members[0];
+        group.siblings = group.members.filter((member) => member.id !== group.representative.id);
+    });
+    destinationGroupCache = groups;
+    return groups;
+}
+
+function getDestinationGroup(destinationId) {
+    return getDestinationGroups().get(getDestinationGroupKey(getDestination(destinationId))) || null;
+}
+
+let selectableDestinationCache = null;
+function getSelectableDestinations() {
+    if (selectableDestinationCache) return selectableDestinationCache;
+    const groups = [...getDestinationGroups().values()];
+    const countryGroupCounts = new Map();
+    groups.forEach((group) => {
+        countryGroupCounts.set(group.country, (countryGroupCounts.get(group.country) || 0) + 1);
     });
 
-    return Object.values(DESTINATIONS).map((destination) => {
-        const hasSiblingCities = (countryCityCounts.get(destination.country) || 0) > 1;
+    selectableDestinationCache = groups.map((group) => {
+        const destination = group.representative;
         const countryLabel = getLocalizedLabel(destination.country);
         const cityLabel = getLocalizedLabel(destination.city, destination.city);
+        const showCity = (countryGroupCounts.get(group.country) || 0) > 1 || group.siblings.length > 0;
 
         return {
             id: destination.id,
+            groupKey: group.key,
+            memberIds: group.members.map((member) => member.id),
+            siblingLabels: group.siblings.map((member) => getLocalizedLabel(member.city, member.city)),
             country: destination.country,
             city: destination.city,
             region: getRegionKey(destination.country),
-            primaryLabel: hasSiblingCities ? `${countryLabel} · ${cityLabel}` : countryLabel,
+            primaryLabel: showCity ? `${countryLabel} · ${cityLabel}` : countryLabel,
             secondaryLabel: destination.timeZone,
             timeZone: destination.timeZone
         };
@@ -18498,12 +18564,19 @@ function getSelectableDestinations() {
         const countryCompare = getCountrySortIndex(left.country) - getCountrySortIndex(right.country);
         if (countryCompare !== 0) return countryCompare;
 
-        const preferredId = PREFERRED_GROUP_DESTINATIONS[left.country];
+        const preferredId = PREFERRED_COUNTRY_DESTINATIONS[left.country];
         if (preferredId && left.id === preferredId) return -1;
         if (preferredId && right.id === preferredId) return 1;
 
         return (left.secondaryLabel || left.primaryLabel).localeCompare(right.secondaryLabel || right.primaryLabel, 'ko');
     });
+    return selectableDestinationCache;
+}
+
+// 도시 id가 속한 목록 줄(대표 도시 항목). 묶인 도시(오사카 등)도 일본·도쿄 줄을 돌려준다.
+function getSelectableEntryFor(destinationId) {
+    const id = getDestination(destinationId).id;
+    return getSelectableDestinations().find((entry) => entry.memberIds.includes(id)) || null;
 }
 
 function getSelectableDestinationId(id) {
@@ -19435,10 +19508,29 @@ function getDirectionsUrl(origin, destination) {
     return url.toString();
 }
 
-function getDayDirectionsUrl(activities = [], fallbackDestinationId = '') {
-    const validLocations = activities
+function getRouteStops(activities = []) {
+    return activities
         .map((activity) => String(activity.mapQuery || activity.location || '').trim())
         .filter(Boolean);
+}
+
+// 키 없이 쓰는 구글 지도 길찾기 임베드. 경유지는 daddr 뒤에 "+to:"로 잇는다.
+function getDirectionsEmbedUrl(origin, destination, waypoints = []) {
+    const start = String(origin || '').trim();
+    const stops = [...waypoints, destination].map((stop) => String(stop || '').trim()).filter(Boolean);
+    if (!start || !stops.length) return '';
+    const daddr = stops.map((stop) => encodeURIComponent(stop)).join('+to:');
+    return `https://maps.google.com/maps?saddr=${encodeURIComponent(start)}&daddr=${daddr}&hl=ko&output=embed`;
+}
+
+function getDayDirectionsEmbedUrl(activities = []) {
+    const stops = getRouteStops(activities);
+    if (stops.length < 2) return '';
+    return getDirectionsEmbedUrl(stops[0], stops[stops.length - 1], stops.slice(1, -1));
+}
+
+function getDayDirectionsUrl(activities = [], fallbackDestinationId = '') {
+    const validLocations = getRouteStops(activities);
     if (validLocations.length < 2) return '';
 
     const origin = validLocations[0];
@@ -19797,12 +19889,18 @@ function renderDestinationSelector() {
         const buttons = entries.map((destination) => `
             <button
                 type="button"
-                class="dropdown-option w-full rounded-[18px] border border-white/10 bg-slate-900 px-4 py-3 text-left transition-colors hover:bg-slate-800 ${destination.id === setupSelection.destinationId ? 'active' : ''}"
-                data-destination="${destination.id}">
+                class="dropdown-option w-full rounded-[18px] border border-white/10 bg-slate-900 px-4 py-3 text-left transition-colors hover:bg-slate-800 ${destination.memberIds.includes(setupSelection.destinationId) ? 'active' : ''}"
+                data-destination="${destination.id}"
+                data-member-ids="${escapeHtml(destination.memberIds.join(' '))}">
                 <div class="flex items-center justify-between gap-3">
                     <div class="min-w-0">
                         <div class="text-base font-semibold text-white truncate">${escapeHtml(destination.primaryLabel)}</div>
                         <div class="text-sm text-white/62 truncate">${escapeHtml(destination.secondaryLabel || '대표 시간대')}</div>
+                        ${destination.siblingLabels.length ? `
+                            <div class="mt-1.5 text-xs leading-5 text-white/50 whitespace-normal" data-sibling-cities="true">
+                                <span class="text-white/34">같은 시간대 · </span>${escapeHtml(destination.siblingLabels.join(' · '))}
+                            </div>
+                        ` : ''}
                     </div>
                     <div class="text-lg shrink-0">${getCountryFlag(destination.country)}</div>
                 </div>
@@ -19817,10 +19915,14 @@ function renderDestinationSelector() {
         `;
     }).join('');
 
-    const selectedDestination = selectableDestinations.find((destination) => destination.id === setupSelection.destinationId)
+    const selectedDestination = selectableDestinations.find((destination) => destination.memberIds.includes(setupSelection.destinationId))
         || selectableDestinations[0];
     if (selectedDestination) {
-        ui.destinationDropdownValue.textContent = selectedDestination.primaryLabel;
+        // 링크로 들어온 묶인 도시(예: 오사카)는 대표 도시 대신 실제 도시 이름을 보여 준다
+        const actualDestination = DESTINATIONS[setupSelection.destinationId];
+        ui.destinationDropdownValue.textContent = actualDestination && actualDestination.id !== selectedDestination.id
+            ? `${getLocalizedLabel(actualDestination.country)} · ${getLocalizedLabel(actualDestination.city, actualDestination.city)}`
+            : selectedDestination.primaryLabel;
         ui.destinationDropdownMeta.textContent = selectedDestination.secondaryLabel || '대표 시간대';
     }
 }
@@ -19843,7 +19945,7 @@ function renderSetupSegmentList() {
         const destination = getDestination(segment.destinationId);
         const localizedCountry = getLocalizedLabel(destination.country, destination.country);
         const localizedCity = getLocalizedLabel(destination.city, destination.city);
-        const secondary = getSelectableDestinations().find((entry) => entry.id === getSelectableDestinationId(destination.id))?.secondaryLabel
+        const secondary = getSelectableEntryFor(destination.id)?.secondaryLabel
             ? ` · ${localizedCity}`
             : '';
 
@@ -19993,7 +20095,7 @@ function getDayChipLabel(day) {
     }
 
     const destination = getDestination(destinationIds[0]);
-    const selectableEntry = getSelectableDestinations().find((entry) => entry.id === getSelectableDestinationId(destination.id));
+    const selectableEntry = getSelectableEntryFor(destination.id);
     if (selectableEntry?.secondaryLabel) {
         return `${getLocalizedLabel(destination.country, destination.country)} · ${getLocalizedLabel(destination.city, destination.city)}`;
     }
@@ -20457,6 +20559,7 @@ function renderItinerary() {
         return;
     }
 
+    closeRoutePreview();
     const reorderMode = Boolean(appState.reorderMode);
     ui.itineraryContainer.innerHTML = '<div class="absolute left-[11px] top-2 bottom-0 w-[2px] bg-white/20"></div>';
 
@@ -20471,6 +20574,7 @@ function renderItinerary() {
         dayElement.className = 'relative pl-8';
         dayElement.dataset.dayPanel = String(dayIndex);
         const dayDirectionsUrl = getDayDirectionsUrl(day.activities, day.destinationId);
+        const dayDirectionsEmbedUrl = getDayDirectionsEmbedUrl(day.activities);
         const segmentChipHtml = isSegmentBoundary ? `
             <div class="mb-2">
                 <div class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[10px] font-semibold tracking-[0.24em] uppercase text-white/84"
@@ -20485,19 +20589,24 @@ function renderItinerary() {
             const isActiveActivity = activity.id === appState.activeActivityId;
             const activityDestination = getDestination(activity.destinationId || day.destinationId);
             const showActivityCountry = (day.destinationIds?.length || 0) > 1;
+            const routeOrigin = String(activity.mapQuery || activity.location || '').trim();
+            const routeTarget = String(nextActivity?.mapQuery || nextActivity?.location || '').trim();
+            const routeTitle = `${activity.location || routeOrigin} → ${nextActivity?.location || routeTarget}`;
             const betweenStopsHtml = nextActivity ? `
                 <div class="relative h-5 -mt-1 -mb-1 z-20">
                     <div class="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-white/18"></div>
                     <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
                         <a
-                            href="${getDirectionsUrl(
-                                String(activity.mapQuery || activity.location || '').trim(),
-                                String(nextActivity.mapQuery || nextActivity.location || '').trim()
-                            )}"
+                            href="${getDirectionsUrl(routeOrigin, routeTarget)}"
                             target="_blank"
                             rel="noreferrer"
                             data-skip-edit="true"
-                            class="w-8 h-8 rounded-full flex items-center justify-center text-white shadow-lg"
+                            data-route-preview="true"
+                            data-route-title="${escapeHtml(routeTitle)}"
+                            data-route-embed="${escapeHtml(getDirectionsEmbedUrl(routeOrigin, routeTarget))}"
+                            title="${escapeHtml('가는 길 미리보기')}"
+                            aria-label="${escapeHtml(`가는 길 미리보기: ${routeTitle}`)}"
+                            class="route-preview-trigger w-8 h-8 rounded-full flex items-center justify-center text-white shadow-lg"
                             style="border: 1px solid rgba(var(--accent-rgb), 0.56); background: rgba(var(--accent-rgb), 0.18);">
                             <i data-lucide="route" class="w-4 h-4"></i>
                         </a>
@@ -20522,7 +20631,7 @@ function renderItinerary() {
                     data-drag-handle="true"
                     class="activity-drag-handle"
                     aria-label="${escapeHtml('일정 순서 바꾸기')}"
-                    title="${escapeHtml('끌어서 순서 바꾸기 · 카드를 길게 눌러도 돼요')}">
+                    title="${escapeHtml('끌어서 순서 바꾸기 · 카드 아무 데나 잡고 끌어도 돼요')}">
                     <i data-lucide="grip-vertical" class="w-5 h-5"></i>
                 </button>
             `;
@@ -20587,7 +20696,11 @@ function renderItinerary() {
                                 target="_blank"
                                 rel="noreferrer"
                                 data-skip-edit="true"
-                                class="rounded-full border border-white/10 bg-white/6 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-white/10 transition-colors inline-flex items-center gap-1.5">
+                                data-route-preview="true"
+                                data-route-title="${escapeHtml(`${formatMonthDay(headerDate)} 하루 이동코스`)}"
+                                data-route-embed="${escapeHtml(dayDirectionsEmbedUrl)}"
+                                title="${escapeHtml('하루 이동코스 미리보기')}"
+                                class="route-preview-trigger rounded-full border border-white/10 bg-white/6 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-white/10 transition-colors inline-flex items-center gap-1.5">
                                 <i data-lucide="route" class="w-3.5 h-3.5"></i>
                                 <span>하루 이동코스</span>
                             </a>
@@ -21485,16 +21598,18 @@ function handleActivityPointerDown(event) {
     activityDragState.startY = event.clientY;
     activityDragState.lastX = event.clientX;
     activityDragState.lastY = event.clientY;
-    // 손잡이(touch-action: none)에서는 움직이자마자, 마우스는 순서 편집 모드에서도 바로 끌기 시작.
-    // 그 밖에는 길게 누르면 들어올린다(그 전까지는 평소처럼 스크롤된다).
-    activityDragState.immediate = Boolean(handle) || (!isTouchLike && appState.reorderMode);
+    // 마우스: 카드 어디를 잡든 움직이자마자 끌기 시작(움직이지 않고 놓으면 평소처럼 클릭=편집).
+    // 터치: 손잡이에서는 바로, 그 밖에서는 길게 눌러 들어올린다(그 전까지는 평소처럼 스크롤된다).
+    activityDragState.immediate = Boolean(handle) || !isTouchLike;
 
     clearHoldTimer();
-    activityDragState.holdTimer = window.setTimeout(() => {
-        activityDragState.holdTimer = null;
-        if (activityDragState.pointerId === null || activityDragState.active) return;
-        beginActivityDrag();
-    }, appState.reorderMode ? DRAG_HOLD_DELAY_REORDER : DRAG_HOLD_DELAY_DEFAULT);
+    if (isTouchLike) {
+        activityDragState.holdTimer = window.setTimeout(() => {
+            activityDragState.holdTimer = null;
+            if (activityDragState.pointerId === null || activityDragState.active) return;
+            beginActivityDrag();
+        }, appState.reorderMode ? DRAG_HOLD_DELAY_REORDER : DRAG_HOLD_DELAY_DEFAULT);
+    }
 
     card.classList.add('activity-card-pressing');
     if (handle) event.preventDefault();
@@ -21612,6 +21727,152 @@ function handleActivityReorderKeydown(event) {
     focusActivityCard(moved.id);
 }
 
+/* ---------- 가는 길 미리보기 (구글 지도 길찾기 iframe) ---------- */
+const ROUTE_HOVER_DELAY = 180;
+const routePreview = { open: false, anchor: null, hoverAnchor: null, hoverTimer: null, lastFocus: null };
+// PC(마우스가 있고 넓은 화면)에서는 연결선 옆에 떠 있는 카드, 그 밖에는 아래에서 올라오는 시트
+const routePreviewPopoverQuery = window.matchMedia('(min-width: 768px) and (hover: hover) and (pointer: fine)');
+
+function isRoutePreviewPopover() {
+    return routePreviewPopoverQuery.matches;
+}
+
+function clearRouteHoverTimer() {
+    if (routePreview.hoverTimer) {
+        window.clearTimeout(routePreview.hoverTimer);
+        routePreview.hoverTimer = null;
+    }
+}
+
+function positionRoutePreview() {
+    const anchor = routePreview.anchor;
+    const card = ui.routePreviewCard;
+    if (!anchor || !anchor.isConnected || !card) {
+        closeRoutePreview();
+        return;
+    }
+    const rect = anchor.getBoundingClientRect();
+    const viewportWidth = document.documentElement.clientWidth;
+    const viewportHeight = window.innerHeight;
+    const margin = 12;
+    const gap = 14;
+    const cardWidth = Math.min(400, viewportWidth - margin * 2);
+    card.style.width = `${cardWidth}px`;
+    const cardHeight = card.offsetHeight || 360;
+    let left;
+    let top;
+    if (rect.right + gap + cardWidth <= viewportWidth - margin) {
+        left = rect.right + gap;
+        top = rect.top + rect.height / 2 - cardHeight / 2;
+    } else if (rect.left - gap - cardWidth >= margin) {
+        left = rect.left - gap - cardWidth;
+        top = rect.top + rect.height / 2 - cardHeight / 2;
+    } else {
+        left = rect.left + rect.width / 2 - cardWidth / 2;
+        top = rect.bottom + gap + cardHeight <= viewportHeight - margin ? rect.bottom + gap : rect.top - gap - cardHeight;
+    }
+    left = Math.min(Math.max(margin, left), Math.max(margin, viewportWidth - margin - cardWidth));
+    top = Math.min(Math.max(margin, top), Math.max(margin, viewportHeight - margin - cardHeight));
+    card.style.left = `${Math.round(left + window.scrollX)}px`;
+    card.style.top = `${Math.round(top + window.scrollY)}px`;
+}
+
+function openRoutePreview(anchor) {
+    if (!anchor || !ui.routePreview) return;
+    const embedUrl = anchor.dataset.routeEmbed;
+    if (!embedUrl) {
+        window.open(anchor.getAttribute('href') || '#', '_blank', 'noopener');
+        return;
+    }
+    clearRouteHoverTimer();
+    const sameAnchor = routePreview.open && routePreview.anchor === anchor;
+    const popover = isRoutePreviewPopover();
+    if (!routePreview.open) routePreview.lastFocus = document.activeElement;
+    routePreview.anchor = anchor;
+    routePreview.open = true;
+
+    ui.routePreviewTitle.textContent = anchor.dataset.routeTitle || '가는 길';
+    ui.routePreviewOpen.href = anchor.getAttribute('href') || '#';
+    if (!sameAnchor) {
+        ui.routePreviewStatus.hidden = false;
+        ui.routePreviewFrame.src = embedUrl;
+    }
+
+    ui.routePreview.classList.toggle('route-preview--pop', popover);
+    ui.routePreview.classList.toggle('route-preview--sheet', !popover);
+    document.body.classList.toggle('route-preview-sheet-open', !popover);
+    ui.routePreview.hidden = false;
+    ui.itineraryContainer.querySelectorAll('[data-route-preview].is-previewing').forEach((element) => element.classList.remove('is-previewing'));
+    anchor.classList.add('is-previewing');
+
+    if (popover) {
+        positionRoutePreview();
+    } else {
+        ui.routePreviewCard.style.left = '';
+        ui.routePreviewCard.style.top = '';
+        ui.routePreviewCard.style.width = '';
+        if (!sameAnchor) ui.routePreviewClose.focus({ preventScroll: true });
+    }
+}
+
+function closeRoutePreview() {
+    clearRouteHoverTimer();
+    routePreview.hoverAnchor = null;
+    if (!routePreview.open || !ui.routePreview) return;
+    routePreview.open = false;
+    ui.routePreview.hidden = true;
+    ui.routePreview.classList.remove('route-preview--pop', 'route-preview--sheet');
+    document.body.classList.remove('route-preview-sheet-open');
+    ui.routePreviewFrame.src = 'about:blank';
+    ui.routePreviewStatus.hidden = false;
+    if (routePreview.anchor?.isConnected) routePreview.anchor.classList.remove('is-previewing');
+    const lastFocus = routePreview.lastFocus;
+    routePreview.anchor = null;
+    routePreview.lastFocus = null;
+    if (lastFocus && lastFocus !== document.body && document.contains(lastFocus) && ui.routePreviewCard.contains(document.activeElement)) {
+        try {
+            lastFocus.focus({ preventScroll: true });
+        } catch (error) {
+            /* 포커스를 되돌릴 수 없으면 그대로 둡니다. */
+        }
+    }
+}
+
+// PC: 연결선(또는 하루 이동코스)에 마우스를 잠깐 올려두면 미리보기가 뜬다. 닫기는 버튼·Esc·바깥 클릭.
+function handleRoutePointerOver(event) {
+    if (event.pointerType !== 'mouse' || !isRoutePreviewPopover()) return;
+    if (activityDragState.pointerId !== null) return;
+    const anchor = event.target.closest('[data-route-preview]');
+    if (!anchor || anchor === routePreview.hoverAnchor) return;
+    clearRouteHoverTimer();
+    routePreview.hoverAnchor = anchor;
+    routePreview.hoverTimer = window.setTimeout(() => {
+        routePreview.hoverTimer = null;
+        if (anchor.isConnected && anchor.matches(':hover')) openRoutePreview(anchor);
+    }, ROUTE_HOVER_DELAY);
+}
+
+function handleRoutePointerOut(event) {
+    if (event.pointerType !== 'mouse') return;
+    const anchor = event.target.closest('[data-route-preview]');
+    if (!anchor) return;
+    if (event.relatedTarget && anchor.contains(event.relatedTarget)) return;
+    routePreview.hoverAnchor = null;
+    clearRouteHoverTimer();
+}
+
+function handleRoutePreviewOutsidePointer(event) {
+    if (!routePreview.open || !isRoutePreviewPopover()) return;
+    if (ui.routePreviewCard.contains(event.target) || event.target.closest('[data-route-preview]')) return;
+    closeRoutePreview();
+}
+
+function syncRoutePreviewLayout() {
+    if (!routePreview.open) return;
+    if (routePreview.anchor?.isConnected) openRoutePreview(routePreview.anchor);
+    else closeRoutePreview();
+}
+
 function handleItineraryClick(event) {
     // 끌어다 놓은 직후 따라오는 click은 편집창을 열지 않는다
     if (Date.now() < suppressItineraryClickUntil) {
@@ -21622,6 +21883,14 @@ function handleItineraryClick(event) {
     const stepButton = event.target.closest('[data-reorder-step]');
     if (stepButton) {
         if (!stepButton.disabled) handleReorderStep(stepButton);
+        return;
+    }
+
+    const routeTrigger = event.target.closest('[data-route-preview]');
+    if (routeTrigger) {
+        // 클릭/탭은 새 창 대신 미리보기를 연다. 사이트로는 미리보기의 "자세히" 버튼으로 간다.
+        event.preventDefault();
+        openRoutePreview(routeTrigger);
         return;
     }
 
@@ -21892,6 +22161,17 @@ ui.itineraryContainer.addEventListener('keydown', handleActivityReorderKeydown);
 ui.itineraryContainer.addEventListener('change', handleReorderDaySelectChange);
 ui.itineraryContainer.addEventListener('touchmove', handleActivityTouchMove, { passive: false });
 ui.itineraryContainer.addEventListener('contextmenu', handleActivityContextMenu);
+ui.itineraryContainer.addEventListener('pointerover', handleRoutePointerOver);
+ui.itineraryContainer.addEventListener('pointerout', handleRoutePointerOut);
+ui.routePreview?.addEventListener('click', (event) => {
+    if (event.target.closest('[data-route-close]')) closeRoutePreview();
+});
+ui.routePreviewFrame?.addEventListener('load', () => {
+    if (ui.routePreviewFrame.getAttribute('src') !== 'about:blank') ui.routePreviewStatus.hidden = true;
+});
+document.addEventListener('pointerdown', handleRoutePreviewOutsidePointer, true);
+window.addEventListener('resize', syncRoutePreviewLayout);
+routePreviewPopoverQuery.addEventListener('change', syncRoutePreviewLayout);
 window.addEventListener('pointermove', handleActivityPointerMove, { passive: false });
 window.addEventListener('pointerup', handleActivityPointerUp);
 window.addEventListener('pointercancel', handleActivityPointerUp);
@@ -21905,6 +22185,11 @@ window.addEventListener('keydown', (event) => {
 
     if (activityDragState.active) {
         cancelActivityDrag();
+        return;
+    }
+
+    if (routePreview.open) {
+        closeRoutePreview();
         return;
     }
 
