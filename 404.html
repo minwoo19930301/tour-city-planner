@@ -6,15 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting</title>
     <script>
-        const target = `./index.html${window.location.search}${window.location.hash}`;
-        window.location.replace(target);
+        // GitHub Pages는 없는 주소에 이 파일을 보여 준다.
+        // 옛 진입 주소(<id>_trip.html)와 trips/ 아래 잘못된 주소는 index.html?destination=<id>로, 나머지는 index.html로 보낸다.
+        // 리포 이름을 바꾸면 repoBase도 같이 바꿀 것.
+        (function () {
+            const repoBase = '/tour-city-planner/';
+            const base = window.location.pathname.startsWith(repoBase) ? repoBase : '/';
+            const relativePath = window.location.pathname.slice(base.length);
+            const params = new URLSearchParams(window.location.search);
+            const aliases = { hongkong: 'hong-kong', losangeles: 'los-angeles', newyork: 'new-york', usa: 'los-angeles' };
+            const match = relativePath.match(/^([a-z0-9-]+)_trip\.html$/i) || relativePath.match(/^trips\/[^/]+\/([a-z0-9-]+)\.html$/i);
+            if (match) {
+                const id = match[1].toLowerCase();
+                params.set('destination', aliases[id] || id);
+            }
+            const query = params.toString();
+            window.__redirectTarget = `${base}index.html${query ? `?${query}` : ''}${window.location.hash}`;
+            window.location.replace(window.__redirectTarget);
+        })();
     </script>
 </head>
 
 <body>
     <p>Redirecting to <a id="redirect-link" href="./index.html">trip plans</a>...</p>
     <script>
-        document.getElementById('redirect-link').setAttribute('href', `./index.html${window.location.search}${window.location.hash}`);
+        document.getElementById('redirect-link').setAttribute('href', window.__redirectTarget || './index.html');
     </script>
 </body>
 

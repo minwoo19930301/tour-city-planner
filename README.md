@@ -8,7 +8,7 @@
 ## 링크
 
 - 서비스: [Tour City Planner](https://minwoo19930301.github.io/tour-city-planner/)
-- 예시 페이지: [Paris Trip](https://minwoo19930301.github.io/tour-city-planner/paris_trip.html)
+- 예시 페이지: [Paris Trip](https://minwoo19930301.github.io/tour-city-planner/trips/france/paris.html)
 - GitHub: [minwoo19930301/tour-city-planner](https://github.com/minwoo19930301/tour-city-planner)
 
 ## 주요 기능
@@ -25,7 +25,7 @@
 - 현지 통화 환율 계산과 한국 원화 기준 예산 감각 확인
 - 활동별 Google Maps 링크와 지도 미리보기
 - 공유 링크 생성
-- `paris_trip.html`, `tokyo_trip.html` 같은 바로가기 진입 페이지 제공
+- `trips/<나라>/<도시>.html` 바로가기 진입 페이지 제공 (예: `trips/japan/osaka.html`). 옛 주소 `osaka_trip.html`도 `404.html`이 같은 곳으로 보내 줍니다
 
 ## 사용하는 방법
 
@@ -51,7 +51,7 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory "/Users/minwokim/Docume
 ## 배포
 
 - 메인 페이지: [https://minwoo19930301.github.io/tour-city-planner/](https://minwoo19930301.github.io/tour-city-planner/)
-- 예시 진입 페이지: [https://minwoo19930301.github.io/tour-city-planner/paris_trip.html](https://minwoo19930301.github.io/tour-city-planner/paris_trip.html)
+- 예시 진입 페이지: [https://minwoo19930301.github.io/tour-city-planner/trips/france/paris.html](https://minwoo19930301.github.io/tour-city-planner/trips/france/paris.html)
 - GitHub Pages 정적 배포
 
 ## 데이터와 외부 연동
@@ -64,7 +64,8 @@ python3 -m http.server 4173 --bind 127.0.0.1 --directory "/Users/minwokim/Docume
 
 - `index.html`: 메인 UI
 - `app.js`: 목적지 데이터, 일정 생성, 공유 로직, 날씨/환율 연동
-- `*_trip.html`: 특정 목적지로 바로 들어가는 redirect 페이지
+- `trips/<나라>/<도시>.html`: 특정 목적지로 바로 들어가는 redirect 페이지. `scripts/gen_trip_pages.py`가 `app.js`의 도시 목록에서 전부 다시 만듭니다
+- `404.html`: 없는 주소와 옛 `<도시>_trip.html` 주소를 `index.html?destination=<도시>`로 보내는 페이지. 로컬에서 시험하려면 `python3 scripts/serve_with_404.py`
 - `assets/heroes/<id>.jpg`(가로, PC용)와 `assets/heroes/<id>-portrait.jpg`(세로, 모바일용): 도시별 대표 랜드마크 사진. 위키미디어 공용의 자유 라이선스 사진 중 심사 등급·해상도·구도로 후보를 뽑고 사람이 직접 골랐습니다. 출처와 라이선스는 [docs/PHOTO_CREDITS.md](docs/PHOTO_CREDITS.md)
 - `scripts/fetch_hero.py`: 위키미디어 공용에서 자유 라이선스 사진을 받아 출처를 기록하는 도구
 - `scripts/city_master.json`: 새로 추가한 도시의 기본 정보와 사진 검색어 목록

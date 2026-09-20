@@ -17667,6 +17667,8 @@ const DESTINATIONS = {
 };
 
 const DEFAULT_DESTINATION_ID = DESTINATIONS.tokyo ? 'tokyo' : Object.keys(DESTINATIONS)[0];
+// 옛 도시 id(예전 진입 페이지·공유 링크)를 지금 id로 바꿔 준다. 404.html의 aliases와 같게 유지할 것.
+const LEGACY_DESTINATION_ALIASES = { hongkong: 'hong-kong', losangeles: 'los-angeles', newyork: 'new-york', usa: 'los-angeles' };
 const ACTIVITY_ICON_VALUES = new Set(ACTIVITY_ICON_OPTIONS.map((option) => option.value));
 
 const appState = {
@@ -18580,7 +18582,8 @@ function getSelectableEntryFor(destinationId) {
 }
 
 function getSelectableDestinationId(id) {
-    return getDestination(id).id;
+    const key = String(id || '').trim().toLowerCase();
+    return getDestination(LEGACY_DESTINATION_ALIASES[key] || key).id;
 }
 
 function getLocalNow(timeZone) {
