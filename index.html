@@ -357,60 +357,259 @@
             }
         }
 
-        .activity-drag-handle {
-            touch-action: none;
+        /* 일정 카드 순서 편집 (드래그 / ▲▼ / 날짜 이동) */
+        .glass-panel.activity-card {
+            transition: transform 120ms ease, background-color 160ms ease, box-shadow 160ms ease;
+        }
+
+        .activity-card-pressing {
+            transform: scale(0.985);
+        }
+
+        .activity-card-reorder {
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
             cursor: grab;
+        }
+
+        .activity-card-reorder .activity-card-main {
+            flex: 1 1 240px;
+        }
+
+        .activity-card-reorder .activity-card-location,
+        .activity-card-reorder .activity-card-memo {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .activity-drag-handle {
+            position: relative;
+            flex: 0 0 auto;
+            width: 44px;
+            height: 44px;
+            margin-left: -12px;
+            margin-right: -4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2px;
-            border-radius: 8px;
-            color: rgba(255, 255, 255, 0.4);
-            transition: color 140ms ease, background 140ms ease;
+            border-radius: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            background: transparent;
+            touch-action: none;
+            cursor: grab;
+            transition: color 140ms ease;
+        }
+
+        .activity-drag-handle::before {
+            content: '';
+            position: absolute;
+            inset: 2px 8px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            transition: background 140ms ease, border-color 140ms ease;
+        }
+
+        .activity-drag-handle svg {
+            position: relative;
         }
 
         .activity-drag-handle:hover,
         .activity-drag-handle:focus-visible {
-            color: rgba(255, 255, 255, 0.82);
-            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        .activity-drag-handle:hover::before,
+        .activity-drag-handle:focus-visible::before {
+            background: rgba(255, 255, 255, 0.16);
+            border-color: rgba(255, 255, 255, 0.24);
         }
 
         .activity-drag-handle.is-dragging {
             cursor: grabbing;
         }
 
-        .activity-card-dragging {
-            opacity: 0.42;
-            transform: scale(0.99);
+        .activity-reorder-controls {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            flex: 0 0 auto;
+            max-width: 100%;
+            margin-left: auto;
         }
 
-        .activity-drop-indicator {
-            position: fixed;
-            height: 2px;
+        .reorder-step-btn {
+            width: 44px;
+            height: 44px;
             border-radius: 999px;
-            background: rgba(var(--accent-rgb), 0.95);
-            box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+            touch-action: manipulation;
+            transition: background 120ms ease, transform 120ms ease, border-color 120ms ease;
+        }
+
+        .reorder-step-btn:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.16);
+        }
+
+        .reorder-step-btn:active:not(:disabled) {
+            transform: scale(0.94);
+            background: rgba(var(--accent-rgb), 0.42);
+            border-color: rgba(var(--accent-rgb), 0.7);
+        }
+
+        .reorder-step-btn:disabled {
+            opacity: 0.28;
+            cursor: default;
+            box-shadow: none;
+        }
+
+        .reorder-day-move {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            height: 44px;
+            padding: 0 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            color: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            cursor: pointer;
+        }
+
+        .reorder-day-move:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .reorder-day-select {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+            font-size: 16px;
+            color-scheme: dark;
+        }
+
+        .reorder-day-select option {
+            color: #fff;
+            background: #1e293b;
+        }
+
+        .reorder-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            height: 38px;
+            padding: 0 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+        }
+
+        .reorder-toggle:hover {
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        .reorder-toggle.is-active {
+            background: var(--accent);
+            border-color: rgba(var(--accent-rgb), 0.9);
+            color: rgba(10, 14, 30, 1);
+            box-shadow: 0 10px 28px rgba(var(--accent-rgb), 0.3);
+        }
+
+        .itinerary-reorder-hint {
+            font-size: 12px;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.72);
+            word-break: keep-all;
+        }
+
+        /* 순서 편집 중에는 떠 있는 완료 버튼이 마지막 카드를 가리지 않도록 여백을 둔다 */
+        body.is-reorder-mode #itinerary-container {
+            padding-bottom: 80px;
+        }
+
+        #reorder-done-fab {
+            background: var(--accent);
+            color: rgba(10, 14, 30, 1);
+            box-shadow: 0 14px 36px rgba(var(--accent-rgb), 0.36), 0 8px 24px rgba(0, 0, 0, 0.35);
+            transition: opacity 160ms ease;
+        }
+
+        /* 포인터를 따라다니는 복제 카드. Tailwind 유틸(.relative 등)보다 우선하도록 두 클래스로 지정 */
+        .activity-card.activity-card-ghost {
+            position: fixed;
+            z-index: 70;
+            margin: 0 !important;
             pointer-events: none;
-            z-index: 60;
+            transform-origin: center;
+            will-change: transform;
+            opacity: 0.96;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            background: linear-gradient(180deg, rgba(40, 52, 76, 0.98), rgba(18, 26, 46, 0.99));
+            border-color: rgba(var(--accent-rgb), 0.72);
+            box-shadow:
+                0 28px 60px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(var(--accent-rgb), 0.35),
+                0 0 34px rgba(var(--accent-rgb), 0.28);
+            transition: none;
+            animation: none;
+        }
+
+        .activity-drop-placeholder {
+            box-sizing: border-box;
+            border-radius: 24px;
+            border: 2px dashed rgba(var(--accent-rgb), 0.72);
+            background: rgba(var(--accent-rgb), 0.1);
         }
 
         .day-drop-target {
-            outline: 1px solid rgba(var(--accent-rgb), 0.42);
+            outline: 2px solid rgba(var(--accent-rgb), 0.55);
             outline-offset: 10px;
             border-radius: 24px;
         }
 
-        .itinerary-drag-hint {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.46);
+        .activity-card-moved {
+            box-shadow: 0 0 0 2px rgba(var(--accent-rgb), 0.9), 0 0 28px rgba(var(--accent-rgb), 0.35);
         }
 
         body.is-reordering-activities {
             user-select: none;
             -webkit-user-select: none;
+            cursor: grabbing;
+        }
+
+        body.is-reordering-activities [data-activity-card-id],
+        body.is-reordering-activities .activity-drag-handle {
+            touch-action: none;
+            cursor: grabbing;
+        }
+
+        body.is-reordering-activities #reorder-done-fab,
+        body.is-reordering-activities #current-focus-btn {
+            pointer-events: none;
+            opacity: 0.35;
         }
     </style>
 </head>
@@ -496,11 +695,12 @@
                 </section>
 
                 <section class="mt-3">
-                    <div class="mb-3 pl-8">
-                        <span class="itinerary-drag-hint">
-                            <i data-lucide="grip-vertical" class="w-3 h-3"></i>
-                            손잡이를 끌어 순서를 바꿀 수 있어요
-                        </span>
+                    <div class="mb-3 pl-8 flex items-center justify-between gap-3">
+                        <span id="reorder-mode-hint" class="itinerary-reorder-hint" hidden>▲▼ 버튼을 누르거나 카드를 길게 눌러 끌어서 옮기세요</span>
+                        <button id="reorder-mode-btn" type="button" class="reorder-toggle ml-auto shrink-0" aria-pressed="false">
+                            <i data-lucide="list-ordered" class="w-4 h-4"></i>
+                            <span>순서 편집</span>
+                        </button>
                     </div>
                     <div class="relative space-y-8" id="itinerary-container">
                         <div class="absolute left-[11px] top-2 bottom-0 w-[2px] bg-white/20"></div>
@@ -547,6 +747,14 @@
         <span class="inline-flex items-center gap-2">
             <i data-lucide="arrow-down" class="w-4 h-4"></i>
             <span>현재 시점으로 가기</span>
+        </span>
+    </button>
+
+    <button id="reorder-done-fab" type="button" hidden
+        class="fixed left-1/2 bottom-5 z-40 -translate-x-1/2 rounded-full px-5 py-3 text-sm font-semibold backdrop-blur-md">
+        <span class="inline-flex items-center gap-2">
+            <i data-lucide="check" class="w-4 h-4"></i>
+            <span>순서 편집 완료</span>
         </span>
     </button>
 
@@ -846,7 +1054,7 @@
         </div>
     </div>
 
-    <script src="./app.js?v=1d9b3fe" defer></script>
+    <script src="./app.js?v=20260920" defer></script>
 </body>
 
 </html>

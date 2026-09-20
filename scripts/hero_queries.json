@@ -1,0 +1,2381 @@
+{
+ "paris": {
+  "city": "Paris",
+  "country": "France",
+  "queries": [
+   "Eiffel Tower",
+   "Eiffel Tower Trocadero",
+   "Eiffel Tower night"
+  ],
+  "must": [
+   "Eiffel",
+   "Paris"
+  ]
+ },
+ "london": {
+  "city": "London",
+  "country": "United Kingdom",
+  "queries": [
+   "Tower Bridge London",
+   "Big Ben Westminster",
+   "London skyline Thames"
+  ],
+  "must": [
+   "London",
+   "Tower Bridge",
+   "Big Ben",
+   "Westminster"
+  ]
+ },
+ "seoul": {
+  "city": "Seoul",
+  "country": "South Korea",
+  "queries": [
+   "Gyeongbokgung Palace Seoul",
+   "N Seoul Tower Namsan",
+   "Seoul skyline Han River"
+  ],
+  "must": [
+   "Gyeongbokgung",
+   "Seoul",
+   "Namsan",
+   "경복궁",
+   "서울"
+  ]
+ },
+ "busan": {
+  "city": "Busan",
+  "country": "South Korea",
+  "queries": [
+   "Gwangan Bridge Busan night",
+   "Haeundae Beach Busan",
+   "Gamcheon Culture Village"
+  ],
+  "must": [
+   "Busan",
+   "Gwangan",
+   "Haeundae",
+   "Gamcheon",
+   "부산",
+   "광안"
+  ]
+ },
+ "jeju": {
+  "city": "Jeju",
+  "country": "South Korea",
+  "queries": [
+   "Seongsan Ilchulbong sunrise peak",
+   "Hallasan Baengnokdam",
+   "Hyeopjae Beach Jeju",
+   "Jusangjeolli Cliff Jeju"
+  ],
+  "must": [
+   "Jeju",
+   "Seongsan",
+   "Hallasan",
+   "Hyeopjae",
+   "Jusangjeolli",
+   "제주",
+   "성산",
+   "한라산",
+   "협재"
+  ]
+ },
+ "new-york": {
+  "city": "New York",
+  "country": "United States",
+  "queries": [
+   "Manhattan skyline",
+   "Brooklyn Bridge Manhattan",
+   "Statue of Liberty"
+  ],
+  "must": [
+   "Manhattan",
+   "New York",
+   "Brooklyn Bridge",
+   "Liberty"
+  ]
+ },
+ "los-angeles": {
+  "city": "Los Angeles",
+  "country": "United States",
+  "queries": [
+   "Griffith Observatory Los Angeles skyline",
+   "Hollywood Sign",
+   "Santa Monica Pier Ferris wheel",
+   "Walt Disney Concert Hall"
+  ],
+  "must": [
+   "Griffith",
+   "Hollywood",
+   "Santa Monica",
+   "Los Angeles",
+   "Disney Concert"
+  ]
+ },
+ "tokyo": {
+  "city": "Tokyo",
+  "country": "Japan",
+  "queries": [
+   "Tokyo Tower",
+   "Tokyo Tower night",
+   "Tokyo Tower Zojoji"
+  ],
+  "must": [
+   "Tokyo Tower",
+   "東京タワー"
+  ]
+ },
+ "osaka": {
+  "city": "Osaka",
+  "country": "Japan",
+  "queries": [
+   "Osaka Castle",
+   "Dotonbori Osaka night",
+   "Osaka Castle cherry blossom"
+  ],
+  "must": [
+   "Osaka",
+   "Dotonbori",
+   "大阪"
+  ]
+ },
+ "kyoto": {
+  "city": "Kyoto",
+  "country": "Japan",
+  "queries": [
+   "Fushimi Inari torii",
+   "Kiyomizu-dera Kyoto",
+   "Kinkaku-ji"
+  ],
+  "must": [
+   "Fushimi",
+   "Inari",
+   "Kiyomizu",
+   "Kinkaku",
+   "Kyoto",
+   "京都"
+  ]
+ },
+ "fukuoka": {
+  "city": "Fukuoka",
+  "country": "Japan",
+  "queries": [
+   "Fukuoka Tower Momochi",
+   "Fukuoka skyline Hakata",
+   "Dazaifu Tenmangu"
+  ],
+  "must": [
+   "Fukuoka",
+   "Hakata",
+   "Dazaifu",
+   "福岡"
+  ]
+ },
+ "sapporo": {
+  "city": "Sapporo",
+  "country": "Japan",
+  "queries": [
+   "Sapporo Clock Tower",
+   "Sapporo TV Tower Odori Park",
+   "Sapporo snow festival"
+  ],
+  "must": [
+   "Sapporo",
+   "Odori",
+   "札幌"
+  ]
+ },
+ "nagoya": {
+  "city": "Nagoya",
+  "country": "Japan",
+  "queries": [
+   "Nagoya Castle",
+   "Nagoya Castle golden shachihoko",
+   "Nagoya skyline"
+  ],
+  "must": [
+   "Nagoya",
+   "名古屋"
+  ]
+ },
+ "okinawa": {
+  "city": "Okinawa",
+  "country": "Japan",
+  "queries": [
+   "Shuri Castle Okinawa",
+   "Okinawa Churaumi Aquarium",
+   "Okinawa beach Kouri island"
+  ],
+  "must": [
+   "Okinawa",
+   "Shuri",
+   "Churaumi",
+   "Kouri",
+   "沖縄"
+  ]
+ },
+ "kagoshima": {
+  "city": "Kagoshima",
+  "country": "Japan",
+  "queries": [
+   "Sakurajima Kagoshima",
+   "Sakurajima volcano from Kagoshima city",
+   "Sengan-en"
+  ],
+  "must": [
+   "Sakurajima",
+   "Kagoshima",
+   "Sengan",
+   "桜島"
+  ]
+ },
+ "kumamoto": {
+  "city": "Kumamoto",
+  "country": "Japan",
+  "queries": [
+   "Kumamoto Castle",
+   "Kumamoto Castle keep",
+   "Mount Aso crater"
+  ],
+  "must": [
+   "Kumamoto",
+   "Aso",
+   "熊本",
+   "阿蘇"
+  ]
+ },
+ "nagasaki": {
+  "city": "Nagasaki",
+  "country": "Japan",
+  "queries": [
+   "Nagasaki night view Inasayama",
+   "Glover Garden Nagasaki",
+   "Megane Bridge Nagasaki"
+  ],
+  "must": [
+   "Nagasaki",
+   "Inasa",
+   "Glover",
+   "長崎"
+  ]
+ },
+ "oita": {
+  "city": "Oita (Beppu)",
+  "country": "Japan",
+  "queries": [
+   "Beppu hells Umi Jigoku",
+   "Beppu onsen steam",
+   "Yufuin Kinrin Lake"
+  ],
+  "must": [
+   "Beppu",
+   "Jigoku",
+   "Yufuin",
+   "Kinrin",
+   "別府",
+   "湯布院"
+  ]
+ },
+ "miyazaki": {
+  "city": "Miyazaki",
+  "country": "Japan",
+  "queries": [
+   "Takachiho Gorge",
+   "Udo Shrine Miyazaki",
+   "Aoshima Miyazaki"
+  ],
+  "must": [
+   "Takachiho",
+   "Udo",
+   "Aoshima",
+   "Miyazaki",
+   "高千穂"
+  ]
+ },
+ "kitakyushu": {
+  "city": "Kitakyushu",
+  "country": "Japan",
+  "queries": [
+   "Mojiko Retro",
+   "Kokura Castle",
+   "Kawachi Fuji Garden wisteria"
+  ],
+  "must": [
+   "Mojiko",
+   "Moji",
+   "Kokura",
+   "Kawachi",
+   "Kitakyushu",
+   "門司"
+  ]
+ },
+ "saga": {
+  "city": "Saga",
+  "country": "Japan",
+  "queries": [
+   "Yutoku Inari Shrine",
+   "Karatsu Castle",
+   "Mifuneyama Rakuen"
+  ],
+  "must": [
+   "Yutoku",
+   "Yūtoku",
+   "Karatsu",
+   "Mifuneyama",
+   "Saga",
+   "祐徳"
+  ]
+ },
+ "hiroshima": {
+  "city": "Hiroshima",
+  "country": "Japan",
+  "queries": [
+   "Itsukushima Shrine torii",
+   "Miyajima floating torii",
+   "Hiroshima Peace Memorial Atomic Bomb Dome"
+  ],
+  "must": [
+   "Itsukushima",
+   "Miyajima",
+   "Hiroshima",
+   "厳島",
+   "宮島"
+  ]
+ },
+ "kobe": {
+  "city": "Kobe",
+  "country": "Japan",
+  "queries": [
+   "Kobe Port Tower",
+   "Kobe Harborland night",
+   "Kobe night view Mount Rokko"
+  ],
+  "must": [
+   "Kobe",
+   "Rokko",
+   "神戸"
+  ]
+ },
+ "okayama": {
+  "city": "Okayama",
+  "country": "Japan",
+  "queries": [
+   "Korakuen Okayama",
+   "Okayama Castle",
+   "Kurashiki Bikan"
+  ],
+  "must": [
+   "Korakuen",
+   "Kōraku",
+   "Okayama",
+   "Kurashiki",
+   "後楽園",
+   "岡山"
+  ]
+ },
+ "takamatsu": {
+  "city": "Takamatsu",
+  "country": "Japan",
+  "queries": [
+   "Ritsurin Garden",
+   "Takamatsu Ritsurin",
+   "Kotohira-gu"
+  ],
+  "must": [
+   "Ritsurin",
+   "Takamatsu",
+   "Kotohira",
+   "栗林"
+  ]
+ },
+ "matsuyama": {
+  "city": "Matsuyama",
+  "country": "Japan",
+  "queries": [
+   "Matsuyama Castle",
+   "Dogo Onsen Honkan",
+   "Dogo Onsen"
+  ],
+  "must": [
+   "Matsuyama",
+   "Dogo",
+   "Dōgo",
+   "松山",
+   "道後"
+  ]
+ },
+ "tokushima": {
+  "city": "Tokushima",
+  "country": "Japan",
+  "queries": [
+   "Naruto whirlpools",
+   "Iya Valley vine bridge Kazurabashi",
+   "Oboke Gorge"
+  ],
+  "must": [
+   "Naruto",
+   "Iya",
+   "Kazurabashi",
+   "Oboke",
+   "鳴門",
+   "祖谷"
+  ]
+ },
+ "yonago": {
+  "city": "Yonago (Tottori)",
+  "country": "Japan",
+  "queries": [
+   "Tottori Sand Dunes",
+   "Sakaiminato Mizuki Shigeru Road",
+   "Daisen from Yonago Tottori"
+  ],
+  "must": [
+   "Tottori",
+   "Yonago",
+   "Sakaiminato",
+   "鳥取",
+   "米子",
+   "大山"
+  ]
+ },
+ "kanazawa": {
+  "city": "Kanazawa",
+  "country": "Japan",
+  "queries": [
+   "Kenrokuen",
+   "Kanazawa Higashi Chaya",
+   "Kanazawa Castle"
+  ],
+  "must": [
+   "Kenroku",
+   "Kanazawa",
+   "Chaya",
+   "兼六園",
+   "金沢"
+  ]
+ },
+ "sendai": {
+  "city": "Sendai",
+  "country": "Japan",
+  "queries": [
+   "Matsushima bay",
+   "Matsushima islands Miyagi",
+   "Zao Okama crater lake"
+  ],
+  "must": [
+   "Matsushima",
+   "Zao",
+   "Zaō",
+   "Sendai",
+   "松島",
+   "蔵王"
+  ]
+ },
+ "niigata": {
+  "city": "Niigata",
+  "country": "Japan",
+  "queries": [
+   "Sado Island coast",
+   "Niigata Bandai Bridge",
+   "Niigata city skyline"
+  ],
+  "must": [
+   "Sado",
+   "Niigata",
+   "Bandai",
+   "佐渡",
+   "新潟"
+  ]
+ },
+ "aomori": {
+  "city": "Aomori",
+  "country": "Japan",
+  "queries": [
+   "Hirosaki Castle cherry blossoms",
+   "Oirase Gorge stream",
+   "Nebuta festival Aomori"
+  ],
+  "must": [
+   "Hirosaki",
+   "Oirase",
+   "Nebuta",
+   "Aomori",
+   "弘前",
+   "奥入瀬"
+  ]
+ },
+ "hakodate": {
+  "city": "Hakodate",
+  "country": "Japan",
+  "queries": [
+   "Hakodate night view",
+   "Mount Hakodate night",
+   "Hakodate Goryokaku"
+  ],
+  "must": [
+   "Hakodate",
+   "Goryokaku",
+   "函館",
+   "五稜郭"
+  ]
+ },
+ "shizuoka": {
+  "city": "Shizuoka",
+  "country": "Japan",
+  "queries": [
+   "Mount Fuji Miho no Matsubara",
+   "Mount Fuji from Shizuoka",
+   "Nihondaira Mount Fuji"
+  ],
+  "must": [
+   "Fuji",
+   "Miho",
+   "Nihondaira",
+   "Shizuoka",
+   "富士",
+   "三保"
+  ]
+ },
+ "ishigaki": {
+  "city": "Ishigaki",
+  "country": "Japan",
+  "queries": [
+   "Kabira Bay Ishigaki",
+   "Ishigaki island beach",
+   "Taketomi island"
+  ],
+  "must": [
+   "Kabira",
+   "Ishigaki",
+   "Taketomi",
+   "川平",
+   "石垣"
+  ]
+ },
+ "miyakojima": {
+  "city": "Miyakojima",
+  "country": "Japan",
+  "queries": [
+   "Irabu Bridge Miyakojima",
+   "Yonaha Maehama beach",
+   "Miyakojima sea"
+  ],
+  "must": [
+   "Irabu",
+   "Miyako",
+   "Yonaha",
+   "Maehama",
+   "伊良部",
+   "宮古"
+  ]
+ },
+ "rome": {
+  "city": "Rome",
+  "country": "Italy",
+  "queries": [
+   "Colosseum Rome",
+   "Colosseum sunrise",
+   "Trevi Fountain"
+  ],
+  "must": [
+   "Colosseum",
+   "Colosseo",
+   "Trevi",
+   "Rome",
+   "Roma"
+  ]
+ },
+ "milan": {
+  "city": "Milan",
+  "country": "Italy",
+  "queries": [
+   "Milan Cathedral facade",
+   "Duomo di Milano",
+   "Galleria Vittorio Emanuele II"
+  ],
+  "must": [
+   "Milan",
+   "Milano",
+   "Duomo",
+   "Galleria"
+  ]
+ },
+ "barcelona": {
+  "city": "Barcelona",
+  "country": "Spain",
+  "queries": [
+   "Sagrada Familia",
+   "Park Güell Barcelona",
+   "Barcelona skyline Sagrada Familia"
+  ],
+  "must": [
+   "Sagrada",
+   "Güell",
+   "Guell",
+   "Barcelona"
+  ]
+ },
+ "singapore": {
+  "city": "Singapore",
+  "country": "Singapore",
+  "queries": [
+   "Marina Bay Sands",
+   "Singapore skyline Marina Bay night",
+   "Gardens by the Bay Supertree"
+  ],
+  "must": [
+   "Singapore",
+   "Marina Bay",
+   "Supertree",
+   "Gardens by the Bay"
+  ]
+ },
+ "malaysia": {
+  "city": "Kuala Lumpur",
+  "country": "Malaysia",
+  "queries": [
+   "Petronas Towers",
+   "Petronas Twin Towers night",
+   "Kuala Lumpur skyline"
+  ],
+  "must": [
+   "Petronas",
+   "Kuala Lumpur",
+   "KLCC"
+  ]
+ },
+ "brunei": {
+  "city": "Bandar Seri Begawan",
+  "country": "Brunei",
+  "queries": [
+   "Sultan Omar Ali Saifuddien Mosque",
+   "Brunei mosque night",
+   "Kampong Ayer Brunei"
+  ],
+  "must": [
+   "Brunei",
+   "Saifuddien",
+   "Kampong Ayer",
+   "Bandar Seri Begawan"
+  ]
+ },
+ "kota-kinabalu": {
+  "city": "Kota Kinabalu",
+  "country": "Malaysia",
+  "queries": [
+   "Mount Kinabalu",
+   "Kota Kinabalu sunset",
+   "Kota Kinabalu City Mosque"
+  ],
+  "must": [
+   "Kinabalu",
+   "Sabah"
+  ]
+ },
+ "jakarta": {
+  "city": "Jakarta",
+  "country": "Indonesia",
+  "queries": [
+   "Monas Jakarta",
+   "National Monument Jakarta",
+   "Jakarta skyline"
+  ],
+  "must": [
+   "Jakarta",
+   "Monas"
+  ]
+ },
+ "bali": {
+  "city": "Bali",
+  "country": "Indonesia",
+  "queries": [
+   "Tanah Lot Bali",
+   "Bali rice terrace Tegallalang",
+   "Uluwatu Temple Bali"
+  ],
+  "must": [
+   "Bali",
+   "Tanah Lot",
+   "Tegallalang",
+   "Uluwatu",
+   "Ubud"
+  ]
+ },
+ "manado": {
+  "city": "Manado",
+  "country": "Indonesia",
+  "queries": [
+   "Bunaken island",
+   "Bunaken coral reef",
+   "Manado bay"
+  ],
+  "must": [
+   "Bunaken",
+   "Manado"
+  ]
+ },
+ "bangkok": {
+  "city": "Bangkok",
+  "country": "Thailand",
+  "queries": [
+   "Wat Arun Bangkok",
+   "Wat Arun sunset Chao Phraya",
+   "Grand Palace Bangkok"
+  ],
+  "must": [
+   "Wat Arun",
+   "Grand Palace",
+   "Bangkok",
+   "วัดอรุณ"
+  ]
+ },
+ "phnom-penh": {
+  "city": "Phnom Penh",
+  "country": "Cambodia",
+  "queries": [
+   "Royal Palace Phnom Penh",
+   "Phnom Penh riverside",
+   "Wat Phnom"
+  ],
+  "must": [
+   "Phnom Penh",
+   "Royal Palace",
+   "Wat Phnom"
+  ]
+ },
+ "vientiane": {
+  "city": "Vientiane",
+  "country": "Laos",
+  "queries": [
+   "Pha That Luang",
+   "Patuxai Vientiane",
+   "That Luang golden stupa"
+  ],
+  "must": [
+   "That Luang",
+   "Patuxai",
+   "Vientiane"
+  ]
+ },
+ "chiang-mai": {
+  "city": "Chiang Mai",
+  "country": "Thailand",
+  "queries": [
+   "Wat Phra That Doi Suthep",
+   "Doi Suthep golden chedi",
+   "Chiang Mai Wat Chedi Luang"
+  ],
+  "must": [
+   "Doi Suthep",
+   "Chedi Luang",
+   "Chiang Mai",
+   "ดอยสุเทพ"
+  ]
+ },
+ "phuket": {
+  "city": "Phuket",
+  "country": "Thailand",
+  "queries": [
+   "James Bond Island Phang Nga",
+   "Phang Nga Bay limestone",
+   "Phuket Big Buddha"
+  ],
+  "must": [
+   "Phang Nga",
+   "Phangnga",
+   "Tapu",
+   "James Bond",
+   "Phuket",
+   "Big Buddha"
+  ]
+ },
+ "dubai": {
+  "city": "Dubai",
+  "country": "United Arab Emirates",
+  "queries": [
+   "Burj Khalifa",
+   "Dubai skyline Burj Khalifa night",
+   "Dubai Marina skyline"
+  ],
+  "must": [
+   "Dubai",
+   "Burj Khalifa"
+  ]
+ },
+ "abu-dhabi": {
+  "city": "Abu Dhabi",
+  "country": "United Arab Emirates",
+  "queries": [
+   "Sheikh Zayed Grand Mosque",
+   "Sheikh Zayed Mosque night",
+   "Sheikh Zayed Mosque exterior"
+  ],
+  "must": [
+   "Zayed",
+   "Abu Dhabi"
+  ]
+ },
+ "doha": {
+  "city": "Doha",
+  "country": "Qatar",
+  "queries": [
+   "Doha skyline West Bay night",
+   "Museum of Islamic Art Doha",
+   "Souq Waqif Doha"
+  ],
+  "must": [
+   "Doha",
+   "Islamic Art",
+   "Souq Waqif",
+   "West Bay"
+  ]
+ },
+ "saudi": {
+  "city": "Mecca",
+  "country": "Saudi Arabia",
+  "queries": [
+   "Riyadh skyline Kingdom Centre",
+   "Al Ula Elephant Rock",
+   "Jeddah corniche"
+  ],
+  "must": [
+   "Riyadh",
+   "Kingdom",
+   "AlUla",
+   "Al Ula",
+   "Jeddah",
+   "Saudi"
+  ]
+ },
+ "amsterdam": {
+  "city": "Amsterdam",
+  "country": "Netherlands",
+  "queries": [
+   "Amsterdam canal houses",
+   "Amsterdam canal night",
+   "Amsterdam Damrak"
+  ],
+  "must": [
+   "Amsterdam",
+   "Damrak"
+  ]
+ },
+ "madrid": {
+  "city": "Madrid",
+  "country": "Spain",
+  "queries": [
+   "Plaza Mayor Madrid",
+   "Royal Palace of Madrid",
+   "Gran Via Madrid"
+  ],
+  "must": [
+   "Madrid",
+   "Plaza Mayor",
+   "Gran Vía",
+   "Gran Via",
+   "Palacio Real"
+  ]
+ },
+ "hong-kong": {
+  "city": "Hong Kong",
+  "country": "Hong Kong",
+  "queries": [
+   "Victoria Harbour Hong Kong skyline",
+   "Hong Kong skyline Victoria Peak",
+   "Hong Kong night skyline"
+  ],
+  "must": [
+   "Hong Kong",
+   "Victoria",
+   "香港"
+  ]
+ },
+ "macau": {
+  "city": "Macau",
+  "country": "Macau",
+  "queries": [
+   "Ruins of St. Paul's Macau",
+   "Macau skyline Grand Lisboa",
+   "Senado Square Macau"
+  ],
+  "must": [
+   "Macau",
+   "Macao",
+   "St. Paul",
+   "Lisboa",
+   "澳門",
+   "澳门"
+  ]
+ },
+ "sydney": {
+  "city": "Sydney",
+  "country": "Australia",
+  "queries": [
+   "Sydney Opera House",
+   "Sydney Harbour Bridge Opera House",
+   "Sydney skyline harbour"
+  ],
+  "must": [
+   "Sydney",
+   "Opera House",
+   "Harbour Bridge"
+  ]
+ },
+ "perth": {
+  "city": "Perth",
+  "country": "Australia",
+  "queries": [
+   "Perth skyline Swan River",
+   "Perth city Elizabeth Quay",
+   "Cottesloe Beach Perth"
+  ],
+  "must": [
+   "Perth",
+   "Swan River",
+   "Elizabeth Quay",
+   "Cottesloe"
+  ]
+ },
+ "brisbane": {
+  "city": "Brisbane",
+  "country": "Australia",
+  "queries": [
+   "Brisbane skyline Story Bridge",
+   "Brisbane city river night",
+   "Brisbane South Bank skyline"
+  ],
+  "must": [
+   "Brisbane",
+   "Story Bridge",
+   "South Bank"
+  ]
+ },
+ "melbourne": {
+  "city": "Melbourne",
+  "country": "Australia",
+  "queries": [
+   "Melbourne skyline Yarra River",
+   "Flinders Street Station",
+   "Twelve Apostles Great Ocean Road"
+  ],
+  "must": [
+   "Melbourne",
+   "Flinders",
+   "Yarra",
+   "Twelve Apostles"
+  ]
+ },
+ "beijing": {
+  "city": "Beijing",
+  "country": "China",
+  "queries": [
+   "Forbidden City Beijing",
+   "Great Wall of China Mutianyu",
+   "Temple of Heaven"
+  ],
+  "must": [
+   "Forbidden",
+   "Great Wall",
+   "Mutianyu",
+   "Temple of Heaven",
+   "Beijing",
+   "故宫",
+   "长城"
+  ]
+ },
+ "shanghai": {
+  "city": "Shanghai",
+  "country": "China",
+  "queries": [
+   "Shanghai Bund skyline",
+   "Lujiazui skyline night",
+   "Oriental Pearl Tower Bund"
+  ],
+  "must": [
+   "Shanghai",
+   "Bund",
+   "Lujiazui",
+   "Pudong",
+   "上海",
+   "外滩"
+  ]
+ },
+ "hangzhou": {
+  "city": "Hangzhou",
+  "country": "China",
+  "queries": [
+   "West Lake Hangzhou",
+   "Leifeng Pagoda West Lake",
+   "Hangzhou West Lake sunset"
+  ],
+  "must": [
+   "West Lake",
+   "Hangzhou",
+   "Leifeng",
+   "西湖",
+   "杭州"
+  ]
+ },
+ "suzhou": {
+  "city": "Suzhou",
+  "country": "China",
+  "queries": [
+   "Humble Administrator's Garden",
+   "Suzhou canal Pingjiang Road",
+   "Tiger Hill Pagoda Suzhou"
+  ],
+  "must": [
+   "Suzhou",
+   "Humble",
+   "Pingjiang",
+   "Tiger Hill",
+   "苏州",
+   "拙政园"
+  ]
+ },
+ "xian": {
+  "city": "Xi",
+  "country": "China",
+  "queries": [
+   "Terracotta Army",
+   "Xi'an city wall",
+   "Giant Wild Goose Pagoda"
+  ],
+  "must": [
+   "Terracotta",
+   "Xi'an",
+   "Xian",
+   "Wild Goose",
+   "兵马俑",
+   "西安"
+  ]
+ },
+ "chengdu": {
+  "city": "Chengdu",
+  "country": "China",
+  "queries": [
+   "Giant panda Chengdu",
+   "Chengdu panda base",
+   "Jinli Ancient Street"
+  ],
+  "must": [
+   "Panda",
+   "Chengdu",
+   "Jinli",
+   "成都",
+   "熊猫"
+  ]
+ },
+ "guangzhou": {
+  "city": "Guangzhou",
+  "country": "China",
+  "queries": [
+   "Canton Tower",
+   "Canton Tower night Guangzhou",
+   "Guangzhou skyline Zhujiang New Town"
+  ],
+  "must": [
+   "Canton",
+   "Guangzhou",
+   "广州"
+  ]
+ },
+ "qingdao": {
+  "city": "Qingdao",
+  "country": "China",
+  "queries": [
+   "Qingdao Zhanqiao Pier",
+   "Qingdao skyline Fushan Bay",
+   "Qingdao May Fourth Square"
+  ],
+  "must": [
+   "Qingdao",
+   "Zhanqiao",
+   "Tsingtao",
+   "青岛"
+  ]
+ },
+ "zhangjiajie": {
+  "city": "Zhangjiajie",
+  "country": "China",
+  "queries": [
+   "Zhangjiajie National Forest Park",
+   "Zhangjiajie sandstone pillars",
+   "Tianmen Mountain"
+  ],
+  "must": [
+   "Zhangjiajie",
+   "Wulingyuan",
+   "Tianmen",
+   "张家界",
+   "武陵源"
+  ]
+ },
+ "nanjing": {
+  "city": "Nanjing",
+  "country": "China",
+  "queries": [
+   "Nanjing Confucius Temple Qinhuai",
+   "Sun Yat-sen Mausoleum",
+   "Nanjing city wall Xuanwu Lake"
+  ],
+  "must": [
+   "Nanjing",
+   "Qinhuai",
+   "Yat-sen",
+   "Xuanwu",
+   "南京"
+  ]
+ },
+ "changsha": {
+  "city": "Changsha",
+  "country": "China",
+  "queries": [
+   "Changsha Orange Isle",
+   "Changsha skyline night Xiang River",
+   "Yuelu Academy"
+  ],
+  "must": [
+   "Changsha",
+   "Orange Isle",
+   "Juzizhou",
+   "Yuelu",
+   "长沙",
+   "橘子洲"
+  ]
+ },
+ "kunming": {
+  "city": "Kunming",
+  "country": "China",
+  "queries": [
+   "Stone Forest Shilin",
+   "Kunming Stone Forest",
+   "Dianchi Lake Kunming"
+  ],
+  "must": [
+   "Stone Forest",
+   "Shilin",
+   "Kunming",
+   "石林",
+   "昆明"
+  ]
+ },
+ "xiamen": {
+  "city": "Xiamen",
+  "country": "China",
+  "queries": [
+   "Gulangyu island",
+   "Xiamen Gulangyu view",
+   "Xiamen skyline"
+  ],
+  "must": [
+   "Gulangyu",
+   "Kulangsu",
+   "Xiamen",
+   "鼓浪屿",
+   "厦门"
+  ]
+ },
+ "harbin": {
+  "city": "Harbin",
+  "country": "China",
+  "queries": [
+   "Saint Sophia Cathedral Harbin",
+   "Harbin Ice and Snow World",
+   "Harbin Central Street"
+  ],
+  "must": [
+   "Harbin",
+   "Sophia",
+   "哈尔滨"
+  ]
+ },
+ "yanji": {
+  "city": "Yanji",
+  "country": "China",
+  "queries": [
+   "Changbai Mountain Heaven Lake",
+   "Tianchi Changbaishan",
+   "Yanji city"
+  ],
+  "must": [
+   "Changbai",
+   "Tianchi",
+   "Heaven Lake",
+   "Yanji",
+   "长白山",
+   "天池",
+   "延吉"
+  ]
+ },
+ "chongqing": {
+  "city": "Chongqing",
+  "country": "China",
+  "queries": [
+   "Hongya Cave Chongqing night",
+   "Chongqing skyline Yangtze",
+   "Chongqing Jiefangbei"
+  ],
+  "must": [
+   "Chongqing",
+   "Hongya",
+   "Hongyadong",
+   "重庆",
+   "洪崖洞"
+  ]
+ },
+ "guilin": {
+  "city": "Guilin",
+  "country": "China",
+  "queries": [
+   "Li River karst Guilin",
+   "Yangshuo karst mountains",
+   "Guilin Elephant Trunk Hill"
+  ],
+  "must": [
+   "Guilin",
+   "Yangshuo",
+   "Li River",
+   "Lijiang",
+   "桂林",
+   "阳朔",
+   "漓江"
+  ]
+ },
+ "dalian": {
+  "city": "Dalian",
+  "country": "China",
+  "queries": [
+   "Dalian Xinghai Square",
+   "Dalian coast Binhai Road",
+   "Dalian Zhongshan Square"
+  ],
+  "must": [
+   "Dalian",
+   "Xinghai",
+   "大连"
+  ]
+ },
+ "shenyang": {
+  "city": "Shenyang",
+  "country": "China",
+  "queries": [
+   "Mukden Palace",
+   "Shenyang Imperial Palace",
+   "Shenyang skyline"
+  ],
+  "must": [
+   "Mukden",
+   "Shenyang",
+   "沈阳",
+   "故宫"
+  ]
+ },
+ "yantai": {
+  "city": "Yantai",
+  "country": "China",
+  "queries": [
+   "Penglai Pavilion",
+   "Yantai Mountain lighthouse",
+   "Yantai coast"
+  ],
+  "must": [
+   "Penglai",
+   "Yantai",
+   "蓬莱",
+   "烟台"
+  ]
+ },
+ "weihai": {
+  "city": "Weihai",
+  "country": "China",
+  "queries": [
+   "Weihai Liugong Island",
+   "Weihai coast",
+   "Weihai Happiness Gate"
+  ],
+  "must": [
+   "Weihai",
+   "Liugong",
+   "威海",
+   "刘公岛"
+  ]
+ },
+ "wuhan": {
+  "city": "Wuhan",
+  "country": "China",
+  "queries": [
+   "Yellow Crane Tower",
+   "Wuhan Yangtze River Bridge",
+   "Wuhan East Lake"
+  ],
+  "must": [
+   "Yellow Crane",
+   "Wuhan",
+   "黄鹤楼",
+   "武汉"
+  ]
+ },
+ "taipei": {
+  "city": "Taipei",
+  "country": "Taiwan",
+  "queries": [
+   "Taipei 101",
+   "Taipei 101 Elephant Mountain",
+   "Taipei skyline night"
+  ],
+  "must": [
+   "Taipei",
+   "101",
+   "台北"
+  ]
+ },
+ "kaohsiung": {
+  "city": "Kaohsiung",
+  "country": "Taiwan",
+  "queries": [
+   "Kaohsiung Love River night",
+   "Kaohsiung 85 Sky Tower",
+   "Lotus Pond Dragon Tiger Pagodas"
+  ],
+  "must": [
+   "Kaohsiung",
+   "Love River",
+   "Lotus Pond",
+   "Dragon",
+   "高雄",
+   "愛河"
+  ]
+ },
+ "taichung": {
+  "city": "Taichung",
+  "country": "Taiwan",
+  "queries": [
+   "Sun Moon Lake",
+   "Sun Moon Lake Taiwan morning",
+   "Gaomei Wetlands windmills"
+  ],
+  "must": [
+   "Sun Moon",
+   "Gaomei",
+   "Taichung",
+   "日月潭",
+   "高美"
+  ]
+ },
+ "hanoi": {
+  "city": "Hanoi",
+  "country": "Vietnam",
+  "queries": [
+   "Hoan Kiem Lake Turtle Tower Hanoi",
+   "Temple of Literature Hanoi",
+   "Hanoi Old Quarter Train Street"
+  ],
+  "must": [
+   "Hoan Kiem",
+   "Hanoi",
+   "Hà Nội",
+   "Turtle Tower",
+   "Temple of Literature",
+   "Train Street"
+  ]
+ },
+ "da-nang": {
+  "city": "Da Nang",
+  "country": "Vietnam",
+  "queries": [
+   "Dragon Bridge Da Nang",
+   "Golden Bridge Ba Na Hills",
+   "My Khe Beach Da Nang"
+  ],
+  "must": [
+   "Da Nang",
+   "Đà Nẵng",
+   "Golden Bridge",
+   "Ba Na",
+   "Bà Nà",
+   "Dragon Bridge"
+  ]
+ },
+ "nha-trang": {
+  "city": "Nha Trang",
+  "country": "Vietnam",
+  "queries": [
+   "Nha Trang bay aerial",
+   "Nha Trang beach",
+   "Po Nagar towers"
+  ],
+  "must": [
+   "Nha Trang",
+   "Po Nagar"
+  ]
+ },
+ "phu-quoc": {
+  "city": "Phu Quoc",
+  "country": "Vietnam",
+  "queries": [
+   "Phu Quoc beach",
+   "Phu Quoc Sao Beach",
+   "Phu Quoc sunset"
+  ],
+  "must": [
+   "Phu Quoc",
+   "Phú Quốc"
+  ]
+ },
+ "ho-chi-minh-city": {
+  "city": "Ho Chi Minh City",
+  "country": "Vietnam",
+  "queries": [
+   "Ho Chi Minh City skyline Bitexco",
+   "Saigon Notre-Dame Basilica",
+   "Ben Thanh Market"
+  ],
+  "must": [
+   "Ho Chi Minh",
+   "Saigon",
+   "Bitexco",
+   "Notre-Dame",
+   "Ben Thanh",
+   "Sài Gòn"
+  ]
+ },
+ "india": {
+  "city": "Delhi",
+  "country": "India",
+  "queries": [
+   "Taj Mahal",
+   "Taj Mahal sunrise",
+   "India Gate Delhi"
+  ],
+  "must": [
+   "Taj Mahal",
+   "India Gate",
+   "Delhi",
+   "Agra"
+  ]
+ },
+ "colombo": {
+  "city": "Colombo",
+  "country": "Sri Lanka",
+  "queries": [
+   "Colombo skyline Lotus Tower",
+   "Galle Face Green Colombo",
+   "Gangaramaya Temple"
+  ],
+  "must": [
+   "Colombo",
+   "Lotus Tower",
+   "Galle Face",
+   "Gangaramaya"
+  ]
+ },
+ "kathmandu": {
+  "city": "Kathmandu",
+  "country": "Nepal",
+  "queries": [
+   "Boudhanath stupa",
+   "Swayambhunath",
+   "Kathmandu Durbar Square"
+  ],
+  "must": [
+   "Boudhanath",
+   "Boudha",
+   "Swayambhu",
+   "Kathmandu",
+   "Durbar"
+  ]
+ },
+ "bishkek": {
+  "city": "Bishkek",
+  "country": "Kyrgyzstan",
+  "queries": [
+   "Ala Archa National Park",
+   "Bishkek Ala-Too Square",
+   "Issyk-Kul lake"
+  ],
+  "must": [
+   "Ala Archa",
+   "Ala-Archa",
+   "Bishkek",
+   "Ala-Too",
+   "Issyk"
+  ]
+ },
+ "tashkent": {
+  "city": "Tashkent",
+  "country": "Uzbekistan",
+  "queries": [
+   "Hazrati Imam Complex Tashkent",
+   "Khast Imam Tashkent",
+   "Amir Timur Square Tashkent"
+  ],
+  "must": [
+   "Tashkent",
+   "Hazrat",
+   "Hazrati",
+   "Khast",
+   "Timur",
+   "Temur"
+  ]
+ },
+ "almaty": {
+  "city": "Almaty",
+  "country": "Kazakhstan",
+  "queries": [
+   "Big Almaty Lake",
+   "Zenkov Cathedral Almaty",
+   "Almaty mountains Kok Tobe"
+  ],
+  "must": [
+   "Almaty",
+   "Zenkov",
+   "Kok Tobe",
+   "Kok-Tobe"
+  ]
+ },
+ "astana": {
+  "city": "Astana",
+  "country": "Kazakhstan",
+  "queries": [
+   "Bayterek Tower Astana",
+   "Astana skyline Nurzhol",
+   "Hazret Sultan Mosque"
+  ],
+  "must": [
+   "Astana",
+   "Bayterek",
+   "Baiterek",
+   "Nur-Sultan",
+   "Hazret",
+   "Hazrat Sultan"
+  ]
+ },
+ "ulaanbaatar": {
+  "city": "Ulaanbaatar",
+  "country": "Mongolia",
+  "queries": [
+   "Gandan Monastery Ulaanbaatar",
+   "Chinggis Khaan statue Tsonjin Boldog",
+   "Gorkhi-Terelj Turtle Rock"
+  ],
+  "must": [
+   "Ulaanbaatar",
+   "Gandan",
+   "Chinggis",
+   "Genghis",
+   "Terelj",
+   "Turtle Rock"
+  ]
+ },
+ "philippines": {
+  "city": "Manila",
+  "country": "Philippines",
+  "queries": [
+   "Intramuros Manila",
+   "Manila skyline Makati",
+   "Manila Bay sunset"
+  ],
+  "must": [
+   "Manila",
+   "Intramuros",
+   "Makati"
+  ]
+ },
+ "cebu": {
+  "city": "Cebu",
+  "country": "Philippines",
+  "queries": [
+   "Cebu Mactan beach",
+   "Kawasan Falls",
+   "Cebu Taoist Temple"
+  ],
+  "must": [
+   "Cebu",
+   "Mactan",
+   "Kawasan",
+   "Oslob",
+   "Moalboal"
+  ]
+ },
+ "bohol": {
+  "city": "Bohol",
+  "country": "Philippines",
+  "queries": [
+   "Chocolate Hills Bohol",
+   "Bohol tarsier",
+   "Panglao beach"
+  ],
+  "must": [
+   "Chocolate Hills",
+   "Bohol",
+   "Panglao",
+   "Tarsier"
+  ]
+ },
+ "boracay": {
+  "city": "Boracay",
+  "country": "Philippines",
+  "queries": [
+   "Boracay White Beach",
+   "Boracay sunset sailing",
+   "Boracay beach aerial"
+  ],
+  "must": [
+   "Boracay"
+  ]
+ },
+ "clark": {
+  "city": "Clark (Angeles)",
+  "country": "Philippines",
+  "queries": [
+   "Mount Pinatubo crater lake",
+   "Pinatubo crater",
+   "Clark Pampanga"
+  ],
+  "must": [
+   "Pinatubo",
+   "Clark",
+   "Pampanga"
+  ]
+ },
+ "russia": {
+  "city": "Moscow",
+  "country": "Russia",
+  "queries": [
+   "Saint Basil's Cathedral Moscow",
+   "Moscow Kremlin Red Square",
+   "Red Square night"
+  ],
+  "must": [
+   "Moscow",
+   "Kremlin",
+   "Red Square",
+   "Basil",
+   "Москва"
+  ]
+ },
+ "vladivostok": {
+  "city": "Vladivostok",
+  "country": "Russia",
+  "queries": [
+   "Vladivostok Golden Bridge",
+   "Vladivostok Russky Bridge",
+   "Vladivostok bay"
+  ],
+  "must": [
+   "Vladivostok",
+   "Russky",
+   "Golden Horn",
+   "Владивосток"
+  ]
+ },
+ "canada": {
+  "city": "Toronto",
+  "country": "Canada",
+  "queries": [
+   "Toronto skyline CN Tower",
+   "CN Tower Toronto night",
+   "Toronto skyline from Toronto Islands"
+  ],
+  "must": [
+   "Toronto",
+   "CN Tower"
+  ]
+ },
+ "vancouver": {
+  "city": "Vancouver",
+  "country": "Canada",
+  "queries": [
+   "Vancouver skyline Stanley Park",
+   "Vancouver skyline mountains",
+   "Capilano Suspension Bridge"
+  ],
+  "must": [
+   "Vancouver",
+   "Stanley Park",
+   "Capilano"
+  ]
+ },
+ "mexico": {
+  "city": "Mexico City",
+  "country": "Mexico",
+  "queries": [
+   "Palacio de Bellas Artes Mexico City",
+   "Mexico City Zocalo cathedral",
+   "Angel of Independence Mexico City"
+  ],
+  "must": [
+   "Mexico City",
+   "Ciudad de México",
+   "Bellas Artes",
+   "Zócalo",
+   "Zocalo",
+   "Ángel"
+  ]
+ },
+ "cancun": {
+  "city": "Cancun",
+  "country": "Mexico",
+  "queries": [
+   "Cancun beach aerial",
+   "Cancun hotel zone Caribbean",
+   "Chichen Itza"
+  ],
+  "must": [
+   "Cancún",
+   "Cancun",
+   "Chichen",
+   "Chichén"
+  ]
+ },
+ "brazil": {
+  "city": "Rio de Janeiro",
+  "country": "Brazil",
+  "queries": [
+   "Christ the Redeemer Rio",
+   "Rio de Janeiro Sugarloaf",
+   "Copacabana beach Rio"
+  ],
+  "must": [
+   "Rio",
+   "Redeemer",
+   "Redentor",
+   "Sugarloaf",
+   "Pão de Açúcar",
+   "Copacabana"
+  ]
+ },
+ "argentina": {
+  "city": "Buenos Aires",
+  "country": "Argentina",
+  "queries": [
+   "Buenos Aires Obelisco",
+   "Caminito La Boca",
+   "Buenos Aires Casa Rosada"
+  ],
+  "must": [
+   "Buenos Aires",
+   "Obelisco",
+   "Caminito",
+   "La Boca",
+   "Casa Rosada"
+  ]
+ },
+ "germany": {
+  "city": "Berlin",
+  "country": "Germany",
+  "queries": [
+   "Brandenburg Gate",
+   "Brandenburg Gate Berlin night",
+   "Berlin Reichstag"
+  ],
+  "must": [
+   "Brandenburg",
+   "Berlin",
+   "Reichstag"
+  ]
+ },
+ "egypt": {
+  "city": "Cairo",
+  "country": "Egypt",
+  "queries": [
+   "Pyramids of Giza",
+   "Great Sphinx Giza",
+   "Pyramids Giza sunset"
+  ],
+  "must": [
+   "Giza",
+   "Pyramid",
+   "Sphinx",
+   "Cairo"
+  ]
+ },
+ "guam": {
+  "city": "Guam",
+  "country": "Guam",
+  "queries": [
+   "Tumon Bay Guam",
+   "Two Lovers Point Guam",
+   "Guam beach"
+  ],
+  "must": [
+   "Guam",
+   "Tumon",
+   "Two Lovers"
+  ]
+ },
+ "hawaii": {
+  "city": "Hawaii",
+  "country": "United States",
+  "queries": [
+   "Diamond Head Waikiki",
+   "Waikiki Beach Honolulu",
+   "Oahu Lanikai Beach"
+  ],
+  "must": [
+   "Waikiki",
+   "Diamond Head",
+   "Honolulu",
+   "Oahu",
+   "Lanikai",
+   "Hawaii"
+  ]
+ },
+ "alaska": {
+  "city": "Alaska",
+  "country": "United States",
+  "queries": [
+   "Denali mountain",
+   "Alaska glacier Kenai Fjords",
+   "Anchorage skyline Chugach"
+  ],
+  "must": [
+   "Denali",
+   "Alaska",
+   "Kenai",
+   "Anchorage",
+   "Glacier"
+  ]
+ },
+ "texas": {
+  "city": "Texas",
+  "country": "United States",
+  "queries": [
+   "Austin skyline Colorado River",
+   "Dallas skyline Reunion Tower",
+   "Houston skyline"
+  ],
+  "must": [
+   "Austin",
+   "Dallas",
+   "Houston",
+   "Texas"
+  ]
+ },
+ "san-francisco": {
+  "city": "San Francisco",
+  "country": "United States",
+  "queries": [
+   "Golden Gate Bridge",
+   "Golden Gate Bridge fog",
+   "San Francisco skyline Bay Bridge"
+  ],
+  "must": [
+   "Golden Gate",
+   "San Francisco"
+  ]
+ },
+ "seattle": {
+  "city": "Seattle",
+  "country": "United States",
+  "queries": [
+   "Space Needle Seattle",
+   "Seattle skyline Mount Rainier",
+   "Seattle skyline Kerry Park"
+  ],
+  "must": [
+   "Seattle",
+   "Space Needle",
+   "Rainier"
+  ]
+ },
+ "chicago": {
+  "city": "Chicago",
+  "country": "United States",
+  "queries": [
+   "Chicago skyline Lake Michigan",
+   "Cloud Gate Millennium Park",
+   "Chicago River skyline"
+  ],
+  "must": [
+   "Chicago",
+   "Cloud Gate",
+   "Millennium"
+  ]
+ },
+ "boston": {
+  "city": "Boston",
+  "country": "United States",
+  "queries": [
+   "Boston skyline Charles River",
+   "Boston Public Garden",
+   "Acorn Street Beacon Hill"
+  ],
+  "must": [
+   "Boston",
+   "Charles River",
+   "Beacon Hill",
+   "Acorn"
+  ]
+ },
+ "washington-dc": {
+  "city": "Washington, D.C.",
+  "country": "United States",
+  "queries": [
+   "United States Capitol",
+   "Lincoln Memorial",
+   "Washington Monument reflecting pool"
+  ],
+  "must": [
+   "Capitol",
+   "Lincoln Memorial",
+   "Washington Monument",
+   "Washington, D.C.",
+   "Washington DC"
+  ]
+ },
+ "salt-lake-city": {
+  "city": "Salt Lake City",
+  "country": "United States",
+  "queries": [
+   "Salt Lake City skyline Wasatch",
+   "Salt Lake Temple",
+   "Utah State Capitol"
+  ],
+  "must": [
+   "Salt Lake",
+   "Utah State Capitol",
+   "Wasatch"
+  ]
+ },
+ "czech": {
+  "city": "Prague",
+  "country": "Czech Republic",
+  "queries": [
+   "Charles Bridge Prague",
+   "Prague Castle skyline",
+   "Prague Old Town Square"
+  ],
+  "must": [
+   "Prague",
+   "Praha",
+   "Charles Bridge",
+   "Karlův"
+  ]
+ },
+ "budapest": {
+  "city": "Budapest",
+  "country": "Hungary",
+  "queries": [
+   "Hungarian Parliament Budapest",
+   "Budapest Parliament Danube night",
+   "Fisherman's Bastion"
+  ],
+  "must": [
+   "Budapest",
+   "Parliament",
+   "Országház",
+   "Fisherman"
+  ]
+ },
+ "poland": {
+  "city": "Warsaw",
+  "country": "Poland",
+  "queries": [
+   "Warsaw Old Town",
+   "Warsaw Old Town Market Square",
+   "Warsaw skyline Palace of Culture"
+  ],
+  "must": [
+   "Warsaw",
+   "Warszawa"
+  ]
+ },
+ "denmark": {
+  "city": "Copenhagen",
+  "country": "Denmark",
+  "queries": [
+   "Nyhavn Copenhagen",
+   "Copenhagen Nyhavn colorful houses",
+   "Copenhagen Little Mermaid"
+  ],
+  "must": [
+   "Nyhavn",
+   "Copenhagen",
+   "København"
+  ]
+ },
+ "sweden": {
+  "city": "Stockholm",
+  "country": "Sweden",
+  "queries": [
+   "Stockholm Gamla Stan",
+   "Stockholm skyline Riddarholmen",
+   "Stockholm City Hall"
+  ],
+  "must": [
+   "Stockholm",
+   "Gamla Stan",
+   "Riddarholmen"
+  ]
+ },
+ "norway": {
+  "city": "Oslo",
+  "country": "Norway",
+  "queries": [
+   "Oslo Opera House",
+   "Oslo waterfront Aker Brygge",
+   "Geirangerfjord"
+  ],
+  "must": [
+   "Oslo",
+   "Geiranger",
+   "Norway"
+  ]
+ },
+ "finland": {
+  "city": "Helsinki",
+  "country": "Finland",
+  "queries": [
+   "Helsinki Cathedral",
+   "Helsinki Senate Square",
+   "Helsinki harbour"
+  ],
+  "must": [
+   "Helsinki",
+   "Helsingfors"
+  ]
+ },
+ "austria": {
+  "city": "Vienna",
+  "country": "Austria",
+  "queries": [
+   "Schönbrunn Palace Vienna",
+   "St. Stephen's Cathedral Vienna",
+   "Vienna Hofburg"
+  ],
+  "must": [
+   "Vienna",
+   "Wien",
+   "Schönbrunn",
+   "Schonbrunn",
+   "Stephansdom",
+   "Stephen"
+  ]
+ },
+ "ireland": {
+  "city": "Dublin",
+  "country": "Ireland",
+  "queries": [
+   "Cliffs of Moher",
+   "Dublin Ha'penny Bridge",
+   "Dublin Temple Bar"
+  ],
+  "must": [
+   "Moher",
+   "Dublin",
+   "Ha'penny",
+   "Temple Bar"
+  ]
+ },
+ "iceland": {
+  "city": "Reykjavik",
+  "country": "Iceland",
+  "queries": [
+   "Kirkjufell waterfall",
+   "Reykjavik Hallgrímskirkja",
+   "Iceland aurora Kirkjufell"
+  ],
+  "must": [
+   "Kirkjufell",
+   "Reykjav",
+   "Hallgrím",
+   "Hallgrim",
+   "Iceland"
+  ]
+ },
+ "south-africa": {
+  "city": "Cape Town",
+  "country": "South Africa",
+  "queries": [
+   "Table Mountain Cape Town",
+   "Cape Town skyline Table Mountain",
+   "Cape of Good Hope"
+  ],
+  "must": [
+   "Cape Town",
+   "Table Mountain",
+   "Good Hope",
+   "South Africa"
+  ]
+ },
+ "ghana": {
+  "city": "Accra",
+  "country": "Ghana",
+  "queries": [
+   "Accra Independence Arch",
+   "Accra Black Star Gate",
+   "Cape Coast Castle"
+  ],
+  "must": [
+   "Accra",
+   "Independence",
+   "Black Star",
+   "Cape Coast",
+   "Ghana"
+  ]
+ },
+ "kenya": {
+  "city": "Nairobi",
+  "country": "Kenya",
+  "queries": [
+   "Nairobi skyline",
+   "Maasai Mara elephants",
+   "Nairobi National Park giraffe skyline"
+  ],
+  "must": [
+   "Nairobi",
+   "Maasai Mara",
+   "Masai Mara",
+   "Kenya"
+  ]
+ },
+ "greece": {
+  "city": "Santorini",
+  "country": "Greece",
+  "queries": [
+   "Santorini Oia blue domes",
+   "Oia Santorini sunset",
+   "Santorini caldera"
+  ],
+  "must": [
+   "Santorini",
+   "Oia",
+   "Thira",
+   "Fira"
+  ]
+ },
+ "turkey": {
+  "city": "Istanbul",
+  "country": "Turkey",
+  "queries": [
+   "Hagia Sophia Istanbul",
+   "Blue Mosque Istanbul",
+   "Istanbul Bosphorus skyline"
+  ],
+  "must": [
+   "Istanbul",
+   "Hagia Sophia",
+   "Blue Mosque",
+   "Sultanahmet",
+   "Bosphorus"
+  ]
+ },
+ "switzerland": {
+  "city": "Zermatt",
+  "country": "Switzerland",
+  "queries": [
+   "Matterhorn Zermatt",
+   "Matterhorn reflection Riffelsee",
+   "Zermatt village Matterhorn"
+  ],
+  "must": [
+   "Matterhorn",
+   "Zermatt",
+   "Riffelsee"
+  ]
+ },
+ "portugal": {
+  "city": "Lisbon",
+  "country": "Portugal",
+  "queries": [
+   "Lisbon tram Alfama",
+   "Belém Tower Lisbon",
+   "Lisbon skyline"
+  ],
+  "must": [
+   "Lisbon",
+   "Lisboa",
+   "Belém",
+   "Belem",
+   "Alfama"
+  ]
+ },
+ "quebec": {
+  "city": "Quebec City",
+  "country": "Canada",
+  "queries": [
+   "Château Frontenac Quebec",
+   "Quebec City old town",
+   "Petit Champlain Quebec"
+  ],
+  "must": [
+   "Frontenac",
+   "Quebec",
+   "Québec",
+   "Champlain"
+  ]
+ },
+ "calgary": {
+  "city": "Calgary (Banff)",
+  "country": "Canada",
+  "queries": [
+   "Moraine Lake Valley of the Ten Peaks",
+   "Lake Louise Chateau Banff",
+   "Banff Avenue Cascade Mountain"
+  ],
+  "must": [
+   "Moraine",
+   "Louise",
+   "Banff",
+   "Vermilion",
+   "Peyto"
+  ]
+ },
+ "las-vegas": {
+  "city": "Las Vegas",
+  "country": "United States",
+  "queries": [
+   "Las Vegas Strip night",
+   "Las Vegas Strip aerial",
+   "Bellagio fountains"
+  ],
+  "must": [
+   "Las Vegas",
+   "Bellagio",
+   "Strip"
+  ]
+ },
+ "peru": {
+  "city": "Cusco",
+  "country": "Peru",
+  "queries": [
+   "Machu Picchu",
+   "Machu Picchu sunrise",
+   "Cusco Plaza de Armas"
+  ],
+  "must": [
+   "Machu Picchu",
+   "Cusco",
+   "Cuzco"
+  ]
+ },
+ "chile": {
+  "city": "Santiago",
+  "country": "Chile",
+  "queries": [
+   "Santiago skyline Andes",
+   "Torres del Paine",
+   "Santiago Chile Andes mountains"
+  ],
+  "must": [
+   "Santiago",
+   "Torres del Paine",
+   "Chile",
+   "Andes"
+  ]
+ },
+ "colombia": {
+  "city": "Cartagena",
+  "country": "Colombia",
+  "queries": [
+   "Cartagena walled city",
+   "Cartagena colorful streets",
+   "Cartagena Colombia old town"
+  ],
+  "must": [
+   "Cartagena"
+  ]
+ },
+ "bolivia": {
+  "city": "Uyuni",
+  "country": "Bolivia",
+  "queries": [
+   "Salar de Uyuni reflection",
+   "Uyuni salt flat",
+   "Salar de Uyuni"
+  ],
+  "must": [
+   "Uyuni",
+   "Salar"
+  ]
+ },
+ "morocco": {
+  "city": "Chefchaouen",
+  "country": "Morocco",
+  "queries": [
+   "Chefchaouen blue street",
+   "Chefchaouen blue city",
+   "Chefchaouen"
+  ],
+  "must": [
+   "Chefchaouen",
+   "Chaouen"
+  ]
+ },
+ "tanzania": {
+  "city": "Arusha",
+  "country": "Tanzania",
+  "queries": [
+   "Kilimanjaro from Amboseli",
+   "Serengeti",
+   "Mount Kilimanjaro"
+  ],
+  "must": [
+   "Kilimanjaro",
+   "Serengeti",
+   "Tanzania",
+   "Arusha",
+   "Ngorongoro"
+  ]
+ },
+ "new-zealand": {
+  "city": "Queenstown",
+  "country": "New Zealand",
+  "queries": [
+   "Queenstown Lake Wakatipu Remarkables",
+   "Milford Sound Mitre Peak",
+   "Auckland skyline Sky Tower"
+  ],
+  "must": [
+   "Queenstown",
+   "Wakatipu",
+   "Milford",
+   "Auckland",
+   "New Zealand"
+  ]
+ },
+ "maldives": {
+  "city": "Malé",
+  "country": "Maldives",
+  "queries": [
+   "Maldives overwater bungalow",
+   "Maldives atoll aerial",
+   "Maldives beach"
+  ],
+  "must": [
+   "Maldives",
+   "Malé",
+   "Maldive"
+  ]
+ },
+ "saipan": {
+  "city": "Saipan",
+  "country": "Saipan",
+  "queries": [
+   "Saipan Managaha island",
+   "Saipan lagoon",
+   "Saipan beach"
+  ],
+  "must": [
+   "Saipan",
+   "Managaha"
+  ]
+ },
+ "palau": {
+  "city": "Koror",
+  "country": "Palau",
+  "queries": [
+   "Rock Islands Palau",
+   "Palau Rock Islands aerial",
+   "Jellyfish Lake Palau"
+  ],
+  "must": [
+   "Palau",
+   "Rock Islands",
+   "Jellyfish"
+  ]
+ }
+}

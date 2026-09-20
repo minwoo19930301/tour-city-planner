@@ -2,7 +2,7 @@
 """Fetch a hero photo for a city from Wikimedia Commons and record its credit.
 usage: python3 scripts/fetch_hero.py <slug> "<search terms>" [--dry]
 Only accepts freely licensed images (PD/CC0/CC BY/CC BY-SA) and landscape >=1600px wide."""
-import json, re, sys, urllib.parse, urllib.request, os, html, subprocess
+import json, re, sys, urllib.parse, urllib.request, os, html, subprocess, fcntl
 
 UA = "tour-city-planner/1.0 (https://github.com/minwoo19930301/tour-city-planner; contact@ai-ing.org)"
 OK_LIC = re.compile(r'^(public domain|cc0|cc by [234]\.[05]|cc by-sa [234]\.[05]|cc by 1\.0|cc by-sa 1\.0)$', re.I)
@@ -58,14 +58,20 @@ def save(slug, pick, dry=False):
 def credit(slug, pick):
     f = os.path.join(ROOT, "docs", "PHOTO_CREDITS.md")
     head = "# 사진 출처\n\n히어로 사진은 위키미디어 공용에서 가져왔습니다. 각 사진의 저작자와 라이선스는 아래와 같습니다.\n\n| 도시 | 사진 | 저작자 | 라이선스 |\n|---|---|---|---|\n"
-    if not os.path.exists(f): open(f, "w").write(head)
-    body = open(f).read()
-    row = f"| `{slug}` | [{pick['title'].replace('File:','')}]({pick['page']}) | {pick['author']} | {pick['lic']} |\n"
-    if f"| `{slug}` |" in body:
-        body = re.sub(rf"\| `{re.escape(slug)}` \|.*\n", row, body)
-    else:
-        body = body.rstrip("\n") + "\n" + row
-    open(f, "w").write(body)
+    lock = open(f + ".lock", "w")
+    fcntl.flock(lock, fcntl.LOCK_EX)
+    try:
+        if not os.path.exists(f): open(f, "w").write(head)
+        body = open(f).read()
+        author = re.sub(r"\s+", " ", pick["author"]).strip()[:80]
+        row = f"| `{slug}` | [{pick['title'].replace('File:','')}]({pick['page']}) | {author} | {pick['lic']} |\n"
+        if f"| `{slug}` |" in body:
+            body = re.sub(rf"\| `{re.escape(slug)}` \|.*\n", lambda m: row, body)
+        else:
+            body = body.rstrip("\n") + "\n" + row
+        open(f, "w").write(body)
+    finally:
+        fcntl.flock(lock, fcntl.LOCK_UN); lock.close()
 
 def from_category(cat, limit=60):
     """Fallback: pull files straight out of a Commons category."""

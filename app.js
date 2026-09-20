@@ -211,6 +211,7 @@ const DESTINATIONS = {
         summary: '예술, 강변 산책, 디저트, 박물관을 리듬 있게 묶은 파리 템플릿입니다.',
         footer: 'Paris works best when the day moves from stone to light.',
         heroImage: 'assets/heroes/paris.jpg',
+        heroImagePortrait: 'assets/heroes/paris-portrait.jpg',
         accent: '#FFD700',
         accentRgb: '255, 215, 0',
         ink: '#1A237E',
@@ -280,6 +281,7 @@ const DESTINATIONS = {
         summary: '런던 핵심 랜드마크와 공원, 박물관, 웨스트엔드를 묶은 도심 템플릿입니다.',
         footer: 'London feels sharp when market, park, and theatre share one day.',
         heroImage: 'assets/heroes/london.jpg',
+        heroImagePortrait: 'assets/heroes/london-portrait.jpg',
         accent: '#FBBF24',
         accentRgb: '251, 191, 36',
         ink: '#0F172A',
@@ -349,6 +351,7 @@ const DESTINATIONS = {
         summary: "경복궁·북촌부터 성수·한강, 잠실 전망대까지 서울 핵심 구역을 하루 하나씩 도는 템플릿으로, 해외 출국 전후 홈 구간으로도 잘 맞습니다.",
         footer: "Seoul runs on palaces by day, neon by night, and a river in between.",
         heroImage: "assets/heroes/seoul.jpg",
+        heroImagePortrait: 'assets/heroes/seoul-portrait.jpg',
         heroPosition: "50% 42%",
         accent: "#D4A24C",
         accentRgb: "212, 162, 76",
@@ -525,6 +528,7 @@ const DESTINATIONS = {
         summary: "해운대와 광안대교 바다, 감천 골목과 자갈치 회 한 접시, 영도 절벽길까지 부산의 바다를 따라 걷는 템플릿입니다.",
         footer: "Busan is salt air, bridge lights, and a bowl of milmyeon.",
         heroImage: "assets/heroes/busan.jpg",
+        heroImagePortrait: 'assets/heroes/busan-portrait.jpg',
         heroPosition: "38% 55%",
         accent: "#026AC7",
         accentRgb: "2, 106, 199",
@@ -678,6 +682,7 @@ const DESTINATIONS = {
         summary: "성산일출봉과 우도, 서귀포 올레길, 협재·애월 카페까지 렌터카로 섬을 시계 방향으로 도는 3박 4일 템플릿입니다.",
         footer: "Jeju is basalt, tangerines, and wind that never quite stops.",
         heroImage: "assets/heroes/jeju.jpg",
+        heroImagePortrait: 'assets/heroes/jeju-portrait.jpg',
         heroPosition: "50% 55%",
         accent: "#FB923C",
         accentRgb: "251, 146, 60",
@@ -831,6 +836,7 @@ const DESTINATIONS = {
         summary: '뉴욕 대표 스폿을 밀도 있게 묶은 도심형 템플릿입니다.',
         footer: 'New York rewards dense days and late walks.',
         heroImage: 'assets/heroes/new-york.jpg',
+        heroImagePortrait: 'assets/heroes/new-york-portrait.jpg',
         heroPosition: 'center 22%',
         accent: '#60A5FA',
         accentRgb: '96, 165, 250',
@@ -901,6 +907,7 @@ const DESTINATIONS = {
         summary: '영화, 해변, 전망 포인트를 묶은 서부 감성 템플릿입니다.',
         footer: 'Los Angeles works when you leave room for light and distance.',
         heroImage: 'assets/heroes/los-angeles.jpg',
+        heroImagePortrait: 'assets/heroes/los-angeles-portrait.jpg',
         accent: '#F97316',
         accentRgb: '249, 115, 22',
         ink: '#431407',
@@ -970,6 +977,7 @@ const DESTINATIONS = {
         summary: '도쿄 핵심 동선 위에 탑, 사원, 후지산 무드를 얹은 클래식 재팬 톤 템플릿입니다.',
         footer: 'Japan feels strongest in vermilion, paper light, and a clean skyline.',
         heroImage: 'assets/heroes/tokyo.jpg',
+        heroImagePortrait: 'assets/heroes/tokyo-portrait.jpg',
         heroPosition: '68% center',
         accent: '#C2410C',
         accentRgb: '194, 65, 12',
@@ -1040,6 +1048,7 @@ const DESTINATIONS = {
         summary: "도톤보리 네온과 길거리 음식, 오사카성과 우메다 전망을 한 줄로 엮은 간사이 먹방 템플릿입니다.",
         footer: "Osaka runs on neon, broth, and people who talk to strangers.",
         heroImage: "assets/heroes/osaka.jpg",
+        heroImagePortrait: 'assets/heroes/osaka-portrait.jpg',
         heroPosition: "60% center",
         accent: "#DC269E",
         accentRgb: "220, 38, 158",
@@ -1216,6 +1225,7 @@ const DESTINATIONS = {
         summary: "청수사 언덕길부터 후시미이나리 천 개의 도리이, 아라시야마 대숲과 기온 밤거리까지 천천히 걷는 고도 템플릿입니다.",
         footer: "Kyoto rewards early mornings, quiet lanes, and slow tea.",
         heroImage: "assets/heroes/kyoto.jpg",
+        heroImagePortrait: 'assets/heroes/kyoto-portrait.jpg',
         heroPosition: "50% 60%",
         accent: "#166534",
         accentRgb: "22, 101, 52",
@@ -1392,6 +1402,7 @@ const DESTINATIONS = {
         summary: "하카타 돈코츠 라멘과 나카스 포장마차, 다자이후 참배와 모모치 바닷바람을 묶은 규슈 관문 템플릿입니다.",
         footer: "Fukuoka is a port city: sea air by day, yatai stools by night.",
         heroImage: "assets/heroes/fukuoka.jpg",
+        heroImagePortrait: 'assets/heroes/fukuoka-portrait.jpg',
         heroPosition: "50% center",
         accent: "#0EA5E9",
         accentRgb: "14, 165, 233",
@@ -1545,6 +1556,7 @@ const DESTINATIONS = {
         summary: "오도리 공원의 찬 공기, 미소 라멘과 징기스칸, 오타루 운하 당일치기까지 담은 홋카이도 겨울 템플릿입니다.",
         footer: "Sapporo is cold air, hot broth, and a grid you can walk.",
         heroImage: "assets/heroes/sapporo.jpg",
+        heroImagePortrait: 'assets/heroes/sapporo-portrait.jpg',
         heroPosition: "50% 45%",
         accent: "#64748B",
         accentRgb: "100, 116, 139",
@@ -1721,6 +1733,7 @@ const DESTINATIONS = {
         summary: "금 샤치호코가 올라앉은 나고야성, 아쓰타 신궁의 고요함, 오스 상점가와 나고야항까지 도는 주부권 템플릿입니다.",
         footer: "Nagoya is golden roofs, miso-dark food, and easy trains.",
         heroImage: "assets/heroes/nagoya.jpg",
+        heroImagePortrait: 'assets/heroes/nagoya-portrait.jpg',
         heroPosition: "55% center",
         accent: "#CAA404",
         accentRgb: "202, 164, 4",
@@ -1874,6 +1887,7 @@ const DESTINATIONS = {
         summary: "고쿠사이도리의 느린 오후, 슈리성의 류큐 색, 추라우미 수족관과 에메랄드 해변까지 이어지는 오키나와 본섬 템플릿입니다.",
         footer: "Okinawa moves at island speed: turquoise water, Ryukyu red, no rush.",
         heroImage: "assets/heroes/okinawa.jpg",
+        heroImagePortrait: 'assets/heroes/okinawa-portrait.jpg',
         heroPosition: "50% 55%",
         accent: "#06B6D4",
         accentRgb: "6, 182, 212",
@@ -2050,6 +2064,7 @@ const DESTINATIONS = {
         summary: "사쿠라지마 화산 연기와 센간엔 정원, 이부스키 모래찜질과 텐몬칸 흑돼지까지 남규슈의 뜨거운 기운을 담은 템플릿입니다.",
         footer: "Kagoshima lives under a smoking volcano and sleeps in warm sand.",
         heroImage: "assets/heroes/kagoshima.jpg",
+        heroImagePortrait: 'assets/heroes/kagoshima-portrait.jpg',
         heroPosition: "center center",
         accent: "#B91C1C",
         accentRgb: "185, 28, 28",
@@ -2203,6 +2218,7 @@ const DESTINATIONS = {
         summary: "구마모토성 검은 천수각에서 스이젠지 정원, 아소 분화구와 구로카와 노천탕까지 불의 나라를 가로지르는 템플릿입니다.",
         footer: "Kumamoto is a black castle, a green caldera, and steam in the valley.",
         heroImage: "assets/heroes/kumamoto.jpg",
+        heroImagePortrait: 'assets/heroes/kumamoto-portrait.jpg',
         heroPosition: "center center",
         accent: "#05968F",
         accentRgb: "5, 150, 143",
@@ -2356,6 +2372,7 @@ const DESTINATIONS = {
         summary: "글로버 가든과 데지마의 이국 정취, 짬뽕 골목과 군함도, 이나사야마 천만 불 야경을 엮은 항구 도시 템플릿입니다.",
         footer: "Nagasaki layers Dutch, Chinese, and Japanese stories over one harbor.",
         heroImage: "assets/heroes/nagasaki.jpg",
+        heroImagePortrait: 'assets/heroes/nagasaki-portrait.jpg',
         heroPosition: "center center",
         accent: "#AB3AED",
         accentRgb: "171, 58, 237",
@@ -2509,6 +2526,7 @@ const DESTINATIONS = {
         summary: "벳푸 지옥순례의 증기와 유후인 긴린코 아침 안개, 다카사키야마 원숭이까지 온천 향으로 채운 4일 템플릿입니다.",
         footer: "Oita is steam rising from every street corner in Beppu.",
         heroImage: "assets/heroes/oita.jpg",
+        heroImagePortrait: 'assets/heroes/oita-portrait.jpg',
         heroPosition: "center center",
         accent: "#0E7490",
         accentRgb: "14, 116, 144",
@@ -2662,6 +2680,7 @@ const DESTINATIONS = {
         summary: "아오시마 도깨비 빨래판과 니치난 해안 드라이브, 다카치호 협곡 보트와 치킨난반으로 남국 햇살을 담은 템플릿입니다.",
         footer: "Miyazaki is palm trees, surf, and myths carved into the coast.",
         heroImage: "assets/heroes/miyazaki.jpg",
+        heroImagePortrait: 'assets/heroes/miyazaki-portrait.jpg',
         heroPosition: "center center",
         accent: "#EA3B0C",
         accentRgb: "234, 59, 12",
@@ -2792,6 +2811,7 @@ const DESTINATIONS = {
         summary: "모지코 레트로 항구와 고쿠라성, 탄가시장 다이가쿠동, 가와치후지엔 등나무 터널을 잇는 공업 도시의 반전 매력 템플릿입니다.",
         footer: "Kitakyushu pairs a brick-red retro port with a castle and a wisteria tunnel.",
         heroImage: "assets/heroes/kitakyushu.jpg",
+        heroImagePortrait: 'assets/heroes/kitakyushu-portrait.jpg',
         heroPosition: "center center",
         accent: "#A21CAF",
         accentRgb: "162, 28, 175",
@@ -2922,6 +2942,7 @@ const DESTINATIONS = {
         summary: "유토쿠이나리의 주홍 회랑과 가라쓰 바다의 오징어 활어회, 우레시노 온천과 아리타 도자기 마을을 도는 소박한 템플릿입니다.",
         footer: "Saga is quiet: vermilion shrines, squid boats, and porcelain kilns.",
         heroImage: "assets/heroes/saga.jpg",
+        heroImagePortrait: 'assets/heroes/saga-portrait.jpg',
         heroPosition: "center center",
         accent: "#1E2DAF",
         accentRgb: "30, 45, 175",
@@ -3052,6 +3073,7 @@ const DESTINATIONS = {
         summary: "평화기념공원의 묵직한 아침부터 미야지마 바다 위 도리이, 오코노미야키 철판과 시마나미 해도 라이딩까지 잇는 세토내해 템플릿입니다.",
         footer: "Hiroshima holds silence and sea light in the same breath.",
         heroImage: "assets/heroes/hiroshima.jpg",
+        heroImagePortrait: 'assets/heroes/hiroshima-portrait.jpg',
         heroPosition: "center center",
         accent: "#9F1226",
         accentRgb: "159, 18, 38",
@@ -3205,6 +3227,7 @@ const DESTINATIONS = {
         summary: "기타노 이진칸 언덕과 하버랜드 야경, 난킨마치 간식과 아리마 온천, 히메지성 당일치기까지 담은 항구 도시 템플릿입니다.",
         footer: "Kobe is a port that dresses well and eats better.",
         heroImage: "assets/heroes/kobe.jpg",
+        heroImagePortrait: 'assets/heroes/kobe-portrait.jpg',
         heroPosition: "center center",
         accent: "#1F1E8A",
         accentRgb: "31, 30, 138",
@@ -3358,6 +3381,7 @@ const DESTINATIONS = {
         summary: "고라쿠엔과 까마귀성, 구라시키 미관지구 운하, 나오시마 예술섬 당일치기를 잇는 세토우치 예술 정원 템플릿입니다.",
         footer: "Okayama pairs raked gardens with island art and white peaches.",
         heroImage: "assets/heroes/okayama.jpg",
+        heroImagePortrait: 'assets/heroes/okayama-portrait.jpg',
         heroPosition: "center center",
         accent: "#EC4899",
         accentRgb: "236, 72, 153",
@@ -3511,6 +3535,7 @@ const DESTINATIONS = {
         summary: "리쓰린공원 아침 산책, 셀프 우동집, 고토히라궁 785계단, 쇼도시마 올리브와 엔젤로드를 엮은 사누키 템플릿입니다.",
         footer: "Takamatsu runs on udon, pine gardens, and slow ferries.",
         heroImage: "assets/heroes/takamatsu.jpg",
+        heroImagePortrait: 'assets/heroes/takamatsu-portrait.jpg',
         heroPosition: "center center",
         accent: "#115E59",
         accentRgb: "17, 94, 89",
@@ -3664,6 +3689,7 @@ const DESTINATIONS = {
         summary: "마쓰야마성 천수각과 도고온천 본관, 시마나미 해도 자전거 횡단까지 온천과 바다를 오가는 이요 템플릿입니다.",
         footer: "Matsuyama is warm water, citrus light, and bridges over the sea.",
         heroImage: "assets/heroes/matsuyama.jpg",
+        heroImagePortrait: 'assets/heroes/matsuyama-portrait.jpg',
         heroPosition: "center center",
         accent: "#FF2700",
         accentRgb: "255, 39, 0",
@@ -3817,6 +3843,7 @@ const DESTINATIONS = {
         summary: "나루토 소용돌이 관조선, 오보케 협곡과 이야 덩굴다리, 아와오도리 회관의 춤까지 담은 아와 자연·축제 템플릿입니다.",
         footer: "Tokushima dances between whirlpools, gorges, and indigo.",
         heroImage: "assets/heroes/tokushima.jpg",
+        heroImagePortrait: 'assets/heroes/tokushima-portrait.jpg',
         heroPosition: "center center",
         accent: "#4630A3",
         accentRgb: "70, 48, 163",
@@ -4123,6 +4150,7 @@ const DESTINATIONS = {
         summary: "겐로쿠엔 아침 산책과 오미초시장 해산물, 히가시차야 금박 골목, 시라카와고 당일치기까지 담은 가가 백만석 템플릿입니다.",
         footer: "Kanazawa keeps gold leaf, rain, and old tea houses in perfect order.",
         heroImage: "assets/heroes/kanazawa.jpg",
+        heroImagePortrait: 'assets/heroes/kanazawa-portrait.jpg',
         heroPosition: "center center",
         accent: "#6B21A8",
         accentRgb: "107, 33, 168",
@@ -4276,6 +4304,7 @@ const DESTINATIONS = {
         summary: "마쓰시마 섬 유람과 자오 오카마, 아키우 온천, 규탄 정식까지 도호쿠의 관문을 느긋하게 도는 센다이 템플릿입니다.",
         footer: "Sendai is a city of trees: pine islands, crater lakes, and grilled beef tongue.",
         heroImage: "assets/heroes/sendai.jpg",
+        heroImagePortrait: 'assets/heroes/sendai-portrait.jpg',
         heroPosition: "center center",
         accent: "#059630",
         accentRgb: "5, 150, 48",
@@ -4429,6 +4458,7 @@ const DESTINATIONS = {
         summary: "반다이바시 강바람과 후루마치 골목, 사도섬 당일치기와 니가타 사케 시음을 엮은 일본해 쌀·술 템플릿입니다.",
         footer: "Niigata runs on rice, sake, and the slow gray light of the Sea of Japan.",
         heroImage: "assets/heroes/niigata.jpg",
+        heroImagePortrait: 'assets/heroes/niigata-portrait.jpg',
         heroPosition: "center center",
         accent: "#1D4ED8",
         accentRgb: "29, 78, 216",
@@ -4582,6 +4612,7 @@ const DESTINATIONS = {
         summary: "네부타의 집 와랏세와 히로사키성, 오이라세 계류와 핫코다 로프웨이를 잇는 혼슈 최북단 축제·자연 템플릿입니다.",
         footer: "Aomori is Nebuta light, apple orchards, and a stream that never stops.",
         heroImage: "assets/heroes/aomori.jpg",
+        heroImagePortrait: 'assets/heroes/aomori-portrait.jpg',
         heroPosition: "center center",
         accent: "#E11DC9",
         accentRgb: "225, 29, 201",
@@ -4735,6 +4766,7 @@ const DESTINATIONS = {
         summary: "하코다테산 백만 불 야경, 아침시장 카이센동, 별 모양 고료카쿠와 모토마치 언덕, 유노카와 온천까지 담은 항구 도시 템플릿입니다.",
         footer: "Hakodate is a harbor of slopes, church bells, and a night view worth the ropeway.",
         heroImage: "assets/heroes/hakodate.jpg",
+        heroImagePortrait: 'assets/heroes/hakodate-portrait.jpg',
         heroPosition: "center center",
         accent: "#4D3AED",
         accentRgb: "77, 58, 237",
@@ -4888,6 +4920,7 @@ const DESTINATIONS = {
         summary: "미호노마쓰바라 너머 후지산, 니혼다이라와 구노잔 동조궁, 아타미 온천 바다까지 차밭 향으로 묶은 시즈오카 템플릿입니다.",
         footer: "Shizuoka is tea fields, a pine-lined shore, and Fuji on a clear morning.",
         heroImage: "assets/heroes/shizuoka.jpg",
+        heroImagePortrait: 'assets/heroes/shizuoka-portrait.jpg',
         heroPosition: "center center",
         accent: "#3DA30D",
         accentRgb: "61, 163, 13",
@@ -5194,6 +5227,7 @@ const DESTINATIONS = {
         summary: "요나하마에하마의 미야코 블루, 이라부대교와 시모지시마 17END, 이케마대교 드라이브를 잇는 렌터카 섬 템플릿입니다.",
         footer: "Miyakojima is one long bridge into blue, best driven with the windows down.",
         heroImage: "assets/heroes/miyakojima.jpg",
+        heroImagePortrait: 'assets/heroes/miyakojima-portrait.jpg',
         heroPosition: "center center",
         accent: "#0891B2",
         accentRgb: "8, 145, 178",
@@ -5347,6 +5381,7 @@ const DESTINATIONS = {
         summary: '로마 유적과 광장, 바티칸, 젤라토를 한 바퀴로 묶은 템플릿입니다.',
         footer: 'Rome feels strongest when history and food stay in the same loop.',
         heroImage: 'assets/heroes/rome.jpg',
+        heroImagePortrait: 'assets/heroes/rome-portrait.jpg',
         accent: '#FACC15',
         accentRgb: '250, 204, 21',
         ink: '#3F1D0A',
@@ -5416,6 +5451,7 @@ const DESTINATIONS = {
         summary: "두오모와 갤러리아, 최후의 만찬, 브레라, 나빌리 아페리티보에 코모 호수 당일치기를 더한 밀라노 템플릿입니다.",
         footer: "Milan works when marble spires, fashion, and aperitivo hour share one evening.",
         heroImage: "assets/heroes/milan.jpg",
+        heroImagePortrait: 'assets/heroes/milan-portrait.jpg',
         heroPosition: "center center",
         accent: "#E045B8",
         accentRgb: "224, 69, 184",
@@ -5592,6 +5628,7 @@ const DESTINATIONS = {
         summary: '가우디, 해변, 마켓, 언덕 전망을 묶은 바르셀로나 템플릿입니다.',
         footer: 'Barcelona gets better once architecture and sea sit in the same frame.',
         heroImage: 'assets/heroes/barcelona.jpg',
+        heroImagePortrait: 'assets/heroes/barcelona-portrait.jpg',
         accent: '#FB7185',
         accentRgb: '251, 113, 133',
         ink: '#4C0519',
@@ -5653,6 +5690,7 @@ const DESTINATIONS = {
         summary: '마리나 베이, 가든스, 호커, 센토사를 빠르게 묶은 싱가포르 템플릿입니다.',
         footer: 'Singapore feels best when skyline, gardens, and food stay in one loop.',
         heroImage: 'assets/heroes/singapore.jpg',
+        heroImagePortrait: 'assets/heroes/singapore-portrait.jpg',
         accent: '#34D399',
         accentRgb: '52, 211, 153',
         ink: '#052E2B',
@@ -5714,6 +5752,7 @@ const DESTINATIONS = {
         summary: '페트로나스, 전망대, 동굴 사원, 야시장을 묶은 말레이시아 템플릿입니다.',
         footer: 'Malaysia feels best when skyline, market, and temple sit in one route.',
         heroImage: 'assets/heroes/malaysia.jpg',
+        heroImagePortrait: 'assets/heroes/malaysia-portrait.jpg',
         timeZone: 'Asia/Kuala_Lumpur',
         weather: { latitude: 3.1390, longitude: 101.6869 },
         currency: { code: 'MYR', symbol: 'RM', locale: 'ms-MY' },
@@ -5758,6 +5797,7 @@ const DESTINATIONS = {
         summary: "술탄 오마르 알리 사이푸딘 모스크와 캄퐁아예르 수상마을, 제임 아스르 모스크, 울루템부롱 정글까지 3박 4일 브루나이 템플릿입니다.",
         footer: "Brunei is gold domes, quiet water villages, and rainforest an hour away.",
         heroImage: "assets/heroes/brunei.jpg",
+        heroImagePortrait: 'assets/heroes/brunei-portrait.jpg',
         heroPosition: "center center",
         accent: "#C8EA08",
         accentRgb: "200, 234, 8",
@@ -5911,6 +5951,7 @@ const DESTINATIONS = {
         summary: "탄중아루 선셋과 사피·마누칸 섬 호핑, 마리마리 문화마을, 키나발루 공원과 필리피노 야시장까지 4박 5일 코타키나발루 템플릿입니다.",
         footer: "Kota Kinabalu ends every day the same way, with the sun sinking into the South China Sea.",
         heroImage: "assets/heroes/kota-kinabalu.jpg",
+        heroImagePortrait: 'assets/heroes/kota-kinabalu-portrait.jpg',
         heroPosition: "center center",
         accent: "#FF7043",
         accentRgb: "255, 112, 67",
@@ -6087,6 +6128,7 @@ const DESTINATIONS = {
         summary: '따만 미니, 전통관, 전망 타워, 녹지 산책을 묶은 자카르타 템플릿입니다.',
         footer: 'Jakarta feels better when Taman Mini scale and green walkways stay balanced.',
         heroImage: 'assets/heroes/jakarta.jpg',
+        heroImagePortrait: 'assets/heroes/jakarta-portrait.jpg',
         timeZone: 'Asia/Jakarta',
         weather: { latitude: -6.2088, longitude: 106.8456 },
         currency: { code: 'IDR', symbol: 'Rp', locale: 'id-ID' },
@@ -6132,6 +6174,7 @@ const DESTINATIONS = {
         summary: '발리 사원, 우붓, 라이스 테라스, 선셋 스폿을 묶은 발리 템플릿입니다.',
         footer: 'Bali feels strongest when temple, rice terrace, and sunset stay in one flow.',
         heroImage: 'assets/heroes/bali.jpg',
+        heroImagePortrait: 'assets/heroes/bali-portrait.jpg',
         timeZone: 'Asia/Makassar',
         weather: { latitude: -8.6500, longitude: 115.2167 },
         currency: { code: 'IDR', symbol: 'Rp', locale: 'id-ID' },
@@ -6353,6 +6396,7 @@ const DESTINATIONS = {
         summary: '사원, 강변, 야시장, 루프탑을 묶은 방콕 템플릿입니다.',
         footer: 'Bangkok feels strongest when temple, market, and rooftop share one day.',
         heroImage: 'assets/heroes/bangkok.jpg',
+        heroImagePortrait: 'assets/heroes/bangkok-portrait.jpg',
         accent: '#F59E0B',
         accentRgb: '245, 158, 11',
         ink: '#451A03',
@@ -6414,6 +6458,7 @@ const DESTINATIONS = {
         summary: "왕궁과 실버파고다, 왓프놈, 센트럴마켓, 뚜올슬렝과 킬링필드, 리버사이드를 차분히 잇는 프놈펜 템플릿입니다.",
         footer: "Phnom Penh asks for a quiet morning, an honest afternoon, and a riverside evening.",
         heroImage: "assets/heroes/phnom-penh.jpg",
+        heroImagePortrait: 'assets/heroes/phnom-penh-portrait.jpg',
         heroPosition: "center center",
         accent: "#BE123C",
         accentRgb: "190, 18, 60",
@@ -6567,6 +6612,7 @@ const DESTINATIONS = {
         summary: "탓루앙과 빠뚜사이, 왓시사켓, 메콩 야시장에 고속철 방비엥 당일 여행을 더한 비엔티안 템플릿입니다.",
         footer: "Vientiane keeps a slow riverside pace, with a fast train to the mountains.",
         heroImage: "assets/heroes/vientiane.jpg",
+        heroImagePortrait: 'assets/heroes/vientiane-portrait.jpg',
         heroPosition: "center center",
         accent: "#F4DE30",
         accentRgb: "244, 222, 48",
@@ -6720,6 +6766,7 @@ const DESTINATIONS = {
         summary: "올드시티 사원, 도이수텝, 님만해민 카페, 코끼리 보호구역과 도이인타논까지 란나의 산과 절을 느리게 걷는 치앙마이 템플릿입니다.",
         footer: "Chiang Mai slows down for temples, mountains, and one more coffee.",
         heroImage: "assets/heroes/chiang-mai.jpg",
+        heroImagePortrait: 'assets/heroes/chiang-mai-portrait.jpg',
         heroPosition: "center center",
         accent: "#A14E07",
         accentRgb: "161, 78, 7",
@@ -6896,6 +6943,7 @@ const DESTINATIONS = {
         summary: "빠통과 올드타운, 빅부다와 프롬텝곶 노을, 팡아만 투어까지 안다만 해의 결을 따라 도는 푸켓 템플릿입니다.",
         footer: "Phuket is loudest in Patong and quietest at Promthep Cape.",
         heroImage: "assets/heroes/phuket.jpg",
+        heroImagePortrait: 'assets/heroes/phuket-portrait.jpg',
         heroPosition: "center center",
         accent: "#0316A1",
         accentRgb: "3, 22, 161",
@@ -7072,6 +7120,7 @@ const DESTINATIONS = {
         summary: '버즈 칼리파, 마리나, 사막, 올드 수크를 묶은 두바이 템플릿입니다.',
         footer: 'Dubai feels best when glass, desert, and old souks are all in frame.',
         heroImage: 'assets/heroes/dubai.jpg',
+        heroImagePortrait: 'assets/heroes/dubai-portrait.jpg',
         accent: '#22D3EE',
         accentRgb: '34, 211, 238',
         ink: '#082F49',
@@ -7133,6 +7182,7 @@ const DESTINATIONS = {
         summary: "셰이크 자이드 모스크와 카스르 알 와탄, 루브르 아부다비, 야스 섬 페라리 월드와 코르니슈를 묶은 아부다비 템플릿입니다.",
         footer: "Abu Dhabi is white marble, gold light, and calm turquoise water.",
         heroImage: "assets/heroes/abu-dhabi.jpg",
+        heroImagePortrait: 'assets/heroes/abu-dhabi-portrait.jpg',
         heroPosition: "center center",
         accent: "#C9A227",
         accentRgb: "201, 162, 39",
@@ -7286,6 +7336,7 @@ const DESTINATIONS = {
         summary: "수크 와키프와 이슬람 예술 박물관, 코르니슈, 카타라와 펄, 사막 사파리까지 묶은 도하 템플릿입니다.",
         footer: "Doha feels strongest when old souq lanterns and new skyline glass share one bay.",
         heroImage: "assets/heroes/doha.jpg",
+        heroImagePortrait: 'assets/heroes/doha-portrait.jpg',
         heroPosition: "center center",
         accent: "#8D1B3D",
         accentRgb: "141, 27, 61",
@@ -7439,6 +7490,7 @@ const DESTINATIONS = {
         summary: '성지 풍경, 대모스크 실루엣, 탑 전망을 중심으로 짠 사우디아라비아 템플릿입니다.',
         footer: 'Saudi Arabia feels strongest when marble scale and night lights stay calm together.',
         heroImage: 'assets/heroes/saudi.jpg',
+        heroImagePortrait: 'assets/heroes/saudi-portrait.jpg',
         timeZone: 'Asia/Riyadh',
         weather: { latitude: 21.3891, longitude: 39.8579 },
         currency: { code: 'SAR', symbol: 'SAR', locale: 'ar-SA' },
@@ -7483,6 +7535,7 @@ const DESTINATIONS = {
         summary: '운하, 미술관, 조르단, 시장을 자연스럽게 잇는 암스테르담 템플릿입니다.',
         footer: 'Amsterdam works best when canals, museums, and markets stay in the same rhythm.',
         heroImage: 'assets/heroes/amsterdam.jpg',
+        heroImagePortrait: 'assets/heroes/amsterdam-portrait.jpg',
         accent: '#38BDF8',
         accentRgb: '56, 189, 248',
         ink: '#082F49',
@@ -7544,6 +7597,7 @@ const DESTINATIONS = {
         summary: '광장, 미술관, 공원, 타파스를 균형 있게 묶은 마드리드 템플릿입니다.',
         footer: 'Madrid feels strongest when plazas, museums, and late dinners share the same pace.',
         heroImage: 'assets/heroes/madrid.jpg',
+        heroImagePortrait: 'assets/heroes/madrid-portrait.jpg',
         accent: '#F97316',
         accentRgb: '249, 115, 22',
         ink: '#431407',
@@ -7597,6 +7651,7 @@ const DESTINATIONS = {
         summary: '스카이라인, 트램, 마켓, 빅토리아 피크를 압축한 홍콩 템플릿입니다.',
         footer: 'Hong Kong feels sharp when skyline, tram lines, and night markets overlap.',
         heroImage: 'assets/heroes/hong-kong.jpg',
+        heroImagePortrait: 'assets/heroes/hong-kong-portrait.jpg',
         accent: '#A78BFA',
         accentRgb: '167, 139, 250',
         ink: '#2E1065',
@@ -7650,6 +7705,7 @@ const DESTINATIONS = {
         summary: '성바울 유적, 세나도 광장, 타이파, 코타이를 묶은 마카오 템플릿입니다.',
         footer: 'Macau works best when old stone and casino light stay in the same frame.',
         heroImage: 'assets/heroes/macau.jpg',
+        heroImagePortrait: 'assets/heroes/macau-portrait.jpg',
         timeZone: 'Asia/Macau',
         weather: { latitude: 22.1987, longitude: 113.5439 },
         currency: { code: 'MOP', symbol: 'MOP$', locale: 'zh-MO' },
@@ -7694,6 +7750,7 @@ const DESTINATIONS = {
         summary: '오페라하우스, 항구, 비치, 로컬 브런치를 묶은 시드니 템플릿입니다.',
         footer: 'Sydney works when harbour icons and beach time stay in balance.',
         heroImage: 'assets/heroes/sydney.jpg',
+        heroImagePortrait: 'assets/heroes/sydney-portrait.jpg',
         accent: '#22C55E',
         accentRgb: '34, 197, 94',
         ink: '#052E16',
@@ -7747,6 +7804,7 @@ const DESTINATIONS = {
         summary: '킹스파크, 강변, 해변, 도심 전망을 묶은 퍼스 템플릿입니다.',
         footer: 'Perth works when park light and ocean space stay in balance.',
         heroImage: 'assets/heroes/perth.jpg',
+        heroImagePortrait: 'assets/heroes/perth-portrait.jpg',
         timeZone: 'Australia/Perth',
         weather: { latitude: -31.9523, longitude: 115.8613 },
         currency: { code: 'AUD', symbol: 'A$', locale: 'en-AU' },
@@ -7791,6 +7849,7 @@ const DESTINATIONS = {
         summary: "사우스뱅크, 스토리 브리지, 론파인 코알라, 마운트 쿠사 전망에 골드코스트 당일치기를 더한 브리즈번 템플릿입니다.",
         footer: "Brisbane works when river light, koalas, and a Gold Coast beach day stay easy.",
         heroImage: "assets/heroes/brisbane.jpg",
+        heroImagePortrait: 'assets/heroes/brisbane-portrait.jpg',
         heroPosition: "center center",
         accent: "#A3E635",
         accentRgb: "163, 230, 53",
@@ -7967,6 +8026,7 @@ const DESTINATIONS = {
         summary: "플린더스 역과 호시어 레인, 퀸빅토리아 마켓, 세인트 킬다에 그레이트 오션 로드와 야라 밸리 당일치기를 더한 멜버른 템플릿입니다.",
         footer: "Melbourne runs on laneway coffee, street art, and one long coastal drive.",
         heroImage: "assets/heroes/melbourne.jpg",
+        heroImagePortrait: 'assets/heroes/melbourne-portrait.jpg',
         heroPosition: "center center",
         accent: "#818CF8",
         accentRgb: "129, 140, 248",
@@ -8143,6 +8203,7 @@ const DESTINATIONS = {
         summary: '고궁, 후통, 공원, 야경을 묶은 베이징 템플릿입니다.',
         footer: 'Beijing works when imperial landmarks and hutong streets stay in one loop.',
         heroImage: 'assets/heroes/beijing.jpg',
+        heroImagePortrait: 'assets/heroes/beijing-portrait.jpg',
         accent: '#F87171',
         accentRgb: '248, 113, 113',
         ink: '#450A0A',
@@ -8193,6 +8254,7 @@ const DESTINATIONS = {
         summary: '번드, 타워, 쇼핑 거리, 강변 야경을 묶은 상하이 템플릿입니다.',
         footer: 'Shanghai feels strongest when the Bund and the skyline stay in the same frame.',
         heroImage: 'assets/heroes/shanghai.jpg',
+        heroImagePortrait: 'assets/heroes/shanghai-portrait.jpg',
         accent: '#38BDF8',
         accentRgb: '56, 189, 248',
         ink: '#082F49',
@@ -8243,6 +8305,7 @@ const DESTINATIONS = {
         summary: "서호 호반과 차밭, 고찰과 옛 거리를 천천히 묶은 항저우 템플릿입니다.",
         footer: "Hangzhou opens up when the lake, the tea hills, and the temple bells share one slow day.",
         heroImage: "assets/heroes/hangzhou.jpg",
+        heroImagePortrait: 'assets/heroes/hangzhou-portrait.jpg',
         heroPosition: "center 38%",
         accent: "#14B8A6",
         accentRgb: "20, 184, 166",
@@ -8419,6 +8482,7 @@ const DESTINATIONS = {
         summary: "고전 정원과 수로 골목, 사찰과 옛 거리를 잇는 쑤저우 템플릿입니다.",
         footer: "Suzhou reads like ink on paper: gardens, canals, and a temple bell at dusk.",
         heroImage: "assets/heroes/suzhou.jpg",
+        heroImagePortrait: 'assets/heroes/suzhou-portrait.jpg',
         heroPosition: "center 40%",
         accent: "#475B72",
         accentRgb: "71, 91, 114",
@@ -8595,6 +8659,7 @@ const DESTINATIONS = {
         summary: "병마용과 성벽, 회민가 먹거리로 고도의 시간을 되짚는 시안 템플릿입니다.",
         footer: "Xi'an lands when clay soldiers, old ramparts, and night-market smoke stack up in one trip.",
         heroImage: "assets/heroes/xian.jpg",
+        heroImagePortrait: 'assets/heroes/xian-portrait.jpg',
         heroPosition: "center 40%",
         accent: "#B46A09",
         accentRgb: "180, 106, 9",
@@ -8771,6 +8836,7 @@ const DESTINATIONS = {
         summary: "판다와 찻집, 사당과 옛 골목을 느긋하게 이어 붙인 청두 템플릿입니다.",
         footer: "Chengdu works at teahouse speed: pandas early, hotpot late, everything else in between.",
         heroImage: "assets/heroes/chengdu.jpg",
+        heroImagePortrait: 'assets/heroes/chengdu-portrait.jpg',
         heroPosition: "center 42%",
         accent: "#4D7C0F",
         accentRgb: "77, 124, 15",
@@ -8947,6 +9013,7 @@ const DESTINATIONS = {
         summary: "딤섬과 강변 야경, 사면섬 산책을 묶은 광저우 템플릿입니다.",
         footer: "Guangzhou is a food city first: dim sum by day, river lights by night.",
         heroImage: "assets/heroes/guangzhou.jpg",
+        heroImagePortrait: 'assets/heroes/guangzhou-portrait.jpg',
         heroPosition: "center 35%",
         accent: "#DB2777",
         accentRgb: "219, 39, 119",
@@ -9123,6 +9190,7 @@ const DESTINATIONS = {
         summary: "바다와 독일식 거리, 맥주와 해산물을 묶은 칭다오 템플릿입니다.",
         footer: "Qingdao is red roofs, blue water, and a cold glass of beer at the end of the day.",
         heroImage: "assets/heroes/qingdao.jpg",
+        heroImagePortrait: 'assets/heroes/qingdao-portrait.jpg',
         heroPosition: "center 45%",
         accent: "#2563EB",
         accentRgb: "37, 99, 235",
@@ -9299,6 +9367,7 @@ const DESTINATIONS = {
         summary: "아바타 봉우리와 톈먼산 유리잔도, 대협곡 유리다리로 하늘 위를 걷는 장자제 템플릿입니다.",
         footer: "Zhangjiajie hits hardest when the sandstone pillars float out of the morning mist.",
         heroImage: "assets/heroes/zhangjiajie.jpg",
+        heroImagePortrait: 'assets/heroes/zhangjiajie-portrait.jpg',
         heroPosition: "center center",
         accent: "#059669",
         accentRgb: "5, 150, 105",
@@ -9452,6 +9521,7 @@ const DESTINATIONS = {
         summary: "중산릉과 명효릉, 부자묘 친화이허 야경으로 육조 고도의 시간을 되짚는 난징 템플릿입니다.",
         footer: "Nanjing is best read slowly, from the mausoleum steps to the lantern-lit Qinhuai.",
         heroImage: "assets/heroes/nanjing.jpg",
+        heroImagePortrait: 'assets/heroes/nanjing-portrait.jpg',
         heroPosition: "center center",
         accent: "#7C3AED",
         accentRgb: "124, 58, 237",
@@ -9605,6 +9675,7 @@ const DESTINATIONS = {
         summary: "웨루산과 오렌지섬, 후난성박물관, 타이핑제와 원허유 야시장으로 매운 밤을 채우는 창사 템플릿입니다.",
         footer: "Changsha runs on chili, milk tea, and a skyline that never quite goes to sleep.",
         heroImage: "assets/heroes/changsha.jpg",
+        heroImagePortrait: 'assets/heroes/changsha-portrait.jpg',
         heroPosition: "center center",
         accent: "#EA580C",
         accentRgb: "234, 88, 12",
@@ -9735,6 +9806,7 @@ const DESTINATIONS = {
         summary: "석림과 뎬츠, 진마비지팡에 다리 고성 당일까지 얹은 사계절 봄 도시 쿤밍 템플릿입니다.",
         footer: "Kunming stays spring all year; the stone forest and the lake do the rest.",
         heroImage: "assets/heroes/kunming.jpg",
+        heroImagePortrait: 'assets/heroes/kunming-portrait.jpg',
         heroPosition: "center center",
         accent: "#65A30D",
         accentRgb: "101, 163, 13",
@@ -9911,6 +9983,7 @@ const DESTINATIONS = {
         summary: "구랑위 섬, 샤먼대학과 난푸퉈사, 쩡춰안 바닷가 골목을 묶은 샤먼 템플릿입니다.",
         footer: "Xiamen is a ferry ride, a piano echo, and a slow walk along the sea wall.",
         heroImage: "assets/heroes/xiamen.jpg",
+        heroImagePortrait: 'assets/heroes/xiamen-portrait.jpg',
         heroPosition: "center center",
         accent: "#E11D48",
         accentRgb: "225, 29, 72",
@@ -10064,6 +10137,7 @@ const DESTINATIONS = {
         summary: "성소피아 성당과 중앙대가, 빙설대세계와 태양도로 겨울 러시아 무드를 담은 하얼빈 템플릿입니다.",
         footer: "Harbin glows coldest and brightest when the ice lanterns switch on.",
         heroImage: "assets/heroes/harbin.jpg",
+        heroImagePortrait: 'assets/heroes/harbin-portrait.jpg',
         heroPosition: "center center",
         accent: "#7DD3FC",
         accentRgb: "125, 211, 252",
@@ -10217,6 +10291,7 @@ const DESTINATIONS = {
         summary: "한글 간판 거리와 옌볜 냉면, 백두산 천지 당일과 두만강까지 잇는 옌지 템플릿입니다.",
         footer: "Yanji feels close to home, with Heaven Lake one long morning away.",
         heroImage: "assets/heroes/yanji.jpg",
+        heroImagePortrait: 'assets/heroes/yanji-portrait.jpg',
         heroPosition: "center center",
         accent: "#0F766E",
         accentRgb: "15, 118, 110",
@@ -10347,6 +10422,7 @@ const DESTINATIONS = {
         summary: "훙야둥 야경과 경전철 관통 건물, 고진 골목과 훠궈를 한 줄로 엮은 산성 충칭 템플릿입니다.",
         footer: "Chongqing stacks itself: trains through towers, lights on the cliff, hotpot at the end.",
         heroImage: "assets/heroes/chongqing.jpg",
+        heroImagePortrait: 'assets/heroes/chongqing-portrait.jpg',
         heroPosition: "center center",
         accent: "#D72626",
         accentRgb: "215, 38, 38",
@@ -10500,6 +10576,7 @@ const DESTINATIONS = {
         summary: "상비산과 리장 유람, 룽지 다랑논과 양숴 시골길까지 카르스트 풍경을 나흘로 묶은 구이린 템플릿입니다.",
         footer: "Guilin is an ink painting you can float through.",
         heroImage: "assets/heroes/guilin.jpg",
+        heroImagePortrait: 'assets/heroes/guilin-portrait.jpg',
         heroPosition: "center center",
         accent: "#2F855A",
         accentRgb: "47, 133, 90",
@@ -10653,6 +10730,7 @@ const DESTINATIONS = {
         summary: "싱하이광장과 빈하이로 해안, 라오후탄과 러시아풍정가를 잇는 바닷바람 다롄 템플릿입니다.",
         footer: "Dalian is sea wind, wide squares, and seafood by the pier.",
         heroImage: "assets/heroes/dalian.jpg",
+        heroImagePortrait: 'assets/heroes/dalian-portrait.jpg',
         heroPosition: "center center",
         accent: "#1F6FB2",
         accentRgb: "31, 111, 178",
@@ -10783,6 +10861,7 @@ const DESTINATIONS = {
         summary: "선양고궁과 장씨수부, 북릉공원과 중가 야경으로 청나라 첫 수도를 걷는 선양 템플릿입니다.",
         footer: "Shenyang is the first Qing capital, still warm with dumplings and skewers.",
         heroImage: "assets/heroes/shenyang.jpg",
+        heroImagePortrait: 'assets/heroes/shenyang-portrait.jpg',
         heroPosition: "center center",
         accent: "#B8860B",
         accentRgb: "184, 134, 11",
@@ -10913,6 +10992,7 @@ const DESTINATIONS = {
         summary: "옌타이산 등대와 펑라이각 전설, 창위 와인과 양마도 해안을 담은 옌타이 템플릿입니다.",
         footer: "Yantai pours wine by the sea and tells legends of the eight immortals.",
         heroImage: "assets/heroes/yantai.jpg",
+        heroImagePortrait: 'assets/heroes/yantai-portrait.jpg',
         heroPosition: "center center",
         accent: "#7B2D8E",
         accentRgb: "123, 45, 142",
@@ -11173,6 +11253,7 @@ const DESTINATIONS = {
         summary: "황학루와 창장대교, 둥후 녹도와 후베이성박물관, 호부항 먹거리를 잇는 우한 템플릿입니다.",
         footer: "Wuhan starts with hot dry noodles and ends with the river lights.",
         heroImage: "assets/heroes/wuhan.jpg",
+        heroImagePortrait: 'assets/heroes/wuhan-portrait.jpg',
         heroPosition: "center center",
         accent: "#E08A1E",
         accentRgb: "224, 138, 30",
@@ -11326,6 +11407,7 @@ const DESTINATIONS = {
         summary: '도심 전망, 야시장, 온천, 로컬 먹거리를 묶은 타이베이 템플릿입니다.',
         footer: 'Taipei works when viewpoints, night markets, and food keep the pace light.',
         heroImage: 'assets/heroes/taipei.jpg',
+        heroImagePortrait: 'assets/heroes/taipei-portrait.jpg',
         accent: '#22D3EE',
         accentRgb: '34, 211, 238',
         ink: '#083344',
@@ -11376,6 +11458,7 @@ const DESTINATIONS = {
         summary: "연지담 용호탑, 보얼예술특구와 치진섬, 불광산과 류허 야시장, 아이허 야경을 3박 4일로 묶은 가오슝 템플릿입니다.",
         footer: "Kaohsiung is a harbor city that turns on its lights slowly and generously.",
         heroImage: "assets/heroes/kaohsiung.jpg",
+        heroImagePortrait: 'assets/heroes/kaohsiung-portrait.jpg',
         heroPosition: "center center",
         accent: "#F43F76",
         accentRgb: "244, 63, 118",
@@ -11529,6 +11612,7 @@ const DESTINATIONS = {
         summary: "궁위안옌과와 펑자 야시장, 르웨탄 유람선, 무지개마을과 가오메이 습지 선셋을 3박 4일로 엮은 타이중 템플릿입니다.",
         footer: "Taichung pairs bubble tea and a mountain lake within one easy day.",
         heroImage: "assets/heroes/taichung.jpg",
+        heroImagePortrait: 'assets/heroes/taichung-portrait.jpg',
         heroPosition: "center center",
         accent: "#8B5CF6",
         accentRgb: "139, 92, 246",
@@ -11682,6 +11766,7 @@ const DESTINATIONS = {
         summary: '호수, 올드쿼터, 카페, 야시장을 묶은 하노이 템플릿입니다.',
         footer: 'Hanoi feels best when lakes, old streets, and food stops move at an easy pace.',
         heroImage: 'assets/heroes/hanoi.jpg',
+        heroImagePortrait: 'assets/heroes/hanoi-portrait.jpg',
         accent: '#4ADE80',
         accentRgb: '74, 222, 128',
         ink: '#052E16',
@@ -11732,6 +11817,7 @@ const DESTINATIONS = {
         summary: "미케 비치 아침, 바나힐 골든 브릿지, 호이안 등불, 용다리 불쇼까지 바다와 산과 옛 마을을 한 번에 도는 다낭 템플릿입니다.",
         footer: "Da Nang is a beach morning, a mountain bridge, and a lantern town after dark.",
         heroImage: "assets/heroes/da-nang.jpg",
+        heroImagePortrait: 'assets/heroes/da-nang-portrait.jpg',
         heroPosition: "center center",
         accent: "#0F940D",
         accentRgb: "15, 148, 13",
@@ -11908,6 +11994,7 @@ const DESTINATIONS = {
         summary: "포나가르 탑과 롱선사, 머드 온천, 혼문섬 스노클링, 빈원더스를 해변 도시의 느긋한 리듬으로 엮은 나트랑 템플릿입니다.",
         footer: "Nha Trang works best when the bay does most of the planning.",
         heroImage: "assets/heroes/nha-trang.jpg",
+        heroImagePortrait: 'assets/heroes/nha-trang-portrait.jpg',
         heroPosition: "center center",
         accent: "#08B263",
         accentRgb: "8, 178, 99",
@@ -12260,6 +12347,7 @@ const DESTINATIONS = {
         summary: '도심 랜드마크, 카페, 마켓, 강변 야경을 묶은 호치민 템플릿입니다.',
         footer: 'Ho Chi Minh City works when cafes, markets, and skyline views stay close together.',
         heroImage: 'assets/heroes/ho-chi-minh-city.jpg',
+        heroImagePortrait: 'assets/heroes/ho-chi-minh-city-portrait.jpg',
         accent: '#FACC15',
         accentRgb: '250, 204, 21',
         ink: '#422006',
@@ -12310,6 +12398,7 @@ const DESTINATIONS = {
         summary: '타지마할 무드와 델리 핵심 랜드마크, 시장, 야경을 묶은 인도 템플릿입니다.',
         footer: 'India feels richest when stone, spice, and late light share one route.',
         heroImage: 'assets/heroes/india.jpg',
+        heroImagePortrait: 'assets/heroes/india-portrait.jpg',
         timeZone: 'Asia/Kolkata',
         weather: { latitude: 28.6139, longitude: 77.2090 },
         currency: { code: 'INR', symbol: '₹', locale: 'hi-IN' },
@@ -12354,6 +12443,7 @@ const DESTINATIONS = {
         summary: "갈레 페이스 일몰과 강가라마야 사원, 페타 시장, 로터스 타워에 갈레 요새 당일 기차까지 엮은 콜롬보 템플릿입니다.",
         footer: "Colombo is best at golden hour, with sea spray and a cup of Ceylon tea.",
         heroImage: "assets/heroes/colombo.jpg",
+        heroImagePortrait: 'assets/heroes/colombo-portrait.jpg',
         heroPosition: "center center",
         accent: "#10B981",
         accentRgb: "16, 185, 129",
@@ -12530,6 +12620,7 @@ const DESTINATIONS = {
         summary: "보드나트와 스와얌부나트, 더르바르 광장과 파슈파티나트, 타멜 밤거리에 나가르코트 일출까지 담은 카트만두 템플릿입니다.",
         footer: "Kathmandu feels richest in prayer flags, butter lamps, and mountain dawns.",
         heroImage: "assets/heroes/kathmandu.jpg",
+        heroImagePortrait: 'assets/heroes/kathmandu-portrait.jpg',
         heroPosition: "center center",
         accent: "#E4572E",
         accentRgb: "228, 87, 46",
@@ -12706,6 +12797,7 @@ const DESTINATIONS = {
         summary: "알라투 광장과 오쉬 바자르, 알라 아르차 트레킹, 부라나 탑을 지나 이식쿨 호수까지 이어지는 비슈케크 템플릿입니다.",
         footer: "Bishkek is a gateway: bazaars in the morning, alpine air by noon.",
         heroImage: "assets/heroes/bishkek.jpg",
+        heroImagePortrait: 'assets/heroes/bishkek-portrait.jpg',
         heroPosition: "center center",
         accent: "#EF4444",
         accentRgb: "239, 68, 68",
@@ -12882,6 +12974,7 @@ const DESTINATIONS = {
         summary: "하즈라티 이맘과 초르수 바자르, 지하철 역 투어에 사마르칸트 레기스탄 당일 고속철까지 묶은 타슈켄트 템플릿입니다.",
         footer: "Tashkent runs on blue tiles, plov, and marble metro stations.",
         heroImage: "assets/heroes/tashkent.jpg",
+        heroImagePortrait: 'assets/heroes/tashkent-portrait.jpg',
         heroPosition: "center center",
         accent: "#26A0B8",
         accentRgb: "38, 160, 184",
@@ -13058,6 +13151,7 @@ const DESTINATIONS = {
         summary: "젠코프 성당과 그린 바자르, 콕토베, 메데우·침불락, 빅 알마티 호수와 차른 캐니언까지 산과 도시를 잇는 알마티 템플릿입니다.",
         footer: "Almaty works best when apple orchards, snow peaks, and bazaars share one day.",
         heroImage: "assets/heroes/almaty.jpg",
+        heroImagePortrait: 'assets/heroes/almaty-portrait.jpg',
         heroPosition: "center center",
         accent: "#16A34A",
         accentRgb: "22, 163, 74",
@@ -13234,6 +13328,7 @@ const DESTINATIONS = {
         summary: "바이테렉과 칸 샤티르, 하즈렛 술탄 모스크, 누르 알렘에 보로보이 당일까지 더한 초원 위 미래도시 아스타나 템플릿입니다.",
         footer: "Astana feels strongest when glass towers meet the wide steppe sky.",
         heroImage: "assets/heroes/astana.jpg",
+        heroImagePortrait: 'assets/heroes/astana-portrait.jpg',
         heroPosition: "center center",
         accent: "#EEF205",
         accentRgb: "238, 242, 5",
@@ -13410,6 +13505,7 @@ const DESTINATIONS = {
         summary: "간단사와 수흐바타르 광장, 자이산 전망대에 테를지 초원과 칭기즈칸 기마상까지 묶은 몽골 템플릿입니다.",
         footer: "Ulaanbaatar is best read against an endless blue sky and open steppe.",
         heroImage: "assets/heroes/ulaanbaatar.jpg",
+        heroImagePortrait: 'assets/heroes/ulaanbaatar-portrait.jpg',
         heroPosition: "center center",
         accent: "#3B82F6",
         accentRgb: "59, 130, 246",
@@ -13586,6 +13682,7 @@ const DESTINATIONS = {
         summary: '인트라무로스, 도심 스카이라인, 강변, 야시장을 묶은 필리핀 템플릿입니다.',
         footer: 'The Philippines feels best when old walls and tropical evening light stay together.',
         heroImage: 'assets/heroes/philippines.jpg',
+        heroImagePortrait: 'assets/heroes/philippines-portrait.jpg',
         timeZone: 'Asia/Manila',
         weather: { latitude: 14.5995, longitude: 120.9842 },
         currency: { code: 'PHP', symbol: '₱', locale: 'en-PH' },
@@ -13630,6 +13727,7 @@ const DESTINATIONS = {
         summary: "막탄 호핑과 오슬롭 고래상어, 모알보알 정어리떼와 카와산 폭포에 세부 시티 탑스힐 야경까지 얹은 4박 5일 세부 휴양 템플릿입니다.",
         footer: "Cebu is turquoise water, mango shakes, and a boat waiting at every pier.",
         heroImage: "assets/heroes/cebu.jpg",
+        heroImagePortrait: 'assets/heroes/cebu-portrait.jpg',
         heroPosition: "center center",
         accent: "#2DD4BF",
         accentRgb: "45, 212, 191",
@@ -13806,6 +13904,7 @@ const DESTINATIONS = {
         summary: "초콜릿힐과 안경원숭이, 로복강 크루즈, 팡라오 알로나비치와 발리카삭 스노클링을 3박 4일로 엮은 보홀 템플릿입니다.",
         footer: "Bohol moves slowly: hills, rivers, and reefs all on one small island.",
         heroImage: "assets/heroes/bohol.jpg",
+        heroImagePortrait: 'assets/heroes/bohol-portrait.jpg',
         heroPosition: "center center",
         accent: "#84CC16",
         accentRgb: "132, 204, 22",
@@ -13959,6 +14058,7 @@ const DESTINATIONS = {
         summary: "화이트비치 스테이션 1~3과 디몰, 푸카셸비치, 선셋 세일링, 아리엘스 포인트까지 섬 하나를 꽉 채우는 3박 4일 보라카이 템플릿입니다.",
         footer: "Boracay is powder-white sand, paraw sails, and a sunset that never gets old.",
         heroImage: "assets/heroes/boracay.jpg",
+        heroImagePortrait: 'assets/heroes/boracay-portrait.jpg',
         heroPosition: "center center",
         accent: "#F472B6",
         accentRgb: "244, 114, 182",
@@ -14112,6 +14212,7 @@ const DESTINATIONS = {
         summary: "미모사 골프 라운딩과 피나투보 화산 트레킹, 수빅 오션어드벤처, SM클락 쇼핑을 묶은 3박 4일 클락 템플릿입니다.",
         footer: "Clark is volcano ash, wide fairways, and the easiest airport in the Philippines.",
         heroImage: "assets/heroes/clark.jpg",
+        heroImagePortrait: 'assets/heroes/clark-portrait.jpg',
         heroPosition: "center center",
         accent: "#9A3412",
         accentRgb: "154, 52, 18",
@@ -14265,6 +14366,7 @@ const DESTINATIONS = {
         summary: '붉은광장, 크렘린, 강변, 대로 풍경을 묶은 러시아 템플릿입니다.',
         footer: 'Russia feels strongest when red walls and evening avenues stay in one arc.',
         heroImage: 'assets/heroes/russia.jpg',
+        heroImagePortrait: 'assets/heroes/russia-portrait.jpg',
         timeZone: 'Europe/Moscow',
         weather: { latitude: 55.7558, longitude: 37.6173 },
         currency: { code: 'RUB', symbol: '₽', locale: 'ru-RU' },
@@ -14309,6 +14411,7 @@ const DESTINATIONS = {
         summary: '해안 전망, 브리지, 항구 산책을 묶은 블라디보스토크 템플릿입니다.',
         footer: 'Vladivostok feels best when bridge lines and harbor light stay in one sweep.',
         heroImage: 'assets/heroes/vladivostok.jpg',
+        heroImagePortrait: 'assets/heroes/vladivostok-portrait.jpg',
         timeZone: 'Asia/Vladivostok',
         weather: { latitude: 43.1155, longitude: 131.8855 },
         currency: { code: 'RUB', symbol: '₽', locale: 'ru-RU' },
@@ -14353,6 +14456,7 @@ const DESTINATIONS = {
         summary: '스카이라인, 수변 산책, 마켓, 타워 전망을 묶은 캐나다 템플릿입니다.',
         footer: 'Canada feels calmest when skyline, water, and markets stay in one sweep.',
         heroImage: 'assets/heroes/canada.jpg',
+        heroImagePortrait: 'assets/heroes/canada-portrait.jpg',
         timeZone: 'America/Toronto',
         weather: { latitude: 43.6532, longitude: -79.3832 },
         currency: { code: 'CAD', symbol: 'C$', locale: 'en-CA' },
@@ -14397,6 +14501,7 @@ const DESTINATIONS = {
         summary: '사이언스 월드, 수변 산책, 공원, 전망 포인트를 묶은 밴쿠버 템플릿입니다.',
         footer: 'Vancouver works best when Science World and the waterfront stay in one skyline.',
         heroImage: 'assets/heroes/vancouver.jpg',
+        heroImagePortrait: 'assets/heroes/vancouver-portrait.jpg',
         timeZone: 'America/Vancouver',
         weather: { latitude: 49.2827, longitude: -123.1207 },
         currency: { code: 'CAD', symbol: 'C$', locale: 'en-CA' },
@@ -14441,6 +14546,7 @@ const DESTINATIONS = {
         summary: '대광장, 벨라스 아르테스, 공원, 시장을 묶은 멕시코 템플릿입니다.',
         footer: 'Mexico feels richest when plaza, colour, and food stay in one route.',
         heroImage: 'assets/heroes/mexico.jpg',
+        heroImagePortrait: 'assets/heroes/mexico-portrait.jpg',
         timeZone: 'America/Mexico_City',
         weather: { latitude: 19.4326, longitude: -99.1332 },
         currency: { code: 'MXN', symbol: 'MX$', locale: 'es-MX' },
@@ -14485,6 +14591,7 @@ const DESTINATIONS = {
         summary: '해변, 전망 포인트, 페리, 야경을 묶은 칸쿤 템플릿입니다.',
         footer: 'Cancun feels best when beach blue and night light stay easy and bright.',
         heroImage: 'assets/heroes/cancun.jpg',
+        heroImagePortrait: 'assets/heroes/cancun-portrait.jpg',
         timeZone: 'America/Cancun',
         weather: { latitude: 21.1619, longitude: -86.8515 },
         currency: { code: 'MXN', symbol: 'MX$', locale: 'es-MX' },
@@ -14529,6 +14636,7 @@ const DESTINATIONS = {
         summary: '구세주상, 해변, 케이블카, 밤거리를 묶은 브라질 템플릿입니다.',
         footer: 'Brazil feels brightest when sea, mountain, and night stay in the same rhythm.',
         heroImage: 'assets/heroes/brazil.jpg',
+        heroImagePortrait: 'assets/heroes/brazil-portrait.jpg',
         timeZone: 'America/Sao_Paulo',
         weather: { latitude: -22.9068, longitude: -43.1729 },
         currency: { code: 'BRL', symbol: 'R$', locale: 'pt-BR' },
@@ -14573,6 +14681,7 @@ const DESTINATIONS = {
         summary: '오벨리스크, 광장, 카페, 탱고 무드를 묶은 아르헨티나 템플릿입니다.',
         footer: 'Argentina feels best when wide avenues, cafes, and late music share one day.',
         heroImage: 'assets/heroes/argentina.jpg',
+        heroImagePortrait: 'assets/heroes/argentina-portrait.jpg',
         timeZone: 'America/Argentina/Buenos_Aires',
         weather: { latitude: -34.6037, longitude: -58.3816 },
         currency: { code: 'ARS', symbol: 'AR$', locale: 'es-AR' },
@@ -14617,6 +14726,7 @@ const DESTINATIONS = {
         summary: '브란덴부르크문, 박물관섬, 장벽 흔적, 강변을 묶은 독일 템플릿입니다.',
         footer: 'Germany feels sharp when gates, museums, and broad avenues stay in one frame.',
         heroImage: 'assets/heroes/germany.jpg',
+        heroImagePortrait: 'assets/heroes/germany-portrait.jpg',
         timeZone: 'Europe/Berlin',
         weather: { latitude: 52.5200, longitude: 13.4050 },
         currency: { code: 'EUR', symbol: '€', locale: 'de-DE' },
@@ -14661,6 +14771,7 @@ const DESTINATIONS = {
         summary: '피라미드, 강변, 시장, 모스크를 묶은 이집트 템플릿입니다.',
         footer: 'Egypt feels timeless when stone, river, and market sound stay in one loop.',
         heroImage: 'assets/heroes/egypt.jpg',
+        heroImagePortrait: 'assets/heroes/egypt-portrait.jpg',
         timeZone: 'Africa/Cairo',
         weather: { latitude: 30.0444, longitude: 31.2357 },
         currency: { code: 'EGP', symbol: 'E£', locale: 'ar-EG' },
@@ -14705,6 +14816,7 @@ const DESTINATIONS = {
         summary: '투몬 베이, 전망대, 쇼핑, 선셋 비치를 묶은 괌 템플릿입니다.',
         footer: 'Guam feels best when reef colour and sunset pace stay slow.',
         heroImage: 'assets/heroes/guam.jpg',
+        heroImagePortrait: 'assets/heroes/guam-portrait.jpg',
         timeZone: 'Pacific/Guam',
         weather: { latitude: 13.4443, longitude: 144.7937 },
         currency: { code: 'USD', symbol: '$', locale: 'en-US' },
@@ -14749,6 +14861,7 @@ const DESTINATIONS = {
         summary: '와이키키, 다이아몬드 헤드, 수변 산책, 선셋을 묶은 하와이 템플릿입니다.',
         footer: 'Hawaii feels best when waves, ridge lines, and sunset stay in one day.',
         heroImage: 'assets/heroes/hawaii.jpg',
+        heroImagePortrait: 'assets/heroes/hawaii-portrait.jpg',
         timeZone: 'Pacific/Honolulu',
         weather: { latitude: 21.3099, longitude: -157.8581 },
         currency: { code: 'USD', symbol: '$', locale: 'en-US' },
@@ -14793,6 +14906,7 @@ const DESTINATIONS = {
         summary: '빙하 전망, 야생 풍경, 수변 산책을 묶은 알래스카 템플릿입니다.',
         footer: 'Alaska feels best when mountain scale and cold light stay wide open.',
         heroImage: 'assets/heroes/alaska.jpg',
+        heroImagePortrait: 'assets/heroes/alaska-portrait.jpg',
         timeZone: 'America/Anchorage',
         weather: { latitude: 61.2181, longitude: -149.9003 },
         currency: { code: 'USD', symbol: '$', locale: 'en-US' },
@@ -14837,6 +14951,7 @@ const DESTINATIONS = {
         summary: '스카이라인, 브런치, 라이브 음악, 강변 산책을 묶은 텍사스 템플릿입니다.',
         footer: 'Texas works when skyline, food, and music stay warm and loose.',
         heroImage: 'assets/heroes/texas.jpg',
+        heroImagePortrait: 'assets/heroes/texas-portrait.jpg',
         timeZone: 'America/Chicago',
         weather: { latitude: 30.2672, longitude: -97.7431 },
         currency: { code: 'USD', symbol: '$', locale: 'en-US' },
@@ -14881,6 +14996,7 @@ const DESTINATIONS = {
         summary: "골든게이트, 알카트라즈, 피어 39, 케이블카, 소살리토 페리를 언덕 동선으로 묶은 샌프란시스코 템플릿입니다.",
         footer: "San Francisco works when fog, hills, and the bay keep showing up in one frame.",
         heroImage: "assets/heroes/san-francisco.jpg",
+        heroImagePortrait: 'assets/heroes/san-francisco-portrait.jpg',
         heroPosition: "center center",
         accent: "#F00035",
         accentRgb: "240, 0, 53",
@@ -15057,6 +15173,7 @@ const DESTINATIONS = {
         summary: "파이크 플레이스 마켓, 스페이스 니들, 치훌리, 케리 파크 스카이라인을 커피 향으로 묶은 시애틀 템플릿입니다.",
         footer: "Seattle feels right with a coffee in hand, a ferry horn, and rain that never quite falls.",
         heroImage: "assets/heroes/seattle.jpg",
+        heroImagePortrait: 'assets/heroes/seattle-portrait.jpg',
         heroPosition: "center center",
         accent: "#1FA91F",
         accentRgb: "31, 169, 31",
@@ -15233,6 +15350,7 @@ const DESTINATIONS = {
         summary: "클라우드 게이트, 아트 인스티튜트, 건축 리버 크루즈, 윌리스 타워, 딥디쉬를 묶은 시카고 템플릿입니다.",
         footer: "Chicago works when the river, the skyline, and a slow deep-dish share one day.",
         heroImage: "assets/heroes/chicago.jpg",
+        heroImagePortrait: 'assets/heroes/chicago-portrait.jpg',
         heroPosition: "center center",
         accent: "#3DEBF2",
         accentRgb: "61, 235, 242",
@@ -15409,6 +15527,7 @@ const DESTINATIONS = {
         summary: "프리덤 트레일, 퀸시 마켓, 하버드·MIT, 펜웨이, 뉴베리 스트리트를 걸어서 묶은 보스턴 템플릿입니다.",
         footer: "Boston is best on foot, where red brick, campus lawns, and the harbour line up.",
         heroImage: "assets/heroes/boston.jpg",
+        heroImagePortrait: 'assets/heroes/boston-portrait.jpg',
         heroPosition: "center center",
         accent: "#BD3039",
         accentRgb: "189, 48, 57",
@@ -15585,6 +15704,7 @@ const DESTINATIONS = {
         summary: "내셔널 몰의 링컨 기념관, 스미소니언, 백악관과 의사당, 조지타운, 알링턴을 묶은 워싱턴 D.C. 템플릿입니다.",
         footer: "Washington works when monuments, free museums, and Georgetown brick stay in one loop.",
         heroImage: "assets/heroes/washington-dc.jpg",
+        heroImagePortrait: 'assets/heroes/washington-dc-portrait.jpg',
         heroPosition: "center center",
         accent: "#F9A8D4",
         accentRgb: "249, 168, 212",
@@ -15761,6 +15881,7 @@ const DESTINATIONS = {
         summary: "템플 스퀘어와 주 의사당, 앤털로프 아일랜드, 파크시티, 와사치 캐니언을 로드트립으로 묶은 솔트레이크시티 템플릿입니다.",
         footer: "Salt Lake City works when granite temples, salt flats, and mountain roads share the week.",
         heroImage: "assets/heroes/salt-lake-city.jpg",
+        heroImagePortrait: 'assets/heroes/salt-lake-city-portrait.jpg',
         heroPosition: "center center",
         accent: "#D084FC",
         accentRgb: "208, 132, 252",
@@ -15937,6 +16058,7 @@ const DESTINATIONS = {
         summary: '프라하성, 카를교, 광장, 야경을 묶은 체코 템플릿입니다.',
         footer: 'Prague works when bridges, stone lanes, and night light stay close together.',
         heroImage: 'assets/heroes/czech.jpg',
+        heroImagePortrait: 'assets/heroes/czech-portrait.jpg',
         timeZone: 'Europe/Prague',
         weather: { latitude: 50.0755, longitude: 14.4378 },
         currency: { code: 'CZK', symbol: 'Kč', locale: 'cs-CZ' },
@@ -15981,6 +16103,7 @@ const DESTINATIONS = {
         summary: "국회의사당과 어부의 요새, 세체니 온천, 중앙시장, 도나우 야경 유람선을 묶은 부다페스트 템플릿입니다.",
         footer: "Budapest glows brightest when thermal steam and Danube lights end the same day.",
         heroImage: "assets/heroes/budapest.jpg",
+        heroImagePortrait: 'assets/heroes/budapest-portrait.jpg',
         heroPosition: "center center",
         accent: "#DE843B",
         accentRgb: "222, 132, 59",
@@ -16157,6 +16280,7 @@ const DESTINATIONS = {
         summary: '구시가지, 궁전, 공원, 강변 야경을 묶은 폴란드 템플릿입니다.',
         footer: 'Poland works when old squares and modern skyline stay in one rhythm.',
         heroImage: 'assets/heroes/poland.jpg',
+        heroImagePortrait: 'assets/heroes/poland-portrait.jpg',
         timeZone: 'Europe/Warsaw',
         weather: { latitude: 52.2297, longitude: 21.0122 },
         currency: { code: 'PLN', symbol: 'zł', locale: 'pl-PL' },
@@ -16201,6 +16325,7 @@ const DESTINATIONS = {
         summary: '니하운, 궁전, 운하, 북유럽 산책을 묶은 덴마크 템플릿입니다.',
         footer: 'Denmark works when canals, colour, and a clean walkable pace stay light.',
         heroImage: 'assets/heroes/denmark.jpg',
+        heroImagePortrait: 'assets/heroes/denmark-portrait.jpg',
         timeZone: 'Europe/Copenhagen',
         weather: { latitude: 55.6761, longitude: 12.5683 },
         currency: { code: 'DKK', symbol: 'kr', locale: 'da-DK' },
@@ -16245,6 +16370,7 @@ const DESTINATIONS = {
         summary: '감라스탄, 수변, 전망, 박물관을 묶은 스웨덴 템플릿입니다.',
         footer: 'Sweden feels best when water, stone alleys, and clean design stay together.',
         heroImage: 'assets/heroes/sweden.jpg',
+        heroImagePortrait: 'assets/heroes/sweden-portrait.jpg',
         timeZone: 'Europe/Stockholm',
         weather: { latitude: 59.3293, longitude: 18.0686 },
         currency: { code: 'SEK', symbol: 'kr', locale: 'sv-SE' },
@@ -16289,6 +16415,7 @@ const DESTINATIONS = {
         summary: '오슬로 오페라하우스, 항구, 공원, 전망을 묶은 노르웨이 템플릿입니다.',
         footer: 'Norway works when harbour light and clean northern air stay crisp.',
         heroImage: 'assets/heroes/norway.jpg',
+        heroImagePortrait: 'assets/heroes/norway-portrait.jpg',
         timeZone: 'Europe/Oslo',
         weather: { latitude: 59.9139, longitude: 10.7522 },
         currency: { code: 'NOK', symbol: 'kr', locale: 'nb-NO' },
@@ -16333,6 +16460,7 @@ const DESTINATIONS = {
         summary: '헬싱키 대성당, 항구, 디자인 지구를 묶은 핀란드 템플릿입니다.',
         footer: 'Finland works when harbour calm and clean city lines stay minimal.',
         heroImage: 'assets/heroes/finland.jpg',
+        heroImagePortrait: 'assets/heroes/finland-portrait.jpg',
         timeZone: 'Europe/Helsinki',
         weather: { latitude: 60.1699, longitude: 24.9384 },
         currency: { code: 'EUR', symbol: '€', locale: 'fi-FI' },
@@ -16377,6 +16505,7 @@ const DESTINATIONS = {
         summary: '쇤브룬, 구시가지, 카페, 클래식 무드를 묶은 오스트리아 템플릿입니다.',
         footer: 'Austria works when palace scale and cafe rhythm stay elegant.',
         heroImage: 'assets/heroes/austria.jpg',
+        heroImagePortrait: 'assets/heroes/austria-portrait.jpg',
         timeZone: 'Europe/Vienna',
         weather: { latitude: 48.2082, longitude: 16.3738 },
         currency: { code: 'EUR', symbol: '€', locale: 'de-AT' },
@@ -16421,6 +16550,7 @@ const DESTINATIONS = {
         summary: '템플바, 강변, 공원, 로컬 펍 무드를 묶은 아일랜드 템플릿입니다.',
         footer: 'Ireland works when river walks and pub light stay easygoing.',
         heroImage: 'assets/heroes/ireland.jpg',
+        heroImagePortrait: 'assets/heroes/ireland-portrait.jpg',
         timeZone: 'Europe/Dublin',
         weather: { latitude: 53.3498, longitude: -6.2603 },
         currency: { code: 'EUR', symbol: '€', locale: 'en-IE' },
@@ -16465,6 +16595,7 @@ const DESTINATIONS = {
         summary: '레이캬비크 교회, 해안 산책, 블루라군 무드를 묶은 아이슬란드 템플릿입니다.',
         footer: 'Iceland works when cold air, church lines, and open sky stay uncluttered.',
         heroImage: 'assets/heroes/iceland.jpg',
+        heroImagePortrait: 'assets/heroes/iceland-portrait.jpg',
         timeZone: 'Atlantic/Reykjavik',
         weather: { latitude: 64.1466, longitude: -21.9426 },
         currency: { code: 'ISK', symbol: 'kr', locale: 'is-IS' },
@@ -16509,6 +16640,7 @@ const DESTINATIONS = {
         summary: '테이블마운틴, 해안, 와이너리 무드를 묶은 남아공 템플릿입니다.',
         footer: 'South Africa works when mountain silhouette and ocean light stay bold.',
         heroImage: 'assets/heroes/south-africa.jpg',
+        heroImagePortrait: 'assets/heroes/south-africa-portrait.jpg',
         timeZone: 'Africa/Johannesburg',
         weather: { latitude: -33.9249, longitude: 18.4241 },
         currency: { code: 'ZAR', symbol: 'R', locale: 'en-ZA' },
@@ -16553,6 +16685,7 @@ const DESTINATIONS = {
         summary: '독립광장, 해변, 로컬 마켓을 묶은 가나 템플릿입니다.',
         footer: 'Ghana works when warm colour, coast, and city pace stay direct.',
         heroImage: 'assets/heroes/ghana.jpg',
+        heroImagePortrait: 'assets/heroes/ghana-portrait.jpg',
         timeZone: 'Africa/Accra',
         weather: { latitude: 5.6037, longitude: -0.1870 },
         currency: { code: 'GHS', symbol: '₵', locale: 'en-GH' },
@@ -16597,6 +16730,7 @@ const DESTINATIONS = {
         summary: '사파리 무드, 기린 실루엣, 도심 전망을 함께 담은 케냐 템플릿입니다.',
         footer: 'Kenya feels strongest when savannah air and city skyline meet in one frame.',
         heroImage: 'assets/heroes/kenya.jpg',
+        heroImagePortrait: 'assets/heroes/kenya-portrait.jpg',
         timeZone: 'Africa/Nairobi',
         weather: { latitude: -1.2921, longitude: 36.8219 },
         currency: { code: 'KES', symbol: 'KSh', locale: 'en-KE' },
@@ -16641,6 +16775,7 @@ const DESTINATIONS = {
         summary: '오이아, 피라, 칼데라 전망, 하얀 돔 무드를 묶은 그리스 템플릿입니다.',
         footer: 'Greece works best when white walls, blue domes, and caldera light stay clear.',
         heroImage: 'assets/heroes/greece.jpg',
+        heroImagePortrait: 'assets/heroes/greece-portrait.jpg',
         timeZone: 'Europe/Athens',
         weather: { latitude: 36.3932, longitude: 25.4615 },
         currency: { code: 'EUR', symbol: '€', locale: 'el-GR' },
@@ -16685,6 +16820,7 @@ const DESTINATIONS = {
         summary: '아야 소피아, 블루 모스크, 바자르, 해협 전망을 묶은 튀르키예 템플릿입니다.',
         footer: 'Turkey feels richest when Hagia Sophia, domes, and bazaars stay in one rhythm.',
         heroImage: 'assets/heroes/turkey.jpg',
+        heroImagePortrait: 'assets/heroes/turkey-portrait.jpg',
         timeZone: 'Europe/Istanbul',
         weather: { latitude: 41.0082, longitude: 28.9784 },
         currency: { code: 'TRY', symbol: '₺', locale: 'tr-TR' },
@@ -16729,6 +16865,7 @@ const DESTINATIONS = {
         summary: '마테호른, 호수 반영, 산악열차 무드를 묶은 스위스 템플릿입니다.',
         footer: 'Switzerland feels sharpest when clean air, snow line, and lake reflection stay clear.',
         heroImage: 'assets/heroes/switzerland.jpg',
+        heroImagePortrait: 'assets/heroes/switzerland-portrait.jpg',
         timeZone: 'Europe/Zurich',
         weather: { latitude: 46.0207, longitude: 7.7491 },
         currency: { code: 'CHF', symbol: 'CHF', locale: 'de-CH' },
@@ -16773,6 +16910,7 @@ const DESTINATIONS = {
         summary: '코메르시우 광장, 알파마, 벨렝, 강변 전망을 묶은 포르투갈 템플릿입니다.',
         footer: 'Portugal feels best when plaza light and river wind stay warm together.',
         heroImage: 'assets/heroes/portugal.jpg',
+        heroImagePortrait: 'assets/heroes/portugal-portrait.jpg',
         timeZone: 'Europe/Lisbon',
         weather: { latitude: 38.7223, longitude: -9.1393 },
         currency: { code: 'EUR', symbol: '€', locale: 'pt-PT' },
@@ -16817,6 +16955,7 @@ const DESTINATIONS = {
         summary: '샤토 프롱트낙, 성벽, 구시가지 풍경을 묶은 퀘벡 템플릿입니다.',
         footer: 'Quebec works when stone streets and winter-blue light stay intimate.',
         heroImage: 'assets/heroes/quebec.jpg',
+        heroImagePortrait: 'assets/heroes/quebec-portrait.jpg',
         timeZone: 'America/Toronto',
         weather: { latitude: 46.8139, longitude: -71.2080 },
         currency: { code: 'CAD', symbol: 'C$', locale: 'fr-CA' },
@@ -16861,6 +17000,7 @@ const DESTINATIONS = {
         summary: "캘거리 타워에서 밴프 곤돌라, 모레인 호수, 레이크 루이스, 아이스필드 파크웨이까지 이어지는 로키 로드트립 템플릿입니다.",
         footer: "The Rockies reward early starts, glacier-blue water, and one more lookout.",
         heroImage: "assets/heroes/calgary.jpg",
+        heroImagePortrait: 'assets/heroes/calgary-portrait.jpg',
         heroPosition: "center center",
         accent: "#5EEAD4",
         accentRgb: "94, 234, 212",
@@ -17037,6 +17177,7 @@ const DESTINATIONS = {
         summary: '스트립, 분수쇼, 스피어, 야경 드라이브를 묶은 라스베이거스 템플릿입니다.',
         footer: 'Las Vegas works when neon scale and desert night stay unapologetically bright.',
         heroImage: 'assets/heroes/las-vegas.jpg',
+        heroImagePortrait: 'assets/heroes/las-vegas-portrait.jpg',
         timeZone: 'America/Los_Angeles',
         weather: { latitude: 36.1699, longitude: -115.1398 },
         currency: { code: 'USD', symbol: '$', locale: 'en-US' },
@@ -17081,6 +17222,7 @@ const DESTINATIONS = {
         summary: '마추픽추 무드, 광장, 계단 골목, 안데스 풍경을 묶은 페루 템플릿입니다.',
         footer: 'Peru feels most memorable when stone terraces and cloud lines stay dramatic.',
         heroImage: 'assets/heroes/peru.jpg',
+        heroImagePortrait: 'assets/heroes/peru-portrait.jpg',
         timeZone: 'America/Lima',
         weather: { latitude: -13.5319, longitude: -71.9675 },
         currency: { code: 'PEN', symbol: 'S/', locale: 'es-PE' },
@@ -17125,6 +17267,7 @@ const DESTINATIONS = {
         summary: '안데스 전망, 언덕, 와이너리 무드를 묶은 칠레 템플릿입니다.',
         footer: 'Chile works when mountain scale and dry evening light stay wide and crisp.',
         heroImage: 'assets/heroes/chile.jpg',
+        heroImagePortrait: 'assets/heroes/chile-portrait.jpg',
         timeZone: 'America/Santiago',
         weather: { latitude: -33.4489, longitude: -70.6693 },
         currency: { code: 'CLP', symbol: '$', locale: 'es-CL' },
@@ -17169,6 +17312,7 @@ const DESTINATIONS = {
         summary: '성벽 도시, 요새, 카리브해 색감을 묶은 콜롬비아 템플릿입니다.',
         footer: 'Colombia feels best when walls, balconies, and sea breeze stay warm.',
         heroImage: 'assets/heroes/colombia.jpg',
+        heroImagePortrait: 'assets/heroes/colombia-portrait.jpg',
         timeZone: 'America/Bogota',
         weather: { latitude: 10.3910, longitude: -75.4794 },
         currency: { code: 'COP', symbol: '$', locale: 'es-CO' },
@@ -17213,6 +17357,7 @@ const DESTINATIONS = {
         summary: '우유니 소금사막, 반영샷, 기차무덤 무드를 묶은 볼리비아 템플릿입니다.',
         footer: 'Bolivia feels surreal when horizon, reflection, and salt textures stay endless.',
         heroImage: 'assets/heroes/bolivia.jpg',
+        heroImagePortrait: 'assets/heroes/bolivia-portrait.jpg',
         timeZone: 'America/La_Paz',
         weather: { latitude: -20.4607, longitude: -66.8267 },
         currency: { code: 'BOB', symbol: 'Bs', locale: 'es-BO' },
@@ -17257,6 +17402,7 @@ const DESTINATIONS = {
         summary: '푸른 골목, 메디나, 옥상 뷰를 묶은 모로코 템플릿입니다.',
         footer: 'Morocco feels strongest when blue walls and late rooftop light stay soft.',
         heroImage: 'assets/heroes/morocco.jpg',
+        heroImagePortrait: 'assets/heroes/morocco-portrait.jpg',
         timeZone: 'Africa/Casablanca',
         weather: { latitude: 35.1688, longitude: -5.2636 },
         currency: { code: 'MAD', symbol: 'د.م.', locale: 'ar-MA' },
@@ -17301,6 +17447,7 @@ const DESTINATIONS = {
         summary: '킬리만자로 무드, 사파리 관문, 로컬 마켓을 묶은 탄자니아 템플릿입니다.',
         footer: 'Tanzania feels unforgettable when mountain silhouettes and savannah air stay open.',
         heroImage: 'assets/heroes/tanzania.jpg',
+        heroImagePortrait: 'assets/heroes/tanzania-portrait.jpg',
         timeZone: 'Africa/Dar_es_Salaam',
         weather: { latitude: -3.3869, longitude: 36.6830 },
         currency: { code: 'TZS', symbol: 'TSh', locale: 'sw-TZ' },
@@ -17345,6 +17492,7 @@ const DESTINATIONS = {
         summary: '피오르드, 호수, 산악 전망을 묶은 뉴질랜드 템플릿입니다.',
         footer: 'New Zealand feels vast when lake stillness and cliff scale stay clean.',
         heroImage: 'assets/heroes/new-zealand.jpg',
+        heroImagePortrait: 'assets/heroes/new-zealand-portrait.jpg',
         timeZone: 'Pacific/Auckland',
         weather: { latitude: -45.0312, longitude: 168.6626 },
         currency: { code: 'NZD', symbol: 'NZ$', locale: 'en-NZ' },
@@ -17389,6 +17537,7 @@ const DESTINATIONS = {
         summary: '라군, 수상 방갈로, 스노클링 무드를 묶은 몰디브 템플릿입니다.',
         footer: 'Maldives works when water colour and slow air stay almost unreal.',
         heroImage: 'assets/heroes/maldives.jpg',
+        heroImagePortrait: 'assets/heroes/maldives-portrait.jpg',
         timeZone: 'Indian/Maldives',
         weather: { latitude: 4.1755, longitude: 73.5093 },
         currency: { code: 'MVR', symbol: 'Rf', locale: 'en-MV' },
@@ -17477,6 +17626,7 @@ const DESTINATIONS = {
         summary: '락 아일랜드, 에메랄드 바다, 섬 호핑을 묶은 팔라우 템플릿입니다.',
         footer: 'Palau feels surreal when green islands float over clear water.',
         heroImage: 'assets/heroes/palau.jpg',
+        heroImagePortrait: 'assets/heroes/palau-portrait.jpg',
         timeZone: 'Pacific/Palau',
         weather: { latitude: 7.3426, longitude: 134.4789 },
         currency: { code: 'USD', symbol: '$', locale: 'en-US' },
@@ -17531,7 +17681,8 @@ const appState = {
     hasStarted: false,
     customized: false,
     activeDayId: null,
-    activeActivityId: null
+    activeActivityId: null,
+    reorderMode: false
 };
 
 let activityEditorState = {
@@ -17560,6 +17711,17 @@ let exchangeInputDestinationId = null;
 let exchangeInputsTouched = false;
 let currentFocusDismissedActivityId = null;
 let isAutoScrollingToCurrentFocus = false;
+// 모바일(세로 화면)에서는 세로 사진이 있으면 그것을 쓴다. 가로 사진을 세로로 자르면 랜드마크가 잘려 나가기 때문.
+const portraitViewportQuery = window.matchMedia('(orientation: portrait)');
+function isPortraitViewport() {
+    return portraitViewportQuery.matches;
+}
+function getHeroSource(destination) {
+    if (isPortraitViewport() && destination.heroImagePortrait) {
+        return { src: destination.heroImagePortrait, position: destination.heroPositionPortrait || 'center center' };
+    }
+    return { src: destination.heroImage, position: destination.heroPosition || 'center center' };
+}
 const heroImagePreloadCache = new Map();
 
 const COUNTRY_FLAGS = {
@@ -18122,6 +18284,9 @@ const ui = {
     appendDayBtn: document.getElementById('append-day-btn'),
     itineraryContainer: document.getElementById('itinerary-container'),
     currentFocusBtn: document.getElementById('current-focus-btn'),
+    reorderModeBtn: document.getElementById('reorder-mode-btn'),
+    reorderModeHint: document.getElementById('reorder-mode-hint'),
+    reorderDoneFab: document.getElementById('reorder-done-fab'),
     footerNote: document.getElementById('footer-note'),
     activityModal: document.getElementById('activity-modal'),
     activityCloseBtn: document.getElementById('activity-close-btn'),
@@ -19195,9 +19360,10 @@ function applyTheme(destination) {
     document.documentElement.style.setProperty('--overlay-top', destination.overlayTop);
     document.documentElement.style.setProperty('--overlay-bottom', destination.overlayBottom);
 
-    ui.heroImage.src = destination.heroImage;
+    const heroSource = getHeroSource(destination);
+    if (ui.heroImage.getAttribute('src') !== heroSource.src) ui.heroImage.src = heroSource.src;
     ui.heroImage.alt = `${destination.city}, ${destination.country}`;
-    ui.heroImage.style.objectPosition = destination.heroPosition || 'center center';
+    ui.heroImage.style.objectPosition = heroSource.position;
     document.title = `${destination.country} Trip Plan`;
 }
 
@@ -19529,7 +19695,7 @@ function setCurrentFocusButtonVisible(visible) {
 }
 
 function updateCurrentFocusButton() {
-    if (!appState.hasStarted || !appState.activeActivityId || ui.tripShell.classList.contains('hidden')) {
+    if (!appState.hasStarted || !appState.activeActivityId || appState.reorderMode || ui.tripShell.classList.contains('hidden')) {
         setCurrentFocusButtonVisible(false);
         return;
     }
@@ -20219,7 +20385,79 @@ function refreshRenderedWeather() {
     lucide.createIcons();
 }
 
+function getDayMoveLabel(day, dayIndex) {
+    const date = parseYmd(day.date);
+    return `${dayIndex + 1}일차 · ${formatMonthDay(date)} ${formatMonthDayWithWeekday(date)} · ${getDayChipLabel(day)}`;
+}
+
+function buildActivityReorderControlsHtml(day, dayIndex, activity, activityIndex) {
+    const dayCount = appState.itinerary.length;
+    const isFirstCard = activityIndex === 0;
+    const isLastCard = activityIndex === day.activities.length - 1;
+    const upCrossesDay = isFirstCard && dayIndex > 0;
+    const downCrossesDay = isLastCard && dayIndex < dayCount - 1;
+    const canMoveUp = !isFirstCard || upCrossesDay;
+    const canMoveDown = !isLastCard || downCrossesDay;
+    const upLabel = upCrossesDay ? '이전 날짜의 마지막으로 이동' : '위로 이동';
+    const downLabel = downCrossesDay ? '다음 날짜의 처음으로 이동' : '아래로 이동';
+    const dayOptionsHtml = appState.itinerary
+        .map((otherDay, otherIndex) => (otherIndex === dayIndex
+            ? ''
+            : `<option value="${otherIndex}">${escapeHtml(getDayMoveLabel(otherDay, otherIndex))}</option>`))
+        .join('');
+    const dayMoveHtml = dayCount > 1 ? `
+        <label class="reorder-day-move" title="${escapeHtml('다른 날짜로 이동')}">
+            <i data-lucide="calendar-days" class="w-3.5 h-3.5"></i>
+            <span>날짜 이동</span>
+            <select
+                class="reorder-day-select"
+                data-reorder-day-select="true"
+                data-day-index="${dayIndex}"
+                data-activity-id="${activity.id}"
+                aria-label="${escapeHtml('다른 날짜로 이동')}">
+                <option value="" selected disabled>${escapeHtml('이동할 날짜 선택')}</option>
+                ${dayOptionsHtml}
+            </select>
+        </label>
+    ` : '';
+
+    return `
+        <div class="activity-reorder-controls" data-reorder-control="true" data-skip-edit="true">
+            ${dayMoveHtml}
+            <button
+                type="button"
+                class="reorder-step-btn"
+                data-reorder-step="up"
+                data-day-index="${dayIndex}"
+                data-activity-id="${activity.id}"
+                aria-label="${escapeHtml(upLabel)}"
+                title="${escapeHtml(upLabel)}"
+                ${canMoveUp ? '' : 'disabled'}>
+                <i data-lucide="${upCrossesDay ? 'chevrons-up' : 'chevron-up'}" class="w-5 h-5"></i>
+            </button>
+            <button
+                type="button"
+                class="reorder-step-btn"
+                data-reorder-step="down"
+                data-day-index="${dayIndex}"
+                data-activity-id="${activity.id}"
+                aria-label="${escapeHtml(downLabel)}"
+                title="${escapeHtml(downLabel)}"
+                ${canMoveDown ? '' : 'disabled'}>
+                <i data-lucide="${downCrossesDay ? 'chevrons-down' : 'chevron-down'}" class="w-5 h-5"></i>
+            </button>
+        </div>
+    `;
+}
+
 function renderItinerary() {
+    if (activityDragState.active) {
+        // 끌기 도중에는 DOM을 갈아끼우지 않고, 끌기가 끝난 뒤 다시 그린다
+        activityDragState.renderPending = true;
+        return;
+    }
+
+    const reorderMode = Boolean(appState.reorderMode);
     ui.itineraryContainer.innerHTML = '<div class="absolute left-[11px] top-2 bottom-0 w-[2px] bg-white/20"></div>';
 
     appState.itinerary.forEach((day, dayIndex) => {
@@ -20266,48 +20504,59 @@ function renderItinerary() {
                     </div>
                 </div>
             ` : '';
+            const mapLinkHtml = `
+                <a href="${getMapsSearchUrl(activity.mapQuery || activity.location, activity.destinationId || day.destinationId)}"
+                    target="_blank"
+                    rel="noreferrer"
+                    data-skip-edit="true"
+                    class="map-link p-2 text-white/36 transition-colors shrink-0"
+                    title="구글 맵에서 보기">
+                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                </a>
+            `;
+            const dragHandleHtml = reorderMode ? '' : `
+                <button
+                    type="button"
+                    tabindex="-1"
+                    data-skip-edit="true"
+                    data-drag-handle="true"
+                    class="activity-drag-handle"
+                    aria-label="${escapeHtml('일정 순서 바꾸기')}"
+                    title="${escapeHtml('끌어서 순서 바꾸기 · 카드를 길게 눌러도 돼요')}">
+                    <i data-lucide="grip-vertical" class="w-5 h-5"></i>
+                </button>
+            `;
+            const cardModeClasses = reorderMode
+                ? 'flex-wrap activity-card-reorder'
+                : 'justify-between cursor-pointer hover:bg-white/[0.08]';
+            const cardModeAttributes = reorderMode ? '' : 'data-action="edit-activity"';
 
             return `
-            <div>
+            <div data-activity-wrapper="${activity.id}" data-flip-item="true">
                 <div
-                    class="relative glass-panel p-4 rounded-3xl flex items-center justify-between gap-3 mb-3 cursor-pointer hover:bg-white/[0.08] transition-colors ${isActiveActivity ? 'next-item' : ''}"
-                    data-action="edit-activity"
+                    class="activity-card relative glass-panel p-4 rounded-3xl flex items-center gap-3 mb-3 transition-colors ${cardModeClasses} ${isActiveActivity ? 'next-item' : ''}"
+                    ${cardModeAttributes}
                     data-day-index="${dayIndex}"
                     data-activity-card-id="${activity.id}"
                     data-activity-id="${activity.id}"
                     tabindex="0">
                     ${buildHourlyWeatherHtml(day, activity)}
-                    <div class="flex items-center gap-3 flex-1 min-w-0">
-                        <button
-                            type="button"
-                            tabindex="-1"
-                            data-skip-edit="true"
-                            data-drag-handle="true"
-                            class="activity-drag-handle shrink-0"
-                            aria-label="${escapeHtml('일정 순서 바꾸기')}"
-                            title="${escapeHtml('끌어서 순서 바꾸기')}">
-                            <i data-lucide="grip-vertical" class="w-4 h-4"></i>
-                        </button>
+                    <div class="activity-card-main flex items-center gap-3 flex-1 min-w-0">
+                        ${dragHandleHtml}
                         <div class="p-2 rounded-xl accent-icon shrink-0">
                             <i data-lucide="${getRenderableActivityIcon(activity.type)}" class="w-4 h-4"></i>
                         </div>
-                        <div class="min-w-0">
+                        <div class="min-w-0 flex-1">
                             ${showActivityCountry ? `<div class="text-[10px] uppercase tracking-[0.22em] text-white/46 mb-1">${escapeHtml(getLocalizedLabel(activityDestination.country, activityDestination.country))}</div>` : ''}
-                            <div class="text-sm font-bold text-white">${escapeHtml(activity.time)}</div>
-                            <div class="text-sm text-white/88 mt-1">${escapeHtml(activity.location)}</div>
-                            ${activity.memo ? `<div class="text-xs text-white/62 mt-1 leading-5">${escapeHtml(activity.memo)}</div>` : ''}
+                            <div class="text-sm font-bold text-white activity-card-time">${escapeHtml(activity.time)}</div>
+                            <div class="text-sm text-white/88 mt-1 activity-card-location">${escapeHtml(activity.location)}</div>
+                            ${activity.memo ? `<div class="text-xs text-white/62 mt-1 leading-5 activity-card-memo">${escapeHtml(activity.memo)}</div>` : ''}
                         </div>
+                        ${reorderMode ? mapLinkHtml : ''}
                     </div>
-                    <div class="flex items-center gap-2 shrink-0">
-                        <a href="${getMapsSearchUrl(activity.mapQuery || activity.location, activity.destinationId || day.destinationId)}"
-                            target="_blank"
-                            rel="noreferrer"
-                            data-skip-edit="true"
-                            class="map-link p-2 text-white/36 transition-colors"
-                            title="구글 맵에서 보기">
-                            <i data-lucide="map-pin" class="w-5 h-5"></i>
-                        </a>
-                    </div>
+                    ${reorderMode
+                        ? buildActivityReorderControlsHtml(day, dayIndex, activity, activityIndex)
+                        : `<div class="flex items-center gap-2 shrink-0">${mapLinkHtml}</div>`}
                 </div>
                 ${betweenStopsHtml}
             </div>
@@ -20315,7 +20564,7 @@ function renderItinerary() {
         }).join('');
 
         dayElement.innerHTML = `
-            <div class="flex items-start gap-3 mb-4">
+            <div class="flex items-start gap-3 mb-4" data-day-header="${dayIndex}" data-flip-item="true">
                 <div class="w-6 h-6 rounded-full border-4 border-white/20 shadow-sm z-10 absolute left-0 flex items-center justify-center"
                     style="background:rgba(${dayDestination.inkRgb},0.9);">
                     <div class="w-1.5 h-1.5 rounded-full accent-dot"></div>
@@ -20355,7 +20604,7 @@ function renderItinerary() {
                 </div>
             </div>
 
-            <div class="space-y-3">
+            <div class="space-y-3" data-activity-list="${dayIndex}">
                 ${activitiesHtml}
             </div>
         `;
@@ -20363,6 +20612,7 @@ function renderItinerary() {
         ui.itineraryContainer.appendChild(dayElement);
     });
 
+    syncReorderModeUi();
     lucide.createIcons();
     updateCurrentFocusButton();
 }
@@ -20456,12 +20706,13 @@ async function executeItineraryStart(creationMode) {
     appState.customized = (creationMode === 'blank');
     appState.currentWeather = null;
     appState.weatherMode = 'loading';
+    appState.reorderMode = false;
 
     ui.startOptionsModal.classList.add('hidden');
     hideSetupOverlay();
 
     ui.applyPlanBtn.disabled = true;
-    await Promise.all(appState.segments.map((segment) => preloadHeroImage(getDestination(segment.destinationId).heroImage)));
+    await Promise.all(appState.segments.map((segment) => preloadHeroImage(getHeroSource(getDestination(segment.destinationId)).src)));
     applyActiveContext(findActiveContext(), { refreshPhrase: true });
     applyTheme(getDestination(appState.destinationId));
     setShareStatus('');
@@ -20592,6 +20843,8 @@ function resetToSetup() {
     appState.customized = false;
     appState.activeDayId = null;
     appState.activeActivityId = null;
+    appState.reorderMode = false;
+    syncReorderModeUi();
     setRandomPhrase(destination.id);
 
     const cleanUrl = window.location.pathname;
@@ -20735,25 +20988,40 @@ function renameDay(dayIndex) {
 
 
 const activityDragState = {
-    active: false,
     pointerId: null,
-    handle: null,
+    pointerType: '',
+    active: false,
+    immediate: false,
+    renderPending: false,
     card: null,
+    wrapper: null,
+    handle: null,
+    ghost: null,
+    placeholder: null,
     sourceDayIndex: -1,
     activityId: '',
     startX: 0,
     startY: 0,
+    lastX: 0,
     lastY: 0,
     targetDayIndex: -1,
     targetIndex: -1,
-    indicator: null,
     dayPanel: null,
-    autoScrollFrame: null
+    holdTimer: null,
+    lockUntil: 0,
+    autoScrollFrame: null,
+    flipTimer: null
 };
 
-const DRAG_START_THRESHOLD = 5;
+const DRAG_START_THRESHOLD = 6;          // 마우스: 이만큼 움직이면 바로 끌기 시작
+const DRAG_HOLD_CANCEL_DISTANCE = 10;    // 길게 누르는 동안 이만큼 움직이면 스크롤/선택으로 보고 취소
+const DRAG_HOLD_DELAY_REORDER = 220;     // 순서 편집 모드에서 길게 누르기 시간(ms)
+const DRAG_HOLD_DELAY_DEFAULT = 300;     // 일반 모드에서 카드를 길게 누르기 시간(ms)
 const DRAG_EDGE_ZONE = 90;
 const DRAG_EDGE_SPEED = 14;
+const DRAG_FLIP_DURATION = 150;
+const DRAG_CLICK_SUPPRESS_MS = 250;      // 놓은 직후 따라오는 click 무시 시간(ms)
+let suppressItineraryClickUntil = 0;
 
 function reassignDayTimes(day, orderedActivities) {
     const times = day.activities.map((activity) => activity.time).sort((left, right) => left.localeCompare(right));
@@ -20820,26 +21088,127 @@ function moveActivityAcrossDays(sourceDayIndex, targetDayIndex, activityId, targ
     return true;
 }
 
+// ▲/▼ 한 칸 이동. 날짜의 맨 위/맨 아래에서는 이전/다음 날짜로 넘어간다.
+function stepActivity(dayIndex, activityId, direction) {
+    const day = appState.itinerary[dayIndex];
+    if (!day) return false;
+
+    const currentIndex = day.activities.findIndex((activity) => activity.id === activityId);
+    if (currentIndex === -1) return false;
+
+    if (direction < 0) {
+        if (currentIndex > 0) return moveActivityWithinDay(dayIndex, activityId, currentIndex - 1);
+        const previousDay = appState.itinerary[dayIndex - 1];
+        if (!previousDay) return false;
+        return moveActivityAcrossDays(dayIndex, dayIndex - 1, activityId, previousDay.activities.length);
+    }
+
+    if (currentIndex < day.activities.length - 1) return moveActivityWithinDay(dayIndex, activityId, currentIndex + 2);
+    if (!appState.itinerary[dayIndex + 1]) return false;
+    return moveActivityAcrossDays(dayIndex, dayIndex + 1, activityId, 0);
+}
+
+// "날짜 이동": 고른 날짜의 마지막 순서로 옮긴다.
+function moveActivityToDay(dayIndex, activityId, targetDayIndex) {
+    const targetDay = appState.itinerary[targetDayIndex];
+    if (!targetDay || targetDayIndex === dayIndex) return false;
+    return moveActivityAcrossDays(dayIndex, targetDayIndex, activityId, targetDay.activities.length);
+}
+
+// 끌어다 놓기 결과 반영. targetIndex는 끌던 카드를 뺀 나머지 카드 기준의 삽입 위치다.
+function commitActivityDrop(sourceDayIndex, targetDayIndex, targetIndex, activityId) {
+    if (targetDayIndex !== sourceDayIndex) {
+        return moveActivityAcrossDays(sourceDayIndex, targetDayIndex, activityId, targetIndex);
+    }
+
+    const day = appState.itinerary[sourceDayIndex];
+    if (!day) return false;
+    const currentIndex = day.activities.findIndex((activity) => activity.id === activityId);
+    if (currentIndex === -1) return false;
+
+    const insertPosition = targetIndex >= currentIndex ? targetIndex + 1 : targetIndex;
+    return moveActivityWithinDay(sourceDayIndex, activityId, insertPosition);
+}
+
 function getDayCards(dayIndex) {
     const panel = ui.itineraryContainer.querySelector(`[data-day-panel="${dayIndex}"]`);
     if (!panel) return [];
     return Array.from(panel.querySelectorAll('[data-activity-card-id]'));
 }
 
-function ensureDropIndicator() {
-    if (activityDragState.indicator) return activityDragState.indicator;
-    const indicator = document.createElement('div');
-    indicator.className = 'activity-drop-indicator';
-    document.body.appendChild(indicator);
-    activityDragState.indicator = indicator;
-    return indicator;
+function getActivityCard(activityId) {
+    return ui.itineraryContainer.querySelector(`[data-activity-card-id="${activityId}"]`);
 }
 
-function clearDropIndicator() {
-    if (activityDragState.indicator) {
-        activityDragState.indicator.remove();
-        activityDragState.indicator = null;
+function getCardTop(activityId) {
+    const card = getActivityCard(activityId);
+    return card ? card.getBoundingClientRect().top : null;
+}
+
+function vibrateDevice(duration) {
+    try {
+        navigator.vibrate?.(duration);
+    } catch (error) {
+        /* 진동을 지원하지 않는 환경은 무시합니다. */
     }
+}
+
+function syncReorderModeUi() {
+    const enabled = Boolean(appState.reorderMode);
+    document.body.classList.toggle('is-reorder-mode', enabled);
+
+    if (ui.reorderModeBtn) {
+        ui.reorderModeBtn.classList.toggle('is-active', enabled);
+        ui.reorderModeBtn.setAttribute('aria-pressed', String(enabled));
+        ui.reorderModeBtn.innerHTML = enabled
+            ? '<i data-lucide="check" class="w-4 h-4"></i><span>완료</span>'
+            : '<i data-lucide="list-ordered" class="w-4 h-4"></i><span>순서 편집</span>';
+    }
+    if (ui.reorderModeHint) ui.reorderModeHint.hidden = !enabled;
+    if (ui.reorderDoneFab) ui.reorderDoneFab.hidden = !enabled;
+}
+
+function setReorderMode(enabled) {
+    const next = Boolean(enabled);
+    if (appState.reorderMode === next) return;
+
+    if (activityDragState.pointerId !== null) cancelActivityDrag();
+    appState.reorderMode = next;
+
+    if (appState.hasStarted) {
+        renderItinerary();
+    } else {
+        syncReorderModeUi();
+        lucide.createIcons();
+    }
+    updateCurrentFocusButton();
+}
+
+function focusActivityCard(activityId) {
+    const card = getActivityCard(activityId);
+    if (card) card.focus({ preventScroll: true });
+}
+
+// 옮긴 카드를 찾기 쉽게: anchorTop이 있으면 카드를 화면의 같은 자리에 두고(엄지 아래 유지),
+// 화면 밖이면 부드럽게 스크롤한 뒤 잠깐 강조한다.
+function revealActivityCard(activityId, { anchorTop = null } = {}) {
+    const card = getActivityCard(activityId);
+    if (!card) return;
+
+    if (anchorTop !== null) {
+        const delta = card.getBoundingClientRect().top - anchorTop;
+        if (Math.abs(delta) > 1) window.scrollBy(0, delta);
+    }
+
+    const rect = card.getBoundingClientRect();
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+    if (rect.top < 72 || rect.bottom > viewportHeight - 72) {
+        card.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
+
+    card.focus({ preventScroll: true });
+    card.classList.add('activity-card-moved');
+    window.setTimeout(() => card.classList.remove('activity-card-moved'), 700);
 }
 
 function highlightDayPanel(panel) {
@@ -20849,22 +21218,61 @@ function highlightDayPanel(panel) {
     if (panel) panel.classList.add('day-drop-target');
 }
 
-function updateDropTarget(clientX, clientY) {
-    const element = document.elementFromPoint(clientX, clientY);
-    const panel = element ? element.closest('[data-day-panel]') : null;
+function captureFlipPositions() {
+    const positions = new Map();
+    ui.itineraryContainer.querySelectorAll('[data-flip-item]').forEach((element) => {
+        if (element.hidden) return;
+        positions.set(element, element.getBoundingClientRect().top);
+    });
+    return positions;
+}
 
-    if (!panel) {
-        activityDragState.targetDayIndex = -1;
-        activityDragState.targetIndex = -1;
-        highlightDayPanel(null);
-        clearDropIndicator();
-        return;
+// FLIP: 자리 표시자가 옮겨진 뒤, 이웃 카드가 이전 위치에서 새 위치로 150ms 동안 미끄러지게 한다.
+function playFlip(positionsBefore) {
+    if (activityDragState.flipTimer) {
+        window.clearTimeout(activityDragState.flipTimer);
+        activityDragState.flipTimer = null;
     }
 
-    const dayIndex = Number(panel.dataset.dayPanel);
-    const cards = getDayCards(dayIndex);
-    let insertIndex = cards.length;
+    positionsBefore.forEach((top, element) => {
+        element.style.transition = 'none';
+        element.style.transform = '';
+    });
 
+    const moving = [];
+    positionsBefore.forEach((top, element) => {
+        if (!element.isConnected) return;
+        const delta = top - element.getBoundingClientRect().top;
+        if (Math.abs(delta) < 0.5) return;
+        element.style.transform = `translateY(${delta}px)`;
+        moving.push(element);
+    });
+
+    if (!moving.length) return;
+    void ui.itineraryContainer.offsetHeight;
+    moving.forEach((element) => {
+        element.style.transition = `transform ${DRAG_FLIP_DURATION}ms ease`;
+        element.style.transform = '';
+    });
+    activityDragState.flipTimer = window.setTimeout(() => {
+        moving.forEach((element) => {
+            element.style.transition = '';
+        });
+        activityDragState.flipTimer = null;
+    }, DRAG_FLIP_DURATION + 30);
+}
+
+function updateDropTarget(clientX, clientY) {
+    if (!activityDragState.active || !activityDragState.placeholder) return;
+    if (performance.now() < activityDragState.lockUntil) return;
+
+    const element = document.elementFromPoint(clientX, clientY);
+    const panel = element ? element.closest('[data-day-panel]') : null;
+    if (!panel || !ui.itineraryContainer.contains(panel)) return;
+
+    const dayIndex = Number(panel.dataset.dayPanel);
+    const cards = getDayCards(dayIndex).filter((card) => card !== activityDragState.card);
+    let insertIndex = cards.length;
     for (let index = 0; index < cards.length; index += 1) {
         const rect = cards[index].getBoundingClientRect();
         if (clientY < rect.top + rect.height / 2) {
@@ -20873,107 +21281,245 @@ function updateDropTarget(clientX, clientY) {
         }
     }
 
+    if (dayIndex === activityDragState.targetDayIndex && insertIndex === activityDragState.targetIndex) return;
+
+    const list = panel.querySelector('[data-activity-list]');
+    if (!list) return;
+
+    const positionsBefore = captureFlipPositions();
+    const referenceWrapper = cards[insertIndex] ? cards[insertIndex].closest('[data-activity-wrapper]') : null;
+    if (referenceWrapper && referenceWrapper.parentNode === list) {
+        list.insertBefore(activityDragState.placeholder, referenceWrapper);
+    } else {
+        list.appendChild(activityDragState.placeholder);
+    }
+
     activityDragState.targetDayIndex = dayIndex;
     activityDragState.targetIndex = insertIndex;
     highlightDayPanel(panel);
+    playFlip(positionsBefore);
+    activityDragState.lockUntil = performance.now() + DRAG_FLIP_DURATION;
+}
 
-    const indicator = ensureDropIndicator();
-    const referenceCard = cards[insertIndex] || cards[cards.length - 1];
-    if (!referenceCard) {
-        const panelRect = panel.getBoundingClientRect();
-        indicator.style.left = `${panelRect.left + 32}px`;
-        indicator.style.width = `${Math.max(0, panelRect.width - 32)}px`;
-        indicator.style.top = `${panelRect.bottom - 8}px`;
-        return;
-    }
-
-    const rect = referenceCard.getBoundingClientRect();
-    indicator.style.left = `${rect.left}px`;
-    indicator.style.width = `${rect.width}px`;
-    indicator.style.top = `${cards[insertIndex] ? rect.top - 5 : rect.bottom + 3}px`;
+function updateGhostPosition() {
+    if (!activityDragState.ghost) return;
+    const deltaY = activityDragState.lastY - activityDragState.startY;
+    activityDragState.ghost.style.transform = `translate3d(0, ${deltaY}px, 0) scale(1.03)`;
 }
 
 function stepDragAutoScroll() {
     if (!activityDragState.active) return;
+
     const y = activityDragState.lastY;
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+    let delta = 0;
 
     if (y < DRAG_EDGE_ZONE) {
-        window.scrollBy(0, -DRAG_EDGE_SPEED);
-        updateDropTarget(activityDragState.startX, y);
-    } else if (y > window.innerHeight - DRAG_EDGE_ZONE) {
-        window.scrollBy(0, DRAG_EDGE_SPEED);
-        updateDropTarget(activityDragState.startX, y);
+        delta = -DRAG_EDGE_SPEED * Math.max(0.3, (DRAG_EDGE_ZONE - Math.max(0, y)) / DRAG_EDGE_ZONE);
+    } else if (y > viewportHeight - DRAG_EDGE_ZONE) {
+        delta = DRAG_EDGE_SPEED * Math.max(0.3, (y - (viewportHeight - DRAG_EDGE_ZONE)) / DRAG_EDGE_ZONE);
+    }
+
+    if (delta) {
+        const previousScrollY = window.scrollY;
+        window.scrollBy(0, delta);
+        if (window.scrollY !== previousScrollY) updateDropTarget(activityDragState.lastX, y);
     }
 
     activityDragState.autoScrollFrame = window.requestAnimationFrame(stepDragAutoScroll);
 }
 
+function clearHoldTimer() {
+    if (activityDragState.holdTimer) {
+        window.clearTimeout(activityDragState.holdTimer);
+        activityDragState.holdTimer = null;
+    }
+}
+
+// 카드를 "들어올린다": 고스트(포인터를 따라다니는 복제 카드)와 자리 표시자를 만든다.
 function beginActivityDrag() {
+    clearHoldTimer();
+    const { card, wrapper, pointerId } = activityDragState;
+    if (!card || !wrapper || !card.isConnected) {
+        resetActivityDragState();
+        return;
+    }
+
     activityDragState.active = true;
-    document.body.classList.add('is-reordering-activities');
-    if (activityDragState.card) activityDragState.card.classList.add('activity-card-dragging');
+    card.classList.remove('activity-card-pressing');
     if (activityDragState.handle) activityDragState.handle.classList.add('is-dragging');
+
+    try {
+        window.getSelection()?.removeAllRanges();
+    } catch (error) {
+        /* 선택 영역이 없으면 무시합니다. */
+    }
+    try {
+        ui.itineraryContainer.setPointerCapture(pointerId);
+    } catch (error) {
+        /* 일부 환경에서는 포인터 캡처를 지원하지 않습니다. */
+    }
+
+    // 눌림 축소(transition)나 강조 애니메이션이 섞이지 않은 원래 크기로 잰다 (곧바로 숨겨지므로 되돌려도 티가 나지 않는다)
+    ['transform', 'animation', 'transition'].forEach((property) => card.style.setProperty(property, 'none', 'important'));
+    const cardRect = card.getBoundingClientRect();
+    const sourcePosition = getDayCards(activityDragState.sourceDayIndex).indexOf(card);
+    const nextWrapper = wrapper.nextElementSibling;
+    const slotHeight = nextWrapper ? nextWrapper.getBoundingClientRect().top - cardRect.top : cardRect.height;
+    ['transform', 'animation', 'transition'].forEach((property) => card.style.removeProperty(property));
+
+    const ghost = card.cloneNode(true);
+    ghost.classList.remove('relative', 'next-item', 'activity-card-pressing', 'cursor-pointer', 'hover:bg-white/[0.08]');
+    ghost.classList.add('activity-card-ghost');
+    ['data-activity-card-id', 'data-activity-id', 'data-action', 'data-day-index', 'tabindex'].forEach((name) => ghost.removeAttribute(name));
+    ghost.querySelectorAll('[data-hourly-weather]').forEach((element) => element.remove());
+    ghost.style.left = `${cardRect.left}px`;
+    ghost.style.top = `${cardRect.top}px`;
+    ghost.style.width = `${cardRect.width}px`;
+    ghost.style.height = `${cardRect.height}px`;
+    document.body.appendChild(ghost);
+
+    const placeholder = document.createElement('div');
+    placeholder.className = 'activity-drop-placeholder';
+    placeholder.style.height = `${cardRect.height}px`;
+    placeholder.style.marginBottom = `${Math.max(0, slotHeight - cardRect.height)}px`;
+    wrapper.parentNode.insertBefore(placeholder, wrapper);
+    wrapper.hidden = true;
+
+    activityDragState.ghost = ghost;
+    activityDragState.placeholder = placeholder;
+    activityDragState.targetDayIndex = activityDragState.sourceDayIndex;
+    activityDragState.targetIndex = sourcePosition;
+    activityDragState.lockUntil = 0;
+    highlightDayPanel(wrapper.closest('[data-day-panel]'));
+    document.body.classList.add('is-reordering-activities');
+    updateGhostPosition();
+    vibrateDevice(10);
     activityDragState.autoScrollFrame = window.requestAnimationFrame(stepDragAutoScroll);
 }
 
 function resetActivityDragState() {
+    const wasActive = activityDragState.active;
+    clearHoldTimer();
+
     if (activityDragState.autoScrollFrame) {
         window.cancelAnimationFrame(activityDragState.autoScrollFrame);
         activityDragState.autoScrollFrame = null;
     }
-    if (activityDragState.card) activityDragState.card.classList.remove('activity-card-dragging');
+    if (activityDragState.flipTimer) {
+        window.clearTimeout(activityDragState.flipTimer);
+        activityDragState.flipTimer = null;
+    }
+    if (activityDragState.pointerId !== null) {
+        try {
+            if (ui.itineraryContainer.hasPointerCapture(activityDragState.pointerId)) {
+                ui.itineraryContainer.releasePointerCapture(activityDragState.pointerId);
+            }
+        } catch (error) {
+            /* 이미 해제된 경우는 무시합니다. */
+        }
+    }
+
+    if (activityDragState.ghost) activityDragState.ghost.remove();
+    if (activityDragState.placeholder) activityDragState.placeholder.remove();
+    if (activityDragState.wrapper) activityDragState.wrapper.hidden = false;
+    if (activityDragState.card) activityDragState.card.classList.remove('activity-card-pressing');
     if (activityDragState.handle) activityDragState.handle.classList.remove('is-dragging');
     highlightDayPanel(null);
-    clearDropIndicator();
+    if (wasActive) {
+        ui.itineraryContainer.querySelectorAll('[data-flip-item]').forEach((element) => {
+            element.style.transform = '';
+            element.style.transition = '';
+        });
+    }
     document.body.classList.remove('is-reordering-activities');
 
-    activityDragState.active = false;
     activityDragState.pointerId = null;
-    activityDragState.handle = null;
+    activityDragState.pointerType = '';
+    activityDragState.active = false;
+    activityDragState.immediate = false;
     activityDragState.card = null;
+    activityDragState.wrapper = null;
+    activityDragState.handle = null;
+    activityDragState.ghost = null;
+    activityDragState.placeholder = null;
     activityDragState.sourceDayIndex = -1;
     activityDragState.activityId = '';
     activityDragState.targetDayIndex = -1;
     activityDragState.targetIndex = -1;
+    activityDragState.lockUntil = 0;
+
+    if (activityDragState.renderPending) {
+        activityDragState.renderPending = false;
+        renderItinerary();
+    }
+}
+
+function cancelActivityDrag() {
+    if (activityDragState.pointerId === null) return;
+    if (activityDragState.active) suppressItineraryClickUntil = Date.now() + DRAG_CLICK_SUPPRESS_MS;
+    resetActivityDragState();
 }
 
 function handleActivityPointerDown(event) {
     if (event.button !== undefined && event.button !== 0) return;
-    const handle = event.target.closest('[data-drag-handle="true"]');
-    if (!handle) return;
+    if (activityDragState.pointerId !== null) return;
+    if (event.target.closest('[data-reorder-control], a, select, input, textarea, button:not([data-drag-handle])')) return;
 
-    const card = handle.closest('[data-activity-card-id]');
+    const card = event.target.closest('[data-activity-card-id]');
     if (!card) return;
+    const wrapper = card.closest('[data-activity-wrapper]');
+    if (!wrapper) return;
+
+    const handle = event.target.closest('[data-drag-handle="true"]');
+    const isTouchLike = event.pointerType === 'touch' || event.pointerType === 'pen';
 
     activityDragState.pointerId = event.pointerId;
-    activityDragState.handle = handle;
+    activityDragState.pointerType = event.pointerType;
     activityDragState.card = card;
+    activityDragState.wrapper = wrapper;
+    activityDragState.handle = handle;
     activityDragState.sourceDayIndex = Number(card.dataset.dayIndex);
     activityDragState.activityId = card.dataset.activityId;
     activityDragState.startX = event.clientX;
     activityDragState.startY = event.clientY;
+    activityDragState.lastX = event.clientX;
     activityDragState.lastY = event.clientY;
+    // 손잡이(touch-action: none)에서는 움직이자마자, 마우스는 순서 편집 모드에서도 바로 끌기 시작.
+    // 그 밖에는 길게 누르면 들어올린다(그 전까지는 평소처럼 스크롤된다).
+    activityDragState.immediate = Boolean(handle) || (!isTouchLike && appState.reorderMode);
 
-    try {
-        handle.setPointerCapture(event.pointerId);
-    } catch (error) {
-        /* 일부 환경에서는 포인터 캡처를 지원하지 않습니다. */
-    }
-    event.preventDefault();
+    clearHoldTimer();
+    activityDragState.holdTimer = window.setTimeout(() => {
+        activityDragState.holdTimer = null;
+        if (activityDragState.pointerId === null || activityDragState.active) return;
+        beginActivityDrag();
+    }, appState.reorderMode ? DRAG_HOLD_DELAY_REORDER : DRAG_HOLD_DELAY_DEFAULT);
+
+    card.classList.add('activity-card-pressing');
+    if (handle) event.preventDefault();
 }
 
 function handleActivityPointerMove(event) {
     if (activityDragState.pointerId === null || event.pointerId !== activityDragState.pointerId) return;
 
+    activityDragState.lastX = event.clientX;
     activityDragState.lastY = event.clientY;
 
     if (!activityDragState.active) {
         const distance = Math.hypot(event.clientX - activityDragState.startX, event.clientY - activityDragState.startY);
-        if (distance < DRAG_START_THRESHOLD) return;
-        beginActivityDrag();
+        if (activityDragState.immediate) {
+            if (distance < DRAG_START_THRESHOLD) return;
+            beginActivityDrag();
+            if (!activityDragState.active) return;
+        } else {
+            if (distance > DRAG_HOLD_CANCEL_DISTANCE) cancelActivityDrag();
+            return;
+        }
     }
 
-    event.preventDefault();
+    if (event.cancelable) event.preventDefault();
+    updateGhostPosition();
     updateDropTarget(event.clientX, event.clientY);
 }
 
@@ -20981,36 +21527,62 @@ function handleActivityPointerUp(event) {
     if (activityDragState.pointerId === null || event.pointerId !== activityDragState.pointerId) return;
 
     const wasActive = activityDragState.active;
-    const sourceDayIndex = activityDragState.sourceDayIndex;
-    const targetDayIndex = activityDragState.targetDayIndex;
-    const targetIndex = activityDragState.targetIndex;
-    const activityId = activityDragState.activityId;
-
-    try {
-        if (activityDragState.handle && activityDragState.handle.hasPointerCapture(event.pointerId)) {
-            activityDragState.handle.releasePointerCapture(event.pointerId);
-        }
-    } catch (error) {
-        /* 이미 해제된 경우는 무시합니다. */
-    }
+    const isCancelled = event.type === 'pointercancel';
+    const { sourceDayIndex, targetDayIndex, targetIndex, activityId } = activityDragState;
 
     resetActivityDragState();
 
-    if (!wasActive || targetDayIndex === -1 || targetIndex === -1) return;
+    if (!wasActive) return;
+    suppressItineraryClickUntil = Date.now() + DRAG_CLICK_SUPPRESS_MS;
+    if (isCancelled || targetDayIndex === -1 || targetIndex === -1) return;
 
-    const moved = targetDayIndex === sourceDayIndex
-        ? moveActivityWithinDay(sourceDayIndex, activityId, targetIndex)
-        : moveActivityAcrossDays(sourceDayIndex, targetDayIndex, activityId, targetIndex);
+    const moved = commitActivityDrop(sourceDayIndex, targetDayIndex, targetIndex, activityId);
+    if (!moved) return;
 
-    if (moved) {
-        persistItineraryChanges();
-        focusActivityCard(activityId);
-    }
+    vibrateDevice(10);
+    persistItineraryChanges();
+    revealActivityCard(activityId);
 }
 
-function focusActivityCard(activityId) {
-    const card = ui.itineraryContainer.querySelector(`[data-activity-card-id="${activityId}"]`);
-    if (card) card.focus({ preventScroll: true });
+// 들어올린 뒤에는 터치 스크롤을 막아야 브라우저가 끌기를 가로채(pointercancel) 않는다.
+function handleActivityTouchMove(event) {
+    if (activityDragState.active && event.cancelable) event.preventDefault();
+}
+
+function handleActivityContextMenu(event) {
+    if (activityDragState.pointerId !== null) {
+        event.preventDefault();
+        return;
+    }
+    if (appState.reorderMode && event.target.closest('[data-activity-card-id]')) event.preventDefault();
+}
+
+function handleReorderStep(button) {
+    const dayIndex = Number(button.dataset.dayIndex);
+    const activityId = button.dataset.activityId;
+    const direction = button.dataset.reorderStep === 'up' ? -1 : 1;
+    const anchorTop = getCardTop(activityId);
+
+    if (!stepActivity(dayIndex, activityId, direction)) return;
+    persistItineraryChanges();
+    revealActivityCard(activityId, { anchorTop });
+}
+
+function handleReorderDaySelectChange(event) {
+    const select = event.target.closest('[data-reorder-day-select]');
+    if (!select) return;
+
+    const dayIndex = Number(select.dataset.dayIndex);
+    const targetDayIndex = Number(select.value);
+    const activityId = select.dataset.activityId;
+    if (!Number.isInteger(targetDayIndex) || targetDayIndex === dayIndex) return;
+
+    if (!moveActivityToDay(dayIndex, activityId, targetDayIndex)) {
+        select.value = '';
+        return;
+    }
+    persistItineraryChanges();
+    revealActivityCard(activityId);
 }
 
 function handleActivityReorderKeydown(event) {
@@ -21041,12 +21613,25 @@ function handleActivityReorderKeydown(event) {
 }
 
 function handleItineraryClick(event) {
+    // 끌어다 놓은 직후 따라오는 click은 편집창을 열지 않는다
+    if (Date.now() < suppressItineraryClickUntil) {
+        event.preventDefault();
+        return;
+    }
+
+    const stepButton = event.target.closest('[data-reorder-step]');
+    if (stepButton) {
+        if (!stepButton.disabled) handleReorderStep(stepButton);
+        return;
+    }
+
     if (event.target.closest('[data-skip-edit]')) {
         return;
     }
 
     const editButton = event.target.closest('[data-action="edit-activity"]');
     if (editButton) {
+        if (appState.reorderMode) return;
         openActivityEditor(Number(editButton.dataset.dayIndex), editButton.dataset.activityId);
         return;
     }
@@ -21164,7 +21749,7 @@ ui.destinationSelector.addEventListener('click', (event) => {
     setupSelection.endDate = endDate;
     setupRangeSelectingEnd = false;
     syncSetupCalendarMonth(startDate);
-    preloadHeroImage(destination.heroImage);
+    preloadHeroImage(getHeroSource(destination).src);
     applyTheme(destination);
     renderSetupInputs();
     renderDestinationSelector();
@@ -21297,22 +21882,43 @@ ui.rateKrwInput.addEventListener('input', () => {
     updateExchangeOutputs();
 });
 ui.itineraryContainer.addEventListener('click', handleItineraryClick);
+// 화면을 돌리면(세로↔가로) 히어로 사진을 방향에 맞는 것으로 바꾼다
+portraitViewportQuery.addEventListener('change', () => {
+    const destination = getDestination(appState.destinationId);
+    if (destination) applyTheme(destination);
+});
 ui.itineraryContainer.addEventListener('pointerdown', handleActivityPointerDown);
 ui.itineraryContainer.addEventListener('keydown', handleActivityReorderKeydown);
+ui.itineraryContainer.addEventListener('change', handleReorderDaySelectChange);
+ui.itineraryContainer.addEventListener('touchmove', handleActivityTouchMove, { passive: false });
+ui.itineraryContainer.addEventListener('contextmenu', handleActivityContextMenu);
 window.addEventListener('pointermove', handleActivityPointerMove, { passive: false });
 window.addEventListener('pointerup', handleActivityPointerUp);
 window.addEventListener('pointercancel', handleActivityPointerUp);
+window.addEventListener('blur', cancelActivityDrag);
+ui.reorderModeBtn?.addEventListener('click', () => setReorderMode(!appState.reorderMode));
+ui.reorderDoneFab?.addEventListener('click', () => setReorderMode(false));
 ui.currentFocusBtn.addEventListener('click', scrollToCurrentFocus);
 
 window.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && !ui.iconPickerModal.classList.contains('hidden')) {
+    if (event.key !== 'Escape') return;
+
+    if (activityDragState.active) {
+        cancelActivityDrag();
+        return;
+    }
+
+    if (!ui.iconPickerModal.classList.contains('hidden')) {
         closeIconPicker();
         return;
     }
 
-    if (event.key === 'Escape' && !ui.activityModal.classList.contains('hidden')) {
+    if (!ui.activityModal.classList.contains('hidden')) {
         closeActivityEditor();
+        return;
     }
+
+    if (appState.reorderMode) setReorderMode(false);
 });
 
 ['mousemove', 'mousedown', 'keydown', 'touchmove', 'wheel'].forEach((eventName) => {
