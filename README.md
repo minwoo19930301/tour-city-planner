@@ -1,5 +1,11 @@
 # Tour City Planner - Travel Route Planner
 
+<!-- PROJECT-PRESENTATION:START -->
+<a href="https://minwoo19930301.github.io/tour-city-planner/"><img src=".github/project-cover.svg" alt="Tour City Planner - Travel Route Planner" width="960"></a>
+
+[![OPEN APP](https://img.shields.io/badge/OPEN%20APP-2C6049?style=for-the-badge)](https://minwoo19930301.github.io/tour-city-planner/) [![QUICK START](https://img.shields.io/badge/QUICK%20START-374151?style=for-the-badge)](#사용하는-방법) [![SOURCE](https://img.shields.io/badge/SOURCE-444444?style=for-the-badge)](https://github.com/minwoo19930301/tour-city-planner)
+<!-- PROJECT-PRESENTATION:END -->
+
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-brightgreen?style=for-the-badge&logo=github)](https://minwoo19930301.github.io/tour-city-planner/)
 
 
