@@ -20580,21 +20580,55 @@ function graphLayoutAttributes(rows, activity) {
     const width = 6 / row.length, col = row.indexOf(activity) * width + 1;
     return `data-parallel="${row.length > 1}" style="grid-row:${rowIndex + 1};grid-column:${col} / span ${width}"`;
 }
-function graphControlsHtml(day, dayIndex, activity, rows) {
-    const rowIndex = rows.findIndex(r => r.includes(activity)), row = rows[rowIndex];
-    const targets = rows.slice(rowIndex + 1).flat();
-    const links = day.links.filter(e => e[0] === activity.id);
+function graphControlsHtml(day, dayIndex, activity) {
     const attrs = `data-graph-day="${dayIndex}" data-graph-id="${activity.id}" data-skip-edit="true"`;
-    return `<div class="tree-actions" data-skip-edit="true">
-        <button type="button" ${attrs} data-graph-action="parallel" ${row.length >= 3 ? 'disabled' : ''}>+ 나란히</button>
-        <details class="tree-connection-tools" data-skip-edit="true"><summary>연결 편집</summary><div>
-        ${row.length > 1 ? `<button type="button" ${attrs} data-graph-action="separate">따로 놓기</button>` : ''}
-        <select ${attrs} data-graph-connect aria-label="${escapeHtml(activity.location)}에서 연결할 일정"><option value="">선 연결 / 합류</option>${targets.filter(a => !links.some(e => e[1] === a.id)).map(a => `<option value="${a.id}">${escapeHtml(a.time + ' ' + a.location)}</option>`).join('')}</select>
-        <select ${attrs} data-graph-join aria-label="${escapeHtml(activity.location)} 나란히 이동"><option value="">나란히 이동</option>${rows.filter(r=>r!==row && r.length<3).map(r=>`<option value="${r[0].id}">${escapeHtml(r[0].time+' '+r[0].location)} 옆</option>`).join('')}</select>
-        <div class="tree-links">${links.map(e => { const target = day.activities.find(a => a.id === e[1]); return `<button type="button" ${attrs} data-graph-action="unlink" data-graph-to="${e[1]}" title="연결선 제거">↳ ${escapeHtml(target?.location || '')} ×</button>`; }).join('')}</div>
-        </div></details><button type="button" ${attrs} data-graph-action="remove" class="tree-remove">제거</button>
-    </div>`;
+    return `<button type="button" ${attrs} class="graph-port graph-input" data-graph-port="in" aria-label="${escapeHtml(activity.location)}에 연결" title="여기에 놓으면 연결·합류"></button>
+    <button type="button" ${attrs} class="graph-port graph-output" data-graph-port="out" aria-label="${escapeHtml(activity.location)}에서 연결" title="아래 일정의 연결점으로 드래그"></button>
+    <button type="button" ${attrs} data-graph-action="remove" class="graph-remove" aria-label="${escapeHtml(activity.location)} 제거" title="일정 제거">×</button>`;
 }
+let graphWire = null;
+function finishGraphWire(target) {
+    if (!graphWire) return;
+    const wire = graphWire; graphWire = null;
+    wire.svg.remove(); document.body.classList.remove('graph-connecting');
+    document.querySelectorAll('.graph-port-ready').forEach(el=>el.classList.remove('graph-port-ready'));
+    suppressItineraryClickUntil = Date.now() + 350;
+    if (target?.dataset.graphPort === 'in' && Number(target.dataset.graphDay) === wire.day &&
+        TripGraph.connect(appState.itinerary[wire.day], wire.id, target.dataset.graphId)) persistItineraryChanges();
+}
+function startGraphWire(port, pointerId) {
+    finishGraphWire();
+    const r=port.getBoundingClientRect(), svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.classList.add('graph-wire'); svg.innerHTML='<path />'; document.body.appendChild(svg);
+    graphWire={day:Number(port.dataset.graphDay),id:port.dataset.graphId,x:r.left+r.width/2,y:r.top+r.height/2,svg,pointerId};
+    const rows=TripGraph.rows(appState.itinerary[graphWire.day]), rank=rows.findIndex(row=>row.some(a=>a.id===graphWire.id));
+    rows.slice(rank+1).flat().forEach(a=>ui.itineraryContainer.querySelector(`[data-graph-port="in"][data-graph-id="${a.id}"]`)?.classList.add('graph-port-ready'));
+    document.body.classList.add('graph-connecting');
+}
+document.addEventListener('pointerdown', event=>{
+    const port=event.target.closest('[data-graph-port="out"]');
+    if(!port || event.button!==0) return;
+    event.preventDefault(); startGraphWire(port,event.pointerId);
+});
+window.addEventListener('pointermove', event=>{
+    if(!graphWire || graphWire.pointerId!==event.pointerId) return;
+    const {x,y,svg}=graphWire;
+    svg.firstChild.setAttribute('d',`M ${x} ${y} C ${x} ${y+35}, ${event.clientX} ${event.clientY-35}, ${event.clientX} ${event.clientY}`);
+});
+window.addEventListener('pointerup', event=>{
+    if(graphWire?.pointerId!==event.pointerId) return;
+    finishGraphWire(document.elementFromPoint(event.clientX,event.clientY)?.closest('[data-graph-port="in"]'));
+});
+window.addEventListener('pointercancel',()=>finishGraphWire());
+document.addEventListener('keydown',event=>{
+    if(event.key==='Escape') finishGraphWire();
+    if(event.target.closest('.graph-edge-remove') && (event.key==='Enter' || event.key===' ')) {event.preventDefault();handleGraphClick(event);}
+    const port=event.target.closest('[data-graph-port]');
+    if(port && (event.key==='Enter' || event.key===' ')) {
+        event.preventDefault();
+        if(port.dataset.graphPort==='out') startGraphWire(port,null); else finishGraphWire(port);
+    }
+});
 function reconnectMovedStop(day, id) {
     const rows = TripGraph.normalize(day), i = rows.findIndex(r => r.some(a => a.id === id));
     day.links = day.links.filter(e => !e.includes(id));
@@ -20633,20 +20667,13 @@ function drawGraphEdges() {
             const bend=Math.min(34,(yy-y)/2);
             const source=day.activities.find(a=>a.id===from), target=day.activities.find(a=>a.id===to);
             const origin=source.mapQuery || source.location, dest=target.mapQuery || target.location;
-            return `<a data-route-preview="true" data-skip-edit="true" href="${getDirectionsUrl(origin,dest)}" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}" aria-label="${escapeHtml(source.location+'에서 '+target.location+' 가는 길')}"><path style="pointer-events:stroke;cursor:pointer" d="M ${x} ${y} C ${x} ${y+bend}, ${xx} ${yy-bend}, ${xx} ${yy}"/><circle cx="${xx}" cy="${yy}" r="3" fill="currentColor"/></a>`;
+            return `<a data-route-preview="true" data-skip-edit="true" href="${getDirectionsUrl(origin,dest)}" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}" aria-label="${escapeHtml(source.location+'에서 '+target.location+' 가는 길')}"><path style="pointer-events:stroke;cursor:pointer" d="M ${x} ${y} C ${x} ${y+bend}, ${xx} ${yy-bend}, ${xx} ${yy}"/><circle cx="${xx}" cy="${yy}" r="3" fill="currentColor"/></a><g class="graph-edge-remove" data-skip-edit="true" data-graph-action="unlink" data-graph-day="${dayIndex}" data-graph-id="${from}" data-graph-to="${to}" role="button" tabindex="0" aria-label="${escapeHtml(source.location+' → '+target.location)} 연결 제거" transform="translate(${(x+xx)/2},${(y+yy)/2})"><circle r="9"/><text text-anchor="middle" dy="4">×</text></g>`;
         }).join('');
     });
 }
 window.addEventListener('resize', () => requestAnimationFrame(drawGraphEdges));
-document.addEventListener('toggle', event => {if(event.target.matches('.tree-connection-tools')) requestAnimationFrame(drawGraphEdges);}, true);
-document.addEventListener('change', event => {
-    const join=event.target.closest('[data-graph-join]');
-    if(join && join.value){const day=appState.itinerary[Number(join.dataset.graphDay)];if(TripGraph.join(day,join.dataset.graphId,join.value)) persistItineraryChanges();return;}
-    const select=event.target.closest('[data-graph-connect]'); if(!select || !select.value) return;
-    const day=appState.itinerary[Number(select.dataset.graphDay)];
-    if(TripGraph.connect(day,select.dataset.graphId,select.value)) persistItineraryChanges();
-});
 function renderItinerary() {
+    if (graphWire) finishGraphWire();
     if (activityDragState.active) {
         // 끌기 도중에는 DOM을 갈아끼우지 않고, 끌기가 끝난 뒤 다시 그린다
         activityDragState.renderPending = true;
@@ -21206,7 +21233,7 @@ function moveActivityWithinDay(dayIndex, activityId, targetIndex) {
     if (currentIndex === -1) return false;
 
     let nextIndex = Math.max(0, Math.min(day.activities.length - 1, targetIndex > currentIndex ? targetIndex - 1 : targetIndex));
-    if (nextIndex === currentIndex) return false;
+    if (nextIndex === currentIndex && TripGraph.rows(day).find(row=>row.some(a=>a.id===activityId)).length === 1) return false;
 
     const ordered = day.activities.slice();
     const [moved] = ordered.splice(currentIndex, 1);
@@ -21445,6 +21472,21 @@ function updateDropTarget(clientX, clientY) {
 
     const dayIndex = Number(panel.dataset.dayPanel);
     const cards = getDayCards(dayIndex).filter((card) => card !== activityDragState.card);
+    const peer = cards.find(card=>{const r=card.getBoundingClientRect();return clientY>r.top+r.height*.22 && clientY<r.bottom-r.height*.22 && clientX>=r.left && clientX<=r.right && (clientX<r.left+r.width*.28 || clientX>r.right-r.width*.28);});
+    document.querySelectorAll('.graph-drop-peer,.graph-drop-full').forEach(el=>el.classList.remove('graph-drop-peer','graph-drop-full'));
+    activityDragState.targetPeerId = null;
+    activityDragState.dropBlocked = false;
+    if(peer) {
+        const row=TripGraph.rows(appState.itinerary[dayIndex]).find(row=>row.some(a=>a.id===peer.dataset.activityId));
+        const full=row.length>=3 || row.some(a=>a.id===activityDragState.activityId);
+        peer.classList.add(full?'graph-drop-full':'graph-drop-peer');
+        activityDragState.dropBlocked=full;
+        activityDragState.targetPeerId=peer.dataset.activityId;
+        activityDragState.targetPeerLeft=clientX<peer.getBoundingClientRect().left+peer.getBoundingClientRect().width/2;
+        activityDragState.targetDayIndex=dayIndex;
+        activityDragState.targetIndex=0;
+        return;
+    }
     let insertIndex = cards.length;
     for (let index = 0; index < cards.length; index += 1) {
         const rect = cards[index].getBoundingClientRect();
@@ -21575,6 +21617,9 @@ function beginActivityDrag() {
 }
 
 function resetActivityDragState() {
+    document.querySelectorAll('.graph-drop-peer,.graph-drop-full').forEach(el=>el.classList.remove('graph-drop-peer','graph-drop-full'));
+    activityDragState.targetPeerId=null;
+    activityDragState.dropBlocked=false;
     const wasActive = activityDragState.active;
     clearHoldTimer();
 
@@ -21705,16 +21750,28 @@ function handleActivityPointerUp(event) {
     if (activityDragState.pointerId === null || event.pointerId !== activityDragState.pointerId) return;
 
     const wasActive = activityDragState.active;
+    if(wasActive && event.type !== 'pointercancel') {activityDragState.lockUntil=0;updateDropTarget(event.clientX,event.clientY);}
     const isCancelled = event.type === 'pointercancel';
-    const { sourceDayIndex, targetDayIndex, targetIndex, activityId } = activityDragState;
+    const { sourceDayIndex, targetDayIndex, targetIndex, activityId, targetPeerId, targetPeerLeft, dropBlocked } = activityDragState;
 
     resetActivityDragState();
 
     if (!wasActive) return;
     suppressItineraryClickUntil = Date.now() + DRAG_CLICK_SUPPRESS_MS;
-    if (isCancelled || targetDayIndex === -1 || targetIndex === -1) return;
+    if (isCancelled || dropBlocked || targetDayIndex === -1 || targetIndex === -1) return;
 
-    const moved = commitActivityDrop(sourceDayIndex, targetDayIndex, targetIndex, activityId);
+    let moved;
+    if(targetPeerId) {
+        const day=appState.itinerary[targetDayIndex], source=appState.itinerary[sourceDayIndex];
+        const item=source.activities.find(a=>a.id===activityId);
+        if(source===day) moved=TripGraph.join(day,activityId,targetPeerId);
+        else if(TripGraph.rows(day).find(r=>r.some(a=>a.id===targetPeerId))?.length<3) {
+            TripGraph.remove(source,activityId); moved=TripGraph.parallel(day,targetPeerId,item);
+            item.destinationId=day.activities.find(a=>a.id===targetPeerId).destinationId; syncDayDestinations(source);
+        }
+        if(moved && targetPeerLeft) {day.activities=day.activities.filter(a=>a!==item);day.activities.splice(day.activities.findIndex(a=>a.id===targetPeerId),0,item);}
+        syncDayDestinations(day);
+    } else moved = commitActivityDrop(sourceDayIndex, targetDayIndex, targetIndex, activityId);
     if (!moved) return;
 
     vibrateDevice(10);

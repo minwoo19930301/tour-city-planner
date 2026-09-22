@@ -802,7 +802,7 @@
         .day-panel {padding:18px;border:1px solid #ffffff25;border-radius:26px;background:rgba(22,32,46,.35);backdrop-filter:blur(16px);}
         .day-panel [data-day-header] {align-items:center;margin-bottom:15px;}
         .day-panel h3 {font-size:22px;}
-        .day-panel .tree-scroll {padding:3px 2px 4px;margin:0;scrollbar-width:thin;scrollbar-color:#ffffff30 transparent;}
+        .day-panel .tree-scroll {padding:15px 2px;margin:0;scrollbar-width:thin;scrollbar-color:#ffffff30 transparent;}
         .activity-tree .next-item,.activity-tree .next-item::after {animation:none;}
         .activity-tree {gap:40px 12px;margin-bottom:0;}
         .activity-tree .activity-card {padding:12px;gap:6px;border-radius:18px;justify-content:flex-start;}
@@ -817,6 +817,25 @@
         .tree-actions .tree-remove {margin-left:0;}
         .activity-card-ghost {display:flex;flex-direction:column;align-items:stretch;gap:6px;}
         @media(max-width:640px){.compact-summary{flex-wrap:wrap;padding:9px 12px;gap:7px}.summary-clocks{font-size:11px}.summary-rate{font-size:11px}.day-panel{padding:12px;border-radius:22px}.activity-tree:has([data-parallel="true"]){min-width:620px}.day-panel h3{font-size:20px}}
+
+        .activity-tree .activity-card {position:relative;padding-right:28px;overflow:visible;}
+        .graph-port {position:absolute;left:calc(50% - 14px);width:28px;height:28px;z-index:4;touch-action:none;cursor:crosshair;background:transparent;border:0;}
+        .graph-port::after {content:'';position:absolute;inset:9px;border:2px solid rgba(var(--accent-rgb),.85);background:#172236;border-radius:50%;}
+        .graph-input {top:-15px}.graph-output {bottom:-15px}
+        .graph-port:hover::after,.graph-port:focus-visible::after,.graph-port-ready::after {background:rgb(var(--accent-rgb));box-shadow:0 0 0 5px rgba(var(--accent-rgb),.16)}
+        .activity-tree [data-hourly-weather] {left:auto;right:29px;top:3px;transform:none;width:22px;flex-direction:row;font-size:9px;gap:2px;}
+        .graph-remove {position:absolute;right:7px;top:7px;width:22px;height:22px;border:0;border-radius:50%;color:#94a3b8;background:transparent;font-size:17px;}
+        .graph-remove:hover {color:#fda4af;background:#ffffff12}
+        .graph-wire {position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:9999;}
+        .graph-wire path {fill:none;stroke:#a5b4fc;stroke-width:3;stroke-dasharray:5 4}
+        .graph-edge-remove {pointer-events:all;cursor:pointer;opacity:0}
+        .tree-svg:hover .graph-edge-remove,.graph-edge-remove:focus {opacity:1}
+        .graph-edge-remove circle {fill:#25334a;stroke:#ffffff40}.graph-edge-remove text {fill:#e2e8f0;font-size:14px}
+        .graph-drop-peer {outline:2px dashed #a5b4fc!important;background:#6366f133!important}
+        .graph-drop-peer::after {content:'나란히 놓기';position:absolute;inset:0;display:grid;place-items:center;background:#111827c9;border-radius:inherit;color:#c7d2fe;font-size:12px;pointer-events:none}
+        .graph-drop-full {outline:2px dashed #fb7185!important}
+        .graph-drop-full::after {content:'최대 3개';position:absolute;inset:0;display:grid;place-items:center;background:#111827c9;border-radius:inherit;color:#fda4af;font-size:12px;pointer-events:none}
+        @media(hover:none){.graph-edge-remove{opacity:.65}}
     </style>
 </head>
 
@@ -1235,7 +1254,7 @@
 
     <script src="./example-hotels.js?v=1"></script>
     <script src="./graph-model.js?v=4"></script>
-    <script src="./app.js?v=compact-v5" defer></script>
+    <script src="./app.js?v=direct-v6" defer></script>
 </body>
 
 </html>
