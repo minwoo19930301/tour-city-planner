@@ -108,3 +108,17 @@ const DESTINATIONS = {
 본 프로젝트는 **CC BY-NC 4.0 (비영리)** 라이선스로 배포됩니다.
 * **비영리/개인 사용**: 자유롭게 수정, 공유 및 활용 가능.
 * **상업적 사용 (기업 서비스 탑재, 유료 연동, 대행업 등)**: 저작권자(`contact@ai-ing.org`)와 상업 라이선스 계약 필수.
+
+## 일정 그래프 (v4)
+
+- `graph-model.js`는 날짜별 순서가 있는 DAG를 관리한다. 한 행은 최대 3개 노드다.
+- `+ 나란히`는 분기 후보를 만든다. 입력 취소 시 생성한 후보도 취소된다. `나란히 이동`은 기존 카드를 같은 행으로 옮긴다.
+- `따로 놓기`는 카드를 독립 행으로 분리한다. `선 연결 / 합류`는 뒤쪽 노드로 연결하며, 연결 이름의 ×는 선만 제거한다. 카드의 `제거`는 노드를 제거하고 앞뒤 연결을 이어준다.
+- 순서 이동은 카드 본문에서 가능하다. 터치에서는 300ms 길게 누르며, 빠른 스와이프는 기존 스크롤이다. 키보드 Alt+↑/↓도 유지한다.
+- 공유 데이터 `v:4`의 `a[].id`, `a[].r`는 노드/행 ID, 날짜 `e`는 `[from,to]` 연결 배열이다. 제목 `n`과 지도 검색 `q`도 보존한다. v3 이하의 링크는 기존 순서를 따라 연결하며, 명시적인 빈 날짜와 끊어진 연결도 유지한다.
+- 그래프 분기에는 단일 ‘하루 이동코스’를 제공하지 않는다. 실제 연결선을 누르면 해당 구간의 길찾기 미리보기가 열린다.
+- `example-hotels.js`의 호텔은 예시 일정의 장소명이다. 실제 예약/가격/공실 정보가 아니다. AI 생성 프롬프트에도 구체적인 호텔명을 요청한다.
+- 같은 시간대의 추가 도시 안내는 `EXTRA_CITY_LABELS`에 있다. 안내용 도시명을 완성된 일정 템플릿으로 취급하지 않는다.
+- 모델 회귀 검사: `node scripts/test-graph.cjs`.
+
+호텔명 참고: [Hilton Tokyo](https://www.hilton.com/en/hotels/tyohitw-hilton-tokyo/), [Pullman Paris Tour Eiffel](https://all.accor.com/hotel/7229/index.en.shtml), [The Palace Madrid](https://www.marriott.com/en-us/hotels/madcl-the-palace-a-luxury-collection-hotel-madrid/overview/), [Phoenix Seagaia Ocean Tower](https://en.seagaia.co.jp/), [Arusha Serena](https://www.serenahotels.com/arusha).

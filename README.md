@@ -1,15 +1,9 @@
 # Tour City Planner - Travel Route Planner
 
-<!-- PROJECT-PRESENTATION:START -->
-<a href="https://minwoo19930301.github.io/tour-city-planner/"><img src=".github/project-cover.svg" alt="Tour City Planner - Travel Route Planner" width="960"></a>
-
-[![OPEN APP](https://img.shields.io/badge/OPEN%20APP-2C6049?style=for-the-badge)](https://minwoo19930301.github.io/tour-city-planner/) [![QUICK START](https://img.shields.io/badge/QUICK%20START-374151?style=for-the-badge)](#사용하는-방법) [![SOURCE](https://img.shields.io/badge/SOURCE-444444?style=for-the-badge)](https://github.com/minwoo19930301/tour-city-planner)
-<!-- PROJECT-PRESENTATION:END -->
-
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-brightgreen?style=for-the-badge&logo=github)](https://minwoo19930301.github.io/tour-city-planner/)
 
 
-도시별 추천 일정 템플릿을 바탕으로 여행 루트를 만들고, 날씨와 환율, 지도 미리보기까지 한 화면에서 확인할 수 있는 정적 여행 플래너입니다. 단일 도시 일정뿐 아니라 여러 나라를 이어 붙인 멀티 세그먼트 일정도 URL로 공유할 수 있습니다.
+도시별 추천 일정 템플릿을 바탕으로 여행 루트를 만들고, 날씨와 환율, 지도 미리보기까지 한 화면에서 확인할 수 있는 정적 여행 플래너입니다. 최대 3개의 일정 후보를 Git 그래프처럼 나란히 놓고, 선으로 분기·합류 경로를 편집할 수 있습니다. 단일 도시 일정뿐 아니라 여러 나라를 이어 붙인 멀티 세그먼트 일정도 URL로 공유할 수 있습니다.
 
 ## 링크
 
@@ -22,7 +16,7 @@
 - 목적지 템플릿 156개. 한국에서 직항이 있는 도시를 중심으로 일본 29곳, 중국 22곳, 동남아·대만·홍콩·마카오 27곳, 중앙아시아·남아시아·중동 12곳, 한국 3곳, 유럽·미주·오세아니아·아프리카를 담았습니다
 - 목적지 목록은 나라·시간대별로 한 줄(대표 도시)씩 80줄로 묶어 보여 줍니다. 여행에서 중요한 건 시간대라서, 같은 시간대의 다른 도시(오사카·교토 등)는 그 줄 아래에 이름으로 함께 적어 두었습니다. 그 도시들의 템플릿과 사진은 그대로 있어서 `?destination=osaka`나 `osaka_trip.html`로 열면 그대로 씁니다
 - 국내 도시(서울·부산·제주)를 앞뒤 구간으로 붙여 서울 → 오사카 같은 멀티 세그먼트 일정 작성
-- 일정 카드는 아무 데나 잡고 끌어서 옮길 수 있음 (PC는 누르고 바로, 터치는 길게 누른 뒤). 「순서 편집」 모드에서는 카드마다 ▲▼ 버튼과 「날짜 이동」도 나타남 (키보드는 `Alt`+위아래)
+- 카드 전체를 끌어 순서를 바꾸고, 최대 3개의 후보를 나란히 놓아 분기·합류 경로를 연결합니다.
 - 카드 사이 연결선(가는 길)과 「하루 이동코스」에 마우스를 올리거나 탭하면 구글 지도 길찾기가 그 자리에 iframe으로 뜸. 「자세히」 아이콘으로 구글 지도로 이동, 「닫기」로 닫음
 - 모바일(세로 화면)에서는 세로 구도 대표 사진을, PC에서는 가로 사진을 따로 보여줌
 - 도시별 추천 일정 자동 구성
@@ -49,7 +43,7 @@
 정적 HTML/JS 프로젝트라서 간단한 서버만 있으면 됩니다.
 
 ```bash
-python3 -m http.server 4173 --bind 127.0.0.1 --directory "/Users/minwokim/Documents/New project/trip-plans"
+python3 -m http.server 4173 --bind 127.0.0.1
 ```
 
 브라우저에서 `http://127.0.0.1:4173`를 열면 됩니다.

@@ -18532,6 +18532,16 @@ function getDestinationGroup(destinationId) {
     return getDestinationGroups().get(getDestinationGroupKey(getDestination(destinationId))) || null;
 }
 
+const EXTRA_CITY_LABELS = {
+    paris:['리옹','마르세유','니스','보르도','스트라스부르'], london:['맨체스터','에든버러','리버풀','버밍엄','글래스고'],
+    germany:['뮌헨','프랑크푸르트','함부르크','쾰른','뒤셀도르프'], czech:['브르노','체스키크룸로프','카를로비바리'],
+    budapest:['데브레첸','세게드','페치'], poland:['크라쿠프','그단스크','브로츠와프','포즈난'],
+    austria:['잘츠부르크','인스브루크','그라츠'], switzerland:['취리히','제네바','루체른','인터라켄','베른'],
+    amsterdam:['로테르담','헤이그','위트레흐트'], portugal:['포르투','파루','코임브라'], greece:['테살로니키','산토리니','미코노스','이라클리온'],
+    sweden:['예테보리','말뫼','웁살라'], norway:['베르겐','트롬쇠','트론헤임'], denmark:['오르후스','오덴세','올보르'],
+    finland:['탐페레','투르쿠','로바니에미'], canada:['오타와','몬트리올'], vancouver:['빅토리아','휘슬러'],
+    mexico:['과달라하라','몬테레이','푸에블라'], cancun:['플라야델카르멘','툴룸','코수멜']
+};
 let selectableDestinationCache = null;
 function getSelectableDestinations() {
     if (selectableDestinationCache) return selectableDestinationCache;
@@ -18551,11 +18561,11 @@ function getSelectableDestinations() {
             id: destination.id,
             groupKey: group.key,
             memberIds: group.members.map((member) => member.id),
-            siblingLabels: group.siblings.map((member) => getLocalizedLabel(member.city, member.city)),
+            siblingLabels: [...new Set([...group.siblings.map((member) => getLocalizedLabel(member.city, member.city)), ...(EXTRA_CITY_LABELS[destination.id] || [])])],
             country: destination.country,
             city: destination.city,
             region: getRegionKey(destination.country),
-            primaryLabel: showCity ? `${countryLabel} · ${cityLabel}` : countryLabel,
+            primaryLabel: `${countryLabel} · ${cityLabel}`,
             secondaryLabel: destination.timeZone,
             timeZone: destination.timeZone
         };
@@ -18637,6 +18647,7 @@ function roundMinutes(value, step = 5) {
 }
 
 function sortActivities(day) {
+    if (Array.isArray(day.links)) return;
     day.activities.sort((left, right) => left.time.localeCompare(right.time));
 }
 
@@ -18805,7 +18816,7 @@ function buildGeneratedActivitiesForDestination(context, slotIndex = 0, slotCoun
 
 function buildStayMapQuery(destinationId) {
     const destination = getDestination(destinationId);
-    return `${destination.city} hotel`;
+    return `${EXAMPLE_HOTELS[destinationId]} ${destination.city}`;
 }
 
 function createStayActivity({ destinationId, time, title }) {
@@ -18814,10 +18825,10 @@ function createStayActivity({ destinationId, time, title }) {
         destinationId,
         time,
         title,
-        location: '숙소',
+        location: EXAMPLE_HOTELS[destinationId],
         mapQuery: buildStayMapQuery(destinationId),
         type: 'luggage',
-        memo: ''
+        memo: title.includes('출발') ? '예시 호텔 · 출발' : '예시 호텔 · 복귀'
     };
 }
 
@@ -18984,9 +18995,10 @@ function buildItineraryFromSharedPayload(segments = [], serializedDays = []) {
         const sourceDay = serializedDays[dayIndex];
         if (!sourceDay) return day;
 
-        const nextActivities = Array.isArray(sourceDay.a) && sourceDay.a.length
+        const nextActivities = Array.isArray(sourceDay.a)
             ? sourceDay.a.map((activity) => ({
-                id: createId('activity'),
+                id: typeof activity.id === 'string' && /^[a-zA-Z0-9_-]+$/.test(activity.id) ? activity.id : createId('activity'),
+                row: typeof activity.r === 'string' ? activity.r : undefined,
                 destinationId: getSelectableDestinationId(
                     typeof activity.d === 'string' && activity.d
                         ? activity.d
@@ -18998,7 +19010,8 @@ function buildItineraryFromSharedPayload(segments = [], serializedDays = []) {
                     : (typeof activity.l === 'string' && activity.l.trim() ? activity.l.trim() : '일정'),
                 location: typeof activity.l === 'string' ? activity.l : '',
                 type: typeof activity.k === 'string' && (ACTIVITY_ICON_VALUES.has(activity.k) || activity.k === '') ? activity.k : '',
-                memo: typeof activity.m === 'string' ? activity.m : ''
+                memo: typeof activity.m === 'string' ? activity.m : '',
+                mapQuery: typeof activity.q === 'string' ? activity.q : activity.l
             }))
             : day.activities;
 
@@ -19007,21 +19020,24 @@ function buildItineraryFromSharedPayload(segments = [], serializedDays = []) {
             destinationId: nextActivities[0]?.destinationId || day.destinationId,
             destinationIds: [...new Set(nextActivities.map((activity) => activity.destinationId).filter(Boolean))],
             title: typeof sourceDay.t === 'string' && sourceDay.t.trim() ? sourceDay.t.trim() : day.title,
-            activities: nextActivities
+            activities: nextActivities,
+            links: Array.isArray(sourceDay.e) ? sourceDay.e : undefined
         };
     });
 }
 
 function buildSharePayload() {
     return {
-        v: 3,
+        v: 4,
         g: appState.segments.map((segment) => ({
             d: getSelectableDestinationId(segment.destinationId),
             s: segment.startDate,
             e: segment.endDate
         })),
         i: appState.itinerary.map((day) => ({
+            e: day.links,
             a: day.activities.map((activity) => ({
+                id: activity.id, r: activity.row, n: activity.title, q: activity.mapQuery,
                 d: getSelectableDestinationId(activity.destinationId || day.destinationId),
                 h: activity.time,
                 l: activity.location,
@@ -20147,6 +20163,7 @@ ${baseDomain}#plan=<BASE64_ENCODED_JSON>
 
 * 참고 스펙:
 - "i" 배열의 원소 개수는 여행 총 일수와 정확히 일치해야 합니다.
+- 숙박 장소는 "숙소", "호텔" 같은 일반명 대신 해당 도시의 실제 호텔 이름을 사용하세요. 예약된 숙소로 오해하지 않도록 메모에 "예시 호텔"을 표시하세요.
 - "k" 값에는 Lucide 아이콘 명칭 사용: "plane", "sparkles", "luggage", "landmark", "compass", "utensils", "coffee", "hotel", "camera", "shopping-bag", "train", "car", "map-pin", "moon-star", "sun", "ticket", "beer".
 - 완성된 JSON 문자열을 UTF-8 기준으로 Base64 인코딩하여 #plan= 뒤에 붙여 한 줄의 링크로만 응답해 주세요.`;
 }
@@ -20555,6 +20572,78 @@ function buildActivityReorderControlsHtml(day, dayIndex, activity, activityIndex
     `;
 }
 
+
+let pendingParallelActivity = null;
+
+function graphLayoutAttributes(rows, activity) {
+    const rowIndex = rows.findIndex(r => r.includes(activity)), row = rows[rowIndex];
+    const width = 6 / row.length, col = row.indexOf(activity) * width + 1;
+    return `data-parallel="${row.length > 1}" style="grid-row:${rowIndex + 1};grid-column:${col} / span ${width}"`;
+}
+function graphControlsHtml(day, dayIndex, activity, rows) {
+    const rowIndex = rows.findIndex(r => r.includes(activity)), row = rows[rowIndex];
+    const targets = rows.slice(rowIndex + 1).flat();
+    const links = day.links.filter(e => e[0] === activity.id);
+    const attrs = `data-graph-day="${dayIndex}" data-graph-id="${activity.id}" data-skip-edit="true"`;
+    return `<div class="tree-actions" data-skip-edit="true">
+        <button type="button" ${attrs} data-graph-action="parallel" ${row.length >= 3 ? 'disabled' : ''}>+ 나란히</button>
+        ${row.length > 1 ? `<button type="button" ${attrs} data-graph-action="separate">따로 놓기</button>` : ''}
+        <select ${attrs} data-graph-connect aria-label="${escapeHtml(activity.location)}에서 연결할 일정"><option value="">선 연결 / 합류</option>${targets.filter(a => !links.some(e => e[1] === a.id)).map(a => `<option value="${a.id}">${escapeHtml(a.time + ' ' + a.location)}</option>`).join('')}</select>
+        <select ${attrs} data-graph-join aria-label="${escapeHtml(activity.location)} 나란히 이동"><option value="">나란히 이동</option>${rows.filter(r=>r!==row && r.length<3).map(r=>`<option value="${r[0].id}">${escapeHtml(r[0].time+' '+r[0].location)} 옆</option>`).join('')}</select>
+        <button type="button" ${attrs} data-graph-action="remove" class="tree-remove">제거</button>
+        <div class="tree-links">${links.map(e => { const target = day.activities.find(a => a.id === e[1]); return `<button type="button" ${attrs} data-graph-action="unlink" data-graph-to="${e[1]}" title="연결선 제거">↳ ${escapeHtml(target?.location || '')} ×</button>`; }).join('')}</div>
+    </div>`;
+}
+function reconnectMovedStop(day, id) {
+    const rows = TripGraph.normalize(day), i = rows.findIndex(r => r.some(a => a.id === id));
+    day.links = day.links.filter(e => !e.includes(id));
+    (rows[i-1] || []).forEach(a => TripGraph.connect(day,a.id,id));
+    (rows[i+1] || []).forEach(a => TripGraph.connect(day,id,a.id));
+}
+function handleGraphClick(event) {
+    const button = event.target.closest('[data-graph-action]');
+    if (!button) return false;
+    const dayIndex = Number(button.dataset.graphDay), day = appState.itinerary[dayIndex], id = button.dataset.graphId;
+    const activity = day?.activities.find(a => a.id === id); if (!activity) return true;
+    const action = button.dataset.graphAction;
+    if (action === 'parallel') {
+        const item = {...activity, id:createId('activity'), location:'새 후보 장소', title:'새 후보', mapQuery:'', memo:''};
+        if (!TripGraph.parallel(day,id,item)) return true;
+        pendingParallelActivity={dayIndex,id:item.id};
+        persistItineraryChanges(); openActivityEditor(dayIndex,item.id); return true;
+    }
+    if (action === 'separate') TripGraph.separate(day,id);
+    if (action === 'remove') TripGraph.remove(day,id);
+    if (action === 'unlink') day.links = day.links.filter(e => !(e[0] === id && e[1] === button.dataset.graphTo));
+    syncDayDestinations(day); persistItineraryChanges(); return true;
+}
+function drawGraphEdges() {
+    appState.itinerary.forEach((day,dayIndex) => {
+        const list=ui.itineraryContainer.querySelector(`[data-activity-list="${dayIndex}"]`), svg=list?.querySelector('.tree-svg');
+        if (!svg) return;
+        const bounds=list.getBoundingClientRect();
+        svg.setAttribute('viewBox',`0 0 ${bounds.width} ${bounds.height}`);
+        svg.innerHTML=day.links.map(([from,to]) => {
+            const a=list.querySelector(`[data-activity-wrapper="${from}"]`)?.getBoundingClientRect();
+            const b=list.querySelector(`[data-activity-wrapper="${to}"]`)?.getBoundingClientRect();
+            if(!a || !b) return '';
+            const x=a.left+a.width/2-bounds.left, y=a.bottom-bounds.top;
+            const xx=b.left+b.width/2-bounds.left, yy=b.top-bounds.top;
+            const bend=Math.min(34,(yy-y)/2);
+            const source=day.activities.find(a=>a.id===from), target=day.activities.find(a=>a.id===to);
+            const origin=source.mapQuery || source.location, dest=target.mapQuery || target.location;
+            return `<a data-route-preview="true" data-skip-edit="true" href="${getDirectionsUrl(origin,dest)}" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}" aria-label="${escapeHtml(source.location+'에서 '+target.location+' 가는 길')}"><path style="pointer-events:stroke;cursor:pointer" d="M ${x} ${y} C ${x} ${y+bend}, ${xx} ${yy-bend}, ${xx} ${yy}"/><circle cx="${xx}" cy="${yy}" r="3" fill="currentColor"/></a>`;
+        }).join('');
+    });
+}
+window.addEventListener('resize', () => requestAnimationFrame(drawGraphEdges));
+document.addEventListener('change', event => {
+    const join=event.target.closest('[data-graph-join]');
+    if(join && join.value){const day=appState.itinerary[Number(join.dataset.graphDay)];if(TripGraph.join(day,join.dataset.graphId,join.value)) persistItineraryChanges();return;}
+    const select=event.target.closest('[data-graph-connect]'); if(!select || !select.value) return;
+    const day=appState.itinerary[Number(select.dataset.graphDay)];
+    if(TripGraph.connect(day,select.dataset.graphId,select.value)) persistItineraryChanges();
+});
 function renderItinerary() {
     if (activityDragState.active) {
         // 끌기 도중에는 DOM을 갈아끼우지 않고, 끌기가 끝난 뒤 다시 그린다
@@ -20563,7 +20652,7 @@ function renderItinerary() {
     }
 
     closeRoutePreview();
-    const reorderMode = Boolean(appState.reorderMode);
+    const reorderMode = false;
     ui.itineraryContainer.innerHTML = '<div class="absolute left-[11px] top-2 bottom-0 w-[2px] bg-white/20"></div>';
 
     appState.itinerary.forEach((day, dayIndex) => {
@@ -20576,7 +20665,8 @@ function renderItinerary() {
         const dayElement = document.createElement('div');
         dayElement.className = 'relative pl-8';
         dayElement.dataset.dayPanel = String(dayIndex);
-        const dayDirectionsUrl = getDayDirectionsUrl(day.activities, day.destinationId);
+        const graphIsLinear = TripGraph.normalize(day).every(r => r.length === 1) && day.links.length === Math.max(0, day.activities.length - 1) && day.links.every(([a,b]) => day.activities.findIndex(x => x.id === b) === day.activities.findIndex(x => x.id === a) + 1);
+        const dayDirectionsUrl = graphIsLinear ? getDayDirectionsUrl(day.activities, day.destinationId) : null;
         const dayDirectionsEmbedUrl = getDayDirectionsEmbedUrl(day.activities);
         const segmentChipHtml = isSegmentBoundary ? `
             <div class="mb-2">
@@ -20587,6 +20677,7 @@ function renderItinerary() {
             </div>
         ` : '';
 
+        const graphRows = TripGraph.normalize(day);
         const activitiesHtml = day.activities.map((activity, activityIndex) => {
             const nextActivity = day.activities[activityIndex + 1];
             const isActiveActivity = activity.id === appState.activeActivityId;
@@ -20595,27 +20686,7 @@ function renderItinerary() {
             const routeOrigin = String(activity.mapQuery || activity.location || '').trim();
             const routeTarget = String(nextActivity?.mapQuery || nextActivity?.location || '').trim();
             const routeTitle = `${activity.location || routeOrigin} → ${nextActivity?.location || routeTarget}`;
-            const betweenStopsHtml = nextActivity ? `
-                <div class="relative h-5 -mt-1 -mb-1 z-20">
-                    <div class="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-white/18"></div>
-                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
-                        <a
-                            href="${getDirectionsUrl(routeOrigin, routeTarget)}"
-                            target="_blank"
-                            rel="noreferrer"
-                            data-skip-edit="true"
-                            data-route-preview="true"
-                            data-route-title="${escapeHtml(routeTitle)}"
-                            data-route-embed="${escapeHtml(getDirectionsEmbedUrl(routeOrigin, routeTarget))}"
-                            title="${escapeHtml('가는 길 미리보기')}"
-                            aria-label="${escapeHtml(`가는 길 미리보기: ${routeTitle}`)}"
-                            class="route-preview-trigger w-8 h-8 rounded-full flex items-center justify-center text-white shadow-lg"
-                            style="border: 1px solid rgba(var(--accent-rgb), 0.56); background: rgba(var(--accent-rgb), 0.18);">
-                            <i data-lucide="route" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-                </div>
-            ` : '';
+            const betweenStopsHtml = '';
             const mapLinkHtml = `
                 <a href="${getMapsSearchUrl(activity.mapQuery || activity.location, activity.destinationId || day.destinationId)}"
                     target="_blank"
@@ -20626,25 +20697,14 @@ function renderItinerary() {
                     <i data-lucide="map-pin" class="w-5 h-5"></i>
                 </a>
             `;
-            const dragHandleHtml = reorderMode ? '' : `
-                <button
-                    type="button"
-                    tabindex="-1"
-                    data-skip-edit="true"
-                    data-drag-handle="true"
-                    class="activity-drag-handle"
-                    aria-label="${escapeHtml('일정 순서 바꾸기')}"
-                    title="${escapeHtml('끌어서 순서 바꾸기 · 카드 아무 데나 잡고 끌어도 돼요')}">
-                    <i data-lucide="grip-vertical" class="w-5 h-5"></i>
-                </button>
-            `;
+            const dragHandleHtml = '';
             const cardModeClasses = reorderMode
                 ? 'flex-wrap activity-card-reorder'
                 : 'justify-between cursor-pointer hover:bg-white/[0.08]';
             const cardModeAttributes = reorderMode ? '' : 'data-action="edit-activity"';
 
             return `
-            <div data-activity-wrapper="${activity.id}" data-flip-item="true">
+            <div data-activity-wrapper="${activity.id}" data-flip-item="true" ${graphLayoutAttributes(graphRows, activity)}>
                 <div
                     class="activity-card relative glass-panel p-4 rounded-3xl flex items-center gap-3 mb-3 transition-colors ${cardModeClasses} ${isActiveActivity ? 'next-item' : ''}"
                     ${cardModeAttributes}
@@ -20666,9 +20726,8 @@ function renderItinerary() {
                         </div>
                         ${reorderMode ? mapLinkHtml : ''}
                     </div>
-                    ${reorderMode
-                        ? buildActivityReorderControlsHtml(day, dayIndex, activity, activityIndex)
-                        : `<div class="flex items-center gap-2 shrink-0">${mapLinkHtml}</div>`}
+                    <div class="flex items-center gap-2">${mapLinkHtml}</div>
+                    ${graphControlsHtml(day, dayIndex, activity, graphRows)}
                 </div>
                 ${betweenStopsHtml}
             </div>
@@ -20720,9 +20779,9 @@ function renderItinerary() {
                 </div>
             </div>
 
-            <div class="space-y-3" data-activity-list="${dayIndex}">
-                ${activitiesHtml}
-            </div>
+            <div class="tree-scroll"><div class="activity-tree" data-activity-list="${dayIndex}">
+                <svg class="tree-svg" aria-hidden="true"></svg>${activitiesHtml}
+            </div></div>
         `;
 
         ui.itineraryContainer.appendChild(dayElement);
@@ -20730,6 +20789,7 @@ function renderItinerary() {
 
     syncReorderModeUi();
     lucide.createIcons();
+    requestAnimationFrame(drawGraphEdges);
     updateCurrentFocusButton();
 }
 
@@ -21021,6 +21081,7 @@ function openActivityEditor(dayIndex, activityId = null) {
 }
 
 function closeActivityEditor() {
+    if(pendingParallelActivity){const {dayIndex,id}=pendingParallelActivity; pendingParallelActivity=null;TripGraph.remove(appState.itinerary[dayIndex],id);persistItineraryChanges();}
     closeIconPicker();
     ui.activityModal.classList.add('hidden');
     updateBodyScrollLock();
@@ -21053,6 +21114,7 @@ function saveActivityEditor() {
     }
 
     const nextActivity = {
+        ...existingActivity,
         id: activityEditorState.activityId || createId('activity'),
         destinationId: existingActivity?.destinationId || day.destinationIds?.[0] || day.destinationId || appState.destinationId,
         time,
@@ -21072,6 +21134,8 @@ function saveActivityEditor() {
         day.activities.push(nextActivity);
     }
 
+    pendingParallelActivity=null;
+    if (!existingActivity) reconnectMovedStop(day, nextActivity.id);
     sortActivities(day);
     syncDayDestinations(day);
     closeActivityEditor();
@@ -21085,7 +21149,8 @@ function deleteCurrentActivity() {
     const shouldDelete = window.confirm('이 일정을 삭제할까요?');
     if (!shouldDelete) return;
 
-    day.activities = day.activities.filter((activity) => activity.id !== activityEditorState.activityId);
+    pendingParallelActivity=null;
+    TripGraph.remove(day, activityEditorState.activityId);
     syncDayDestinations(day);
     closeActivityEditor();
     persistItineraryChanges();
@@ -21160,7 +21225,10 @@ function moveActivityWithinDay(dayIndex, activityId, targetIndex) {
     const ordered = day.activities.slice();
     const [moved] = ordered.splice(currentIndex, 1);
     ordered.splice(nextIndex, 0, moved);
+    moved.row = TripGraph.freshRow(day, moved.id);
     reassignDayTimes(day, ordered);
+    TripGraph.normalize(day);
+    reconnectMovedStop(day, moved.id);
     return true;
 }
 
@@ -21190,13 +21258,16 @@ function moveActivityAcrossDays(sourceDayIndex, targetDayIndex, activityId, targ
     const currentIndex = sourceDay.activities.findIndex((activity) => activity.id === activityId);
     if (currentIndex === -1) return false;
 
-    const [moved] = sourceDay.activities.splice(currentIndex, 1);
+    const moved = sourceDay.activities[currentIndex];
+    TripGraph.remove(sourceDay, moved.id);
+    moved.row = TripGraph.freshRow(targetDay, moved.id);
     const insertIndex = Math.max(0, Math.min(targetDay.activities.length, targetIndex));
     moved.time = resolveInsertedTime(targetDay.activities, insertIndex, moved.time);
     moved.destinationId = targetDay.destinationIds?.[0] || targetDay.destinationId || moved.destinationId;
     targetDay.activities.splice(insertIndex, 0, moved);
 
-    sortActivities(targetDay);
+    TripGraph.normalize(targetDay);
+    reconnectMovedStop(targetDay, moved.id);
     if (typeof syncDayDestinations === 'function') {
         syncDayDestinations(sourceDay);
         syncDayDestinations(targetDay);
@@ -21391,7 +21462,7 @@ function updateDropTarget(clientX, clientY) {
     let insertIndex = cards.length;
     for (let index = 0; index < cards.length; index += 1) {
         const rect = cards[index].getBoundingClientRect();
-        if (clientY < rect.top + rect.height / 2) {
+        if (clientY < rect.top || (clientY < rect.bottom && clientX < rect.left + rect.width / 2)) {
             insertIndex = index;
             break;
         }
@@ -21404,6 +21475,8 @@ function updateDropTarget(clientX, clientY) {
 
     const positionsBefore = captureFlipPositions();
     const referenceWrapper = cards[insertIndex] ? cards[insertIndex].closest('[data-activity-wrapper]') : null;
+    activityDragState.placeholder.style.gridRow = referenceWrapper?.style.gridRow || String(TripGraph.rows(appState.itinerary[dayIndex]).length + 1);
+    activityDragState.placeholder.style.gridColumn = referenceWrapper?.style.gridColumn || '1 / span 6';
     if (referenceWrapper && referenceWrapper.parentNode === list) {
         list.insertBefore(activityDragState.placeholder, referenceWrapper);
     } else {
@@ -21420,7 +21493,7 @@ function updateDropTarget(clientX, clientY) {
 function updateGhostPosition() {
     if (!activityDragState.ghost) return;
     const deltaY = activityDragState.lastY - activityDragState.startY;
-    activityDragState.ghost.style.transform = `translate3d(0, ${deltaY}px, 0) scale(1.03)`;
+    activityDragState.ghost.style.transform = `translate3d(${activityDragState.lastX - activityDragState.startX}px, ${deltaY}px, 0) scale(1.03)`;
 }
 
 function stepDragAutoScroll() {
@@ -21498,7 +21571,8 @@ function beginActivityDrag() {
     const placeholder = document.createElement('div');
     placeholder.className = 'activity-drop-placeholder';
     placeholder.style.height = `${cardRect.height}px`;
-    placeholder.style.marginBottom = `${Math.max(0, slotHeight - cardRect.height)}px`;
+    placeholder.style.gridRow = wrapper.style.gridRow;
+    placeholder.style.gridColumn = wrapper.style.gridColumn;
     wrapper.parentNode.insertBefore(placeholder, wrapper);
     wrapper.hidden = true;
 
@@ -21725,7 +21799,10 @@ function handleActivityReorderKeydown(event) {
     const ordered = day.activities.slice();
     const [moved] = ordered.splice(currentIndex, 1);
     ordered.splice(nextIndex, 0, moved);
+    moved.row = moved.id;
     reassignDayTimes(day, ordered);
+    TripGraph.normalize(day);
+    reconnectMovedStop(day, moved.id);
     persistItineraryChanges();
     focusActivityCard(moved.id);
 }
@@ -21896,6 +21973,8 @@ function handleItineraryClick(event) {
         openRoutePreview(routeTrigger);
         return;
     }
+
+    if (handleGraphClick(event)) return;
 
     if (event.target.closest('[data-skip-edit]')) {
         return;
