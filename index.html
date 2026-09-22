@@ -790,6 +790,33 @@
         .tree-scroll {overflow-x:auto;padding:5px 3px 24px;}
         @media(max-width:640px){.activity-tree:has([data-parallel="true"]){min-width:720px}.tree-scroll{margin-left:-24px}.activity-tree .activity-card{padding:12px}}
         .activity-card-ghost{pointer-events:none!important}
+
+        .compact-summary {display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px;border-radius:20px;font-size:12px;}
+        .summary-clocks,.summary-rate {display:flex;align-items:center;gap:7px;white-space:nowrap;}
+        .summary-clocks strong {font-variant-numeric:tabular-nums;font-size:14px;}
+        .summary-divider {opacity:.35;margin:0 2px;}
+        .summary-rate input {width:60px;background:#ffffff0c;border:1px solid #ffffff18;border-radius:7px;padding:3px 5px;color:white;min-width:0;}
+        .reverse-rate {position:relative;}
+        .reverse-rate summary {list-style:none;cursor:pointer;padding:3px 6px;border-radius:6px;background:#ffffff0d;}
+        .reverse-rate>div {position:absolute;right:0;top:28px;z-index:40;display:flex;align-items:center;gap:6px;background:#172335;border:1px solid #ffffff25;border-radius:12px;padding:10px;box-shadow:0 10px 30px #0005;}
+        .day-panel {padding:18px;border:1px solid #ffffff25;border-radius:26px;background:rgba(22,32,46,.35);backdrop-filter:blur(16px);}
+        .day-panel [data-day-header] {align-items:center;margin-bottom:15px;}
+        .day-panel h3 {font-size:22px;}
+        .day-panel .tree-scroll {padding:3px 2px 4px;margin:0;scrollbar-width:thin;scrollbar-color:#ffffff30 transparent;}
+        .activity-tree .next-item,.activity-tree .next-item::after {animation:none;}
+        .activity-tree {gap:40px 12px;margin-bottom:0;}
+        .activity-tree .activity-card {padding:12px;gap:6px;border-radius:18px;justify-content:flex-start;}
+        .activity-tree .activity-card-main {gap:8px;}
+        .activity-tree .activity-card-location {font-size:13px;}
+        .tree-actions {margin-top:2px;gap:4px;align-items:center;}
+        .tree-actions button,.tree-actions select {padding:4px 6px;font-size:10px;}
+        .tree-connection-tools {flex:1;min-width:0;}
+        .tree-connection-tools>summary {font-size:10px;color:#aab9cb;cursor:pointer;list-style:none;width:max-content;padding:4px 6px;}
+        .tree-connection-tools>summary::-webkit-details-marker {display:none;}
+        .tree-connection-tools>div {display:flex;gap:5px;flex-wrap:wrap;padding-top:6px;}
+        .tree-actions .tree-remove {margin-left:0;}
+        .activity-card-ghost {display:flex;flex-direction:column;align-items:stretch;gap:6px;}
+        @media(max-width:640px){.compact-summary{flex-wrap:wrap;padding:9px 12px;gap:7px}.summary-clocks{font-size:11px}.summary-rate{font-size:11px}.day-panel{padding:12px;border-radius:22px}.activity-tree:has([data-parallel="true"]){min-width:620px}.day-panel h3{font-size:20px}}
     </style>
 </head>
 
@@ -803,54 +830,20 @@
     <div id="trip-shell" class="relative z-10 min-h-screen hidden">
         <main class="px-4 pt-4 pb-8 sm:px-6 lg:px-8">
             <div class="max-w-[760px] mx-auto">
-                <div class="utility-shell utility-top">
-                    <div class="space-y-2">
-                        <section class="glass-panel rounded-[22px] p-2">
-                            <div class="grid grid-cols-2 gap-3">
-                                <div class="rounded-[18px] border border-white/10 bg-white/5 p-2.5">
-                                    <div class="flex items-center gap-2">
-                                        <input id="rate-base-input" type="number" min="0" step="any" value="1" class="input-shell text-base font-semibold py-1.5 px-4">
-                                        <div id="base-currency-label" class="text-base font-semibold text-white shrink-0 min-w-[3.5rem] text-right">EUR</div>
-                                    </div>
-                                    <div id="rate-to-krw" class="text-sm font-semibold text-white/84 mt-1.5">...</div>
-                                </div>
-                                <div class="rounded-[18px] border border-white/10 bg-white/5 p-2.5">
-                                    <div class="flex items-center gap-2">
-                                        <input id="rate-krw-input" type="number" min="0" step="any" value="1000" class="input-shell text-base font-semibold py-1.5 px-4">
-                                        <div class="text-base font-semibold text-white shrink-0 min-w-[3.5rem] text-right">₩</div>
-                                    </div>
-                                    <div id="rate-from-krw" class="text-sm font-semibold text-white/84 mt-1.5">...</div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <section class="grid grid-cols-2 gap-3">
-                            <div class="glass-panel rounded-[22px] p-2.5 text-center min-h-[72px] flex flex-col justify-center">
-                                <div id="destination-clock-label" class="text-sm text-white/64 mb-1">🌍</div>
-                                <div id="time-destination" class="text-xl font-serif font-bold text-white">--:--</div>
-                                <div id="date-destination" class="text-[11px] text-white/68 mt-0.5">---</div>
-                            </div>
-                            <div class="glass-panel rounded-[22px] p-2.5 text-center min-h-[72px] flex flex-col justify-center">
-                                <div class="text-sm text-white/64 mb-1">🇰🇷</div>
-                                <div id="time-seoul" class="text-xl font-serif font-bold text-white">--:--</div>
-                                <div id="date-seoul" class="text-[11px] text-white/68 mt-0.5">---</div>
-                            </div>
-                        </section>
+                <header class="utility-shell utility-top glass-panel compact-summary">
+                    <div class="summary-clocks" aria-label="현재 시간">
+                        <span id="destination-clock-label">🌍</span><strong id="time-destination">--:--</strong>
+                        <span class="summary-divider">/</span><span>🇰🇷</span><strong id="time-seoul">--:--</strong>
+                        <span id="date-destination" hidden></span><span id="date-seoul" hidden></span>
                     </div>
-                </div>
-
-                <section class="mt-2">
-                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
-                        <div class="flex flex-wrap gap-2">
-                            <button id="prepend-day-btn" type="button" class="rounded-full border border-white/10 bg-white/6 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-white/10 transition-colors">앞 날짜 +1</button>
-                            <button id="remove-first-day-btn" type="button" class="rounded-full border border-white/10 bg-white/6 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-white/10 transition-colors">첫날 삭제</button>
-                        </div>
-                        <div class="flex flex-wrap gap-2">
-                            <button id="remove-last-day-btn" type="button" class="rounded-full border border-white/10 bg-white/6 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-white/10 transition-colors">마지막날 삭제</button>
-                            <button id="append-day-btn" type="button" class="rounded-full border border-white/10 bg-white/6 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-white/10 transition-colors">뒤 날짜 +1</button>
-                        </div>
+                    <div class="summary-rate">
+                        <input id="rate-base-input" aria-label="현지 통화 금액" type="number" min="0" step="any" value="1">
+                        <span id="base-currency-label">EUR</span><span class="summary-divider">≈</span><strong id="rate-to-krw">...</strong>
+                        <details class="reverse-rate"><summary aria-label="원화로 환산 입력">⇄</summary><div>
+                            <input id="rate-krw-input" aria-label="원화 금액" type="number" min="0" step="any" value="1000"><span>₩</span><span id="rate-from-krw">...</span>
+                        </div></details>
                     </div>
-                </section>
+                </header>
 
                 <section class="hidden glass-panel rounded-[36px] p-6 sm:p-8">
                     <div id="trip-country-chip" class="chip inline-flex items-center gap-2 px-5 py-2 text-[11px] uppercase tracking-[0.32em] font-semibold mb-5"></div>
@@ -874,10 +867,7 @@
                 </section>
 
                 <section class="mt-3">
-                    <p class="mb-3 pl-8 text-xs text-white/50">카드를 끌어 이동 · 터치는 길게 누르기 · 후보는 최대 3개까지 나란히</p>
-                    <div class="relative space-y-8" id="itinerary-container">
-                        <div class="absolute left-[11px] top-2 bottom-0 w-[2px] bg-white/20"></div>
-                    </div>
+                    <div id="itinerary-container" class="space-y-4"></div>
                 </section>
 
                 <div class="utility-shell utility-bottom">
@@ -1245,7 +1235,7 @@
 
     <script src="./example-hotels.js?v=1"></script>
     <script src="./graph-model.js?v=4"></script>
-    <script src="./app.js?v=graph-v4" defer></script>
+    <script src="./app.js?v=compact-v5" defer></script>
 </body>
 
 </html>

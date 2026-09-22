@@ -20587,11 +20587,12 @@ function graphControlsHtml(day, dayIndex, activity, rows) {
     const attrs = `data-graph-day="${dayIndex}" data-graph-id="${activity.id}" data-skip-edit="true"`;
     return `<div class="tree-actions" data-skip-edit="true">
         <button type="button" ${attrs} data-graph-action="parallel" ${row.length >= 3 ? 'disabled' : ''}>+ 나란히</button>
+        <details class="tree-connection-tools" data-skip-edit="true"><summary>연결 편집</summary><div>
         ${row.length > 1 ? `<button type="button" ${attrs} data-graph-action="separate">따로 놓기</button>` : ''}
         <select ${attrs} data-graph-connect aria-label="${escapeHtml(activity.location)}에서 연결할 일정"><option value="">선 연결 / 합류</option>${targets.filter(a => !links.some(e => e[1] === a.id)).map(a => `<option value="${a.id}">${escapeHtml(a.time + ' ' + a.location)}</option>`).join('')}</select>
         <select ${attrs} data-graph-join aria-label="${escapeHtml(activity.location)} 나란히 이동"><option value="">나란히 이동</option>${rows.filter(r=>r!==row && r.length<3).map(r=>`<option value="${r[0].id}">${escapeHtml(r[0].time+' '+r[0].location)} 옆</option>`).join('')}</select>
-        <button type="button" ${attrs} data-graph-action="remove" class="tree-remove">제거</button>
         <div class="tree-links">${links.map(e => { const target = day.activities.find(a => a.id === e[1]); return `<button type="button" ${attrs} data-graph-action="unlink" data-graph-to="${e[1]}" title="연결선 제거">↳ ${escapeHtml(target?.location || '')} ×</button>`; }).join('')}</div>
+        </div></details><button type="button" ${attrs} data-graph-action="remove" class="tree-remove">제거</button>
     </div>`;
 }
 function reconnectMovedStop(day, id) {
@@ -20637,6 +20638,7 @@ function drawGraphEdges() {
     });
 }
 window.addEventListener('resize', () => requestAnimationFrame(drawGraphEdges));
+document.addEventListener('toggle', event => {if(event.target.matches('.tree-connection-tools')) requestAnimationFrame(drawGraphEdges);}, true);
 document.addEventListener('change', event => {
     const join=event.target.closest('[data-graph-join]');
     if(join && join.value){const day=appState.itinerary[Number(join.dataset.graphDay)];if(TripGraph.join(day,join.dataset.graphId,join.value)) persistItineraryChanges();return;}
@@ -20653,7 +20655,7 @@ function renderItinerary() {
 
     closeRoutePreview();
     const reorderMode = false;
-    ui.itineraryContainer.innerHTML = '<div class="absolute left-[11px] top-2 bottom-0 w-[2px] bg-white/20"></div>';
+    ui.itineraryContainer.innerHTML = '';
 
     appState.itinerary.forEach((day, dayIndex) => {
         const dayDestination = getDayDestination(day);
@@ -20663,20 +20665,11 @@ function renderItinerary() {
             || previousDay.destinationId !== day.destinationId
             || countDaysInclusive(parseYmd(previousDay.date), parseYmd(day.date)) > 1;
         const dayElement = document.createElement('div');
-        dayElement.className = 'relative pl-8';
+        dayElement.className = 'day-panel';
         dayElement.dataset.dayPanel = String(dayIndex);
         const graphIsLinear = TripGraph.normalize(day).every(r => r.length === 1) && day.links.length === Math.max(0, day.activities.length - 1) && day.links.every(([a,b]) => day.activities.findIndex(x => x.id === b) === day.activities.findIndex(x => x.id === a) + 1);
         const dayDirectionsUrl = graphIsLinear ? getDayDirectionsUrl(day.activities, day.destinationId) : null;
         const dayDirectionsEmbedUrl = getDayDirectionsEmbedUrl(day.activities);
-        const segmentChipHtml = isSegmentBoundary ? `
-            <div class="mb-2">
-                <div class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[10px] font-semibold tracking-[0.24em] uppercase text-white/84"
-                    style="border-color: rgba(${dayDestination.accentRgb}, 0.42); background: rgba(${dayDestination.accentRgb}, 0.16);">
-                    <span>${escapeHtml(getDayChipLabel(day))}</span>
-                </div>
-            </div>
-        ` : '';
-
         const graphRows = TripGraph.normalize(day);
         const activitiesHtml = day.activities.map((activity, activityIndex) => {
             const nextActivity = day.activities[activityIndex + 1];
@@ -20724,9 +20717,8 @@ function renderItinerary() {
                             <div class="text-sm text-white/88 mt-1 activity-card-location">${escapeHtml(activity.location)}</div>
                             ${activity.memo ? `<div class="text-xs text-white/62 mt-1 leading-5 activity-card-memo">${escapeHtml(activity.memo)}</div>` : ''}
                         </div>
-                        ${reorderMode ? mapLinkHtml : ''}
+                        ${mapLinkHtml}
                     </div>
-                    <div class="flex items-center gap-2">${mapLinkHtml}</div>
                     ${graphControlsHtml(day, dayIndex, activity, graphRows)}
                 </div>
                 ${betweenStopsHtml}
@@ -20736,13 +20728,7 @@ function renderItinerary() {
 
         dayElement.innerHTML = `
             <div class="flex items-start gap-3 mb-4" data-day-header="${dayIndex}" data-flip-item="true">
-                <div class="w-6 h-6 rounded-full border-4 border-white/20 shadow-sm z-10 absolute left-0 flex items-center justify-center"
-                    style="background:rgba(${dayDestination.inkRgb},0.9);">
-                    <div class="w-1.5 h-1.5 rounded-full accent-dot"></div>
-                </div>
-
                 <div class="flex-1">
-                    ${segmentChipHtml}
                     <div class="flex items-end gap-2.5">
                         <h3 class="text-3xl font-serif font-bold text-white leading-none">${escapeHtml(formatMonthDay(headerDate))}</h3>
                         <span class="text-sm text-white/70 font-medium pb-0.5">${escapeHtml(formatMonthDayWithWeekday(headerDate))}</span>
@@ -21654,7 +21640,7 @@ function cancelActivityDrag() {
 function handleActivityPointerDown(event) {
     if (event.button !== undefined && event.button !== 0) return;
     if (activityDragState.pointerId !== null) return;
-    if (event.target.closest('[data-reorder-control], a, select, input, textarea, button:not([data-drag-handle])')) return;
+    if (event.target.closest('[data-reorder-control], a, summary, select, input, textarea, button:not([data-drag-handle])')) return;
 
     const card = event.target.closest('[data-activity-card-id]');
     if (!card) return;
@@ -22201,10 +22187,10 @@ ui.aiPromptCopyBtn.addEventListener('click', () => {
 
 ui.sharePlanBtn.addEventListener('click', sharePlan);
 ui.resetPlanBtn.addEventListener('click', resetToSetup);
-ui.prependDayBtn.addEventListener('click', prependDay);
-ui.appendDayBtn.addEventListener('click', appendDay);
-ui.removeFirstDayBtn.addEventListener('click', removeFirstDay);
-ui.removeLastDayBtn.addEventListener('click', removeLastDay);
+ui.prependDayBtn?.addEventListener('click', prependDay);
+ui.appendDayBtn?.addEventListener('click', appendDay);
+ui.removeFirstDayBtn?.addEventListener('click', removeFirstDay);
+ui.removeLastDayBtn?.addEventListener('click', removeLastDay);
 
 ui.activityCloseBtn.addEventListener('click', closeActivityEditor);
 ui.activityCancelBtn.addEventListener('click', closeActivityEditor);
