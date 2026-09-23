@@ -22389,10 +22389,35 @@ portraitViewportQuery.addEventListener('change', () => {
     const destination = getDestination(appState.destinationId);
     if (destination) applyTheme(destination);
 });
-ui.itineraryContainer.addEventListener('pointerdown', handleActivityPointerDown);
+ui.itineraryContainer.addEventListener('pointerdown', event=>{if(event.pointerType!=='touch')handleActivityPointerDown(event);});
 ui.itineraryContainer.addEventListener('keydown', handleActivityReorderKeydown);
 ui.itineraryContainer.addEventListener('change', handleReorderDaySelectChange);
-ui.itineraryContainer.addEventListener('touchmove', handleActivityTouchMove, { passive: false });
+// Keep a native touch stream alive when the browser cancels Pointer Events for scrolling.
+// Before the hold threshold normal swipes scroll; after it, touchmove owns the gesture.
+let activityTouchId=null;
+function activityTouchEvent(event,touch,type){return {type,pointerId:touch.identifier+100000,pointerType:'touch',button:0,target:event.target,clientX:touch.clientX,clientY:touch.clientY,cancelable:event.cancelable,preventDefault:()=>event.preventDefault()};}
+ui.itineraryContainer.addEventListener('touchstart',event=>{
+    if(event.touches.length!==1){cancelActivityDrag();activityTouchId=null;return;}
+    const touch=event.changedTouches[0];
+    handleActivityPointerDown(activityTouchEvent(event,touch,'pointerdown'));
+    if(activityDragState.pointerId===touch.identifier+100000)activityTouchId=touch.identifier;
+},{passive:true});
+window.addEventListener('touchmove',event=>{
+    if(activityTouchId===null)return;
+    if(event.touches.length!==1){cancelActivityDrag();activityTouchId=null;return;}
+    const touch=Array.from(event.changedTouches).find(t=>t.identifier===activityTouchId);if(!touch)return;
+    if(activityDragState.active && event.cancelable)event.preventDefault();
+    handleActivityPointerMove(activityTouchEvent(event,touch,'pointermove'));
+},{passive:false,capture:true});
+function finishActivityTouch(event){
+    if(activityTouchId===null)return;
+    const touch=Array.from(event.changedTouches).find(t=>t.identifier===activityTouchId);if(!touch)return;
+    const active=activityDragState.active;
+    handleActivityPointerUp(activityTouchEvent(event,touch,event.type==='touchcancel'?'pointercancel':'pointerup'));
+    if(active && event.cancelable)event.preventDefault();activityTouchId=null;
+}
+window.addEventListener('touchend',finishActivityTouch,{passive:false});
+window.addEventListener('touchcancel',finishActivityTouch,{passive:false});
 ui.itineraryContainer.addEventListener('contextmenu', handleActivityContextMenu);
 ui.itineraryContainer.addEventListener('pointerover', handleRoutePointerOver);
 ui.itineraryContainer.addEventListener('pointerout', handleRoutePointerOut);
