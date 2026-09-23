@@ -20677,6 +20677,7 @@ function drawGraphEdges() {
         svg.setAttribute('viewBox',`0 0 ${bounds.width} ${bounds.height}`);
         list.querySelectorAll('.edge-actions').forEach(el=>el.remove());
         const actionPositions=[];
+        const boundaryCounts=new Map();
         const ranks=new Map(TripGraph.rows(day).flatMap((r,i)=>r.map(a=>[a.id,i])));
         svg.innerHTML=day.links.map(([from,to]) => {
             const a=list.querySelector(`[data-activity-wrapper="${from}"]`)?.getBoundingClientRect();
@@ -20687,13 +20688,19 @@ function drawGraphEdges() {
             const bend=Math.min(34,(yy-y)/2);
             const skips=ranks.get(to)-ranks.get(from)>1;
             const lane=xx<bounds.width/2?-9:bounds.width+9;
-            const path=skips?`M ${x} ${y} V ${y+30} H ${lane} V ${yy-30} H ${xx} V ${yy}`:`M ${x} ${y} C ${x} ${y+bend}, ${xx} ${yy-bend}, ${xx} ${yy}`;
+            let path=skips?`M ${x} ${y} V ${y+30} H ${lane} V ${yy-30} H ${xx} V ${yy}`:`M ${x} ${y} C ${x} ${y+bend}, ${xx} ${yy-bend}, ${xx} ${yy}`;
             const toolbarY=skips?y+46:(y+yy)/2;
             const source=day.activities.find(a=>a.id===from), target=day.activities.find(a=>a.id===to);
             const origin=source.mapQuery || source.location, dest=target.mapQuery || target.location;
             const actions=document.createElement('div');actions.className='edge-actions';actions.dataset.skipEdit='true';
-            const ax=Math.max(35,Math.min(bounds.width-35,(x+xx)/2));let ay=toolbarY;
-            for(const offset of [0,-26,26]){const candidate=toolbarY+offset;if(!actionPositions.some(p=>Math.abs(p.x-ax)<72&&Math.abs(p.y-candidate)<25)){ay=candidate;break;}}
+            const boundary=ranks.get(from)+'-'+ranks.get(to);
+            const siblings=day.links.filter(([f,t])=>ranks.get(f)===ranks.get(from)&&ranks.get(t)===ranks.get(to));
+            const position=boundaryCounts.get(boundary)||0;boundaryCounts.set(boundary,position+1);
+            const columns=Math.max(1,Math.min(siblings.length,Math.floor(bounds.width/76)));
+            const rows=Math.ceil(siblings.length/columns);
+            const ax=(position%columns+.5)*bounds.width/columns;
+            const ay=skips?toolbarY+Math.floor(position/columns)*36:y+(yy-y)/2+(Math.floor(position/columns)-(rows-1)/2)*36;
+            if(!skips)path=`M ${x} ${y} C ${x} ${y+18}, ${ax} ${ay-18}, ${ax} ${ay} C ${ax} ${ay+18}, ${xx} ${yy-18}, ${xx} ${yy}`;
             actionPositions.push({x:ax,y:ay});
             actions.style.left=`${ax}px`;actions.style.top=`${ay}px`;
             actions.title=source.location+' → '+target.location;
@@ -21143,7 +21150,7 @@ function inferStopTime(day,id,placement) {
 }
 let pendingStopPlacement=null;
 let placingStop=null;
-function syncOptionalTime(){document.getElementById('activity-time-unset').setAttribute('aria-pressed',String(!ui.activityTime.value));}
+function syncOptionalTime(){}
 function positionStopEditor(){
     if(ui.activityModal.classList.contains('hidden')) return;
     const id=activityEditorState.activityId || pendingStopPlacement?.target;
@@ -21201,7 +21208,6 @@ function insertPlacedStop(day,item,placement){
 document.addEventListener('pointermove',event=>{if(placingStop&&event.pointerType!=='touch'){placingStop.ghost.style.left=`${event.clientX+12}px`;placingStop.ghost.style.top=`${event.clientY+12}px`;}});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){cancelStopPlacement();document.getElementById('day-route-picker')?.remove();}});
 window.addEventListener('resize',positionStopEditor);
-document.getElementById('activity-time-unset').addEventListener('click',()=>{const day=appState.itinerary[activityEditorState.dayIndex];ui.activityTime.value=inferStopTime(day,activityEditorState.activityId,pendingStopPlacement);syncOptionalTime();});
 ui.activityTime.addEventListener('input',syncOptionalTime);
 ui.activityTime.addEventListener('click',()=>{try{ui.activityTime.showPicker();}catch{}});
 function renderActivityParents(day, existing) {

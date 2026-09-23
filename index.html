@@ -969,6 +969,12 @@
         .placement-slot.slot-before{top:-25px;height:23px;padding:1px;}
         .placement-slot.slot-after{bottom:-25px;height:23px;padding:1px;}
         @media(max-width:600px){#day-route-picker{padding:10px}.day-route-options{max-height:120px}}
+    .stop-primary-row,.stop-secondary-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,.8fr);gap:12px;align-items:start;}
+        .stop-primary-row>div,.stop-secondary-row>div{min-width:0}
+        .stop-secondary-row #activity-icon-trigger{padding:8px;gap:4px}
+        .stop-secondary-row #activity-icon-label{font-size:11px}
+        .stop-secondary-row #activity-icon-trigger>span:last-child{display:none}
+        .activity-tree{row-gap:140px!important}
     </style>
 </head>
 
@@ -1184,16 +1190,16 @@
                 </div>
 
                 <div class="space-y-4">
-                    <div>
+                    <div class="stop-primary-row"><div>
                         <label for="activity-location" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">장소</label>
                         <input id="activity-location" type="text" placeholder="예: 중정기념관" class="input-shell">
                     </div>
                     <div>
-                        <label for="activity-time" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">시간 · 선택</label>
-                        <div class="stop-time-row"><input id="activity-time" type="time" class="input-shell"><button id="activity-time-unset" type="button">시간 자동</button></div>
+                        <label for="activity-time" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">시간</label>
+                        <div class="stop-time-row"><input id="activity-time" type="time" class="input-shell"></div>
 
                     </div>
-                    <fieldset class="stop-dependencies" hidden><legend>어디 다음에 갈까요?</legend><div id="activity-parents"></div><p>여러 장소를 고르면 여기서 합류해요. 선택하지 않으면 시작 장소예요.</p></fieldset>
+                    </div><fieldset class="stop-dependencies" hidden><legend>어디 다음에 갈까요?</legend><div id="activity-parents"></div><p>여러 장소를 고르면 여기서 합류해요. 선택하지 않으면 시작 장소예요.</p></fieldset>
                     <details class="stop-extra stop-map" open><summary>지도 확인</summary>
                         <div class="flex items-center justify-between gap-3 mb-2">
                             <label class="text-[11px] uppercase tracking-[0.24em] text-white/45 block">지도 미리보기</label>
@@ -1213,7 +1219,7 @@
                         </div>
                         <div id="activity-map-status" class="text-xs text-white/55 mt-2">장소를 입력하면 여기서 바로 구글 지도를 미리 볼 수 있습니다.</div>
                     </details>
-                    <details class="stop-extra"><summary>메모·아이콘</summary>                    <div>
+                    <div class="stop-secondary-row"><div>
                         <label for="activity-memo" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">Memo <span class="text-white/28">(Optional)</span></label>
                         <textarea id="activity-memo" rows="2" placeholder="준비물, 예약 메모, 이동 팁" class="input-shell"></textarea>
                     </div>
@@ -1232,7 +1238,7 @@
                             <span class="text-[11px] uppercase tracking-[0.24em] text-white/38 shrink-0">Choose</span>
                         </button>
                     </div>
-                    </details>
+                    </div>
                 </div>
 
                 <div class="flex flex-col gap-3 mt-6 sm:flex-row">
