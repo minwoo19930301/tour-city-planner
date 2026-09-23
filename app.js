@@ -20674,6 +20674,7 @@ function drawGraphEdges() {
         svg.setAttribute('viewBox',`0 0 ${bounds.width} ${bounds.height}`);
         list.querySelectorAll('.edge-actions').forEach(el=>el.remove());
         const actionPositions=[];
+        const ranks=new Map(TripGraph.rows(day).flatMap((r,i)=>r.map(a=>[a.id,i])));
         svg.innerHTML=day.links.map(([from,to]) => {
             const a=list.querySelector(`[data-activity-wrapper="${from}"]`)?.getBoundingClientRect();
             const b=list.querySelector(`[data-activity-wrapper="${to}"]`)?.getBoundingClientRect();
@@ -20681,17 +20682,21 @@ function drawGraphEdges() {
             const x=a.left+a.width/2-bounds.left, y=a.bottom-bounds.top;
             const xx=b.left+b.width/2-bounds.left, yy=b.top-bounds.top;
             const bend=Math.min(34,(yy-y)/2);
+            const skips=ranks.get(to)-ranks.get(from)>1;
+            const lane=xx<bounds.width/2?-9:bounds.width+9;
+            const path=skips?`M ${x} ${y} V ${y+30} H ${lane} V ${yy-30} H ${xx} V ${yy}`:`M ${x} ${y} C ${x} ${y+bend}, ${xx} ${yy-bend}, ${xx} ${yy}`;
+            const toolbarY=skips?y+46:(y+yy)/2;
             const source=day.activities.find(a=>a.id===from), target=day.activities.find(a=>a.id===to);
             const origin=source.mapQuery || source.location, dest=target.mapQuery || target.location;
             const actions=document.createElement('div');actions.className='edge-actions';actions.dataset.skipEdit='true';
-            const ax=Math.max(35,Math.min(bounds.width-35,(x+xx)/2));let ay=(y+yy)/2;
-            for(const offset of [0,-26,26,-52,52]){const candidate=(y+yy)/2+offset;if(!actionPositions.some(p=>Math.abs(p.x-ax)<72&&Math.abs(p.y-candidate)<25)){ay=candidate;break;}}
+            const ax=Math.max(35,Math.min(bounds.width-35,(x+xx)/2));let ay=toolbarY;
+            for(const offset of [0,-26,26]){const candidate=toolbarY+offset;if(!actionPositions.some(p=>Math.abs(p.x-ax)<72&&Math.abs(p.y-candidate)<25)){ay=candidate;break;}}
             actionPositions.push({x:ax,y:ay});
             actions.style.left=`${ax}px`;actions.style.top=`${ay}px`;
             actions.title=source.location+' → '+target.location;
             actions.innerHTML=`<a href="${getDirectionsUrl(origin,dest)}" data-route-preview="true" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}" aria-label="${escapeHtml(source.location+' → '+target.location)} 가는 길" title="가는 길"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="M8 5h8a4 4 0 0 1 0 8H8a3 3 0 0 0 0 6h8"/></svg></a><button type="button" data-graph-action="unlink" data-graph-day="${dayIndex}" data-graph-id="${from}" data-graph-to="${to}" aria-label="${escapeHtml(source.location+' → '+target.location)} 연결 제거">×</button>`;
             list.appendChild(actions);
-            return `<a data-route-preview="true" data-skip-edit="true" href="${getDirectionsUrl(origin,dest)}" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}" aria-label="${escapeHtml(source.location+'에서 '+target.location+' 가는 길')}"><path style="pointer-events:stroke;cursor:pointer" d="M ${x} ${y} C ${x} ${y+bend}, ${xx} ${yy-bend}, ${xx} ${yy}"/><circle cx="${xx}" cy="${yy}" r="3" fill="currentColor"/></a><g class="graph-edge-remove" data-skip-edit="true" data-graph-action="unlink" data-graph-day="${dayIndex}" data-graph-id="${from}" data-graph-to="${to}" role="button" tabindex="0" aria-label="${escapeHtml(source.location+' → '+target.location)} 연결 제거" transform="translate(${(x+xx)/2},${(y+yy)/2})"><circle r="9"/><text text-anchor="middle" dy="4">×</text></g>`;
+            return `<a data-route-preview="true" data-skip-edit="true" href="${getDirectionsUrl(origin,dest)}" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}" aria-label="${escapeHtml(source.location+'에서 '+target.location+' 가는 길')}"><path style="pointer-events:stroke;cursor:pointer" d="${path}"/><circle cx="${xx}" cy="${yy}" r="3" fill="currentColor"/></a><g class="graph-edge-remove" data-skip-edit="true" data-graph-action="unlink" data-graph-day="${dayIndex}" data-graph-id="${from}" data-graph-to="${to}" role="button" tabindex="0" aria-label="${escapeHtml(source.location+' → '+target.location)} 연결 제거" transform="translate(${(x+xx)/2},${(y+yy)/2})"><circle r="9"/><text text-anchor="middle" dy="4">×</text></g>`;
         }).join('');
     });
 }
@@ -21570,11 +21575,12 @@ function updateDropTarget(clientX, clientY) {
 
     const dayIndex = Number(panel.dataset.dayPanel);
     const cards = getDayCards(dayIndex).filter((card) => card !== activityDragState.card);
-    const peer = cards.find(card=>{const r=card.getBoundingClientRect();return clientY>r.top+r.height*.22 && clientY<r.bottom-r.height*.22 && clientX>=r.left && clientX<=r.right && (clientX<r.left+r.width*.28 || clientX>r.right-r.width*.28);});
+    const peer = cards.find(card=>{const r=card.getBoundingClientRect();return clientY>r.top+r.height*.22 && clientY<r.bottom-r.height*.22 && clientX>=r.left && clientX<=r.right;});
     document.querySelectorAll('.graph-drop-peer,.graph-drop-full').forEach(el=>el.classList.remove('graph-drop-peer','graph-drop-full'));
     activityDragState.targetPeerId = null;
     activityDragState.dropBlocked = false;
     if(peer) {
+        document.querySelectorAll('.graph-insert-marker').forEach(el=>el.remove());
         const row=TripGraph.rows(appState.itinerary[dayIndex]).find(row=>row.some(a=>a.id===peer.dataset.activityId));
         const full=row.length>=3 || row.some(a=>a.id===activityDragState.activityId);
         peer.classList.add(full?'graph-drop-full':'graph-drop-peer');
@@ -21599,21 +21605,19 @@ function updateDropTarget(clientX, clientY) {
     const list = panel.querySelector('[data-activity-list]');
     if (!list) return;
 
-    const positionsBefore = captureFlipPositions();
-    const referenceWrapper = cards[insertIndex] ? cards[insertIndex].closest('[data-activity-wrapper]') : null;
-    activityDragState.placeholder.style.gridRow = referenceWrapper?.style.gridRow || String(TripGraph.rows(appState.itinerary[dayIndex]).length + 1);
-    activityDragState.placeholder.style.gridColumn = referenceWrapper?.style.gridColumn || '1 / span 6';
-    if (referenceWrapper && referenceWrapper.parentNode === list) {
-        list.insertBefore(activityDragState.placeholder, referenceWrapper);
-    } else {
-        list.appendChild(activityDragState.placeholder);
-    }
+    // Keep the source placeholder fixed: moving it changes row heights under the pointer.
+    // A drop indicator is absolutely positioned, so hit testing stays stable.
+    let marker=document.querySelector('.graph-insert-marker');
+    if(!marker){marker=document.createElement('div');marker.className='graph-insert-marker';document.body.appendChild(marker);}
+    const reference=cards[insertIndex]?.getBoundingClientRect();
+    const end=cards.at(-1)?.getBoundingClientRect();
+    const bounds=list.getBoundingClientRect();
+    marker.style.cssText=`position:fixed;pointer-events:none;z-index:99;left:${bounds.left}px;top:${reference?reference.top-10:(end?.bottom||bounds.top)+10}px;width:${bounds.width}px;border-top:3px solid #a5b4fc;`;
 
     activityDragState.targetDayIndex = dayIndex;
     activityDragState.targetIndex = insertIndex;
     highlightDayPanel(panel);
-    playFlip(positionsBefore);
-    activityDragState.lockUntil = performance.now() + DRAG_FLIP_DURATION;
+    activityDragState.lockUntil = 0;
 }
 
 function updateGhostPosition() {
@@ -21715,6 +21719,7 @@ function beginActivityDrag() {
 }
 
 function resetActivityDragState() {
+    document.querySelectorAll('.graph-insert-marker').forEach(el=>el.remove());
     document.querySelectorAll('.graph-drop-peer,.graph-drop-full').forEach(el=>el.classList.remove('graph-drop-peer','graph-drop-full'));
     activityDragState.targetPeerId=null;
     activityDragState.dropBlocked=false;

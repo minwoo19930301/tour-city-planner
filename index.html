@@ -946,6 +946,9 @@
         .activity-tree [data-hourly-weather] svg {display:block!important;flex-shrink:0;}
         @media(max-width:640px){.compact-summary {gap:10px;padding:12px 14px;}.summary-clocks,.summary-rate{flex-basis:100%;}.summary-clocks strong{font-size:15px;}}
         @media(max-width:380px){.day-routes-button {gap:2px;padding:6px 3px}.day-routes-button svg{width:12px;height:12px}.day-header-row [data-daily-weather] svg{width:12px;height:12px}.day-header-row [data-daily-weather] > div{padding:3px 2px;gap:2px}.day-date{gap:2px}}
+
+        .day-panel .tree-scroll {padding-left:12px;padding-right:12px;}
+        .is-reordering-activities .edge-actions {pointer-events:none;opacity:.35;}
     </style>
 </head>
 
@@ -1367,7 +1370,7 @@
 
     <script src="./example-hotels.js?v=1"></script>
     <script src="./graph-model.js?v=5"></script>
-    <script src="./app.js?v=polish-v10" defer></script>
+    <script src="./app.js?v=drag-fix-v11" defer></script>
 </body>
 
 </html>
