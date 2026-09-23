@@ -18908,6 +18908,18 @@ function buildTemplateTitle(destination, dayIndex) {
     return cycle ? `${template.title} · ${cycle + 1}` : template.title;
 }
 
+function addBranchExample(day, dayIndex) {
+    if(dayIndex!==1 || day.activities.length<4 || day.destinationIds.length!==1) return day;
+    const [first,...rest]=day.activities, last=rest.pop();
+    const choices=rest.slice(0,3);
+    if(choices.length<2) return day;
+    choices.forEach(a=>{a.row='example-choices-'+day.id;a.time=choices[0].time;});
+    day.links=choices.flatMap(a=>[[first.id,a.id],[a.id,last.id]]);
+    // Longer templates keep remaining stops after the sample alternatives.
+    if(rest.length>3){day.links=choices.map(a=>[first.id,a.id]);choices.forEach(a=>day.links.push([a.id,rest[3].id]));rest.slice(3).forEach((a,i,rr)=>day.links.push([a.id,rr[i+1]?.id||last.id]));}
+    TripGraph.normalize(day);return day;
+}
+
 function buildItineraryFromRange(destinationId, startDate, endDate) {
     const destination = getDestination(destinationId);
     const baseDate = parseYmd(startDate);
@@ -18925,7 +18937,7 @@ function buildItineraryFromRange(destinationId, startDate, endDate) {
             endDate
         }, 0, 1);
 
-        return applyDailyStayAnchors({
+        return addBranchExample(applyDailyStayAnchors({
             id: createId('day'),
             destinationId,
             destinationIds: [destinationId],
@@ -18933,7 +18945,7 @@ function buildItineraryFromRange(destinationId, startDate, endDate) {
             day: DAY_LABELS[currentDate.getDay()],
             title: buildTemplateTitle(destination, dayIndex),
             activities
-        });
+        }), dayIndex);
     });
 }
 
@@ -18962,7 +18974,7 @@ function buildItineraryFromSegments(segments = []) {
 
     return Array.from(dayContextMap.entries())
         .sort(([leftDate], [rightDate]) => leftDate.localeCompare(rightDate))
-        .map(([date, contexts]) => {
+        .map(([date, contexts], dayIndex) => {
             const sortedContexts = [...contexts].sort((left, right) => {
                 const startCompare = left.startDate.localeCompare(right.startDate);
                 if (startCompare !== 0) return startCompare;
@@ -18974,7 +18986,7 @@ function buildItineraryFromSegments(segments = []) {
             );
             const primaryDestination = getDestination(destinationIds[0]);
 
-            return applyDailyStayAnchors({
+            return addBranchExample(applyDailyStayAnchors({
                 id: createId('day'),
                 destinationId: destinationIds[0],
                 destinationIds,
@@ -18984,7 +18996,7 @@ function buildItineraryFromSegments(segments = []) {
                     ? `${destinationIds.length}개 국가 일정`
                     : buildTemplateTitle(primaryDestination, sortedContexts[0].dayIndex),
                 activities
-            });
+            }), dayIndex);
         });
 }
 
@@ -20677,7 +20689,7 @@ function drawGraphEdges() {
             actionPositions.push({x:ax,y:ay});
             actions.style.left=`${ax}px`;actions.style.top=`${ay}px`;
             actions.title=source.location+' → '+target.location;
-            actions.innerHTML=`<a href="${getDirectionsUrl(origin,dest)}" data-route-preview="true" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}">가는 길</a><button type="button" data-graph-action="unlink" data-graph-day="${dayIndex}" data-graph-id="${from}" data-graph-to="${to}" aria-label="${escapeHtml(source.location+' → '+target.location)} 연결 제거">×</button>`;
+            actions.innerHTML=`<a href="${getDirectionsUrl(origin,dest)}" data-route-preview="true" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}" aria-label="${escapeHtml(source.location+' → '+target.location)} 가는 길" title="가는 길"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="M8 5h8a4 4 0 0 1 0 8H8a3 3 0 0 0 0 6h8"/></svg></a><button type="button" data-graph-action="unlink" data-graph-day="${dayIndex}" data-graph-id="${from}" data-graph-to="${to}" aria-label="${escapeHtml(source.location+' → '+target.location)} 연결 제거">×</button>`;
             list.appendChild(actions);
             return `<a data-route-preview="true" data-skip-edit="true" href="${getDirectionsUrl(origin,dest)}" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}" aria-label="${escapeHtml(source.location+'에서 '+target.location+' 가는 길')}"><path style="pointer-events:stroke;cursor:pointer" d="M ${x} ${y} C ${x} ${y+bend}, ${xx} ${yy-bend}, ${xx} ${yy}"/><circle cx="${xx}" cy="${yy}" r="3" fill="currentColor"/></a><g class="graph-edge-remove" data-skip-edit="true" data-graph-action="unlink" data-graph-day="${dayIndex}" data-graph-id="${from}" data-graph-to="${to}" role="button" tabindex="0" aria-label="${escapeHtml(source.location+' → '+target.location)} 연결 제거" transform="translate(${(x+xx)/2},${(y+yy)/2})"><circle r="9"/><text text-anchor="middle" dy="4">×</text></g>`;
         }).join('');
@@ -20757,7 +20769,7 @@ function renderItinerary() {
                             <div class="text-sm text-white/88 mt-1 activity-card-location">${escapeHtml(activity.location)}</div>
                             ${activity.memo ? `<div class="text-xs text-white/62 mt-1 leading-5 activity-card-memo">${escapeHtml(activity.memo)}</div>` : ''}
                         </div>
-                        ${mapLinkHtml}
+
                     </div>
                     ${graphControlsHtml(day, dayIndex, activity, graphRows)}
                 </div>
@@ -20769,7 +20781,7 @@ function renderItinerary() {
         dayElement.innerHTML = `
             <div class="day-header-row" data-day-header="${dayIndex}" data-flip-item="true">
                 <div class="day-date"><h3>${escapeHtml(formatMonthDay(headerDate))}</h3><span>${escapeHtml(formatMonthDayWithWeekday(headerDate))}</span></div>
-                <button class="day-routes-button" data-day-routes="${dayIndex}" type="button">하루 이동코스</button>
+                <button class="day-routes-button" data-day-routes="${dayIndex}" type="button"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="M8 5h8a4 4 0 0 1 0 8H8a3 3 0 0 0 0 6h8"/></svg><span>하루 이동코스</span></button>
                 ${buildDailyWeatherHtml(day)}
                 <button type="button" class="day-add-button" data-action="add-activity" data-day-index="${dayIndex}">+ 일정</button>
             </div>

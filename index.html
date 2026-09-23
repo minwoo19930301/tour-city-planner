@@ -930,6 +930,22 @@
 
         .activity-tree {row-gap:94px;}
         .is-placing .activity-tree {row-gap:94px;}
+
+        .edge-actions a {display:flex;align-items:center;justify-content:center;padding:6px 8px;}
+        .edge-actions button {min-width:26px;min-height:28px;font-size:14px;}
+        .day-routes-button {display:inline-flex;align-items:center;justify-content:center;gap:4px;}
+        .day-routes-button svg {flex-shrink:0;width:14px;height:14px;}
+        #activity-modal .mb-5 {display:none;}
+        #activity-modal .glass-panel {padding:14px;}
+        #activity-modal iframe {height:120px;}
+        .compact-summary {padding:14px 18px;gap:16px;}
+        .summary-clocks {flex:1;justify-content:space-evenly;gap:10px;}
+        .summary-rate {flex:1;justify-content:space-evenly;gap:8px;}
+        .summary-clocks strong {font-size:16px;}
+        .day-header-row [data-daily-weather] svg {display:block!important;flex-shrink:0;}
+        .activity-tree [data-hourly-weather] svg {display:block!important;flex-shrink:0;}
+        @media(max-width:640px){.compact-summary {gap:10px;padding:12px 14px;}.summary-clocks,.summary-rate{flex-basis:100%;}.summary-clocks strong{font-size:15px;}}
+        @media(max-width:380px){.day-routes-button {gap:2px;padding:6px 3px}.day-routes-button svg{width:12px;height:12px}.day-header-row [data-daily-weather] svg{width:12px;height:12px}.day-header-row [data-daily-weather] > div{padding:3px 2px;gap:2px}.day-date{gap:2px}}
     </style>
 </head>
 
@@ -1351,7 +1367,7 @@
 
     <script src="./example-hotels.js?v=1"></script>
     <script src="./graph-model.js?v=5"></script>
-    <script src="./app.js?v=routes-v9" defer></script>
+    <script src="./app.js?v=polish-v10" defer></script>
 </body>
 
 </html>

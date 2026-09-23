@@ -55,3 +55,9 @@ assert.equal(vm.runInContext("inferStopTime(timed,'b')",ctx),'12:00');
 assert.equal(vm.runInContext("inferStopTime(timed,null,{target:'c',where:'before'})",ctx),'12:30');
 assert.equal(vm.runInContext("inferStopTime(timed,null,{target:'a',where:'right'})",ctx),'09:00');
 console.log('PASS: midpoint time for moves, insertion, and parallel placement.');
+{const start=app.indexOf('function addBranchExample('),end=app.indexOf('\n}\n',start)+3;vm.runInContext(app.slice(start,end),ctx);}
+ctx.example={id:'sample',destinationIds:['tokyo'],activities:['hotel-start','option-a','option-b','hotel-end'].map(id=>({id,time:'10:00'}))};
+vm.runInContext('addBranchExample(example,1)',ctx);
+assert.deepEqual(Array.from(G.rows(ctx.example),r=>r.length),[1,2,1]);
+assert.equal(ctx.example.links.length,4);
+console.log('PASS: new sample itinerary branches and merges at hotel.');
