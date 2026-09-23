@@ -61,3 +61,9 @@ vm.runInContext('addBranchExample(example,1)',ctx);
 assert.deepEqual(Array.from(G.rows(ctx.example),r=>r.length),[1,2,1]);
 assert.equal(ctx.example.links.length,4);
 console.log('PASS: new sample itinerary branches and merges at hotel.');
+// Moving a merge node before alternatives must replace, not retain, bypass edges.
+d={activities:[{id:'start'},{id:'end'},{id:'left',row:'choices'},{id:'right',row:'choices'}],links:[['start','end'],['start','left'],['start','right'],['end','left'],['end','right']]};
+G.reconnectRows(d);assert.deepEqual(JSON.parse(JSON.stringify(d.links)),[['start','end'],['end','left'],['end','right']]);
+const reductionStart=app.indexOf('function removeRedundantBypasses('),reductionEnd=app.indexOf('\n}\n',reductionStart)+3;vm.runInContext(app.slice(reductionStart,reductionEnd),ctx);
+ctx.redundant={activities:[{id:'a'},{id:'b'},{id:'c'}],links:[['a','b'],['b','c'],['a','c']]};vm.runInContext('removeRedundantBypasses(redundant)',ctx);assert.equal(ctx.redundant.links.length,2);
+console.log('PASS: moving before branches replaces stale bypasses; old redundant links repaired.');

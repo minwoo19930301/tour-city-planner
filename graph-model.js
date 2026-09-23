@@ -83,5 +83,6 @@
         day.activities.forEach(a=>{const r=rank.get(a.id), count=counts.get(r)||0; a.row=`level-${r}-${Math.floor(count/3)}`;counts.set(r,count+1);});
         day.links=links; normalize(day); return true;
     }
-    root.TripGraph={layout,rows,normalize,connect,remove,parallel,separate,join,freshRow};
+    function reconnectRows(day) {delete day.links;return normalize(day);}
+    root.TripGraph={reconnectRows,layout,rows,normalize,connect,remove,parallel,separate,join,freshRow};
 })(typeof module==='object' ? module.exports : globalThis);

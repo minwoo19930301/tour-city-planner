@@ -952,6 +952,9 @@
 
         .activity-card {-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;}
         .activity-card-pressing {outline:2px solid rgba(var(--accent-rgb),.55);}
+
+        .activity-tree .activity-card {touch-action:none;}
+        .activity-drop-placeholder {pointer-events:none;}
     </style>
 </head>
 
@@ -1372,8 +1375,8 @@
     </div>
 
     <script src="./example-hotels.js?v=1"></script>
-    <script src="./graph-model.js?v=5"></script>
-    <script src="./app.js?v=filled-time-v13" defer></script>
+    <script src="./graph-model.js?v=6"></script>
+    <script src="./app.js?v=row-touch-v14" defer></script>
 </body>
 
 </html>

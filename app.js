@@ -20715,6 +20715,7 @@ function renderItinerary() {
     ui.itineraryContainer.innerHTML = '';
 
     appState.itinerary.forEach((day, dayIndex) => {
+        removeRedundantBypasses(day);
         ensureStopTimes(day);
         const dayDestination = getDayDestination(day);
         const headerDate = parseYmd(day.date);
@@ -21088,6 +21089,14 @@ function openDayRoutes(dayIndex, offset=0) {
     function choose(i){const activities=paths[i]?.map(id=>byId.get(id));if(!activities)return;panel.querySelector('iframe').src=getDayDirectionsEmbedUrl(activities);panel.querySelector('a').href=getDayDirectionsUrl(activities,day.destinationId);}
     panel.addEventListener('change',e=>{if(e.target.name==='day-route-choice')choose(Number(e.target.value));});choose(0);
 }
+function removeRedundantBypasses(day) {
+    TripGraph.normalize(day);
+    day.links=day.links.filter(([from,to],index,edges)=>{
+        const seen=new Set(), stack=edges.filter((e,i)=>i!==index&&e[0]===from).map(e=>e[1]);
+        while(stack.length){const id=stack.pop();if(id===to)return false;if(seen.has(id))continue;seen.add(id);edges.filter(e=>e[0]===id).forEach(e=>stack.push(e[1]));}
+        return true;
+    });
+}
 function ensureStopTimes(day) {
     const periods={오전:'09:00',점심:'12:00',오후:'15:00',저녁:'18:00',밤:'21:00'};
     day.activities.forEach(a=>{if(periods[a.time])a.time=periods[a.time];});
@@ -21102,9 +21111,11 @@ function inferStopTime(day,id,placement) {
     const minute=a=>{const t=({오전:'09:00',점심:'12:00',오후:'15:00',저녁:'18:00',밤:'21:00'})[a?.time]||a?.time;return /^\d{2}:\d{2}$/.test(t||'')?timeToMinutes(t):null;};
     if(placement && ['left','right'].includes(placement.where)){const t=minute(day.activities.find(a=>a.id===placement.target));return minutesToTime(t??720);}
     const boundary=placement?rowIndex+(placement.where==='after'?1:0):rowIndex;
-    const previous=rows.slice(0,boundary).reverse().flat().map(minute).find(t=>t!==null);
-    const following=rows.slice(placement?boundary:rowIndex+1).flat().map(minute).find(t=>t!==null);
-    const value=previous!==undefined&&following!==undefined?(previous+following)/2:previous!==undefined?Math.min(1439,previous+60):following!==undefined?Math.max(0,following-60):720;
+    const previous=rows.slice(0,boundary).reverse().map(row=>row.map(minute).filter(t=>t!==null)).find(times=>times.length);
+    const beforeTime=previous?.length?Math.max(...previous):undefined;
+    const nextTimes=rows.slice(placement?boundary:rowIndex+1).map(row=>row.map(minute).filter(t=>t!==null)).find(times=>times.length);
+    const following=nextTimes?.length?Math.min(...nextTimes):undefined;
+    const value=beforeTime!==undefined&&following!==undefined?(beforeTime+following)/2:beforeTime!==undefined?Math.min(1439,beforeTime+60):following!==undefined?Math.max(0,following-60):720;
     return minutesToTime(Math.round(value));
 }
 let pendingStopPlacement=null;
@@ -21353,7 +21364,7 @@ function moveActivityWithinDay(dayIndex, activityId, targetIndex) {
     moved.row = TripGraph.freshRow(day, moved.id);
     reassignDayTimes(day, ordered);
     TripGraph.normalize(day);
-    reconnectMovedStop(day, moved.id);
+    TripGraph.reconnectRows(day);
     moved.time=inferStopTime(day,moved.id);
     return true;
 }
@@ -21393,7 +21404,8 @@ function moveActivityAcrossDays(sourceDayIndex, targetDayIndex, activityId, targ
     targetDay.activities.splice(insertIndex, 0, moved);
 
     TripGraph.normalize(targetDay);
-    reconnectMovedStop(targetDay, moved.id);
+    TripGraph.reconnectRows(sourceDay);
+    TripGraph.reconnectRows(targetDay);
     moved.time=inferStopTime(targetDay,moved.id);
     if (typeof syncDayDestinations === 'function') {
         syncDayDestinations(sourceDay);
@@ -21715,7 +21727,7 @@ function beginActivityDrag() {
     placeholder.style.gridRow = wrapper.style.gridRow;
     placeholder.style.gridColumn = wrapper.style.gridColumn;
     wrapper.parentNode.insertBefore(placeholder, wrapper);
-    wrapper.hidden = true;
+    wrapper.style.opacity = '0.18';
 
     activityDragState.ghost = ghost;
     activityDragState.placeholder = placeholder;
@@ -21757,7 +21769,7 @@ function resetActivityDragState() {
 
     if (activityDragState.ghost) activityDragState.ghost.remove();
     if (activityDragState.placeholder) activityDragState.placeholder.remove();
-    if (activityDragState.wrapper) activityDragState.wrapper.hidden = false;
+    if (activityDragState.wrapper) {activityDragState.wrapper.hidden = false;activityDragState.wrapper.style.opacity='';}
     if (activityDragState.card) activityDragState.card.classList.remove('activity-card-pressing');
     if (activityDragState.handle) activityDragState.handle.classList.remove('is-dragging');
     highlightDayPanel(null);
@@ -21823,7 +21835,7 @@ function handleActivityPointerDown(event) {
     activityDragState.lastY = event.clientY;
     // 마우스: 카드 어디를 잡든 움직이자마자 끌기 시작(움직이지 않고 놓으면 평소처럼 클릭=편집).
     // 터치: 손잡이에서는 바로, 그 밖에서는 길게 눌러 들어올린다(그 전까지는 평소처럼 스크롤된다).
-    activityDragState.immediate = Boolean(handle) || !isTouchLike;
+    activityDragState.immediate = true;
 
     clearHoldTimer();
     if (isTouchLike) {
@@ -21889,6 +21901,8 @@ function handleActivityPointerUp(event) {
         syncDayDestinations(day);
     } else moved = commitActivityDrop(sourceDayIndex, targetDayIndex, targetIndex, activityId);
     if (!moved) return;
+    TripGraph.reconnectRows(appState.itinerary[sourceDayIndex]);
+    if(targetDayIndex!==sourceDayIndex)TripGraph.reconnectRows(appState.itinerary[targetDayIndex]);
 
     vibrateDevice(10);
     persistItineraryChanges();
