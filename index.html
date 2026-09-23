@@ -902,7 +902,7 @@
         .placement-slot.slot-left{left:0;top:25%;height:50%;width:30%;}
         .placement-slot.slot-right{right:0;top:25%;height:50%;width:30%;}
         .is-placing .activity-tree {row-gap:66px;}
-        .is-placing [data-activity-wrapper] {position:relative;}
+        .is-placing [data-activity-wrapper],.is-reordering-activities [data-activity-wrapper] {position:relative;}
         .is-placing .graph-port,.is-placing .graph-remove {visibility:hidden;}
         .placement-cancel {position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:96;background:#172537;border:1px solid #ffffff40;border-radius:18px;color:white;padding:12px 20px;font-size:13px;}
 
@@ -960,6 +960,15 @@
         #transit-leg-select {display:block;width:100%;margin-top:6px;padding:10px;background:#243449;border:1px solid #ffffff30;border-radius:10px;color:white;}
 
         @media(hover:none){.graph-port {visibility:visible;}}
+
+        #day-route-picker{top:auto;bottom:0;left:50%;transform:translateX(-50%);width:min(900px,100%);max-height:94svh;border-radius:20px 20px 0 0;}
+        #day-route-picker iframe{height:58svh;min-height:320px;}
+        .route-mode{color:white;background:#243449;border:1px solid #ffffff30;border-radius:9px;padding:7px 12px;margin:6px 0;}
+        .drag-placement-slot{pointer-events:auto;z-index:30;}
+        .drag-placement-slot.is-target{background:#ed7400;color:white;border-style:solid;}
+        .placement-slot.slot-before{top:-25px;height:23px;padding:1px;}
+        .placement-slot.slot-after{bottom:-25px;height:23px;padding:1px;}
+        @media(max-width:600px){#day-route-picker{padding:10px}.day-route-options{max-height:120px}}
     </style>
 </head>
 

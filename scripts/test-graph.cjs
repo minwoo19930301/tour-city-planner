@@ -67,3 +67,12 @@ G.reconnectRows(d);assert.deepEqual(JSON.parse(JSON.stringify(d.links)),[['start
 const reductionStart=app.indexOf('function removeRedundantBypasses('),reductionEnd=app.indexOf('\n}\n',reductionStart)+3;vm.runInContext(app.slice(reductionStart,reductionEnd),ctx);
 ctx.redundant={activities:[{id:'a'},{id:'b'},{id:'c'}],links:[['a','b'],['b','c'],['a','c']]};vm.runInContext('removeRedundantBypasses(redundant)',ctx);assert.equal(ctx.redundant.links.length,2);
 console.log('PASS: moving before branches replaces stale bypasses; old redundant links repaired.');
+for(const name of ['reorderEditedTime','getDirectionsUrl','getDirectionsEmbedUrl']){const start=app.indexOf('function '+name+'('),end=app.indexOf('\n}\n',start)+3;vm.runInContext(app.slice(start,end),ctx);}
+ctx.URL=URL;
+ctx.timed={activities:[{id:'a',time:'09:00'},{id:'b',time:'18:00'},{id:'c',time:'15:00'}]};
+vm.runInContext("reorderEditedTime(timed,'b')",ctx);assert.deepEqual(Array.from(ctx.timed.activities,a=>a.id),['a','c','b']);assert.deepEqual(JSON.parse(JSON.stringify(ctx.timed.links)),[['a','c'],['c','b']]);
+ctx.timed.activities[2].time='08:00';vm.runInContext("reorderEditedTime(timed,'b')",ctx);assert.deepEqual(Array.from(ctx.timed.activities,a=>a.id),['b','a','c']);
+assert(vm.runInContext("getDirectionsUrl('A','B')",ctx).includes('travelmode=transit'));
+assert(vm.runInContext("getDirectionsUrl('A','B','driving')",ctx).includes('travelmode=driving'));
+assert(vm.runInContext("getDirectionsEmbedUrl('A','B',[],'driving')",ctx).includes('dirflg=d'));
+console.log('PASS: time edits reorder cards and links; selectable transit/driving URLs.');
