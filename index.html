@@ -836,6 +836,29 @@
         .graph-drop-full {outline:2px dashed #fb7185!important}
         .graph-drop-full::after {content:'최대 3개';position:absolute;inset:0;display:grid;place-items:center;background:#111827c9;border-radius:inherit;color:#fda4af;font-size:12px;pointer-events:none}
         @media(hover:none){.graph-edge-remove{opacity:.65}}
+
+        #activity-modal > .relative {max-width:480px;}
+        #activity-modal .glass-panel {padding:18px;border-radius:22px;}
+        #activity-modal .input-shell {padding:10px 12px;font-size:14px;border-radius:12px;}
+        #activity-modal .mb-5 {margin-bottom:4px;}
+        #activity-modal iframe {height:150px;}
+        .stop-extra {font-size:12px;color:#b8c4d4;}
+        .stop-extra summary {cursor:pointer;padding:8px 0;}
+        .stop-dependencies legend {font-size:13px;margin-bottom:8px;color:#e2e8f0;}
+        #activity-parents {display:flex;flex-wrap:wrap;gap:6px;max-height:150px;overflow:auto;}
+        #activity-parents label {display:flex;gap:6px;align-items:center;padding:7px 10px;border:1px solid #ffffff25;border-radius:10px;font-size:12px;cursor:pointer;}
+        #activity-parents label:has(:checked){border-color:var(--accent);background:#ffffff12;}
+        .stop-dependencies p {font-size:11px;color:#94a3b8;margin-top:7px;}
+        .activity-tree [data-hourly-weather] {position:static;align-self:flex-end;flex-direction:row;gap:5px;width:auto;min-height:22px;margin-right:18px;}
+        .activity-tree [data-hourly-weather]:empty{display:none}
+        .activity-tree [data-hourly-weather] svg {width:20px;height:20px;margin:0;}
+        .activity-tree [data-hourly-weather] span {font-size:14px;}
+        .activity-tree .activity-card-main > .accent-icon {display:none;}
+        .activity-card-location {font-weight:600;font-size:15px!important;}
+        .activity-card-time {font-size:12px!important;color:#aebdce!important;}
+        .graph-port {visibility:hidden;}
+        .activity-card:hover .graph-port,.graph-port:focus-visible,.graph-connecting .graph-port {visibility:visible;}
+        .compact-summary {position:relative;z-index:5;overflow:visible;}
     </style>
 </head>
 
@@ -1040,8 +1063,8 @@
             <div class="glass-panel rounded-[32px] p-6 w-full my-4 max-h-[calc(100svh-2rem)] overflow-y-auto">
                 <div class="flex items-start justify-between gap-4 mb-5">
                     <div>
-                        <div class="text-[11px] uppercase tracking-[0.24em] text-white/45 mb-2">Customize Stop</div>
-                        <h2 id="activity-modal-title" class="text-2xl font-serif font-bold text-white">일정 편집</h2>
+
+                        <h2 id="activity-modal-title" class="sr-only">장소 편집</h2>
                     </div>
                     <button id="activity-close-btn"
                         class="shrink-0 rounded-full bg-white/5 border border-white/10 p-2 text-white/45 hover:text-white transition-colors"
@@ -1052,14 +1075,16 @@
 
                 <div class="space-y-4">
                     <div>
-                        <label for="activity-time" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">시간</label>
-                        <input id="activity-time" type="time" class="input-shell">
-                    </div>
-                    <div>
                         <label for="activity-location" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">장소</label>
                         <input id="activity-location" type="text" placeholder="예: 중정기념관" class="input-shell">
                     </div>
                     <div>
+                        <label for="activity-time" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">시간 · 선택</label>
+                        <input id="activity-time" type="text" list="activity-time-options" placeholder="미정 · 오전 · 오후 · 14:30" class="input-shell">
+                        <datalist id="activity-time-options"><option value="오전"><option value="점심"><option value="오후"><option value="저녁"><option value="밤"></datalist>
+                    </div>
+                    <fieldset class="stop-dependencies"><legend>어디 다음에 갈까요?</legend><div id="activity-parents"></div><p>여러 장소를 고르면 여기서 합류해요. 선택하지 않으면 시작 장소예요.</p></fieldset>
+                    <details class="stop-extra"><summary>지도 확인</summary>
                         <div class="flex items-center justify-between gap-3 mb-2">
                             <label class="text-[11px] uppercase tracking-[0.24em] text-white/45 block">지도 미리보기</label>
                             <a id="activity-map-link" href="https://www.google.com/maps" target="_blank" rel="noreferrer"
@@ -1077,10 +1102,10 @@
                                 src="about:blank"></iframe>
                         </div>
                         <div id="activity-map-status" class="text-xs text-white/55 mt-2">장소를 입력하면 여기서 바로 구글 지도를 미리 볼 수 있습니다.</div>
-                    </div>
-                    <div>
+                    </details>
+                    <details class="stop-extra"><summary>메모·아이콘</summary>                    <div>
                         <label for="activity-memo" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">Memo <span class="text-white/28">(Optional)</span></label>
-                        <textarea id="activity-memo" rows="4" placeholder="준비물, 예약 메모, 이동 팁" class="input-shell"></textarea>
+                        <textarea id="activity-memo" rows="2" placeholder="준비물, 예약 메모, 이동 팁" class="input-shell"></textarea>
                     </div>
                     <div>
                         <div class="flex items-center justify-between gap-3 mb-2">
@@ -1097,6 +1122,7 @@
                             <span class="text-[11px] uppercase tracking-[0.24em] text-white/38 shrink-0">Choose</span>
                         </button>
                     </div>
+                    </details>
                 </div>
 
                 <div class="flex flex-col gap-3 mt-6 sm:flex-row">
@@ -1253,8 +1279,8 @@
     </div>
 
     <script src="./example-hotels.js?v=1"></script>
-    <script src="./graph-model.js?v=4"></script>
-    <script src="./app.js?v=direct-v6" defer></script>
+    <script src="./graph-model.js?v=5"></script>
+    <script src="./app.js?v=blocks-v7" defer></script>
 </body>
 
 </html>

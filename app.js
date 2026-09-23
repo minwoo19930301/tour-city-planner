@@ -19004,7 +19004,7 @@ function buildItineraryFromSharedPayload(segments = [], serializedDays = []) {
                         ? activity.d
                         : (day.activities[0]?.destinationId || day.destinationId)
                 ),
-                time: typeof activity.h === 'string' && activity.h ? activity.h : '09:00',
+                time: typeof activity.h === 'string' ? activity.h : '',
                 title: typeof activity.n === 'string' && activity.n
                     ? activity.n
                     : (typeof activity.l === 'string' && activity.l.trim() ? activity.l.trim() : '일정'),
@@ -20466,7 +20466,10 @@ function buildDailyWeatherHtml(day) {
 }
 
 function buildHourlyWeatherContent(day, activity) {
-    const hourLabel = `${day.date}T${activity.time.split(':')[0]}:00`;
+    const periods={오전:'09:00',점심:'12:00',오후:'15:00',저녁:'18:00',밤:'21:00'};
+    const resolved=periods[activity.time] || activity.time;
+    if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(resolved || '')) return '';
+    const hourLabel = `${day.date}T${resolved.split(':')[0]}:00`;
     const weather = appState.currentWeather?.hourlyByKey?.[`${activity.destinationId || day.destinationId}|${hourLabel}`];
     if (!weather) return '';
 
@@ -20475,7 +20478,7 @@ function buildHourlyWeatherContent(day, activity) {
 
     return `
         <i data-lucide="${weatherInfo.icon}" class="w-4 h-4 mb-0.5" style="color:${weatherInfo.color}"></i>
-        <span class="text-[10px] font-bold text-white/90">${temp}°</span>
+        <span class="text-[10px] font-bold text-white/90" title="${periods[activity.time] ? periods[activity.time] + ' 기준 예보' : '시간별 예보'}">${periods[activity.time] ? '약 ' : ''}${temp}°</span>
     `;
 }
 
@@ -20740,7 +20743,7 @@ function renderItinerary() {
                         </div>
                         <div class="min-w-0 flex-1">
                             ${showActivityCountry ? `<div class="text-[10px] uppercase tracking-[0.22em] text-white/46 mb-1">${escapeHtml(getLocalizedLabel(activityDestination.country, activityDestination.country))}</div>` : ''}
-                            <div class="text-sm font-bold text-white activity-card-time">${escapeHtml(activity.time)}</div>
+                            <div class="text-sm font-bold text-white activity-card-time">${escapeHtml(activity.time || '시간 미정')}</div>
                             <div class="text-sm text-white/88 mt-1 activity-card-location">${escapeHtml(activity.location)}</div>
                             ${activity.memo ? `<div class="text-xs text-white/62 mt-1 leading-5 activity-card-memo">${escapeHtml(activity.memo)}</div>` : ''}
                         </div>
@@ -21072,6 +21075,14 @@ async function sharePlan() {
     }
 }
 
+function renderActivityParents(day, existing) {
+    TripGraph.normalize(day);
+    const descendants=new Set(existing?[existing.id]:[]);
+    let changed=true;
+    while(changed){changed=false;day.links.forEach(([a,b])=>{if(descendants.has(a)&&!descendants.has(b)){descendants.add(b);changed=true;}});}
+    const selected=existing?day.links.filter(e=>e[1]===existing.id).map(e=>e[0]):[day.activities.at(-1)?.id];
+    document.getElementById('activity-parents').innerHTML=day.activities.filter(a=>!descendants.has(a.id)).map(a=>`<label><input type="checkbox" value="${escapeHtml(a.id)}" ${selected.includes(a.id)?'checked':''}>${escapeHtml(a.location)}</label>`).join('') || '<span class="text-xs text-white/40">이 날짜의 첫 장소</span>';
+}
 function openActivityEditor(dayIndex, activityId = null) {
     const day = appState.itinerary[dayIndex];
     const existing = activityId ? day.activities.find((activity) => activity.id === activityId) : null;
@@ -21080,7 +21091,9 @@ function openActivityEditor(dayIndex, activityId = null) {
     activityEditorState.activityId = activityId;
     activityEditorState.icon = existing?.type || '';
     ui.activityModalTitle.textContent = existing ? '일정 편집' : '새 일정 추가';
-    ui.activityTime.value = existing?.time || '09:00';
+    ui.activityTime.value = existing?.time || '';
+    ui.activityModal.querySelectorAll('details').forEach(el=>el.open=false);
+    renderActivityParents(day, existing);
     ui.activityLocation.value = existing?.location || '';
     ui.activityMemo.value = existing?.memo || '';
     ui.activityDeleteBtn.classList.toggle('hidden', !existing);
@@ -21116,13 +21129,13 @@ function saveActivityEditor() {
     if (!day) return;
 
     const location = ui.activityLocation.value.trim();
-    const time = ui.activityTime.value;
+    const time = ui.activityTime.value.trim();
     const existingActivity = activityEditorState.activityId
         ? day.activities.find((activity) => activity.id === activityEditorState.activityId)
         : null;
 
-    if (!location || !time) {
-        window.alert('시간과 장소는 비워둘 수 없습니다.');
+    if (!location) {
+        window.alert('장소를 입력해주세요.');
         return;
     }
 
@@ -21148,7 +21161,10 @@ function saveActivityEditor() {
     }
 
     pendingParallelActivity=null;
-    if (!existingActivity) reconnectMovedStop(day, nextActivity.id);
+    const parents=Array.from(document.querySelectorAll('#activity-parents input:checked')).map(el=>el.value);
+    day.links=(day.links || []).filter(edge=>edge[1]!==nextActivity.id);
+    parents.forEach(id=>day.links.push([id,nextActivity.id]));
+    TripGraph.layout(day);
     sortActivities(day);
     syncDayDestinations(day);
     closeActivityEditor();
@@ -21218,11 +21234,7 @@ const DRAG_CLICK_SUPPRESS_MS = 250;      // 놓은 직후 따라오는 click 무
 let suppressItineraryClickUntil = 0;
 
 function reassignDayTimes(day, orderedActivities) {
-    const times = day.activities.map((activity) => activity.time).sort((left, right) => left.localeCompare(right));
     day.activities = orderedActivities;
-    day.activities.forEach((activity, index) => {
-        if (times[index]) activity.time = times[index];
-    });
 }
 
 function moveActivityWithinDay(dayIndex, activityId, targetIndex) {
@@ -21275,7 +21287,7 @@ function moveActivityAcrossDays(sourceDayIndex, targetDayIndex, activityId, targ
     TripGraph.remove(sourceDay, moved.id);
     moved.row = TripGraph.freshRow(targetDay, moved.id);
     const insertIndex = Math.max(0, Math.min(targetDay.activities.length, targetIndex));
-    moved.time = resolveInsertedTime(targetDay.activities, insertIndex, moved.time);
+    // 블록을 옮겨도 사용자가 정한 시간은 유지한다.
     moved.destinationId = targetDay.destinationIds?.[0] || targetDay.destinationId || moved.destinationId;
     targetDay.activities.splice(insertIndex, 0, moved);
 
@@ -22253,8 +22265,8 @@ ui.activityCloseBtn.addEventListener('click', closeActivityEditor);
 ui.activityCancelBtn.addEventListener('click', closeActivityEditor);
 ui.activitySaveBtn.addEventListener('click', saveActivityEditor);
 ui.activityDeleteBtn.addEventListener('click', deleteCurrentActivity);
-ui.activityTime.addEventListener('click', openActivityTimePicker);
-ui.activityTime.addEventListener('focus', openActivityTimePicker);
+
+
 ui.activityLocation.addEventListener('input', updateActivityMapPreview);
 ui.activityIconTrigger.addEventListener('click', openIconPicker);
 ui.iconPickerCloseBtn.addEventListener('click', closeIconPicker);

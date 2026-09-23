@@ -28,3 +28,14 @@ console.log('PASS: branches (max 3), merge, cycle rejection, deletion, detach, d
 d=day();G.parallel(d,'b',{id:'x'});G.separate(d,'b');assert(G.rows(d).every(r=>r.length===1));
 assert.equal(G.join(d,'b','x'),true);assert.deepEqual(Array.from(G.rows(d),r=>r.length),[1,2,1]);
 console.log('PASS: original branch separation and joining existing stops.');
+
+// User example: a -> b/c/d -> e/f, with explicit paths rather than all-to-all.
+d={activities:['f','e','d','c','b','a'].map(id=>({id,time:id==='a'?'':id==='b'?'오후':'14:30'})),links:[['a','b'],['a','c'],['a','d'],['b','e'],['c','f'],['d','f']]};
+assert.equal(G.layout(d),true);
+assert.deepEqual(Array.from(G.rows(d),r=>r.length),[1,3,2]);
+assert.equal(d.links.length,6);assert(!d.links.some(e=>e[0]==='b'&&e[1]==='f'));
+const before=JSON.stringify(d);d.links.push(['e','a']);assert.equal(G.layout(d),false);d=JSON.parse(before);
+ctx.appState.itinerary=[d];vm.runInContext('restored=buildItineraryFromSharedPayload(appState.segments,buildSharePayload().i)',ctx);
+assert.equal(ctx.restored[0].activities.find(a=>a.id==='a').time,'');
+assert.equal(ctx.restored[0].activities.find(a=>a.id==='b').time,'오후');
+console.log('PASS: dependency layout, explicit routes, cycle rejection, empty/flexible time round trip.');

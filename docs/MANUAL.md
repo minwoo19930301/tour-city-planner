@@ -122,3 +122,9 @@ const DESTINATIONS = {
 - 모델 회귀 검사: `node scripts/test-graph.cjs`.
 
 호텔명 참고: [Hilton Tokyo](https://www.hilton.com/en/hotels/tyohitw-hilton-tokyo/), [Pullman Paris Tour Eiffel](https://all.accor.com/hotel/7229/index.en.shtml), [The Palace Madrid](https://www.marriott.com/en-us/hotels/madcl-the-palace-a-luxury-collection-hotel-madrid/overview/), [Phoenix Seagaia Ocean Tower](https://en.seagaia.co.jp/), [Arusha Serena](https://www.serenahotels.com/arusha).
+
+## 블록 중심 편집
+
+- 장소를 누른 뒤 ‘어디 다음에 갈까요?’에서 선행 장소를 선택하면 배치와 선을 자동 구성한다. 여러 개 선택하면 합류한다. 후속 장소는 선택 후보에서 제외하여 순환을 막는다.
+- 시간은 선택이다. 공란, 오전·점심·오후·저녁·밤, 정확한 시각을 저장할 수 있으며 이동으로 덮어쓰지 않는다. 대략적 시간대의 날씨는 각각 09·12·15·18·21시 예보를 사용한다. 미정은 시간별 예보를 표시하지 않는다.
+- 편집창은 장소·시간·선행 장소만 먼저 보이고 지도·메모·아이콘은 접혀 있다.

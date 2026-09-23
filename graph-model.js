@@ -39,7 +39,7 @@
         const rr = normalize(day), row = rr.find(r=>r.some(a=>a.id===id));
         if (!row || row.length >= 3) return false;
         const source = row.find(a=>a.id===id);
-        item.row=source.row; item.time=source.time;
+        item.row=source.row;
         const index=day.activities.indexOf(row[row.length-1]); day.activities.splice(index+1,0,item);
         day.links.filter(e=>e[1]===id).forEach(e=>day.links.push([e[0],item.id]));
         day.links.filter(e=>e[0]===id).forEach(e=>day.links.push([item.id,e[1]]));
@@ -57,7 +57,31 @@
     function join(day,id,target) {
         const rr=normalize(day), item=day.activities.find(a=>a.id===id), row=rr.find(r=>r.some(a=>a.id===target));
         if(!item || !row || row.length>=3 || row.includes(item)) return false;
-        remove(day,id); return parallel(day,target,item);
+        const saved=day.links.map(e=>e.slice());
+        day.activities=day.activities.filter(a=>a!==item);
+        item.row=row[0].row;
+        day.activities.splice(day.activities.indexOf(row[row.length-1])+1,0,item);
+        day.links=saved; normalize(day);
+        // Repositioning blocks must not create every possible cross-connection.
+        if(!day.links.some(e=>e[1]===id)) day.links.filter(e=>e[1]===target).forEach(e=>day.links.push([e[0],id]));
+        normalize(day); return true;
     }
-    root.TripGraph={rows,normalize,connect,remove,parallel,separate,join,freshRow};
+    function layout(day) {
+        const ids=new Set(day.activities.map(a=>a.id));
+        const links=(day.links || []).filter(([a,b])=>ids.has(a)&&ids.has(b)&&a!==b);
+        const rank=new Map(), remaining=new Set(ids);
+        while(remaining.size) {
+            let progress=false;
+            for(const id of remaining) {
+                const parents=links.filter(e=>e[1]===id).map(e=>e[0]);
+                if(parents.every(p=>rank.has(p))) {rank.set(id,parents.length?Math.max(...parents.map(p=>rank.get(p)))+1:0);remaining.delete(id);progress=true;}
+            }
+            if(!progress) return false;
+        }
+        day.activities.sort((a,b)=>rank.get(a.id)-rank.get(b.id));
+        const counts=new Map();
+        day.activities.forEach(a=>{const r=rank.get(a.id), count=counts.get(r)||0; a.row=`level-${r}-${Math.floor(count/3)}`;counts.set(r,count+1);});
+        day.links=links; normalize(day); return true;
+    }
+    root.TripGraph={layout,rows,normalize,connect,remove,parallel,separate,join,freshRow};
 })(typeof module==='object' ? module.exports : globalThis);
