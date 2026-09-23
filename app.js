@@ -19533,6 +19533,7 @@ function getDirectionsUrl(origin, destination) {
     url.searchParams.set('api', '1');
     url.searchParams.set('hl', 'ko');
     url.searchParams.set('gl', 'kr');
+    url.searchParams.set('travelmode', 'transit');
     url.searchParams.set('origin', origin);
     url.searchParams.set('destination', destination);
     return url.toString();
@@ -19550,7 +19551,7 @@ function getDirectionsEmbedUrl(origin, destination, waypoints = []) {
     const stops = [...waypoints, destination].map((stop) => String(stop || '').trim()).filter(Boolean);
     if (!start || !stops.length) return '';
     const daddr = stops.map((stop) => encodeURIComponent(stop)).join('+to:');
-    return `https://maps.google.com/maps?saddr=${encodeURIComponent(start)}&daddr=${daddr}&hl=ko&output=embed`;
+    return `https://maps.google.com/maps?saddr=${encodeURIComponent(start)}&daddr=${daddr}&dirflg=r&hl=ko&output=embed`;
 }
 
 function getDayDirectionsEmbedUrl(activities = []) {
@@ -19570,6 +19571,7 @@ function getDayDirectionsUrl(activities = [], fallbackDestinationId = '') {
     url.searchParams.set('api', '1');
     url.searchParams.set('hl', 'ko');
     url.searchParams.set('gl', 'kr');
+    url.searchParams.set('travelmode', 'transit');
     url.searchParams.set('origin', origin);
     url.searchParams.set('destination', destination);
     if (waypoints.length) {
@@ -21083,10 +21085,26 @@ function openDayRoutes(dayIndex, offset=0) {
     day.activities.filter(a=>!incoming.has(a.id)).forEach(a=>visit(a.id,[]));
     const hasMore=paths.length>200;if(hasMore)paths.pop();
     const panel=document.createElement('section');panel.id='day-route-picker';panel.setAttribute('role','dialog');panel.setAttribute('aria-label','하루 이동코스');
-    panel.innerHTML=`<header><strong>하루 이동코스 · ${offset?offset+1+'–':''}${offset+paths.length}${hasMore?'+':''}개</strong><button type="button" aria-label="코스 닫기">×</button></header><div class="day-route-options">${paths.map((path,i)=>`<label><input type="radio" name="day-route-choice" value="${i}" ${i===0?'checked':''}><span>${path.map(id=>escapeHtml(byId.get(id).location)).join(' → ')}</span></label>`).join('') || '등록된 일정이 없어요.'}</div><div class="route-pages">${offset?'<button data-route-page="prev">이전 코스</button>':''}${hasMore?'<button data-route-page="next">다음 코스</button>':''}</div><iframe title="선택한 하루 이동코스 지도" referrerpolicy="no-referrer-when-downgrade"></iframe><a target="_blank" rel="noreferrer">구글 맵에서 열기 ↗</a>`;
+    panel.innerHTML=`<header><strong>하루 이동코스 · ${offset?offset+1+'–':''}${offset+paths.length}${hasMore?'+':''}개</strong><button type="button" aria-label="코스 닫기">×</button></header><div class="day-route-options">${paths.map((path,i)=>`<label><input type="radio" name="day-route-choice" value="${i}" ${i===0?'checked':''}><span>${path.map(id=>escapeHtml(byId.get(id).location)).join(' → ')}</span></label>`).join('') || '등록된 일정이 없어요.'}</div><div class="route-pages">${offset?'<button data-route-page="prev">이전 코스</button>':''}${hasMore?'<button data-route-page="next">다음 코스</button>':''}</div><label class="transit-leg-label">대중교통 이동 구간<select id="transit-leg-select"></select></label><iframe title="선택한 하루 이동코스 지도" referrerpolicy="no-referrer-when-downgrade"></iframe><a target="_blank" rel="noreferrer">구글 맵에서 열기 ↗</a>`;
     document.body.appendChild(panel);panel.querySelector('button').onclick=()=>panel.remove();
     panel.querySelectorAll('[data-route-page]').forEach(button=>button.onclick=()=>openDayRoutes(dayIndex,offset+(button.dataset.routePage==='next'?200:-200)));
-    function choose(i){const activities=paths[i]?.map(id=>byId.get(id));if(!activities)return;panel.querySelector('iframe').src=getDayDirectionsEmbedUrl(activities);panel.querySelector('a').href=getDayDirectionsUrl(activities,day.destinationId);}
+    let chosenActivities=[];
+    function chooseLeg(i){
+        const from=chosenActivities[i],to=chosenActivities[i+1];
+        const frame=panel.querySelector('iframe'),link=panel.querySelector('a');
+        if(!from||!to){frame.src='about:blank';link.hidden=true;return;}
+        const origin=from.mapQuery||from.location,dest=to.mapQuery||to.location;
+        frame.src=getDirectionsEmbedUrl(origin,dest);link.href=getDirectionsUrl(origin,dest);link.hidden=false;
+        link.textContent='이 구간을 구글 맵 대중교통으로 열기 ↗';
+    }
+    function choose(i){
+        chosenActivities=paths[i]?.map(id=>byId.get(id))||[];
+        const select=panel.querySelector('#transit-leg-select');
+        select.innerHTML=chosenActivities.slice(0,-1).map((a,j)=>`<option value="${j}">${escapeHtml(a.location+' → '+chosenActivities[j+1].location)}</option>`).join('');
+        select.disabled=chosenActivities.length<2;chooseLeg(0);
+    }
+    panel.querySelector('#transit-leg-select').addEventListener('change',event=>chooseLeg(Number(event.target.value)));
+
     panel.addEventListener('change',e=>{if(e.target.name==='day-route-choice')choose(Number(e.target.value));});choose(0);
 }
 function removeRedundantBypasses(day) {
