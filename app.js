@@ -20715,6 +20715,7 @@ function renderItinerary() {
     ui.itineraryContainer.innerHTML = '';
 
     appState.itinerary.forEach((day, dayIndex) => {
+        ensureStopTimes(day);
         const dayDestination = getDayDestination(day);
         const headerDate = parseYmd(day.date);
         const previousDay = appState.itinerary[dayIndex - 1];
@@ -21087,6 +21088,14 @@ function openDayRoutes(dayIndex, offset=0) {
     function choose(i){const activities=paths[i]?.map(id=>byId.get(id));if(!activities)return;panel.querySelector('iframe').src=getDayDirectionsEmbedUrl(activities);panel.querySelector('a').href=getDayDirectionsUrl(activities,day.destinationId);}
     panel.addEventListener('change',e=>{if(e.target.name==='day-route-choice')choose(Number(e.target.value));});choose(0);
 }
+function ensureStopTimes(day) {
+    const periods={오전:'09:00',점심:'12:00',오후:'15:00',저녁:'18:00',밤:'21:00'};
+    day.activities.forEach(a=>{if(periods[a.time])a.time=periods[a.time];});
+    TripGraph.rows(day).forEach(row=>{
+        const known=row.find(a=>/^([01]\d|2[0-3]):[0-5]\d$/.test(a.time||''))?.time;
+        row.forEach(a=>{if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(a.time||''))a.time=known||inferStopTime(day,a.id);});
+    });
+}
 function inferStopTime(day,id,placement) {
     const rows=TripGraph.rows(day), item=day.activities.find(a=>a.id===id);
     const rowIndex=rows.findIndex(r=>r.some(a=>a.id===(placement?.target || id)));
@@ -21158,7 +21167,7 @@ function insertPlacedStop(day,item,placement){
 document.addEventListener('pointermove',event=>{if(placingStop&&event.pointerType!=='touch'){placingStop.ghost.style.left=`${event.clientX+12}px`;placingStop.ghost.style.top=`${event.clientY+12}px`;}});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){cancelStopPlacement();document.getElementById('day-route-picker')?.remove();}});
 window.addEventListener('resize',positionStopEditor);
-document.getElementById('activity-time-unset').addEventListener('click',()=>{ui.activityTime.value='';syncOptionalTime();});
+document.getElementById('activity-time-unset').addEventListener('click',()=>{const day=appState.itinerary[activityEditorState.dayIndex];ui.activityTime.value=inferStopTime(day,activityEditorState.activityId,pendingStopPlacement);syncOptionalTime();});
 ui.activityTime.addEventListener('input',syncOptionalTime);
 ui.activityTime.addEventListener('click',()=>{try{ui.activityTime.showPicker();}catch{}});
 function renderActivityParents(day, existing) {
@@ -21177,7 +21186,8 @@ function openActivityEditor(dayIndex, activityId = null) {
     activityEditorState.activityId = activityId;
     activityEditorState.icon = existing?.type || '';
     ui.activityModalTitle.textContent = existing ? '일정 편집' : '새 일정 추가';
-    ui.activityTime.value = existing?.time || (existing?'':inferStopTime(day,null,pendingStopPlacement));
+    ensureStopTimes(day);
+    ui.activityTime.value = existing?.time || inferStopTime(day,null,pendingStopPlacement);
     ui.activityModal.querySelectorAll('details').forEach(el=>el.open=el.classList.contains('stop-map'));
     syncOptionalTime();
     renderActivityParents(day, existing);
@@ -21206,6 +21216,7 @@ function closeActivityEditor() {
 }
 
 function persistItineraryChanges() {
+    appState.itinerary.forEach(ensureStopTimes);
     appState.customized = true;
     applyActiveContext(findActiveContext());
     renderItinerary();
@@ -21218,7 +21229,7 @@ function saveActivityEditor() {
     if (!day) return;
 
     const location = ui.activityLocation.value.trim();
-    const time = ui.activityTime.value.trim();
+    const time = ui.activityTime.value.trim() || inferStopTime(day,activityEditorState.activityId,pendingStopPlacement);
     const existingActivity = activityEditorState.activityId
         ? day.activities.find((activity) => activity.id === activityEditorState.activityId)
         : null;
