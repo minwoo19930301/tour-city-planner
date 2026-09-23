@@ -20598,7 +20598,7 @@ function graphLayoutAttributes(rows, activity) {
 }
 function graphControlsHtml(day, dayIndex, activity) {
     const attrs = `data-graph-day="${dayIndex}" data-graph-id="${activity.id}" data-skip-edit="true"`;
-    return `<button type="button" ${attrs} class="graph-port graph-input" data-graph-port="in" aria-label="${escapeHtml(activity.location)}에 연결" title="여기에 놓으면 연결·합류"></button>
+    return `<button type="button" ${attrs} class="graph-port graph-input" data-graph-port="in" aria-label="${escapeHtml(activity.location)}에 연결" title="위 일정으로 끌거나 여기에 놓아 연결"></button>
     <button type="button" ${attrs} class="graph-port graph-output" data-graph-port="out" aria-label="${escapeHtml(activity.location)}에서 연결" title="아래 일정의 연결점으로 드래그"></button>
     <button type="button" ${attrs} data-graph-action="remove" class="graph-remove" aria-label="${escapeHtml(activity.location)} 제거" title="일정 제거">×</button>`;
 }
@@ -20609,31 +20609,32 @@ function finishGraphWire(target) {
     wire.svg.remove(); document.body.classList.remove('graph-connecting');
     document.querySelectorAll('.graph-port-ready').forEach(el=>el.classList.remove('graph-port-ready'));
     suppressItineraryClickUntil = Date.now() + 350;
-    if (target?.dataset.graphPort === 'in' && Number(target.dataset.graphDay) === wire.day &&
-        TripGraph.connect(appState.itinerary[wire.day], wire.id, target.dataset.graphId)) persistItineraryChanges();
+    if (target?.dataset.graphPort === (wire.reverse?'out':'in') && Number(target.dataset.graphDay) === wire.day &&
+        TripGraph.connect(appState.itinerary[wire.day], wire.reverse?target.dataset.graphId:wire.id, wire.reverse?wire.id:target.dataset.graphId)) persistItineraryChanges();
 }
 function startGraphWire(port, pointerId) {
     finishGraphWire();
     const r=port.getBoundingClientRect(), svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
     svg.classList.add('graph-wire'); svg.innerHTML='<path />'; document.body.appendChild(svg);
-    graphWire={day:Number(port.dataset.graphDay),id:port.dataset.graphId,x:r.left+r.width/2,y:r.top+r.height/2,svg,pointerId};
+    graphWire={day:Number(port.dataset.graphDay),id:port.dataset.graphId,x:r.left+r.width/2,y:r.top+r.height/2,svg,pointerId,reverse:port.dataset.graphPort==='in'};
     const rows=TripGraph.rows(appState.itinerary[graphWire.day]), rank=rows.findIndex(row=>row.some(a=>a.id===graphWire.id));
-    rows.slice(rank+1).flat().forEach(a=>ui.itineraryContainer.querySelector(`[data-graph-port="in"][data-graph-id="${a.id}"]`)?.classList.add('graph-port-ready'));
+    (graphWire.reverse?rows.slice(0,rank):rows.slice(rank+1)).flat().forEach(a=>ui.itineraryContainer.querySelector(`[data-graph-port="${graphWire.reverse?'out':'in'}"][data-graph-id="${a.id}"]`)?.classList.add('graph-port-ready'));
     document.body.classList.add('graph-connecting');
 }
 document.addEventListener('pointerdown', event=>{
-    const port=event.target.closest('[data-graph-port="out"]');
+    const port=event.target.closest('[data-graph-port]');
     if(!port || event.button!==0) return;
     event.preventDefault(); startGraphWire(port,event.pointerId);
 });
 window.addEventListener('pointermove', event=>{
     if(!graphWire || graphWire.pointerId!==event.pointerId) return;
-    const {x,y,svg}=graphWire;
-    svg.firstChild.setAttribute('d',`M ${x} ${y} C ${x} ${y+35}, ${event.clientX} ${event.clientY-35}, ${event.clientX} ${event.clientY}`);
+    const {x,y,svg,reverse}=graphWire;
+    const bend=reverse?-35:35;
+    svg.firstChild.setAttribute('d',`M ${x} ${y} C ${x} ${y+bend}, ${event.clientX} ${event.clientY-bend}, ${event.clientX} ${event.clientY}`);
 });
 window.addEventListener('pointerup', event=>{
     if(graphWire?.pointerId!==event.pointerId) return;
-    finishGraphWire(document.elementFromPoint(event.clientX,event.clientY)?.closest('[data-graph-port="in"]'));
+    finishGraphWire(document.elementFromPoint(event.clientX,event.clientY)?.closest('[data-graph-port]'));
 });
 window.addEventListener('pointercancel',()=>finishGraphWire());
 document.addEventListener('keydown',event=>{
@@ -20642,7 +20643,7 @@ document.addEventListener('keydown',event=>{
     const port=event.target.closest('[data-graph-port]');
     if(port && (event.key==='Enter' || event.key===' ')) {
         event.preventDefault();
-        if(port.dataset.graphPort==='out') startGraphWire(port,null); else finishGraphWire(port);
+        if(graphWire) finishGraphWire(port); else startGraphWire(port,null);
     }
 });
 function reconnectMovedStop(day, id) {
