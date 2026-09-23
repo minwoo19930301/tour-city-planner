@@ -20660,6 +20660,8 @@ function drawGraphEdges() {
         if (!svg) return;
         const bounds=list.getBoundingClientRect();
         svg.setAttribute('viewBox',`0 0 ${bounds.width} ${bounds.height}`);
+        list.querySelectorAll('.edge-actions').forEach(el=>el.remove());
+        const actionPositions=[];
         svg.innerHTML=day.links.map(([from,to]) => {
             const a=list.querySelector(`[data-activity-wrapper="${from}"]`)?.getBoundingClientRect();
             const b=list.querySelector(`[data-activity-wrapper="${to}"]`)?.getBoundingClientRect();
@@ -20669,6 +20671,14 @@ function drawGraphEdges() {
             const bend=Math.min(34,(yy-y)/2);
             const source=day.activities.find(a=>a.id===from), target=day.activities.find(a=>a.id===to);
             const origin=source.mapQuery || source.location, dest=target.mapQuery || target.location;
+            const actions=document.createElement('div');actions.className='edge-actions';actions.dataset.skipEdit='true';
+            const ax=Math.max(35,Math.min(bounds.width-35,(x+xx)/2));let ay=(y+yy)/2;
+            for(const offset of [0,-26,26,-52,52]){const candidate=(y+yy)/2+offset;if(!actionPositions.some(p=>Math.abs(p.x-ax)<72&&Math.abs(p.y-candidate)<25)){ay=candidate;break;}}
+            actionPositions.push({x:ax,y:ay});
+            actions.style.left=`${ax}px`;actions.style.top=`${ay}px`;
+            actions.title=source.location+' → '+target.location;
+            actions.innerHTML=`<a href="${getDirectionsUrl(origin,dest)}" data-route-preview="true" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}">가는 길</a><button type="button" data-graph-action="unlink" data-graph-day="${dayIndex}" data-graph-id="${from}" data-graph-to="${to}" aria-label="${escapeHtml(source.location+' → '+target.location)} 연결 제거">×</button>`;
+            list.appendChild(actions);
             return `<a data-route-preview="true" data-skip-edit="true" href="${getDirectionsUrl(origin,dest)}" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}" aria-label="${escapeHtml(source.location+'에서 '+target.location+' 가는 길')}"><path style="pointer-events:stroke;cursor:pointer" d="M ${x} ${y} C ${x} ${y+bend}, ${xx} ${yy-bend}, ${xx} ${yy}"/><circle cx="${xx}" cy="${yy}" r="3" fill="currentColor"/></a><g class="graph-edge-remove" data-skip-edit="true" data-graph-action="unlink" data-graph-day="${dayIndex}" data-graph-id="${from}" data-graph-to="${to}" role="button" tabindex="0" aria-label="${escapeHtml(source.location+' → '+target.location)} 연결 제거" transform="translate(${(x+xx)/2},${(y+yy)/2})"><circle r="9"/><text text-anchor="middle" dy="4">×</text></g>`;
         }).join('');
     });
@@ -20757,42 +20767,11 @@ function renderItinerary() {
         }).join('');
 
         dayElement.innerHTML = `
-            <div class="flex items-start gap-3 mb-4" data-day-header="${dayIndex}" data-flip-item="true">
-                <div class="flex-1">
-                    <div class="flex items-end gap-2.5">
-                        <h3 class="text-3xl font-serif font-bold text-white leading-none">${escapeHtml(formatMonthDay(headerDate))}</h3>
-                        <span class="text-sm text-white/70 font-medium pb-0.5">${escapeHtml(formatMonthDayWithWeekday(headerDate))}</span>
-                    </div>
-                </div>
-
-                <div class="flex flex-col items-end gap-2">
-                    ${buildDailyWeatherHtml(day)}
-                    <div class="flex gap-2">
-                        ${dayDirectionsUrl ? `
-                            <a
-                                href="${dayDirectionsUrl}"
-                                target="_blank"
-                                rel="noreferrer"
-                                data-skip-edit="true"
-                                data-route-preview="true"
-                                data-route-title="${escapeHtml(`${formatMonthDay(headerDate)} 하루 이동코스`)}"
-                                data-route-embed="${escapeHtml(dayDirectionsEmbedUrl)}"
-                                title="${escapeHtml('하루 이동코스 미리보기')}"
-                                class="route-preview-trigger rounded-full border border-white/10 bg-white/6 px-3 py-1.5 text-[11px] font-semibold text-white hover:bg-white/10 transition-colors inline-flex items-center gap-1.5">
-                                <i data-lucide="route" class="w-3.5 h-3.5"></i>
-                                <span>하루 이동코스</span>
-                            </a>
-                        ` : ''}
-                        <button
-                            type="button"
-                            class="rounded-full px-3 py-1.5 text-[11px] font-semibold text-slate-950 transition-colors"
-                            style="background: var(--accent);"
-                            data-action="add-activity"
-                            data-day-index="${dayIndex}">
-                            + 일정
-                        </button>
-                    </div>
-                </div>
+            <div class="day-header-row" data-day-header="${dayIndex}" data-flip-item="true">
+                <div class="day-date"><h3>${escapeHtml(formatMonthDay(headerDate))}</h3><span>${escapeHtml(formatMonthDayWithWeekday(headerDate))}</span></div>
+                <button class="day-routes-button" data-day-routes="${dayIndex}" type="button">하루 이동코스</button>
+                ${buildDailyWeatherHtml(day)}
+                <button type="button" class="day-add-button" data-action="add-activity" data-day-index="${dayIndex}">+ 일정</button>
             </div>
 
             <div class="tree-scroll"><div class="activity-tree" data-activity-list="${dayIndex}">
@@ -21075,6 +21054,33 @@ async function sharePlan() {
     }
 }
 
+function openDayRoutes(dayIndex, offset=0) {
+    document.getElementById('day-route-picker')?.remove();
+    const day=appState.itinerary[dayIndex];TripGraph.normalize(day);
+    const byId=new Map(day.activities.map(a=>[a.id,a])), paths=[];
+    const incoming=new Set(day.links.map(e=>e[1]));
+    let visited=0;
+    function visit(id,path){if(paths.length>=201)return;const next=day.links.filter(e=>e[0]===id).map(e=>e[1]);if(!next.length){if(visited++>=offset)paths.push([...path,id]);}else next.forEach(n=>visit(n,[...path,id]));}
+    day.activities.filter(a=>!incoming.has(a.id)).forEach(a=>visit(a.id,[]));
+    const hasMore=paths.length>200;if(hasMore)paths.pop();
+    const panel=document.createElement('section');panel.id='day-route-picker';panel.setAttribute('role','dialog');panel.setAttribute('aria-label','하루 이동코스');
+    panel.innerHTML=`<header><strong>하루 이동코스 · ${offset?offset+1+'–':''}${offset+paths.length}${hasMore?'+':''}개</strong><button type="button" aria-label="코스 닫기">×</button></header><div class="day-route-options">${paths.map((path,i)=>`<label><input type="radio" name="day-route-choice" value="${i}" ${i===0?'checked':''}><span>${path.map(id=>escapeHtml(byId.get(id).location)).join(' → ')}</span></label>`).join('') || '등록된 일정이 없어요.'}</div><div class="route-pages">${offset?'<button data-route-page="prev">이전 코스</button>':''}${hasMore?'<button data-route-page="next">다음 코스</button>':''}</div><iframe title="선택한 하루 이동코스 지도" referrerpolicy="no-referrer-when-downgrade"></iframe><a target="_blank" rel="noreferrer">구글 맵에서 열기 ↗</a>`;
+    document.body.appendChild(panel);panel.querySelector('button').onclick=()=>panel.remove();
+    panel.querySelectorAll('[data-route-page]').forEach(button=>button.onclick=()=>openDayRoutes(dayIndex,offset+(button.dataset.routePage==='next'?200:-200)));
+    function choose(i){const activities=paths[i]?.map(id=>byId.get(id));if(!activities)return;panel.querySelector('iframe').src=getDayDirectionsEmbedUrl(activities);panel.querySelector('a').href=getDayDirectionsUrl(activities,day.destinationId);}
+    panel.addEventListener('change',e=>{if(e.target.name==='day-route-choice')choose(Number(e.target.value));});choose(0);
+}
+function inferStopTime(day,id,placement) {
+    const rows=TripGraph.rows(day), item=day.activities.find(a=>a.id===id);
+    const rowIndex=rows.findIndex(r=>r.some(a=>a.id===(placement?.target || id)));
+    const minute=a=>{const t=({오전:'09:00',점심:'12:00',오후:'15:00',저녁:'18:00',밤:'21:00'})[a?.time]||a?.time;return /^\d{2}:\d{2}$/.test(t||'')?timeToMinutes(t):null;};
+    if(placement && ['left','right'].includes(placement.where)){const t=minute(day.activities.find(a=>a.id===placement.target));return minutesToTime(t??720);}
+    const boundary=placement?rowIndex+(placement.where==='after'?1:0):rowIndex;
+    const previous=rows.slice(0,boundary).reverse().flat().map(minute).find(t=>t!==null);
+    const following=rows.slice(placement?boundary:rowIndex+1).flat().map(minute).find(t=>t!==null);
+    const value=previous!==undefined&&following!==undefined?(previous+following)/2:previous!==undefined?Math.min(1439,previous+60):following!==undefined?Math.max(0,following-60):720;
+    return minutesToTime(Math.round(value));
+}
 let pendingStopPlacement=null;
 let placingStop=null;
 function syncOptionalTime(){document.getElementById('activity-time-unset').setAttribute('aria-pressed',String(!ui.activityTime.value));}
@@ -21133,10 +21139,11 @@ function insertPlacedStop(day,item,placement){
     before.forEach(a=>day.links.push([a.id,item.id]));after.forEach(a=>day.links.push([item.id,a.id]));TripGraph.normalize(day);
 }
 document.addEventListener('pointermove',event=>{if(placingStop&&event.pointerType!=='touch'){placingStop.ghost.style.left=`${event.clientX+12}px`;placingStop.ghost.style.top=`${event.clientY+12}px`;}});
-document.addEventListener('keydown',event=>{if(event.key==='Escape')cancelStopPlacement();});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'){cancelStopPlacement();document.getElementById('day-route-picker')?.remove();}});
 window.addEventListener('resize',positionStopEditor);
 document.getElementById('activity-time-unset').addEventListener('click',()=>{ui.activityTime.value='';syncOptionalTime();});
 ui.activityTime.addEventListener('input',syncOptionalTime);
+ui.activityTime.addEventListener('click',()=>{try{ui.activityTime.showPicker();}catch{}});
 function renderActivityParents(day, existing) {
     TripGraph.normalize(day);
     const descendants=new Set(existing?[existing.id]:[]);
@@ -21153,7 +21160,7 @@ function openActivityEditor(dayIndex, activityId = null) {
     activityEditorState.activityId = activityId;
     activityEditorState.icon = existing?.type || '';
     ui.activityModalTitle.textContent = existing ? '일정 편집' : '새 일정 추가';
-    ui.activityTime.value = existing?.time || '';
+    ui.activityTime.value = existing?.time || (existing?'':inferStopTime(day,null,pendingStopPlacement));
     ui.activityModal.querySelectorAll('details').forEach(el=>el.open=el.classList.contains('stop-map'));
     syncOptionalTime();
     renderActivityParents(day, existing);
@@ -21319,6 +21326,7 @@ function moveActivityWithinDay(dayIndex, activityId, targetIndex) {
     reassignDayTimes(day, ordered);
     TripGraph.normalize(day);
     reconnectMovedStop(day, moved.id);
+    moved.time=inferStopTime(day,moved.id);
     return true;
 }
 
@@ -21352,12 +21360,13 @@ function moveActivityAcrossDays(sourceDayIndex, targetDayIndex, activityId, targ
     TripGraph.remove(sourceDay, moved.id);
     moved.row = TripGraph.freshRow(targetDay, moved.id);
     const insertIndex = Math.max(0, Math.min(targetDay.activities.length, targetIndex));
-    // 블록을 옮겨도 사용자가 정한 시간은 유지한다.
+    // 배치가 끝난 뒤 앞뒤 시간의 중간값을 계산한다.
     moved.destinationId = targetDay.destinationIds?.[0] || targetDay.destinationId || moved.destinationId;
     targetDay.activities.splice(insertIndex, 0, moved);
 
     TripGraph.normalize(targetDay);
     reconnectMovedStop(targetDay, moved.id);
+    moved.time=inferStopTime(targetDay,moved.id);
     if (typeof syncDayDestinations === 'function') {
         syncDayDestinations(sourceDay);
         syncDayDestinations(targetDay);
@@ -21848,6 +21857,7 @@ function handleActivityPointerUp(event) {
             item.destinationId=day.activities.find(a=>a.id===targetPeerId).destinationId; syncDayDestinations(source);
         }
         if(moved && targetPeerLeft) {day.activities=day.activities.filter(a=>a!==item);day.activities.splice(day.activities.findIndex(a=>a.id===targetPeerId),0,item);}
+        if(moved)item.time=inferStopTime(day,item.id,{target:targetPeerId,where:'right'});
         syncDayDestinations(day);
     } else moved = commitActivityDrop(sourceDayIndex, targetDayIndex, targetIndex, activityId);
     if (!moved) return;
@@ -22076,6 +22086,8 @@ function syncRoutePreviewLayout() {
 
 function handleItineraryClick(event) {
     if(placingStop) return;
+    const dayRouteButton=event.target.closest('[data-day-routes]');
+    if(dayRouteButton){openDayRoutes(Number(dayRouteButton.dataset.dayRoutes));return;}
     // 끌어다 놓은 직후 따라오는 click은 편집창을 열지 않는다
     if (Date.now() < suppressItineraryClickUntil) {
         event.preventDefault();

@@ -49,3 +49,9 @@ vm.runInContext("insertPlacedStop(placed,{id:'side',time:'',location:'side'},{ta
 assert.deepEqual(placed.activities.map(a=>a.id),['a','new','side','b','c']);
 assert.equal(placed.activities.find(a=>a.id==='side').time,'');
 console.log('PASS: insert-before rewiring and parallel left placement without forced time.');
+{for(const name of ['timeToMinutes','minutesToTime','inferStopTime']){const start=app.indexOf('function '+name+'('),end=app.indexOf('\n}\n',start)+3;vm.runInContext(app.slice(start,end),ctx);}}
+ctx.timed={activities:[{id:'a',time:'09:00'},{id:'b',time:'10:00'},{id:'c',time:'15:00'}]};
+assert.equal(vm.runInContext("inferStopTime(timed,'b')",ctx),'12:00');
+assert.equal(vm.runInContext("inferStopTime(timed,null,{target:'c',where:'before'})",ctx),'12:30');
+assert.equal(vm.runInContext("inferStopTime(timed,null,{target:'a',where:'right'})",ctx),'09:00');
+console.log('PASS: midpoint time for moves, insertion, and parallel placement.');
