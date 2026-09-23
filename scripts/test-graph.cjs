@@ -39,3 +39,13 @@ ctx.appState.itinerary=[d];vm.runInContext('restored=buildItineraryFromSharedPay
 assert.equal(ctx.restored[0].activities.find(a=>a.id==='a').time,'');
 assert.equal(ctx.restored[0].activities.find(a=>a.id==='b').time,'오후');
 console.log('PASS: dependency layout, explicit routes, cycle rejection, empty/flexible time round trip.');
+// Placement inserts in front/behind a row, or as a parallel candidate.
+{ const start=app.indexOf('function insertPlacedStop('),end=app.indexOf('\n}\n',start)+3;vm.runInContext(app.slice(start,end),ctx); }
+let placed=day();G.normalize(placed);ctx.placed=placed;
+vm.runInContext("insertPlacedStop(placed,{id:'new',time:'',location:'new'},{target:'b',where:'before'})",ctx);
+assert.deepEqual(placed.activities.map(a=>a.id),['a','new','b','c']);
+assert(!placed.links.some(e=>e[0]==='a'&&e[1]==='b'));assert(placed.links.some(e=>e[0]==='new'&&e[1]==='b'));
+vm.runInContext("insertPlacedStop(placed,{id:'side',time:'',location:'side'},{target:'b',where:'left'})",ctx);
+assert.deepEqual(placed.activities.map(a=>a.id),['a','new','side','b','c']);
+assert.equal(placed.activities.find(a=>a.id==='side').time,'');
+console.log('PASS: insert-before rewiring and parallel left placement without forced time.');

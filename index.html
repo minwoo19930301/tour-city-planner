@@ -884,6 +884,27 @@
             .activity-tree .activity-card-main {flex-wrap:nowrap;}
             .activity-tree .activity-card-main > .min-w-0 {flex-basis:auto;}
         }
+
+        #activity-modal {position:absolute;inset:auto;overflow:visible;width:min(420px,calc(100vw - 16px));z-index:90;}
+        #activity-modal > .absolute {display:none;}
+        #activity-modal > .relative {min-height:0;padding:0;margin:0;display:block;}
+        #activity-modal .glass-panel {margin:0;background:#172537;backdrop-filter:none;box-shadow:0 12px 35px #0008;max-height:calc(100svh - 24px);}
+        .stop-time-row {display:flex;align-items:center;gap:8px;}
+        .stop-time-row input {min-width:0;flex:1;}
+        #activity-time-unset {white-space:nowrap;font-size:12px;padding:10px;border:1px solid #ffffff30;border-radius:10px;color:#cbd5e1;}
+        #activity-time-unset[aria-pressed="true"] {border-color:var(--accent);color:var(--accent);background:#ffffff10;}
+        .stop-dependencies[hidden]{display:none}
+        .placement-ghost {position:fixed;z-index:95;pointer-events:none;padding:14px 24px;border:1px dashed var(--accent);border-radius:14px;background:#25354bb3;color:white;opacity:.7;box-shadow:0 8px 24px #0004;}
+        .placement-slot {position:absolute;z-index:8;border:1px dashed #ffae65;border-radius:9px;background:#172537d9;color:#ffd4b1;font-size:11px;cursor:pointer;min-height:26px;}
+        .placement-slot:hover,.placement-slot:focus-visible {background:#bc5a1dcc;border-style:solid;box-shadow:0 0 0 4px #ffae6533;}
+        .placement-slot.slot-before{top:-29px;left:0;width:100%}
+        .placement-slot.slot-after{bottom:-29px;left:0;width:100%}
+        .placement-slot.slot-left{left:0;top:25%;height:50%;width:30%;}
+        .placement-slot.slot-right{right:0;top:25%;height:50%;width:30%;}
+        .is-placing .activity-tree {row-gap:66px;}
+        .is-placing [data-activity-wrapper] {position:relative;}
+        .is-placing .graph-port,.is-placing .graph-remove {visibility:hidden;}
+        .placement-cancel {position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:96;background:#172537;border:1px solid #ffffff40;border-radius:18px;color:white;padding:12px 20px;font-size:13px;}
     </style>
 </head>
 
@@ -1105,11 +1126,11 @@
                     </div>
                     <div>
                         <label for="activity-time" class="text-[11px] uppercase tracking-[0.24em] text-white/45 block mb-2">시간 · 선택</label>
-                        <input id="activity-time" type="text" list="activity-time-options" placeholder="미정 · 오전 · 오후 · 14:30" class="input-shell">
-                        <datalist id="activity-time-options"><option value="오전"><option value="점심"><option value="오후"><option value="저녁"><option value="밤"></datalist>
+                        <div class="stop-time-row"><input id="activity-time" type="time" class="input-shell"><button id="activity-time-unset" type="button">미정 · 순서만</button></div>
+
                     </div>
-                    <fieldset class="stop-dependencies"><legend>어디 다음에 갈까요?</legend><div id="activity-parents"></div><p>여러 장소를 고르면 여기서 합류해요. 선택하지 않으면 시작 장소예요.</p></fieldset>
-                    <details class="stop-extra"><summary>지도 확인</summary>
+                    <fieldset class="stop-dependencies" hidden><legend>어디 다음에 갈까요?</legend><div id="activity-parents"></div><p>여러 장소를 고르면 여기서 합류해요. 선택하지 않으면 시작 장소예요.</p></fieldset>
+                    <details class="stop-extra stop-map" open><summary>지도 확인</summary>
                         <div class="flex items-center justify-between gap-3 mb-2">
                             <label class="text-[11px] uppercase tracking-[0.24em] text-white/45 block">지도 미리보기</label>
                             <a id="activity-map-link" href="https://www.google.com/maps" target="_blank" rel="noreferrer"
@@ -1305,7 +1326,7 @@
 
     <script src="./example-hotels.js?v=1"></script>
     <script src="./graph-model.js?v=5"></script>
-    <script src="./app.js?v=blocks-v7" defer></script>
+    <script src="./app.js?v=placement-v8" defer></script>
 </body>
 
 </html>

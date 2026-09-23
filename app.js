@@ -19404,7 +19404,6 @@ function setScrollLock(locked) {
 
 function updateBodyScrollLock() {
     const shouldLock = !ui.setupOverlay.classList.contains('hidden')
-        || !ui.activityModal.classList.contains('hidden')
         || !ui.iconPickerModal.classList.contains('hidden');
     setScrollLock(shouldLock);
 }
@@ -20676,6 +20675,7 @@ function drawGraphEdges() {
 }
 window.addEventListener('resize', () => requestAnimationFrame(drawGraphEdges));
 function renderItinerary() {
+    if(placingStop) return;
     if (graphWire) finishGraphWire();
     if (activityDragState.active) {
         // 끌기 도중에는 DOM을 갈아끼우지 않고, 끌기가 끝난 뒤 다시 그린다
@@ -21075,6 +21075,68 @@ async function sharePlan() {
     }
 }
 
+let pendingStopPlacement=null;
+let placingStop=null;
+function syncOptionalTime(){document.getElementById('activity-time-unset').setAttribute('aria-pressed',String(!ui.activityTime.value));}
+function positionStopEditor(){
+    if(ui.activityModal.classList.contains('hidden')) return;
+    const id=activityEditorState.activityId || pendingStopPlacement?.target;
+    const anchor=id?getActivityCard(id):ui.itineraryContainer.querySelector(`[data-day-panel="${activityEditorState.dayIndex}"] [data-day-header]`);
+    if(!anchor) return;
+    ui.activityModal.style.width=`${Math.min(420,document.documentElement.clientWidth-16)}px`;
+    const r=anchor.getBoundingClientRect(), h=ui.activityModal.offsetHeight, w=ui.activityModal.offsetWidth;
+    const below=window.innerHeight-r.bottom, above=r.top;
+    const top=below>=Math.min(h,320)||below>=above?r.bottom+8:Math.max(8,r.top-h-8);
+    ui.activityModal.style.top=`${window.scrollY+top}px`;
+    ui.activityModal.style.left=`${Math.max(8,Math.min(r.left,document.documentElement.clientWidth-w-8))}px`;
+}
+function cancelStopPlacement(){
+    placingStop?.ghost.remove(); placingStop=null;
+    document.querySelectorAll('.placement-slot,.placement-cancel').forEach(el=>el.remove());
+    document.body.classList.remove('is-placing');requestAnimationFrame(drawGraphEdges);
+}
+function startStopPlacement(dayIndex){
+    closeActivityEditor();cancelStopPlacement();
+    const ghost=document.createElement('div');ghost.className='placement-ghost';ghost.textContent='새 일정';
+    ghost.style.left='calc(50% - 55px)';ghost.style.top='90px';document.body.appendChild(ghost);
+    placingStop={dayIndex,ghost};document.body.classList.add('is-placing');
+    const cancel=document.createElement('button');cancel.className='placement-cancel';cancel.textContent='놓을 자리 선택 · 취소';cancel.onclick=cancelStopPlacement;document.body.appendChild(cancel);
+    const day=appState.itinerary[dayIndex], rows=TripGraph.rows(day);
+    function slot(parent,target,where,label){
+        const el=document.createElement('button');el.type='button';el.className=`placement-slot slot-${where}`;el.textContent=label;
+        el.setAttribute('aria-label',`${target?.location || '첫 일정'} ${label}`);
+        el.onclick=event=>{event.stopPropagation();const targetId=target?.id;cancelStopPlacement();pendingStopPlacement={target:targetId,where};openActivityEditor(dayIndex);};
+        parent.appendChild(el);
+    }
+    rows.forEach((row,i)=>row.forEach((a,j)=>{
+        const wrap=getActivityCard(a.id).closest('[data-activity-wrapper]');
+        if(j===0)slot(wrap,a,'before','앞에 놓기');
+        if(i===rows.length-1&&j===0)slot(wrap,a,'after','뒤에 놓기');
+        if(row.length<3){if(j===0)slot(wrap,a,'left','← 옆');if(j===row.length-1)slot(wrap,a,'right','옆 →');}
+    }));
+    if(!rows.length){cancelStopPlacement();pendingStopPlacement={where:'after'};openActivityEditor(dayIndex);}
+    requestAnimationFrame(drawGraphEdges);
+}
+function insertPlacedStop(day,item,placement){
+    const rows=TripGraph.normalize(day), target=day.activities.find(a=>a.id===placement?.target);
+    if(target && ['left','right'].includes(placement.where)) {
+        TripGraph.parallel(day,target.id,item);
+        if(placement.where==='left'){day.activities=day.activities.filter(a=>a!==item);day.activities.splice(day.activities.indexOf(target),0,item);}
+        return;
+    }
+    const rowIndex=target?rows.findIndex(r=>r.includes(target)):rows.length;
+    const index=placement?.where==='after'?rowIndex+1:rowIndex;
+    const before=rows[index-1]||[], after=rows[index]||[];
+    item.row=TripGraph.freshRow(day,item.id);
+    day.activities.splice(after.length?day.activities.indexOf(after[0]):day.activities.length,0,item);
+    day.links=day.links.filter(([a,b])=>!(before.some(n=>n.id===a)&&after.some(n=>n.id===b)));
+    before.forEach(a=>day.links.push([a.id,item.id]));after.forEach(a=>day.links.push([item.id,a.id]));TripGraph.normalize(day);
+}
+document.addEventListener('pointermove',event=>{if(placingStop&&event.pointerType!=='touch'){placingStop.ghost.style.left=`${event.clientX+12}px`;placingStop.ghost.style.top=`${event.clientY+12}px`;}});
+document.addEventListener('keydown',event=>{if(event.key==='Escape')cancelStopPlacement();});
+window.addEventListener('resize',positionStopEditor);
+document.getElementById('activity-time-unset').addEventListener('click',()=>{ui.activityTime.value='';syncOptionalTime();});
+ui.activityTime.addEventListener('input',syncOptionalTime);
 function renderActivityParents(day, existing) {
     TripGraph.normalize(day);
     const descendants=new Set(existing?[existing.id]:[]);
@@ -21092,7 +21154,8 @@ function openActivityEditor(dayIndex, activityId = null) {
     activityEditorState.icon = existing?.type || '';
     ui.activityModalTitle.textContent = existing ? '일정 편집' : '새 일정 추가';
     ui.activityTime.value = existing?.time || '';
-    ui.activityModal.querySelectorAll('details').forEach(el=>el.open=false);
+    ui.activityModal.querySelectorAll('details').forEach(el=>el.open=el.classList.contains('stop-map'));
+    syncOptionalTime();
     renderActivityParents(day, existing);
     ui.activityLocation.value = existing?.location || '';
     ui.activityMemo.value = existing?.memo || '';
@@ -21102,6 +21165,7 @@ function openActivityEditor(dayIndex, activityId = null) {
     closeIconPicker();
 
     ui.activityModal.classList.remove('hidden');
+    positionStopEditor();
     updateBodyScrollLock();
     lucide.createIcons();
 }
@@ -21114,6 +21178,7 @@ function closeActivityEditor() {
     activityEditorState.dayIndex = null;
     activityEditorState.activityId = null;
     activityEditorState.icon = '';
+    pendingStopPlacement=null;
 }
 
 function persistItineraryChanges() {
@@ -21161,10 +21226,10 @@ function saveActivityEditor() {
     }
 
     pendingParallelActivity=null;
-    const parents=Array.from(document.querySelectorAll('#activity-parents input:checked')).map(el=>el.value);
-    day.links=(day.links || []).filter(edge=>edge[1]!==nextActivity.id);
-    parents.forEach(id=>day.links.push([id,nextActivity.id]));
-    TripGraph.layout(day);
+    if(!existingActivity) {
+        day.activities=day.activities.filter(a=>a!==nextActivity);
+        insertPlacedStop(day,nextActivity,pendingStopPlacement);
+    }
     sortActivities(day);
     syncDayDestinations(day);
     closeActivityEditor();
@@ -21695,6 +21760,7 @@ function cancelActivityDrag() {
 }
 
 function handleActivityPointerDown(event) {
+    if(placingStop) return;
     if (event.button !== undefined && event.button !== 0) return;
     if (activityDragState.pointerId !== null) return;
     if (event.target.closest('[data-reorder-control], a, summary, select, input, textarea, button:not([data-drag-handle])')) return;
@@ -22009,6 +22075,7 @@ function syncRoutePreviewLayout() {
 }
 
 function handleItineraryClick(event) {
+    if(placingStop) return;
     // 끌어다 놓은 직후 따라오는 click은 편집창을 열지 않는다
     if (Date.now() < suppressItineraryClickUntil) {
         event.preventDefault();
@@ -22044,7 +22111,7 @@ function handleItineraryClick(event) {
 
     const addButton = event.target.closest('[data-action="add-activity"]');
     if (addButton) {
-        openActivityEditor(Number(addButton.dataset.dayIndex), null);
+        startStopPlacement(Number(addButton.dataset.dayIndex));
         return;
     }
 
