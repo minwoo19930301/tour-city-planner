@@ -20190,7 +20190,7 @@ https://minwoo19930301.github.io/tour-city-planner/#trip=1&${groupParams}
 - 구간의 시작일과 종료일을 포함한 모든 날짜에 실제 장소를 넣으세요. 날짜·시간 순서로 작성하세요.
 - 도시ID는 해당 여행 구간의 ID를 그대로 사용하세요: ${[...new Set(compact.map(segment => segment.d))].join(', ')}.
 - 고유ID는 a1,a2처럼 전체 일정에서 중복되지 않는 영문·숫자. 행ID는 r1,r2처럼 쓰세요.
-- 같은 날짜에서 같은 행ID인 연속 장소들은 나란한 후보입니다(최대 3개). 보통 순차 일정은 행ID를 다르게 주세요.
+- 같은 날짜에서 같은 행ID인 연속 장소들은 나란한 후보입니다(기본 3개 표시, 더 많으면 가로 스크롤). 보통 순차 일정은 행ID를 다르게 주세요.
 - 아이콘은 다음 중 하나: ${ACTIVITY_ICON_OPTIONS.map(option => option.value).join(', ')}.
 - 장소명은 도시를 함께 적어 정확히 찾게 해 주세요. 한글·영어·일본어를 그대로 쓸 수 있습니다.
 - 장소명·메모 안의 공백은 +, &는 %26, #은 %23, ~는 %7E, +는 %2B, %는 %25, 괄호는 %28 및 %29로 쓰세요. 이스케이프는 원래 글자에 한 번만 적용하세요. 항목 사이의 &와 ~는 그대로 둡니다.
@@ -20618,15 +20618,16 @@ let pendingParallelActivity = null;
 
 function graphLayoutAttributes(rows, activity) {
     const rowIndex = rows.findIndex(r => r.includes(activity)), row = rows[rowIndex];
-    let width = 6 / row.length, col = row.indexOf(activity) * width + 1;
-    if(row.length===1 && rowIndex>0){
-        const day=appState.itinerary.find(d=>d.activities.includes(activity)),previous=rows[rowIndex-1];
-        const parents=day?.links.filter(e=>e[1]===activity.id).map(e=>e[0])||[];
-        const parent=previous.find(a=>parents.includes(a.id));
-        if(previous.length>1&&parents.length===1&&parent){width=6/previous.length;col=previous.indexOf(parent)*width+1;}
+    let lanes = row.length, column = row.indexOf(activity);
+    if (row.length === 1 && rowIndex > 0) {
+        const day = appState.itinerary.find(d => d.activities.includes(activity)), previous = rows[rowIndex - 1];
+        const parents = day?.links.filter(e => e[1] === activity.id).map(e => e[0]) || [];
+        const parent = previous.find(a => parents.includes(a.id));
+        if (previous.length > 1 && parents.length === 1 && parent) { lanes = previous.length; column = previous.indexOf(parent); }
     }
-    return `data-parallel="${row.length > 1}" style="grid-row:${rowIndex + 1};grid-column:${col} / span ${width}"`;
+    return `data-parallel="${row.length > 1}" style="grid-row:${rowIndex + 1};grid-column:1 / -1;width:calc((100% + var(--tree-column-gap)) / ${lanes} - var(--tree-column-gap));margin-left:calc((100% + var(--tree-column-gap)) * ${column / lanes})"`;
 }
+
 function graphControlsHtml(day, dayIndex, activity) {
     const attrs = `data-graph-day="${dayIndex}" data-graph-id="${activity.id}" data-skip-edit="true"`;
     return `<button type="button" ${attrs} class="graph-port graph-input" data-graph-port="in" aria-label="${escapeHtml(activity.location)}에 연결" title="위 일정으로 끌거나 여기에 놓아 연결"></button>
@@ -20700,12 +20701,16 @@ function handleGraphClick(event) {
     if (action === 'unlink') day.links = day.links.filter(e => !(e[0] === id && e[1] === button.dataset.graphTo));
     syncDayDestinations(day); persistItineraryChanges(); return true;
 }
+function getRouteColor(index) {
+    const colors = ['#fb923c', '#38bdf8', '#a78bfa', '#f472b6', '#4ade80', '#facc15', '#2dd4bf', '#f87171'];
+    return colors[index % colors.length];
+}
 function routeEdgeColors(day){
     const colors=new Map(), incoming=new Set(day.links.map(e=>e[1]));let count=0;
     function visit(id,edges,seen){
         if(count>=200||seen.has(id))return;
         const next=day.links.filter(e=>e[0]===id);
-        if(!next.length){const color=['#fb923c','#38bdf8','#a78bfa'][count++%3];edges.forEach(e=>{const key=e.join('→');if(!colors.has(key))colors.set(key,new Set());colors.get(key).add(color);});return;}
+        if(!next.length){const color=getRouteColor(count++);edges.forEach(e=>{const key=e.join('→');if(!colors.has(key))colors.set(key,new Set());colors.get(key).add(color);});return;}
         next.forEach(e=>visit(e[1],[...edges,e],new Set([...seen,id])));
     }
     day.activities.filter(a=>!incoming.has(a.id)).forEach(a=>visit(a.id,[],new Set()));return colors;
@@ -20773,6 +20778,7 @@ function renderItinerary() {
 
     closeRoutePreview();
     const reorderMode = false;
+    const horizontalOffsets = new Map([...ui.itineraryContainer.querySelectorAll('[data-day-panel]')].map(panel => [panel.dataset.dayPanel, panel.querySelector('.tree-scroll')?.scrollLeft || 0]));
     ui.itineraryContainer.innerHTML = '';
 
     appState.itinerary.forEach((day, dayIndex) => {
@@ -20791,6 +20797,7 @@ function renderItinerary() {
         const dayDirectionsUrl = graphIsLinear ? getDayDirectionsUrl(day.activities, day.destinationId) : null;
         const dayDirectionsEmbedUrl = getDayDirectionsEmbedUrl(day.activities);
         const graphRows = TripGraph.normalize(day);
+        const graphLanes = Math.max(3, ...graphRows.map(row => row.length));
         const activitiesHtml = day.activities.map((activity, activityIndex) => {
             const nextActivity = day.activities[activityIndex + 1];
             const isActiveActivity = activity.id === appState.activeActivityId;
@@ -20854,12 +20861,14 @@ function renderItinerary() {
                 <button type="button" class="day-add-button" data-action="add-activity" data-day-index="${dayIndex}">+ 일정</button>
             </div>
 
-            <div class="tree-scroll"><div class="activity-tree" data-activity-list="${dayIndex}">
+            ${graphLanes > 3 ? '<p class="tree-scroll-hint">↔ 옆으로 밀어 더 보기 · 길게 눌러 일정 이동</p>' : ''}
+            <div class="tree-scroll" ${graphLanes > 3 ? 'tabindex="0" role="region" aria-label="나란한 일정, 좌우로 스크롤"' : ''}><div class="activity-tree" data-activity-list="${dayIndex}" style="width:calc(${graphLanes / 3 * 100}% + var(--tree-column-gap) * ${graphLanes / 3 - 1})">
                 <svg class="tree-svg" aria-hidden="true"></svg>${activitiesHtml}
             </div></div>
         `;
 
         ui.itineraryContainer.appendChild(dayElement);
+        dayElement.querySelector('.tree-scroll').scrollLeft = horizontalOffsets.get(String(dayIndex)) || 0;
     });
 
     syncReorderModeUi();
@@ -21144,7 +21153,7 @@ function openDayRoutes(dayIndex, offset=0) {
     day.activities.filter(a=>!incoming.has(a.id)).forEach(a=>visit(a.id,[]));
     const hasMore=paths.length>200;if(hasMore)paths.pop();
     const panel=document.createElement('section');panel.id='day-route-picker';panel.setAttribute('role','dialog');panel.setAttribute('aria-label','하루 이동코스');
-    panel.innerHTML=`<header><strong>하루 이동코스 · ${offset?offset+1+'–':''}${offset+paths.length}${hasMore?'+':''}개</strong><button type="button" aria-label="코스 닫기">×</button></header><div class="day-route-options">${paths.map((path,i)=>`<label><input type="radio" name="day-route-choice" value="${i}" ${i===0?'checked':''}><span><b style="color:${['#fb923c','#38bdf8','#a78bfa'][i%3]}">${String.fromCharCode(65+(offset+i)%26)}.</b> ${path.map(id=>escapeHtml(byId.get(id).location)).join(' → ')}</span></label>`).join('') || '등록된 일정이 없어요.'}</div><div class="route-pages">${offset?'<button data-route-page="prev">이전 코스</button>':''}${hasMore?'<button data-route-page="next">다음 코스</button>':''}</div>${routeModeRadios('day-travel-mode','driving')}<label class="transit-leg-label">대중교통 이동 구간<select id="transit-leg-select"></select></label><iframe title="선택한 하루 이동코스 지도" referrerpolicy="no-referrer-when-downgrade"></iframe><a target="_blank" rel="noreferrer">구글 맵에서 열기 ↗</a>`;
+    panel.innerHTML=`<header><strong>하루 이동코스 · ${offset?offset+1+'–':''}${offset+paths.length}${hasMore?'+':''}개</strong><button type="button" aria-label="코스 닫기">×</button></header><div class="day-route-options">${paths.map((path,i)=>`<label><input type="radio" name="day-route-choice" value="${i}" ${i===0?'checked':''}><span><b style="color:${getRouteColor(offset+i)}">${String.fromCharCode(65+(offset+i)%26)}.</b> ${path.map(id=>escapeHtml(byId.get(id).location)).join(' → ')}</span></label>`).join('') || '등록된 일정이 없어요.'}</div><div class="route-pages">${offset?'<button data-route-page="prev">이전 코스</button>':''}${hasMore?'<button data-route-page="next">다음 코스</button>':''}</div>${routeModeRadios('day-travel-mode','driving')}<label class="transit-leg-label">대중교통 이동 구간<select id="transit-leg-select"></select></label><iframe title="선택한 하루 이동코스 지도" referrerpolicy="no-referrer-when-downgrade"></iframe><a target="_blank" rel="noreferrer">구글 맵에서 열기 ↗</a>`;
     document.body.appendChild(panel);panel.querySelector('button').onclick=()=>panel.remove();
     panel.querySelectorAll('[data-route-page]').forEach(button=>button.onclick=()=>openDayRoutes(dayIndex,offset+(button.dataset.routePage==='next'?200:-200)));
     let chosenActivities=[];
@@ -21278,7 +21287,7 @@ function startStopPlacement(dayIndex){
         const wrap=getActivityCard(a.id).closest('[data-activity-wrapper]');
         slot(wrap,a,'before','앞에 놓기');
         slot(wrap,a,'after','뒤에 놓기');
-        if(row.length<3){slot(wrap,a,'left','← 옆');slot(wrap,a,'right','옆 →');}
+        slot(wrap,a,'left','← 옆');slot(wrap,a,'right','옆 →');
     }));
     if(!rows.length){cancelStopPlacement();pendingStopPlacement={where:'after'};openActivityEditor(dayIndex);}
     requestAnimationFrame(drawGraphEdges);
@@ -21386,8 +21395,7 @@ function showDragSlots(){
     appState.itinerary.forEach((day,dayIndex)=>TripGraph.rows(day).forEach(row=>row.forEach(a=>{
         if(a.id===activityDragState.activityId)return;
         const wrap=getActivityCard(a.id)?.closest('[data-activity-wrapper]');if(!wrap)return;
-        const capacity=row.filter(a=>a.id!==activityDragState.activityId).length<3;
-        for(const where of ['before','after',...(capacity?['left','right']:[])]){
+        for(const where of ['before','after','left','right']){
             const el=document.createElement('div');el.className=`placement-slot drag-placement-slot slot-${where}`;
             el.dataset.dropTarget=a.id;el.dataset.dropWhere=where;el.dataset.dropDay=dayIndex;
             el.textContent=({before:'앞에 놓기',after:'뒤에 놓기',left:'← 옆',right:'옆 →'})[where];wrap.appendChild(el);
@@ -21773,7 +21781,7 @@ function updateDropTarget(clientX, clientY) {
     if(peer) {
         document.querySelectorAll('.graph-insert-marker').forEach(el=>el.remove());
         const row=TripGraph.rows(appState.itinerary[dayIndex]).find(row=>row.some(a=>a.id===peer.dataset.activityId));
-        const full=row.length>=3 || row.some(a=>a.id===activityDragState.activityId);
+        const full=row.some(a=>a.id===activityDragState.activityId);
         peer.classList.add(full?'graph-drop-full':'graph-drop-peer');
         activityDragState.dropBlocked=full;
         activityDragState.targetPeerId=peer.dataset.activityId;
@@ -21836,6 +21844,16 @@ function stepDragAutoScroll() {
         if (window.scrollY !== previousScrollY) updateDropTarget(activityDragState.lastX, y);
     }
 
+    const scroller = document.elementFromPoint(activityDragState.lastX, y)?.closest('.tree-scroll');
+    if (scroller && scroller.scrollWidth > scroller.clientWidth) {
+        const bounds = scroller.getBoundingClientRect(), x = activityDragState.lastX;
+        const horizontal = x < bounds.left + 36 ? -8 : x > bounds.right - 36 ? 8 : 0;
+        if (horizontal) {
+            const previous = scroller.scrollLeft;
+            scroller.scrollLeft += horizontal;
+            if (scroller.scrollLeft !== previous) updateDropTarget(x, y);
+        }
+    }
     activityDragState.autoScrollFrame = window.requestAnimationFrame(stepDragAutoScroll);
 }
 
@@ -22006,7 +22024,7 @@ function handleActivityPointerDown(event) {
     activityDragState.lastY = event.clientY;
     // 마우스: 카드 어디를 잡든 움직이자마자 끌기 시작(움직이지 않고 놓으면 평소처럼 클릭=편집).
     // 터치: 손잡이에서는 바로, 그 밖에서는 길게 눌러 들어올린다(그 전까지는 평소처럼 스크롤된다).
-    activityDragState.immediate = true;
+    activityDragState.immediate = !isTouchLike || Boolean(handle);
 
     clearHoldTimer();
     if (isTouchLike) {
@@ -22070,7 +22088,7 @@ function handleActivityPointerUp(event) {
         const day=appState.itinerary[targetDayIndex], source=appState.itinerary[sourceDayIndex];
         const item=source.activities.find(a=>a.id===activityId);
         if(source===day) moved=TripGraph.join(day,activityId,targetPeerId);
-        else if(TripGraph.rows(day).find(r=>r.some(a=>a.id===targetPeerId))?.length<3) {
+        else if(TripGraph.rows(day).some(r=>r.some(a=>a.id===targetPeerId))) {
             TripGraph.remove(source,activityId); moved=TripGraph.parallel(day,targetPeerId,item);
             item.destinationId=day.activities.find(a=>a.id===targetPeerId).destinationId; syncDayDestinations(source);
         }
@@ -22547,8 +22565,28 @@ ui.optCancelBtn.addEventListener('click', () => {
 });
 let aiPromptFlowVersion = 0;
 let aiPromptCopied = false;
+let pendingAIService = null;
+const aiHandoffDialog = document.getElementById('ai-handoff-dialog');
+
+function getAIPasteInstruction(platform, userAgent, maxTouchPoints = 0) {
+    const mobile = /Android|iPhone|iPad|iPod/i.test(userAgent) || (/Mac/i.test(platform) && maxTouchPoints > 1);
+    if (mobile) return 'AI 서비스의 입력창을 꾹 누른 뒤 ‘붙여넣기’를 선택해 주세요. 붙여넣은 내용을 전송하면 됩니다.';
+    const shortcut = /Mac/i.test(platform) ? 'Command (⌘) + V' : 'Ctrl + V';
+    return `AI 서비스의 입력창을 클릭한 뒤 ${shortcut}를 누르거나, 우클릭하고 ‘붙여넣기’를 선택해 주세요. 붙여넣은 내용을 전송하면 됩니다.`;
+}
+
+aiHandoffDialog.querySelector('[data-handoff-cancel]').addEventListener('click', () => aiHandoffDialog.close());
+aiHandoffDialog.querySelector('[data-handoff-confirm]').addEventListener('click', () => {
+    if (!aiPromptCopied || !pendingAIService) return;
+    window.location.assign(pendingAIService.href);
+});
+aiHandoffDialog.addEventListener('close', () => {
+    pendingAIService?.focus();
+    pendingAIService = null;
+});
 
 function showAIRequestStep() {
+    if (aiHandoffDialog.open) aiHandoffDialog.close();
     aiPromptFlowVersion++;
     aiPromptCopied = false;
     ui.aiPromptTitle.textContent = '어떤 여행을 계획하고 있나요?';
@@ -22616,7 +22654,10 @@ ui.aiServiceStep.addEventListener('click', event => {
         ui.aiPromptCopyBtn.focus();
         return;
     }
-    window.location.assign(link.href);
+    pendingAIService = link;
+    document.getElementById('ai-handoff-title').textContent = `${link.dataset.aiService}에 붙여넣어 주세요`;
+    document.getElementById('ai-handoff-message').textContent = getAIPasteInstruction(navigator.userAgentData?.platform || navigator.platform, navigator.userAgent, navigator.maxTouchPoints);
+    aiHandoffDialog.showModal();
 });
 
 ui.sharePlanBtn.addEventListener('click', sharePlan);
@@ -22709,6 +22750,7 @@ ui.currentFocusBtn.addEventListener('click', scrollToCurrentFocus);
 
 window.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return;
+    if (aiHandoffDialog.open) { event.preventDefault(); aiHandoffDialog.close(); return; }
 
     if (activityDragState.active) {
         cancelActivityDrag();

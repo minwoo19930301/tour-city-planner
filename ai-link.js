@@ -63,7 +63,6 @@
                     row = []; rows.push(row);
                 }
                 row.push(stop);
-                if (row.length > 3) fail('나란한 일정은 최대 3개입니다');
                 rank.set(stop.id, rows.length - 1);
             }
         }

@@ -3,7 +3,7 @@ const vm=require('node:vm'), fs=require('node:fs');
 const modelContext=vm.createContext({});vm.runInContext(fs.readFileSync('graph-model.js','utf8'),modelContext);const G=modelContext.TripGraph;
 const day=()=>({activities:['a','b','c'].map((id,i)=>({id,time:`${10+i}:00`,location:id}))});
 let d=day(); G.normalize(d); assert.deepEqual(JSON.parse(JSON.stringify(d.links)),[['a','b'],['b','c']]);
-assert.equal(G.parallel(d,'b',{id:'x'}),true); assert.equal(G.parallel(d,'b',{id:'y'}),true); assert.equal(G.parallel(d,'b',{id:'z'}),false);
+assert.equal(G.parallel(d,'b',{id:'x'}),true); assert.equal(G.parallel(d,'b',{id:'y'}),true); assert.equal(G.parallel(d,'b',{id:'z'}),true);assert.deepEqual(Array.from(G.rows(d),r=>r.length),[1,4,1]);G.remove(d,'z');
 assert.deepEqual(Array.from(G.rows(d),r=>r.length),[1,3,1]);
 for(const n of ['b','x','y']) {assert(d.links.some(e=>e[0]==='a'&&e[1]===n));assert(d.links.some(e=>e[0]===n&&e[1]==='c'));}
 assert.equal(G.connect(d,'c','a'),false); assert.equal(G.connect(d,'x','b'),false);
@@ -23,7 +23,7 @@ d=day();G.parallel(d,'b',{id:'x',location:'candidate',destinationId:'tokyo'});ct
 vm.runInContext('var payload=buildSharePayload();var restored=buildItineraryFromSharedPayload(appState.segments,payload.i);',ctx);
 assert.deepEqual(JSON.parse(JSON.stringify(ctx.restored[0].links)),JSON.parse(JSON.stringify(d.links)));assert.deepEqual(Array.from(G.rows(ctx.restored[0]),r=>r.length),[1,2,1]);
 ctx.appState.itinerary=[{activities:[],links:[]}];vm.runInContext('restored=buildItineraryFromSharedPayload(appState.segments,buildSharePayload().i)',ctx);assert.equal(ctx.restored[0].activities.length,0);
-console.log('PASS: branches (max 3), merge, cycle rejection, deletion, detach, disconnected paths, 156 hotel entries, share round trip and empty days.');
+console.log('PASS: branches (including 4+), merge, cycle rejection, deletion, detach, disconnected paths, 156 hotel entries, share round trip and empty days.');
 
 d=day();G.parallel(d,'b',{id:'x'});G.separate(d,'b');assert(G.rows(d).every(r=>r.length===1));
 assert.equal(G.join(d,'b','x'),true);assert.deepEqual(Array.from(G.rows(d),r=>r.length),[1,2,1]);
@@ -147,7 +147,6 @@ assert.equal(parseTrip(overlapping,tripOptions).i.length,2);
 for(const broken of [
  readable.replace('~09:00~','~25:00~'),
  readable.replace('~a3~','~a2~'),
- readable.replace('~r3~','~r2~'),
  readable.replace('2026-10-02~b1','2026-10-03~b1'),
  readable.replace('2026-10-01~2026-10-02','2026-02-30~2026-10-02'),
  readable+'&e=a5~a1',readable+'&e=a1~b1',readable+'&unknown=x',
@@ -155,3 +154,41 @@ for(const broken of [
  readable.replace('&s=2026-10-02~b1~r1~09:00~tokyo~landmark~호텔','')
 ]) assert.throws(()=>parseTrip(broken,tripOptions));
 console.log('PASS: readable links preserve Unicode/reserved characters, three branches and merges; invalid or missing data rejected.');
+
+const wide=parseTrip(readable.replace('~r3~','~r2~'),tripOptions);
+assert.equal(wide.i[0].a.filter(a=>a.r==='r2').length,4);
+let wideDay={activities:[{id:'root'},...Array.from({length:7},(_,i)=>({id:'option'+i,row:'options'})),{id:'end'}]};
+G.normalize(wideDay);assert.deepEqual(Array.from(G.rows(wideDay),r=>r.length),[1,7,1]);
+assert.equal(wideDay.links.length,14);G.layout(wideDay);assert.deepEqual(Array.from(G.rows(wideDay),r=>r.length),[1,7,1]);
+ctx.appState.itinerary=[wideDay];vm.runInContext('restored=buildItineraryFromSharedPayload(appState.segments,buildSharePayload().i)',ctx);
+assert.deepEqual(Array.from(G.rows(ctx.restored[0]),r=>r.length),[1,7,1]);
+for(const name of ['graphLayoutAttributes','getAIPasteInstruction']){const start=app.indexOf('function '+name+'('),end=app.indexOf('\n}\n',start)+3;vm.runInContext(app.slice(start,end),ctx);}
+const wideRows=G.rows(wideDay);
+assert(ctx.graphLayoutAttributes(wideRows,wideRows[1][6]).includes('grid-column:1 / -1'));
+assert(ctx.graphLayoutAttributes(wideRows,wideRows[1][6]).includes('/ 7'));
+assert(ctx.getAIPasteInstruction('MacIntel','Macintosh',0).includes('Command (⌘) + V'));
+for(const platform of ['Win32','Windows','Linux x86_64'])assert(ctx.getAIPasteInstruction(platform,'Mozilla',0).includes('Ctrl + V'));
+for(const [platform,ua,touch] of [['iPhone','iPhone',5],['Linux','Android',5],['MacIntel','Macintosh',5]]){
+ const instruction=ctx.getAIPasteInstruction(platform,ua,touch);assert(instruction.includes('꾹 누른'));assert(!instruction.includes('우클릭'));
+}
+console.log('PASS: 7 parallel stops retain branches on layout/share, responsive positioning, and mobile/Mac/Windows/Linux paste instructions.');
+
+const gesture={pointerId:null,active:false};let began=0,cancelled=0,prevented=0,hold;
+const wrapper={},card={dataset:{dayIndex:'0',activityId:'a'},closest:()=>wrapper,classList:{add(){}}};
+const dragContext=vm.createContext({placingStop:null,activityDragState:gesture,appState:{reorderMode:false},
+ DRAG_HOLD_DELAY_REORDER:220,DRAG_HOLD_DELAY_DEFAULT:300,DRAG_START_THRESHOLD:6,DRAG_HOLD_CANCEL_DISTANCE:10,
+ clearHoldTimer(){},window:{setTimeout(cb){hold=cb;return 1;}},
+ beginActivityDrag(){began++;gesture.active=true;},cancelActivityDrag(){cancelled++;gesture.pointerId=null;gesture.active=false;},
+ updateGhostPosition(){},updateDropTarget(){}});
+for(const name of ['handleActivityPointerDown','handleActivityPointerMove']){const start=app.indexOf('function '+name+'('),end=app.indexOf('\n}\n',start)+3;vm.runInContext(app.slice(start,end),dragContext);}
+const touch={pointerType:'touch',pointerId:1,button:0,clientX:0,clientY:0,cancelable:true,preventDefault(){prevented++;},target:{closest(selector){return selector==='[data-activity-card-id]'?card:null;}}};
+dragContext.handleActivityPointerDown(touch);dragContext.handleActivityPointerMove({...touch,clientX:20});
+assert.equal(cancelled,1);assert.equal(began,0);assert.equal(prevented,0);
+dragContext.handleActivityPointerDown(touch);hold();dragContext.handleActivityPointerMove({...touch,clientX:20});
+assert.equal(began,1);assert.equal(prevented,1);
+console.log('PASS: a touch swipe remains native scrolling; holding starts drag and captures movement.');
+
+let joined={activities:[{id:'start'},...Array.from({length:4},(_,i)=>({id:'p'+i,row:'parallel'})),{id:'moved'},{id:'finish'}]};
+G.normalize(joined);assert.equal(G.join(joined,'moved','p2'),true);
+assert.deepEqual(Array.from(G.rows(joined),row=>row.length),[1,5,1]);
+console.log('PASS: moving an existing stop into a row of four keeps five parallel stops.');

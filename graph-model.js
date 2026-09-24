@@ -1,10 +1,10 @@
-/* Ordered DAG: up to three stops per row, only forward connections. */
+/* Ordered DAG: parallel stops per row, only forward connections. */
 (function (root) {
     function rows(day) {
         const result = [];
         day.activities.forEach(a => {
             const last = result[result.length - 1];
-            if (a.row && last && last[0].row === a.row && last.length < 3) last.push(a);
+            if (a.row && last && last[0].row === a.row) last.push(a);
             else { a.row = a.row || a.id; result.push([a]); }
         });
         // A row token can appear again after dragging; give it its own identity.
@@ -37,7 +37,7 @@
     }
     function parallel(day, id, item) {
         const rr = normalize(day), row = rr.find(r=>r.some(a=>a.id===id));
-        if (!row || row.length >= 3) return false;
+        if (!row) return false;
         const source = row.find(a=>a.id===id);
         item.row=source.row;
         const index=day.activities.indexOf(row[row.length-1]); day.activities.splice(index+1,0,item);
@@ -56,7 +56,7 @@
     }
     function join(day,id,target) {
         const rr=normalize(day), item=day.activities.find(a=>a.id===id), row=rr.find(r=>r.some(a=>a.id===target));
-        if(!item || !row || row.length>=3 || row.includes(item)) return false;
+        if(!item || !row || row.includes(item)) return false;
         const saved=day.links.map(e=>e.slice());
         day.activities=day.activities.filter(a=>a!==item);
         item.row=row[0].row;
@@ -79,8 +79,7 @@
             if(!progress) return false;
         }
         day.activities.sort((a,b)=>rank.get(a.id)-rank.get(b.id));
-        const counts=new Map();
-        day.activities.forEach(a=>{const r=rank.get(a.id), count=counts.get(r)||0; a.row=`level-${r}-${Math.floor(count/3)}`;counts.set(r,count+1);});
+        day.activities.forEach(a=>{a.row=`level-${rank.get(a.id)}`;});
         day.links=links; normalize(day); return true;
     }
     function reconnectRows(day) {delete day.links;return normalize(day);}

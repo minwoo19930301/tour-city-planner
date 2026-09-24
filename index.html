@@ -834,7 +834,7 @@
         .graph-drop-peer {outline:2px dashed #a5b4fc!important;background:#6366f133!important}
         .graph-drop-peer::after {content:'나란히 놓기';position:absolute;inset:0;display:grid;place-items:center;background:#111827c9;border-radius:inherit;color:#c7d2fe;font-size:12px;pointer-events:none}
         .graph-drop-full {outline:2px dashed #fb7185!important}
-        .graph-drop-full::after {content:'최대 3개';position:absolute;inset:0;display:grid;place-items:center;background:#111827c9;border-radius:inherit;color:#fda4af;font-size:12px;pointer-events:none}
+        .graph-drop-full::after {content:'이미 같은 줄이에요';position:absolute;inset:0;display:grid;place-items:center;background:#111827c9;border-radius:inherit;color:#fda4af;font-size:12px;pointer-events:none}
         @media(hover:none){.graph-edge-remove{opacity:.65}}
 
         #activity-modal > .relative {max-width:480px;}
@@ -953,7 +953,7 @@
         .activity-card {-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;}
         .activity-card-pressing {outline:2px solid rgba(var(--accent-rgb),.55);}
 
-        .activity-tree .activity-card {touch-action:none;}
+        .activity-tree .activity-card {touch-action:pan-x pan-y;}
         .activity-drop-placeholder {pointer-events:none;}
 
         .transit-leg-label {display:block;font-size:12px;color:#cbd5e1;margin:8px 0 12px;}
@@ -984,6 +984,17 @@
         .day-route-options{position:relative;scrollbar-width:auto;scrollbar-color:#f97316 #ffffff18;box-sizing:content-box;scroll-behavior:smooth;padding-right:8px}
         .day-route-options::-webkit-scrollbar{width:7px}
         .day-route-options::-webkit-scrollbar-thumb{background:#f97316;border-radius:8px}
+        .activity-tree {--tree-column-gap:12px;grid-template-columns:minmax(0,1fr);column-gap:var(--tree-column-gap);}
+        .day-panel .tree-scroll {overflow-x:auto;overflow-y:hidden;min-width:0;overscroll-behavior-x:contain;scrollbar-color:#ffffff70 #ffffff0d;}
+        .tree-scroll-hint {font-size:11px;color:#cbd5e1;text-align:right;margin:4px 12px 0;}
+        #ai-handoff-dialog {margin:auto;max-height:80svh;color:#f8fafc;background:#172537;border:1px solid #ffffff30;border-radius:22px;padding:24px;width:min(440px,calc(100% - 32px));box-shadow:0 20px 80px #0008;}
+        #ai-handoff-dialog::backdrop {background:#080e1899;}
+        #ai-handoff-dialog h2 {font-size:19px;font-weight:700;}
+        #ai-handoff-message {font-size:15px;line-height:1.8;margin:16px 0 22px;}
+        .ai-handoff-actions {display:flex;gap:8px;}
+        .ai-handoff-actions button {padding:12px;border-radius:12px;font-size:14px;font-weight:600;border:1px solid #ffffff30;}
+        .ai-handoff-actions [data-handoff-confirm] {flex:1;background:#9333ea;border-color:#9333ea;}
+        @media(max-width:640px){.activity-tree {--tree-column-gap:6px;}}
     </style>
 </head>
 
@@ -1331,7 +1342,7 @@
                     <button id="opt-ai-btn" type="button" class="w-full flex items-center justify-between p-4 rounded-2xl border border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/18 hover:border-purple-500/50 transition-all text-left group">
                         <div>
                             <div class="text-sm font-semibold text-purple-200 group-hover:text-purple-100 transition-colors">🤖 AI 플래너에게 시키기</div>
-                            <div class="text-xs text-purple-300/60 mt-1">ChatGPT, Claude, Gemini, Grok용 맞춤 프롬프트 생성</div>
+                            <div class="text-xs text-purple-300/60 mt-1">원하는 AI 서비스로 가져갈 맞춤 프롬프트 생성</div>
                         </div>
                         <i data-lucide="chevron-right" class="w-4 h-4 text-purple-400 group-hover:text-purple-200 transition-colors"></i>
                     </button>
@@ -1378,13 +1389,17 @@
                     </button>
                 </div>
                 <div id="ai-service-step" class="hidden">
-                    <p class="text-sm text-white/85 leading-relaxed mb-2">아래 AI 서비스를 선택한 뒤, 입력창에서 <strong>우클릭</strong>하거나 <strong>꾹 눌러 ‘붙여넣기’</strong>를 선택해 주세요.</p>
+                    <p class="text-sm text-white/85 leading-relaxed mb-2">이동할 AI 서비스를 선택해 주세요. 붙여넣기 방법을 한 번 더 안내해 드릴게요.</p>
                     <p class="text-xs text-white/55 leading-relaxed mb-5">붙여넣은 내용을 전송하고, AI가 만든 일정 링크를 열면 계획을 확인할 수 있어요.</p>
                     <div class="grid grid-cols-2 gap-2" aria-label="AI 서비스 선택">
-                        <a data-ai-service href="https://chatgpt.com" class="flex items-center justify-center p-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-sm font-semibold text-white">💬 ChatGPT</a>
-                        <a data-ai-service href="https://claude.ai" class="flex items-center justify-center p-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-sm font-semibold text-white">🎨 Claude</a>
-                        <a data-ai-service href="https://gemini.google.com" class="flex items-center justify-center p-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-sm font-semibold text-white">✨ Gemini</a>
-                        <a data-ai-service href="https://grok.com" class="flex items-center justify-center p-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-sm font-semibold text-white">🔮 Grok</a>
+                        <a data-ai-service="ChatGPT" href="https://chatgpt.com" class="flex items-center justify-center p-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-sm font-semibold text-white">💬 ChatGPT</a>
+                        <a data-ai-service="Google AI Mode" href="https://www.google.com/aimode" class="flex items-center justify-center p-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-sm font-semibold text-white">🔎 Google AI Mode</a>
+                        <a data-ai-service="Claude" href="https://claude.ai" class="flex items-center justify-center p-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-sm font-semibold text-white">🎨 Claude</a>
+                        <a data-ai-service="Gemini" href="https://gemini.google.com" class="flex items-center justify-center p-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-sm font-semibold text-white">✨ Gemini</a>
+                        <a data-ai-service="Grok" href="https://grok.com" class="flex items-center justify-center p-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-sm font-semibold text-white">🔮 Grok</a>
+                        <a data-ai-service="Cursor" href="https://cursor.com/agents" class="flex items-center justify-center p-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-sm font-semibold text-white">↗ Cursor</a>
+                        <a data-ai-service="Perplexity" href="https://www.perplexity.ai/" class="flex items-center justify-center p-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-sm font-semibold text-white">🔍 Perplexity</a>
+                        <a data-ai-service="AI Arena" href="https://arena.ai/text/direct" class="flex items-center justify-center p-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-sm font-semibold text-white">⚖️ AI Arena</a>
                     </div>
                     <button id="ai-request-back-btn" type="button" class="mt-5 text-sm text-white/65 underline underline-offset-4">내용 수정하기</button>
                 </div>
@@ -1392,10 +1407,16 @@
         </div>
     </div>
 
+    <dialog id="ai-handoff-dialog" role="alertdialog" aria-labelledby="ai-handoff-title" aria-describedby="ai-handoff-message">
+        <h2 id="ai-handoff-title">AI에 붙여넣어 주세요</h2>
+        <p id="ai-handoff-message"></p>
+        <div class="ai-handoff-actions"><button type="button" data-handoff-cancel>다시 선택</button><button type="button" data-handoff-confirm autofocus>확인하고 이동</button></div>
+    </dialog>
+
     <script src="./example-hotels.js?v=1"></script>
-    <script src="./graph-model.js?v=6"></script>
-    <script src="./ai-link.js?v=1"></script>
-    <script src="./app.js?v=ai-readable-v20" defer></script>
+    <script src="./graph-model.js?v=7"></script>
+    <script src="./ai-link.js?v=2"></script>
+    <script src="./app.js?v=parallel-handoff-v21" defer></script>
 </body>
 
 </html>
