@@ -20683,6 +20683,16 @@ function handleGraphClick(event) {
     if (action === 'unlink') day.links = day.links.filter(e => !(e[0] === id && e[1] === button.dataset.graphTo));
     syncDayDestinations(day); persistItineraryChanges(); return true;
 }
+function routeEdgeColors(day){
+    const colors=new Map(), incoming=new Set(day.links.map(e=>e[1]));let count=0;
+    function visit(id,edges,seen){
+        if(count>=200||seen.has(id))return;
+        const next=day.links.filter(e=>e[0]===id);
+        if(!next.length){const color=['#fb923c','#38bdf8','#a78bfa'][count++%3];edges.forEach(e=>{const key=e.join('→');if(!colors.has(key))colors.set(key,new Set());colors.get(key).add(color);});return;}
+        next.forEach(e=>visit(e[1],[...edges,e],new Set([...seen,id])));
+    }
+    day.activities.filter(a=>!incoming.has(a.id)).forEach(a=>visit(a.id,[],new Set()));return colors;
+}
 function drawGraphEdges() {
     appState.itinerary.forEach((day,dayIndex) => {
         const list=ui.itineraryContainer.querySelector(`[data-activity-list="${dayIndex}"]`), svg=list?.querySelector('.tree-svg');
@@ -20690,6 +20700,7 @@ function drawGraphEdges() {
         const bounds=list.getBoundingClientRect();
         svg.setAttribute('viewBox',`0 0 ${bounds.width} ${bounds.height}`);
         list.querySelectorAll('.edge-actions').forEach(el=>el.remove());
+        const edgeColors=routeEdgeColors(day);
         const actionPositions=[];
         const boundaryCounts=new Map();
         const ranks=new Map(TripGraph.rows(day).flatMap((r,i)=>r.map(a=>[a.id,i])));
@@ -20708,7 +20719,8 @@ function drawGraphEdges() {
             const origin=source.mapQuery || source.location, dest=target.mapQuery || target.location;
             const routeRows=TripGraph.rows(day),sr=routeRows.find(r=>r.includes(source)),tr=routeRows.find(r=>r.includes(target));
             const branchIndex=tr.length>1?tr.indexOf(target):sr.length>1?sr.indexOf(source):0;
-            const color=['#fb923c','#38bdf8','#a78bfa'][branchIndex];
+            const colors=[...(edgeColors.get(from+'→'+to)||new Set(['#fb923c']))];
+            const color=colors[0];
             const actions=document.createElement('div');actions.style.borderColor=color;actions.className='edge-actions';actions.dataset.skipEdit='true';
             const boundary=ranks.get(from)+'-'+ranks.get(to);
             const siblings=day.links.filter(([f,t])=>ranks.get(f)===ranks.get(from)&&ranks.get(t)===ranks.get(to));
@@ -20723,7 +20735,7 @@ function drawGraphEdges() {
             actions.title=source.location+' → '+target.location;
             actions.innerHTML=`<a href="${getDirectionsUrl(origin,dest)}" data-route-preview="true" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}" aria-label="${escapeHtml(source.location+' → '+target.location)} 가는 길" title="가는 길"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="M8 5h8a4 4 0 0 1 0 8H8a3 3 0 0 0 0 6h8"/></svg></a><button type="button" data-graph-action="unlink" data-graph-day="${dayIndex}" data-graph-id="${from}" data-graph-to="${to}" aria-label="${escapeHtml(source.location+' → '+target.location)} 연결 제거">×</button>`;
             list.appendChild(actions);
-            return `<a data-route-preview="true" data-skip-edit="true" href="${getDirectionsUrl(origin,dest)}" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}" aria-label="${escapeHtml(source.location+'에서 '+target.location+' 가는 길')}"><path style="pointer-events:stroke;cursor:pointer;stroke:${color}" d="${path}"/><circle cx="${xx}" cy="${yy}" r="3" fill="currentColor"/></a><g class="graph-edge-remove" data-skip-edit="true" data-graph-action="unlink" data-graph-day="${dayIndex}" data-graph-id="${from}" data-graph-to="${to}" role="button" tabindex="0" aria-label="${escapeHtml(source.location+' → '+target.location)} 연결 제거" transform="translate(${(x+xx)/2},${(y+yy)/2})"><circle r="9"/><text text-anchor="middle" dy="4">×</text></g>`;
+            return `<a data-route-preview="true" data-skip-edit="true" href="${getDirectionsUrl(origin,dest)}" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}" aria-label="${escapeHtml(source.location+'에서 '+target.location+' 가는 길')}">${colors.map((c,i)=>`<path transform="translate(${(i-(colors.length-1)/2)*3.5},0)" style="pointer-events:stroke;cursor:pointer;stroke:${c};stroke-width:3" d="${path}"/>`).join('')}<circle cx="${xx}" cy="${yy}" r="3" fill="currentColor"/></a><g class="graph-edge-remove" data-skip-edit="true" data-graph-action="unlink" data-graph-day="${dayIndex}" data-graph-id="${from}" data-graph-to="${to}" role="button" tabindex="0" aria-label="${escapeHtml(source.location+' → '+target.location)} 연결 제거" transform="translate(${(x+xx)/2},${(y+yy)/2})"><circle r="9"/><text text-anchor="middle" dy="4">×</text></g>`;
         }).join('');
     });
 }
