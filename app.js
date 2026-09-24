@@ -22764,6 +22764,13 @@ window.addEventListener('scroll', syncDestinationDropdownPosition, { passive: tr
 window.addEventListener('scroll', handleCurrentFocusScrollDismiss, { passive: true });
 ui.setupOverlay.addEventListener('scroll', syncDestinationDropdownPosition, { passive: true });
 
+// Navigating to another shared link on an open planner only changes the fragment.
+// Re-run startup so the displayed itinerary matches that link. replaceState saves do not fire this.
+window.addEventListener('hashchange', () => {
+    const params = new URLSearchParams(window.location.hash.slice(1));
+    if (params.has('trip') || params.has('plan')) window.location.reload();
+});
+
 window.setInterval(updateClocks, 1000);
 renderIconPicker();
 bootstrapFromUrl();
