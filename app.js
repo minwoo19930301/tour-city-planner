@@ -19808,7 +19808,7 @@ function openActivityTimePicker() {
 }
 
 function inferPlaceIcon(text){
-    const rules=[['luggage',/호텔|숙소|리조트|\b(hotel|hilton|inn|resort)\b|ホテル|旅館|酒店|饭店/i],['waves',/강$|강변|하천|\briver\b|川|河流|河畔/i],['coffee',/카페|커피|cafe|café|coffee|カフェ|咖啡/i],['plane',/공항|airport|空港|机场/i],['trees',/공원|park|公園|公园/i],['landmark',/신궁|사원|temple|shrine|神宮|神社|寺/i],['utensils-crossed',/식당|맛집|restaurant|レストラン|餐厅/i]];
+    const rules=[['tower-control',/타워|tower|タワー|塔/i],['luggage',/호텔|숙소|리조트|\b(hotel|hilton|inn|resort)\b|ホテル|旅館|酒店|饭店/i],['waves',/강$|강변|하천|\briver\b|川|河流|河畔/i],['coffee',/카페|커피|cafe|café|coffee|カフェ|咖啡/i],['plane',/공항|airport|空港|机场/i],['trees',/공원|park|公園|公园/i],['landmark',/신궁|사원|temple|shrine|神宮|神社|寺/i],['utensils-crossed',/식당|맛집|restaurant|レストラン|餐厅/i]];
     return rules.find(([,pattern])=>pattern.test(text))?.[0]||'';
 }
 function applyActivityIconSelection(value) {
@@ -20701,7 +20701,7 @@ function drawGraphEdges() {
         day.links.forEach(([a,b])=>{const key=rankForGap.get(a)+'-'+rankForGap.get(b);counts.set(key,(counts.get(key)||0)+1);});
         const columnsForGap=Math.max(1,Math.floor(list.clientWidth/76));
         const toolbarRows=Math.ceil(Math.max(1,...counts.values())/columnsForGap);
-        list.style.setProperty('row-gap',`${Math.max(placingStop||activityDragState.active?96:72,toolbarRows*36+20)}px`,'important');
+        list.style.setProperty('row-gap',`${Math.max(placingStop||activityDragState.active?96:60,toolbarRows*36+20)}px`,'important');
         const bounds=list.getBoundingClientRect();
         svg.setAttribute('viewBox',`0 0 ${bounds.width} ${bounds.height}`);
         list.querySelectorAll('.edge-actions').forEach(el=>el.remove());
@@ -21184,6 +21184,46 @@ function inferStopTime(day,id,placement) {
 }
 let pendingStopPlacement=null;
 let placingStop=null;
+let placeEstimateVersion=0,placeEstimateTimer=null;
+const placeCoordinateCache=new Map();
+function distanceKm(a,b){
+    const rad=n=>n*Math.PI/180,dl=rad(b[0]-a[0]),dp=rad(b[1]-a[1]);
+    const h=Math.sin(dp/2)**2+Math.cos(rad(a[1]))*Math.cos(rad(b[1]))*Math.sin(dl/2)**2;
+    return 6371*2*Math.atan2(Math.sqrt(h),Math.sqrt(Math.max(0,1-h)));
+}
+function approximateTravelMinutes(km){return Math.max(5,Math.ceil((km*1.35/22*60+10)/5)*5);}
+async function lookupPlaceCoordinates(query,destinationId){
+    const key=destinationId+':'+query;if(placeCoordinateCache.has(key))return placeCoordinateCache.get(key);
+    const center=getDestination(destinationId)?.weather;
+    const url=new URL('https://photon.komoot.io/api/');url.searchParams.set('q',query);url.searchParams.set('limit','3');
+    if(center){url.searchParams.set('lat',center.latitude);url.searchParams.set('lon',center.longitude);}
+    const result=await fetch(url,{signal:AbortSignal.timeout(7000)});if(!result.ok)throw Error('lookup');
+    const features=(await result.json()).features||[];
+    const found=features.find(f=>Array.isArray(f.geometry?.coordinates)&&(!center||distanceKm([center.longitude,center.latitude],f.geometry.coordinates)<150));
+    const coords=found?.geometry.coordinates;if(!coords)throw Error('not found');
+    placeCoordinateCache.set(key,coords);return coords;
+}
+async function estimateEnteredPlace(){
+    const version=++placeEstimateVersion,location=ui.activityLocation.value.trim();
+    if(!location||activityEditorState.timeManual||ui.activityModal.classList.contains('hidden'))return;
+    const day=appState.itinerary[activityEditorState.dayIndex],id=activityEditorState.activityId,placement=pendingStopPlacement;
+    let parentIds=day.links?.filter(e=>e[1]===(placement?.target||id)).map(e=>e[0])||[];
+    if(placement?.where==='after')parentIds=[placement.target];
+    const previous=parentIds.map(id=>day.activities.find(a=>a.id===id)).filter(Boolean).sort((a,b)=>timeToMinutes(b.time)-timeToMinutes(a.time))[0] || (!id&&!placement?day.activities.at(-1):null);
+    const status=document.getElementById('activity-time-estimate');
+    if(!previous){status.textContent='첫 일정은 원하는 시작 시간을 지정해주세요.';return;}
+    status.textContent='장소 좌표로 이동시간 추정 중…';
+    const destinationId=getEditingActivityDestinationId();
+    try{
+        const from=await lookupPlaceCoordinates(previous.mapQuery||previous.location,previous.destinationId||destinationId);
+        const to=await lookupPlaceCoordinates(location,destinationId);
+        if(version!==placeEstimateVersion||activityEditorState.timeManual||ui.activityModal.classList.contains('hidden'))return;
+        const km=distanceKm(from,to),travel=approximateTravelMinutes(km),minutes=timeToMinutes(previous.time)+30+travel;
+        if(minutes>1439){status.textContent='예상 도착이 다음 날이에요. 시간을 직접 확인해주세요.';return;}
+        ui.activityTime.value=minutesToTime(minutes);
+        status.textContent=`직선 약 ${km.toFixed(1)}km · 이동 약 ${travel}분 + 이전 장소 체류 30분으로 추정`;
+    }catch{if(version===placeEstimateVersion)status.textContent='좌표를 찾지 못했어요. 기존 시간을 유지했어요.';}
+}
 function syncOptionalTime(){}
 function positionStopEditor(){
     if(ui.activityModal.classList.contains('hidden')) return;
@@ -21254,7 +21294,7 @@ function insertPlacedStop(day,item,placement){
 document.addEventListener('pointermove',event=>{if(placingStop&&event.pointerType!=='touch'){placingStop.ghost.style.left=`${event.clientX+12}px`;placingStop.ghost.style.top=`${event.clientY+12}px`;}});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){cancelStopPlacement();document.getElementById('day-route-picker')?.remove();}});
 window.addEventListener('resize',positionStopEditor);
-ui.activityTime.addEventListener('input',syncOptionalTime);
+ui.activityTime.addEventListener('input',()=>{activityEditorState.timeManual=true;placeEstimateVersion++;document.getElementById('activity-time-estimate').textContent='직접 지정한 시간';});
 ui.activityTime.addEventListener('click',()=>{try{ui.activityTime.showPicker();}catch{}});
 function renderActivityParents(day, existing) {
     TripGraph.normalize(day);
@@ -21268,6 +21308,9 @@ function openActivityEditor(dayIndex, activityId = null) {
     const day = appState.itinerary[dayIndex];
     const existing = activityId ? day.activities.find((activity) => activity.id === activityId) : null;
 
+    placeEstimateVersion++;clearTimeout(placeEstimateTimer);
+    activityEditorState.timeManual=false;
+    document.getElementById('activity-time-estimate').textContent='장소 입력 후 거리로 시간을 추정해요. 직접 수정한 시간은 유지돼요.';
     activityEditorState.dayIndex = dayIndex;
     activityEditorState.activityId = activityId;
     activityEditorState.icon = existing?.type || '';
@@ -21291,6 +21334,7 @@ function openActivityEditor(dayIndex, activityId = null) {
 }
 
 function closeActivityEditor() {
+    placeEstimateVersion++;clearTimeout(placeEstimateTimer);
     if(pendingParallelActivity){const {dayIndex,id}=pendingParallelActivity; pendingParallelActivity=null;TripGraph.remove(appState.itinerary[dayIndex],id);persistItineraryChanges();}
     closeIconPicker();
     ui.activityModal.classList.add('hidden');
@@ -21331,7 +21375,11 @@ function showDragSlots(){
         }
     })));
 }
-function saveActivityEditor() {
+async function saveActivityEditor() {
+    const editorIdentity=[activityEditorState.dayIndex,activityEditorState.activityId,ui.activityLocation.value].join('|');
+    clearTimeout(placeEstimateTimer);
+    await estimateEnteredPlace();
+    if(ui.activityModal.classList.contains('hidden')||editorIdentity!==[activityEditorState.dayIndex,activityEditorState.activityId,ui.activityLocation.value].join('|'))return;
     const day = appState.itinerary[activityEditorState.dayIndex];
     if (!day) return;
 
@@ -22505,7 +22553,7 @@ ui.activitySaveBtn.addEventListener('click', saveActivityEditor);
 ui.activityDeleteBtn.addEventListener('click', deleteCurrentActivity);
 
 
-ui.activityLocation.addEventListener('input', ()=>{updateActivityMapPreview();const icon=inferPlaceIcon(ui.activityLocation.value);if(icon){activityEditorState.icon=icon;renderActivityIconSelection();}});
+ui.activityLocation.addEventListener('input', ()=>{updateActivityMapPreview();const icon=inferPlaceIcon(ui.activityLocation.value);activityEditorState.icon=icon;renderActivityIconSelection();placeEstimateVersion++;clearTimeout(placeEstimateTimer);placeEstimateTimer=setTimeout(estimateEnteredPlace,1200);});
 ui.activityIconTrigger.addEventListener('click', openIconPicker);
 ui.iconPickerCloseBtn.addEventListener('click', closeIconPicker);
 ui.iconPickerCancelBtn.addEventListener('click', closeIconPicker);

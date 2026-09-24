@@ -974,7 +974,7 @@
         .stop-secondary-row #activity-icon-trigger{padding:8px;gap:4px}
         .stop-secondary-row #activity-icon-label{font-size:11px}
         .stop-secondary-row #activity-icon-trigger>span:last-child{display:none}
-        .activity-tree{row-gap:72px!important}
+        .activity-tree{row-gap:60px!important}
         .is-placing .activity-tree,.is-reordering-activities .activity-tree{row-gap:96px!important}
     .route-modes{display:flex;flex-wrap:wrap;gap:6px;border:0;padding:0;margin:8px 0}
         .route-modes label{display:flex;align-items:center;gap:5px;padding:7px 9px;border:1px solid #ffffff25;border-radius:10px;font-size:12px;cursor:pointer;white-space:nowrap}
@@ -1204,7 +1204,7 @@
                         <div class="stop-time-row"><input id="activity-time" type="time" class="input-shell"></div>
 
                     </div>
-                    </div><fieldset class="stop-dependencies" hidden><legend>어디 다음에 갈까요?</legend><div id="activity-parents"></div><p>여러 장소를 고르면 여기서 합류해요. 선택하지 않으면 시작 장소예요.</p></fieldset>
+                    </div><div id="activity-time-estimate" class="text-xs text-white/55" aria-live="polite"></div><div class="text-[10px] text-white/35">좌표: <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">© OpenStreetMap</a> · Photon</div><fieldset class="stop-dependencies" hidden><legend>어디 다음에 갈까요?</legend><div id="activity-parents"></div><p>여러 장소를 고르면 여기서 합류해요. 선택하지 않으면 시작 장소예요.</p></fieldset>
                     <details class="stop-extra stop-map" open><summary>지도 확인</summary>
                         <div class="flex items-center justify-between gap-3 mb-2">
                             <label class="text-[11px] uppercase tracking-[0.24em] text-white/45 block">지도 미리보기</label>

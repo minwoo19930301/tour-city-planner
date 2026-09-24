@@ -86,3 +86,8 @@ assert(!ctx.branch.links.some(e=>e[0]==='new'&&e[1]==='left'));
 for(const title of ['힐튼 호텔','Hilton Tokyo','東京ホテル','上海酒店'])assert.equal(ctx.inferPlaceIcon(title),'luggage');
 for(const title of ['한강','Thames River','隅田川'])assert.equal(ctx.inferPlaceIcon(title),'waves');
 console.log('PASS: branch-local insertion and multilingual place icons.');
+for(const name of ['distanceKm','approximateTravelMinutes']){const start=app.indexOf('function '+name+'(');let end=app.indexOf('\n}\n',start)+3;if(name==='approximateTravelMinutes')end=app.indexOf('\n',start);vm.runInContext(app.slice(start,end),ctx);}
+assert.equal(ctx.distanceKm([139,35],[139,35]),0);
+assert(Math.abs(ctx.distanceKm([0,0],[0,1])-111.195)<.1);
+assert(ctx.approximateTravelMinutes(10)>ctx.approximateTravelMinutes(1));
+console.log('PASS: coordinate distance and estimated travel duration.');
