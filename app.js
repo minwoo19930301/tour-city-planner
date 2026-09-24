@@ -20171,31 +20171,39 @@ function generateAIPromptText(destinationId, startDate, endDate, tripNotes = '')
     const destination=getDestination(destinationId);
     const segments=(pendingSetupSegmentsData?.length?pendingSetupSegmentsData:[{destinationId,startDate,endDate}]);
     const compact=segments.map(s=>({d:s.destinationId,s:s.startDate,e:s.endDate}));
-    const example={v:4,g:compact,i:[{a:[{id:'stop-1',r:'row-1',d:destinationId,h:'09:00',l:'실제 장소명',q:'현지어 또는 영어 지도 검색어',k:'landmark',m:''},{id:'stop-2',r:'row-2',d:destinationId,h:'12:00',l:'실제 식당명',q:'현지어 또는 영어 지도 검색어',k:'utensils-crossed',m:''}],e:[['stop-1','stop-2']]}]};
-    return `여행 요구사항: ${tripNotes.trim() || '동선이 무리하지 않은 여행.'}
+    const groupParams = compact.map(segment => `g=${segment.d}~${segment.s}~${segment.e}`).join('&');
+    return `여행 일정 링크를 만들어 주세요. 최종 답변은 완성된 일정 URL을 표시하는 클릭 가능한 링크 하나여야 합니다.
+여행 요구사항: ${tripNotes.trim() || '동선이 무리하지 않은 여행.'}
 여행지: ${getLocalizedLabel(destination.country)} · ${getLocalizedLabel(destination.city,destination.city)}
-여행 구간: ${JSON.stringify(compact)}
-주어진 날짜의 실제 방문 가능한 장소로 여행 계획을 만들어 주세요. 추가 요구사항이 없으면 합리적인 기본값으로 진행하세요.
+여행 구간: ${compact.map(segment => `${segment.d}: ${segment.s} ~ ${segment.e}`).join(', ')}
 사용자가 적은 숙소·맛집·필수 방문지·정해진 루트를 우선 반영하고, 명시한 예약 날짜와 시간은 임의로 바꾸지 마세요.
-앱 개발이나 소스 분석이 아닌 여행 일정 생성 요청입니다. 아래 형식을 사용해 일정과 링크를 완성하세요.
+숙소를 지정하지 않았다면 실제 호텔을 제안하고 메모에 예시 호텔이라고 표시하세요. 이동시간은 추정입니다.
+앱 개발이나 소스 분석이 아닌 여행 일정 생성 요청입니다. 아래 형식으로 바로 일정을 작성하세요.
 
-현재 앱이 읽는 JSON 예시 (실제 모든 날짜를 채워야 함):
-${JSON.stringify(example,null,2)}
+이 앱은 아래의 텍스트 URL을 직접 읽습니다. JSON, Base64, 압축, 코드 실행이 필요 없습니다.
+링크 시작 부분은 다음을 그대로 사용하세요:
+https://minwoo19930301.github.io/tour-city-planner/#trip=1&${groupParams}
 
-규칙:
-- v는 4. g는 위 여행 구간 그대로. i는 구간들의 중복 날짜를 한 번만 센 날짜 오름차순 배열. 시작일과 종료일 모두 포함.
-- a의 id는 전체 일정에서 고유한 영문/숫자/하이픈 문자열. h는 현지 시각 HH:MM이며 빈칸 금지.
-- l은 장소명, q는 도시명을 포함한 정확한 지도 검색어, m은 메모.
-- k는 다음 중 하나만 사용: ${ACTIVITY_ICON_OPTIONS.map(o=>o.value).join(', ')}.
-- 같은 r을 가진 연속 항목은 나란한 후보이며 최대 3개. e는 [출발 id,도착 id] 목록이며 분기·합류를 정확히 표현. 뒤에서 앞으로 잇는 순환 금지. 단일 코스는 항목을 순서대로 연결.
-- 사용자가 숙소를 지정했다면 그 숙소를 사용하세요. 지정하지 않았다면 실제 호텔명을 예시로 쓰고 m에 예시 호텔이라고 표시하세요. 사용자가 예약했다고 명시하지 않은 숙소를 예약된 것으로 단정하지 마세요.
-- 이동시간은 추정이며 확정 교통·예약 정보처럼 표현하지 마세요.
+위 URL 끝에 장소마다 아래 항목을 &s= 로 이어 붙이세요:
+&s=날짜~고유ID~행ID~HH:MM~도시ID~아이콘~장소명
+예: &s=${startDate}~a1~r1~09:00~${destinationId}~landmark~센소지
+- 구간의 시작일과 종료일을 포함한 모든 날짜에 실제 장소를 넣으세요. 날짜·시간 순서로 작성하세요.
+- 도시ID는 해당 여행 구간의 ID를 그대로 사용하세요: ${[...new Set(compact.map(segment => segment.d))].join(', ')}.
+- 고유ID는 a1,a2처럼 전체 일정에서 중복되지 않는 영문·숫자. 행ID는 r1,r2처럼 쓰세요.
+- 같은 날짜에서 같은 행ID인 연속 장소들은 나란한 후보입니다(최대 3개). 보통 순차 일정은 행ID를 다르게 주세요.
+- 아이콘은 다음 중 하나: ${ACTIVITY_ICON_OPTIONS.map(option => option.value).join(', ')}.
+- 장소명은 도시를 함께 적어 정확히 찾게 해 주세요. 한글·영어·일본어를 그대로 쓸 수 있습니다.
+- 장소명·메모 안의 공백은 +, &는 %26, #은 %23, ~는 %7E, +는 %2B, %는 %25, 괄호는 %28 및 %29로 쓰세요. 이스케이프는 원래 글자에 한 번만 적용하세요. 항목 사이의 &와 ~는 그대로 둡니다.
+- 메모가 필요하면 &m=고유ID~메모 를 붙이세요. 메모는 간단히 적으세요.
+- 지도 검색어를 별도로 지정하려면 &q=고유ID~검색어 를 붙이세요.
+- 기본은 앞 행에서 다음 행으로 자동 연결됩니다. 서로 다른 경로를 명시할 때는 해당 날짜의 모든 연결을 &e=출발ID~도착ID 로 적으세요.
+  예: a1 → a2/a3 → a4는 &e=a1~a2&e=a1~a3&e=a2~a4&e=a3~a4 입니다. a2,a3는 같은 행ID를 씁니다.
 
-완성된 JSON을 UTF-8 Base64URL로 인코딩해서 아래 주소 뒤에 붙이세요. 압축 접두사 z는 붙이지 마세요.
-https://minwoo19930301.github.io/tour-city-planner/#plan=<Base64URL>
-Python 인코딩 예시: base64.urlsafe_b64encode(json.dumps(payload,ensure_ascii=False,separators=(',',':')).encode('utf-8')).decode().rstrip('=')
-코드 실행 도구가 있다면 반드시 인코딩 후 디코딩하여 원본 JSON과 동일한지 검증하세요. 인코딩 문자열을 추측하지 마세요. 코드 실행이 불가능하면 링크를 만들어내지 말고 완성 JSON을 코드 블록으로 제공하세요.
-검증한 경우 최종 답변은 [일정 열기](완성 URL) 형태의 클릭 가능한 링크 하나만 주세요. 코드가 출력한 URL을 그대로 사용하고 인코딩 문자열을 직접 다시 작성하거나 중간을 생략하지 마세요. 최종 URL의 #plan 값을 다시 디코딩하고 JSON.parse에 해당하는 검사를 통과했는지 확인하세요.`;
+최종 답변은 위 규칙의 완성 URL을 사용한 [완성된 URL](<동일한 완성된 URL>) 링크 하나만 주세요.
+링크 제목에도 실제 주소 전체를 표시하세요. ‘일정 열기’ 같은 제목으로 주소를 숨기지 마세요. 클릭 표시가 지원되지 않아도 주소 전체가 보이게 해야 합니다.
+URL 내부에 줄바꿈·공백을 넣지 마세요.
+JSON이나 코드 블록, 미완성 예시, 인코딩된 #plan 링크를 반환하지 마세요. #trip=1 형식의 URL을 직접 작성하면 됩니다.
+날짜 누락·중복 ID·잘못된 시간·연결을 확인하고 링크 전체를 생략 없이 출력하세요.`;
 }
 
 function findActiveContext() {
@@ -22354,13 +22362,17 @@ function showPlanImportNotice(message) {
 
 function bootstrapFromUrl() {
     const url = new URL(window.location.href);
-    const hashPlanParam = new URLSearchParams(url.hash.replace(/^#/, '')).get('plan');
+    const hashParams = new URLSearchParams(url.hash.replace(/^#/, ''));
+    const readablePlan = hashParams.has('trip');
+    const hashPlanParam = hashParams.get('plan');
     const planParam = hashPlanParam || url.searchParams.get('plan');
 
-    if (planParam) {
+    if (readablePlan || planParam) {
         try {
             let repaired = false;
-            const payload = decodePlan(planParam, { onRepair: () => { repaired = true; } });
+            const payload = readablePlan
+                ? AITripLink.parse(url.hash, { destinationIds: Object.keys(DESTINATIONS), iconIds: ACTIVITY_ICON_OPTIONS.map(option => option.value) })
+                : decodePlan(planParam, { onRepair: () => { repaired = true; } });
             if (!payload || typeof payload !== 'object' || Array.isArray(payload)) throw new Error('Invalid plan payload');
             const segments = Array.isArray(payload.g) && payload.g.length
                 ? payload.g.map((segment) => {
@@ -22413,7 +22425,7 @@ function bootstrapFromUrl() {
             return;
         } catch (error) {
             console.warn('Failed to decode shared plan:', error);
-            showPlanImportNotice('일정 링크의 데이터가 깨져서 열지 못했어요. AI에 ‘JSON 문법과 Base64URL 디코딩을 코드로 검증한 뒤 링크를 다시 만들어 줘’라고 요청해 주세요. 원본 링크는 주소창에 남아 있어요.');
+            showPlanImportNotice('일정 링크의 데이터가 깨져서 열지 못했어요. AI에 ‘#trip=1 형식으로 날짜·장소·연결 항목을 확인해 완성 링크를 다시 만들어 줘’라고 요청해 주세요. 원본 링크는 주소창에 남아 있어요.');
         }
     }
 

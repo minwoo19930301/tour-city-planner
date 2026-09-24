@@ -94,20 +94,21 @@ console.log('PASS: coordinate distance and estimated travel duration.');
 const promptContext=vm.createContext({pendingSetupSegmentsData:null,getDestination:()=>({country:'Japan',city:'Tokyo'}),getLocalizedLabel:x=>x,ACTIVITY_ICON_OPTIONS:[{value:'landmark'},{value:'utensils-crossed'}],atob:s=>Buffer.from(s,'base64').toString('binary'),TextDecoder,Uint8Array,console});
 for(const name of ['generateAIPromptText','decodePlan']){const start=app.indexOf('function '+name+'('),end=app.indexOf('\n}\n',start)+3;vm.runInContext(app.slice(start,end),promptContext);}
 const prompt=promptContext.generateAIPromptText('tokyo','2026-10-01','2026-10-01');
-const example=JSON.parse(prompt.split('현재 앱이 읽는 JSON 예시 (실제 모든 날짜를 채워야 함):\n')[1].split('\n\n규칙:')[0]);
-// First brace belongs to compact travel segments, extract example after its explicit heading.
-
-assert.equal(example.v,4);assert.equal(example.i[0].a[1].k,"utensils-crossed");
-const encoded=Buffer.from(JSON.stringify(example)).toString("base64url");assert.deepEqual(JSON.parse(JSON.stringify(promptContext.decodePlan(encoded))),example);
-ctx.appState.segments=example.g;ctx.exampleDays=example.i;vm.runInContext("restored=buildItineraryFromSharedPayload(appState.segments,exampleDays)",ctx);assert.equal(ctx.restored[0].activities[0].location,"실제 장소명");assert.equal(ctx.restored[0].links[0][1],"stop-2");
-console.log("PASS: AI prompt v4 example UTF-8 Base64URL decode and itinerary import.");
+assert(prompt.includes('#trip=1&g=tokyo~2026-10-01~2026-10-01'));
+assert(prompt.includes('링크 하나만 주세요'));
+assert(!prompt.includes('코드 실행 도구가 없다면'));
+const example={v:4,g:[{d:'tokyo',s:'2026-10-01',e:'2026-10-01'}],i:[{a:[{id:'stop-1',r:'r1',h:'09:00',d:'tokyo',k:'landmark',l:'실제 장소명'},{id:'stop-2',r:'r2',h:'12:00',d:'tokyo',k:'utensils-crossed',l:'식당'}],e:[['stop-1','stop-2']]}]};
+const encoded=Buffer.from(JSON.stringify(example)).toString('base64url');
+assert.deepEqual(JSON.parse(JSON.stringify(promptContext.decodePlan(encoded))),example);
+ctx.appState.segments=example.g;ctx.exampleDays=example.i;vm.runInContext("restored=buildItineraryFromSharedPayload(appState.segments,exampleDays)",ctx);
+assert.equal(ctx.restored[0].activities[0].location,'실제 장소명');assert.equal(ctx.restored[0].links[0][1],'stop-2');
+console.log('PASS: legacy UTF-8 Base64URL decode and itinerary import.');
 const travelNotes='숙소: 힐튼 도쿄\n예약: 10월 3일 19:00 스시\n루트: 아사쿠사 → 우에노';
 const customPrompt=promptContext.generateAIPromptText('tokyo','2026-10-02','2026-10-06',travelNotes);
 assert(customPrompt.includes(travelNotes));
 assert(customPrompt.includes('명시한 예약 날짜와 시간은 임의로 바꾸지 마세요'));
-const customExample=JSON.parse(customPrompt.split('현재 앱이 읽는 JSON 예시 (실제 모든 날짜를 채워야 함):\n')[1].split('\n\n규칙:')[0]);
-assert.deepEqual(customExample.g,[{d:'tokyo',s:'2026-10-02',e:'2026-10-06'}]);
-console.log('PASS: traveler notes and selected dates included without replacing booked hotel/time constraints.');
+assert(customPrompt.includes('#trip=1&g=tokyo~2026-10-02~2026-10-06'));
+console.log('PASS: readable AI link prompt preserves traveler notes, dates and reservation constraints.');
 // AI output reported by the user: the memo omitted its closing quote/brace before the next stop.
 const brokenMemo='{"v":4,"g":[{"d":"tokyo","s":"2026-10-02","e":"2026-10-06"}],"i":[{"a":[{"id":"d3-5","m":"신세카이 산책과 전망,{"id":"d3-6","m":"도톤보리"}],"e":[["d3-5","d3-6"]]}]}';
 let repairCount=0;
@@ -121,3 +122,36 @@ assert.deepEqual(JSON.parse(JSON.stringify(promptContext.decodePlan(Buffer.from(
 assert.equal(repairCount,1);
 assert.throws(()=>promptContext.decodePlan(Buffer.from('{"v":4,"i":[').toString('base64url')));
 console.log('PASS: narrowly repair missing memo boundary, preserve valid quoted text, reject truncated links.');
+
+const tripContext=vm.createContext({});vm.runInContext(fs.readFileSync('ai-link.js','utf8'),tripContext);
+const parseTrip=(hash,options)=>JSON.parse(JSON.stringify(tripContext.AITripLink.parse(hash,options)));
+const tripOptions={destinationIds:['tokyo','seoul'],iconIds:['landmark']};
+const readable='#trip=1&g=tokyo~2026-10-01~2026-10-02'+
+'&s=2026-10-01~a1~r1~09:00~tokyo~landmark~호텔+Tokyo'+
+'&s=2026-10-01~a2~r2~10:00~tokyo~landmark~강+%26+River%7E%25%2B'+
+'&s=2026-10-01~a3~r2~10:00~tokyo~landmark~센소지'+
+'&s=2026-10-01~a4~r2~10:00~tokyo~landmark~東京タワー'+
+'&s=2026-10-01~a5~r3~18:00~tokyo~landmark~식당'+
+'&s=2026-10-02~b1~r1~09:00~tokyo~landmark~호텔'+
+'&m=a1~메모+%22따옴표%22&q=a1~Hilton+Tokyo';
+const parsed=parseTrip(readable,tripOptions);
+assert.equal(parsed.i.length,2);assert.equal(parsed.i[0].a[1].l,'강 & River~%+');
+assert.equal(parsed.i[0].a[0].m,'메모 "따옴표"');assert.equal(parsed.i[0].a[0].q,'Hilton Tokyo');
+assert.deepEqual(parsed.i[0].e,[['a1','a2'],['a1','a3'],['a1','a4'],['a2','a5'],['a3','a5'],['a4','a5']]);
+ctx.exampleDays=parsed.i;vm.runInContext('restored=buildItineraryFromSharedPayload(appState.segments,exampleDays)',ctx);
+assert.deepEqual(Array.from(G.rows(ctx.restored[0]),row=>row.length),[1,3,1]);
+assert.equal(ctx.restored[0].activities[1].location,'강 & River~%+');
+assert.deepEqual(parseTrip(readable+'&e=a1~a3&e=a3~a5',tripOptions).i[0].e,[['a1','a3'],['a3','a5']]);
+const overlapping=readable.replace('&g=tokyo','&g=seoul~2026-10-02~2026-10-02&g=tokyo');
+assert.equal(parseTrip(overlapping,tripOptions).i.length,2);
+for(const broken of [
+ readable.replace('~09:00~','~25:00~'),
+ readable.replace('~a3~','~a2~'),
+ readable.replace('~r3~','~r2~'),
+ readable.replace('2026-10-02~b1','2026-10-03~b1'),
+ readable.replace('2026-10-01~2026-10-02','2026-02-30~2026-10-02'),
+ readable+'&e=a5~a1',readable+'&e=a1~b1',readable+'&unknown=x',
+ readable+'&m=a1~%notencoded',
+ readable.replace('&s=2026-10-02~b1~r1~09:00~tokyo~landmark~호텔','')
+]) assert.throws(()=>parseTrip(broken,tripOptions));
+console.log('PASS: readable links preserve Unicode/reserved characters, three branches and merges; invalid or missing data rejected.');
