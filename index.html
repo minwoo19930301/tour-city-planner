@@ -1346,6 +1346,13 @@
         </div>
     </div>
 
+    <div id="plan-import-notice" role="alert" class="hidden fixed bottom-4 left-4 right-4 z-[99] max-w-xl mx-auto rounded-2xl border border-amber-300/40 bg-slate-900 p-4 shadow-xl">
+        <div class="flex items-start gap-3">
+            <p id="plan-import-message" class="flex-1 text-sm leading-relaxed text-white"></p>
+            <button id="plan-import-close" type="button" aria-label="일정 링크 안내 닫기" class="shrink-0 text-white/70 px-2 py-1">✕</button>
+        </div>
+    </div>
+
     <!-- 여행 요청 입력 → 직접 복사 → AI 서비스 이동 -->
     <div id="ai-prompt-modal" role="dialog" aria-modal="true" aria-labelledby="ai-prompt-title" class="fixed inset-0 z-[97] hidden overflow-y-auto">
         <div class="absolute inset-0 bg-slate-950/76 backdrop-blur-md"></div>
@@ -1359,14 +1366,14 @@
                 </div>
                 <div id="ai-request-step">
                     <label for="ai-trip-notes" class="block text-sm text-white/80 leading-relaxed mb-3">가려는 숙소, 예약해 둔 맛집, 꼭 가보고 싶은 곳이나 정해진 루트가 있다면 대략 적어 주세요.</label>
-                    <textarea id="ai-trip-notes" rows="6" class="w-full p-3.5 rounded-2xl border border-white/15 bg-black/25 text-base text-white leading-relaxed focus:outline-none focus:border-purple-400 resize-y" placeholder="숙소: 힐튼 도쿄
+                    <textarea id="ai-trip-notes" rows="6" required class="w-full p-3.5 rounded-2xl border border-white/15 bg-black/25 text-base text-white leading-relaxed focus:outline-none focus:border-purple-400 resize-y" placeholder="숙소: 힐튼 도쿄
 예약한 맛집: 둘째 날 저녁 7시 스시집
 꼭 가볼 곳: 메이지 신궁, 시부야 스카이
 정해진 루트: 아사쿠사 → 우에노
 그 밖의 취향: 천천히 걷고 카페에서 쉬기"></textarea>
-                    <p class="text-xs text-white/55 mt-2">아직 정한 게 없다면 비워 두어도 괜찮아요.</p>
-                    <p id="ai-copy-status" role="status" aria-live="polite" class="text-sm text-purple-200 mt-5 mb-3">먼저 아래 ‘프롬프트 복사하기’를 눌러 주세요. 도시·날짜와 적어 주신 내용을 함께 복사합니다.</p>
-                    <button id="ai-prompt-copy-btn" type="button" class="w-full rounded-2xl bg-purple-600 px-4 py-3.5 text-sm font-semibold text-white hover:bg-purple-500 disabled:opacity-50 flex items-center justify-center gap-2">
+                    <p class="text-xs text-white/55 mt-2">아직 정한 게 없다면 원하는 여행 분위기나 취향을 한 줄 적어 주세요.</p>
+                    <p id="ai-copy-status" role="status" aria-live="polite" class="text-sm text-purple-200 mt-5 mb-3">다 쓰고 나서 아래 ‘프롬프트 복사하기’를 눌러 주세요. 도시·날짜와 적어 주신 내용을 함께 복사합니다.</p>
+                    <button id="ai-prompt-copy-btn" type="button" disabled class="w-full rounded-2xl bg-purple-600 px-4 py-3.5 text-sm font-semibold text-white hover:bg-purple-500 disabled:opacity-50 flex items-center justify-center gap-2">
                         <i data-lucide="copy" class="w-4 h-4"></i><span>프롬프트 복사하기</span>
                     </button>
                 </div>
@@ -1387,7 +1394,7 @@
 
     <script src="./example-hotels.js?v=1"></script>
     <script src="./graph-model.js?v=6"></script>
-    <script src="./app.js?v=ai-request-flow-v17" defer></script>
+    <script src="./app.js?v=ai-import-v18" defer></script>
 </body>
 
 </html>

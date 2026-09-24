@@ -108,3 +108,16 @@ assert(customPrompt.includes('명시한 예약 날짜와 시간은 임의로 바
 const customExample=JSON.parse(customPrompt.split('현재 앱이 읽는 JSON 예시 (실제 모든 날짜를 채워야 함):\n')[1].split('\n\n규칙:')[0]);
 assert.deepEqual(customExample.g,[{d:'tokyo',s:'2026-10-02',e:'2026-10-06'}]);
 console.log('PASS: traveler notes and selected dates included without replacing booked hotel/time constraints.');
+// AI output reported by the user: the memo omitted its closing quote/brace before the next stop.
+const brokenMemo='{"v":4,"g":[{"d":"tokyo","s":"2026-10-02","e":"2026-10-06"}],"i":[{"a":[{"id":"d3-5","m":"신세카이 산책과 전망,{"id":"d3-6","m":"도톤보리"}],"e":[["d3-5","d3-6"]]}]}';
+let repairCount=0;
+const recovered=promptContext.decodePlan(Buffer.from(brokenMemo).toString('base64url'),{onRepair:()=>repairCount++});
+assert.equal(repairCount,1);
+assert.equal(recovered.i[0].a.length,2);
+assert.equal(recovered.i[0].a[0].m,'신세카이 산책과 전망');
+assert.equal(recovered.i[0].e[0][1],'d3-6');
+const validWithQuotes={v:4,g:example.g,i:[{a:[{id:'a',m:'메모에 ,{"id": 와 "따옴표", 줄바꿈\n그대로'}],e:[]}]};
+assert.deepEqual(JSON.parse(JSON.stringify(promptContext.decodePlan(Buffer.from(JSON.stringify(validWithQuotes)).toString('base64url'),{onRepair:()=>repairCount++}))),validWithQuotes);
+assert.equal(repairCount,1);
+assert.throws(()=>promptContext.decodePlan(Buffer.from('{"v":4,"i":[').toString('base64url')));
+console.log('PASS: narrowly repair missing memo boundary, preserve valid quoted text, reject truncated links.');

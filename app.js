@@ -19391,7 +19391,7 @@ function encodePlan(payload) {
         .replace(/=+$/g, '');
 }
 
-function decodePlan(value) {
+function decodePlan(value, { onRepair } = {}) {
     if (!value) return null;
     let json = null;
 
@@ -19414,12 +19414,21 @@ function decodePlan(value) {
         json = new TextDecoder().decode(bytes);
     }
     
-    // 이스케이프되지 않은 제어 문자(줄바꿈, 탭 등)가 문자열 값 내부에 있으면 이스케이프하여 파싱 에러 방지
-    json = json.replace(/"([^"]*)"/g, (match, p1) => {
-        return '"' + p1.replace(/\n/g, '\\n').replace(/\r/g, '\\r').replace(/\t/g, '\\t') + '"';
-    });
-
-    return JSON.parse(json);
+    try {
+        return JSON.parse(json);
+    } catch (originalError) {
+        // Only repair a missing memo/object terminator immediately before the next stop.
+        // Valid JSON is always returned untouched; no activities or fields are discarded.
+        const repaired = json.replace(/("m"\s*:\s*"(?:[^"\\]|\\.)*),\s*(\{\s*"id"\s*:)/g, '$1"},$2');
+        if (repaired === json) throw originalError;
+        const payload = JSON.parse(repaired);
+        if (payload?.v !== 4 || !Array.isArray(payload.g) || !Array.isArray(payload.i)
+            || !payload.i.length || !payload.i.every(day => Array.isArray(day.a) && Array.isArray(day.e))) {
+            throw originalError;
+        }
+        onRepair?.();
+        return payload;
+    }
 }
 
 function setScrollLock(locked) {
@@ -20186,7 +20195,7 @@ ${JSON.stringify(example,null,2)}
 https://minwoo19930301.github.io/tour-city-planner/#plan=<Base64URL>
 Python 인코딩 예시: base64.urlsafe_b64encode(json.dumps(payload,ensure_ascii=False,separators=(',',':')).encode('utf-8')).decode().rstrip('=')
 코드 실행 도구가 있다면 반드시 인코딩 후 디코딩하여 원본 JSON과 동일한지 검증하세요. 인코딩 문자열을 추측하지 마세요. 코드 실행이 불가능하면 링크를 만들어내지 말고 완성 JSON을 코드 블록으로 제공하세요.
-검증한 경우 최종 답변은 클릭 가능한 완성 링크 하나만 주세요.`;
+검증한 경우 최종 답변은 [일정 열기](완성 URL) 형태의 클릭 가능한 링크 하나만 주세요. 코드가 출력한 URL을 그대로 사용하고 인코딩 문자열을 직접 다시 작성하거나 중간을 생략하지 마세요. 최종 URL의 #plan 값을 다시 디코딩하고 JSON.parse에 해당하는 검사를 통과했는지 확인하세요.`;
 }
 
 function findActiveContext() {
@@ -22338,6 +22347,11 @@ function handleItineraryClick(event) {
 
 }
 
+function showPlanImportNotice(message) {
+    document.getElementById('plan-import-message').textContent = message;
+    document.getElementById('plan-import-notice').classList.remove('hidden');
+}
+
 function bootstrapFromUrl() {
     const url = new URL(window.location.href);
     const hashPlanParam = new URLSearchParams(url.hash.replace(/^#/, '')).get('plan');
@@ -22345,7 +22359,9 @@ function bootstrapFromUrl() {
 
     if (planParam) {
         try {
-            const payload = decodePlan(planParam);
+            let repaired = false;
+            const payload = decodePlan(planParam, { onRepair: () => { repaired = true; } });
+            if (!payload || typeof payload !== 'object' || Array.isArray(payload)) throw new Error('Invalid plan payload');
             const segments = Array.isArray(payload.g) && payload.g.length
                 ? payload.g.map((segment) => {
                     const destination = getDestination(getSelectableDestinationId(segment.d));
@@ -22386,6 +22402,7 @@ function bootstrapFromUrl() {
             setupRangeSelectingEnd = false;
             syncSetupCalendarMonth(draftSegment.startDate);
 
+            if (repaired) showPlanImportNotice('AI가 만든 링크에서 빠진 메모 끝 기호를 복구해 일정을 열었어요. 장소와 메모를 확인해 주세요.');
             const searchPlanParam = url.searchParams.get('plan');
             if (searchPlanParam && !hashPlanParam) {
                 const cleanUrl = new URL(window.location.href);
@@ -22396,6 +22413,7 @@ function bootstrapFromUrl() {
             return;
         } catch (error) {
             console.warn('Failed to decode shared plan:', error);
+            showPlanImportNotice('일정 링크의 데이터가 깨져서 열지 못했어요. AI에 ‘JSON 문법과 Base64URL 디코딩을 코드로 검증한 뒤 링크를 다시 만들어 줘’라고 요청해 주세요. 원본 링크는 주소창에 남아 있어요.');
         }
     }
 
@@ -22420,6 +22438,10 @@ function bootstrapFromUrl() {
     setupRangeSelectingEnd = false;
     syncSetupCalendarMonth(startDate);
 }
+
+document.getElementById('plan-import-close').addEventListener('click', () => {
+    document.getElementById('plan-import-notice').classList.add('hidden');
+});
 
 ui.destinationDropdownTrigger.addEventListener('click', () => {
     toggleDestinationDropdown();
@@ -22520,8 +22542,8 @@ function showAIRequestStep() {
     ui.aiPromptTitle.textContent = '어떤 여행을 계획하고 있나요?';
     ui.aiRequestStep.classList.remove('hidden');
     ui.aiServiceStep.classList.add('hidden');
-    ui.aiPromptCopyBtn.disabled = false;
-    ui.aiCopyStatus.textContent = '먼저 아래 ‘프롬프트 복사하기’를 눌러 주세요. 도시·날짜와 적어 주신 내용을 함께 복사합니다.';
+    ui.aiPromptCopyBtn.disabled = !ui.aiTripNotes.value.trim();
+    ui.aiCopyStatus.textContent = '다 쓰고 나서 아래 ‘프롬프트 복사하기’를 눌러 주세요. 도시·날짜와 적어 주신 내용을 함께 복사합니다.';
 }
 
 function closeAIPrompt() {
@@ -22545,12 +22567,13 @@ ui.aiRequestBackBtn.addEventListener('click', () => {
     ui.aiTripNotes.focus();
 });
 ui.aiTripNotes.addEventListener('input', () => {
+    ui.aiCopyStatus.textContent = '다 쓰고 나서 아래 ‘프롬프트 복사하기’를 눌러 주세요. 도시·날짜와 적어 주신 내용을 함께 복사합니다.';
     aiPromptCopied = false;
     aiPromptFlowVersion++;
-    ui.aiPromptCopyBtn.disabled = false;
+    ui.aiPromptCopyBtn.disabled = !ui.aiTripNotes.value.trim();
 });
 ui.aiPromptCopyBtn.addEventListener('click', async () => {
-    if (!pendingSetupSegmentsData?.length) return;
+    if (!pendingSetupSegmentsData?.length || !ui.aiTripNotes.value.trim()) return;
     const version = ++aiPromptFlowVersion;
     const seg = pendingSetupSegmentsData[0];
     const prompt = generateAIPromptText(seg.destinationId, seg.startDate, seg.endDate, ui.aiTripNotes.value);
@@ -22569,7 +22592,7 @@ ui.aiPromptCopyBtn.addEventListener('click', async () => {
             ui.aiCopyStatus.textContent = '복사하지 못했어요. 브라우저의 클립보드 권한을 확인한 뒤 다시 눌러 주세요.';
         }
     } finally {
-        if (version === aiPromptFlowVersion) ui.aiPromptCopyBtn.disabled = false;
+        if (version === aiPromptFlowVersion) ui.aiPromptCopyBtn.disabled = !ui.aiTripNotes.value.trim();
     }
 });
 ui.aiServiceStep.addEventListener('click', event => {
