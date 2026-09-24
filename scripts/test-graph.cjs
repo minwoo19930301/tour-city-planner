@@ -76,3 +76,13 @@ assert(vm.runInContext("getDirectionsUrl('A','B')",ctx).includes('travelmode=tra
 assert(vm.runInContext("getDirectionsUrl('A','B','driving')",ctx).includes('travelmode=driving'));
 assert(vm.runInContext("getDirectionsEmbedUrl('A','B',[],'driving')",ctx).includes('dirflg=d'));
 console.log('PASS: time edits reorder cards and links; selectable transit/driving URLs.');
+ctx.branch={activities:[{id:'start',time:'09:00'},{id:'left',row:'choices'},{id:'right',row:'choices'},{id:'end'}],links:[['start','left'],['start','right'],['left','end'],['right','end']]};
+vm.runInContext("insertPlacedStop(branch,{id:'new',time:'10:00'},{target:'right',where:'before'})",ctx);
+assert(ctx.branch.links.some(e=>e[0]==='start'&&e[1]==='left'));
+assert(ctx.branch.links.some(e=>e[0]==='start'&&e[1]==='new'));
+assert(ctx.branch.links.some(e=>e[0]==='new'&&e[1]==='right'));
+assert(!ctx.branch.links.some(e=>e[0]==='new'&&e[1]==='left'));
+{const start=app.indexOf('function inferPlaceIcon('),end=app.indexOf('\n}\n',start)+3;vm.runInContext(app.slice(start,end),ctx);}
+for(const title of ['힐튼 호텔','Hilton Tokyo','東京ホテル','上海酒店'])assert.equal(ctx.inferPlaceIcon(title),'luggage');
+for(const title of ['한강','Thames River','隅田川'])assert.equal(ctx.inferPlaceIcon(title),'waves');
+console.log('PASS: branch-local insertion and multilingual place icons.');

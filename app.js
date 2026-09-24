@@ -1,6 +1,7 @@
 const DAY_LABELS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const WEEKDAY_LABELS_KO = ['일', '월', '화', '수', '목', '금', '토'];
 const ACTIVITY_ICON_OPTIONS = [
+    { value: 'waves', label: '강 · River · 川 · 河' },
     { value: 'plane', label: 'Plane' },
     { value: 'train-front', label: 'Train' },
     { value: 'ship', label: 'Boat' },
@@ -19806,6 +19807,10 @@ function openActivityTimePicker() {
     }
 }
 
+function inferPlaceIcon(text){
+    const rules=[['luggage',/호텔|숙소|리조트|\b(hotel|hilton|inn|resort)\b|ホテル|旅館|酒店|饭店/i],['waves',/강$|강변|하천|\briver\b|川|河流|河畔/i],['coffee',/카페|커피|cafe|café|coffee|カフェ|咖啡/i],['plane',/공항|airport|空港|机场/i],['trees',/공원|park|公園|公园/i],['landmark',/신궁|사원|temple|shrine|神宮|神社|寺/i],['utensils-crossed',/식당|맛집|restaurant|レストラン|餐厅/i]];
+    return rules.find(([,pattern])=>pattern.test(text))?.[0]||'';
+}
 function applyActivityIconSelection(value) {
     activityEditorState.icon = ACTIVITY_ICON_VALUES.has(value) ? value : '';
     renderActivityIconSelection();
@@ -20596,7 +20601,13 @@ let pendingParallelActivity = null;
 
 function graphLayoutAttributes(rows, activity) {
     const rowIndex = rows.findIndex(r => r.includes(activity)), row = rows[rowIndex];
-    const width = 6 / row.length, col = row.indexOf(activity) * width + 1;
+    let width = 6 / row.length, col = row.indexOf(activity) * width + 1;
+    if(row.length===1 && rowIndex>0){
+        const day=appState.itinerary.find(d=>d.activities.includes(activity)),previous=rows[rowIndex-1];
+        const parents=day?.links.filter(e=>e[1]===activity.id).map(e=>e[0])||[];
+        const parent=previous.find(a=>parents.includes(a.id));
+        if(previous.length>1&&parents.length===1&&parent){width=6/previous.length;col=previous.indexOf(parent)*width+1;}
+    }
     return `data-parallel="${row.length > 1}" style="grid-row:${rowIndex + 1};grid-column:${col} / span ${width}"`;
 }
 function graphControlsHtml(day, dayIndex, activity) {
@@ -20695,7 +20706,10 @@ function drawGraphEdges() {
             const toolbarY=skips?y+46:(y+yy)/2;
             const source=day.activities.find(a=>a.id===from), target=day.activities.find(a=>a.id===to);
             const origin=source.mapQuery || source.location, dest=target.mapQuery || target.location;
-            const actions=document.createElement('div');actions.className='edge-actions';actions.dataset.skipEdit='true';
+            const routeRows=TripGraph.rows(day),sr=routeRows.find(r=>r.includes(source)),tr=routeRows.find(r=>r.includes(target));
+            const branchIndex=tr.length>1?tr.indexOf(target):sr.length>1?sr.indexOf(source):0;
+            const color=['#fb923c','#38bdf8','#a78bfa'][branchIndex];
+            const actions=document.createElement('div');actions.style.borderColor=color;actions.className='edge-actions';actions.dataset.skipEdit='true';
             const boundary=ranks.get(from)+'-'+ranks.get(to);
             const siblings=day.links.filter(([f,t])=>ranks.get(f)===ranks.get(from)&&ranks.get(t)===ranks.get(to));
             const position=boundaryCounts.get(boundary)||0;boundaryCounts.set(boundary,position+1);
@@ -20709,7 +20723,7 @@ function drawGraphEdges() {
             actions.title=source.location+' → '+target.location;
             actions.innerHTML=`<a href="${getDirectionsUrl(origin,dest)}" data-route-preview="true" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}" aria-label="${escapeHtml(source.location+' → '+target.location)} 가는 길" title="가는 길"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="M8 5h8a4 4 0 0 1 0 8H8a3 3 0 0 0 0 6h8"/></svg></a><button type="button" data-graph-action="unlink" data-graph-day="${dayIndex}" data-graph-id="${from}" data-graph-to="${to}" aria-label="${escapeHtml(source.location+' → '+target.location)} 연결 제거">×</button>`;
             list.appendChild(actions);
-            return `<a data-route-preview="true" data-skip-edit="true" href="${getDirectionsUrl(origin,dest)}" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}" aria-label="${escapeHtml(source.location+'에서 '+target.location+' 가는 길')}"><path style="pointer-events:stroke;cursor:pointer" d="${path}"/><circle cx="${xx}" cy="${yy}" r="3" fill="currentColor"/></a><g class="graph-edge-remove" data-skip-edit="true" data-graph-action="unlink" data-graph-day="${dayIndex}" data-graph-id="${from}" data-graph-to="${to}" role="button" tabindex="0" aria-label="${escapeHtml(source.location+' → '+target.location)} 연결 제거" transform="translate(${(x+xx)/2},${(y+yy)/2})"><circle r="9"/><text text-anchor="middle" dy="4">×</text></g>`;
+            return `<a data-route-preview="true" data-skip-edit="true" href="${getDirectionsUrl(origin,dest)}" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}" aria-label="${escapeHtml(source.location+'에서 '+target.location+' 가는 길')}"><path style="pointer-events:stroke;cursor:pointer;stroke:${color}" d="${path}"/><circle cx="${xx}" cy="${yy}" r="3" fill="currentColor"/></a><g class="graph-edge-remove" data-skip-edit="true" data-graph-action="unlink" data-graph-day="${dayIndex}" data-graph-id="${from}" data-graph-to="${to}" role="button" tabindex="0" aria-label="${escapeHtml(source.location+' → '+target.location)} 연결 제거" transform="translate(${(x+xx)/2},${(y+yy)/2})"><circle r="9"/><text text-anchor="middle" dy="4">×</text></g>`;
         }).join('');
     });
 }
@@ -21096,7 +21110,7 @@ function openDayRoutes(dayIndex, offset=0) {
     day.activities.filter(a=>!incoming.has(a.id)).forEach(a=>visit(a.id,[]));
     const hasMore=paths.length>200;if(hasMore)paths.pop();
     const panel=document.createElement('section');panel.id='day-route-picker';panel.setAttribute('role','dialog');panel.setAttribute('aria-label','하루 이동코스');
-    panel.innerHTML=`<header><strong>하루 이동코스 · ${offset?offset+1+'–':''}${offset+paths.length}${hasMore?'+':''}개</strong><button type="button" aria-label="코스 닫기">×</button></header><div class="day-route-options">${paths.map((path,i)=>`<label><input type="radio" name="day-route-choice" value="${i}" ${i===0?'checked':''}><span>${path.map(id=>escapeHtml(byId.get(id).location)).join(' → ')}</span></label>`).join('') || '등록된 일정이 없어요.'}</div><div class="route-pages">${offset?'<button data-route-page="prev">이전 코스</button>':''}${hasMore?'<button data-route-page="next">다음 코스</button>':''}</div>${routeModeRadios('day-travel-mode','driving')}<label class="transit-leg-label">대중교통 이동 구간<select id="transit-leg-select"></select></label><iframe title="선택한 하루 이동코스 지도" referrerpolicy="no-referrer-when-downgrade"></iframe><a target="_blank" rel="noreferrer">구글 맵에서 열기 ↗</a>`;
+    panel.innerHTML=`<header><strong>하루 이동코스 · ${offset?offset+1+'–':''}${offset+paths.length}${hasMore?'+':''}개</strong><button type="button" aria-label="코스 닫기">×</button></header><div class="day-route-options">${paths.map((path,i)=>`<label><input type="radio" name="day-route-choice" value="${i}" ${i===0?'checked':''}><span><b style="color:${['#fb923c','#38bdf8','#a78bfa'][i%3]}">${String.fromCharCode(65+(offset+i)%26)}.</b> ${path.map(id=>escapeHtml(byId.get(id).location)).join(' → ')}</span></label>`).join('') || '등록된 일정이 없어요.'}</div><div class="route-pages">${offset?'<button data-route-page="prev">이전 코스</button>':''}${hasMore?'<button data-route-page="next">다음 코스</button>':''}</div>${routeModeRadios('day-travel-mode','driving')}<label class="transit-leg-label">대중교통 이동 구간<select id="transit-leg-select"></select></label><iframe title="선택한 하루 이동코스 지도" referrerpolicy="no-referrer-when-downgrade"></iframe><a target="_blank" rel="noreferrer">구글 맵에서 열기 ↗</a>`;
     document.body.appendChild(panel);panel.querySelector('button').onclick=()=>panel.remove();
     panel.querySelectorAll('[data-route-page]').forEach(button=>button.onclick=()=>openDayRoutes(dayIndex,offset+(button.dataset.routePage==='next'?200:-200)));
     let chosenActivities=[];
@@ -21195,6 +21209,18 @@ function startStopPlacement(dayIndex){
 }
 function insertPlacedStop(day,item,placement){
     const rows=TripGraph.normalize(day), target=day.activities.find(a=>a.id===placement?.target);
+    const targetRow=rows.find(r=>r.includes(target));
+    if(target && placement.where==='before' && targetRow.length>1){
+        const oldRow=target.row, incoming=day.links.filter(e=>e[1]===target.id);
+        item.row=oldRow;
+        const index=day.activities.indexOf(target);day.activities.splice(index,1,item);
+        target.row=TripGraph.freshRow(day,target.id);
+        const last=targetRow.filter(a=>a!==target).concat(item).reduce((n,a)=>Math.max(n,day.activities.indexOf(a)),0);
+        day.activities.splice(last+1,0,target);
+        day.links=day.links.filter(e=>e[1]!==target.id);
+        incoming.forEach(([from])=>day.links.push([from,item.id]));day.links.push([item.id,target.id]);
+        TripGraph.normalize(day);return;
+    }
     if(target && ['left','right'].includes(placement.where)) {
         TripGraph.parallel(day,target.id,item);
         day.activities=day.activities.filter(a=>a!==item);day.activities.splice(day.activities.indexOf(target)+(placement.where==='right'?1:0),0,item);
@@ -21969,8 +21995,8 @@ function handleActivityPointerUp(event) {
         syncDayDestinations(day);
     } else moved = commitActivityDrop(sourceDayIndex, targetDayIndex, targetIndex, activityId);
     if (!moved) return;
-    TripGraph.reconnectRows(appState.itinerary[sourceDayIndex]);
-    if(targetDayIndex!==sourceDayIndex)TripGraph.reconnectRows(appState.itinerary[targetDayIndex]);
+    if(!exactPlacement){TripGraph.reconnectRows(appState.itinerary[sourceDayIndex]);
+    if(targetDayIndex!==sourceDayIndex)TripGraph.reconnectRows(appState.itinerary[targetDayIndex]);}
 
     vibrateDevice(10);
     persistItineraryChanges();
@@ -22462,7 +22488,7 @@ ui.activitySaveBtn.addEventListener('click', saveActivityEditor);
 ui.activityDeleteBtn.addEventListener('click', deleteCurrentActivity);
 
 
-ui.activityLocation.addEventListener('input', updateActivityMapPreview);
+ui.activityLocation.addEventListener('input', ()=>{updateActivityMapPreview();const icon=inferPlaceIcon(ui.activityLocation.value);if(icon){activityEditorState.icon=icon;renderActivityIconSelection();}});
 ui.activityIconTrigger.addEventListener('click', openIconPicker);
 ui.iconPickerCloseBtn.addEventListener('click', closeIconPicker);
 ui.iconPickerCancelBtn.addEventListener('click', closeIconPicker);
