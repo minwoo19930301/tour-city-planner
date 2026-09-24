@@ -1390,7 +1390,7 @@
                 </div>
                 <div id="ai-service-step" class="hidden">
                     <p class="text-sm text-white/85 leading-relaxed mb-2">이동할 AI 서비스를 선택해 주세요. 붙여넣기 방법을 한 번 더 안내해 드릴게요.</p>
-                    <p class="text-xs text-white/55 leading-relaxed mb-5">붙여넣은 내용을 전송하고, AI가 만든 일정 링크를 열면 계획을 확인할 수 있어요.</p>
+                    <p class="text-xs text-white/55 leading-relaxed mb-5">AI의 답변 전체를 복사한 뒤 답변 아래 ‘여행 일정 열기’를 눌러 주세요.</p>
                     <div class="grid grid-cols-2 gap-2" aria-label="AI 서비스 선택">
                         <a data-ai-service="ChatGPT" href="https://chatgpt.com" class="flex items-center justify-center p-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-sm font-semibold text-white">💬 ChatGPT</a>
                         <a data-ai-service="Google AI Mode" href="https://www.google.com/aimode" class="flex items-center justify-center p-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-sm font-semibold text-white">🔎 Google AI Mode</a>
@@ -1413,10 +1413,23 @@
         <div class="ai-handoff-actions"><button type="button" data-handoff-cancel>다시 선택</button><button type="button" data-handoff-confirm autofocus>확인하고 이동</button></div>
     </dialog>
 
+    <dialog id="ai-result-dialog" aria-labelledby="ai-result-title" style="margin:auto;width:min(520px,calc(100vw - 32px));max-height:90svh;overflow:auto;padding:24px;border:1px solid #64748b;border-radius:24px;background:#172435;color:white;">
+        <h2 id="ai-result-title" class="text-xl font-bold mb-2">AI가 만든 일정 열기</h2>
+        <p class="text-sm text-white/75 leading-relaxed mb-5">AI의 답변 전체를 복사했다면 아래 버튼을 눌러 주세요.</p>
+        <button id="ai-result-clipboard" type="button" class="w-full rounded-xl bg-purple-600 px-4 py-3 font-semibold">복사한 일정 열기</button>
+        <p id="ai-result-status" role="status" aria-live="polite" class="text-sm text-amber-200 mt-3"></p>
+        <label for="ai-result-text" class="block text-sm text-white/70 mt-5 mb-2">직접 붙여넣어도 돼요</label>
+        <textarea id="ai-result-text" rows="4" class="input-shell w-full text-sm" placeholder="AI의 전체 응답이나 완성된 일정 주소를 붙여넣어 주세요."></textarea>
+        <div class="flex gap-2 mt-4">
+            <button id="ai-result-cancel" type="button" class="rounded-xl border border-white/20 px-4 py-3 text-sm">닫기</button>
+            <button id="ai-result-open" type="button" disabled class="flex-1 rounded-xl bg-purple-600 px-4 py-3 text-sm font-semibold disabled:opacity-40">붙여넣은 일정 열기</button>
+        </div>
+    </dialog>
+
     <script src="./example-hotels.js?v=1"></script>
     <script src="./graph-model.js?v=7"></script>
-    <script src="./ai-link.js?v=2"></script>
-    <script src="./app.js?v=parallel-handoff-v21" defer></script>
+    <script src="./ai-link.js?v=3"></script>
+    <script src="./app.js?v=ai-response-import-v22" defer></script>
 </body>
 
 </html>

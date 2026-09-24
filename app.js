@@ -20172,7 +20172,7 @@ function generateAIPromptText(destinationId, startDate, endDate, tripNotes = '')
     const segments=(pendingSetupSegmentsData?.length?pendingSetupSegmentsData:[{destinationId,startDate,endDate}]);
     const compact=segments.map(s=>({d:s.destinationId,s:s.startDate,e:s.endDate}));
     const groupParams = compact.map(segment => `g=${segment.d}~${segment.s}~${segment.e}`).join('&');
-    return `여행 일정 링크를 만들어 주세요. 최종 답변은 완성된 일정 URL을 표시하는 클릭 가능한 링크 하나여야 합니다.
+    return `여행 일정을 만들고, 아래 출력 형식대로 일정 주소와 ‘여행 일정 열기’ 링크를 주세요.
 여행 요구사항: ${tripNotes.trim() || '동선이 무리하지 않은 여행.'}
 여행지: ${getLocalizedLabel(destination.country)} · ${getLocalizedLabel(destination.city,destination.city)}
 여행 구간: ${compact.map(segment => `${segment.d}: ${segment.s} ~ ${segment.e}`).join(', ')}
@@ -20199,11 +20199,13 @@ https://minwoo19930301.github.io/tour-city-planner/#trip=1&${groupParams}
 - 기본은 앞 행에서 다음 행으로 자동 연결됩니다. 서로 다른 경로를 명시할 때는 해당 날짜의 모든 연결을 &e=출발ID~도착ID 로 적으세요.
   예: a1 → a2/a3 → a4는 &e=a1~a2&e=a1~a3&e=a2~a4&e=a3~a4 입니다. a2,a3는 같은 행ID를 씁니다.
 
-최종 답변은 위 규칙의 완성 URL을 사용한 [완성된 URL](<동일한 완성된 URL>) 링크 하나만 주세요.
-링크 제목에도 실제 주소 전체를 표시하세요. ‘일정 열기’ 같은 제목으로 주소를 숨기지 마세요. 클릭 표시가 지원되지 않아도 주소 전체가 보이게 해야 합니다.
-URL 내부에 줄바꿈·공백을 넣지 마세요.
+최종 답변은 정확히 다음 세 부분으로 작성하세요:
+1. “이 응답 전체를 복사한 뒤 아래 ‘여행 일정 열기’를 눌러 주세요.”
+2. 위 규칙으로 만든 완성 URL 원문 한 줄. 주소를 마크다운 링크 제목 뒤에 숨기지 마세요. URL 내부에 줄바꿈·공백을 넣지 마세요.
+3. 다음 고정 링크를 수정 없이 그대로 출력하세요: [여행 일정 열기](https://minwoo19930301.github.io/tour-city-planner/?import=ai)
+고정 링크에는 일정을 붙이지 마세요. 그 화면에서 복사한 응답을 읽어 일정을 엽니다. 생성한 주소가 클릭되지 않는 AI 화면에서도 사용할 수 있는 방식입니다.
 JSON이나 코드 블록, 미완성 예시, 인코딩된 #plan 링크를 반환하지 마세요. #trip=1 형식의 URL을 직접 작성하면 됩니다.
-날짜 누락·중복 ID·잘못된 시간·연결을 확인하고 링크 전체를 생략 없이 출력하세요.`;
+날짜 누락·중복 ID·잘못된 시간·연결을 확인하고 주소 전체를 생략 없이 출력하세요.`;
 }
 
 function findActiveContext() {
@@ -22656,8 +22658,54 @@ ui.aiServiceStep.addEventListener('click', event => {
     }
     pendingAIService = link;
     document.getElementById('ai-handoff-title').textContent = `${link.dataset.aiService}에 붙여넣어 주세요`;
-    document.getElementById('ai-handoff-message').textContent = getAIPasteInstruction(navigator.userAgentData?.platform || navigator.platform, navigator.userAgent, navigator.maxTouchPoints);
+    document.getElementById('ai-handoff-message').textContent = getAIPasteInstruction(navigator.userAgentData?.platform || navigator.platform, navigator.userAgent, navigator.maxTouchPoints) + ' 답변이 완성되면 응답 전체를 복사하고, 답변 아래 ‘여행 일정 열기’를 눌러 주세요.';
     aiHandoffDialog.showModal();
+});
+
+const aiResultDialog = document.getElementById('ai-result-dialog');
+const aiResultText = document.getElementById('ai-result-text');
+const aiResultStatus = document.getElementById('ai-result-status');
+const aiResultOpen = document.getElementById('ai-result-open');
+const aiResultClipboard = document.getElementById('ai-result-clipboard');
+function openAIResponse(text) {
+    try {
+        const { fragment } = AITripLink.readResponse(text, {
+            destinationIds: Object.keys(DESTINATIONS),
+            iconIds: ACTIVITY_ICON_OPTIONS.map(option => option.value)
+        });
+        const url = new URL(window.location.href);
+        url.search = '';
+        url.hash = fragment;
+        // Validate the complete answer before replacing any current itinerary.
+        window.location.assign(url.toString());
+    } catch (error) {
+        aiResultStatus.textContent = error.message;
+        aiResultText.focus();
+    }
+}
+aiResultText.addEventListener('input', () => {
+    aiResultOpen.disabled = !aiResultText.value.trim();
+    aiResultStatus.textContent = '';
+});
+aiResultOpen.addEventListener('click', () => openAIResponse(aiResultText.value));
+aiResultClipboard.addEventListener('click', async () => {
+    aiResultClipboard.disabled = true;
+    aiResultStatus.textContent = '';
+    try {
+        const text = await navigator.clipboard.readText();
+        aiResultText.value = text;
+        aiResultOpen.disabled = !text.trim();
+        openAIResponse(text);
+    } catch {
+        aiResultStatus.textContent = '자동으로 붙여넣지 못했어요. 아래 입력창에 AI의 응답을 직접 붙여넣어 주세요.';
+        aiResultText.focus();
+    } finally { aiResultClipboard.disabled = false; }
+});
+document.getElementById('ai-result-cancel').addEventListener('click', () => aiResultDialog.close());
+aiResultDialog.addEventListener('close', () => {
+    const url = new URL(window.location.href);
+    url.searchParams.delete('import');
+    window.history.replaceState({}, '', url.toString());
 });
 
 ui.sharePlanBtn.addEventListener('click', sharePlan);
@@ -22750,6 +22798,7 @@ ui.currentFocusBtn.addEventListener('click', scrollToCurrentFocus);
 
 window.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape') return;
+    if (aiResultDialog.open) { event.preventDefault(); aiResultDialog.close(); return; }
     if (aiHandoffDialog.open) { event.preventDefault(); aiHandoffDialog.close(); return; }
 
     if (activityDragState.active) {
@@ -22817,3 +22866,4 @@ window.setInterval(updateClocks, 1000);
 renderIconPicker();
 bootstrapFromUrl();
 refreshPlan();
+if (new URL(window.location.href).searchParams.get('import') === 'ai') aiResultDialog.showModal();

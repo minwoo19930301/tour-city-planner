@@ -95,7 +95,9 @@ const promptContext=vm.createContext({pendingSetupSegmentsData:null,getDestinati
 for(const name of ['generateAIPromptText','decodePlan']){const start=app.indexOf('function '+name+'('),end=app.indexOf('\n}\n',start)+3;vm.runInContext(app.slice(start,end),promptContext);}
 const prompt=promptContext.generateAIPromptText('tokyo','2026-10-01','2026-10-01');
 assert(prompt.includes('#trip=1&g=tokyo~2026-10-01~2026-10-01'));
-assert(prompt.includes('링크 하나만 주세요'));
+assert(prompt.includes('[여행 일정 열기](https://minwoo19930301.github.io/tour-city-planner/?import=ai)'));
+assert(prompt.includes('완성 URL 원문 한 줄'));
+assert(!prompt.includes('[완성된 URL](<'));
 assert(!prompt.includes('코드 실행 도구가 없다면'));
 const example={v:4,g:[{d:'tokyo',s:'2026-10-01',e:'2026-10-01'}],i:[{a:[{id:'stop-1',r:'r1',h:'09:00',d:'tokyo',k:'landmark',l:'실제 장소명'},{id:'stop-2',r:'r2',h:'12:00',d:'tokyo',k:'utensils-crossed',l:'식당'}],e:[['stop-1','stop-2']]}]};
 const encoded=Buffer.from(JSON.stringify(example)).toString('base64url');
@@ -123,7 +125,7 @@ assert.equal(repairCount,1);
 assert.throws(()=>promptContext.decodePlan(Buffer.from('{"v":4,"i":[').toString('base64url')));
 console.log('PASS: narrowly repair missing memo boundary, preserve valid quoted text, reject truncated links.');
 
-const tripContext=vm.createContext({});vm.runInContext(fs.readFileSync('ai-link.js','utf8'),tripContext);
+const tripContext=vm.createContext({URL});vm.runInContext(fs.readFileSync('ai-link.js','utf8'),tripContext);
 const parseTrip=(hash,options)=>JSON.parse(JSON.stringify(tripContext.AITripLink.parse(hash,options)));
 const tripOptions={destinationIds:['tokyo','seoul'],iconIds:['landmark']};
 const readable='#trip=1&g=tokyo~2026-10-01~2026-10-02'+
@@ -192,3 +194,20 @@ let joined={activities:[{id:'start'},...Array.from({length:4},(_,i)=>({id:'p'+i,
 G.normalize(joined);assert.equal(G.join(joined,'moved','p2'),true);
 assert.deepEqual(Array.from(G.rows(joined),row=>row.length),[1,5,1]);
 console.log('PASS: moving an existing stop into a row of four keeps five parallel stops.');
+
+// Pasting a whole answer must recover the generated plan, not the fixed import link.
+const readAnswer=text=>JSON.parse(JSON.stringify(tripContext.AITripLink.readResponse(text,tripOptions)));
+const fullURL='https://minwoo19930301.github.io/tour-city-planner/'+readable;
+const answer='이 응답을 복사하세요.\n'+fullURL+'\n[여행 일정 열기](https://minwoo19930301.github.io/tour-city-planner/?import=ai)';
+assert.deepEqual(readAnswer(answer).payload,parsed);
+assert.deepEqual(readAnswer('[일정]('+fullURL+')\n'+fullURL).payload,parsed);
+assert.deepEqual(readAnswer(fullURL.replace('#trip=','?utm_source=chatgpt.com&trip=')).payload,parsed);
+assert.deepEqual(readAnswer(fullURL.replaceAll('&','&amp;')).payload,parsed);
+// ChatGPT's copy button escapes tildes and emits a Markdown hard break after the URL.
+assert.deepEqual(readAnswer(fullURL.replaceAll('~','\\~')+'\\\n[여행 일정 열기](<https://minwoo19930301.github.io/tour-city-planner/?import=ai>)').payload,parsed);
+assert.throws(()=>readAnswer('https://evil.example/'+readable));
+assert.throws(()=>readAnswer('https://minwoo19930301.github.io/tour-city-planner/?import=ai'));
+assert.throws(()=>readAnswer(fullURL.replace('~09:00~','~29:00~')));
+assert.throws(()=>readAnswer(fullURL+'\n'+fullURL.replace('~09:00~','~08:00~')));
+assert.throws(()=>readAnswer(prompt));
+console.log('PASS: whole AI response import, Markdown/HTML escapes, duplicate URLs, ambiguity and malformed answer rejection.');

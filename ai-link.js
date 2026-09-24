@@ -82,5 +82,31 @@
         }
         return { v: 4, g, i: [...days.values()] };
     }
-    root.AITripLink = { parse };
+    function readResponse(text, options) {
+        // Accept the whole AI answer, including its fixed import link and Markdown.
+        // Only read planner URLs; never navigate to a URL supplied by pasted text.
+        const source = String(text).replace(/\\\r?\n/g, '\n').replace(/&amp;/g, '&').replace(/\\([_&~])/g, '$1');
+        const candidates = source.match(/https:\/\/minwoo19930301\.github\.io\/tour-city-planner\/(?:index\.html)?[?#][^\s<>"`]+/g) || [];
+        const valid = new Map();
+        let foundPlan = false;
+        for (const candidate of candidates) {
+            const url = new URL(candidate.replace(/[).,\]]+$/, ''));
+            let fragment = url.hash;
+            if (!fragment.startsWith('#trip=')) {
+                if (!url.searchParams.has('trip')) continue;
+                fragment = '#' + url.search.slice(1).split('&').filter(part => /^(trip|g|s|e|m|q)=/.test(part)).join('&');
+            }
+            foundPlan = true;
+            try {
+                const payload = parse(fragment, options);
+                valid.set(JSON.stringify(payload), { fragment, payload });
+            } catch { /* Reject incomplete candidates without changing the current plan. */ }
+        }
+        if (valid.size > 1) throw new Error('서로 다른 일정이 여러 개 있어요. 원하는 일정 주소 하나만 붙여넣어 주세요.');
+        if (!valid.size) throw new Error(foundPlan
+            ? '일정 주소가 잘렸거나 형식이 맞지 않아요. AI의 전체 응답을 다시 복사해 주세요.'
+            : '일정 주소가 없어요. 프롬프트가 아닌 AI가 완성한 응답을 복사해 주세요.');
+        return valid.values().next().value;
+    }
+    root.AITripLink = { parse, readResponse };
 })(typeof module === 'object' ? module.exports : globalThis);
