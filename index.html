@@ -980,6 +980,10 @@
         .route-modes label{display:flex;align-items:center;gap:5px;padding:7px 9px;border:1px solid #ffffff25;border-radius:10px;font-size:12px;cursor:pointer;white-space:nowrap}
         .route-modes label:has(input:checked){border-color:var(--accent);background:#ff780020}
         .route-modes input{accent-color:var(--accent);margin:0}
+    #destination-selector{background:#111b2c!important;box-sizing:border-box;z-index:100;max-width:calc(100vw - 32px)}
+        .day-route-options{position:relative;scrollbar-width:auto;scrollbar-color:#f97316 #ffffff18;box-sizing:content-box;scroll-behavior:smooth;padding-right:8px}
+        .day-route-options::-webkit-scrollbar{width:7px}
+        .day-route-options::-webkit-scrollbar-thumb{background:#f97316;border-radius:8px}
     </style>
 </head>
 
@@ -1159,7 +1163,6 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-3 mt-auto">
-                        <button id="add-segment-btn" type="button" class="rounded-full border border-white/12 bg-white/6 px-5 py-4 text-sm font-semibold text-white hover:bg-white/10 transition-colors">일정 추가하기</button>
                         <button id="apply-plan-btn" type="button" class="action-btn primary px-6 py-4 text-sm font-semibold">이 일정으로 시작</button>
                     </div>
                     <div id="setup-segment-panel" class="hidden rounded-[24px] border border-white/10 bg-white/[0.04] p-3 sm:p-4">

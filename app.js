@@ -41,15 +41,16 @@ const REGION_LABELS = {
     'south-america': '남미'
 };
 const COUNTRY_SORT_ORDER = [
-    'South Korea',
     'Japan',
+    'Vietnam',
+    'China',
+    'Thailand',
+    'Philippines',
+    'United States',
+    'Taiwan',
     'Hong Kong',
     'Macau',
-    'China',
-    'Taiwan',
-    'Thailand',
-    'Vietnam',
-    'Philippines',
+    'South Korea',
     'Malaysia',
     'Singapore',
     'India',
@@ -18234,7 +18235,7 @@ const COUNTRY_THEMES = {
 // (없으면 데이터 순서상 첫 도시) 키는 "나라::시간대" 또는 나라 이름.
 const PREFERRED_GROUP_DESTINATIONS = {
     'Japan::Asia/Tokyo': 'tokyo',
-    'China::Asia/Shanghai': 'beijing',
+    'China::Asia/Shanghai': 'shanghai',
     'South Korea::Asia/Seoul': 'seoul',
     'United States::America/Los_Angeles': 'los-angeles',
     'United States::America/New_York': 'new-york',
@@ -18244,8 +18245,8 @@ const PREFERRED_GROUP_DESTINATIONS = {
     'Spain::Europe/Madrid': 'madrid',
     'Italy::Europe/Rome': 'rome',
     'Thailand::Asia/Bangkok': 'bangkok',
-    'Vietnam::Asia/Ho_Chi_Minh': 'hanoi',
-    'Philippines::Asia/Manila': 'philippines',
+    'Vietnam::Asia/Ho_Chi_Minh': 'da-nang',
+    'Philippines::Asia/Manila': 'cebu',
     'Taiwan::Asia/Taipei': 'taipei',
     'Malaysia::Asia/Kuala_Lumpur': 'malaysia',
     'United Arab Emirates::Asia/Dubai': 'dubai',
@@ -18533,7 +18534,15 @@ function getDestinationGroup(destinationId) {
     return getDestinationGroups().get(getDestinationGroupKey(getDestination(destinationId))) || null;
 }
 
+// Curated ordering informed by Korean outbound/air passenger statistics; not a live ranking.
+const POPULAR_CITY_LABELS={Japan:['도쿄','오사카','후쿠오카','삿포로','오키나와'],China:['상하이','칭다오','베이징','장자제','다롄'],Vietnam:['다낭','나트랑','푸꾸옥','하노이','호치민'],Thailand:['방콕','치앙마이','푸켓'],Philippines:['세부','마닐라','보홀','클락','보라카이']};
 const EXTRA_CITY_LABELS = {
+    india:['뭄바이','벵갈루루','첸나이'],colombo:['캔디','갈레'],kathmandu:['포카라','박타푸르'],bishkek:['오시','카라콜'],tashkent:['사마르칸트','부하라'],ulaanbaatar:['다르항','에르데네트'],
+    'phnom-penh':['시엠레아프','시아누크빌'],vientiane:['루앙프라방','방비엥'],saudi:['리야드','제다','메디나'],alaska:['앵커리지','페어뱅크스'],calgary:['에드먼턴','밴프'],
+    ireland:['코크','골웨이','리머릭'],iceland:['아퀴레이리','케플라비크'],
+    'south-africa':['요하네스버그','더반','프리토리아'],ghana:['쿠마시','테마'],kenya:['몸바사','나쿠루'],
+    brazil:['상파울루','브라질리아'],argentina:['코르도바','멘도사'],peru:['리마','아레키파'],chile:['발파라이소','푸에르토몬트'],colombia:['보고타','메데인'],bolivia:['라파스','수크레'],morocco:['카사블랑카','마라케시','페스'],tanzania:['다르에스살람','잔지바르'],
+    'new-zealand':['오클랜드','크라이스트처치','웰링턴'],egypt:['룩소르','알렉산드리아'],turkey:['앙카라','안탈리아','이즈미르'],
     paris:['리옹','마르세유','니스','보르도','스트라스부르'], london:['맨체스터','에든버러','리버풀','버밍엄','글래스고'],
     germany:['뮌헨','프랑크푸르트','함부르크','쾰른','뒤셀도르프'], czech:['브르노','체스키크룸로프','카를로비바리'],
     budapest:['데브레첸','세게드','페치'], poland:['크라쿠프','그단스크','브로츠와프','포즈난'],
@@ -18562,7 +18571,7 @@ function getSelectableDestinations() {
             id: destination.id,
             groupKey: group.key,
             memberIds: group.members.map((member) => member.id),
-            siblingLabels: [...new Set([...group.siblings.map((member) => getLocalizedLabel(member.city, member.city)), ...(EXTRA_CITY_LABELS[destination.id] || [])])],
+            siblingLabels: [...new Set([...(POPULAR_CITY_LABELS[destination.country] || []), ...group.siblings.map((member) => getLocalizedLabel(member.city, member.city)), ...(EXTRA_CITY_LABELS[destination.id] || [])])].filter(label=>label!==cityLabel).slice(0,4),
             country: destination.country,
             city: destination.city,
             region: getRegionKey(destination.country),
@@ -18571,8 +18580,6 @@ function getSelectableDestinations() {
             timeZone: destination.timeZone
         };
     }).sort((left, right) => {
-        const regionCompare = REGION_ORDER.indexOf(left.region) - REGION_ORDER.indexOf(right.region);
-        if (regionCompare !== 0) return regionCompare;
 
         const countryCompare = getCountrySortIndex(left.country) - getCountrySortIndex(right.country);
         if (countryCompare !== 0) return countryCompare;
@@ -19922,8 +19929,8 @@ function renderUtilityInfo() {
 
 function renderDestinationSelector() {
     const selectableDestinations = getSelectableDestinations();
-    ui.destinationSelector.innerHTML = REGION_ORDER.map((regionKey) => {
-        const entries = selectableDestinations.filter((destination) => destination.region === regionKey);
+    ui.destinationSelector.innerHTML = ['all'].map((regionKey) => {
+        const entries = selectableDestinations;
         if (!entries.length) return '';
 
         const buttons = entries.map((destination) => `
@@ -19949,7 +19956,7 @@ function renderDestinationSelector() {
 
         return `
             <section class="pb-1 ${regionKey === REGION_ORDER[0] ? '' : 'pt-2'}">
-                <div class="px-3 pb-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-white/34">${REGION_LABELS[regionKey]}</div>
+                <div class="px-3 pb-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-white/34">한국 출발 인기 여행지</div>
                 <div class="space-y-2">${buttons}</div>
             </section>
         `;
@@ -20058,9 +20065,7 @@ function renderSetupInputs() {
     const hasValidDraft = Boolean(getDraftSetupSegment());
     const pendingSegments = getPendingSetupSegments(hasValidDraft);
     const canApply = pendingSegments.length > 0;
-    ui.addSegmentBtn.disabled = !hasValidDraft;
-    ui.addSegmentBtn.classList.toggle('opacity-50', !hasValidDraft);
-    ui.addSegmentBtn.classList.toggle('pointer-events-none', !hasValidDraft);
+
     ui.applyPlanBtn.disabled = !canApply;
     ui.applyPlanBtn.classList.toggle('opacity-50', !canApply);
     ui.applyPlanBtn.classList.toggle('pointer-events-none', !canApply);
@@ -20076,7 +20081,7 @@ function syncDestinationDropdownPosition() {
     const viewportPadding = 16;
     const width = Math.min(rect.width, window.innerWidth - (viewportPadding * 2));
     const left = Math.min(Math.max(viewportPadding, rect.left), window.innerWidth - width - viewportPadding);
-    const availableBelow = Math.max(220, window.innerHeight - rect.bottom - viewportPadding);
+    const availableBelow = Math.max(100, window.innerHeight - rect.bottom - viewportPadding - 8);
 
     ui.destinationSelector.style.left = `${left}px`;
     ui.destinationSelector.style.top = `${rect.bottom + 8}px`;
@@ -20086,6 +20091,7 @@ function syncDestinationDropdownPosition() {
 }
 
 function openDestinationDropdown() {
+    document.body.appendChild(ui.destinationSelector);
     ui.destinationSelector.classList.remove('hidden');
     syncDestinationDropdownPosition();
 }
@@ -20149,44 +20155,32 @@ function getClockTimeValue(timeZone) {
 }
 
 function generateAIPromptText(destinationId, startDate, endDate) {
-    const destination = getDestination(destinationId);
-    const cityKo = destination.cityKo || destination.city || destinationId;
-    const countryKo = destination.countryKo || destination.country || '';
-    const baseDomain = 'https://minwoo19930301.github.io/tour-city-planner/';
+    const destination=getDestination(destinationId);
+    const segments=(pendingSetupSegmentsData?.length?pendingSetupSegmentsData:[{destinationId,startDate,endDate}]);
+    const compact=segments.map(s=>({d:s.destinationId,s:s.startDate,e:s.endDate}));
+    const example={v:4,g:compact,i:[{a:[{id:'stop-1',r:'row-1',d:destinationId,h:'09:00',l:'실제 장소명',q:'현지어 또는 영어 지도 검색어',k:'landmark',m:''},{id:'stop-2',r:'row-2',d:destinationId,h:'12:00',l:'실제 식당명',q:'현지어 또는 영어 지도 검색어',k:'utensils-crossed',m:''}],e:[['stop-1','stop-2']]}]};
+    return `여행 요구사항: 동선이 무리하지 않은 여행. 이 줄을 원하는 취향으로 수정해도 됩니다.
+여행지: ${getLocalizedLabel(destination.country)} · ${getLocalizedLabel(destination.city,destination.city)}
+여행 구간: ${JSON.stringify(compact)}
+주어진 날짜의 실제 방문 가능한 장소로 여행 계획을 만들어 주세요. 추가 요구사항이 없으면 합리적인 기본값으로 진행하세요.
 
-    return `[ 여기에 원하는 여행 테마나 요구사항을 자유롭게 적어주세요. 예: 디즈니랜드 위주로 대충 짜줘 ]
+현재 앱이 읽는 JSON 예시 (실제 모든 날짜를 채워야 함):
+${JSON.stringify(example,null,2)}
 
----
-AI 플래너님, 아래 여행지 및 날짜 조건에 맞는 멋진 여행 일정을 계획해 주세요.
-* 여행지: ${cityKo} (${countryKo})
-* 일정 날짜: ${startDate} ~ ${endDate}
+규칙:
+- v는 4. g는 위 여행 구간 그대로. i는 구간들의 중복 날짜를 한 번만 센 날짜 오름차순 배열. 시작일과 종료일 모두 포함.
+- a의 id는 전체 일정에서 고유한 영문/숫자/하이픈 문자열. h는 현지 시각 HH:MM이며 빈칸 금지.
+- l은 장소명, q는 도시명을 포함한 정확한 지도 검색어, m은 메모.
+- k는 다음 중 하나만 사용: ${ACTIVITY_ICON_OPTIONS.map(o=>o.value).join(', ')}.
+- 같은 r을 가진 연속 항목은 나란한 후보이며 최대 3개. e는 [출발 id,도착 id] 목록이며 분기·합류를 정확히 표현. 뒤에서 앞으로 잇는 순환 금지. 단일 코스는 항목을 순서대로 연결.
+- 실제 호텔명을 쓰되 예약된 것으로 단정하지 말고 m에 예시 호텔이라고 표시.
+- 이동시간은 추정이며 확정 교통·예약 정보처럼 표현하지 마세요.
 
-[답변 작성 시 필수 규칙 - 100% 엄수]
-1. 사용자의 요구사항(첫 줄 대괄호 안의 내용)이 비어있거나 수정되지 않았더라도, 되물어보거나 질문을 절대 하지 말고 즉시 일정을 멋지게 짜서 완성해 주세요.
-2. 인사말, 코스 설명, 이동 소요 시간, 팁, 서론, 결론 등 일체의 텍스트 설명을 전부 생략하고, 오로지 최종 JSON 결과물을 인코딩한 URL 링크 단 한 줄만 텍스트로 즉각 대답해 주세요.
-
-[출력 포맷]
-${baseDomain}#plan=<BASE64_ENCODED_JSON>
-
-[JSON 설계 스펙 가이드]
-{
-  "v": 3,
-  "g": [{"d": "${destinationId}", "s": "${startDate}", "e": "${endDate}"}],
-  "i": [
-    {
-      "a": [
-        {"d": "${destinationId}", "h": "09:00", "l": "가볼만한 장소 또는 활동명 1", "k": "landmark", "m": ""},
-        {"d": "${destinationId}", "h": "13:00", "l": "가볼만한 장소 또는 활동명 2", "k": "utensils", "m": ""}
-      ]
-    }
-  ]
-}
-
-* 참고 스펙:
-- "i" 배열의 원소 개수는 여행 총 일수와 정확히 일치해야 합니다.
-- 숙박 장소는 "숙소", "호텔" 같은 일반명 대신 해당 도시의 실제 호텔 이름을 사용하세요. 예약된 숙소로 오해하지 않도록 메모에 "예시 호텔"을 표시하세요.
-- "k" 값에는 Lucide 아이콘 명칭 사용: "plane", "sparkles", "luggage", "landmark", "compass", "utensils", "coffee", "hotel", "camera", "shopping-bag", "train", "car", "map-pin", "moon-star", "sun", "ticket", "beer".
-- 완성된 JSON 문자열을 UTF-8 기준으로 Base64 인코딩하여 #plan= 뒤에 붙여 한 줄의 링크로만 응답해 주세요.`;
+완성된 JSON을 UTF-8 Base64URL로 인코딩해서 아래 주소 뒤에 붙이세요. 압축 접두사 z는 붙이지 마세요.
+https://minwoo19930301.github.io/tour-city-planner/#plan=<Base64URL>
+Python 인코딩 예시: base64.urlsafe_b64encode(json.dumps(payload,ensure_ascii=False,separators=(',',':')).encode('utf-8')).decode().rstrip('=')
+코드 실행 도구가 있다면 반드시 인코딩 후 디코딩하여 원본 JSON과 동일한지 검증하세요. 인코딩 문자열을 추측하지 마세요. 코드 실행이 불가능하면 링크를 만들어내지 말고 완성 JSON을 코드 블록으로 제공하세요.
+검증한 경우 최종 답변은 클릭 가능한 완성 링크 하나만 주세요.`;
 }
 
 function findActiveContext() {
@@ -21145,6 +21139,8 @@ function openDayRoutes(dayIndex, offset=0) {
     }
     function choose(i){
         chosenActivities=paths[i]?.map(id=>byId.get(id))||[];
+        const options=panel.querySelector('.day-route-options'), selected=options.querySelectorAll('label')[i];
+        if(selected){let spacer=options.querySelector('.route-scroll-spacer');if(!spacer){spacer=document.createElement('div');spacer.className='route-scroll-spacer';options.appendChild(spacer);}spacer.style.height=Math.max(0,options.clientHeight-selected.offsetHeight)+'px';options.scrollTo({top:selected.offsetTop-options.firstElementChild.offsetTop,behavior:'smooth'});}
         const select=panel.querySelector('#transit-leg-select');
         select.innerHTML=chosenActivities.slice(0,-1).map((a,j)=>`<option value="${j}">${escapeHtml(a.location+' → '+chosenActivities[j+1].location)}</option>`).join('');
         select.disabled=chosenActivities.length<2;chooseLeg(0);
@@ -22496,9 +22492,7 @@ ui.setupCalendarNextBtn.addEventListener('click', () => {
     renderSetupCalendar();
 });
 
-ui.addSegmentBtn.addEventListener('click', () => {
-    addSetupSegmentFromSelection();
-});
+
 ui.applyPlanBtn.addEventListener('click', applySetupSelection);
 
 // 시작 옵션 모달 리스너들

@@ -91,3 +91,13 @@ assert.equal(ctx.distanceKm([139,35],[139,35]),0);
 assert(Math.abs(ctx.distanceKm([0,0],[0,1])-111.195)<.1);
 assert(ctx.approximateTravelMinutes(10)>ctx.approximateTravelMinutes(1));
 console.log('PASS: coordinate distance and estimated travel duration.');
+const promptContext=vm.createContext({pendingSetupSegmentsData:null,getDestination:()=>({country:'Japan',city:'Tokyo'}),getLocalizedLabel:x=>x,ACTIVITY_ICON_OPTIONS:[{value:'landmark'},{value:'utensils-crossed'}],atob:s=>Buffer.from(s,'base64').toString('binary'),TextDecoder,Uint8Array,console});
+for(const name of ['generateAIPromptText','decodePlan']){const start=app.indexOf('function '+name+'('),end=app.indexOf('\n}\n',start)+3;vm.runInContext(app.slice(start,end),promptContext);}
+const prompt=promptContext.generateAIPromptText('tokyo','2026-10-01','2026-10-01');
+const example=JSON.parse(prompt.split('현재 앱이 읽는 JSON 예시 (실제 모든 날짜를 채워야 함):\n')[1].split('\n\n규칙:')[0]);
+// First brace belongs to compact travel segments, extract example after its explicit heading.
+
+assert.equal(example.v,4);assert.equal(example.i[0].a[1].k,"utensils-crossed");
+const encoded=Buffer.from(JSON.stringify(example)).toString("base64url");assert.deepEqual(JSON.parse(JSON.stringify(promptContext.decodePlan(encoded))),example);
+ctx.appState.segments=example.g;ctx.exampleDays=example.i;vm.runInContext("restored=buildItineraryFromSharedPayload(appState.segments,exampleDays)",ctx);assert.equal(ctx.restored[0].activities[0].location,"실제 장소명");assert.equal(ctx.restored[0].links[0][1],"stop-2");
+console.log("PASS: AI prompt v4 example UTF-8 Base64URL decode and itinerary import.");
