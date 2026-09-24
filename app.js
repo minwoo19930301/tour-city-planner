@@ -18348,10 +18348,14 @@ const ui = {
     optAiBtn: document.getElementById('opt-ai-btn'),
     optCancelBtn: document.getElementById('opt-cancel-btn'),
     aiPromptModal: document.getElementById('ai-prompt-modal'),
-    aiPromptText: document.getElementById('ai-prompt-text'),
+    aiTripNotes: document.getElementById('ai-trip-notes'),
+    aiPromptTitle: document.getElementById('ai-prompt-title'),
+    aiRequestStep: document.getElementById('ai-request-step'),
+    aiServiceStep: document.getElementById('ai-service-step'),
+    aiCopyStatus: document.getElementById('ai-copy-status'),
+    aiRequestBackBtn: document.getElementById('ai-request-back-btn'),
     aiPromptCopyBtn: document.getElementById('ai-prompt-copy-btn'),
-    aiPromptCloseBtn: document.getElementById('ai-prompt-close-btn'),
-    aiPromptOkBtn: document.getElementById('ai-prompt-ok-btn')
+    aiPromptCloseBtn: document.getElementById('ai-prompt-close-btn')
 };
 
 function createId(prefix) {
@@ -20154,15 +20158,17 @@ function getClockTimeValue(timeZone) {
     return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
 }
 
-function generateAIPromptText(destinationId, startDate, endDate) {
+function generateAIPromptText(destinationId, startDate, endDate, tripNotes = '') {
     const destination=getDestination(destinationId);
     const segments=(pendingSetupSegmentsData?.length?pendingSetupSegmentsData:[{destinationId,startDate,endDate}]);
     const compact=segments.map(s=>({d:s.destinationId,s:s.startDate,e:s.endDate}));
     const example={v:4,g:compact,i:[{a:[{id:'stop-1',r:'row-1',d:destinationId,h:'09:00',l:'실제 장소명',q:'현지어 또는 영어 지도 검색어',k:'landmark',m:''},{id:'stop-2',r:'row-2',d:destinationId,h:'12:00',l:'실제 식당명',q:'현지어 또는 영어 지도 검색어',k:'utensils-crossed',m:''}],e:[['stop-1','stop-2']]}]};
-    return `여행 요구사항: 동선이 무리하지 않은 여행. 이 줄을 원하는 취향으로 수정해도 됩니다.
+    return `여행 요구사항: ${tripNotes.trim() || '동선이 무리하지 않은 여행.'}
 여행지: ${getLocalizedLabel(destination.country)} · ${getLocalizedLabel(destination.city,destination.city)}
 여행 구간: ${JSON.stringify(compact)}
 주어진 날짜의 실제 방문 가능한 장소로 여행 계획을 만들어 주세요. 추가 요구사항이 없으면 합리적인 기본값으로 진행하세요.
+사용자가 적은 숙소·맛집·필수 방문지·정해진 루트를 우선 반영하고, 명시한 예약 날짜와 시간은 임의로 바꾸지 마세요.
+앱 개발이나 소스 분석이 아닌 여행 일정 생성 요청입니다. 아래 형식을 사용해 일정과 링크를 완성하세요.
 
 현재 앱이 읽는 JSON 예시 (실제 모든 날짜를 채워야 함):
 ${JSON.stringify(example,null,2)}
@@ -20173,7 +20179,7 @@ ${JSON.stringify(example,null,2)}
 - l은 장소명, q는 도시명을 포함한 정확한 지도 검색어, m은 메모.
 - k는 다음 중 하나만 사용: ${ACTIVITY_ICON_OPTIONS.map(o=>o.value).join(', ')}.
 - 같은 r을 가진 연속 항목은 나란한 후보이며 최대 3개. e는 [출발 id,도착 id] 목록이며 분기·합류를 정확히 표현. 뒤에서 앞으로 잇는 순환 금지. 단일 코스는 항목을 순서대로 연결.
-- 실제 호텔명을 쓰되 예약된 것으로 단정하지 말고 m에 예시 호텔이라고 표시.
+- 사용자가 숙소를 지정했다면 그 숙소를 사용하세요. 지정하지 않았다면 실제 호텔명을 예시로 쓰고 m에 예시 호텔이라고 표시하세요. 사용자가 예약했다고 명시하지 않은 숙소를 예약된 것으로 단정하지 마세요.
 - 이동시간은 추정이며 확정 교통·예약 정보처럼 표현하지 마세요.
 
 완성된 JSON을 UTF-8 Base64URL로 인코딩해서 아래 주소 뒤에 붙이세요. 압축 접두사 z는 붙이지 마세요.
@@ -22505,33 +22511,77 @@ ui.optBlankBtn.addEventListener('click', () => {
 ui.optCancelBtn.addEventListener('click', () => {
     ui.startOptionsModal.classList.add('hidden');
 });
+let aiPromptFlowVersion = 0;
+let aiPromptCopied = false;
+
+function showAIRequestStep() {
+    aiPromptFlowVersion++;
+    aiPromptCopied = false;
+    ui.aiPromptTitle.textContent = '어떤 여행을 계획하고 있나요?';
+    ui.aiRequestStep.classList.remove('hidden');
+    ui.aiServiceStep.classList.add('hidden');
+    ui.aiPromptCopyBtn.disabled = false;
+    ui.aiCopyStatus.textContent = '먼저 아래 ‘프롬프트 복사하기’를 눌러 주세요. 도시·날짜와 적어 주신 내용을 함께 복사합니다.';
+}
+
+function closeAIPrompt() {
+    aiPromptFlowVersion++;
+    ui.aiPromptModal.classList.add('hidden');
+    ui.optAiBtn.focus();
+}
+
 ui.optAiBtn.addEventListener('click', () => {
-    if (!pendingSetupSegmentsData || !pendingSetupSegmentsData.length) return;
-    const seg = pendingSetupSegmentsData[0];
-    const promptText = generateAIPromptText(seg.destinationId, seg.startDate, seg.endDate);
-    
-    ui.aiPromptText.value = promptText;
+    if (!pendingSetupSegmentsData?.length) return;
+    showAIRequestStep();
     ui.startOptionsModal.classList.add('hidden');
     ui.aiPromptModal.classList.remove('hidden');
-    
-    navigator.clipboard.writeText(promptText).then(() => {
-        window.alert('프롬프트가 클립보드에 자동으로 복사되었습니다! 원하시는 AI 서비스에 붙여넣어주세요.');
-    }).catch((err) => {
-        console.warn('Clipboard write failed: ', err);
-    });
 });
-
-// AI 프롬프트 안내 모달 리스너들
 ui.aiPromptCloseBtn.addEventListener('click', () => {
-    ui.aiPromptModal.classList.add('hidden');
+    ui.startOptionsModal.classList.remove('hidden');
+    closeAIPrompt();
 });
-ui.aiPromptOkBtn.addEventListener('click', () => {
-    ui.aiPromptModal.classList.add('hidden');
+ui.aiRequestBackBtn.addEventListener('click', () => {
+    showAIRequestStep();
+    ui.aiTripNotes.focus();
 });
-ui.aiPromptCopyBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(ui.aiPromptText.value).then(() => {
-        window.alert('프롬프트가 복사되었습니다!');
-    });
+ui.aiTripNotes.addEventListener('input', () => {
+    aiPromptCopied = false;
+    aiPromptFlowVersion++;
+    ui.aiPromptCopyBtn.disabled = false;
+});
+ui.aiPromptCopyBtn.addEventListener('click', async () => {
+    if (!pendingSetupSegmentsData?.length) return;
+    const version = ++aiPromptFlowVersion;
+    const seg = pendingSetupSegmentsData[0];
+    const prompt = generateAIPromptText(seg.destinationId, seg.startDate, seg.endDate, ui.aiTripNotes.value);
+    ui.aiPromptCopyBtn.disabled = true;
+    ui.aiCopyStatus.textContent = '프롬프트를 복사하고 있어요…';
+    try {
+        await navigator.clipboard.writeText(prompt);
+        if (version !== aiPromptFlowVersion) return;
+        aiPromptCopied = true;
+        ui.aiPromptTitle.textContent = '복사했어요. AI에 붙여넣어 주세요';
+        ui.aiRequestStep.classList.add('hidden');
+        ui.aiServiceStep.classList.remove('hidden');
+        ui.aiServiceStep.querySelector('[data-ai-service]').focus();
+    } catch {
+        if (version === aiPromptFlowVersion) {
+            ui.aiCopyStatus.textContent = '복사하지 못했어요. 브라우저의 클립보드 권한을 확인한 뒤 다시 눌러 주세요.';
+        }
+    } finally {
+        if (version === aiPromptFlowVersion) ui.aiPromptCopyBtn.disabled = false;
+    }
+});
+ui.aiServiceStep.addEventListener('click', event => {
+    const link = event.target.closest('[data-ai-service]');
+    if (!link) return;
+    event.preventDefault();
+    if (!aiPromptCopied) {
+        showAIRequestStep();
+        ui.aiPromptCopyBtn.focus();
+        return;
+    }
+    window.location.assign(link.href);
 });
 
 ui.sharePlanBtn.addEventListener('click', sharePlan);
@@ -22627,6 +22677,12 @@ window.addEventListener('keydown', (event) => {
 
     if (activityDragState.active) {
         cancelActivityDrag();
+        return;
+    }
+
+    if (!ui.aiPromptModal.classList.contains('hidden')) {
+        ui.startOptionsModal.classList.remove('hidden');
+        closeAIPrompt();
         return;
     }
 

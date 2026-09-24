@@ -1162,7 +1162,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-3 mt-auto">
+                    <div class="grid grid-cols-1 gap-3 mt-auto">
                         <button id="apply-plan-btn" type="button" class="action-btn primary px-6 py-4 text-sm font-semibold">이 일정으로 시작</button>
                     </div>
                     <div id="setup-segment-panel" class="hidden rounded-[24px] border border-white/10 bg-white/[0.04] p-3 sm:p-4">
@@ -1346,57 +1346,40 @@
         </div>
     </div>
 
-    <!-- AI 프롬프트 가이드 모달 -->
-    <div id="ai-prompt-modal" class="fixed inset-0 z-[97] hidden overflow-y-auto">
+    <!-- 여행 요청 입력 → 직접 복사 → AI 서비스 이동 -->
+    <div id="ai-prompt-modal" role="dialog" aria-modal="true" aria-labelledby="ai-prompt-title" class="fixed inset-0 z-[97] hidden overflow-y-auto">
         <div class="absolute inset-0 bg-slate-950/76 backdrop-blur-md"></div>
         <div class="relative z-10 max-w-xl mx-auto min-h-screen flex items-center px-4 py-8">
-            <div class="glass-panel rounded-[32px] p-6 w-full relative">
+            <div class="glass-panel rounded-[28px] p-5 sm:p-6 w-full relative">
                 <div class="flex items-start justify-between gap-4 mb-4">
-                    <div>
-                        <div class="text-[11px] uppercase tracking-[0.24em] text-white/45 mb-1">AI Prompt Copier</div>
-                        <h2 class="text-xl font-serif font-bold text-white">AI 플래너 프롬프트 복사</h2>
-                    </div>
-                    <button id="ai-prompt-close-btn" class="shrink-0 rounded-full bg-white/5 border border-white/10 p-2 text-white/45 hover:text-white transition-colors" aria-label="닫기">
+                    <h2 id="ai-prompt-title" class="text-xl font-bold text-white">어떤 여행을 계획하고 있나요?</h2>
+                    <button id="ai-prompt-close-btn" type="button" class="shrink-0 rounded-full bg-white/5 border border-white/10 p-2 text-white/60" aria-label="닫기">
                         <i data-lucide="x" class="w-4 h-4"></i>
                     </button>
                 </div>
-
-                <p class="text-xs text-white/60 mb-3 leading-relaxed">
-                    아래 프롬프트 텍스트를 복사한 뒤, 원하시는 AI 서비스에 붙여넣어 완벽한 여행 레시피 해시 링크를 받으세요! AI가 뱉어주는 최종 링크를 주소창에 치고 들어오시면 일정이 연동됩니다.
-                </p>
-
-                <!-- 프롬프트 텍스트 에어리어 -->
-                <div class="relative mb-4">
-                    <textarea id="ai-prompt-text" readonly rows="8" class="w-full p-3.5 rounded-2xl border border-white/10 bg-black/40 text-xs font-mono text-white/80 leading-relaxed focus:outline-none focus:border-purple-500/50 resize-none hide-scrollbar"></textarea>
-                    <button id="ai-prompt-copy-btn" type="button" class="absolute right-3 bottom-3 rounded-xl bg-purple-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-purple-500 transition-all flex items-center gap-1.5 shadow-lg active:scale-95">
-                        <i data-lucide="copy" class="w-3.5 h-3.5"></i>
-                        <span>복사하기</span>
+                <div id="ai-request-step">
+                    <label for="ai-trip-notes" class="block text-sm text-white/80 leading-relaxed mb-3">가려는 숙소, 예약해 둔 맛집, 꼭 가보고 싶은 곳이나 정해진 루트가 있다면 대략 적어 주세요.</label>
+                    <textarea id="ai-trip-notes" rows="6" class="w-full p-3.5 rounded-2xl border border-white/15 bg-black/25 text-base text-white leading-relaxed focus:outline-none focus:border-purple-400 resize-y" placeholder="숙소: 힐튼 도쿄
+예약한 맛집: 둘째 날 저녁 7시 스시집
+꼭 가볼 곳: 메이지 신궁, 시부야 스카이
+정해진 루트: 아사쿠사 → 우에노
+그 밖의 취향: 천천히 걷고 카페에서 쉬기"></textarea>
+                    <p class="text-xs text-white/55 mt-2">아직 정한 게 없다면 비워 두어도 괜찮아요.</p>
+                    <p id="ai-copy-status" role="status" aria-live="polite" class="text-sm text-purple-200 mt-5 mb-3">먼저 아래 ‘프롬프트 복사하기’를 눌러 주세요. 도시·날짜와 적어 주신 내용을 함께 복사합니다.</p>
+                    <button id="ai-prompt-copy-btn" type="button" class="w-full rounded-2xl bg-purple-600 px-4 py-3.5 text-sm font-semibold text-white hover:bg-purple-500 disabled:opacity-50 flex items-center justify-center gap-2">
+                        <i data-lucide="copy" class="w-4 h-4"></i><span>프롬프트 복사하기</span>
                     </button>
                 </div>
-
-                <!-- AI 링크 4종 세트 -->
-                <div class="mb-5">
-                    <div class="text-[11px] uppercase tracking-[0.24em] text-white/45 mb-2.5">AI Services</div>
-                    <div class="grid grid-cols-2 gap-2">
-                        <a href="https://chatgpt.com" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 p-2.5 rounded-xl border border-white/8 bg-white/4 hover:bg-white/8 text-xs font-semibold text-white/90 hover:text-white transition-colors">
-                            <span>💬 ChatGPT</span>
-                        </a>
-                        <a href="https://claude.ai" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 p-2.5 rounded-xl border border-white/8 bg-white/4 hover:bg-white/8 text-xs font-semibold text-white/90 hover:text-white transition-colors">
-                            <span>🎨 Claude</span>
-                        </a>
-                        <a href="https://gemini.google.com" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 p-2.5 rounded-xl border border-white/8 bg-white/4 hover:bg-white/8 text-xs font-semibold text-white/90 hover:text-white transition-colors">
-                            <span>✨ Gemini</span>
-                        </a>
-                        <a href="https://grok.com" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 p-2.5 rounded-xl border border-white/8 bg-white/4 hover:bg-white/8 text-xs font-semibold text-white/90 hover:text-white transition-colors">
-                            <span>🔮 Grok</span>
-                        </a>
+                <div id="ai-service-step" class="hidden">
+                    <p class="text-sm text-white/85 leading-relaxed mb-2">아래 AI 서비스를 선택한 뒤, 입력창에서 <strong>우클릭</strong>하거나 <strong>꾹 눌러 ‘붙여넣기’</strong>를 선택해 주세요.</p>
+                    <p class="text-xs text-white/55 leading-relaxed mb-5">붙여넣은 내용을 전송하고, AI가 만든 일정 링크를 열면 계획을 확인할 수 있어요.</p>
+                    <div class="grid grid-cols-2 gap-2" aria-label="AI 서비스 선택">
+                        <a data-ai-service href="https://chatgpt.com" class="flex items-center justify-center p-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-sm font-semibold text-white">💬 ChatGPT</a>
+                        <a data-ai-service href="https://claude.ai" class="flex items-center justify-center p-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-sm font-semibold text-white">🎨 Claude</a>
+                        <a data-ai-service href="https://gemini.google.com" class="flex items-center justify-center p-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-sm font-semibold text-white">✨ Gemini</a>
+                        <a data-ai-service href="https://grok.com" class="flex items-center justify-center p-3.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-sm font-semibold text-white">🔮 Grok</a>
                     </div>
-                </div>
-
-                <div class="flex justify-end pt-3 border-t border-white/8">
-                    <button id="ai-prompt-ok-btn" type="button" class="rounded-2xl border border-white/12 bg-white/6 px-4 py-2.5 text-xs font-semibold text-white hover:bg-white/10 transition-colors w-full sm:w-auto">
-                        닫기
-                    </button>
+                    <button id="ai-request-back-btn" type="button" class="mt-5 text-sm text-white/65 underline underline-offset-4">내용 수정하기</button>
                 </div>
             </div>
         </div>
@@ -1404,7 +1387,7 @@
 
     <script src="./example-hotels.js?v=1"></script>
     <script src="./graph-model.js?v=6"></script>
-    <script src="./app.js?v=reverse-wire-v16" defer></script>
+    <script src="./app.js?v=ai-request-flow-v17" defer></script>
 </body>
 
 </html>
