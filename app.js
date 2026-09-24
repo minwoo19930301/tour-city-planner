@@ -19528,6 +19528,9 @@ function getMapsSearchUrl(location, destinationId = '') {
     return url.toString();
 }
 
+function routeModeRadios(name,selected){
+    return `<fieldset class="route-modes" aria-label="이동 수단">${[['driving','자동차'],['transit','대중교통'],['walking','도보']].map(([value,label])=>`<label><input type="radio" name="${name}" value="${value}" ${value===selected?'checked':''}>${label}</label>`).join('')}</fieldset>`;
+}
 function getDirectionsUrl(origin, destination, mode = 'transit') {
     const url = new URL('https://www.google.com/maps/dir/');
     url.searchParams.set('api', '1');
@@ -19551,7 +19554,7 @@ function getDirectionsEmbedUrl(origin, destination, waypoints = [], mode = 'tran
     const stops = [...waypoints, destination].map((stop) => String(stop || '').trim()).filter(Boolean);
     if (!start || !stops.length) return '';
     const daddr = stops.map((stop) => encodeURIComponent(stop)).join('+to:');
-    return `https://maps.google.com/maps?saddr=${encodeURIComponent(start)}&daddr=${daddr}&dirflg=${mode === 'driving' ? 'd' : 'r'}&hl=ko&output=embed`;
+    return `https://maps.google.com/maps?saddr=${encodeURIComponent(start)}&daddr=${daddr}&dirflg=${mode === 'driving' ? 'd' : mode === 'walking' ? 'w' : 'r'}&hl=ko&output=embed`;
 }
 
 function getDayDirectionsEmbedUrl(activities = [], mode = 'driving') {
@@ -21093,15 +21096,15 @@ function openDayRoutes(dayIndex, offset=0) {
     day.activities.filter(a=>!incoming.has(a.id)).forEach(a=>visit(a.id,[]));
     const hasMore=paths.length>200;if(hasMore)paths.pop();
     const panel=document.createElement('section');panel.id='day-route-picker';panel.setAttribute('role','dialog');panel.setAttribute('aria-label','하루 이동코스');
-    panel.innerHTML=`<header><strong>하루 이동코스 · ${offset?offset+1+'–':''}${offset+paths.length}${hasMore?'+':''}개</strong><button type="button" aria-label="코스 닫기">×</button></header><div class="day-route-options">${paths.map((path,i)=>`<label><input type="radio" name="day-route-choice" value="${i}" ${i===0?'checked':''}><span>${path.map(id=>escapeHtml(byId.get(id).location)).join(' → ')}</span></label>`).join('') || '등록된 일정이 없어요.'}</div><div class="route-pages">${offset?'<button data-route-page="prev">이전 코스</button>':''}${hasMore?'<button data-route-page="next">다음 코스</button>':''}</div><select class="route-mode" aria-label="이동 수단"><option value="driving">자동차</option><option value="transit">대중교통</option></select><label class="transit-leg-label">대중교통 이동 구간<select id="transit-leg-select"></select></label><iframe title="선택한 하루 이동코스 지도" referrerpolicy="no-referrer-when-downgrade"></iframe><a target="_blank" rel="noreferrer">구글 맵에서 열기 ↗</a>`;
+    panel.innerHTML=`<header><strong>하루 이동코스 · ${offset?offset+1+'–':''}${offset+paths.length}${hasMore?'+':''}개</strong><button type="button" aria-label="코스 닫기">×</button></header><div class="day-route-options">${paths.map((path,i)=>`<label><input type="radio" name="day-route-choice" value="${i}" ${i===0?'checked':''}><span>${path.map(id=>escapeHtml(byId.get(id).location)).join(' → ')}</span></label>`).join('') || '등록된 일정이 없어요.'}</div><div class="route-pages">${offset?'<button data-route-page="prev">이전 코스</button>':''}${hasMore?'<button data-route-page="next">다음 코스</button>':''}</div>${routeModeRadios('day-travel-mode','driving')}<label class="transit-leg-label">대중교통 이동 구간<select id="transit-leg-select"></select></label><iframe title="선택한 하루 이동코스 지도" referrerpolicy="no-referrer-when-downgrade"></iframe><a target="_blank" rel="noreferrer">구글 맵에서 열기 ↗</a>`;
     document.body.appendChild(panel);panel.querySelector('button').onclick=()=>panel.remove();
     panel.querySelectorAll('[data-route-page]').forEach(button=>button.onclick=()=>openDayRoutes(dayIndex,offset+(button.dataset.routePage==='next'?200:-200)));
     let chosenActivities=[];
-    const modeSelect=panel.querySelector('.route-mode');
-    modeSelect.onchange=()=>chooseLeg(Number(panel.querySelector('#transit-leg-select').value)||0);
+    const modeSelect=()=>panel.querySelector('[name=day-travel-mode]:checked').value;
+    panel.querySelector('.route-modes').onchange=()=>chooseLeg(Number(panel.querySelector('#transit-leg-select').value)||0);
     function chooseLeg(i){
-        panel.querySelector('.transit-leg-label').hidden=modeSelect.value==='driving';
-        if(modeSelect.value==='driving'){const frame=panel.querySelector('iframe'),link=panel.querySelector('a');frame.src=getDayDirectionsEmbedUrl(chosenActivities)||'about:blank';link.href=getDayDirectionsUrl(chosenActivities);link.hidden=chosenActivities.length<2;link.textContent='이 코스를 구글 맵 자동차로 열기 ↗';return;}
+        panel.querySelector('.transit-leg-label').hidden=modeSelect()!=='transit';
+        if(modeSelect()!=='transit'){const frame=panel.querySelector('iframe'),link=panel.querySelector('a');frame.src=getDayDirectionsEmbedUrl(chosenActivities,modeSelect())||'about:blank';link.href=getDayDirectionsUrl(chosenActivities,'',modeSelect());link.hidden=chosenActivities.length<2;link.textContent=`이 코스를 구글 맵 ${modeSelect()==='walking'?'도보':'자동차'}로 열기 ↗`;return;}
         const from=chosenActivities[i],to=chosenActivities[i+1];
         const frame=panel.querySelector('iframe'),link=panel.querySelector('a');
         if(!from||!to){frame.src='about:blank';link.hidden=true;return;}
@@ -22111,9 +22114,10 @@ function openRoutePreview(anchor) {
 
     ui.routePreviewTitle.textContent = anchor.dataset.routeTitle || '가는 길';
     let selector=document.getElementById('segment-route-mode');
-    if(!selector){selector=document.createElement('select');selector.id='segment-route-mode';selector.className='route-mode';selector.setAttribute('aria-label','이동 수단');selector.innerHTML='<option value="transit">대중교통</option><option value="driving">자동차</option>';ui.routePreviewTitle.after(selector);}
-    selector.value='transit';
-    selector.onchange=()=>{const url=new URL(anchor.href);const from=url.searchParams.get('origin'),to=url.searchParams.get('destination');ui.routePreviewFrame.src=getDirectionsEmbedUrl(from,to,[],selector.value);ui.routePreviewOpen.href=getDirectionsUrl(from,to,selector.value);};
+    if(!selector){selector=document.createElement('div');selector.id='segment-route-mode';ui.routePreviewTitle.after(selector);}
+    selector.innerHTML=routeModeRadios('segment-travel-mode','transit');
+    selector.onchange=()=>{const mode=selector.querySelector('input:checked').value;const url=new URL(anchor.href);const from=url.searchParams.get('origin'),to=url.searchParams.get('destination');ui.routePreviewFrame.src=getDirectionsEmbedUrl(from,to,[],mode);ui.routePreviewOpen.href=getDirectionsUrl(from,to,mode);};
+
 
     ui.routePreviewOpen.href = anchor.getAttribute('href') || '#';
     if (!sameAnchor) {
@@ -22514,8 +22518,8 @@ function finishActivityTouch(event){
 window.addEventListener('touchend',finishActivityTouch,{passive:false});
 window.addEventListener('touchcancel',finishActivityTouch,{passive:false});
 ui.itineraryContainer.addEventListener('contextmenu', handleActivityContextMenu);
-ui.itineraryContainer.addEventListener('pointerover', handleRoutePointerOver);
-ui.itineraryContainer.addEventListener('pointerout', handleRoutePointerOut);
+
+
 ui.routePreview?.addEventListener('click', (event) => {
     if (event.target.closest('[data-route-close]')) closeRoutePreview();
 });
