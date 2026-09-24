@@ -20697,6 +20697,11 @@ function drawGraphEdges() {
     appState.itinerary.forEach((day,dayIndex) => {
         const list=ui.itineraryContainer.querySelector(`[data-activity-list="${dayIndex}"]`), svg=list?.querySelector('.tree-svg');
         if (!svg) return;
+        const rankForGap=new Map(TripGraph.rows(day).flatMap((row,i)=>row.map(a=>[a.id,i]))),counts=new Map();
+        day.links.forEach(([a,b])=>{const key=rankForGap.get(a)+'-'+rankForGap.get(b);counts.set(key,(counts.get(key)||0)+1);});
+        const columnsForGap=Math.max(1,Math.floor(list.clientWidth/76));
+        const toolbarRows=Math.ceil(Math.max(1,...counts.values())/columnsForGap);
+        list.style.setProperty('row-gap',`${Math.max(placingStop||activityDragState.active?96:72,toolbarRows*36+20)}px`,'important');
         const bounds=list.getBoundingClientRect();
         svg.setAttribute('viewBox',`0 0 ${bounds.width} ${bounds.height}`);
         list.querySelectorAll('.edge-actions').forEach(el=>el.remove());
