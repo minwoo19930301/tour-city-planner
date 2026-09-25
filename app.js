@@ -17720,7 +17720,20 @@ const portraitViewportQuery = window.matchMedia('(orientation: portrait)');
 function isPortraitViewport() {
     return portraitViewportQuery.matches;
 }
+const visitAppearance = new Map();
+function getVisitAppearance(destination) {
+    if (!visitAppearance.has(destination.country)) {
+        const photos = Object.values(DESTINATIONS).filter(item => item.country === destination.country && item.heroImage);
+        const colors = ['#f97316', '#ec4899', '#a78bfa', '#22d3ee', '#34d399', '#fbbf24'];
+        visitAppearance.set(destination.country, {
+            photo: photos[Math.floor(Math.random() * photos.length)] || destination,
+            accent: colors[Math.floor(Math.random() * colors.length)]
+        });
+    }
+    return visitAppearance.get(destination.country);
+}
 function getHeroSource(destination) {
+    destination = getVisitAppearance(destination).photo;
     if (isPortraitViewport() && destination.heroImagePortrait) {
         return { src: destination.heroImagePortrait, position: destination.heroPositionPortrait || 'center center' };
     }
@@ -19477,8 +19490,9 @@ function setShareStatus(message = '') {
 }
 
 function applyTheme(destination) {
-    document.documentElement.style.setProperty('--accent', destination.accent);
-    document.documentElement.style.setProperty('--accent-rgb', destination.accentRgb);
+    const appearance = getVisitAppearance(destination);
+    document.documentElement.style.setProperty('--accent', appearance.accent);
+    document.documentElement.style.setProperty('--accent-rgb', hexToRgbString(appearance.accent));
     document.documentElement.style.setProperty('--ink', destination.ink);
     document.documentElement.style.setProperty('--ink-rgb', destination.inkRgb);
     document.documentElement.style.setProperty('--overlay-top', destination.overlayTop);
@@ -19486,7 +19500,7 @@ function applyTheme(destination) {
 
     const heroSource = getHeroSource(destination);
     if (ui.heroImage.getAttribute('src') !== heroSource.src) ui.heroImage.src = heroSource.src;
-    ui.heroImage.alt = `${destination.city}, ${destination.country}`;
+    ui.heroImage.alt = `${appearance.photo.city}, ${appearance.photo.country}`;
     ui.heroImage.style.objectPosition = heroSource.position;
     document.title = `${destination.country} Trip Plan`;
 }
@@ -20365,9 +20379,9 @@ function updateClocks() {
     });
 }
 
-function getWeatherInfo(code) {
-    if (code === 0) return { icon: 'sun', color: '#fbbf24' };
-    if (code === 1 || code === 2) return { icon: 'cloud-sun', color: '#fbbf24' };
+function getWeatherInfo(code, isDay = true) {
+    if (code === 0) return { icon: isDay ? 'sun' : 'moon', color: isDay ? '#f97316' : '#c4b5fd' };
+    if (code === 1 || code === 2) return { icon: isDay ? 'cloud-sun' : 'cloud-moon', color: isDay ? '#fbbf24' : '#c4b5fd' };
     if (code === 3) return { icon: 'cloud', color: '#94a3b8' };
     if (code >= 45 && code <= 48) return { icon: 'cloud-fog', color: '#94a3b8' };
     if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82)) return { icon: 'cloud-rain', color: '#60a5fa' };
@@ -20439,7 +20453,7 @@ async function fetchWeather() {
                 latitude: destination.weather.latitude,
                 longitude: destination.weather.longitude,
                 daily: 'weather_code,temperature_2m_max,temperature_2m_min',
-                hourly: 'temperature_2m,weather_code',
+                hourly: 'temperature_2m,weather_code,is_day',
                 timezone: destination.timeZone,
                 start_date: segment.startDate,
                 end_date: segment.endDate
@@ -20461,7 +20475,8 @@ async function fetchWeather() {
             (data?.hourly?.time || []).forEach((entry, index) => {
                 hourlyByKey[`${destination.id}|${entry}`] = {
                     weatherCode: data.hourly.weather_code[index],
-                    temp: data.hourly.temperature_2m[index]
+                    temp: data.hourly.temperature_2m[index],
+                    isDay: data.hourly.is_day?.[index]
                 };
             });
         } catch (error) {
@@ -20519,7 +20534,7 @@ function buildHourlyWeatherContent(day, activity) {
     const weather = appState.currentWeather?.hourlyByKey?.[`${activity.destinationId || day.destinationId}|${hourLabel}`];
     if (!weather) return '';
 
-    const weatherInfo = getWeatherInfo(weather.weatherCode);
+    const weatherInfo = getWeatherInfo(weather.weatherCode, weather.isDay != null ? Boolean(weather.isDay) : (Number(resolved.split(':')[0]) >= 6 && Number(resolved.split(':')[0]) < 18));
     const temp = Math.round(weather.temp);
 
     return `

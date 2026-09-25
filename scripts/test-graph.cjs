@@ -235,5 +235,5 @@ assert(ctx.moveDays[0].activities.every(a=>/^\d\d:\d\d$/.test(a.time)));
 const phraseContext=vm.createContext({});vm.runInContext(fs.readFileSync('travel-phrases.js','utf8')+';globalThis.phrases=JAPANESE_TRAVEL_PHRASES',phraseContext);
 assert(phraseContext.phrases.length>=100);assert.equal(new Set(phraseContext.phrases.map(p=>p.text)).size,phraseContext.phrases.length);assert(phraseContext.phrases.every(p=>p.text&&p.pron&&p.meaning));
 {const a=app.indexOf('function getWeatherInfo('),b=app.indexOf('\n}\n',a)+3;vm.runInContext(app.slice(a,b),ctx);}
-assert.equal(ctx.getWeatherInfo(0).color,ctx.getWeatherInfo(1).color);assert.equal(ctx.getWeatherInfo(3).icon,'cloud');assert.equal(ctx.getWeatherInfo(85).icon,'cloud-snow');
+assert.equal(ctx.getWeatherInfo(0).color,'#f97316');assert.equal(ctx.getWeatherInfo(1).color,'#fbbf24');assert.equal(ctx.getWeatherInfo(0,false).icon,'moon');assert.equal(ctx.getWeatherInfo(2,false).icon,'cloud-moon');assert.equal(ctx.getWeatherInfo(3).icon,'cloud');assert.equal(ctx.getWeatherInfo(85).icon,'cloud-snow');
 console.log('PASS: branch-aware sorting, complete Japanese phrase bank ('+phraseContext.phrases.length+'), consistent weather codes.');
