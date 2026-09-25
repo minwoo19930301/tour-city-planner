@@ -20214,7 +20214,7 @@ https://minwoo19930301.github.io/tour-city-planner/#trip~1&${groupParams}
 - 고유ID는 a1,a2처럼 전체 일정에서 중복되지 않는 영문·숫자. 행ID는 r1,r2처럼 쓰세요.
 - 같은 날짜에서 같은 행ID인 연속 장소들은 나란한 후보입니다(기본 3개 표시, 더 많으면 가로 스크롤). 보통 순차 일정은 행ID를 다르게 주세요.
 - 아이콘은 다음 중 하나: ${ACTIVITY_ICON_OPTIONS.map(option => option.value).join(', ')}.
-- 장소명은 실제 검색 가능한 장소 이름만 적고 도시를 함께 적어 정확히 찾게 해 주세요. 골프팀·휴식팀·A팀·합류·체크아웃 같은 팀 이름이나 행동은 장소명에 넣지 말고 메모에 적으세요. 같은 장소여도 방문 시간이나 팀 경로가 다르면 별도 일정으로 만들고, 실제 같은 시간에 합류할 때만 공통 일정에 연결하세요. 한글·영어·일본어를 그대로 쓸 수 있습니다.
+- 장소명은 실제 검색 가능한 장소 이름만 적고 도시를 함께 적어 정확히 찾게 해 주세요. 골프팀·휴식팀·A팀·합류·체크아웃 같은 팀 이름이나 행동은 장소명에 넣지 말고 메모에 적으세요. 한 번 갈라진 경로는 다시 합치지 마세요. 이후 동일한 장소도 가지마다 다른 ID로 복제하세요. 시간은 표시용이며 배치는 앞·뒤·옆에 놓은 순서를 따릅니다. 한글·영어·일본어를 그대로 쓸 수 있습니다.
 - 장소명·메모 안의 공백은 +, &는 %26, #은 %23, ~는 %7E, +는 %2B, %는 %25, 괄호는 %28 및 %29로 쓰세요. 이스케이프는 원래 글자에 한 번만 적용하세요. 항목 사이의 &와 ~는 그대로 둡니다.
 - 메모가 필요하면 &m~고유ID~메모 를 붙이세요. 메모는 간단히 적으세요.
 - 지도 검색어를 별도로 지정하려면 &q~고유ID~검색어 를 붙이세요.
@@ -20641,33 +20641,20 @@ function buildActivityReorderControlsHtml(day, dayIndex, activity, activityIndex
 
 let pendingParallelActivity = null;
 
-function buildTimedBranchLayout(day) {
-    const ordered=TripGraph.rows(day).flat(), positions=new Map();
-    const minutes=a=>{const m=/^(\d{2}):(\d{2})$/.exec(a.time||'');return m?Number(m[1])*60+Number(m[2]):0;};
-    const times=[...new Set(ordered.map(minutes))].sort((a,b)=>a-b);
-    const roots=ordered.filter(a=>!day.links.some(e=>e[1]===a.id));
-    for(const activity of ordered){
-        const parents=day.links.filter(e=>e[1]===activity.id).map(e=>positions.get(e[0])).filter(Boolean);
-        let left=0,width=1;
-        if(parents.length>1){left=Math.min(...parents.map(p=>p.left));width=Math.max(...parents.map(p=>p.left+p.width))-left;}
-        else if(parents.length===1){
-            const parentId=day.links.find(e=>e[1]===activity.id)[0],parent=parents[0];
-            const children=day.links.filter(e=>e[0]===parentId).map(e=>e[1]);
-            left=parent.left+parent.width*children.indexOf(activity.id)/children.length;width=parent.width/children.length;
-        }else if(roots.length>1){left=roots.indexOf(activity)/roots.length;width=1/roots.length;}
-        const row=Math.max(times.indexOf(minutes(activity))+1,...parents.map(p=>p.row+1));
-        positions.set(activity.id,{left,width,row,span:1});
-    }
-    for(const activity of ordered){
-        const pos=positions.get(activity.id),next=day.links.filter(e=>e[0]===activity.id).map(e=>positions.get(e[1])).filter(Boolean);
-        if(next.length)pos.span=Math.max(1,Math.min(...next.map(p=>p.row))-pos.row);
-    }
-    return positions;
+function buildBranchLayout(day) {
+    const rows=TripGraph.rows(day), positions=new Map(), children=new Map(day.activities.map(a=>[a.id,day.links.filter(e=>e[0]===a.id).map(e=>e[1])]));
+    const sizes=new Map();
+    function size(id){if(!sizes.has(id))sizes.set(id,Math.max(1,children.get(id).reduce((n,c)=>n+size(c),0)));return sizes.get(id);}
+    const roots=day.activities.filter(a=>!day.links.some(e=>e[1]===a.id));
+    const total=roots.reduce((n,a)=>n+size(a.id),0)||1;
+    function place(id,left,depth=1){const width=size(id)/total;positions.set(id,{left,width,row:depth,span:1});let offset=left;children.get(id).forEach(c=>{place(c,offset,depth+1);offset+=size(c)/total;});}
+    let left=0;roots.forEach(a=>{place(a.id,left);left+=size(a.id)/total;});
+    positions.lanes=total;return positions;
 }
 function graphLayoutAttributes(rows, activity, previewDay = null) {
     const day=previewDay||appState.itinerary.find(d=>d.activities.includes(activity));
-    const pos=buildTimedBranchLayout(day).get(activity.id);
-    return `data-parallel="${pos.width<.999}" style="grid-row:${pos.row} / span ${pos.span};grid-column:1 / -1;width:calc((100% + var(--tree-column-gap)) * ${pos.width} - var(--tree-column-gap));margin-left:calc((100% + var(--tree-column-gap)) * ${pos.left})"`;
+    const pos=buildBranchLayout(day).get(activity.id);
+    return `data-parallel="${pos.width<.999}" style="grid-row:${pos.row};grid-column:1 / -1;width:calc((100% + var(--tree-column-gap)) * ${pos.width} - var(--tree-column-gap));margin-left:calc((100% + var(--tree-column-gap)) * ${pos.left})"`;
 }
 
 function graphControlsHtml(day, dayIndex, activity) {
@@ -20833,6 +20820,7 @@ function renderItinerary() {
 
     appState.itinerary.forEach((day, dayIndex) => {
         removeRedundantBypasses(day);
+        TripGraph.unfold(day);
         ensureStopTimes(day);
         const dayDestination = getDayDestination(day);
         const headerDate = parseYmd(day.date);
@@ -20847,7 +20835,7 @@ function renderItinerary() {
         const dayDirectionsUrl = graphIsLinear ? getDayDirectionsUrl(day.activities, day.destinationId) : null;
         const dayDirectionsEmbedUrl = getDayDirectionsEmbedUrl(day.activities);
         const graphRows = TripGraph.normalize(day);
-        const graphLanes = Math.max(3, ...graphRows.map(row => row.length));
+        const graphLanes = Math.max(3, buildBranchLayout(day).lanes);
         const activitiesHtml = day.activities.map((activity, activityIndex) => {
             const nextActivity = day.activities[activityIndex + 1];
             const isActiveActivity = activity.id === appState.activeActivityId;
@@ -21343,7 +21331,7 @@ function startStopPlacement(dayIndex){
 function insertPlacedStop(day,item,placement){
     const rows=TripGraph.normalize(day), target=day.activities.find(a=>a.id===placement?.target);
     const targetRow=rows.find(r=>r.includes(target));
-    if(target && placement.where==='before' && targetRow.length>1){
+    if(target && placement.where==='before'){
         const oldRow=target.row, incoming=day.links.filter(e=>e[1]===target.id);
         item.row=oldRow;
         const index=day.activities.indexOf(target);day.activities.splice(index,1,item);
@@ -21358,6 +21346,14 @@ function insertPlacedStop(day,item,placement){
         TripGraph.parallel(day,target.id,item);
         day.activities=day.activities.filter(a=>a!==item);day.activities.splice(day.activities.indexOf(target)+(placement.where==='right'?1:0),0,item);
         return;
+    }
+    if(target && placement.where==='after') {
+        const outgoing=day.links.filter(e=>e[0]===target.id);
+        item.row=TripGraph.freshRow(day,item.id);
+        day.activities.splice(day.activities.indexOf(targetRow.at(-1))+1,0,item);
+        day.links=day.links.filter(e=>e[0]!==target.id);
+        day.links.push([target.id,item.id]);outgoing.forEach(([,to])=>day.links.push([item.id,to]));
+        TripGraph.normalize(day);return;
     }
     const rowIndex=target?rows.findIndex(r=>r.includes(target)):rows.length;
     const index=placement?.where==='after'?rowIndex+1:rowIndex;
@@ -21485,7 +21481,7 @@ async function saveActivityEditor() {
         day.activities=day.activities.filter(a=>a!==nextActivity);
         insertPlacedStop(day,nextActivity,pendingStopPlacement);
     }
-    if(existingActivity && existingActivity.time!==time) reorderEditedTime(day,nextActivity.id);
+    // Placement, not edited time, determines the order.
     sortActivities(day);
     syncDayDestinations(day);
     closeActivityEditor();
@@ -21821,7 +21817,7 @@ function previewActivityPlacement(dayIndex, placement) {
     const before = captureFlipPositions();
     preview.forEach((day, index) => {
         const list = ui.itineraryContainer.querySelector(`[data-activity-list="${index}"]`);
-        const rows = TripGraph.rows(day), lanes = Math.max(3, ...rows.map(r => r.length));
+        const rows = TripGraph.rows(day), lanes = Math.max(3, buildBranchLayout(day).lanes);
         list.style.width = `calc(${lanes / 3 * 100}% + var(--tree-column-gap) * ${lanes / 3 - 1})`;
         rows.forEach(row => row.forEach(a => {
             const el = a.id === state.activityId ? state.placeholder : getActivityCard(a.id)?.closest('[data-activity-wrapper]');

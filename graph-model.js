@@ -82,6 +82,25 @@
         day.activities.forEach(a=>{a.row=`level-${rank.get(a.id)}`;});
         day.links=links; normalize(day); return true;
     }
+    // Materialize a separate continuation for every branch. Never merge paths.
+    function unfold(day) {
+        const rr=normalize(day), rank=new Map(rr.flatMap((r,i)=>r.map(a=>[a.id,i])));
+        const original=day.activities.slice(), edges=day.links.slice(), copies=new Map(), used=new Set(original.map(a=>a.id));
+        const activities=[], links=[];
+        for(const a of original) {
+            const parents=edges.filter(e=>e[1]===a.id).flatMap(e=>copies.get(e[0])||[]);
+            const versions=(parents.length?parents:[null]).map((parent,index)=>{
+                let id=a.id;
+                if(index){let n=index;do{id=`${a.id}-branch-${n++}`;}while(used.has(id));used.add(id);}
+                const copy=index?{...a,id}:a;
+                activities.push(copy);if(parent)links.push([parent.id,id]);return copy;
+            });
+            copies.set(a.id,versions);
+        }
+        const order=new Map(activities.map(a=>[a.id,rank.get(original.find(o=>copies.get(o.id).includes(a)).id)]));
+        activities.sort((a,b)=>order.get(a.id)-order.get(b.id));
+        day.activities=activities;day.links=links;normalize(day);
+    }
     function reconnectRows(day) {delete day.links;return normalize(day);}
-    root.TripGraph={reconnectRows,layout,rows,normalize,connect,remove,parallel,separate,join,freshRow};
+    root.TripGraph={unfold,reconnectRows,layout,rows,normalize,connect,remove,parallel,separate,join,freshRow};
 })(typeof module==='object' ? module.exports : globalThis);

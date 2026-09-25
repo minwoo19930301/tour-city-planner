@@ -164,10 +164,10 @@ G.normalize(wideDay);assert.deepEqual(Array.from(G.rows(wideDay),r=>r.length),[1
 assert.equal(wideDay.links.length,14);G.layout(wideDay);assert.deepEqual(Array.from(G.rows(wideDay),r=>r.length),[1,7,1]);
 ctx.appState.itinerary=[wideDay];vm.runInContext('restored=buildItineraryFromSharedPayload(appState.segments,buildSharePayload().i)',ctx);
 assert.deepEqual(Array.from(G.rows(ctx.restored[0]),r=>r.length),[1,7,1]);
-for(const name of ['buildTimedBranchLayout','graphLayoutAttributes','getAIPasteInstruction']){const start=app.indexOf('function '+name+'('),end=app.indexOf('\n}\n',start)+3;vm.runInContext(app.slice(start,end),ctx);}
+for(const name of ['buildBranchLayout','graphLayoutAttributes','getAIPasteInstruction']){const start=app.indexOf('function '+name+'('),end=app.indexOf('\n}\n',start)+3;vm.runInContext(app.slice(start,end),ctx);}
 const wideRows=G.rows(wideDay);
 assert(ctx.graphLayoutAttributes(wideRows,wideRows[1][6]).includes('grid-column:1 / -1'));
-assert.equal(ctx.buildTimedBranchLayout(wideDay).get('option6').width,1/7);
+assert.equal(ctx.buildBranchLayout(wideDay).get('option6').width,1/7);
 assert(ctx.getAIPasteInstruction('MacIntel','Macintosh',0).includes('Command (⌘) + V'));
 for(const platform of ['Win32','Windows','Linux x86_64'])assert(ctx.getAIPasteInstruction(platform,'Mozilla',0).includes('Ctrl + V'));
 for(const [platform,ua,touch] of [['iPhone','iPhone',5],['Linux','Android',5],['MacIntel','Macintosh',5]]){
@@ -246,6 +246,10 @@ const mergedDates=ctx.moveTripDate(dateDays(),1,'2026-10-02',false);assert.equal
 console.log('PASS: date shifting, sorted single-day move and collision merge preserve activities.');
 
 const timed={activities:[{id:'start',time:'08:00'},{id:'a1',time:'09:00'},{id:'b1',time:'09:00'},{id:'a2',time:'10:00'},{id:'join',time:'12:00'}],links:[['start','a1'],['start','b1'],['a1','a2'],['a2','join'],['b1','join']]};
-G.normalize(timed);const positions=ctx.buildTimedBranchLayout(timed);
-assert.equal(positions.get('a1').left,positions.get('a2').left);assert.equal(positions.get('a2').width,.5);assert.equal(positions.get('b1').span,2);assert.equal(positions.get('join').width,1);
-console.log('PASS: branch lanes persist, unequal branch length spans to the timed merge.');
+G.unfold(timed);const positions=ctx.buildBranchLayout(timed);
+assert.equal(timed.activities.filter(a=>a.id.startsWith('join')).length,2);
+assert(timed.activities.every(a=>timed.links.filter(e=>e[1]===a.id).length<=1));
+assert.equal(positions.get('a1').left,positions.get('a2').left);
+assert.equal(positions.get('b1').span,1);
+const saved=JSON.stringify(timed);G.unfold(timed);assert.equal(JSON.stringify(timed),saved);
+console.log('PASS: shared continuations are cloned once, branch lanes persist without time stretching.');
