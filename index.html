@@ -1003,8 +1003,10 @@
         #activity-memo,#activity-icon-trigger {height:44px;min-height:44px;resize:vertical;}
         #activity-modal .stop-secondary-row label {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);}
         #activity-icon-label {display:block;}
-         .day-date-tools {display:flex;gap:8px;flex-wrap:wrap;margin:8px 0;color:#d3dce8;font-size:11px;}
-.day-date-tools button {padding:6px 10px;border:1px solid #ffffff25;border-radius:10px;background:#ffffff08;}
+        .day-insert {display:block;width:100%;min-height:32px;margin:4px 0 10px;border:1px dashed #ffffff30;border-radius:10px;background:#ffffff05;color:#d3dce8;font-size:12px;}
+        .day-insert:last-child {margin:10px 0 0;}
+        .day-delete {flex:0 0 32px;width:32px;height:32px;border-radius:50%;color:#d3dce8;font-size:22px;line-height:1;background:#ffffff08;}
+        .day-delete:hover {color:#fda4af;background:#fb718520;}
 #day-date-editor {background:#172537;color:white;border:1px solid #ffffff30;border-radius:20px;padding:24px;max-width:360px;}
 #day-date-editor::backdrop{background:#0004;}
 #day-date-editor input[type=date]{display:block;margin:16px 0;padding:10px;background:#ffffff15;color:white;border-radius:8px;color-scheme:dark;}
@@ -1449,7 +1451,7 @@
     <script src="./graph-model.js?v=tree32-7"></script>
     <script src="./travel-phrases.js?v=1"></script>
     <script src="./ai-link.js?v=4"></script>
-    <script src="./app.js?v=branch-tree-v32" defer></script>
+    <script src="./app.js?v=day-buttons-v33" defer></script>
 </body>
 
 </html>

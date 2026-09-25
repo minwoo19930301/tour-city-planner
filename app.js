@@ -20892,18 +20892,20 @@ function renderItinerary() {
         }).join('');
 
         dayElement.innerHTML = `
+            <button type="button" class="day-insert" data-insert-day="${dayIndex}" aria-label="${day.date} 앞에 하루 추가">+ 하루</button>
             <div class="day-header-row" data-day-header="${dayIndex}" data-flip-item="true">
                 <button type="button" class="day-date" data-edit-date="${dayIndex}" aria-label="${day.date} 날짜 수정"><h3>${escapeHtml(formatMonthDay(headerDate))}</h3><span>${escapeHtml(formatMonthDayWithWeekday(headerDate))}</span><span aria-hidden="true">✎</span></button>
                 <button class="day-routes-button" data-day-routes="${dayIndex}" type="button"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="M8 5h8a4 4 0 0 1 0 8H8a3 3 0 0 0 0 6h8"/></svg><span>하루 이동코스</span></button>
                 ${buildDailyWeatherHtml(day)}
                 <button type="button" class="day-add-button" data-action="add-activity" data-day-index="${dayIndex}">+ 일정</button>
+                <button type="button" class="day-delete" data-delete-day="${dayIndex}" aria-label="${day.date} 삭제">×</button>
             </div>
 
 
-            <div class="day-date-tools"><button type="button" data-insert-day="${dayIndex}">앞에 하루 추가</button><button type="button" data-insert-day="${dayIndex + 1}">뒤에 하루 추가</button><button type="button" data-delete-day="${dayIndex}">이 날 삭제</button></div>
             <div class="tree-scroll" ${graphLanes > 3 ? 'tabindex="0" role="region" aria-label="나란한 일정, 좌우로 스크롤"' : ''}><div class="activity-tree" data-activity-list="${dayIndex}" style="width:calc(${graphLanes / 3 * 100}% + var(--tree-column-gap) * ${graphLanes / 3 - 1})">
                 <svg class="tree-svg" aria-hidden="true"></svg>${activitiesHtml}
             </div></div>
+            <button type="button" class="day-insert" data-insert-day="${dayIndex + 1}" aria-label="${day.date} 뒤에 하루 추가">+ 하루</button>
         `;
 
         ui.itineraryContainer.appendChild(dayElement);
