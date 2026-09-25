@@ -3,7 +3,7 @@
     function parse(hash, { destinationIds, iconIds } = {}) {
         const fail = message => { throw new Error(message); };
         const entries = hash.replace(/^#/, '').split('&').map(part => {
-            const separator = part.indexOf('=');
+            const separator = part.search(/[=~]/);
             if (separator < 1) fail('올바르지 않은 링크 항목');
             const key = part.slice(0, separator);
             if (!['trip', 'g', 's', 'e', 'm', 'q'].includes(key)) fail('알 수 없는 링크 항목');
@@ -92,7 +92,7 @@
         for (const candidate of candidates) {
             const url = new URL(candidate.replace(/[).,\]]+$/, ''));
             let fragment = url.hash;
-            if (!fragment.startsWith('#trip=')) {
+            if (!/^#trip[=~]/.test(fragment)) {
                 if (!url.searchParams.has('trip')) continue;
                 fragment = '#' + url.search.slice(1).split('&').filter(part => /^(trip|g|s|e|m|q)=/.test(part)).join('&');
             }

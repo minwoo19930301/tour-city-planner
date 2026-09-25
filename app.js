@@ -20171,7 +20171,7 @@ function generateAIPromptText(destinationId, startDate, endDate, tripNotes = '')
     const destination=getDestination(destinationId);
     const segments=(pendingSetupSegmentsData?.length?pendingSetupSegmentsData:[{destinationId,startDate,endDate}]);
     const compact=segments.map(s=>({d:s.destinationId,s:s.startDate,e:s.endDate}));
-    const groupParams = compact.map(segment => `g=${segment.d}~${segment.s}~${segment.e}`).join('&');
+    const groupParams = compact.map(segment => `g~${segment.d}~${segment.s}~${segment.e}`).join('&');
     return `여행 일정을 만들고, 아래 출력 형식대로 일정 주소와 ‘여행 일정 열기’ 링크를 주세요.
 여행 요구사항: ${tripNotes.trim() || '동선이 무리하지 않은 여행.'}
 여행지: ${getLocalizedLabel(destination.country)} · ${getLocalizedLabel(destination.city,destination.city)}
@@ -20182,11 +20182,11 @@ function generateAIPromptText(destinationId, startDate, endDate, tripNotes = '')
 
 이 앱은 아래의 텍스트 URL을 직접 읽습니다. JSON, Base64, 압축, 코드 실행이 필요 없습니다.
 링크 시작 부분은 다음을 그대로 사용하세요:
-https://minwoo19930301.github.io/tour-city-planner/#trip=1&${groupParams}
+https://minwoo19930301.github.io/tour-city-planner/#trip~1&${groupParams}
 
-위 URL 끝에 장소마다 아래 항목을 &s= 로 이어 붙이세요:
-&s=날짜~고유ID~행ID~HH:MM~도시ID~아이콘~장소명
-예: &s=${startDate}~a1~r1~09:00~${destinationId}~landmark~센소지
+위 URL 끝에 장소마다 아래 항목을 &s~ 로 이어 붙이세요:
+&s~날짜~고유ID~행ID~HH:MM~도시ID~아이콘~장소명
+예: &s~${startDate}~a1~r1~09:00~${destinationId}~landmark~센소지
 - 구간의 시작일과 종료일을 포함한 모든 날짜에 실제 장소를 넣으세요. 날짜·시간 순서로 작성하세요.
 - 도시ID는 해당 여행 구간의 ID를 그대로 사용하세요: ${[...new Set(compact.map(segment => segment.d))].join(', ')}.
 - 고유ID는 a1,a2처럼 전체 일정에서 중복되지 않는 영문·숫자. 행ID는 r1,r2처럼 쓰세요.
@@ -20194,17 +20194,17 @@ https://minwoo19930301.github.io/tour-city-planner/#trip=1&${groupParams}
 - 아이콘은 다음 중 하나: ${ACTIVITY_ICON_OPTIONS.map(option => option.value).join(', ')}.
 - 장소명은 도시를 함께 적어 정확히 찾게 해 주세요. 한글·영어·일본어를 그대로 쓸 수 있습니다.
 - 장소명·메모 안의 공백은 +, &는 %26, #은 %23, ~는 %7E, +는 %2B, %는 %25, 괄호는 %28 및 %29로 쓰세요. 이스케이프는 원래 글자에 한 번만 적용하세요. 항목 사이의 &와 ~는 그대로 둡니다.
-- 메모가 필요하면 &m=고유ID~메모 를 붙이세요. 메모는 간단히 적으세요.
-- 지도 검색어를 별도로 지정하려면 &q=고유ID~검색어 를 붙이세요.
-- 기본은 앞 행에서 다음 행으로 자동 연결됩니다. 서로 다른 경로를 명시할 때는 해당 날짜의 모든 연결을 &e=출발ID~도착ID 로 적으세요.
-  예: a1 → a2/a3 → a4는 &e=a1~a2&e=a1~a3&e=a2~a4&e=a3~a4 입니다. a2,a3는 같은 행ID를 씁니다.
+- 메모가 필요하면 &m~고유ID~메모 를 붙이세요. 메모는 간단히 적으세요.
+- 지도 검색어를 별도로 지정하려면 &q~고유ID~검색어 를 붙이세요.
+- 기본은 앞 행에서 다음 행으로 자동 연결됩니다. 서로 다른 경로를 명시할 때는 해당 날짜의 모든 연결을 &e~출발ID~도착ID 로 적으세요.
+  예: a1 → a2/a3 → a4는 &e~a1~a2&e~a1~a3&e~a2~a4&e~a3~a4 입니다. a2,a3는 같은 행ID를 씁니다.
 
 최종 답변은 정확히 다음 세 부분으로 작성하세요:
 1. “이 응답 전체를 복사한 뒤 아래 ‘여행 일정 열기’를 눌러 주세요.”
 2. 위 규칙으로 만든 완성 URL 원문 한 줄. 주소를 마크다운 링크 제목 뒤에 숨기지 마세요. URL 내부에 줄바꿈·공백을 넣지 마세요.
-3. 다음 고정 링크를 수정 없이 그대로 출력하세요: [여행 일정 열기](https://minwoo19930301.github.io/tour-city-planner/?import=ai)
+3. 다음 고정 링크를 수정 없이 그대로 출력하세요: [여행 일정 열기](https://minwoo19930301.github.io/tour-city-planner/#import-ai)
 고정 링크에는 일정을 붙이지 마세요. 그 화면에서 복사한 응답을 읽어 일정을 엽니다. 생성한 주소가 클릭되지 않는 AI 화면에서도 사용할 수 있는 방식입니다.
-JSON이나 코드 블록, 미완성 예시, 인코딩된 #plan 링크를 반환하지 마세요. #trip=1 형식의 URL을 직접 작성하면 됩니다.
+JSON이나 코드 블록, 미완성 예시, 인코딩된 #plan 링크를 반환하지 마세요. #trip~1 형식의 URL을 직접 작성하면 됩니다.
 날짜 누락·중복 ID·잘못된 시간·연결을 확인하고 주소 전체를 생략 없이 출력하세요.`;
 }
 
@@ -20881,18 +20881,15 @@ function renderItinerary() {
 
 function buildShareUrl() {
     const url = new URL(window.location.href);
-    url.searchParams.delete('plan');
+    url.search = '';
     url.pathname = url.pathname.replace(/\/index\.html$/, '/');
-    url.searchParams.set('plan', encodePlan(buildSharePayload()));
+    url.hash = encodePlan(buildSharePayload());
     return url.toString();
 }
 
 function syncUrl() {
     if (!appState.hasStarted) return;
-    const url = new URL(window.location.href);
-    url.searchParams.delete('plan');
-    url.hash = `plan=${encodePlan(buildSharePayload())}`;
-    window.history.replaceState({}, '', url.toString());
+    window.history.replaceState({}, '', buildShareUrl());
 }
 
 function addSetupSegmentFromSelection({ silent = false } = {}) {
@@ -22383,8 +22380,8 @@ function showPlanImportNotice(message) {
 function bootstrapFromUrl() {
     const url = new URL(window.location.href);
     const hashParams = new URLSearchParams(url.hash.replace(/^#/, ''));
-    const readablePlan = hashParams.has('trip');
-    const hashPlanParam = hashParams.get('plan');
+    const readablePlan = hashParams.has('trip') || url.hash.startsWith('#trip~1&');
+    const hashPlanParam = hashParams.get('plan') || (/^#[A-Za-z0-9_-]+$/.test(url.hash) && url.hash !== '#import-ai' ? url.hash.slice(1) : null);
     const planParam = hashPlanParam || url.searchParams.get('plan');
 
     if (readablePlan || planParam) {
@@ -22439,7 +22436,7 @@ function bootstrapFromUrl() {
             if (searchPlanParam && !hashPlanParam) {
                 const cleanUrl = new URL(window.location.href);
                 cleanUrl.searchParams.delete('plan');
-                cleanUrl.hash = `plan=${planParam}`;
+                cleanUrl.hash = planParam;
                 window.history.replaceState({}, '', cleanUrl.toString());
             }
             return;
@@ -22669,13 +22666,13 @@ const aiResultOpen = document.getElementById('ai-result-open');
 const aiResultClipboard = document.getElementById('ai-result-clipboard');
 function openAIResponse(text) {
     try {
-        const { fragment } = AITripLink.readResponse(text, {
+        const { payload } = AITripLink.readResponse(text, {
             destinationIds: Object.keys(DESTINATIONS),
             iconIds: ACTIVITY_ICON_OPTIONS.map(option => option.value)
         });
         const url = new URL(window.location.href);
         url.search = '';
-        url.hash = fragment;
+        url.hash = encodePlan(payload);
         // Validate the complete answer before replacing any current itinerary.
         window.location.assign(url.toString());
     } catch (error) {
@@ -22866,4 +22863,4 @@ window.setInterval(updateClocks, 1000);
 renderIconPicker();
 bootstrapFromUrl();
 refreshPlan();
-if (new URL(window.location.href).searchParams.get('import') === 'ai') aiResultDialog.showModal();
+if (new URL(window.location.href).searchParams.get('import') === 'ai' || window.location.hash === '#import-ai') aiResultDialog.showModal();

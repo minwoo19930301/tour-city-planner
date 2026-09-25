@@ -94,8 +94,8 @@ console.log('PASS: coordinate distance and estimated travel duration.');
 const promptContext=vm.createContext({pendingSetupSegmentsData:null,getDestination:()=>({country:'Japan',city:'Tokyo'}),getLocalizedLabel:x=>x,ACTIVITY_ICON_OPTIONS:[{value:'landmark'},{value:'utensils-crossed'}],atob:s=>Buffer.from(s,'base64').toString('binary'),TextDecoder,Uint8Array,console});
 for(const name of ['generateAIPromptText','decodePlan']){const start=app.indexOf('function '+name+'('),end=app.indexOf('\n}\n',start)+3;vm.runInContext(app.slice(start,end),promptContext);}
 const prompt=promptContext.generateAIPromptText('tokyo','2026-10-01','2026-10-01');
-assert(prompt.includes('#trip=1&g=tokyo~2026-10-01~2026-10-01'));
-assert(prompt.includes('[여행 일정 열기](https://minwoo19930301.github.io/tour-city-planner/?import=ai)'));
+assert(prompt.includes('#trip~1&g~tokyo~2026-10-01~2026-10-01'));
+assert(prompt.includes('[여행 일정 열기](https://minwoo19930301.github.io/tour-city-planner/#import-ai)'));
 assert(prompt.includes('완성 URL 원문 한 줄'));
 assert(!prompt.includes('[완성된 URL](<'));
 assert(!prompt.includes('코드 실행 도구가 없다면'));
@@ -109,7 +109,7 @@ const travelNotes='숙소: 힐튼 도쿄\n예약: 10월 3일 19:00 스시\n루�
 const customPrompt=promptContext.generateAIPromptText('tokyo','2026-10-02','2026-10-06',travelNotes);
 assert(customPrompt.includes(travelNotes));
 assert(customPrompt.includes('명시한 예약 날짜와 시간은 임의로 바꾸지 마세요'));
-assert(customPrompt.includes('#trip=1&g=tokyo~2026-10-02~2026-10-06'));
+assert(customPrompt.includes('#trip~1&g~tokyo~2026-10-02~2026-10-06'));
 console.log('PASS: readable AI link prompt preserves traveler notes, dates and reservation constraints.');
 // AI output reported by the user: the memo omitted its closing quote/brace before the next stop.
 const brokenMemo='{"v":4,"g":[{"d":"tokyo","s":"2026-10-02","e":"2026-10-06"}],"i":[{"a":[{"id":"d3-5","m":"신세카이 산책과 전망,{"id":"d3-6","m":"도톤보리"}],"e":[["d3-5","d3-6"]]}]}';
@@ -211,3 +211,17 @@ assert.throws(()=>readAnswer(fullURL.replace('~09:00~','~29:00~')));
 assert.throws(()=>readAnswer(fullURL+'\n'+fullURL.replace('~09:00~','~08:00~')));
 assert.throws(()=>readAnswer(prompt));
 console.log('PASS: whole AI response import, Markdown/HTML escapes, duplicate URLs, ambiguity and malformed answer rejection.');
+
+// New delimiter-free sharing preserves old links and full graph payloads.
+const noEquals=readable.replace(/(trip|g|s|e|m|q)=/g,'$1~');
+assert.deepEqual(parseTrip(noEquals,tripOptions),parseTrip(readable,tripOptions));
+assert.deepEqual(readAnswer('https://minwoo19930301.github.io/tour-city-planner/'+noEquals).payload,parsed);
+const codec=vm.createContext({TextEncoder,TextDecoder,btoa,atob,URL});
+vm.runInContext(app.slice(app.indexOf('const LZString = {'),app.indexOf('function setScrollLock(')),codec);
+codec.appState=ctx.appState;codec.buildSharePayload=()=>parsed;
+codec.window={location:{href:'https://minwoo19930301.github.io/tour-city-planner/?plan=old&utm_source=test#plan=old'},history:{replaceState:(_a,_b,url)=>codec.saved=url}};
+for(const name of ['buildShareUrl','syncUrl']) {const a=app.indexOf('function '+name+'('),b=app.indexOf('\n}\n',a)+3;vm.runInContext(app.slice(a,b),codec);}
+const shared=codec.buildShareUrl();assert(!shared.includes('='));assert(!shared.includes('?'));
+assert.deepEqual(JSON.parse(JSON.stringify(codec.decodePlan(new URL(shared).hash.slice(1)))),parsed);
+codec.appState.hasStarted=true;codec.syncUrl();assert.equal(codec.saved,shared);
+console.log('PASS: no-equals readable import, compressed sharing, query cleanup and payload round trip.');
