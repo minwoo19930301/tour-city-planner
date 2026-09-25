@@ -19906,15 +19906,21 @@ function handleCurrentFocusScrollDismiss() {
     updateCurrentFocusButton();
 }
 
+function getTravelPhrases(destination) {
+    const shared = destination.country === 'Japan' ? JAPANESE_TRAVEL_PHRASES : [];
+    const phrases = [...shared, ...(destination.phrases || [])];
+    return [...new Map(phrases.map(p => [p.text, p])).values()];
+}
+
 function setRandomPhrase(destinationId) {
     const destination = getDestination(destinationId);
-    const phraseCount = Array.isArray(destination.phrases) ? destination.phrases.length : 0;
+    const phraseCount = getTravelPhrases(destination).length;
     appState.phraseIndex = phraseCount ? Math.floor(Math.random() * phraseCount) : 0;
 }
 
 function cyclePhrase() {
     const destination = getDestination(appState.destinationId);
-    const phraseCount = Array.isArray(destination.phrases) ? destination.phrases.length : 0;
+    const phraseCount = getTravelPhrases(destination).length;
     if (!phraseCount) return;
 
     appState.phraseIndex = (appState.phraseIndex + 1) % phraseCount;
@@ -19923,10 +19929,10 @@ function cyclePhrase() {
 
 function renderPhrase() {
     const destination = getDestination(appState.destinationId);
-    const phrases = Array.isArray(destination.phrases) ? destination.phrases : [];
+    const phrases = getTravelPhrases(destination);
     const phrase = phrases[appState.phraseIndex] || phrases[0];
 
-    ui.phraseLabel.textContent = destination.phraseLabel || 'Phrase';
+    ui.phraseLabel.textContent = `${destination.phraseLabel || 'Phrase'} · ${appState.phraseIndex + 1}/${phrases.length}`;
     ui.phraseText.textContent = phrase?.text || 'Hello';
     ui.phraseMeta.textContent = phrase ? `${phrase.pron} · ${phrase.meaning}` : `${destination.city} trip`;
 }
@@ -20360,14 +20366,14 @@ function updateClocks() {
 }
 
 function getWeatherInfo(code) {
-    if (code === 0) return { icon: 'sun', color: 'var(--accent)' };
-    if (code >= 1 && code <= 3) return { icon: 'sun', color: '#f8fafc' };
-    if (code >= 45 && code <= 48) return { icon: 'cloud-fog', color: '#cbd5e1' };
-    if (code >= 51 && code <= 67) return { icon: 'cloud-drizzle', color: '#93c5fd' };
-    if (code >= 71 && code <= 77) return { icon: 'cloud-snow', color: '#f8fafc' };
-    if (code >= 80 && code <= 82) return { icon: 'cloud-rain', color: '#60a5fa' };
+    if (code === 0) return { icon: 'sun', color: '#fbbf24' };
+    if (code === 1 || code === 2) return { icon: 'cloud-sun', color: '#fbbf24' };
+    if (code === 3) return { icon: 'cloud', color: '#94a3b8' };
+    if (code >= 45 && code <= 48) return { icon: 'cloud-fog', color: '#94a3b8' };
+    if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82)) return { icon: 'cloud-rain', color: '#60a5fa' };
+    if ((code >= 71 && code <= 77) || code === 85 || code === 86) return { icon: 'cloud-snow', color: '#67e8f9' };
     if (code >= 95 && code <= 99) return { icon: 'cloud-lightning', color: '#c084fc' };
-    return { icon: 'cloud', color: '#cbd5e1' };
+    return { icon: 'cloud', color: '#94a3b8' };
 }
 
 async function fetchExchangeRate() {
@@ -20618,11 +20624,11 @@ function buildActivityReorderControlsHtml(day, dayIndex, activity, activityIndex
 
 let pendingParallelActivity = null;
 
-function graphLayoutAttributes(rows, activity) {
+function graphLayoutAttributes(rows, activity, previewDay = null) {
     const rowIndex = rows.findIndex(r => r.includes(activity)), row = rows[rowIndex];
     let lanes = row.length, column = row.indexOf(activity);
     if (row.length === 1 && rowIndex > 0) {
-        const day = appState.itinerary.find(d => d.activities.includes(activity)), previous = rows[rowIndex - 1];
+        const day = previewDay || appState.itinerary.find(d => d.activities.includes(activity)), previous = rows[rowIndex - 1];
         const parents = day?.links.filter(e => e[1] === activity.id).map(e => e[0]) || [];
         const parent = previous.find(a => parents.includes(a.id));
         if (previous.length > 1 && parents.length === 1 && parent) { lanes = previous.length; column = previous.indexOf(parent); }
@@ -20718,6 +20724,7 @@ function routeEdgeColors(day){
     day.activities.filter(a=>!incoming.has(a.id)).forEach(a=>visit(a.id,[],new Set()));return colors;
 }
 function drawGraphEdges() {
+    if (activityDragState.active) return;
     appState.itinerary.forEach((day,dayIndex) => {
         const list=ui.itineraryContainer.querySelector(`[data-activity-list="${dayIndex}"]`), svg=list?.querySelector('.tree-svg');
         if (!svg) return;
@@ -20764,7 +20771,7 @@ function drawGraphEdges() {
             actions.title=source.location+' → '+target.location;
             actions.innerHTML=`<a href="${getDirectionsUrl(origin,dest)}" data-route-preview="true" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}" aria-label="${escapeHtml(source.location+' → '+target.location)} 가는 길" title="가는 길"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="M8 5h8a4 4 0 0 1 0 8H8a3 3 0 0 0 0 6h8"/></svg></a><button type="button" data-graph-action="unlink" data-graph-day="${dayIndex}" data-graph-id="${from}" data-graph-to="${to}" aria-label="${escapeHtml(source.location+' → '+target.location)} 연결 제거">×</button>`;
             list.appendChild(actions);
-            return `<a data-route-preview="true" data-skip-edit="true" href="${getDirectionsUrl(origin,dest)}" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}" aria-label="${escapeHtml(source.location+'에서 '+target.location+' 가는 길')}">${colors.map((c,i)=>`<path transform="translate(${(i-(colors.length-1)/2)*3.5},0)" style="pointer-events:stroke;cursor:pointer;stroke:${c};stroke-width:3" d="${path}"/>`).join('')}<circle cx="${xx}" cy="${yy}" r="3" fill="currentColor"/></a><g class="graph-edge-remove" data-skip-edit="true" data-graph-action="unlink" data-graph-day="${dayIndex}" data-graph-id="${from}" data-graph-to="${to}" role="button" tabindex="0" aria-label="${escapeHtml(source.location+' → '+target.location)} 연결 제거" transform="translate(${(x+xx)/2},${(y+yy)/2})"><circle r="9"/><text text-anchor="middle" dy="4">×</text></g>`;
+            return `<a data-route-preview="true" data-skip-edit="true" href="${getDirectionsUrl(origin,dest)}" data-route-title="${escapeHtml(source.location+' → '+target.location)}" data-route-embed="${escapeHtml(getDirectionsEmbedUrl(origin,dest))}" aria-label="${escapeHtml(source.location+'에서 '+target.location+' 가는 길')}">${colors.map((c,i)=>`<path transform="translate(${(i-(colors.length-1)/2)*3.5},0)" style="pointer-events:stroke;cursor:pointer;stroke:${c};stroke-width:3" d="${path}"/>`).join('')}<circle cx="${xx}" cy="${yy}" r="3" fill="currentColor"/></a>`;
         }).join('');
     });
 }
@@ -21390,17 +21397,7 @@ function reorderEditedTime(day,id){
     day.activities.splice(next?day.activities.indexOf(next[0]):day.activities.length,0,item);
     TripGraph.reconnectRows(day);
 }
-function showDragSlots(){
-    appState.itinerary.forEach((day,dayIndex)=>TripGraph.rows(day).forEach(row=>row.forEach(a=>{
-        if(a.id===activityDragState.activityId)return;
-        const wrap=getActivityCard(a.id)?.closest('[data-activity-wrapper]');if(!wrap)return;
-        for(const where of ['before','after','left','right']){
-            const el=document.createElement('div');el.className=`placement-slot drag-placement-slot slot-${where}`;
-            el.dataset.dropTarget=a.id;el.dataset.dropWhere=where;el.dataset.dropDay=dayIndex;
-            el.textContent=({before:'앞에 놓기',after:'뒤에 놓기',left:'← 옆',right:'옆 →'})[where];wrap.appendChild(el);
-        }
-    })));
-}
+
 async function saveActivityEditor() {
     const editorIdentity=[activityEditorState.dayIndex,activityEditorState.activityId,ui.activityLocation.value].join('|');
     clearTimeout(placeEstimateTimer);
@@ -21759,63 +21756,74 @@ function playFlip(positionsBefore) {
     }, DRAG_FLIP_DURATION + 30);
 }
 
+function movePlacedActivity(itinerary, sourceIndex, targetIndex, id, placement) {
+    const source = itinerary[sourceIndex], target = itinerary[targetIndex];
+    const item = source?.activities.find(a => a.id === id);
+    if (!item || !target || placement.target === id) return false;
+    TripGraph.remove(source, id);
+    item.destinationId = target.destinationIds?.[0] || target.destinationId || item.destinationId;
+    item.time = inferStopTime(target, id, placement);
+    insertPlacedStop(target, item, placement);
+    removeRedundantBypasses(source);
+    if (target !== source) removeRedundantBypasses(target);
+    return true;
+}
+
+function previewActivityPlacement(dayIndex, placement) {
+    const state = activityDragState;
+    const key = JSON.stringify([dayIndex, placement]);
+    if (state.previewKey === key) return;
+    state.previewKey = key;
+    const preview = JSON.parse(JSON.stringify(appState.itinerary));
+    if (!movePlacedActivity(preview, state.sourceDayIndex, dayIndex, state.activityId, placement)) return;
+    const before = captureFlipPositions();
+    preview.forEach((day, index) => {
+        const list = ui.itineraryContainer.querySelector(`[data-activity-list="${index}"]`);
+        const rows = TripGraph.rows(day), lanes = Math.max(3, ...rows.map(r => r.length));
+        list.style.width = `calc(${lanes / 3 * 100}% + var(--tree-column-gap) * ${lanes / 3 - 1})`;
+        rows.forEach(row => row.forEach(a => {
+            const el = a.id === state.activityId ? state.placeholder : getActivityCard(a.id)?.closest('[data-activity-wrapper]');
+            if (!el) return;
+            if (a.id === state.activityId) list.appendChild(el);
+            el.style.cssText = graphLayoutAttributes(rows, a, day).match(/style="([^"]*)"/)[1];
+            if (a.id === state.activityId) el.style.minHeight = `${state.card.getBoundingClientRect().height || state.ghost.offsetHeight}px`;
+        }));
+    });
+    state.exactPlacement = placement;
+    state.targetDayIndex = dayIndex;
+    state.targetIndex = 0;
+    state.dropBlocked = false;
+    playFlip(before);
+}
+
 function updateDropTarget(clientX, clientY) {
-    if (!activityDragState.active || !activityDragState.placeholder) return;
-    if (performance.now() < activityDragState.lockUntil) return;
-
-    const element = document.elementFromPoint(clientX, clientY);
-    const slot=element?.closest('.drag-placement-slot');
-    document.querySelectorAll('.drag-placement-slot').forEach(el=>el.classList.toggle('is-target',el===slot));
-    activityDragState.exactPlacement=slot?{target:slot.dataset.dropTarget,where:slot.dataset.dropWhere}:null;
-    if(slot){activityDragState.targetDayIndex=Number(slot.dataset.dropDay);activityDragState.targetIndex=0;activityDragState.dropBlocked=false;return;}
-    const panel = element ? element.closest('[data-day-panel]') : null;
-    if (!panel || !ui.itineraryContainer.contains(panel)) return;
-
+    const state = activityDragState;
+    if (!state.active || !state.placeholder) return;
+    const hit = document.elementFromPoint(clientX, clientY);
+    const panel = hit?.closest('[data-day-panel]');
+    if (!panel) { state.dropBlocked = true; return; }
+    state.dropBlocked = false;
+    if (hit.closest('.activity-drop-placeholder')) return;
     const dayIndex = Number(panel.dataset.dayPanel);
-    const cards = getDayCards(dayIndex).filter((card) => card !== activityDragState.card);
-    const peer = cards.find(card=>{const r=card.getBoundingClientRect();return clientY>r.top+r.height*.22 && clientY<r.bottom-r.height*.22 && clientX>=r.left && clientX<=r.right;});
-    document.querySelectorAll('.graph-drop-peer,.graph-drop-full').forEach(el=>el.classList.remove('graph-drop-peer','graph-drop-full'));
-    activityDragState.targetPeerId = null;
-    activityDragState.dropBlocked = false;
-    if(peer) {
-        document.querySelectorAll('.graph-insert-marker').forEach(el=>el.remove());
-        const row=TripGraph.rows(appState.itinerary[dayIndex]).find(row=>row.some(a=>a.id===peer.dataset.activityId));
-        const full=row.some(a=>a.id===activityDragState.activityId);
-        peer.classList.add(full?'graph-drop-full':'graph-drop-peer');
-        activityDragState.dropBlocked=full;
-        activityDragState.targetPeerId=peer.dataset.activityId;
-        activityDragState.targetPeerLeft=clientX<peer.getBoundingClientRect().left+peer.getBoundingClientRect().width/2;
-        activityDragState.targetDayIndex=dayIndex;
-        activityDragState.targetIndex=0;
-        return;
+    const cards = getDayCards(dayIndex).filter(card => card !== state.card);
+    if (!cards.length) { previewActivityPlacement(dayIndex, {where:'after'}); return; }
+    const peer = cards.find(card => {
+        const r = card.getBoundingClientRect();
+        return clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom;
+    });
+    let target = peer, where;
+    if (peer) {
+        const r = peer.getBoundingClientRect(), x = (clientX-r.left)/r.width, y = (clientY-r.top)/r.height;
+        where = y > .25 && y < .75 && (x < .2 || x > .8) ? (x < .5 ? 'left':'right') : (y < .5 ? 'before':'after');
+    } else {
+        target = cards.reduce((best, card) => {
+            const r = card.getBoundingClientRect(), b = best.getBoundingClientRect();
+            return Math.hypot(clientX-(r.left+r.width/2),clientY-(r.top+r.height/2)) < Math.hypot(clientX-(b.left+b.width/2),clientY-(b.top+b.height/2)) ? card : best;
+        });
+        const r = target.getBoundingClientRect();
+        where = clientY < r.top+r.height/2 ? 'before':'after';
     }
-    let insertIndex = cards.length;
-    for (let index = 0; index < cards.length; index += 1) {
-        const rect = cards[index].getBoundingClientRect();
-        if (clientY < rect.top || (clientY < rect.bottom && clientX < rect.left + rect.width / 2)) {
-            insertIndex = index;
-            break;
-        }
-    }
-
-    if (dayIndex === activityDragState.targetDayIndex && insertIndex === activityDragState.targetIndex) return;
-
-    const list = panel.querySelector('[data-activity-list]');
-    if (!list) return;
-
-    // Keep the source placeholder fixed: moving it changes row heights under the pointer.
-    // A drop indicator is absolutely positioned, so hit testing stays stable.
-    let marker=document.querySelector('.graph-insert-marker');
-    if(!marker){marker=document.createElement('div');marker.className='graph-insert-marker';document.body.appendChild(marker);}
-    const reference=cards[insertIndex]?.getBoundingClientRect();
-    const end=cards.at(-1)?.getBoundingClientRect();
-    const bounds=list.getBoundingClientRect();
-    marker.style.cssText=`position:fixed;pointer-events:none;z-index:99;left:${bounds.left}px;top:${reference?reference.top-10:(end?.bottom||bounds.top)+10}px;width:${bounds.width}px;border-top:3px solid #a5b4fc;`;
-
-    activityDragState.targetDayIndex = dayIndex;
-    activityDragState.targetIndex = insertIndex;
-    highlightDayPanel(panel);
-    activityDragState.lockUntil = 0;
+    previewActivityPlacement(dayIndex, {target:target.dataset.activityId, where});
 }
 
 function updateGhostPosition() {
@@ -21873,7 +21881,7 @@ function beginActivityDrag() {
     }
 
     activityDragState.active = true;
-    showDragSlots();
+    cancelStopPlacement();
     card.classList.remove('activity-card-pressing');
     if (activityDragState.handle) activityDragState.handle.classList.add('is-dragging');
 
@@ -21900,7 +21908,7 @@ function beginActivityDrag() {
     ghost.classList.remove('relative', 'next-item', 'activity-card-pressing', 'cursor-pointer', 'hover:bg-white/[0.08]');
     ghost.classList.add('activity-card-ghost');
     ['data-activity-card-id', 'data-activity-id', 'data-action', 'data-day-index', 'tabindex'].forEach((name) => ghost.removeAttribute(name));
-    ghost.querySelectorAll('[data-hourly-weather]').forEach((element) => element.remove());
+    ghost.querySelectorAll('.graph-port,.graph-remove').forEach((element) => element.remove());
     ghost.style.left = `${cardRect.left}px`;
     ghost.style.top = `${cardRect.top}px`;
     ghost.style.width = `${cardRect.width}px`;
@@ -21909,11 +21917,12 @@ function beginActivityDrag() {
 
     const placeholder = document.createElement('div');
     placeholder.className = 'activity-drop-placeholder';
-    placeholder.style.height = `${cardRect.height}px`;
-    placeholder.style.gridRow = wrapper.style.gridRow;
-    placeholder.style.gridColumn = wrapper.style.gridColumn;
+    placeholder.style.cssText = wrapper.style.cssText;
+    placeholder.style.minHeight = `${cardRect.height}px`;
     wrapper.parentNode.insertBefore(placeholder, wrapper);
-    wrapper.style.opacity = '0.18';
+    wrapper.hidden = true;
+    placeholder.textContent = card.querySelector('.activity-card-location')?.textContent || '놓을 자리';
+    activityDragState.previewStyles = new Map([...ui.itineraryContainer.querySelectorAll('[data-activity-wrapper], [data-activity-list]')].map(el => [el, el.getAttribute('style')]));
 
     activityDragState.ghost = ghost;
     activityDragState.placeholder = placeholder;
@@ -21928,10 +21937,12 @@ function beginActivityDrag() {
 }
 
 function resetActivityDragState() {
-    document.querySelectorAll('.drag-placement-slot').forEach(el=>el.remove());
+    activityDragState.previewStyles?.forEach((style, el) => { if (style === null) el.removeAttribute('style'); else el.setAttribute('style',style); });
+    activityDragState.previewStyles = null;
+    activityDragState.previewKey = null;
     activityDragState.exactPlacement=null;
-    document.querySelectorAll('.graph-insert-marker').forEach(el=>el.remove());
-    document.querySelectorAll('.graph-drop-peer,.graph-drop-full').forEach(el=>el.classList.remove('graph-drop-peer','graph-drop-full'));
+
+
     activityDragState.targetPeerId=null;
     activityDragState.dropBlocked=false;
     const wasActive = activityDragState.active;
@@ -22075,29 +22086,11 @@ function handleActivityPointerUp(event) {
     suppressItineraryClickUntil = Date.now() + DRAG_CLICK_SUPPRESS_MS;
     if (isCancelled || dropBlocked || targetDayIndex === -1 || targetIndex === -1) return;
 
-    let moved;
-    if(exactPlacement){
-        const source=appState.itinerary[sourceDayIndex],day=appState.itinerary[targetDayIndex];
-        const item=source.activities.find(a=>a.id===activityId);
-        TripGraph.remove(source,activityId);
-        item.time=inferStopTime(day,item.id,exactPlacement);
-        insertPlacedStop(day,item,exactPlacement);
-        syncDayDestinations(source);syncDayDestinations(day);moved=true;
-    } else if(targetPeerId) {
-        const day=appState.itinerary[targetDayIndex], source=appState.itinerary[sourceDayIndex];
-        const item=source.activities.find(a=>a.id===activityId);
-        if(source===day) moved=TripGraph.join(day,activityId,targetPeerId);
-        else if(TripGraph.rows(day).some(r=>r.some(a=>a.id===targetPeerId))) {
-            TripGraph.remove(source,activityId); moved=TripGraph.parallel(day,targetPeerId,item);
-            item.destinationId=day.activities.find(a=>a.id===targetPeerId).destinationId; syncDayDestinations(source);
-        }
-        if(moved && targetPeerLeft) {day.activities=day.activities.filter(a=>a!==item);day.activities.splice(day.activities.findIndex(a=>a.id===targetPeerId),0,item);}
-        if(moved)item.time=inferStopTime(day,item.id,{target:targetPeerId,where:'right'});
-        syncDayDestinations(day);
-    } else moved = commitActivityDrop(sourceDayIndex, targetDayIndex, targetIndex, activityId);
+    if (!exactPlacement) return;
+    const moved = movePlacedActivity(appState.itinerary, sourceDayIndex, targetDayIndex, activityId, exactPlacement);
     if (!moved) return;
-    if(!exactPlacement){TripGraph.reconnectRows(appState.itinerary[sourceDayIndex]);
-    if(targetDayIndex!==sourceDayIndex)TripGraph.reconnectRows(appState.itinerary[targetDayIndex]);}
+    syncDayDestinations(appState.itinerary[sourceDayIndex]);
+    syncDayDestinations(appState.itinerary[targetDayIndex]);
 
     vibrateDevice(10);
     persistItineraryChanges();

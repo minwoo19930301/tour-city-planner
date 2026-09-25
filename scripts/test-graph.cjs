@@ -225,3 +225,15 @@ const shared=codec.buildShareUrl();assert(!shared.includes('='));assert(!shared.
 assert.deepEqual(JSON.parse(JSON.stringify(codec.decodePlan(new URL(shared).hash.slice(1)))),parsed);
 codec.appState.hasStarted=true;codec.syncUrl();assert.equal(codec.saved,shared);
 console.log('PASS: no-equals readable import, compressed sharing, query cleanup and payload round trip.');
+// Preview and drop use one operation; branch deletion and relocation preserve valid paths.
+{const a=app.indexOf('function movePlacedActivity('),b=app.indexOf('\n}\n',a)+3;vm.runInContext(app.slice(a,b),ctx);}
+ctx.moveDays=[{destinationId:'tokyo',activities:[{id:'a',time:'09:00'},{id:'b',row:'p',time:'11:00'},{id:'c',row:'p',time:'11:00'},{id:'d',time:'15:00'}],links:[['a','b'],['a','c'],['b','d'],['c','d']]}];
+assert(ctx.movePlacedActivity(ctx.moveDays,0,0,'d',{target:'b',where:'before'}));
+assert.deepEqual(Array.from(G.rows(ctx.moveDays[0]),r=>Array.from(r,a=>a.id)),[['a'],['d','c'],['b']]);
+assert(!ctx.moveDays[0].links.some(e=>e[0]==='b'&&e[1]==='d'));
+assert(ctx.moveDays[0].activities.every(a=>/^\d\d:\d\d$/.test(a.time)));
+const phraseContext=vm.createContext({});vm.runInContext(fs.readFileSync('travel-phrases.js','utf8')+';globalThis.phrases=JAPANESE_TRAVEL_PHRASES',phraseContext);
+assert(phraseContext.phrases.length>=100);assert.equal(new Set(phraseContext.phrases.map(p=>p.text)).size,phraseContext.phrases.length);assert(phraseContext.phrases.every(p=>p.text&&p.pron&&p.meaning));
+{const a=app.indexOf('function getWeatherInfo('),b=app.indexOf('\n}\n',a)+3;vm.runInContext(app.slice(a,b),ctx);}
+assert.equal(ctx.getWeatherInfo(0).color,ctx.getWeatherInfo(1).color);assert.equal(ctx.getWeatherInfo(3).icon,'cloud');assert.equal(ctx.getWeatherInfo(85).icon,'cloud-snow');
+console.log('PASS: branch-aware sorting, complete Japanese phrase bank ('+phraseContext.phrases.length+'), consistent weather codes.');

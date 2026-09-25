@@ -831,12 +831,6 @@
         .graph-edge-remove {pointer-events:all;cursor:pointer;opacity:0}
         .tree-svg:hover .graph-edge-remove,.graph-edge-remove:focus {opacity:1}
         .graph-edge-remove circle {fill:#25334a;stroke:#ffffff40}.graph-edge-remove text {fill:#e2e8f0;font-size:14px}
-        .graph-drop-peer {outline:2px dashed #a5b4fc!important;background:#6366f133!important}
-        .graph-drop-peer::after {content:'나란히 놓기';position:absolute;inset:0;display:grid;place-items:center;background:#111827c9;border-radius:inherit;color:#c7d2fe;font-size:12px;pointer-events:none}
-        .graph-drop-full {outline:2px dashed #fb7185!important}
-        .graph-drop-full::after {content:'이미 같은 줄이에요';position:absolute;inset:0;display:grid;place-items:center;background:#111827c9;border-radius:inherit;color:#fda4af;font-size:12px;pointer-events:none}
-        @media(hover:none){.graph-edge-remove{opacity:.65}}
-
         #activity-modal > .relative {max-width:480px;}
         #activity-modal .glass-panel {padding:18px;border-radius:22px;}
         #activity-modal .input-shell {padding:10px 12px;font-size:14px;border-radius:12px;}
@@ -975,7 +969,7 @@
         .stop-secondary-row #activity-icon-label{font-size:11px}
         .stop-secondary-row #activity-icon-trigger>span:last-child{display:none}
         .activity-tree{row-gap:60px!important}
-        .is-placing .activity-tree,.is-reordering-activities .activity-tree{row-gap:96px!important}
+        .is-placing .activity-tree{row-gap:96px!important}
     .route-modes{display:flex;flex-wrap:wrap;gap:6px;border:0;padding:0;margin:8px 0}
         .route-modes label{display:flex;align-items:center;gap:5px;padding:7px 9px;border:1px solid #ffffff25;border-radius:10px;font-size:12px;cursor:pointer;white-space:nowrap}
         .route-modes label:has(input:checked){border-color:var(--accent);background:#ff780020}
@@ -995,6 +989,10 @@
         .ai-handoff-actions button {padding:12px;border-radius:12px;font-size:14px;font-weight:600;border:1px solid #ffffff30;}
         .ai-handoff-actions [data-handoff-confirm] {flex:1;background:#9333ea;border-color:#9333ea;}
         @media(max-width:640px){.activity-tree {--tree-column-gap:6px;}}
+        .is-reordering-activities .tree-svg,.is-reordering-activities .edge-actions,.is-reordering-activities .graph-port {visibility:hidden!important;pointer-events:none!important;}
+        .is-reordering-activities [data-activity-wrapper][hidden] {display:none!important;}
+        .activity-drop-placeholder {pointer-events:auto;display:flex;align-items:center;justify-content:center;padding:12px;color:#fdba74;font-size:12px;min-height:80px;box-shadow:inset 0 0 0 1px #fb923c44;}
+        .activity-card.activity-card-ghost {opacity:.7;max-width:280px;box-shadow:0 10px 24px #0004;}
     </style>
 </head>
 
@@ -1428,8 +1426,9 @@
 
     <script src="./example-hotels.js?v=1"></script>
     <script src="./graph-model.js?v=7"></script>
+    <script src="./travel-phrases.js?v=1"></script>
     <script src="./ai-link.js?v=4"></script>
-    <script src="./app.js?v=fragment-share-v24" defer></script>
+    <script src="./app.js?v=sorting-preview-v25" defer></script>
 </body>
 
 </html>
