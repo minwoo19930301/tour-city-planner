@@ -22674,7 +22674,10 @@ function openAIResponse(text) {
         url.search = '';
         url.hash = encodePlan(payload);
         // Validate the complete answer before replacing any current itinerary.
-        window.location.assign(url.toString());
+        window.history.replaceState({}, '', url.toString());
+        aiResultDialog.close();
+        bootstrapFromUrl();
+        refreshPlan();
     } catch (error) {
         aiResultStatus.textContent = error.message;
         aiResultText.focus();
