@@ -237,3 +237,10 @@ assert(phraseContext.phrases.length>=100);assert.equal(new Set(phraseContext.phr
 {const a=app.indexOf('function getWeatherInfo('),b=app.indexOf('\n}\n',a)+3;vm.runInContext(app.slice(a,b),ctx);}
 assert.equal(ctx.getWeatherInfo(0).color,'#f97316');assert.equal(ctx.getWeatherInfo(1).color,'#fbbf24');assert.equal(ctx.getWeatherInfo(0,false).icon,'moon');assert.equal(ctx.getWeatherInfo(2,false).icon,'cloud-moon');assert.equal(ctx.getWeatherInfo(3).icon,'cloud');assert.equal(ctx.getWeatherInfo(85).icon,'cloud-snow');
 console.log('PASS: branch-aware sorting, complete Japanese phrase bank ('+phraseContext.phrases.length+'), consistent weather codes.');
+{const a=app.indexOf('function moveTripDate('),b=app.indexOf('\nfunction commitTripDates',a);vm.runInContext(app.slice(a,b),ctx);}
+ctx.formatYmd=d=>d.toISOString().slice(0,10);ctx.parseYmd=s=>new Date(s+'T00:00:00Z');ctx.addDays=(d,n)=>new Date(d.getTime()+n*86400000);
+const dateDays=()=>['2026-10-02','2026-10-03','2026-10-04'].map((date,i)=>({date,activities:[{id:'date'+i}],links:[],destinationId:'osaka'}));
+assert.deepEqual(Array.from(ctx.moveTripDate(dateDays(),0,'2026-09-25',true),d=>d.date),['2026-09-25','2026-09-26','2026-09-27']);
+assert.deepEqual(Array.from(ctx.moveTripDate(dateDays(),1,'2026-10-05',false),d=>d.date),['2026-10-02','2026-10-04','2026-10-05']);
+const mergedDates=ctx.moveTripDate(dateDays(),1,'2026-10-02',false);assert.equal(mergedDates.length,2);assert.equal(mergedDates[0].activities.length,2);
+console.log('PASS: date shifting, sorted single-day move and collision merge preserve activities.');

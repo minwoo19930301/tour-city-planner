@@ -20886,13 +20886,14 @@ function renderItinerary() {
 
         dayElement.innerHTML = `
             <div class="day-header-row" data-day-header="${dayIndex}" data-flip-item="true">
-                <div class="day-date"><h3>${escapeHtml(formatMonthDay(headerDate))}</h3><span>${escapeHtml(formatMonthDayWithWeekday(headerDate))}</span></div>
+                <button type="button" class="day-date" data-edit-date="${dayIndex}" aria-label="${day.date} 날짜 수정"><h3>${escapeHtml(formatMonthDay(headerDate))}</h3><span>${escapeHtml(formatMonthDayWithWeekday(headerDate))}</span><span aria-hidden="true">✎</span></button>
                 <button class="day-routes-button" data-day-routes="${dayIndex}" type="button"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="M8 5h8a4 4 0 0 1 0 8H8a3 3 0 0 0 0 6h8"/></svg><span>하루 이동코스</span></button>
                 ${buildDailyWeatherHtml(day)}
                 <button type="button" class="day-add-button" data-action="add-activity" data-day-index="${dayIndex}">+ 일정</button>
             </div>
 
 
+            <div class="day-date-tools"><button type="button" data-insert-day="${dayIndex}">앞에 하루 추가</button><button type="button" data-insert-day="${dayIndex + 1}">뒤에 하루 추가</button><button type="button" data-delete-day="${dayIndex}">이 날 삭제</button></div>
             <div class="tree-scroll" ${graphLanes > 3 ? 'tabindex="0" role="region" aria-label="나란한 일정, 좌우로 스크롤"' : ''}><div class="activity-tree" data-activity-list="${dayIndex}" style="width:calc(${graphLanes / 3 * 100}% + var(--tree-column-gap) * ${graphLanes / 3 - 1})">
                 <svg class="tree-svg" aria-hidden="true"></svg>${activitiesHtml}
             </div></div>
@@ -22343,6 +22344,20 @@ function syncRoutePreviewLayout() {
 }
 
 function handleItineraryClick(event) {
+    const dateButton=event.target.closest('[data-edit-date]');
+    if(dateButton){openDayDateEditor(Number(dateButton.dataset.editDate));return;}
+    const insertButton=event.target.closest('[data-insert-day]');
+    if(insertButton){insertTripDay(Number(insertButton.dataset.insertDay));return;}
+    const deleteButton=event.target.closest('[data-delete-day]');
+    if(deleteButton){
+        const index=Number(deleteButton.dataset.deleteDay);
+        if(appState.itinerary.length===1){window.alert('최소 하루는 남겨 주세요.');return;}
+        const dialog=document.createElement('dialog');dialog.id='day-date-editor';
+        dialog.innerHTML=`<form method="dialog"><h3>${appState.itinerary[index].date} 삭제</h3><p>이 날의 일정 전체를 삭제해요. 다른 날짜는 유지돼요.</p><div><button value="cancel">취소</button><button value="delete">삭제</button></div></form>`;
+        dialog.addEventListener('close',()=>{if(dialog.returnValue==='delete'){appState.itinerary.splice(index,1);commitTripDates();}dialog.remove();});
+        document.body.appendChild(dialog);dialog.showModal();
+        return;
+    }
     if(placingStop) return;
     const dayRouteButton=event.target.closest('[data-day-routes]');
     if(dayRouteButton){openDayRoutes(Number(dayRouteButton.dataset.dayRoutes));return;}
@@ -22892,3 +22907,44 @@ document.addEventListener('pointerdown', (event) => {
     }
     if (placingStop && !event.target.closest('[data-placement], [data-stop-placement], .stop-placement-slot, [data-activity-list], [data-day-header]')) cancelStopPlacement();
 });
+
+function moveTripDate(days,index,date,shiftFollowing){
+    const delta=Math.round((Date.parse(date+'T00:00:00Z')-Date.parse(days[index].date+'T00:00:00Z'))/86400000);
+    if(!Number.isFinite(delta))throw new Error('날짜를 선택해 주세요.');
+    days.forEach((day,i)=>{if(i===index||(shiftFollowing&&i>index))day.date=formatYmd(addDays(parseYmd(day.date),delta));});
+    // Moving only one day onto an occupied date keeps both sets of activities.
+    const merged=[];
+    [...days].sort((a,b)=>a.date.localeCompare(b.date)).forEach(day=>{
+        const previous=merged.at(-1);
+        if(previous?.date===day.date){previous.activities.push(...day.activities);previous.links=[...(previous.links||[]),...(day.links||[])];previous.destinationIds=[...new Set([...(previous.destinationIds||[previous.destinationId]),...(day.destinationIds||[day.destinationId])])];}
+        else merged.push(day);
+    });
+    return merged;
+}
+function commitTripDates(){
+    appState.itinerary.sort((a,b)=>a.date.localeCompare(b.date));
+    appState.itinerary.forEach(day=>day.day=DAY_LABELS[parseYmd(day.date).getDay()]);
+    appState.segments=appState.itinerary.flatMap(day=>(day.destinationIds?.length?day.destinationIds:[day.destinationId]).map(destinationId=>({destinationId,startDate:day.date,endDate:day.date})));
+    setupSegments=appState.segments.map(cloneSegment);syncAppDateBounds();
+    appState.currentWeather=null;appState.customized=true;
+    persistItineraryChanges();fetchWeather();
+}
+function insertTripDay(index){
+    const source=appState.itinerary[Math.min(index,appState.itinerary.length-1)];
+    const date=index<appState.itinerary.length?source.date:formatYmd(addDays(parseYmd(source.date),1));
+    for(let i=index;i<appState.itinerary.length;i++)appState.itinerary[i].date=formatYmd(addDays(parseYmd(appState.itinerary[i].date),1));
+    appState.itinerary.splice(index,0,{id:createId('day'),date,destinationId:source.destinationId,destinationIds:[source.destinationId],activities:[],links:[],title:''});
+    commitTripDates();
+}
+function openDayDateEditor(index){
+    document.getElementById('day-date-editor')?.remove();
+    const dialog=document.createElement('dialog');dialog.id='day-date-editor';
+    dialog.innerHTML=`<form method="dialog"><h3>날짜 수정</h3><input type="date" name="date" required value="${appState.itinerary[index].date}" aria-label="새 날짜"><label><input type="radio" name="mode" value="one" checked> 이 날짜만 이동</label><p>날짜순으로 배치하며, 같은 날짜가 있으면 일정을 합쳐요.</p><label><input type="radio" name="mode" value="following"> 뒤 날짜도 함께 이동</label><p>뒤 일정도 같은 일수만큼 이동해요.</p><div><button value="cancel">취소</button><button value="save">적용</button></div></form>`;
+    dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close();});
+    dialog.addEventListener('close',()=>{
+        if(dialog.returnValue==='save'){
+            appState.itinerary=moveTripDate(appState.itinerary,index,dialog.querySelector('[name=date]').value,dialog.querySelector('[name=mode]:checked').value==='following');commitTripDates();
+        }
+        dialog.remove();
+    });document.body.appendChild(dialog);dialog.showModal();
+}
