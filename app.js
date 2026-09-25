@@ -20892,7 +20892,7 @@ function renderItinerary() {
                 <button type="button" class="day-add-button" data-action="add-activity" data-day-index="${dayIndex}">+ 일정</button>
             </div>
 
-            ${graphLanes > 3 ? '<p class="tree-scroll-hint">↔ 옆으로 밀어 더 보기 · 길게 눌러 일정 이동</p>' : ''}
+
             <div class="tree-scroll" ${graphLanes > 3 ? 'tabindex="0" role="region" aria-label="나란한 일정, 좌우로 스크롤"' : ''}><div class="activity-tree" data-activity-list="${dayIndex}" style="width:calc(${graphLanes / 3 * 100}% + var(--tree-column-gap) * ${graphLanes / 3 - 1})">
                 <svg class="tree-svg" aria-hidden="true"></svg>${activitiesHtml}
             </div></div>
