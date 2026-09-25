@@ -19619,7 +19619,7 @@ function getDayDirectionsUrl(activities = [], fallbackDestinationId = '', mode =
 }
 
 function getGoogleMapsEmbedUrl(query) {
-    return `https://maps.google.com/maps?q=${encodeURIComponent(query)}&z=15&output=embed`;
+    return `https://maps.google.com/maps?q=${encodeURIComponent(query)}&z=12&output=embed`;
 }
 
 function parseAmountInput(value) {
@@ -19816,7 +19816,7 @@ function updateActivityMapPreview() {
         if (requestId !== mapPreviewRequestId) return;
         const query = String(location || lookupValue || getLocationSearchQuery(location, destinationId)).trim();
         ui.activityMapFrame.src = getGoogleMapsEmbedUrl(query);
-        ui.activityMapStatus.textContent = `"${location}" 주변을 구글 지도 기준으로 보여줍니다.`;
+        ui.activityMapStatus.textContent = '';
     }, 320);
 }
 
@@ -20778,7 +20778,14 @@ function drawGraphEdges() {
             const position=boundaryCounts.get(boundary)||0;boundaryCounts.set(boundary,position+1);
             const columns=Math.max(1,Math.min(siblings.length,Math.floor(bounds.width/76)));
             const rows=Math.ceil(siblings.length/columns);
-            const ax=(position%columns+.5)*bounds.width/columns;
+            // Keep each control on its own connection, rather than routing every
+            // single branch back through the centre of the entire day.
+            let ax=(x+xx)/2;
+            for (const placed of actionPositions) {
+                if (Math.abs(placed.y-toolbarY)<34 && Math.abs(placed.x-ax)<70) {
+                    ax=Math.max(36,Math.min(bounds.width-36,placed.x+70));
+                }
+            }
             const ay=skips?toolbarY+Math.floor(position/columns)*36:y+(yy-y)/2+(Math.floor(position/columns)-(rows-1)/2)*36;
             if(!skips)path=`M ${x} ${y} C ${x} ${y+18}, ${ax} ${ay-18}, ${ax} ${ay} C ${ax} ${ay+18}, ${xx} ${yy-18}, ${xx} ${yy}`;
             actionPositions.push({x:ax,y:ay});
@@ -22875,3 +22882,13 @@ renderIconPicker();
 bootstrapFromUrl();
 refreshPlan();
 if (new URL(window.location.href).searchParams.get('import') === 'ai' || window.location.hash === '#import-ai') aiResultDialog.showModal();
+
+// Close anchored editors without saving when the user taps elsewhere.
+document.addEventListener('pointerdown', (event) => {
+    if (!ui.activityModal.classList.contains('hidden') &&
+        !ui.activityModal.contains(event.target) &&
+        !ui.iconPickerModal.contains(event.target)) {
+        closeActivityEditor();
+    }
+    if (placingStop && !event.target.closest('[data-placement], [data-stop-placement], .stop-placement-slot, [data-activity-list], [data-day-header]')) cancelStopPlacement();
+});
