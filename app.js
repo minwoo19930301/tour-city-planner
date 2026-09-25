@@ -1,6 +1,8 @@
 const DAY_LABELS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const WEEKDAY_LABELS_KO = ['일', '월', '화', '수', '목', '금', '토'];
 const ACTIVITY_ICON_OPTIONS = [
+    { value: 'flag', label: '골프 · Golf' },
+    { value: 'car', label: '자동차 · Car' },
     { value: 'waves', label: '강 · River · 川 · 河' },
     { value: 'plane', label: 'Plane' },
     { value: 'train-front', label: 'Train' },
@@ -20212,7 +20214,7 @@ https://minwoo19930301.github.io/tour-city-planner/#trip~1&${groupParams}
 - 고유ID는 a1,a2처럼 전체 일정에서 중복되지 않는 영문·숫자. 행ID는 r1,r2처럼 쓰세요.
 - 같은 날짜에서 같은 행ID인 연속 장소들은 나란한 후보입니다(기본 3개 표시, 더 많으면 가로 스크롤). 보통 순차 일정은 행ID를 다르게 주세요.
 - 아이콘은 다음 중 하나: ${ACTIVITY_ICON_OPTIONS.map(option => option.value).join(', ')}.
-- 장소명은 도시를 함께 적어 정확히 찾게 해 주세요. 한글·영어·일본어를 그대로 쓸 수 있습니다.
+- 장소명은 실제 검색 가능한 장소 이름만 적고 도시를 함께 적어 정확히 찾게 해 주세요. 골프팀·휴식팀·A팀·합류·체크아웃 같은 팀 이름이나 행동은 장소명에 넣지 말고 메모에 적으세요. 같은 장소여도 방문 시간이나 팀 경로가 다르면 별도 일정으로 만들고, 실제 같은 시간에 합류할 때만 공통 일정에 연결하세요. 한글·영어·일본어를 그대로 쓸 수 있습니다.
 - 장소명·메모 안의 공백은 +, &는 %26, #은 %23, ~는 %7E, +는 %2B, %는 %25, 괄호는 %28 및 %29로 쓰세요. 이스케이프는 원래 글자에 한 번만 적용하세요. 항목 사이의 &와 ~는 그대로 둡니다.
 - 메모가 필요하면 &m~고유ID~메모 를 붙이세요. 메모는 간단히 적으세요.
 - 지도 검색어를 별도로 지정하려면 &q~고유ID~검색어 를 붙이세요.
@@ -20639,16 +20641,33 @@ function buildActivityReorderControlsHtml(day, dayIndex, activity, activityIndex
 
 let pendingParallelActivity = null;
 
-function graphLayoutAttributes(rows, activity, previewDay = null) {
-    const rowIndex = rows.findIndex(r => r.includes(activity)), row = rows[rowIndex];
-    let lanes = row.length, column = row.indexOf(activity);
-    if (row.length === 1 && rowIndex > 0) {
-        const day = previewDay || appState.itinerary.find(d => d.activities.includes(activity)), previous = rows[rowIndex - 1];
-        const parents = day?.links.filter(e => e[1] === activity.id).map(e => e[0]) || [];
-        const parent = previous.find(a => parents.includes(a.id));
-        if (previous.length > 1 && parents.length === 1 && parent) { lanes = previous.length; column = previous.indexOf(parent); }
+function buildTimedBranchLayout(day) {
+    const ordered=TripGraph.rows(day).flat(), positions=new Map();
+    const minutes=a=>{const m=/^(\d{2}):(\d{2})$/.exec(a.time||'');return m?Number(m[1])*60+Number(m[2]):0;};
+    const times=[...new Set(ordered.map(minutes))].sort((a,b)=>a-b);
+    const roots=ordered.filter(a=>!day.links.some(e=>e[1]===a.id));
+    for(const activity of ordered){
+        const parents=day.links.filter(e=>e[1]===activity.id).map(e=>positions.get(e[0])).filter(Boolean);
+        let left=0,width=1;
+        if(parents.length>1){left=Math.min(...parents.map(p=>p.left));width=Math.max(...parents.map(p=>p.left+p.width))-left;}
+        else if(parents.length===1){
+            const parentId=day.links.find(e=>e[1]===activity.id)[0],parent=parents[0];
+            const children=day.links.filter(e=>e[0]===parentId).map(e=>e[1]);
+            left=parent.left+parent.width*children.indexOf(activity.id)/children.length;width=parent.width/children.length;
+        }else if(roots.length>1){left=roots.indexOf(activity)/roots.length;width=1/roots.length;}
+        const row=Math.max(times.indexOf(minutes(activity))+1,...parents.map(p=>p.row+1));
+        positions.set(activity.id,{left,width,row,span:1});
     }
-    return `data-parallel="${row.length > 1}" style="grid-row:${rowIndex + 1};grid-column:1 / -1;width:calc((100% + var(--tree-column-gap)) / ${lanes} - var(--tree-column-gap));margin-left:calc((100% + var(--tree-column-gap)) * ${column / lanes})"`;
+    for(const activity of ordered){
+        const pos=positions.get(activity.id),next=day.links.filter(e=>e[0]===activity.id).map(e=>positions.get(e[1])).filter(Boolean);
+        if(next.length)pos.span=Math.max(1,Math.min(...next.map(p=>p.row))-pos.row);
+    }
+    return positions;
+}
+function graphLayoutAttributes(rows, activity, previewDay = null) {
+    const day=previewDay||appState.itinerary.find(d=>d.activities.includes(activity));
+    const pos=buildTimedBranchLayout(day).get(activity.id);
+    return `data-parallel="${pos.width<.999}" style="grid-row:${pos.row} / span ${pos.span};grid-column:1 / -1;width:calc((100% + var(--tree-column-gap)) * ${pos.width} - var(--tree-column-gap));margin-left:calc((100% + var(--tree-column-gap)) * ${pos.left})"`;
 }
 
 function graphControlsHtml(day, dayIndex, activity) {
@@ -20762,7 +20781,7 @@ function drawGraphEdges() {
             const x=a.left+a.width/2-bounds.left, y=a.bottom-bounds.top;
             const xx=b.left+b.width/2-bounds.left, yy=b.top-bounds.top;
             const bend=Math.min(34,(yy-y)/2);
-            const skips=ranks.get(to)-ranks.get(from)>1;
+            const skips=false;
             const lane=xx<bounds.width/2?-9:bounds.width+9;
             let path=skips?`M ${x} ${y} V ${y+30} H ${lane} V ${yy-30} H ${xx} V ${yy}`:`M ${x} ${y} C ${x} ${y+bend}, ${xx} ${yy-bend}, ${xx} ${yy}`;
             const toolbarY=skips?y+46:(y+yy)/2;
