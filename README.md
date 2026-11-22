@@ -1,7 +1,10 @@
 # Tour City Planner - Travel Route Planner
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-brightgreen?style=for-the-badge&logo=github)](https://minwoo19930301.github.io/tour-city-planner/)
-
+<!-- LIVE-LINK:START -->
+<p align="center">
+  <a href="https://minwoo19930301.github.io/tour-city-planner/"><img alt="바로 가기: minwoo19930301.github.io/tour-city-planner" src="https://img.shields.io/badge/%E2%96%B6%20%EB%B0%94%EB%A1%9C%20%EA%B0%80%EA%B8%B0-minwoo19930301.github.io%2Ftour--city--planner-ff5a5f?style=for-the-badge"></a>
+</p>
+<!-- LIVE-LINK:END -->
 
 도시별 추천 일정 템플릿을 바탕으로 여행 루트를 만들고, 날씨와 환율, 지도 미리보기까지 한 화면에서 확인할 수 있는 정적 여행 플래너입니다. 최대 3개의 일정 후보를 Git 그래프처럼 나란히 놓고, 선으로 분기·합류 경로를 편집할 수 있습니다. 단일 도시 일정뿐 아니라 여러 나라를 이어 붙인 멀티 세그먼트 일정도 URL로 공유할 수 있습니다.
 
